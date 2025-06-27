@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 27 Jun 2025 10:34:44 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[🔄 LINE Bot Flex Messageの状態管理 - 古いボタンの誤操作を防ぐToken実装]]></title><description><![CDATA[
+ はじめに
+LINE Botで支出管理や予約システムを作り始めた時、以下のような問題に遭遇しました。
+「編集ボタンを押した後、画面に残った古い削除ボタンを押したら削除されてしまった...」
+「支出を記録した後、同じく画面に残った古い確認ボタンを押したら二重登録された...」
+今回は、LINE BotのFlex Messageで状態管理トークンを実装して、古いボタンの誤操作を防いだ方法をご紹介します。
+
+ 🎯 今回解決する問題
+
+ LINE Botでよくある状態管理の課題
+LINE Botでは、ユーザーの操作履歴が画面に残り続けるため、以下のような問題が発生します：
+
+ 問題例1: 編集...]]></description><link>https://zenn.dev/techfirst/articles/79553bd0e85a7b</link><guid isPermaLink="true">https://zenn.dev/techfirst/articles/79553bd0e85a7b</guid><pubDate>Fri, 27 Jun 2025 08:54:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--A3al2aD0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520%2520LINE%2520Bot%2520Flex%2520Message%25E3%2581%25AE%25E7%258A%25B6%25E6%2585%258B%25E7%25AE%25A1%25E7%2590%2586%2520-%2520%25E5%258F%25A4%25E3%2581%2584%25E3%2583%259C%25E3%2582%25BF%25E3%2583%25B3%25E3%2581%25AE%25E8%25AA%25A4%25E6%2593%258D%25E4%25BD%259C%25E3%2582%2592%25E9%2598%25B2%25E3%2581%2590Token%25E5%25AE%259F%25E8%25A3%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:GSKP%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNmNmNjMmQwM2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>GSKP</dc:creator></item><item><title><![CDATA[Visual Studio CodeでTypeScriptのコード補完が効かなくなったので修正した(tsconfig)]]></title><description><![CDATA[
+ 要約
+Visual Studio Code(以下VS Code)で以下のメッセージが出てTypeScriptのコード補完が効かなくなりました。
+To enable project-wide JavaScript/TypeScript language features,
+exclude large folders with source files that you do not work on.
+TypeScriptのコード補完をする対象ファイルのサイズが大きすぎたようで、tsconfigで大きいサイズのファイル（今回だとnuxtのoutput）をexcludeしたら治りました。
+...]]></description><link>https://zenn.dev/bita/articles/c9ff705495c5c2</link><guid isPermaLink="true">https://zenn.dev/bita/articles/c9ff705495c5c2</guid><pubDate>Fri, 27 Jun 2025 08:06:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Fvk4rhr6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Visual%2520Studio%2520Code%25E3%2581%25A7TypeScript%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E8%25A3%259C%25E5%25AE%258C%25E3%2581%258C%25E5%258A%25B9%25E3%2581%258B%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E4%25BF%25AE%25E6%25AD%25A3%25E3%2581%2597%25E3%2581%259F%2528tsconfig%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:h.watahiki%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5Y2Q0YzJlZDEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:bitA%2520Tech%2520Blog%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFjYmQwNDdhNmIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>h.watahiki</dc:creator></item><item><title><![CDATA[AIが人間にタスクを依頼する逆転発想アプリ「Gemiyou」の開発記録]]></title><description><![CDATA[
+ はじめに
+「AIが人間にタスクを依頼する」 という従来とは真逆のアプローチで開発したWebアプリケーション「Gemiyou」について、技術的な実装から設計思想まで詳しく紹介します。
+このプロジェクトは第2回 AI Agent Hackathon with Google Cloud での挑戦として開発しました。テーマである「AI Agent、創造の極みへ」に対して、AIエージェントが人間にタスク依頼を行い評価し、経済価値を与える という革新的なアプローチを考案しました。
+通常のチャットボットは「人間がAIに質問・依頼する」形ですが、このアプリでは「AIが人間にクリエイティブなタスクを依...]]></description><link>https://zenn.dev/yukilab/articles/f281ec36462357</link><guid isPermaLink="true">https://zenn.dev/yukilab/articles/f281ec36462357</guid><pubDate>Fri, 27 Jun 2025 07:54:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Uw60UNJN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AI%25E3%2581%258C%25E4%25BA%25BA%25E9%2596%2593%25E3%2581%25AB%25E3%2582%25BF%25E3%2582%25B9%25E3%2582%25AF%25E3%2582%2592%25E4%25BE%259D%25E9%25A0%25BC%25E3%2581%2599%25E3%2582%258B%25E9%2580%2586%25E8%25BB%25A2%25E7%2599%25BA%25E6%2583%25B3%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2580%258CGemiyou%25E3%2580%258D%25E3%2581%25AE%25E9%2596%258B%25E7%2599%25BA%25E8%25A8%2598%25E9%258C%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yukilab%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS05Ia3ZtVThINjF1V1F6NjhSZXhjd2lfZ1NvbjlSMmVVYkRyYWN5bllfc0sxeW44WXRIdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yukilab</dc:creator></item><item><title><![CDATA[Tailwindのopacityが子要素に乗ってしまうのを防ぐ方法]]></title><description><![CDATA[
+ はじめに
+こんにちは！PortalKeyの渋谷です。
+
+皆さんはこのような画像の上に文字を乗せたい時に
+
+このようなフィルターをかけ
+
+このように要素を乗せたい時ありませんか？
+
+そしてこうなって困っていたりしませんか？
+自分はこれに悩まされた過去があり、解決方法はわりと簡単だったのでまとめておきたいと思います。
+
+ 開発環境
+
+
+TypeScript v5.5.4
+
+react v18.3.1
+
+tailwindcss v3.4.10
+
+
+ なぜこうなったのか
+まずはコードを確認してみましょう。
+&lt;div className="relative w-64 h-64"&gt;
+...]]></description><link>https://zenn.dev/portalkeyinc/articles/b0fe3e3c195ed1</link><guid isPermaLink="true">https://zenn.dev/portalkeyinc/articles/b0fe3e3c195ed1</guid><pubDate>Fri, 27 Jun 2025 06:50:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qsgqDxCX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tailwind%25E3%2581%25AEopacity%25E3%2581%258C%25E5%25AD%2590%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%25AB%25E4%25B9%2597%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2586%25E3%2581%25AE%25E3%2582%2592%25E9%2598%25B2%25E3%2581%2590%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:da-shibuya%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM2Y2JkM2UxMzEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:PortalKey%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzR2Y0dCWGJ5bmIwc3k4TnQyZll4aU8xQ2xBN1ZwNzAtR2RJeTR4WW1uc2JEMEhRPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>da-shibuya</dc:creator></item><item><title><![CDATA[📸 レシート読み取りLINE Botの作り方 - Google Cloud Vision APIで家計簿を自動化]]></title><description><![CDATA[
+ はじめに
+こんにちは！今回は、レシート画像を送るだけで金額を自動で読み取って家計簿に記録してくれるLINE Botを作ってみました。
+「レシートの金額を手入力するのが面倒...」「家計簿アプリは続かない...」
+そんな悩みを解決する、実用的なOCR機能付きLINE Botの実装方法を解説していきます。
+
+ 🎯 今回作るもの
+
+
+レシート画像送信: LINEで写真を送るだけ
+
+自動金額抽出: Google Cloud Vision APIでOCR処理
+
+智能解析: 合計金額を自動判定
+
+家計簿記録: そのまま支出として記録
+
+
+ 🛠️ 使用技術
+
+
+LINE Messaging API...]]></description><link>https://zenn.dev/techfirst/articles/3fe1f118ebe287</link><guid isPermaLink="true">https://zenn.dev/techfirst/articles/3fe1f118ebe287</guid><pubDate>Fri, 27 Jun 2025 06:47:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AOqNA5fH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520%2520%25E3%2583%25AC%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%2588%25E8%25AA%25AD%25E3%2581%25BF%25E5%258F%2596%25E3%2582%258ALINE%2520Bot%25E3%2581%25AE%25E4%25BD%259C%25E3%2582%258A%25E6%2596%25B9%2520-%2520Google%2520Cloud%2520Vision%2520API%25E3%2581%25A7%25E5%25AE%25B6%25E8%25A8%2588%25E7%25B0%25BF%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E5%258C%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:GSKP%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNmNmNjMmQwM2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>GSKP</dc:creator></item><item><title><![CDATA[[TypeScript]実行環境のタイムゾーンによらず日本時間で日付を操作する]]></title><description><![CDATA[const JST_OFFSET_MS = 9 * 60 * 60 * 1000;
+
+export const getJSTFullYear = (date: Date): number =&gt; {
+  const jstDate = new Date(date.getTime() + JST_OFFSET_MS);
+  return jstDate.getUTCFullYear();
+};
+
+export const getJSTMonth = (date: Date): number =&gt; {
+  const jstDate = new Date(date.getTime(...]]></description><link>https://zenn.dev/purratto/articles/c8ced87c3130ad</link><guid isPermaLink="true">https://zenn.dev/purratto/articles/c8ced87c3130ad</guid><pubDate>Fri, 27 Jun 2025 04:50:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bLYQKZIK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BTypeScript%255D%25E5%25AE%259F%25E8%25A1%258C%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AE%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E3%2582%25BE%25E3%2583%25BC%25E3%2583%25B3%25E3%2581%25AB%25E3%2582%2588%25E3%2582%2589%25E3%2581%259A%25E6%2597%25A5%25E6%259C%25AC%25E6%2599%2582%25E9%2596%2593%25E3%2581%25A7%25E6%2597%25A5%25E4%25BB%2598%25E3%2582%2592%25E6%2593%258D%25E4%25BD%259C%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:purratto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhODdjNTc4MzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>purratto</dc:creator></item><item><title><![CDATA[[TypeScript]与えられた日時に対応する会計年度の開始日時を返す関数]]></title><description><![CDATA[/**
+ * 与えられたJST基準の日付に対応する会計年度の開始日時（4月1日 00:00:00 JST）を返す。
+ * 実行環境のタイムゾーンに関係なく、JSTとして扱う。
+ *
+ * @param date 日本時間として指定されたDateオブジェクト
+ * @returns 会計年度開始日時（JST基準）
+ */
+export const getFiscalYearStartDate = (date: Date): Date =&gt; {
+  const JST_OFFSET_MS = 9 * 60 * 60 * 1000;
+  const jstDate = new Date(...]]></description><link>https://zenn.dev/purratto/articles/3fc0b5e058ff53</link><guid isPermaLink="true">https://zenn.dev/purratto/articles/3fc0b5e058ff53</guid><pubDate>Fri, 27 Jun 2025 04:27:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--e2p4oieJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BTypeScript%255D%25E4%25B8%258E%25E3%2581%2588%25E3%2582%2589%25E3%2582%258C%25E3%2581%259F%25E6%2597%25A5%25E6%2599%2582%25E3%2581%25AB%25E5%25AF%25BE%25E5%25BF%259C%25E3%2581%2599%25E3%2582%258B%25E4%25BC%259A%25E8%25A8%2588%25E5%25B9%25B4%25E5%25BA%25A6%25E3%2581%25AE%25E9%2596%258B%25E5%25A7%258B%25E6%2597%25A5%25E6%2599%2582%25E3%2582%2592%25E8%25BF%2594%25E3%2581%2599%25E9%2596%25A2%25E6%2595%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:purratto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhODdjNTc4MzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>purratto</dc:creator></item><item><title><![CDATA[【実体験】フロントリプレイスでClineを導入したら開発効率が爆上がりした話]]></title><description><![CDATA[『その作業・・・AIだったらすぐ終わりますよ？』
+最近、marionette.js から React へのフロントリプレイスを進めています。
+現在、リプレイス対象の画面改修がなかなか大変だったんですが、
+clineを利用したら大幅に開発効率が上がったので何をしたのかを話します！
+
+ [前提]リプレイス対象画面の大変さについて
+リプレイス対象の画面は、下記のような厳しさがあります。
+
+
+APIの数が多い
+
+実装途中ですが、今40個くらいあります。2画面でですよ？
+
+
+各APIのレスポンスに含まれるプロパティもかなり多い
+
+平均20〜30個くらいで、多いものだと約100個のプロパティを持って...]]></description><link>https://zenn.dev/suzukishouten/articles/b7889c96947bac</link><guid isPermaLink="true">https://zenn.dev/suzukishouten/articles/b7889c96947bac</guid><pubDate>Fri, 27 Jun 2025 03:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--waKSUp_r--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%25AE%259F%25E4%25BD%2593%25E9%25A8%2593%25E3%2580%2591%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2583%25AA%25E3%2583%2597%25E3%2583%25AC%25E3%2582%25A4%25E3%2582%25B9%25E3%2581%25A7Cline%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25E9%2596%258B%25E7%2599%25BA%25E5%258A%25B9%25E7%258E%2587%25E3%2581%258C%25E7%2588%2586%25E4%25B8%258A%25E3%2581%258C%25E3%2582%258A%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%258F%25E3%2581%25A1%25E3%2581%25A1%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q2ODgxNGNkY2QuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E9%2588%25B4%25E6%259C%25A8%25E5%2595%2586%25E5%25BA%2597%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y5ZGI1NDRjZDYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>わちち</dc:creator></item><item><title><![CDATA[WebSocket通信と同期するReduxアプリケーションの実装パターン]]></title><description><![CDATA[こんにちは、PortalKeyの植森です。
+今回は、PortalKeyで実装しているWebSocketやWebRTCといったリアルタイムイベントとReduxを組み合わせた状態管理のアーキテクチャについて紹介します。
+SlackやDiscordのようなリアルタイムアプリケーションでは、他のユーザーの行動をリアルタイムに画面に反映する必要があります。
+このような要件に対して、UIコンポーネントに直接WebSocketやWebRTCの処理を書くと更新タイミングが散らばり、コードが煩雑になってしまいます。
+PortalKeyでは、データ操作とUIコンポーネントを完全に分離し、リアルタイムイベント...]]></description><link>https://zenn.dev/portalkeyinc/articles/24fb9054edef4b</link><guid isPermaLink="true">https://zenn.dev/portalkeyinc/articles/24fb9054edef4b</guid><pubDate>Thu, 26 Jun 2025 15:08:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BQ5KZMyp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WebSocket%25E9%2580%259A%25E4%25BF%25A1%25E3%2581%25A8%25E5%2590%258C%25E6%259C%259F%25E3%2581%2599%25E3%2582%258BRedux%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:wakaba260%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM2Y2JkM2UxMzEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:PortalKey%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hYOTVyU0tGaEZ1Xy00RWJGMXVDMldKcms2SEtYMFZ4MV91ZjhrRkE9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wakaba260</dc:creator></item><item><title><![CDATA[春のカンファレンスまつり 2025 (TSKaigi, JJUG CCC, 関数型まつり) 参加録]]></title><description><![CDATA[春のカンファレンスまつりと書いたのにTSKaigiとJJUG CCCと関数型まつりしかないのは、自分がこれしか参加していないからです。ごめんなさい！！！！
+今回、この３つのカンファレンスとまつりを連続して参加してみて、それぞれが掲げるメインテーマには直接現れない特色がそれぞれあると感じました。
+僭越ながら
+
+TSKaigiは静的検査カンファレンスだった
+JJUG CCCは長期開発カンファレンスだった
+関数型まつりは言語構文の深層探訪まつりだった
+
+と一旦まとめさせていただいて、それぞれの項目で詳しく感じたことを書きます。
+もちろんこのテーマではない発表もあり、その多様な発表こそがカンファ...]]></description><link>https://zenn.dev/xina/articles/bae713cf2b4b5d</link><guid isPermaLink="true">https://zenn.dev/xina/articles/bae713cf2b4b5d</guid><pubDate>Thu, 26 Jun 2025 14:27:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_l4b0xdz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2598%25A5%25E3%2581%25AE%25E3%2582%25AB%25E3%2583%25B3%25E3%2583%2595%25E3%2582%25A1%25E3%2583%25AC%25E3%2583%25B3%25E3%2582%25B9%25E3%2581%25BE%25E3%2581%25A4%25E3%2582%258A%25202025%2520%2528TSKaigi%252C%2520JJUG%2520CCC%252C%2520%25E9%2596%25A2%25E6%2595%25B0%25E5%259E%258B%25E3%2581%25BE%25E3%2581%25A4%25E3%2582%258A%2529%2520%25E5%258F%2582%25E5%258A%25A0%25E9%258C%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kina%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIzNmZjZDM4OTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kina</dc:creator></item><item><title><![CDATA[React 19のuseTransitionで実現する、ローディング体験]]></title><description><![CDATA[
+ はじめに
+ログイン → 認証後TOPページに遷移を実装中
+「ログインボタンを押して処理完了したあとに、毎回画面が数秒固まる...？」
+ログイン処理自体は正常に完了しているのに、次のページへのなかなか遷移しない。
+ユーザーからすると、ローディングが終わったのに何も起きない数秒間は、まるでアプリがフリーズしたように感じられていました。
+この問題を解決する過程で出会ったのが、React 18で導入されたuseTransitionフックです。最初は「また新しいフックか...」と思いましたが、使ってみると実践的で、ユーザー体験を改善できることがわかりました（キャッチアップしんどい）。
+
+ us...]]></description><link>https://zenn.dev/ksuke_sun/articles/6402389f7f0e19</link><guid isPermaLink="true">https://zenn.dev/ksuke_sun/articles/6402389f7f0e19</guid><pubDate>Thu, 26 Jun 2025 12:01:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AWsFW4DD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%252019%25E3%2581%25AEuseTransition%25E3%2581%25A7%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%25E3%2580%2581%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E4%25BD%2593%25E9%25A8%2593%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2593%25E3%2583%25BC%25E3%2581%2599%25E3%2581%2591%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2piWDlfWW5pUTB2Zl9TaHVlRnVsTW9sS0JMMkhXSUdXN3hvamlQPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>こーすけ</dc:creator></item><item><title><![CDATA[JavaScript と TypeScript: どっちがよりカオスか]]></title><description><![CDATA[
+警告: 過度の誇張・事実の脚色を含みます。精神的ダメージは自己責任でハンドルしてください。責任の所在は undefined で宣言済みです。
+In JavaScript we trust; in TypeScript we verify; in production we panic.[1]
+
+
+
+ 0. TL;DR を長々と書く矛盾
+
+
+JavaScript (JS): ｢動いたら奇跡｣[2] を体現するブラウザ常駐型スクリプト言語。型？それってフロントエンドの新しい UI ライブラリですか？
+
+TypeScript (TS): JS に "静的型" という防弾チョッキとリント警察を...]]></description><link>https://zenn.dev/4_4_rest/articles/7970849564df4d</link><guid isPermaLink="true">https://zenn.dev/4_4_rest/articles/7970849564df4d</guid><pubDate>Thu, 26 Jun 2025 09:26:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5RCpAthS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%2520%25E3%2581%25A8%2520TypeScript%253A%2520%25E3%2581%25A9%25E3%2581%25A3%25E3%2581%25A1%25E3%2581%258C%25E3%2582%2588%25E3%2582%258A%25E3%2582%25AB%25E3%2582%25AA%25E3%2582%25B9%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%2585%25A8%25E4%25BC%2591%25E7%25AC%25A6%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VlOGY1YTNlZjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>全休符</dc:creator></item><item><title><![CDATA[1年半の成長を振り返ってストーリーにしてみた件]]></title><description><![CDATA[!
+この記事は個人の学習経験を基にしています。
+機密事項や個人・団体を特定可能な情報は含まれていません。また、ストーリー展開の都合で一部脚色している箇所があります。
+本記事は特定の企業や学習サービスを評価・推奨するものではなく、あくまで一個人の学習体験として記載しております。
+
+
+ 💡 はじめに：とある女性の再挑戦
+👩‍💻 私：「プログラミング技術の進化は早くて...もう自分は昔のようにプログラムを書くことができなくなってしまった」
+👨‍💻 ベテランエンジニア：「でも、基本的な考え方は変わらないよ。無理なく一歩ずつ、本当にやりたい技術を身につけていける道筋を一緒に考えてみよう。」
+👩‍💻...]]></description><link>https://zenn.dev/yucco/articles/2025-06-25-growth-story</link><guid isPermaLink="true">https://zenn.dev/yucco/articles/2025-06-25-growth-story</guid><pubDate>Thu, 26 Jun 2025 09:24:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--czo6ojgO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:1%25E5%25B9%25B4%25E5%258D%258A%25E3%2581%25AE%25E6%2588%2590%25E9%2595%25B7%25E3%2582%2592%25E6%258C%25AF%25E3%2582%258A%25E8%25BF%2594%25E3%2581%25A3%25E3%2581%25A6%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AA%25E3%2583%25BC%25E3%2581%25AB%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E4%25BB%25B6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSVN2WjZVdFAzVlN1TlhIdm9uaDBUc0lSYklLUEQwY0pnTTlORVA0ZjlCN0QxMDNTZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuki</dc:creator></item><item><title><![CDATA[Next.js Server Actionsの負荷テストをしてみた]]></title><description><![CDATA[
+ はじめに
+Next.js の App Router で導入された Server Actions は、フォーム送信やサーバーサイドでの処理を簡潔に記述できる優れた機能です。(v15から明示的にServer Actionsという表現は無くなってます。)
+しかし、本格的な運用環境でパフォーマンスを検証したい場合、Server Actions に対する負荷テストの情報がまだあまり出回っていないのが現状です。
+私は1つのプロジェクトで、Next.jsでフロントエンドもバックエンドもフルスタックに開発しているのですが、こちらの負荷テストを行う必要がありました。
+そこでこの記事では、実際に私が試行...]]></description><link>https://zenn.dev/sonicmoov/articles/93cf5ef8c6615f</link><guid isPermaLink="true">https://zenn.dev/sonicmoov/articles/93cf5ef8c6615f</guid><pubDate>Thu, 26 Jun 2025 09:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UMgYIuEJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%2520Server%2520Actions%25E3%2581%25AE%25E8%25B2%25A0%25E8%258D%25B7%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:yuu_aoringo%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0YjYwNGE3MzguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25BD%25E3%2583%258B%25E3%2583%2583%25E3%2582%25AF%25E3%2583%25A0%25E3%2583%25BC%25E3%2583%2596%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U2MWQzYjIxZDIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yuu_aoringo</dc:creator></item><item><title><![CDATA[LocalStackでLambda(TS)関数をinvokeしようとしたらつまずいた]]></title><description><![CDATA[
+ この記事について
+LocalStackのLambdaでTS関数を作ってローカルでテストしようとしたらinvokeできなくて躓いたところから立ち上がるところまで書いてあります。
+
+ これを読んだら何が得られる？
+
+LocalStackのDockerComposeを用いてLambda関数の実行の正しいもの
+Lambda（TS)関数のローカルテストが実行できるようになる
+
+
+ tl;dr
+dockercompose.yamlにおいてのコンテナネームをちゃんと定義しよう。
+container_name: localstack
+~~~yaml
+environment:
+      - MAIN...]]></description><link>https://zenn.dev/takumi0706/articles/61ca9de593d6e2</link><guid isPermaLink="true">https://zenn.dev/takumi0706/articles/61ca9de593d6e2</guid><pubDate>Thu, 26 Jun 2025 06:04:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2URKihTf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LocalStack%25E3%2581%25A7Lambda%2528TS%2529%25E9%2596%25A2%25E6%2595%25B0%25E3%2582%2592invoke%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%25E3%2581%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25E3%2581%25A4%25E3%2581%25BE%25E3%2581%259A%25E3%2581%2584%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%258F%25E3%2581%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJmNzEyYTMzOGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たくみ</dc:creator></item><item><title><![CDATA[ランダムアドレス生成器 - Cloudflare Workers]]></title><description><![CDATA[
+世界24の国・地域に対応した、Cloudflare Workersにデプロイされたランダムアドレス生成器です。
+🌐 ツールURL: https://address.chat-tempmail.com
+✨ 完全無料 | 🔓 オープンソース
+
+ 機能
+
+🌍 24の国・地域のアドレス生成に対応
+📱 モバイル対応のレスポンシブデザイン
+🗺️ Google Mapsプレビュー統合
+💾 保存したアドレスのローカルストレージ
+📋 ワンクリックコピー機能
+🎨 モダンなUIデザイン
+
+
+ 対応国・地域
+US（アメリカ）、UK（イギリス）、FR（フランス）、DE（ドイツ）、CN（中国）、TW（台湾）、HK...]]></description><link>https://zenn.dev/chattempmail/articles/cc58afbf243354</link><guid isPermaLink="true">https://zenn.dev/chattempmail/articles/cc58afbf243354</guid><pubDate>Thu, 26 Jun 2025 04:25:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mq-UpFRB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25A9%25E3%2583%25B3%25E3%2583%2580%25E3%2583%25A0%25E3%2582%25A2%25E3%2583%2589%25E3%2583%25AC%25E3%2582%25B9%25E7%2594%259F%25E6%2588%2590%25E5%2599%25A8%2520-%2520Cloudflare%2520Workers%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ChatTempMail%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q5ZDFlMzg0MjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ChatTempMail</dc:creator></item><item><title><![CDATA[技育CAMPでWEBアプリ開発をした話]]></title><description><![CDATA[
+
+ はじめに
+5月の25～26日に開催された技育CAMPにLinuxClubのサークルメンバーと参加してWEBアプリを開発しました。今回はその話について語っていきたいと思います。
+
+ そもそも技育CAMPとは？
+概要
+エンジニアを志す学生にハッカソンと勉強会を通して継続的なインプットとアウトプットの場を提供するスキルアップ支援プラットフォーム。
+
+ 作った作品
+
+
+
+
+詳細リンク
+
+github
+Twitter
+
+
+ 技術スタック
+使用言語
+
+TypeScript
+Go
+Typespec
+
+フレームワーク・ライブラリ・モジュール
+
+Next.js
+Tailwind
+Echo
+
+デバイス...]]></description><link>https://zenn.dev/linux_club/articles/477306aa69757a</link><guid isPermaLink="true">https://zenn.dev/linux_club/articles/477306aa69757a</guid><pubDate>Wed, 25 Jun 2025 16:48:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rMChAlkO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%258A%2580%25E8%2582%25B2CAMP%25E3%2581%25A7WEB%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E9%2596%258B%25E7%2599%25BA%25E3%2582%2592%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:hiro%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ0Yzg5Njk5YTYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Linux%2520Club%2520-%2520%25E6%259D%25B1%25E4%25BA%25AC%25E5%25B7%25A5%25E7%25A7%2591%25E5%25A4%25A7%25E5%25AD%25A6%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3NQS0dUUlNZZkVadnZ1VVhjZzczdkVMLVE2elhMUEh4SURnbUIyLTdTY2xoMW1BPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hiro</dc:creator></item><item><title><![CDATA[モノレポでAPI定義書からモデルを自動生成したらめっちゃ楽になった]]></title><description><![CDATA[
+TL;DR
+
+モノレポに OpenAPI を置き、コードジェネレーションで Python と TypeScript の型を自動生成
+
+スキーマを SSOT（Single Source of Truth）化することでドキュメント腐敗を防止
+モデル生成はmakefileを使って、ワンコマンドで実行できるようにする
+
+
+はじめまして！株式会社ハイクリでWebエンジニアをしているHamudoraです。
+弊社で開発している時系列モデルを利用したアパレルの在庫管理システムでは、モデルの実装とデプロイ・Web UIの更新を効率化するためにもモノレポを採用しています。
+最近、バージョン管理の煩雑さを解...]]></description><link>https://zenn.dev/hicrea/articles/monorepo-openapi</link><guid isPermaLink="true">https://zenn.dev/hicrea/articles/monorepo-openapi</guid><pubDate>Wed, 25 Jun 2025 13:59:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eDfHDPz0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25A2%25E3%2583%258E%25E3%2583%25AC%25E3%2583%259D%25E3%2581%25A7API%25E5%25AE%259A%25E7%25BE%25A9%25E6%259B%25B8%25E3%2581%258B%25E3%2582%2589%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E7%2594%259F%25E6%2588%2590%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25E3%2582%2581%25E3%2581%25A3%25E3%2581%25A1%25E3%2582%2583%25E6%25A5%25BD%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2583%258F%25E3%2582%25A4%25E3%2582%25AF%25E3%2583%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzhOQVM2TmtKZGRwNjVqT2hXa3NSd1FqTWU0VXR4LTNCVXpFdGp2LWxTZnZ3RmNRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>株式会社ハイクリ</dc:creator></item><item><title><![CDATA[依存が浮かび上がる！？Effect.tsで依存グラフをレイヤで設計しよう、そしてDIコンテナについて考える]]></title><description><![CDATA[この記事のコード例は、bunを利用して実際に実行できます。
+
+ 依存が浮かび上がる
+
+ まずは依存がない基本から
+売上伝票の一覧から、売上の合計を計算することを考えてみます。
+とりあえず、単純に合計値を計算することを考えます。
+import { Effect, Stream } from "effect";
+
+//     ┌─ Effect.Effect&lt;number, never, never&gt;
+//     ▼
+const profitSum = Effect.gen(function* () {
+  const profits = Stream.make(1, 2, ...]]></description><link>https://zenn.dev/optimind/articles/effect-ts-layer-as-di-container</link><guid isPermaLink="true">https://zenn.dev/optimind/articles/effect-ts-layer-as-di-container</guid><pubDate>Wed, 25 Jun 2025 11:08:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TXSTYqDf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BE%259D%25E5%25AD%2598%25E3%2581%258C%25E6%25B5%25AE%25E3%2581%258B%25E3%2581%25B3%25E4%25B8%258A%25E3%2581%258C%25E3%2582%258B%25EF%25BC%2581%25EF%25BC%259FEffect.ts%25E3%2581%25A7%25E4%25BE%259D%25E5%25AD%2598%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%2595%25E3%2582%2592%25E3%2583%25AC%25E3%2582%25A4%25E3%2583%25A4%25E3%2581%25A7%25E8%25A8%25AD%25E8%25A8%2588%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%25E3%2580%2581%25E3%2581%259D%25E3%2581%2597%25E3%2581%25A6DI%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E8%2580%2583%25E3%2581%2588%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:luma%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNjY2ZmM2Q5YzIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:OPTIMIND%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lnRFRSQVhGMGJ1cUs3cXg4NGdUYlVNU3RlZnVVekdiN0p0Q0hWRFE9czI1MC1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>luma</dc:creator></item><item><title><![CDATA[【Zod】superRefine() と .refine()の違い]]></title><description><![CDATA[
+ superRefine()と.refine()
+superRefine()と.refine()は Zodでのカスタムバリデーションを行う際の2つの方法で、それぞれの使いどころが異なります。
+
+
+
+機能名
+用途
+特徴
+
+
+
+
+.refine()
+単一のフィールド（値）に対する追加検証
+値を見て true/false を返す
+
+
+superRefine()
+オブジェクトや複数フィールドを跨ぐ検証に使う
+複雑なロジックや相関チェックが可能
+
+
+
+
+ .refine()
+
+ 目的
+Zodの組み込みバリデーションでは対応できない独自ルールを追加したい時に使う。
+
+ 特徴
+
+
+
+特徴
+説明
+
+
+...]]></description><link>https://zenn.dev/milkandhoney995/articles/2089a6fcfd75df</link><guid isPermaLink="true">https://zenn.dev/milkandhoney995/articles/2089a6fcfd75df</guid><pubDate>Wed, 25 Jun 2025 09:25:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EbDDCkbJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Zod%25E3%2580%2591superRefine%2528%2529%2520%25E3%2581%25A8%2520.refine%2528%2529%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2594%25E3%2581%25BE%25E3%2581%25A0%25E3%2582%2593%25E3%2581%2594%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNll4Y2RIakdmaEpuUGI2MkVmaXBRRmFlRG85X0ZaMFpic0lrS3Btdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ごまだんご</dc:creator></item></channel></rss>
