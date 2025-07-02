@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Rust」のフィード]]></title><description><![CDATA[Zennのトピック「Rust」のRSSフィードです]]></description><link>https://zenn.dev/topics/rust</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ba09661577.png</url><title>Zennの「Rust」のフィード</title><link>https://zenn.dev/topics/rust</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 02 Jul 2025 00:15:56 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/rust/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Rustに入門したので意図的にクラッシュできるかを試したい]]></title><description><![CDATA[
+ はじめに
+最近ブラウザの書籍でRustに入門しているので、C言語のように意図的にクラッシュができるかどうかを確認します。
+結果として、Rustのコンパイラは堅牢であると判断できました。
+
+ マシンスペック
+MacBook Air M2 arm64
+
+ 準備
+
+ Dockerの起動・インストール
+docker run -it --rm -v $(pwd):/mnt rust:latest bash
+apt update &amp;&amp; apt install -y gcc make vim build-essential
+
+ 検証項目
+下記の観点で順次検証を進めます。
+
+
+
+項目...]]></description><link>https://zenn.dev/ka_kan/articles/2664adeb06a89b</link><guid isPermaLink="true">https://zenn.dev/ka_kan/articles/2664adeb06a89b</guid><pubDate>Tue, 01 Jul 2025 21:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DKfcSrLC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AB%25E5%2585%25A5%25E9%2596%2580%25E3%2581%2597%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E6%2584%258F%25E5%259B%25B3%25E7%259A%2584%25E3%2581%25AB%25E3%2582%25AF%25E3%2583%25A9%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A5%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2581%258B%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kanda%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlOGJhYTMxOGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kanda</dc:creator></item><item><title><![CDATA[【v0.3.0】TUIで操作できるCLIファイル転送ツール Vento をアップデートしました！]]></title><description><![CDATA[
+ はじめに
+こんにちは、中田恭大（@kyotalab）です。
+Rust製のCLIファイル転送ツール「Vento」に、TUI（Text-based User Interface）によるプロファイル編集機能を追加した v0.3.0 をリリースしました！
+本記事では、新機能の概要と、今後の展望について簡単に紹介します。
+
+
+ 🆕 v0.3.0の新機能
+
+ ✅ TUIによる vento admin 操作画面の追加
+$ vento admin
+コマンドを実行すると、以下の操作が可能なTUI画面に遷移します：
+
+プロファイル一覧の表示（Profile）
+設定ファイル（Config）の表示・編集
+プ...]]></description><link>https://zenn.dev/kyonaka/articles/5fa2f19977b558</link><guid isPermaLink="true">https://zenn.dev/kyonaka/articles/5fa2f19977b558</guid><pubDate>Tue, 01 Jul 2025 13:47:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WC4N3uUJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590v0.3.0%25E3%2580%2591TUI%25E3%2581%25A7%25E6%2593%258D%25E4%25BD%259C%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258BCLI%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E8%25BB%25A2%25E9%2580%2581%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%2520Vento%2520%25E3%2582%2592%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%2587%25E3%2583%25BC%25E3%2583%2588%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kyonaka%2540AWS%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg5NzcxODk2ODAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kyonaka@AWSエンジニア</dc:creator></item><item><title><![CDATA[Rustの所有権システムを巡る深い議論：AIとの対話で理解する「見える複雑さ」の価値]]></title><description><![CDATA[
+ Rustの所有権システムを巡る深い議論：AIとの対話で理解する「見える複雑さ」の価値
+
+ はじめに
+バックエンド開発に精通したエンジニアが、Rustの所有権システムについてAIと深い議論を交わした記録です。技術的な詳細から哲学的な設計思想まで、段階的に理解が深まっていく様子をお伝えします。
+
+
+ 第1幕：基本概念の理解
+
+ 最初の疑問
+エンジニア: &amp;selfを外すとどうなりますか？cloneもしない
+AI: &amp;selfを外すと、いくつかの問題が発生します...
+この単純な質問から始まった議論は、Rustの根本的な設計思想へと発展していきました。
+
+ 借用、参照、クロ...]]></description><link>https://zenn.dev/yusuke_sato_eh/articles/rust-ownership-visible-complexity</link><guid isPermaLink="true">https://zenn.dev/yusuke_sato_eh/articles/rust-ownership-visible-complexity</guid><pubDate>Tue, 01 Jul 2025 13:28:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--htxEF7XU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AE%25E6%2589%2580%25E6%259C%2589%25E6%25A8%25A9%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%2592%25E5%25B7%25A1%25E3%2582%258B%25E6%25B7%25B1%25E3%2581%2584%25E8%25AD%25B0%25E8%25AB%2596%25EF%25BC%259AAI%25E3%2581%25A8%25E3%2581%25AE%25E5%25AF%25BE%25E8%25A9%25B1%25E3%2581%25A7%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%25E3%2580%258C%25E8%25A6%258B%25E3%2581%2588%25E3%2582%258B%25E8%25A4%2587%25E9%259B%2591%25E3%2581%2595%25E3%2580%258D%25E3%2581%25AE%25E4%25BE%25A1%25E5%2580%25A4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:CEO%2540Engineers%2520Hub%2520...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjBXb3MtWm12c3Rhb0JVZXlmXzRDT2lJazNnVXFaaXVLNklIUnVjRmhIU3NKUVl3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>CEO@Engineers Hub Co. ,Ltd.</dc:creator></item><item><title><![CDATA[Rust製のローカルLLMベンチマークツールをClaude Codeに作らせた]]></title><description><![CDATA[Claude Max Plan ($200) を契約して2週間が経ちました。毎日しばき倒しているので、従量課金ベースだと40万円くらい使ったことになるみたいです。
+直近やりたかったこととして、「PCを複数台買ったのでLocal LLMの性能を比較したい」というものがありました。軽い気持ちで始めた調査が、最終的にClaude Codeで一つのベンチマークツールを作りあげることができたので、知見の整理も兼ねてまとめます。
+現在、Claude Codeで2-3の新規プロダクトを並列で開発していますが、その中でこのベンチマークツール開発だけ別次元の成果をあげました。なぜこのプロジェクトはうまくい...]]></description><link>https://zenn.dev/ignission/articles/dd2dba1610a276</link><guid isPermaLink="true">https://zenn.dev/ignission/articles/dd2dba1610a276</guid><pubDate>Tue, 01 Jul 2025 10:17:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6VFpSr5_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E8%25A3%25BD%25E3%2581%25AE%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25ABLLM%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2581%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25AF%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592Claude%2520Code%25E3%2581%25AB%25E4%25BD%259C%25E3%2582%2589%25E3%2581%259B%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Shoma%2520Nishitateno%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I1ODM5ZTc5ZWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shoma Nishitateno</dc:creator></item><item><title><![CDATA[多言語と比較して Rust 所有権システムを理解してみる]]></title><description><![CDATA[
+ 「見える複雑さ（Rust）」「見えない複雑さ（C/Go/Java/...）」とは？
+
+
+ 🎯 根幹の理解：設計思想の革命
+
+
+ 従来の言語：「見えない複雑さ」
+
+
+
+ガベージコレクション: いつの間にかメモリが片付けられている「魔法」
+
+共有参照: 何がどこから参照されているか見えない
+
+実行時エラー: 問題は本番環境で発覚
+
+
+ Rustの設計：「見える複雑さ」
+
+
+
+明示的な所有権: 誰が何を持っているか人間が明示
+
+コンパイル時チェック: 問題をコンパイル時に全て発見
+
+予測可能な性能: いつ何が起きるかが明確
+
+この違いが全ての特徴の源流となる
+
+
+ 🏗️ 基本概念：4つの柱...]]></description><link>https://zenn.dev/yusuke_sato_eh/articles/12201bec205f46</link><guid isPermaLink="true">https://zenn.dev/yusuke_sato_eh/articles/12201bec205f46</guid><pubDate>Mon, 30 Jun 2025 23:46:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uXwwpobR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25A4%259A%25E8%25A8%2580%25E8%25AA%259E%25E3%2581%25A8%25E6%25AF%2594%25E8%25BC%2583%25E3%2581%2597%25E3%2581%25A6%2520Rust%2520%25E6%2589%2580%25E6%259C%2589%25E6%25A8%25A9%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:CEO%2540Engineers%2520Hub%2520...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjBXb3MtWm12c3Rhb0JVZXlmXzRDT2lJazNnVXFaaXVLNklIUnVjRmhIU3NKUVl3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>CEO@Engineers Hub Co. ,Ltd.</dc:creator></item><item><title><![CDATA[Rust 1.88 の let chains 構文について]]></title><description><![CDATA[
+ Let chains 構文
+先週 Rust 1.88 がリリースされました。普段はリリースへの反応記事は書かないのですが、今回は前から気になっていた機能が安定化されたので少し触れておきたいと思います。
+その機能というのは let chains と呼ばれています。これは一つの条件文に let 式でマッチすると同時に bool 型の条件を混ぜることができる機能です。例えば次のように書くことができます。
+fn do_something_over_18(age: Option&lt;i32&gt;) {
+    if let Some(age) = age &amp;&amp; 18 &lt...]]></description><link>https://zenn.dev/msakuta/articles/rust-let-chains</link><guid isPermaLink="true">https://zenn.dev/msakuta/articles/rust-let-chains</guid><pubDate>Mon, 30 Jun 2025 14:54:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lP1_ULLh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25201.88%2520%25E3%2581%25AE%2520let%2520chains%2520%25E6%25A7%258B%25E6%2596%2587%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:msakuta%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKeG5tZ0ZYQlJsZjJpZVh1QWlwOG9LaFdpT2FSczg2dXRzWlcwN3o9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>msakuta</dc:creator></item><item><title><![CDATA[ABC412: Rustで解く！問題解説]]></title><description><![CDATA[AtCoder Beginner Contest 412のA-D問題をRustで解いた際の解法をまとめました。
+
+ A 問題
+問題
+https://atcoder.jp/contests/abc412/tasks/abc412_a
+解説
+N 日間のデータについて、目標タスク数より多くタスクが完了できた日数を求める問題です。
+各日について、目標タスク数 A_i と完了タスク数 B_i が与えられます。
+条件 A_i &lt; B_i を満たす日数をカウントし、その結果を出力します。
+コード
+
+abc412a.rs
+use proconio::input;
+
+fn main() {
+    ...]]></description><link>https://zenn.dev/nakst_hide/articles/c0f58a7b071302</link><guid isPermaLink="true">https://zenn.dev/nakst_hide/articles/c0f58a7b071302</guid><pubDate>Sun, 29 Jun 2025 23:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mLNrLZsu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ABC412%253A%2520Rust%25E3%2581%25A7%25E8%25A7%25A3%25E3%2581%258F%25EF%25BC%2581%25E5%2595%258F%25E9%25A1%258C%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakahide%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YkMxNEpSQnNET01hTGcxTVRQWGNTWS1qYlNQbFRMQTN3ZU9Sdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakahide</dc:creator></item><item><title><![CDATA[どっちを使う？Rustの&strとStringの違いを図解で学ぼう]]></title><description><![CDATA[Rustの文字列型には &amp;str と String の2種類が存在します。
+「どっちを使えばいいの？」「どう違うの？」と悩んだことはありませんか？
+この記事では、所有権・可変性・メモリ構造などの観点から、両者の違いをわかりやすく解説します。
+
+ &amp;strとは？
+&amp;strは「文字列スライス」と呼ばれ、自分では文字列の実体を持たず、メモリ上の他の場所にある文字列データを参照するだけの軽量な型です。
+let greeting: &amp;str = "hello";
+この場合、"hello"という文字列はプログラムのバイナリ（静的領域）に埋め込まれており、&amp;st...]]></description><link>https://zenn.dev/collabostyle/articles/cfaf3316c8b32f</link><guid isPermaLink="true">https://zenn.dev/collabostyle/articles/cfaf3316c8b32f</guid><pubDate>Sun, 29 Jun 2025 14:29:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RGxMsXzQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25A9%25E3%2581%25A3%25E3%2581%25A1%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25EF%25BC%259FRust%25E3%2581%25AE%2526str%25E3%2581%25A8String%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2582%2592%25E5%259B%25B3%25E8%25A7%25A3%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25BC%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:MESI%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViM2I3NTQxYzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WU9Qa2tIeEJCcWlvWjFvSzNwOG96LUZleXZvMGhfT2RpM0tsalNwMG89czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>MESI</dc:creator></item><item><title><![CDATA[クソ雑にgemini-cli使ってRustの開発環境作ってもらったりしてみた]]></title><description><![CDATA[めちゃくちゃ時代に取り残されてるので、とりあえず試し始めました。無料で試せるの助かります、ありがとうGoogle.
+
+ 1. 開発環境の準備
+gemini-cliで以下の点を伝えて作ってみてもらいました
+
+Macbookを使っている
+homebrewはインストールされている
+vscodeを使いたい
+プログラミング言語としてRustを使いたい
+
+
+ こんな感じで動いてくれました
+gemini-cliさんが書いてくれた文章による動き
+まず、Homebrewを使ってRustのコンパイラ (rustc) とパッケージマネージャ (cargo) をインストールしました。
+brew install ...]]></description><link>https://zenn.dev/ryutag/articles/71950296ef3b4e</link><guid isPermaLink="true">https://zenn.dev/ryutag/articles/71950296ef3b4e</guid><pubDate>Sun, 29 Jun 2025 05:07:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--76Nk0fh8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AF%25E3%2582%25BD%25E9%259B%2591%25E3%2581%25ABgemini-cli%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6Rust%25E3%2581%25AE%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2582%2582%25E3%2582%2589%25E3%2581%25A3%25E3%2581%259F%25E3%2582%258A%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ryuta%2520goto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y3YzUzZjlhZGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryuta goto</dc:creator></item><item><title><![CDATA[Rust×Clean Archで今更入門するCursor爆速開発]]></title><description><![CDATA[
+ 要件定義から本格API完成まで1.5時間の衝撃体験
+
+ 🔥 はじめに：40分でプロダクションレベルAPIが完成した話
+皆さん、40分でクリーンアーキテクチャを採用した本格的なECサイトAPIを構築できると思いますか？
+「無理でしょ...」と思った方、私も数日前まで同じでした。
+しかし、Claude + Cursorを組み合わせた開発を実際に体験してみると、従来の開発常識が完全に覆されました。
+
+📋 要件定義: Claude と30分相談
+⚡ 実装: Cursor で40分爆速コーディング
+🧪 テスト: 30分で動作確認完了
+合計: 約1.5時間でMVP完成
+
+この記事では、その実体験...]]></description><link>https://zenn.dev/kazuma0606/articles/f0b04828f88127</link><guid isPermaLink="true">https://zenn.dev/kazuma0606/articles/f0b04828f88127</guid><pubDate>Sun, 29 Jun 2025 00:22:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_gicvPS0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25C3%2597Clean%2520Arch%25E3%2581%25A7%25E4%25BB%258A%25E6%259B%25B4%25E5%2585%25A5%25E9%2596%2580%25E3%2581%2599%25E3%2582%258BCursor%25E7%2588%2586%25E9%2580%259F%25E9%2596%258B%25E7%2599%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AB%25E3%2582%25BA%25E3%2583%259E%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYwMWM1OTYyYmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>カズマ</dc:creator></item><item><title><![CDATA[AWS Amplify に Rust | Dioxus で作った Webアプリケーションをデプロイしてみた]]></title><description><![CDATA[
+ はじめに
+AWS Amplifyを使って、過去に私が作ったWebアプリケーションを爆速でデプロイしてみました。
+我なりにスムーズにできたので、気になった方はぜひお試しください！
+!
+手元のDioxusアプリケーションをGithubリポジトリにプッシュしておく必要があります。
+
+
+ ディレクトリ内にYAMLを作成する
+まずは、デプロイ用のYAMLファイルを作成し、リポジトリにプッシュする必要があります。
+Dioxusでは、dioxus-cliをインストールしたのちビルドを実施するため、
+YAMLファイルを作成して、それらのステップを踏む必要がありそうです。
+私は以下のように作ってみまし...]]></description><link>https://zenn.dev/taroyamada5963/articles/7e43cf3e4043e9</link><guid isPermaLink="true">https://zenn.dev/taroyamada5963/articles/7e43cf3e4043e9</guid><pubDate>Sat, 28 Jun 2025 11:11:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wZ9CBC9o--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AWS%2520Amplify%2520%25E3%2581%25AB%2520Rust%2520%257C%2520Dioxus%2520%25E3%2581%25A7%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2520Web%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Shota%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNkOTBhMWI3M2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shota</dc:creator></item><item><title><![CDATA[ターミナルを使う人は、とりあえず「mise」を入れておく時代。　　・・・を夢見て。]]></title><description><![CDATA[
+ 「mise」ってすごい使いやすいんですよ。
+miseとは GitHubリポジトリの説明書きに 「dev tools, env vars, task runner」 と書かれているrust製のcliツールです。
+この記事ではmiseヘビーユーザーの私が推したい生産性の上がる機能を紹介するので、miseを初めて知った人も、知ってるけど使ってないって人も、ぜひ一読してみてください。
+ちなみに最近話題になりやすいAIツールのcliパッケージなどもmiseで管理できたりします。
+https://github.com/jdx/mise
+https://mise.jdx.dev/
+
+ 推したい機能...]]></description><link>https://zenn.dev/dress_code/articles/a99ff13634bbe6</link><guid isPermaLink="true">https://zenn.dev/dress_code/articles/a99ff13634bbe6</guid><pubDate>Thu, 26 Jun 2025 15:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lInfj4Gj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%259F%25E3%2583%258A%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E4%25BA%25BA%25E3%2581%25AF%25E3%2580%2581%25E3%2581%25A8%25E3%2582%258A%25E3%2581%2582%25E3%2581%2588%25E3%2581%259A%25E3%2580%258Cmise%25E3%2580%258D%25E3%2582%2592%25E5%2585%25A5%25E3%2582%258C%25E3%2581%25A6%25E3%2581%258A%25E3%2581%258F%25E6%2599%2582%25E4%25BB%25A3%25E3%2580%2582%25E3%2580%2580%25E3%2580%2580%25E3%2583%25BB%25E3%2583%25BB%25E3%2583%25BB%25E3%2582%2592%25E5%25A4%25A2%25E8%25A6%258B%25E3%2581%25A6%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25BD%25E3%2582%2593%25E3%2581%2593%25E3%2581%25A4%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiOGMxZmU1MDUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:DRESS%2520CODE%2520TECH%2520BLOG%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzliYjdlODc0YzIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぽんこつエンジニア</dc:creator></item><item><title><![CDATA[WebプログラマがRustを触った所感]]></title><description><![CDATA[普段は主にPHPやTypeScriptを書いているんだけど、興味本位でRustを触ってみたので感想を残す。
+
+ 公式のツールチェーンが充実している
+普段TypeScriptを書くことが多いので、トランスパイルだのバンドルだの考えなくて済むのは良いなと思った。フォーマッタもリンタも rustup をインストールすれば入ってくれる。
+
+ rustlingsが良い
+学習環境としてrustlingsがとても良かった。初心者でもセットアップに躓くことがなかったし、ゲーム感覚で楽しかった。広く浅くやる感じなので、全体感を掴みつつ、終わった後にどこを深めるかイメージしやすいのも良い。
+型システムが独特...]]></description><link>https://zenn.dev/musou1500/articles/0529a3f2c25baa</link><guid isPermaLink="true">https://zenn.dev/musou1500/articles/0529a3f2c25baa</guid><pubDate>Thu, 26 Jun 2025 13:48:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oiQRFQXX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Web%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259E%25E3%2581%258CRust%25E3%2582%2592%25E8%25A7%25A6%25E3%2581%25A3%25E3%2581%259F%25E6%2589%2580%25E6%2584%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tt%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2liOVJoZTdaWHFHOEdXTEJPUWptYXg4TVc4ZEhOVm8tU2czMzhhRnc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tt</dc:creator></item><item><title><![CDATA[軽量で使いやすいRust製ファイル転送CLI「Vento」をOSSとして開発しました]]></title><description><![CDATA[
+ はじめに
+こんにちは、@kyotalab です。
+現場で長く使われてきたファイル転送ミドルウェア「HULFT」。その思想にインスパイアされつつ、「もっと軽量で、設定ファイル一つで使えるようなツールがOSSにあってもいいのでは？」という発想から、Rust製CLIツール 「Vento」 を開発しました。
+この記事では、Ventoのコンセプトと使い方、そして直近リリースされた v0.2.0 の主な特徴について紹介します。
+
+
+ Ventoとは？
+
+Vento は、以下をコンセプトにしたシンプルなファイル転送CLIツールです：
+
+軽量・高速（Rust製）
+YAML形式で設定可能
+CLI一発で...]]></description><link>https://zenn.dev/kyonaka/articles/108200585ba1db</link><guid isPermaLink="true">https://zenn.dev/kyonaka/articles/108200585ba1db</guid><pubDate>Thu, 26 Jun 2025 04:42:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EWc7t5ig--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25BB%25BD%25E9%2587%258F%25E3%2581%25A7%25E4%25BD%25BF%25E3%2581%2584%25E3%2582%2584%25E3%2581%2599%25E3%2581%2584Rust%25E8%25A3%25BD%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E8%25BB%25A2%25E9%2580%2581CLI%25E3%2580%258CVento%25E3%2580%258D%25E3%2582%2592OSS%25E3%2581%25A8%25E3%2581%2597%25E3%2581%25A6%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kyonaka%2540AWS%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg5NzcxODk2ODAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kyonaka@AWSエンジニア</dc:creator></item><item><title><![CDATA[Claude CodeにPythonをRustに変えてもらった]]></title><description><![CDATA[
+ はじめに
+AtCoderのHeuristic Contestは気楽に書けるのでPythonで参加しているのだが、計算速度で有利なC++とかRustとか参加した方がいいのかな？と思うことがある。実際どのくらい違うのか、Claude Codeが流行っているっぽいので、自分で作ったPythonのコードをRustに変換してもらってみた。
+
+ Beam Searchのプログラム
+今回はAHC049の問題を、Beam Searchで解いたコードを使った。271行のコードで、コンテスト時間内には間に合わなかったが100番台相当のスコアがでている。ファイルとしては1つなので、 ChatGPT にもお...]]></description><link>https://zenn.dev/attgm/articles/fc491ba8682bb6</link><guid isPermaLink="true">https://zenn.dev/attgm/articles/fc491ba8682bb6</guid><pubDate>Wed, 25 Jun 2025 13:53:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rB9VIEjb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Claude%2520Code%25E3%2581%25ABPython%25E3%2582%2592Rust%25E3%2581%25AB%25E5%25A4%2589%25E3%2581%2588%25E3%2581%25A6%25E3%2582%2582%25E3%2582%2589%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:a2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YkpXRWxFaHZNUHZabUNvSGh2QlRHY1VjdmVRSkVfTHJRUVhYU0I0UT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>a2</dc:creator></item><item><title><![CDATA[【Tauri】フロントからRustを実行する invoke API に触れる]]></title><description><![CDATA[
+ はじめに
+Tauri で開発を行っていても、通常のWeb開発の範囲での機能にとどめる場合は、Rust のコードに触れる機会はほとんどありません。しかし、OS の機能を直接利用するような場面では、Rust 側での実装が必要になります。本記事では、フロントエンドから直接 Rust の処理を呼び出す方法について解説します。
+
+ 概要
+Tauri には、フロントエンドから Rust コードを呼び出すための Invoke API が用意されています。本記事では、この API の実装手順を解説します。
+詳細は公式ドキュメントをご覧ください。
+https://v2.tauri.app/ja/dev...]]></description><link>https://zenn.dev/gemcook/articles/6b0a87542cd3a0</link><guid isPermaLink="true">https://zenn.dev/gemcook/articles/6b0a87542cd3a0</guid><pubDate>Tue, 24 Jun 2025 03:19:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--c2M2L4Yd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Tauri%25E3%2580%2591%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2581%258B%25E3%2582%2589Rust%25E3%2582%2592%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%2520invoke%2520API%2520%25E3%2581%25AB%25E8%25A7%25A6%25E3%2582%258C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Kantarou%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyYzJiNzVlZTIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Gemcook%2520Tech%2520Blog%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkzYTU2MDY5MDAuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kantarou</dc:creator></item><item><title><![CDATA[【2024年版】Python首位・TypeScript急伸・Rust台頭｜人気プログラミング言語ランキング解説]]></title><description><![CDATA[
+ プログラミング言語の人気ランキングならIEEE Spectrum
+プログラミングを志したことのある人なら誰しも一度は考えたことがあるはずです。星の数ほどのプログラミング言語のうち、人気のある言語はどれなのか？
+そんな方にぜひおすすめなのが、米国のIEEE Spectrum誌が毎年実施しているプログラミング言語人気ランキング。
+現時点の最新版は2024年8月に公開された「The Top Programming Languages 2024」です。
+
+ 「IEEE Spectrum」はどんな雑誌？
+IEEEは、1963年に誕生した、電気・電子・情報・通信関連の工学分野全般を対象とする世界...]]></description><link>https://zenn.dev/jouhoukikai/articles/55769c4ee255fb</link><guid isPermaLink="true">https://zenn.dev/jouhoukikai/articles/55769c4ee255fb</guid><pubDate>Tue, 24 Jun 2025 02:58:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6cuHZaWk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%25902024%25E5%25B9%25B4%25E7%2589%2588%25E3%2580%2591Python%25E9%25A6%2596%25E4%25BD%258D%25E3%2583%25BBTypeScript%25E6%2580%25A5%25E4%25BC%25B8%25E3%2583%25BBRust%25E5%258F%25B0%25E9%25A0%25AD%25EF%25BD%259C%25E4%25BA%25BA%25E6%25B0%2597%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E8%25A8%2580%25E8%25AA%259E%25E3%2583%25A9%25E3%2583%25B3%25E3%2582%25AD%25E3%2583%25B3%25E3%2582%25B0%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%2583%2585%25E5%25A0%25B1%25E6%25A9%259F%25E6%25A2%25B0%25E7%25A0%2594%25E7%25A9%25B6%25E6%2589%2580%25EF%25BC%2588%25E6%25A3%25AE%25E5%25B2%25A1%25E5%2589%259B%25EF%25BC%2589%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VjY2FjZjVhMGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>情報機械研究所（森岡剛）</dc:creator></item><item><title><![CDATA[SQLに立ち返って学ぶ、本当に効率的なDB設計]]></title><description><![CDATA[
+ 記事の概要
+対象読者: Web開発経験者（ORM中心の開発経験あり）
+記事の価値: SQLを直接書くことで見えてくる、真のパフォーマンス最適化
+技術スタック: Rust + SQLx + TiDB（しかし言語非依存の内容）
+
+
+ 📝 記事構成案
+
+ 1. 導入：ORMから生SQLへの転換点
+
+ なぜORMからSQLに立ち返る必要があるのか
+Web開発を始めたとき、多くの人がそうであるように、僕もPrismaやTypeORMといったORMに頼り切っていました。
+「SQLなんて古い技術でしょ？」
+「ORMがあれば型安全だし、SQLインジェクションの心配もない」
+そんな風に思っていた僕が、...]]></description><link>https://zenn.dev/kazuma0606/articles/d63bcd108d0791</link><guid isPermaLink="true">https://zenn.dev/kazuma0606/articles/d63bcd108d0791</guid><pubDate>Tue, 24 Jun 2025 00:26:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GrclpjTA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SQL%25E3%2581%25AB%25E7%25AB%258B%25E3%2581%25A1%25E8%25BF%2594%25E3%2581%25A3%25E3%2581%25A6%25E5%25AD%25A6%25E3%2581%25B6%25E3%2580%2581%25E6%259C%25AC%25E5%25BD%2593%25E3%2581%25AB%25E5%258A%25B9%25E7%258E%2587%25E7%259A%2584%25E3%2581%25AADB%25E8%25A8%25AD%25E8%25A8%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AB%25E3%2582%25BA%25E3%2583%259E%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYwMWM1OTYyYmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>カズマ</dc:creator></item><item><title><![CDATA[Rust開発始めてみました！ ～なぜRustで開発？～]]></title><description><![CDATA[
+ はじめに
+前回、自宅開発環境構築について書きました！
+そこで少し話しましたがDynabook RX73をRust開発環境に選びました！
+https://zenn.dev/maromaron88/articles/ac54c9e32ab8cd
+家に眠っていたスペックよわよわノートPCにXubuntuを入れ込めば、
+よわよわでも使う用途が出てくるんじゃないか？という考えのもとGemini先生に相談したところ。。
+そしたら、Windows10で動かすよりもリソース圧迫しないし良いと思う！と
+めちゃめちゃ肯定的な意見をもらったので、すぐにXubuntuインストールしました！
+安易な気持ちでm...]]></description><link>https://zenn.dev/maromaron88/articles/bbe837e0e8b291</link><guid isPermaLink="true">https://zenn.dev/maromaron88/articles/bbe837e0e8b291</guid><pubDate>Mon, 23 Jun 2025 02:18:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--awVwDqLT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E9%2596%258B%25E7%2599%25BA%25E5%25A7%258B%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%25EF%25BC%2581%2520%25EF%25BD%259E%25E3%2581%25AA%25E3%2581%259CRust%25E3%2581%25A7%25E9%2596%258B%25E7%2599%25BA%25EF%25BC%259F%25EF%25BD%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Maromaron88%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY2ZGVjNDJlYzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Maromaron88</dc:creator></item><item><title><![CDATA[Tour of Rust をやってみた]]></title><description><![CDATA[ひょんな事からRustを書いてみようとなったので
+Tour of Rustをチュートリアルとしてやってみて自分が振り返るようにまとめてみました]]></description><link>https://zenn.dev/okn1234/books/6e41a2526c6d22</link><guid isPermaLink="true">https://zenn.dev/okn1234/books/6e41a2526c6d22</guid><pubDate>Sun, 22 Jun 2025 11:51:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QScFtjFI--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci8yYWM4NmFmODcxLmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>okn</dc:creator></item></channel></rss>
