@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 05 Jul 2025 02:30:44 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【DAY26】リアルタイム検索を導入してわかった、便利さと重さのバランス]]></title><description><![CDATA[
+ 【DAY26】リアルタイム検索を導入してわかった、便利さと重さのバランス
+こんにちは、Keisukeです。
+今日は、最近実装した「リアルタイム検索」機能について、その技術的背景や課題、そして改善ポイントを記録しておきます。
+
+
+ 🔍 きっかけは「入力中でも結果が欲しい」という声
+これまでの検索機能は、「検索ボタンを押したらデータ一覧が出る」という仕組みでした。
+しかし、実際に自分で使っていて、「入力しながら即座に検索結果が出てきたら便利だな」と感じる場面が増え、リアルタイム検索の実装に踏み切りました。
+
+
+ 🛠 技術的な実装方法（Firebase + JavaScript）
+リアルタ...]]></description><link>https://zenn.dev/keisuke4649/articles/a7a8ea76affe20</link><guid isPermaLink="true">https://zenn.dev/keisuke4649/articles/a7a8ea76affe20</guid><pubDate>Fri, 04 Jul 2025 22:25:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DX-vvIeJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590DAY26%25E3%2580%2591%25E3%2583%25AA%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E6%25A4%259C%25E7%25B4%25A2%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2597%25E3%2581%25A6%25E3%2582%258F%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%25E3%2580%2581%25E4%25BE%25BF%25E5%2588%25A9%25E3%2581%2595%25E3%2581%25A8%25E9%2587%258D%25E3%2581%2595%25E3%2581%25AE%25E3%2583%2590%25E3%2583%25A9%25E3%2583%25B3%25E3%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:keisuke%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1N6RW9ldTZzVFN5UDFTUEpZazlwSkFDYUVwMGhWeGRQYzVIcHlzeXpKdlBKUGpHcWZ0dz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>keisuke</dc:creator></item><item><title><![CDATA[即時関数]]></title><description><![CDATA[即時関数について備忘録。
+即時関数とは、定義した直後に一度だけ実行される関数のことです。
+英語での略称は、IIFEです。
+即時関数の大きな特徴は、
+
+関数を定義した直後に自動で実行されるため、結果をすぐに得られること。よって、後から関数を呼び出す必要がありません。
+呼び出し元に返ってくるのは、関数定義ではなくてreturn文に続く戻り値です。
+内部の関数や変数を見られないため、グローバルスコープの汚染を防げることです。
+
+普通の関数は、以下のように定義した後に呼び出して実行されます。
+function subtract(a, b) { // 関数を定義
+    return a - b;...]]></description><link>https://zenn.dev/0xyusuke/articles/0c411ecab3552a</link><guid isPermaLink="true">https://zenn.dev/0xyusuke/articles/0c411ecab3552a</guid><pubDate>Fri, 04 Jul 2025 21:37:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZQWvxL2o--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:%25E5%258D%25B3%25E6%2599%2582%25E9%2596%25A2%25E6%2595%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yusuke%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZnZ0WmRlX2xEd1R3bmxpekFYVkhXRl82VHJ5NVQ1VDZSYmNwSW9RUT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yusuke</dc:creator></item><item><title><![CDATA[[自作ライブラリ] VersaLog.js]]></title><description><![CDATA[
+ VersaLog.jsとは？
+VersaLog.js は、多機能で柔軟なログ出力を簡単に実現できる TypeScript/JavaScript ライブラリです。
+シンプルな表示から詳細な実行情報まで、用途に応じたログ形式を選べます。
+詳細・導入方法はこちら：
+リポジトリ
+
+ どんな機能があるの？
+大きく分けて、3つです。
+
+
+
+機能モード
+説明
+
+
+
+
+simple
+シンプルで見やすいログを出力します。色付き・レベル付き
+
+
+detailed
+実行時間、レベル付きログ
+
+
+file
+ファイル名、行数、関数名付きログ
+
+
+
+!
+ログを出力する前に、必ず const logger = n...]]></description><link>https://zenn.dev/kayu0514/articles/ebaae3ba464cac</link><guid isPermaLink="true">https://zenn.dev/kayu0514/articles/ebaae3ba464cac</guid><pubDate>Fri, 04 Jul 2025 18:00:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--w1QWHbQX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E8%2587%25AA%25E4%25BD%259C%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%255D%2520VersaLog.js%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%2580%25AC%25E3%2580%2585%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViY2U4YmVmYjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>瀬々</dc:creator></item><item><title><![CDATA[Moodleの小テストの作文(Essay)問題を必須回答にしたい]]></title><description><![CDATA[Moodleの小テストには作文（Essay）問題があります。
+次のような文字の入力制限のある問題を作りたいとします。
+
+必須入力とし、空白での提出は許されない。
+最大文字数は300文字以内
+
+例えばこんな感じの問題を作るとしましょう。
+
+Moodleの作文問題の設定画面には次のようなオプションがあります。
+
+テキスト必須：学生はテキストを入力する必要があります。
+最小ワード数：（これを1以上にすることもできます）
+最大ワード数：300 (有効にする）
+これらを設定することで、要件に合う動作をする作文問題が作れそうな気がしますが。残念ながらこれらの設定はMoodle 4.5では全く機能しま...]]></description><link>https://zenn.dev/rublix/articles/d1f6de97bd8cf6</link><guid isPermaLink="true">https://zenn.dev/rublix/articles/d1f6de97bd8cf6</guid><pubDate>Fri, 04 Jul 2025 08:53:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AP_pW9Pg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Moodle%25E3%2581%25AE%25E5%25B0%258F%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25AE%25E4%25BD%259C%25E6%2596%2587%2528Essay%2529%25E5%2595%258F%25E9%25A1%258C%25E3%2582%2592%25E5%25BF%2585%25E9%25A0%2588%25E5%259B%259E%25E7%25AD%2594%25E3%2581%25AB%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%2595%25A0%25E4%25B8%25AD%25E4%25BF%258A%25E5%25B7%25B3%2528RubliX%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM2OWEwYTA4YzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>畠中俊巳(RubliX)</dc:creator></item><item><title><![CDATA[macOSで動く社内向けツールをかんたんに作りたい]]></title><description><![CDATA[ごぶさたしております、こまたつです。
+社内の課題を解決するための小さなツールをつくることを趣味としている私ですが、macOSで動くツールの開発って結構めんどくさいんですよね。
+AndroidエンジニアとしてはKotlin Multiplatformを使いたいところではありますが、気軽さはいまひとつ。ということで毎回いろいろな手法を試しております。
+そんな中で今回試したNeutralinojsがなかなか良かったので紹介したいと思います。
+Neutralinojsは簡単に言ってしまえば軽量版Electronのようなもので、Webの技術を使ってマルチプラットフォーム向けにビルドできるフレームワ...]]></description><link>https://zenn.dev/prevent/articles/6b8db9f2539178</link><guid isPermaLink="true">https://zenn.dev/prevent/articles/6b8db9f2539178</guid><pubDate>Fri, 04 Jul 2025 07:52:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nYTzHxEl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:macOS%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258F%25E7%25A4%25BE%25E5%2586%2585%25E5%2590%2591%25E3%2581%2591%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E3%2581%258B%25E3%2582%2593%25E3%2581%259F%25E3%2582%2593%25E3%2581%25AB%25E4%25BD%259C%25E3%2582%258A%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:komatatsu%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QzNzQ5ZTRhYWYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEPREVENT%25E9%2596%258B%25E7%2599%25BA%25E9%2583%25A8%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2gxNDV6SlVyeG5lNi1HWXpha0s2a3ptUzBKaUxXUjVNamFFVUxyTHc9czI1MC1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>komatatsu</dc:creator></item><item><title><![CDATA[JavaScriptの分割代入と残余プロパティを知ろう]]></title><description><![CDATA[
+ 概要
+別記事を書くにあたり分割代入を理解しようの会
+残余プロパティ(残余要素)についてもあわせて紹介
+
+ 分割代入とは
+配列やオブジェクトの一部を切り出して別の変数に格納すること。
+参考: https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Destructuring
+
+配列の分割代入
+const hoge = [1, 2, 3];
+// ↓こんな感じで分割代入する
+const [a, b, c] = hoge;
+
+console.log(a); // 1
+console.log(b); /...]]></description><link>https://zenn.dev/mt5/articles/aa02ce252701d1</link><guid isPermaLink="true">https://zenn.dev/mt5/articles/aa02ce252701d1</guid><pubDate>Fri, 04 Jul 2025 03:49:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pkrOJCdo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AE%25E5%2588%2586%25E5%2589%25B2%25E4%25BB%25A3%25E5%2585%25A5%25E3%2581%25A8%25E6%25AE%258B%25E4%25BD%2599%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2591%25E3%2583%2586%25E3%2582%25A3%25E3%2582%2592%25E7%259F%25A5%25E3%2582%258D%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258A%25E3%2583%25BC%25E3%2581%258F%25E3%2581%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk2OGY2M2MyNTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>おーくぼ</dc:creator></item><item><title><![CDATA[Typescriptの一部完全に理解してた。。(思ったことをそのまま書きます)]]></title><description><![CDATA[みなさんはTypescriptは大好きですか？
+私は。。。😇
+Typescriptは難しい言語だと思っています。
+先日TSKaigiに参加をしてきましたが「まだまだ知らないことがたくさんあるな」「ものすごく勉強になった」というような内容がたくさんありました！
+https://2025.tskaigi.org/
+「カンファレンスは、、いいよなぁ〜〜〜」
+また来年もあったら行きたいなと思いました！
+話は変わって、以前このような記事を書いたと思います。
+https://zenn.dev/terusi/articles/46abffaaf7f002
+この記事を書いてから時間が経ちふと、疑問に思っ...]]></description><link>https://zenn.dev/terusi/articles/542f75deb6dd66</link><guid isPermaLink="true">https://zenn.dev/terusi/articles/542f75deb6dd66</guid><pubDate>Thu, 03 Jul 2025 18:58:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--u6XO4t-z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Typescript%25E3%2581%25AE%25E4%25B8%2580%25E9%2583%25A8%25E5%25AE%258C%25E5%2585%25A8%25E3%2581%25AB%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%25A6%25E3%2581%259F%25E3%2580%2582%25E3%2580%2582%2528%25E6%2580%259D%25E3%2581%25A3%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%25E3%2582%2592%25E3%2581%259D%25E3%2581%25AE%25E3%2581%25BE%25E3%2581%25BE%25E6%259B%25B8%25E3%2581%258D%25E3%2581%25BE%25E3%2581%2599%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A6%25E3%2582%258B%25E3%2581%2597%25E3%2580%259C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlM2M5MzkyNjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>てるし〜</dc:creator></item><item><title><![CDATA[Expoではじめる！スマホアプリ開発の完全ステップバイステップガイド]]></title><description><![CDATA[
+ はじめに
+「スマホアプリを作ってみたいけど、何から始めたらいいかわからない...」
+そんな方のために、React Nativeフレームワークである Expo を使って、iOSとAndroidの両方で動作するスマホアプリを開発する手順を、ステップバイステップで丁寧に解説します。Expoを使えば、複雑な環境構築なしで、すぐにアプリ開発を始めることができます。
+
+ 1. 開発環境の準備
+まず、アプリ開発に必要なツールをPCにインストールします。
+
+ Node.jsのインストール
+ExpoはNode.jsという実行環境の上で動作します。公式サイトからLTS（Long Term Support...]]></description><link>https://zenn.dev/makiinfra/articles/2a1f3b4c5d6e7f89</link><guid isPermaLink="true">https://zenn.dev/makiinfra/articles/2a1f3b4c5d6e7f89</guid><pubDate>Thu, 03 Jul 2025 15:30:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RKRzcfaY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Expo%25E3%2581%25A7%25E3%2581%25AF%25E3%2581%2598%25E3%2582%2581%25E3%2582%258B%25EF%25BC%2581%25E3%2582%25B9%25E3%2583%259E%25E3%2583%259B%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AE%25E5%25AE%258C%25E5%2585%25A8%25E3%2582%25B9%25E3%2583%2586%25E3%2583%2583%25E3%2583%2597%25E3%2583%2590%25E3%2582%25A4%25E3%2582%25B9%25E3%2583%2586%25E3%2583%2583%25E3%2583%2597%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BE%25E3%2581%258D%25E3%2581%25AE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUwNTY5MTk2ODQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>まきの</dc:creator></item><item><title><![CDATA[クロージャーについて]]></title><description><![CDATA[JavaScriptを勉強しているときに、クロージャーという概念の理解が必要になったので、投稿してみました。
+内側に定義されている関数からレキシカルスコープの変数を参照できる現象を、クロージャーといいます。
+クロージャーを使うことで、下の二つのことができます。
+
+プライベート変数の定義
+
+
+プライベートとは関数の外部からアクセスできないということ
+
+
+動的な関数の生成
+
+
+プログラミングにおける「動的」の意味は、状況に応じて変化すること
+動的な関数とは、状況によって異なる関数という意味合い
+
+サンプルコード
+function fn1() { // グローバルスコープ
+    let a ...]]></description><link>https://zenn.dev/0xyusuke/articles/35adc78e6e053c</link><guid isPermaLink="true">https://zenn.dev/0xyusuke/articles/35adc78e6e053c</guid><pubDate>Thu, 03 Jul 2025 09:12:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rDdzEfrG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A3%25E3%2583%25BC%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yusuke%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZnZ0WmRlX2xEd1R3bmxpekFYVkhXRl82VHJ5NVQ1VDZSYmNwSW9RUT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yusuke</dc:creator></item><item><title><![CDATA[【NAGOYA AI YOUTH CAMP 2025】AIでプログラミングを体験してみよう！]]></title><description><![CDATA[NAGOYA AI YOUTH CAMP 2025で使用する教材です。この教材を通してまずはAIを使用してプログラミングを体験してみましょう！]]></description><link>https://zenn.dev/is0629sy/books/nagoya-ai-youth2025</link><guid isPermaLink="true">https://zenn.dev/is0629sy/books/nagoya-ai-youth2025</guid><pubDate>Thu, 03 Jul 2025 05:41:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--58Vy8Bzo--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci9kNzkxNjcwN2ViLnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>is0629sy/GB</dc:creator></item><item><title><![CDATA[TypeScriptのtypeofを知ろう]]></title><description><![CDATA[
+ 概要
+別記事を書くにあたりtypeofを理解しようの会
+
+ typeofとは
+指定した変数やプロパティの型を抽出して定義するもの。
+参考: https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
+let s = "hello";
+let n: typeof s; // string
+
+let l = [1, 2, 3];
+let m: typeof l; // number[]
+ちなみに、配列に対して以下のような書き方をすると要素の型を抜き出せる。
+let l = [1, 2, 3];
+let m: typeo...]]></description><link>https://zenn.dev/mt5/articles/b936558aa1d226</link><guid isPermaLink="true">https://zenn.dev/mt5/articles/b936558aa1d226</guid><pubDate>Thu, 03 Jul 2025 01:03:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PXIRLsxx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25AEtypeof%25E3%2582%2592%25E7%259F%25A5%25E3%2582%258D%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258A%25E3%2583%25BC%25E3%2581%258F%25E3%2581%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk2OGY2M2MyNTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>おーくぼ</dc:creator></item><item><title><![CDATA[非同期処理/エラーハンドリング]]></title><description><![CDATA[自分用チートシートです。
+
+ Promiseを返さない非同期関数
+これらはブラウザやNode.jsに組み込まれたAPIで、処理の完了をコールバック関数で通知します。
+
+ 一定時間後に処理を実行: setTimeout(callback, delay)
+setTimeout(() =&gt; { 
+    console.log("1秒後に一度だけ実行されます"); 
+}, 1000); // 1000ミリ秒 (1秒) 後
+
+ 一定間隔で処理を実行: setInterval(callback, delay)
+const intervalId = setInterval(() =&gt; {...]]></description><link>https://zenn.dev/takaa/articles/39c1f524df4ed5</link><guid isPermaLink="true">https://zenn.dev/takaa/articles/39c1f524df4ed5</guid><pubDate>Wed, 02 Jul 2025 15:24:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qZz8KVcr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%25E5%2587%25A6%25E7%2590%2586%252F%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2583%258F%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takaa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZkZTg4MTMwMTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takaa</dc:creator></item><item><title><![CDATA[イベント系チートシート]]></title><description><![CDATA[自分用チートシートです。
+
+ イベントリスナーの登録
+
+
+
+メソッド
+説明
+例
+備考
+
+
+
+
+element.addEventListener('event', handler, options)
+推奨される方法。 複数のリスナーを登録でき、柔軟性が高い。options で詳細設定可能。
+btn.addEventListener('click', handleClick);
+this はイベントを発生させた要素を指す。
+
+
+element.removeEventListener('event', handler)
+addEventListenerで登録したリスナーを削除。handler関...]]></description><link>https://zenn.dev/takaa/articles/d2f35083bda583</link><guid isPermaLink="true">https://zenn.dev/takaa/articles/d2f35083bda583</guid><pubDate>Wed, 02 Jul 2025 15:24:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yq_TkduI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E7%25B3%25BB%25E3%2583%2581%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takaa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZkZTg4MTMwMTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takaa</dc:creator></item><item><title><![CDATA[DOM操作チートシート]]></title><description><![CDATA[自分用チートシートです。
+
+ 要素の取得
+
+
+
+メソッド
+説明
+例
+
+
+
+
+document.getElementById('id')
+指定されたIDを持つ単一の要素を取得。
+const el = document.getElementById('myId');
+
+
+document.querySelector('selector')
+指定されたCSSセレクタに一致する最初の要素を取得。
+const el = document.querySelector('.myClass');  const el2 = document.querySelector('div.item');
+
+
+doc...]]></description><link>https://zenn.dev/takaa/articles/11113b579ed9fb</link><guid isPermaLink="true">https://zenn.dev/takaa/articles/11113b579ed9fb</guid><pubDate>Wed, 02 Jul 2025 15:24:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--An-hTXDj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:DOM%25E6%2593%258D%25E4%25BD%259C%25E3%2583%2581%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takaa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZkZTg4MTMwMTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takaa</dc:creator></item><item><title><![CDATA[オブジェクト操作チートシート]]></title><description><![CDATA[自分用チートシートです。
+
+ オブジェクトの作成
+
+
+
+方法
+説明
+例
+
+
+
+
+オブジェクトリテラル
+最も一般的で推奨される方法。
+let obj = { key: 'value', num: 123 };
+
+
+new Object()
+基本的なオブジェクトを作成。
+let obj = new Object();
+
+
+Object.create()
+既存のオブジェクトをプロトタイプとして新しいオブジェクトを作成。
+let proto = { greet: 'Hello' };  let obj = Object.create(proto);
+
+
+
+
+ プロパティのアクセスと設定
+
+
+
+方...]]></description><link>https://zenn.dev/takaa/articles/6e55b9a04023ca</link><guid isPermaLink="true">https://zenn.dev/takaa/articles/6e55b9a04023ca</guid><pubDate>Wed, 02 Jul 2025 15:24:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6n-1H4od--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E6%2593%258D%25E4%25BD%259C%25E3%2583%2581%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takaa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZkZTg4MTMwMTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takaa</dc:creator></item><item><title><![CDATA[文字列操作チートシート]]></title><description><![CDATA[自分用チートシートです。
+
+ 文字列の作成
+
+
+
+方法
+説明
+例
+
+
+
+
+文字列リテラル
+最も一般的で推奨される方法。シングル/ダブルクォート。
+let str = 'Hello'; let str2 = "World";
+
+
+テンプレートリテラル
+バッククォート (`) を使用。改行や変数埋め込みが可能。
+let name = "Alice";let msg = \Hello, ${name}!;
+
+
+
+
+
+ 文字列の長さとアクセス
+
+
+
+プロパティ/メソッド
+説明
+例
+結果
+
+
+
+
+length
+文字列の長さを返す。
+hello'.length
+5
+
+
+[index]
+特定のインデッ...]]></description><link>https://zenn.dev/takaa/articles/5a931c5824fe81</link><guid isPermaLink="true">https://zenn.dev/takaa/articles/5a931c5824fe81</guid><pubDate>Wed, 02 Jul 2025 15:24:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5Y8OAnm0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E6%2593%258D%25E4%25BD%259C%25E3%2583%2581%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takaa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZkZTg4MTMwMTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takaa</dc:creator></item><item><title><![CDATA[配列操作チートシート]]></title><description><![CDATA[自分用チートシートです。
+
+ 配列操作
+
+
+
+方法
+説明
+例
+
+
+
+
+リテラル構文
+最も一般的で推奨される方法。
+let arr = [1, 2, 3];
+
+
+Array() コンストラクタ
+特定の長さの空の配列を作成。引数1つの場合。
+let arr = new Array(5); (空の要素5つ)
+
+
+Array.of()
+引数を要素とする配列を作成。
+let arr = Array.of(1, 2, 3);
+
+
+Array.from()
+イテラブル（反復可能）なオブジェクトから配列を作成。
+let arr = Array.from("hello"); (['h', 'e', 'l'...]]></description><link>https://zenn.dev/takaa/articles/91884098bfe179</link><guid isPermaLink="true">https://zenn.dev/takaa/articles/91884098bfe179</guid><pubDate>Wed, 02 Jul 2025 15:24:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_bIjq0vk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%2585%258D%25E5%2588%2597%25E6%2593%258D%25E4%25BD%259C%25E3%2583%2581%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takaa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZkZTg4MTMwMTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takaa</dc:creator></item><item><title><![CDATA[数値操作チートシート]]></title><description><![CDATA[自分用チートシートです
+
+ 数値への型変換
+
+
+
+関数/メソッド
+説明
+例
+結果
+
+
+
+
+Number()
+さまざまな値を数値に変換。変換できない場合は NaN を返す。
+Number("123")  Number("abc")
+123  NaN
+
+
+parseInt()
+文字列を整数に変換。文字列の先頭から数値として解釈できる部分を変換。
+parseInt("123px")  parseInt("abc")
+123  NaN
+
+
+parseFloat()
+文字列を浮動小数点数に変換。
+parseFloat("123.45px")  parseFloat("123")
+123.45  1...]]></description><link>https://zenn.dev/takaa/articles/be43ff75ee5219</link><guid isPermaLink="true">https://zenn.dev/takaa/articles/be43ff75ee5219</guid><pubDate>Wed, 02 Jul 2025 15:23:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qqbrvpnr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2595%25B0%25E5%2580%25A4%25E6%2593%258D%25E4%25BD%259C%25E3%2583%2581%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takaa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZkZTg4MTMwMTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takaa</dc:creator></item><item><title><![CDATA[関数チートシート]]></title><description><![CDATA[自分用チートシートです。
+
+ 関数宣言
+function name(param1, param2) { 
+  return result; 
+}; 
+
+ 関数式
+const func= function(name) { 
+  return result`; 
+}; 
+
+ アロー関数
+const arrow = (param) =&gt; { 
+  // ... 
+}; 
+
+ 短縮形アロー関数
+const arrow = param =&gt; result; 
+
+ 即時実行関数(IIFE)
+(function() { 
+ // ... 
+}); 
+
+ コールバック関数
+function ...]]></description><link>https://zenn.dev/takaa/articles/7e40689f0225e8</link><guid isPermaLink="true">https://zenn.dev/takaa/articles/7e40689f0225e8</guid><pubDate>Wed, 02 Jul 2025 15:23:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xWE4mkfe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%2596%25A2%25E6%2595%25B0%25E3%2583%2581%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takaa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZkZTg4MTMwMTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takaa</dc:creator></item><item><title><![CDATA[制御構文チートシート]]></title><description><![CDATA[自分用チートシートです
+
+ 条件分岐
+if (conditions) { ... }  
+else if (conditions) { ... }  
+else { ... } 
+
+ 多分岐
+switch (value) {  
+  case 'a':  
+    // ...  
+    break;  
+  case 'b':  
+  case 'c':  
+    // ...  
+    break;  
+  default:  
+    // ...  
+} 
+
+ 繰り返し
+for (let i = 0; i &lt; array.length; i++) { ... }
+
+ ...]]></description><link>https://zenn.dev/takaa/articles/55ae34409e4654</link><guid isPermaLink="true">https://zenn.dev/takaa/articles/55ae34409e4654</guid><pubDate>Wed, 02 Jul 2025 15:23:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LbYRfmIE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%25B6%25E5%25BE%25A1%25E6%25A7%258B%25E6%2596%2587%25E3%2583%2581%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takaa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZkZTg4MTMwMTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takaa</dc:creator></item></channel></rss>
