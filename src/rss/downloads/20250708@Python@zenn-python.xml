@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 08 Jul 2025 09:50:41 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[[便利]dbtでStreamlit in Snowflakeのコードを管理しよう！]]></title><description><![CDATA[皆さん。Streamlit in Snowflakeのコード管理大変じゃないですか？
+私の作成したStreamlit Materializationを使うとdbtでStreamlitアプリをコード管理する事ができます。めっちゃ便利なので使ってみてください。
+これを使うメリットとしては
+
+Streamlit アプリケーションがリネージュに表示されるので影響範囲が楽
+dbt buildでStreamlit in Snowflakeアプリもデプロイ+コード管理出来る
+
+{{ref('')}}という参照構文がStreamlitの中で使えるので、開発環境の切り替えなども楽。
+
+dbt run -s...]]></description><link>https://zenn.dev/dataheroes/articles/26d331cef4186f</link><guid isPermaLink="true">https://zenn.dev/dataheroes/articles/26d331cef4186f</guid><pubDate>Tue, 08 Jul 2025 02:49:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--E_9kOFz7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E4%25BE%25BF%25E5%2588%25A9%255Ddbt%25E3%2581%25A7Streamlit%2520in%2520Snowflake%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Kentaro%2520Maeda%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUxNDFkYTVlNTUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Snowflake%2520Data%2520Heroes%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FjYTJlMzdkM2QuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kentaro Maeda</dc:creator></item><item><title><![CDATA[【Seaborn】よく使うグラフ５選【Python】]]></title><description><![CDATA[
+ 0. iris_dataset
+import seaborn as sns
+import matplotlib.pyplot as plt
+import numpy as np
+
+# 0. iris
+iris = sns.load_dataset("iris")
+print(iris)  # 中身の確認
+
+ 1. jointplot
+散布図＋分布の確認
+# 1. jointplot
+def example_jointplot():
+    sns.jointplot(data=iris, x="sepal_length", y="sepal_width",
+             ...]]></description><link>https://zenn.dev/hoshinagi1219/articles/51f9d1fedb2411</link><guid isPermaLink="true">https://zenn.dev/hoshinagi1219/articles/51f9d1fedb2411</guid><pubDate>Tue, 08 Jul 2025 01:30:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--98X4ziu---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Seaborn%25E3%2580%2591%25E3%2582%2588%25E3%2581%258F%25E4%25BD%25BF%25E3%2581%2586%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%2595%25EF%25BC%2595%25E9%2581%25B8%25E3%2580%2590Python%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%2598%259F%25E6%259D%259C%25E3%2581%25AA%25E3%2581%258E%25E3%2581%2595%25EF%25BC%2588Nagisa%2520Hoshi...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ5ZGRkYjJkZjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>星杜なぎさ（Nagisa Hoshimori）</dc:creator></item><item><title><![CDATA[Poetryで作成したPythonプロジェクトをVSCode/Cursor等でエラーなく開く方法]]></title><description><![CDATA[Poetryで作成したPythonプロジェクトをVSCodeやCursorで開いたとき、importエラーやモジュールが見つからないエラーが発生したことはありませんか？
+これは、エディタがPoetryの仮想環境を正しく認識できていないことが原因です。
+
+💡 前提知識
+この記事を読む前に、Poetryの基本的な使い方について以下の記事を確認することをお勧めします
+
+https://zenn.dev/goshawk/articles/974679c38d7268
+今回は、PoetryプロジェクトをVSCode/Cursorで正しく設定し、エラーを解消する方法を紹介します。
+
+
+ 🚨 問題：P...]]></description><link>https://zenn.dev/goshawk/articles/b9079495fb9377</link><guid isPermaLink="true">https://zenn.dev/goshawk/articles/b9079495fb9377</guid><pubDate>Tue, 08 Jul 2025 00:18:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--STrcc_oj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Poetry%25E3%2581%25A7%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2581%259FPython%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2582%2592VSCode%252FCursor%25E7%25AD%2589%25E3%2581%25A7%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%25AA%25E3%2581%258F%25E9%2596%258B%25E3%2581%258F%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:goshawk%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M3MmVlOWM4NjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>goshawk</dc:creator></item><item><title><![CDATA[【Pythonで実装】江島の分散分析における必要サンプルサイズ計算（通常型/Cohen's f）]]></title><description><![CDATA[
+ 江島の通常型分散分析（Cohen's f）によるサンプルサイズ計算【Python実装あり】
+
+ はじめに
+前回の記事では、バイオエクイバレンス試験における江島の方法をPythonで実装しました。
+今回はその通常分散分析型（Cohen's f）に焦点を当て、必要サンプルサイズの求め方を解説します。
+
+※本記事は実務や統計勉強に役立てるために、できるだけ直感的に解説します。
+
+
+
+ 分散分析におけるサンプルサイズの概要
+
+分散分析（ANOVA）では、効果量（ここでは f）・有意水準・検出力・群数・残差分散をもとに必要サンプルサイズを算出します。
+江島の方法は、通常の理論に基づきながらも、...]]></description><link>https://zenn.dev/rain17456322/articles/1f2738d665b29d</link><guid isPermaLink="true">https://zenn.dev/rain17456322/articles/1f2738d665b29d</guid><pubDate>Mon, 07 Jul 2025 14:36:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--C5YpUeq0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2581%25A7%25E5%25AE%259F%25E8%25A3%2585%25E3%2580%2591%25E6%25B1%259F%25E5%25B3%25B6%25E3%2581%25AE%25E5%2588%2586%25E6%2595%25A3%25E5%2588%2586%25E6%259E%2590%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E5%25BF%2585%25E8%25A6%2581%25E3%2582%25B5%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25BA%25E8%25A8%2588%25E7%25AE%2597%25EF%25BC%2588%25E9%2580%259A%25E5%25B8%25B8%25E5%259E%258B%252FCohen%2527s%2520f%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Rain%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTG1ieHhWLVJEMkdYeWxKdUdTZS1BOHN5MU5PT3dMai1rNWtkb1BXUHdtUE9iWjVKQXU9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Rain</dc:creator></item><item><title><![CDATA[キャプチャをPythonで取得]]></title><description><![CDATA[監査対応により、毎月決まった画面のキャプチャを格納する必要がある。
+定常業務の自動化のため、Pythonでページキャプチャを行い、毎月プログラムを実行するだけでいいようにする。
+
+ .pyファイル
+
+cap.py
+import subprocess
+
+appDic = {}
+appDic['fileName1'] = 'https://xxxxxxx/articles/xxxxxxxxxxxxxxxxx1'
+appDic['fileName2'] = 'https://xxxxxxx/articles/xxxxxxxxxxxxxxxxx2'
+
+
+# appDicという辞書からキーと値を一...]]></description><link>https://zenn.dev/nag8/articles/0b914da0139b71</link><guid isPermaLink="true">https://zenn.dev/nag8/articles/0b914da0139b71</guid><pubDate>Mon, 07 Jul 2025 14:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oawTPKfv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AD%25E3%2583%25A3%25E3%2583%2597%25E3%2583%2581%25E3%2583%25A3%25E3%2582%2592Python%25E3%2581%25A7%25E5%258F%2596%25E5%25BE%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%2595%25B7%25E5%25B3%25B0%2520%25E8%25AC%2599%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hxMHdjMzR3ZmFmTlVrc3BjakM5WlN5ZzFSMWdwc0pGMndFUklSVFJzPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>長峰 謙</dc:creator></item><item><title><![CDATA[uvコマンドチートシート]]></title><description><![CDATA[!
+以下は参照用にDeep Researchの出力をコピペしたものです。
+
+
+ Pythonパッケージ管理ツール uv チートシート
+Python中級者向けに、パッケージ管理ツール uv の基本コマンドをまとめます。仮想環境の管理から依存関係の追加・ロックまで、開発ワークフローに沿った使い方を紹介します。
+
+ 仮想環境の作成・管理
+
+
+仮想環境の作成: uv venv コマンドで現在のディレクトリに .venv 環境を高速に作成します。
+$ uv venv               # カレントディレクトリに.venvを作成 (デフォルトPython使用)
+$ uv venv my_e...]]></description><link>https://zenn.dev/giba/articles/python_uv_cheet_sheet</link><guid isPermaLink="true">https://zenn.dev/giba/articles/python_uv_cheet_sheet</guid><pubDate>Mon, 07 Jul 2025 12:14:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TbbvXPvu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:uv%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2583%2581%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:GIBA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y5MmM4MjdhMmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>GIBA</dc:creator></item><item><title><![CDATA[AlmaLinux 9（WSL）で tree-sitter をセットアップして C++ の構造解析をしてみた]]></title><description><![CDATA[
+ はじめに
+コードの特定の場所に処理を追加したいとき、多くの人がまず思いつくのは「正規表現による検索」だと思います。しかし、他のアプローチとして「構造検索」という方法もあります。
+たとえば、コメントや文字列リテラルを除外して、本当に挿入したい場所だけを見つけたいときなど、コードの構造を理解して検索するほうが正確です。
+最近のエディタ（たとえば VSCode や Neovim）では、コメント部分が自動で薄い色になるなど、構造をもとにした解析が行われています。こうした機能の裏側では、tree-sitter のような構文解析ツールが使われている場合もあります。
+今回は、そんな構造検索の強力な...]]></description><link>https://zenn.dev/naosegu/articles/ae9666741e8fe5</link><guid isPermaLink="true">https://zenn.dev/naosegu/articles/ae9666741e8fe5</guid><pubDate>Mon, 07 Jul 2025 11:07:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--x0oBdENT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AlmaLinux%25209%25EF%25BC%2588WSL%25EF%25BC%2589%25E3%2581%25A7%2520tree-sitter%2520%25E3%2582%2592%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2581%2597%25E3%2581%25A6%2520C%252B%252B%2520%25E3%2581%25AE%25E6%25A7%258B%25E9%2580%25A0%25E8%25A7%25A3%25E6%259E%2590%25E3%2582%2592%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:naosegu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUwMjhiMTUxZjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>naosegu</dc:creator></item><item><title><![CDATA[Django REST framework(DRF)を使ったAPIサーバーとReactとのデータ連携]]></title><description><![CDATA[!
+この記事は Qiita に2024年2月に投稿した内容を、再編集したものです。
+
+
+ 概要
+今回はDjango REST frameworkを使用し、Django-adminで設計されたデータの取得とフロント側での表示を実装します。
+
+ 実装機能
+
+
+Django REST framework(DRF)の導入
+Django管理画面で実装したデータの取得
+
+
+
+
+項番
+記事
+
+
+
+
+1
+React + Django + CORSを使ったフロントエンド / バックエンドのデータ連携
+
+
+2
+Django 管理画面のカスタマイズ
+
+
+3
+Django REST framework(DRF)...]]></description><link>https://zenn.dev/xinome/articles/4ddf5b02bac39a</link><guid isPermaLink="true">https://zenn.dev/xinome/articles/4ddf5b02bac39a</guid><pubDate>Mon, 07 Jul 2025 10:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6m8u5rVL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Django%2520REST%2520framework%2528DRF%2529%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259FAPI%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25A8React%25E3%2581%25A8%25E3%2581%25AE%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E9%2580%25A3%25E6%2590%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:xinome%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMzMTQ2NWJhZmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>xinome</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-412｜A - Task Failed Successfully]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-412 A - Task Failed Successfully
+
+
+
+ 提出結果
+def getInt():
+    return int(input())
+
+
+def getIntListRow(N):
+    return [list(map(int, input().split())) for _ in range(N)]
+
+
+def main():
+    N = getInt()
+    AB = getIntListRow(N)
+
+    ans = 0
+    for a, b in AB:
+        if a &lt; b:
+     ...]]></description><link>https://zenn.dev/hyperdb/articles/dd52af0f8c61e4</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/dd52af0f8c61e4</guid><pubDate>Mon, 07 Jul 2025 09:59:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BFUAAJNl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-412%25EF%25BD%259CA%2520-%2520Task%2520Failed%2520Successfully%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-412｜B - Precondition]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-412 B - Precondition
+
+
+
+ 提出結果
+# ABC-412 B - Precondition
+# https://atcoder.jp/contests/abc412/tasks/abc412_b
+#
+def getString():
+    return input()
+
+
+def main():
+    S = getString()
+    T = getString()
+
+    ret = True
+    for i in range(1, len(S)):
+        if S[i] &lt; "a":
+         ...]]></description><link>https://zenn.dev/hyperdb/articles/70d3c08a89a5fc</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/70d3c08a89a5fc</guid><pubDate>Mon, 07 Jul 2025 09:59:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--c4MY7qxl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-412%25EF%25BD%259CB%2520-%2520Precondition%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[AI学習の旅]]></title><description><![CDATA[
+ 自己紹介
+こんにちは！私は中国語、日本語、英語の三言語を使いこなすバックエンド開発エンジニアです。現在、AI応用開発の学習に取り組んでおり、従来のWeb開発スキルとAI技術を組み合わせた新しいキャリアパスを模索しています。
+これまでの開発経験を活かしながら、Python、Java、JavaScript/TypeScriptといった複数の言語でAI開発を習得し、エンタープライズレベルのAIアプリケーション構築を目指しています。このブログでは、私の学習過程と実践的な知見を共有し、同じような道を歩む開発者の皆さんのお役に立てればと思います。
+
+
+ AI学習の旅
+マルチ言語 AI アプリケー...]]></description><link>https://zenn.dev/williamkyo/articles/82d3b13d379f09</link><guid isPermaLink="true">https://zenn.dev/williamkyo/articles/82d3b13d379f09</guid><pubDate>Mon, 07 Jul 2025 09:31:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yFOxvY0k--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:AI%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%25AE%25E6%2597%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kyo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U2YTM2ODNkNDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kyo</dc:creator></item><item><title><![CDATA[JetBrains AI【2025年7月3日 アップデートまとめ】]]></title><description><![CDATA[
+ はじめに
+みなさんこんにちは。JetBrains公式代理店NATTOSYSTEMの私です。
+2025年7月3日にリリースされたJetBrains AIのアップデートをまとめました。
+
+ 🆕 変更点（Changes）
+
+ チャット
+
+
+新しい LLM: Claude 4 Sonnet をチャットに追加
+
+
+ 編集モードの強化
+
+AI による提案機能が改善され、文脈処理の向上とプロジェクト統合がシームレスに
+
+
+ プリコミットチェック
+
+AI によるコミット前チェックが追加され、提案とワンクリックの Quick Fix に対応
+
+
+ コード補完の改善
+
+より良い文脈収集とフィルターモデル...]]></description><link>https://zenn.dev/nattosystem_jp/articles/7001874990536b</link><guid isPermaLink="true">https://zenn.dev/nattosystem_jp/articles/7001874990536b</guid><pubDate>Mon, 07 Jul 2025 07:32:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3yITiK8W--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JetBrains%2520AI%25E3%2580%25902025%25E5%25B9%25B47%25E6%259C%25883%25E6%2597%25A5%2520%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%2587%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25AD%25E3%2581%25B0%25E3%2581%25AD%25E3%2581%25B0%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RiYWQxMDhjNTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BENATTOSYSTEM%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvbi5wbmc=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ねばねば</dc:creator></item><item><title><![CDATA[サポートベクターマシン (SVM) の仕組みをゼロから解説]]></title><description><![CDATA[
+
+ サポートベクターマシン (SVM) の仕組みをゼロから解説
+サポートベクターマシン（SVM）は、機械学習における教師あり学習アルゴリズムであり、主にデータ分類に用いられます。データ内の異なるクラスを区別する際の高い性能が特徴です。
+SVMが「教師あり学習」に分類されるのは、正解となるラベル（目的変数）が与えられたデータを用いて学習を行うためです。これは、教師データから分類規則を学習するプロセスを指します。
+本記事では、SVMの基本原理、提供される機能、および利用における注意点を、技術的理解を深める目的で解説します。
+
+
+ SVMの基本原理：マージン最大化とサポートベクター
+SVMは...]]></description><link>https://zenn.dev/colorfulwave/articles/924c7e20ba79b7</link><guid isPermaLink="true">https://zenn.dev/colorfulwave/articles/924c7e20ba79b7</guid><pubDate>Mon, 07 Jul 2025 06:05:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ly3W8DYT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B5%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2599%25E3%2582%25AF%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%259E%25E3%2582%25B7%25E3%2583%25B3%2520%2528SVM%2529%2520%25E3%2581%25AE%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%25E3%2582%2592%25E3%2582%25BC%25E3%2583%25AD%25E3%2581%258B%25E3%2582%2589%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Colorful%7E%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSW5aSDlKSjFOai0tbXpJODdDLWNFMVJ3eUlpNE9POV9KU1VvTWEzNHRFd1BJQ2JBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Colorful~</dc:creator></item><item><title><![CDATA[Maya rendersetup メモ2]]></title><description><![CDATA[
+ Maya rendersetup メモ2
+rendersetupを追加で触ったので、前回書きそびれてたやつも含めてメモ
+前回: https://zenn.dev/hph/articles/ddcf4a9a62229e
+
+ pythonでの操作
+そのままコピペしても、rsインスタンスやlayerなどは未定義状態の可能性があるので前回とかを参照して変数は作っておいてください。
+
+ 辞書形式の rendersetup のレイヤーを出力
+encode() でrendersetupを辞書で出力できるので、そこからlayerを取得する。
+これを取得したらよしなにJSONで保存すればOK。
+rs....]]></description><link>https://zenn.dev/hph/articles/rendersetup2</link><guid isPermaLink="true">https://zenn.dev/hph/articles/rendersetup2</guid><pubDate>Mon, 07 Jul 2025 05:16:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HGJwLmvy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:Maya%2520rendersetup%2520%25E3%2583%25A1%25E3%2583%25A22%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wef%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5ODIxOWUzN2MuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wef</dc:creator></item><item><title><![CDATA[WHAS (Worcester Heart Attack Study) データセット]]></title><description><![CDATA[データサイエンスの演習で用いられる、急性心筋梗塞に関する地域コホート研究に由来する WHAS500 (Worcester Heart Attack Study) データセットについて。
+
+ データセットについて
+Google Gemini によると、
+
+Worcester Heart Attack Study (WHAS) は、アメリカ合衆国マサチューセッツ州ウースター都市圏の住民を対象とした、急性心筋梗塞（AMI、いわゆる心臓発作）の発生率、治療法、および転帰の経時的な変化を追跡調査した、地域ベースの大規模な疫学研究です。
+（中略）
+この研究は、1975年から始まり、数十年にわたって継...]]></description><link>https://zenn.dev/mokztk/articles/dataset_whas500</link><guid isPermaLink="true">https://zenn.dev/mokztk/articles/dataset_whas500</guid><pubDate>Mon, 07 Jul 2025 02:46:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rI5NgaJB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WHAS%2520%2528Worcester%2520Heart%2520Attack%2520Study%2529%2520%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mokztk%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgxNDhjN2M3MmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mokztk</dc:creator></item><item><title><![CDATA[PythonとOpenAI APIで実践！はじめてのMCP開発入門【第17回】OpenAI APIのレートリミットを華麗にかわす方法]]></title><description><![CDATA[
+ はじめに：AIアプリ運用開始！しかし新たな刺客「レートリミット」が…
+皆さん、こんにちは！
+このブログは、「PythonとOpenAI APIで実践！はじめてのモデルコンテキストプロトコル（MCP）開発入門」シリーズの第17回です。
+パート1で開発の第一歩を踏み出し、パート2でAIとの対話術（プロンプト、MCP）を磨き、パート3で具体的なAIアプリケーションの形を探求しました。そしてパート4では、開発者必須の知識として、第13回でAPIキーの高度な管理、第14回で料金とトークンの仕組み、第15回でコスト削減術、そして前回の第16回では個人情報保護とセキュリティ実装という、サービス公開...]]></description><link>https://zenn.dev/querypie/articles/e2c2644a08203d</link><guid isPermaLink="true">https://zenn.dev/querypie/articles/e2c2644a08203d</guid><pubDate>Mon, 07 Jul 2025 02:18:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vOCZ2NvN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A8OpenAI%2520API%25E3%2581%25A7%25E5%25AE%259F%25E8%25B7%25B5%25EF%25BC%2581%25E3%2581%25AF%25E3%2581%2598%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25AEMCP%25E9%2596%258B%25E7%2599%25BA%25E5%2585%25A5%25E9%2596%2580%25E3%2580%2590%25E7%25AC%25AC17%25E5%259B%259E%25E3%2580%2591OpenAI%2520API%25E3%2581%25AE%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%25E3%2583%25AA%25E3%2583%259F%25E3%2583%2583%25E3%2583%2588...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:QueryPie%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk1MzUyMzdkYzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>QueryPie</dc:creator></item><item><title><![CDATA[Python 1.14 GIL フリー版を使ってみる]]></title><description><![CDATA[
+ はじめに
+このブログでは、Python 3.13で試験的に導入され、3.14で正式にサポートされたGILフリー版の使い方について解説します。
+
+The free-threaded build of Python is now supported and no longer experimental. This is the start of phase II where free-threaded Python is officially supported but still optional.
+https://docs.python.org/3.14/whatsnew/3.14....]]></description><link>https://zenn.dev/tfutada/articles/ba6ad68ee8019a</link><guid isPermaLink="true">https://zenn.dev/tfutada/articles/ba6ad68ee8019a</guid><pubDate>Sun, 06 Jul 2025 23:05:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OHSzmjiE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25201.14%2520GIL%2520%25E3%2583%2595%25E3%2583%25AA%25E3%2583%25BC%25E7%2589%2588%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:TF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k1QWNYclM5WEJFMTZpc0hiNnN6ODFrbWdRZ09ST3lySTJaZ2c0PXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TF</dc:creator></item><item><title><![CDATA[Claude Code Hooksを簡単に作れるPythonフレームワーク「claude-pyhooks」を作った]]></title><description><![CDATA[
+ はじめに
+最近Claude Codeに新機能Hooksが出ましたね！
+そこで、Hooksをpythonで気軽に書けるフレームワークを作りました。
+「シェルスクリプトよりpythonスクリプトで書きたい」、「入出力のjsonをいちいち調べたくない」といった思いがあり、開発に踏み切った次第です。
+Hooksと実例を確認しながら開発しましたが、今後ClaudeのHooksのAPIに変更があったりそもそも私が勘違いしていたりするかもしれませんので、おかしなところがあればご連絡いただけると助かります。
+
+ claude-pyhooksとは
+claude-pyhooksは、Claude Code...]]></description><link>https://zenn.dev/ryo_kak/articles/5af590ec4b0ba5</link><guid isPermaLink="true">https://zenn.dev/ryo_kak/articles/5af590ec4b0ba5</guid><pubDate>Sun, 06 Jul 2025 16:05:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OzkRyq-A--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Claude%2520Code%2520Hooks%25E3%2582%2592%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%25E4%25BD%259C%25E3%2582%258C%25E3%2582%258BPython%25E3%2583%2595%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%25A0%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E3%2580%258Cclaude-pyhooks%25E3%2580%258D%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ryo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzlEUkhWTHRqekNPTzhzYlY3UFA5Z2FBdzFmdVNTVklFWTF2dGxSV1dxbmNVbTlxanA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ryo</dc:creator></item><item><title><![CDATA[RenderでFlaskのWebアプリをデプロイする方法]]></title><description><![CDATA[
+ はじめに
+PaaS（Platform as a Service）のRenderというサービスを利用して、簡単なWebアプリをデプロイする方法を紹介します。無料でデプロイ可能なので、是非試してみてください。
+!
+ターゲット
+ローカル上でwebアプリは作成したことがあるけれど、サーバー上にデプロイしたことがない人向け。
+
+
+ 手順
+
+ デプロイするWebアプリの作成
+WebアプリケーションフレームワークのFlaskを使って、簡単なおみくじアプリを作ります。
+以下の構造でフォルダ、ファイルを作成してください。
+omikuji_app/
+├── app.py
+├── requirements...]]></description><link>https://zenn.dev/uruluu/articles/6b4590e44709d3</link><guid isPermaLink="true">https://zenn.dev/uruluu/articles/6b4590e44709d3</guid><pubDate>Sun, 06 Jul 2025 12:23:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xj3A48pf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Render%25E3%2581%25A7Flask%25E3%2581%25AEWeb%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2586%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk5NGExY2YzNGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>うる</dc:creator></item><item><title><![CDATA[もうローカル環境を汚さない！ DevContainer上でセキュアに Claude CodeとMCPサーバーを動かそう]]></title><description><![CDATA[
+!
+この記事は、半分くらいAIが書いて、人間が校正しています。
+もととなったリポジトリはほぼ人間が書いて、動作確認しています。
+
+
+ はじめに
+
+ローカル環境に起因した挙動違いは大嫌い
+秘匿情報は、もちろんGitに登録しない
+Claude CodeやMCPサーバーの設定は、なるべくチーム共通のもの使い、GitHubのリポジトリ可能な限り設定ファイルを登録して共有する
+Claude Codeで使うLLMはBedrock経由で利用
+(任意)Python + uv + ruff + ty で開発したい
+
+以上の条件を満たす皆さんいらっしゃいませ。
+複数のリポジトリで開発しているとローカル環境...]]></description><link>https://zenn.dev/arrowkato/articles/devcontainer_secure_claude_code_mcp</link><guid isPermaLink="true">https://zenn.dev/arrowkato/articles/devcontainer_secure_claude_code_mcp</guid><pubDate>Sun, 06 Jul 2025 11:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--l_h6EsPK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%2582%25E3%2581%2586%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%25B1%259A%25E3%2581%2595%25E3%2581%25AA%25E3%2581%2584%25EF%25BC%2581%2520DevContainer%25E4%25B8%258A%25E3%2581%25A7%25E3%2582%25BB%25E3%2582%25AD%25E3%2583%25A5%25E3%2582%25A2%25E3%2581%25AB%2520Claude%2520Code%25E3%2581%25A8MCP%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%259D%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:arrowkato%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE3NTJjMWZlNmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>arrowkato</dc:creator></item></channel></rss>
