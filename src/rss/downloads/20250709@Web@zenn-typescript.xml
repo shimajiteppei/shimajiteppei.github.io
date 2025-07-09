@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 09 Jul 2025 07:54:37 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[MastraでFunctionCallingを試してみた]]></title><description><![CDATA[
+ 背景
+前回の記事でFunctionCallingを実装しました。
+今回はTypescript ✕ Mastraを用いて、FunctionCallingを試してみました。
+
+
+ 環境
+
+
+
+項目
+バージョン
+
+
+
+
+OS
+Windows 10
+
+
+ランタイム
+Node.js:22.04 + TypeScript
+
+
+LLM
+Azure OpenAI:gpt-4.1-mini / 2024-12-01-preview
+
+
+
+
+
+ 事前準備
+
+TypeScriptのテンプレート生成。# package.jsonの作成
+npm init -y
+# tsconfig.jsonの作成
+tsc -...]]></description><link>https://zenn.dev/serio/articles/f472690c263797</link><guid isPermaLink="true">https://zenn.dev/serio/articles/f472690c263797</guid><pubDate>Wed, 09 Jul 2025 07:26:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JRfYq1qC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mastra%25E3%2581%25A7FunctionCalling%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:sakane%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM4OGEyY2UyNGQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25BB%25E3%2583%25AA%25E3%2582%25AA%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y4MDM1NDQ5YzkuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sakane</dc:creator></item><item><title><![CDATA[TTS (Azure) - Remotion テンプレート 解説]]></title><description><![CDATA[本ドキュメントは、Remotion TTS Exampleプロジェクトの包括的な技術資料です。
+
+ リンク
+
+
+GitHub リポジトリ: https://github.com/FelippeChemello/Remotion-TTS-Example
+
+
+Remotion公式テンプレート: https://www.remotion.dev/templates/tts
+
+
+
+
+ 目次
+
+プロジェクト概要
+実際の動作実行手順
+TTS処理フローの詳細解説
+
+
+
+ プロジェクト概要
+
+ 概要
+TTS (Azure) - テキストを音声化された動画に変換するテンプレートです。音声合成にはAzure...]]></description><link>https://zenn.dev/inovue/articles/remotion-tts-azure-template-guide</link><guid isPermaLink="true">https://zenn.dev/inovue/articles/remotion-tts-azure-template-guide</guid><pubDate>Wed, 09 Jul 2025 05:26:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jjenxOxA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TTS%2520%2528Azure%2529%2520-%2520Remotion%2520%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%2520%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:inovue%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1M05NNWV0d1lZb2QyVTJ4bGhZQ2dNejVobkxiakhwT3JrMVY1VT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>inovue</dc:creator></item><item><title><![CDATA[TailwindCSSについて自分なりのチートシートを作る。#3 Dark Mode 編]]></title><description><![CDATA[
+ 初めに
+TailwindCSSを使うときに、思うように動かせなかったりすることが多いなと個人的に感じていて、なので一度全体的にまとめておこうと思いこの記事を書いています。
+第一弾目は、疑似クラスについてまとめました。
+https://zenn.dev/daichi09167/articles/da920ca4edc0eb
+第二弾目は、レスポンシブデザインについてまとめました。
+https://zenn.dev/daichi09167/articles/805ea42f18d182
+本記事では、ダークモードの実装についてまとめていきたいと思います。
+Tailwind CSSのダークモー...]]></description><link>https://zenn.dev/daichi09167/articles/39c483492431cc</link><guid isPermaLink="true">https://zenn.dev/daichi09167/articles/39c483492431cc</guid><pubDate>Wed, 09 Jul 2025 03:07:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NnAMmzGd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TailwindCSS%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E8%2587%25AA%25E5%2588%2586%25E3%2581%25AA%25E3%2582%258A%25E3%2581%25AE%25E3%2583%2581%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%2588%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%25E3%2580%2582%25233%2520Dark%2520Mode%2520%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daichi09167%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3YTc4OTEwMDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daichi09167</dc:creator></item><item><title><![CDATA[React + TypeScript + Inertia.js環境でのpropsの仕組みと、効果的なコンポーネント設計]]></title><description><![CDATA[
+ React Props とコンポーネント設計ガイド
+
+ 概要
+このドキュメントでは、React + TypeScript + Inertia.js環境でのpropsの仕組みと、効果的なコンポーネント設計について解説します。
+
+ 📋 目次
+
+propsの基本概念
+分割代入（Destructuring）
+スプレッド構文（Spread Syntax）
+ラッパーコンポーネント設計
+実践例
+ベストプラクティス
+
+
+ propsの基本概念
+props（properties）は、Reactコンポーネント間でデータを渡すためのメカニズムです。
+// 基本的な使用例
+&lt;MyComponent t...]]></description><link>https://zenn.dev/oz006/articles/50042ba10c9577</link><guid isPermaLink="true">https://zenn.dev/oz006/articles/50042ba10c9577</guid><pubDate>Tue, 08 Jul 2025 16:18:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CM5dT7DX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520%252B%2520TypeScript%2520%252B%2520Inertia.js%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7%25E3%2581%25AEprops%25E3%2581%25AE%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%25E3%2581%25A8%25E3%2580%2581%25E5%258A%25B9%25E6%259E%259C%25E7%259A%2584%25E3%2581%25AA%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25B3%25E3%2583%2588%25E8%25A8%25AD%25E8%25A8%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:OZ%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE1YmIyNmE0MzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>OZ</dc:creator></item><item><title><![CDATA[外部API切り替えを容易にするAdapterパターン設計]]></title><description><![CDATA[
+ 概要
+複数の外部APIを使い分ける必要がある場合、Adapterパターンを活用することで、API固有の処理を抽象化し、切り替えやすい設計を実現できます。この記事では、実際のプロジェクトで使用した設計パターンを元に、その実装方法と利点について解説します。
+
+ 設計の背景
+外部APIを利用する際によくある課題：
+
+API仕様の違い: レスポンス形式、エラーハンドリング、認証方式の違い
+APIの可用性: 料金制限、レスポンス速度、サービス停止リスク
+将来性: 新しいAPIサービスへの切り替え需要
+
+これらの課題を解決するため、Adapterパターンを採用しました。
+
+ 設計構造
+
+ 共通イ...]]></description><link>https://zenn.dev/shigerufukada/articles/73dd9b66ee048a</link><guid isPermaLink="true">https://zenn.dev/shigerufukada/articles/73dd9b66ee048a</guid><pubDate>Tue, 08 Jul 2025 05:36:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--w72r7e5r--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25A4%2596%25E9%2583%25A8API%25E5%2588%2587%25E3%2582%258A%25E6%259B%25BF%25E3%2581%2588%25E3%2582%2592%25E5%25AE%25B9%25E6%2598%2593%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258BAdapter%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%25E8%25A8%25AD%25E8%25A8%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Fukada%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhmZGZhNTRjOGMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Fukada</dc:creator></item><item><title><![CDATA[関西人のボクがTypeScriptの型推論と型注釈を説明するやで]]></title><description><![CDATA[
+ はじめに
+まいど！TypeScriptはその名の通り、Type(=型）が大事な言語や。この型の仕組みがどうなっているが分かると、TypeScriptをわざわざ採用する理由も見えてくるで！てなわけで今日は、型推論と型注釈について詳しく親しく解説していきまっから、最後まで読んでや〜。
+
+ 型推論って何やねん？
+その前に、そもそもTypeScriptの型がよーわからん君はまずはこっちでおさらいや！
+https://zenn.dev/fushimeer/articles/cb96a538406ca1
+型推論っていうのは、TypeScriptが「この変数はこの型やろな〜」って自動で判断してくれ...]]></description><link>https://zenn.dev/fushimeer/articles/c50f7543bd27e4</link><guid isPermaLink="true">https://zenn.dev/fushimeer/articles/c50f7543bd27e4</guid><pubDate>Tue, 08 Jul 2025 01:59:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VZ1Rwi0z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%2596%25A2%25E8%25A5%25BF%25E4%25BA%25BA%25E3%2581%25AE%25E3%2583%259C%25E3%2582%25AF%25E3%2581%258CTypeScript%25E3%2581%25AE%25E5%259E%258B%25E6%258E%25A8%25E8%25AB%2596%25E3%2581%25A8%25E5%259E%258B%25E6%25B3%25A8%25E9%2587%2588%25E3%2582%2592%25E8%25AA%25AC%25E6%2598%258E%25E3%2581%2599%25E3%2582%258B%25E3%2582%2584%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:meer%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MzMDM4NzI4NjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>meer</dc:creator></item><item><title><![CDATA[型定義書くの面倒？Laravel Data + TypeScript Transformerがあるよ！]]></title><description><![CDATA[
+ 要約
+
+
+お悩み：Laravel + Inertia.jsで型を手動で書くのが面倒で、結局any型を使ってしまう
+
+解決方法：Laravel Data + TypeScript TransformerでPHPからTypeScript型を自動作成
+
+
+やり方：#[TypeScript]を付けてphp artisan typescript:transformを実行するだけ
+
+効果：タイプミスをすぐ発見、IDE補完が効く、エラーが減り、開発速度が向上
+
+結論: 型定義を手動で書く必要がなくなり、any型を使わずに済むので、Laravel + Inertia.js開発がもっと楽になる
+
+ は...]]></description><link>https://zenn.dev/aun_phonogram/articles/c866ba439ddb08</link><guid isPermaLink="true">https://zenn.dev/aun_phonogram/articles/c866ba439ddb08</guid><pubDate>Mon, 07 Jul 2025 21:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CsyEXf2i--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%259E%258B%25E5%25AE%259A%25E7%25BE%25A9%25E6%259B%25B8%25E3%2581%258F%25E3%2581%25AE%25E9%259D%25A2%25E5%2580%2592%25EF%25BC%259FLaravel%2520Data%2520%252B%2520TypeScript%2520Transformer%25E3%2581%258C%25E3%2581%2582%25E3%2582%258B%25E3%2582%2588%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E5%2590%2589%25E5%25B2%25A1%25E8%25A3%2595%25E8%25B2%25B4%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUwM2RkNmMyMzkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:AUN%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFmNzI5YzVhODEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>吉岡裕貴</dc:creator></item><item><title><![CDATA[ミニマムで理解するTypeScript入門]]></title><description><![CDATA[TypeScriptの説明をする際によく話す内容
+
+ TypeScriptってなに？
+TypeScriptは、MicroSoft製のAltJSの一種。
+
+パッケージとしてインストールし、tsconfig.jsonで構文ルールを管理する方法が主流
+「トランスパイル」という変換を実行すると、JavaScriptとして出力される
+
+AltJS = JavaScript開発をより効率的にするための機能・ライブラリの一種
+
+ほかには CoffeeScript などがある
+
+
+ TypeScript の書き方
+
+ 簡単なサンプル
+挨拶を標準出力するサンプルプログラム
+const greetName ...]]></description><link>https://zenn.dev/slopwelljp/articles/fabec2857b0a3c</link><guid isPermaLink="true">https://zenn.dev/slopwelljp/articles/fabec2857b0a3c</guid><pubDate>Mon, 07 Jul 2025 14:17:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UukvEC04--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259F%25E3%2583%258B%25E3%2583%259E%25E3%2583%25A0%25E3%2581%25A7%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258BTypeScript%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2599%25E3%2582%258D%25E3%2581%25A3%25E3%2581%25BA%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NlYTkxZDE2M2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>すろっぺる</dc:creator></item><item><title><![CDATA[国土交通省交通量APIとDuckDB-WASMで渋滞可視化ツール作ったのでテスト公開する]]></title><description><![CDATA[
+ まえがき
+今年(2025年)5月から国土交通省交通量APIというものが使用できるようになった。
+全国約2,600カ所の交通量(車)を計測したデータをAPIで提供する、
+ただしもろもろの要因により、正確ではないデータも含まれることがある...とのこと。(詳しくは以下)
+https://www.jartic-open-traffic.org/
+しかし個人で渋滞のデータを可視化できそうで面白そうだとは思っており色々やっていたんですが一旦「渋滞可視化ツール」のようなものができたのでテスト公開してみようと思いました。📝
+
+ URL他
+Github
+https://github.com/nkwo...]]></description><link>https://zenn.dev/amana/articles/082b18fd48eed5</link><guid isPermaLink="true">https://zenn.dev/amana/articles/082b18fd48eed5</guid><pubDate>Mon, 07 Jul 2025 13:20:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DdYVU20---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%259B%25BD%25E5%259C%259F%25E4%25BA%25A4%25E9%2580%259A%25E7%259C%2581%25E4%25BA%25A4%25E9%2580%259A%25E9%2587%258FAPI%25E3%2581%25A8DuckDB-WASM%25E3%2581%25A7%25E6%25B8%258B%25E6%25BB%259E%25E5%258F%25AF%25E8%25A6%2596%25E5%258C%2596%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E5%2585%25AC%25E9%2596%258B%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nk_work%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ1MjJkN2U5MzIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nk_work</dc:creator></item><item><title><![CDATA[【お試し・初級】TypeScriptのtype-challengesをやってみた]]></title><description><![CDATA[
+ 🏁 概要
+TypeScriptの型の概念を勉強するために型パズル、type-challengeをやったときのメモ。
+type-challengesとは型定義についてanyとなっているところを書き直してテストケースが通るようにしようね、という問題集。
+テストケースはExpect&lt;Equal&lt;A, B&gt;&gt;となっておりAとBが一致するように書いてあげる。
+やった時時点の問題一覧はこんな感じ。
+
+中級以降は問題が格段に多くなるため、本記事では「お試し」と「初級」にある問題について記載。
+
+ 🪢 知っておくべき知識
+各問題を特にあたって知っておかないと🤯ってなりそうな知...]]></description><link>https://zenn.dev/mt5/articles/cd1d3a72f74cbf</link><guid isPermaLink="true">https://zenn.dev/mt5/articles/cd1d3a72f74cbf</guid><pubDate>Mon, 07 Jul 2025 10:07:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--j_Oms_b2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2581%258A%25E8%25A9%25A6%25E3%2581%2597%25E3%2583%25BB%25E5%2588%259D%25E7%25B4%259A%25E3%2580%2591TypeScript%25E3%2581%25AEtype-challenges%25E3%2582%2592%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258A%25E3%2583%25BC%25E3%2581%258F%25E3%2581%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk2OGY2M2MyNTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>おーくぼ</dc:creator></item><item><title><![CDATA[【TypeScript】クロージャを使ってエラーハンドリングを共通にする]]></title><description><![CDATA[本記事は、リファクタリングの際にクロージャ（二重関数呼び出し）を使ったエラーハンドリングの共通化を調べた備忘録です。
+
+ TL;DR
+クロージャのメリット
+
+エラーハンドリングを共通化・柔軟化できる
+処理を一元管理でき保守性が向上する
+
+クロージャのデメリット
+
+クロージャの理解が必要になる
+小規模のコードでは過剰になる
+
+
+ 修正前コード
+エラーの発生した文脈以外は共通する実装が並んでいます。これではコードの見通しが悪くなり、他の処理を追加するときには似たコードを繰り返し書く必要がありますし、エラーメッセージを修正したいときにはすべての箇所が対象になります。
+// 処理A
+await ...]]></description><link>https://zenn.dev/keystone/articles/f65cd54b6b0bf0</link><guid isPermaLink="true">https://zenn.dev/keystone/articles/f65cd54b6b0bf0</guid><pubDate>Mon, 07 Jul 2025 09:54:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HW835R-8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590TypeScript%25E3%2580%2591%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A3%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2583%258F%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%2592%25E5%2585%25B1%25E9%2580%259A%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2581%25E3%2582%2593%25E3%2581%25A0%25E3%2581%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdjYjc4MWNiNGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>めんだこ</dc:creator></item><item><title><![CDATA[Jestの時間依存テストが突然失敗する問題の原因と安定させるための方法]]></title><description><![CDATA[私の所属しているプロジェクトでは、フロントエンドのコードでNext.jsを用いています。
+そして、コミットするたび、jestで書かれたテストコードが実行されます。
+ある日、storybookを追加しただけのはずのコミットで、なぜかテストが失敗し、戸惑いました。
+
+ 起きた事象
+どんなテストが失敗したのかを確認したところ、以下のような感じで、
+引数に日時を受け取り、それが現在の日時からどれくらい前なのかを計算して返すようなメソッドのテストでした。
+※テスト対象のメソッドはこんな感じです。
+
+utils/timeAgo.ts
+export const timeAgo = (datetime:...]]></description><link>https://zenn.dev/ohimusdev46301/articles/fad52b110d866f</link><guid isPermaLink="true">https://zenn.dev/ohimusdev46301/articles/fad52b110d866f</guid><pubDate>Mon, 07 Jul 2025 08:25:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Vug0PdVL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Jest%25E3%2581%25AE%25E6%2599%2582%25E9%2596%2593%25E4%25BE%259D%25E5%25AD%2598%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2581%258C%25E7%25AA%2581%25E7%2584%25B6%25E5%25A4%25B1%25E6%2595%2597%25E3%2581%2599%25E3%2582%258B%25E5%2595%258F%25E9%25A1%258C%25E3%2581%25AE%25E5%258E%259F%25E5%259B%25A0%25E3%2581%25A8%25E5%25AE%2589%25E5%25AE%259A%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Wataru%2520Takiguchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdkOTBhM2EyYTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Wataru Takiguchi</dc:creator></item><item><title><![CDATA[TypeScriptのReadonly<T>を知ろう]]></title><description><![CDATA[
+ 概要
+別記事を書くにあたりReadonly&lt;T&gt;を理解しようの会
+
+ Readonly&lt;T&gt;とは
+ユーティリティ型の1つ。
+型Tのプロパティにreadonlyを付けた状態で返す時に使う。
+参考: https://www.typescriptlang.org/docs/handbook/utility-types.html#readonlytype
+type Hoge = string[];
+type Fuga = [string, number, boolean];
+type Piyo = { name: string };
+
+const hoge: Read...]]></description><link>https://zenn.dev/mt5/articles/fae97cf2e67369</link><guid isPermaLink="true">https://zenn.dev/mt5/articles/fae97cf2e67369</guid><pubDate>Mon, 07 Jul 2025 04:43:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--etytfYUk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25AEReadonly%253CT%253E%25E3%2582%2592%25E7%259F%25A5%25E3%2582%258D%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258A%25E3%2583%25BC%25E3%2581%258F%25E3%2581%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk2OGY2M2MyNTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>おーくぼ</dc:creator></item><item><title><![CDATA[TypeScriptのPick<T, U>を知ろう]]></title><description><![CDATA[
+ 概要
+別記事を書くにあたりPick&lt;T, U&gt;を理解しようの会
+
+ Pick&lt;T, U&gt;とは
+ユーティリティ型の1つ。
+オブジェクトの型TからキーのUを抽出したい時に使う。
+参考: https://www.typescriptlang.org/docs/handbook/utility-types.html#picktype-keys
+type Hoge = { name: string; message: string };
+
+const hoge: Pick&lt;Hoge, "name"&gt; = { name: "ほげ" }; // ✅抽出したnam...]]></description><link>https://zenn.dev/mt5/articles/891b3e75939547</link><guid isPermaLink="true">https://zenn.dev/mt5/articles/891b3e75939547</guid><pubDate>Mon, 07 Jul 2025 04:18:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1tIYODr4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25AEPick%253CT%252C%2520U%253E%25E3%2582%2592%25E7%259F%25A5%25E3%2582%258D%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258A%25E3%2583%25BC%25E3%2581%258F%25E3%2581%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk2OGY2M2MyNTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>おーくぼ</dc:creator></item><item><title><![CDATA[TypeScriptのParameters<T>を知ろう]]></title><description><![CDATA[
+ 概要
+別記事を書くにあたりParameters&lt;T&gt;を理解しようの会
+
+ Parameters&lt;T&gt;とは
+ユーティリティ型の1つ。
+関数の型Tを渡すとそのパラメータのタプルの型で返すもの。
+参考: https://www.typescriptlang.org/docs/handbook/utility-types.html#parameterstype
+
+引数がない場合
+type HogeFunc = () =&gt; string;
+const hogeFunc: HogeFunc = () =&gt; {
+  return "ほげ";
+};
+
+type H...]]></description><link>https://zenn.dev/mt5/articles/97702989b548c9</link><guid isPermaLink="true">https://zenn.dev/mt5/articles/97702989b548c9</guid><pubDate>Mon, 07 Jul 2025 03:47:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--c1UxKznc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25AEParameters%253CT%253E%25E3%2582%2592%25E7%259F%25A5%25E3%2582%258D%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258A%25E3%2583%25BC%25E3%2581%258F%25E3%2581%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk2OGY2M2MyNTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>おーくぼ</dc:creator></item><item><title><![CDATA[TypeScriptのnever型の使い所]]></title><description><![CDATA[
+ 概要
+TypeScriptのnever型の使い所について説明いたします。
+
+ never型とは
+never型は「値を持たない」を意味するTypeScriptの特別な型です。
+
+https://typescriptbook.jp/reference/statements/never
+
+以下のような使用をすれば何も代入できません。しかし実際には以下のようなコードを書くことはないはずです。
+const foo: never = 1;
+
+ 例外を投げる処理に使う
+例外を投げる処理に使用可能です。しかし、TSには型推論があるので必須ではありません。
+const throwError = ():...]]></description><link>https://zenn.dev/chot/articles/c03d603d3feaf4</link><guid isPermaLink="true">https://zenn.dev/chot/articles/c03d603d3feaf4</guid><pubDate>Mon, 07 Jul 2025 03:16:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_jaZzPhc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25AEnever%25E5%259E%258B%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2589%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2583%2588%25E3%2583%259F%25E3%2583%25BC%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAzODVjOWFlYzkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:chot%2520Inc.%2520tech%2520blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSW1uc1FQOHJYaERqWUw3ZU5aTWlJdm1qOEhnNUVBSDZNTE5tR3BmbDZOPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>トミー</dc:creator></item><item><title><![CDATA[TypeScriptのExclude<T, U>を知ろう]]></title><description><![CDATA[
+ 概要
+別記事を書くにあたりExclude&lt;T, U&gt;を理解しようの会
+
+ Exclude&lt;T, U&gt;とは
+ユーティリティ型の1つ。
+TからUを排除したい時に使う。
+参考: https://www.typescriptlang.org/docs/handbook/utility-types.html#excludeuniontype-excludedmembers
+例えばTがstring | number、Uがnumberの場合は以下の感じ。
+type Hoge = Exclude&lt;string | number, number&gt;; // strin...]]></description><link>https://zenn.dev/mt5/articles/4d056de2f31088</link><guid isPermaLink="true">https://zenn.dev/mt5/articles/4d056de2f31088</guid><pubDate>Mon, 07 Jul 2025 02:18:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8b-1dw_9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25AEExclude%253CT%252C%2520U%253E%25E3%2582%2592%25E7%259F%25A5%25E3%2582%258D%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258A%25E3%2583%25BC%25E3%2581%258F%25E3%2581%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk2OGY2M2MyNTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>おーくぼ</dc:creator></item><item><title><![CDATA[TypeScriptのAwaited<T>を知ろう]]></title><description><![CDATA[
+ 概要
+別記事を書くにあたりAwaited&lt;T&gt;を理解しようの会
+
+ Awaited&lt;T&gt;とは
+ユーティリティ型の1つ。
+async()のawaitとかPromiseの.then()を型にしたもので、特にPromise&lt;T&gt;を再帰的に解決したい時に使う。
+参考: https://www.typescriptlang.org/docs/handbook/utility-types.html#awaitedtype
+Awaited&lt;string&gt; みたいな書き方もできるが、実用的にはAwaited&lt;Promise&lt;string&g...]]></description><link>https://zenn.dev/mt5/articles/34c4138857c55a</link><guid isPermaLink="true">https://zenn.dev/mt5/articles/34c4138857c55a</guid><pubDate>Mon, 07 Jul 2025 01:36:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4zZ3v3Ej--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25AEAwaited%253CT%253E%25E3%2582%2592%25E7%259F%25A5%25E3%2582%258D%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258A%25E3%2583%25BC%25E3%2581%258F%25E3%2581%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk2OGY2M2MyNTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>おーくぼ</dc:creator></item><item><title><![CDATA[複数のLLMを統一APIで扱うライブラリを作った]]></title><description><![CDATA[LLM触っているとこんなことありません？
+「このプロンプトをClaudeでも試したいけど、OpenAIのSDKから書き換えるのめんどい。」
+「OpenAIのレスポンスを想定して開発してたけど、Geminiに書き換えなきゃいけなくなってめんどい。」
+という面倒を解消したくて unified-llm というライブラリを作りました。
+https://github.com/rhyizm/unified-llm
+
+(今のところ)5つのLLMプロバイダー（OpenAI、Claude、Gemini、DeepSeek、Azure）のリクエストとレスポンスを統一APIで操作
+プロバイダー切り替えはコンスト...]]></description><link>https://zenn.dev/rhyizm/articles/c8daf1c870b147</link><guid isPermaLink="true">https://zenn.dev/rhyizm/articles/c8daf1c870b147</guid><pubDate>Sun, 06 Jul 2025 22:15:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gBV6f4JB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25A4%2587%25E6%2595%25B0%25E3%2581%25AELLM%25E3%2582%2592%25E7%25B5%25B1%25E4%25B8%2580API%25E3%2581%25A7%25E6%2589%25B1%25E3%2581%2586%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:rhyizm%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg0YWYxYTlkYjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>rhyizm</dc:creator></item><item><title><![CDATA[playwright-mcpを拡張するMCPサーバーを作ってレスポンスBodyを観察できるようにしてみました]]></title><description><![CDATA[こんにちは。ダイの大冒険エンジョイ勢のbun913と申します。
+みなさんはPlaywrightのMCPサーバーを使いながら「どんなAPIリクエスト・レスポンスがあるかBodyも含めてみてほしいな」と思ったことはありませんか？私はあります。
+PlaywrightのMCPサーバーを使うことでAIにブラウザを操作させるだけでなく、自分でそのサイトを動かしながら指示を出すことが可能です。
+https://qiita.com/t-kurasawa/items/fc47a9133dd6cfe1ae7b
+ただし、既存(2025/07/06時点)のplaywright-mcpのネットワーク監視機能ではネ...]]></description><link>https://zenn.dev/moneyforward/articles/55b47975add631</link><guid isPermaLink="true">https://zenn.dev/moneyforward/articles/55b47975add631</guid><pubDate>Sun, 06 Jul 2025 13:59:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--I6nt4KWG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:playwright-mcp%25E3%2582%2592%25E6%258B%25A1%25E5%25BC%25B5%25E3%2581%2599%25E3%2582%258BMCP%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2583%25AC%25E3%2582%25B9%25E3%2583%259D%25E3%2583%25B3%25E3%2582%25B9Body%25E3%2582%2592%25E8%25A6%25B3%25E5%25AF%259F%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:bun913%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUwOTQ4MTI2ZjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Money%2520Forward%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcxNGVhMDEyMDQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>bun913</dc:creator></item></channel></rss>
