@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「HTML」のフィード]]></title><description><![CDATA[Zennのトピック「HTML」のRSSフィードです]]></description><link>https://zenn.dev/topics/html</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/171432f5a6.png</url><title>Zennの「HTML」のフィード</title><link>https://zenn.dev/topics/html</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 10 Jul 2025 11:33:39 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/html/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Angular *ngTemplateOutletでHTMLを再利用する方法]]></title><description><![CDATA[・ng-templateにテンプレートを定義して再利用できる。
+・*ngTemplateOutletで好きな場所にテンプレートを挿入できる。
+・contextで、表示するデータをテンプレートに渡せる。
+
+component.html
+&lt;!-- 画面表示用 --&gt;
+&lt;div class="user-info"&gt;   
+  &lt;ng-container 
+　　*ngTemplateOutlet="userInfo; context: { $implicit: user }"
+  &gt;    
+  &lt;/ng-container&gt; &lt;!-- ① ...]]></description><link>https://zenn.dev/kei1225/articles/bcfc5736941556</link><guid isPermaLink="true">https://zenn.dev/kei1225/articles/bcfc5736941556</guid><pubDate>Thu, 10 Jul 2025 10:57:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Pm5W1Qlt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Angular%2520%252AngTemplateOutlet%25E3%2581%25A7HTML%25E3%2582%2592%25E5%2586%258D%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:KEITA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZjMzE5MGYyNWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KEITA</dc:creator></item><item><title><![CDATA[field-sizingで自動リサイズするテキストエリアをお手軽に]]></title><description><![CDATA[
+ TLDR
+
+Chromium系ブラウザでは field-sizing: content; が使えるようになっている！
+
+lh単位などと組み合わせれば、最小行数を指定しつつ可変高のテキストエリアをJSなしで作れる
+リセットCSS使っているときはちょっと注意
+
+
+ field-sizingが来た！
+2025年7月10日現在、Chromium系のブラウザではfield-sizingが使えるようになっている。
+https://developer.mozilla.org/ja/docs/Web/CSS/field-sizing
+気軽に使えるというわけではないが、使える環境なら強い味方になってく...]]></description><link>https://zenn.dev/mstssk/articles/66fd7cc819d463</link><guid isPermaLink="true">https://zenn.dev/mstssk/articles/66fd7cc819d463</guid><pubDate>Thu, 10 Jul 2025 03:00:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2vmcflYM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:field-sizing%25E3%2581%25A7%25E8%2587%25AA%25E5%258B%2595%25E3%2583%25AA%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25BA%25E3%2581%2599%25E3%2582%258B%25E3%2583%2586%25E3%2582%25AD%25E3%2582%25B9%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25AA%25E3%2582%25A2%25E3%2582%2592%25E3%2581%258A%25E6%2589%258B%25E8%25BB%25BD%25E3%2581%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258A%25E3%2582%2593%25E3%2581%2594%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2diMVVPWFlpTWVnamIwMnVNU0s0MmYxTXFqaThLX25Zd241WnJYTlE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>りんご🍏</dc:creator></item><item><title><![CDATA[htmlのデザインテンプレを配布]]></title><description><![CDATA[https://github.com/kemii279/green_one_page_design
+
+index.htmlの中身を変更してお使いください。
+自分が欲しいと感じるHTMLの簡易styleがなく、自作しました。
+豪華に何でもきれいに表示できることは目指していません。
+シンプルで、最低限の装飾にとどめています。
+しかし、少しリッチに表示できるように、
+画像的なタイトルの見せ方ができる要素を追加しています。
+サンプルを変更して、試してみてください。
+]]></description><link>https://zenn.dev/kemii/articles/b43ba75f004ca0</link><guid isPermaLink="true">https://zenn.dev/kemii/articles/b43ba75f004ca0</guid><pubDate>Tue, 08 Jul 2025 11:19:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dHKjgOo7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:html%25E3%2581%25AE%25E3%2583%2587%25E3%2582%25B6%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AC%25E3%2582%2592%25E9%2585%258D%25E5%25B8%2583%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kemii%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5ZGYyMjM5ZmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kemii</dc:creator></item><item><title><![CDATA[Dify UI 変更]]></title><description><![CDATA[こんにちは、田中です。今日のテーマはDifyアプリの実行画面におけるUI変更についてです。Difyアプリの実行画面におけるUI変更は、その活用範囲を大きく広げ、ユーザー体験を向上させる鍵となります。本稿では、DifyのUIをどのようにカスタマイズできるかを具体的な実装例を交えて解説します。CSSの専門知識がなくても取り組める内容ですので、ぜひご自身のDifyアプリを最適化してみてください。
+
+ UI変更のメリット
+
+ 1. ユーザー体験（UX）の向上
+Difyの汎用的なデフォルトUIに対し、特定の用途に合わせた調整はユーザーの操作を劇的にスムーズにします。例えば、FAQボットでは質問入力...]]></description><link>https://zenn.dev/upgradetech/articles/d2430c14f31df7</link><guid isPermaLink="true">https://zenn.dev/upgradetech/articles/d2430c14f31df7</guid><pubDate>Tue, 08 Jul 2025 10:17:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3bPnjBdQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:Dify%2520UI%2520%25E5%25A4%2589%25E6%259B%25B4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Taisei_Tanaka%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI4NmJmMzNhODkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:UPGRADE%2520tech%2520blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmlmSWZLR2pUdmFGMDlvbUZ4TVQ0ZGtXLVZQYzdnTFFNejNyRHpya2JqZWdPMVp3PXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Taisei_Tanaka</dc:creator></item><item><title><![CDATA[Cursorで画像生成を効率化できちゃった話]]></title><description><![CDATA[
+ Cursorで画像生成を効率化できちゃった
+
+ はじめに
+こんにちは。株式会社フォノグラムでWebマーケティングを担当している「おきょう」こと森山です。
+今回は、Cursorを使って画像生成を効率化した方法をご紹介します。
+
+ 背景
+画像生成AIは色々ありますが、日本語テキストと組み合わせると途端に怪しくなりがちですよね。
+「なんかフォントが変だな...」「これは日本語なのか？」「文字が歪んでる...」という経験ありませんか？
+gpt-image-1がその辺かなり強いらしいのですが、生成するのに毎回お金がかかるし、微調整が効かないのが悩みでした。
+（もちろん私のプロンプトがいまいちな...]]></description><link>https://zenn.dev/aun_phonogram/articles/cursor-image-generation</link><guid isPermaLink="true">https://zenn.dev/aun_phonogram/articles/cursor-image-generation</guid><pubDate>Tue, 08 Jul 2025 01:24:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Cf530rVY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Cursor%25E3%2581%25A7%25E7%2594%25BB%25E5%2583%258F%25E7%2594%259F%25E6%2588%2590%25E3%2582%2592%25E5%258A%25B9%25E7%258E%2587%25E5%258C%2596%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25A1%25E3%2582%2583%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Noriko%2520Moriyama%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUwM2RkNmMyMzkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:AUN%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ1YTA3MzIxNjMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Noriko Moriyama</dc:creator></item><item><title><![CDATA[【Spring boot】 バリデーション付きのカテゴリ作成処理（POST）を実装する]]></title><description><![CDATA[
+ 📌 はじめに
+前回の記事では、@Controller や @ModelAttribute を使って「カテゴリ作成フォームの表示」までを行いました。
+今回はその続きを扱います。
+
+カテゴリを実際に作成（POST）し、バリデーション付きで保存する処理を作っていきます。
+
+
+
+ 🎯 実現すること
+
+POSTメソッドでカテゴリを新規登録
+入力されたカテゴリ名に対して**バリデーション（空欄NG/文字数制限）**を行う
+エラーがあった場合は、フォーム画面に戻してメッセージを表示
+
+
+
+
+
+
+ 🧩 コントローラ：POSTメソッドの実装
+@PostMapping
+public String cre...]]></description><link>https://zenn.dev/taictech/articles/7d53914c9cd221</link><guid isPermaLink="true">https://zenn.dev/taictech/articles/7d53914c9cd221</guid><pubDate>Sat, 05 Jul 2025 15:08:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--S6_4hoSD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Spring%2520boot%25E3%2580%2591%2520%25E3%2583%2590%25E3%2583%25AA%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E4%25BB%2598%25E3%2581%258D%25E3%2581%25AE%25E3%2582%25AB%25E3%2583%2586%25E3%2582%25B4%25E3%2583%25AA%25E4%25BD%259C%25E6%2588%2590%25E5%2587%25A6%25E7%2590%2586%25EF%25BC%2588POST%25EF%25BC%2589%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tktech%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JmMzNmMTI1MWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tktech</dc:creator></item><item><title><![CDATA[SVGアニメーション(ASVG)が流行ってほしい]]></title><description><![CDATA[
+ なんでASVGが流行って欲しいのか？
+設計書や説明資料を書いていると図を書くことは多々ある
+もちろんUMLに準拠した方が良いこともある
+あ、でも図は動いたほうがわかりやすいのかもって思ったので
+できるならシンプルな記述で図を動かせないかなぁっと思ったのでまとめました。
+
+ SVGアニメーション
+SVG（Scalable Vector Graphics）は、画像だけでなくアニメーションも可能な強力なフォーマットです。
+線とか簡易図形を表すなら丁度いいくらいのシンプルさなのではと(主観)
+ここでは CSS と JavaScript によって SVG をアニメーションさせる方法を、
+「何が...]]></description><link>https://zenn.dev/donai/articles/1c978433699f29</link><guid isPermaLink="true">https://zenn.dev/donai/articles/1c978433699f29</guid><pubDate>Sat, 05 Jul 2025 06:14:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5TkTE_im--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SVG%25E3%2582%25A2%25E3%2583%258B%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%2528ASVG%2529%25E3%2581%258C%25E6%25B5%2581%25E8%25A1%258C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BB%25E3%2581%2597%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%25A6%258B%25E3%2581%25A6%25E5%259B%259E%25E3%2582%258B%25E4%25BA%25BA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>見て回る人</dc:creator></item><item><title><![CDATA[AIをコーディングに活用するタイミングについて考えてみた【2025年6月時点メモ】]]></title><description><![CDATA[
+ はじめに
+Web制作の現場において、「いつ・どのように活用するのか」が実務上の現実的なテーマになっています。
+この記事では、2025年6月時点で、コーディングする際にどのタイミングでAIを活用しているのか、事例も含めて整理してみました。
+【使用AI】ChatGPT（GPT-4o）
+【構築環境】Visual Studio Code（VS Code）
+
+ HTMLでAIを活用するタイミング
+
+タグの使い方が適切かどうかを確認
+→ 検索エンジンが正しく理解できる構造になっているか確認するため。
+&nbsp;
+クラス名の生成
+→ 一定のルールは設けているものの、迷ったときに活用。
+
+
+ CS...]]></description><link>https://zenn.dev/arnk/articles/3411bf716087c3</link><guid isPermaLink="true">https://zenn.dev/arnk/articles/3411bf716087c3</guid><pubDate>Fri, 04 Jul 2025 06:25:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TxKCkqMv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AI%25E3%2582%2592%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AB%25E6%25B4%25BB%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E8%2580%2583%25E3%2581%2588%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E3%2580%25902025%25E5%25B9%25B46%25E6%259C%2588%25E6%2599%2582%25E7%2582%25B9%25E3%2583%25A1%25E3%2583%25A2%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25A2%25E3%2583%25B3%25E3%2582%25AF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU3ZWNmOTk1NmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>アンク</dc:creator></item><item><title><![CDATA[CSSのネスト記法が端末によって適用されない問題]]></title><description><![CDATA[
+ 問題
+CSSのネスト記法が各ブラウザでサポートされるようになったため、サイト制作時に試してみたところ一部の端末でレイアウトが適用されていない問題が発生しました。
+参考：Sassなしで入れ子が可能に。CSSネストが全ブラウザ対応
+特定の端末のみの問題となっており、他の端末では再現できないことから原因を調べてみました。
+
+ 解決法
+調査したところ、下記の記事で紹介されていた内容と今回の問題が類似しており、CSSネスト記法が原因だということがわかりました。
+参考：CSSのネスト(入れ子)は、当面の間は「＆記号」を付けた方が安心か | メモルカ
+CSSネスト記法で「&amp; 入れ子セレクタ...]]></description><link>https://zenn.dev/shusaku009/articles/css-nestting</link><guid isPermaLink="true">https://zenn.dev/shusaku009/articles/css-nestting</guid><pubDate>Thu, 03 Jul 2025 09:33:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Wq9D5lwR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%25E3%2581%25AE%25E3%2583%258D%25E3%2582%25B9%25E3%2583%2588%25E8%25A8%2598%25E6%25B3%2595%25E3%2581%258C%25E7%25AB%25AF%25E6%259C%25AB%25E3%2581%25AB%25E3%2582%2588%25E3%2581%25A3%25E3%2581%25A6%25E9%2581%25A9%25E7%2594%25A8%25E3%2581%2595%25E3%2582%258C%25E3%2581%25AA%25E3%2581%2584%25E5%2595%258F%25E9%25A1%258C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shusaku009%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I0MDI0OTMwNWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shusaku009</dc:creator></item><item><title><![CDATA[【NAGOYA AI YOUTH CAMP 2025】AIでプログラミングを体験してみよう！]]></title><description><![CDATA[NAGOYA AI YOUTH CAMP 2025で使用する教材です。この教材を通してまずはAIを使用してプログラミングを体験してみましょう！]]></description><link>https://zenn.dev/is0629sy/books/nagoya-ai-youth2025</link><guid isPermaLink="true">https://zenn.dev/is0629sy/books/nagoya-ai-youth2025</guid><pubDate>Thu, 03 Jul 2025 05:41:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--58Vy8Bzo--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci9kNzkxNjcwN2ViLnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>is0629sy/GB</dc:creator></item><item><title><![CDATA[デザインをJSONに変換し、再現性の高いAIコーディングを実現する方法]]></title><description><![CDATA[
+ はじめに
+https://medium.com/@GeekSociety/7758adcb7404?sk=d38868bd1dff12b688faf5496b1e74b7
+AIを使ったコーディングについて調べていた時に、気になる記事を見つけました。
+興味深いアプローチでしたので、実際に試してみました。
+コーディングの自動化を目指して、日々AIと向き合っているフロントエンドエンジニアの参考になれば幸いです。✨
+
+ コーディングの進め方
+
+ ステップ1: キャプチャーを撮る
+まずは参考にしたいデザインのスクリーンショットを撮ります。
+弊社で「AUNライブキャプチャ」というページ全体をキャ...]]></description><link>https://zenn.dev/aun_phonogram/articles/22c6d6fb4fbe0b</link><guid isPermaLink="true">https://zenn.dev/aun_phonogram/articles/22c6d6fb4fbe0b</guid><pubDate>Mon, 30 Jun 2025 21:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--K64ejLt1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2582%25B6%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%2592JSON%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2597%25E3%2580%2581%25E5%2586%258D%25E7%258F%25BE%25E6%2580%25A7%25E3%2581%25AE%25E9%25AB%2598%25E3%2581%2584AI%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%2592%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E5%2590%2589%25E5%25B2%25A1%25E8%25A3%2595%25E8%25B2%25B4%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUwM2RkNmMyMzkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:AUN%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFmNzI5YzVhODEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>吉岡裕貴</dc:creator></item><item><title><![CDATA[ルビを含む文字列をコピーするときに、ルビのテキストは除外したい]]></title><description><![CDATA[表題通り、Web ページ上でルビを含む文字列をコピーするときに、ルビのテキストは削除したうえでコピーできるようにしたいです。
+例えば、次のような HTML があるとします。
+&lt;p&gt;&lt;ruby&gt;亜米利加&lt;rt&gt;アメリカ&lt;/rt&gt;&lt;/ruby&gt;&lt;/p&gt;
+この HTML は、次のように展開されます。
+（選択箇所にもよりますが、）「亜米利加」を選択・コピーしようとすると、ルビの「アメリカ」もクリップボードにコピーされてしまいます。
+
+ルビのアメリカまでクリップボードにコピーされてしまう。
+
+ 解決方法1: user-sele...]]></description><link>https://zenn.dev/t_tonyo_maru/articles/316824ffa77285</link><guid isPermaLink="true">https://zenn.dev/t_tonyo_maru/articles/316824ffa77285</guid><pubDate>Sun, 29 Jun 2025 14:19:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EpOjdnmT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AB%25E3%2583%2593%25E3%2582%2592%25E5%2590%25AB%25E3%2582%2580%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E3%2582%2592%25E3%2582%25B3%25E3%2583%2594%25E3%2583%25BC%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AB%25E3%2580%2581%25E3%2583%25AB%25E3%2583%2593%25E3%2581%25AE%25E3%2583%2586%25E3%2582%25AD%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25AF%25E9%2599%25A4%25E5%25A4%2596%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A8%25E3%2582%2593%25E3%2582%2588%25E3%2583%25BC%25E3%2580%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NhNjVjZjg3MjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>とんよー。</dc:creator></item><item><title><![CDATA[【Spring Boot】カテゴリCRUDを作ってみた（Controller + 画面編）]]></title><description><![CDATA[
+ はじめに
+最近、SkillLogアプリという簡単なログ管理Webアプリを作っています。
+その中で「カテゴリ別にログを管理したい」という機能を作成した際の、**Controller層と画面（Thymeleaf）**の実装メモを残します。
+「@Controller」「@RequestMapping」「@GetMapping」や
+「@ModelAttribute」「@Valid」など、実務でよく使うアノテーションの基本的な使い方がわかる記事にしたいと思います。
+
+
+ 実現すること
+
+カテゴリの新規作成／編集／一覧／削除（CRUD）
+
+
+
+ Controllerの実装
+
+ 1️⃣ URLとC...]]></description><link>https://zenn.dev/taictech/articles/623d50fb6bf4f7</link><guid isPermaLink="true">https://zenn.dev/taictech/articles/623d50fb6bf4f7</guid><pubDate>Sat, 28 Jun 2025 13:08:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--33Lok0WU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Spring%2520Boot%25E3%2580%2591%25E3%2582%25AB%25E3%2583%2586%25E3%2582%25B4%25E3%2583%25AACRUD%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25EF%25BC%2588Controller%2520%252B%2520%25E7%2594%25BB%25E9%259D%25A2%25E7%25B7%25A8%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tktech%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JmMzNmMTI1MWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tktech</dc:creator></item><item><title><![CDATA[Bashで実行可能なHTMLファイルを作成する]]></title><description><![CDATA[
+ 前置き
+皆さんは何かしらの導入スクリプトとして、このようなものを見たことがあるはずです。
+$ curl -sSL https://get.example.com/install.sh | bash
+危険性については留意が必要ですが、curlで取得したスクリプトをそのままbashに渡して実行することでインストールを簡略化できる便利な方法です。
+このURLをさらに短くする方法として、install.shではなくindex.htmlに書いても同じ効果を得られます。
+ついでに httpsは省略できるので、以下のように書くこともできます。
+$ curl -sSL get.example.com...]]></description><link>https://zenn.dev/arika/articles/20250627-html-and-bash-file</link><guid isPermaLink="true">https://zenn.dev/arika/articles/20250627-html-and-bash-file</guid><pubDate>Fri, 27 Jun 2025 15:31:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dypNb88N--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Bash%25E3%2581%25A7%25E5%25AE%259F%25E8%25A1%258C%25E5%258F%25AF%25E8%2583%25BD%25E3%2581%25AAHTML%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:arika%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNjOGQzNjQ5OGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>arika</dc:creator></item><item><title><![CDATA[Tailwindのopacityが子要素に乗ってしまうのを防ぐ方法]]></title><description><![CDATA[
+ はじめに
+こんにちは！PortalKeyの渋谷です。
+
+皆さんはこのような画像の上に文字を乗せたい時に
+
+このようなフィルターをかけ
+
+このように要素を乗せたい時ありませんか？
+
+そしてこうなって困っていたりしませんか？
+自分はこれに悩まされた過去があり、解決方法はわりと簡単だったのでまとめておきたいと思います。
+
+ 開発環境
+
+
+TypeScript v5.5.4
+
+react v18.3.1
+
+tailwindcss v3.4.10
+
+
+ なぜこうなったのか
+まずはコードを確認してみましょう。
+&lt;div className="relative w-64 h-64"&gt;
+...]]></description><link>https://zenn.dev/portalkeyinc/articles/b0fe3e3c195ed1</link><guid isPermaLink="true">https://zenn.dev/portalkeyinc/articles/b0fe3e3c195ed1</guid><pubDate>Fri, 27 Jun 2025 06:50:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qsgqDxCX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tailwind%25E3%2581%25AEopacity%25E3%2581%258C%25E5%25AD%2590%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%25AB%25E4%25B9%2597%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2586%25E3%2581%25AE%25E3%2582%2592%25E9%2598%25B2%25E3%2581%2590%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:da-shibuya%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM2Y2JkM2UxMzEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:PortalKey%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzR2Y0dCWGJ5bmIwc3k4TnQyZll4aU8xQ2xBN1ZwNzAtR2RJeTR4WW1uc2JEMEhRPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>da-shibuya</dc:creator></item><item><title><![CDATA[ChatGPT vs Claude｜AIコーディングの実力を比較してみた【2025年4月時点メモ】]]></title><description><![CDATA[
+ はじめに
+2025年4月時点で、ChatGPTとClaudeを使ってコーディング作業を試してみました。
+使用したAIは「ChatGPT（GPT-4o）」と「Claude 3」です。
+この記事では、それぞれの特徴や使ってみて感じたメリット・デメリットをメモ形式で整理しています。
+「AIにコードを書かせてみたい」という方の参考になれば幸いです。
+
+ AIにコードを書かせるメリット
+
+HTMLの枠組みを自動生成してくれるので手間が省ける
+JavaScriptなども一緒に書いてくれる
+コーディング作業の時間短縮につながる
+
+
+ デメリット・注意点
+
+テキスト部分は打ち直しが必要なことが多い
+...]]></description><link>https://zenn.dev/arnk/articles/b4f6d1e18f61f3</link><guid isPermaLink="true">https://zenn.dev/arnk/articles/b4f6d1e18f61f3</guid><pubDate>Wed, 25 Jun 2025 11:08:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WDKZ0EFo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ChatGPT%2520vs%2520Claude%25EF%25BD%259CAI%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AE%25E5%25AE%259F%25E5%258A%259B%25E3%2582%2592%25E6%25AF%2594%25E8%25BC%2583%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E3%2580%25902025%25E5%25B9%25B44%25E6%259C%2588%25E6%2599%2582%25E7%2582%25B9%25E3%2583%25A1%25E3%2583%25A2%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25A2%25E3%2583%25B3%25E3%2582%25AF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU3ZWNmOTk1NmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>アンク</dc:creator></item><item><title><![CDATA[[保存版]HTML Living Standardで定義されているイベントハンドラ全70種]]></title><description><![CDATA[こんにちは、yamanakaです。
+Web開発をしているとたくさんのイベントに出会うと思います。
+それぞれのイベントがどんなときに使えるのか気になりますよね。
+今回はHTML Living Standardに記載のイベントハンドラについて、コード例とすぐに試せるCodePenをあわせて図鑑的にまとめてみました！
+あなたは70種類すべて知っているでしょうか？
+イベントが必要なとき、UI/UXを考えるときにこの記事を参考にしてもらえると嬉しいです。
+
+ マウスイベント
+
+ onclick
+
+
+イベントの発生タイミング: 要素がマウスポインターでクリックされた（左ボタンで押されて離された）時。...]]></description><link>https://zenn.dev/yamanaka_swe/articles/acb1dda443892e</link><guid isPermaLink="true">https://zenn.dev/yamanaka_swe/articles/acb1dda443892e</guid><pubDate>Mon, 23 Jun 2025 22:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gEm0fvuc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E4%25BF%259D%25E5%25AD%2598%25E7%2589%2588%255DHTML%2520Living%2520Standard%25E3%2581%25A7%25E5%25AE%259A%25E7%25BE%25A9%25E3%2581%2595%25E3%2582%258C%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2583%258F%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25A9%25E5%2585%25A870%25E7%25A8%25AE%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yamanaka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSThyaVB1NnZCMlJaQVYtV0hmMEdiYXpRRlJ4SU9vUWlNZ1FQMy1PaDV1VjBkQXlRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yamanaka</dc:creator></item><item><title><![CDATA[よりよい削除ボタンのUI]]></title><description><![CDATA[
+ はじめに
+どうも！毎回Zennの記事タイトルの上にある絵文字の選択に困っているオメガマスターです。
+なんかランダムで選んでくれて良いのになと思っています。
+今回は下記の記事を見てこういう削除ボタン良いなと思いました。実際に見てみてください。
+https://emilkowal.ski/ui/building-a-hold-to-delete-component
+ちなみに皆さんの会社ではどのような削除ボタンを実装していますか？
+
+削除ボタンをおいて、クリックされたらアラートが表示され、yesをクリックすると削除
+しか弊社では実装していない気がします。それでも良いかなと思うのですが、慣れ...]]></description><link>https://zenn.dev/omegamaster/articles/delete-button-ux</link><guid isPermaLink="true">https://zenn.dev/omegamaster/articles/delete-button-ux</guid><pubDate>Mon, 23 Jun 2025 00:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--su0V1hSk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%2588%25E3%2582%258A%25E3%2582%2588%25E3%2581%2584%25E5%2589%258A%25E9%2599%25A4%25E3%2583%259C%25E3%2582%25BF%25E3%2583%25B3%25E3%2581%25AEUI%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AA%25E3%2583%25A1%25E3%2582%25AC%25E3%2583%259E%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0YzVXQURUYXFBRUlnaTg5WHM1a2JCQW1mRm05QzhDS09mNXVYODQ1QTBPYXc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>オメガマスター</dc:creator></item><item><title><![CDATA[あなたの書いたCSSがブラウザを苦しめる]]></title><description><![CDATA[
+ レンダリングの裏側、ちゃんと理解してる？
+ブラウザのアドレスバーにURLを入力してからページが表示されるまでに、ブラウザは以下のような処理を順に行います。
+
+
+Loading（リソースの読み込み）
+a. Download：HTMLやCSS、JavaScriptなどのリソースをネットワークから取得
+b. Parse：取得したリソースを解析し、DOMやCSSOMを構築
+
+Scripting（JavaScriptの実行）
+DOMの操作やイベント処理などが行われる
+
+Rendering（レイアウトツリーの構築）
+a. Calculate Style：CSSOMとDOMを元に各要素のスタイルを...]]></description><link>https://zenn.dev/t___yagi/articles/59724ddcbda62c</link><guid isPermaLink="true">https://zenn.dev/t___yagi/articles/59724ddcbda62c</guid><pubDate>Wed, 18 Jun 2025 15:05:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Mhy4iF8b--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%2582%25E3%2581%25AA%25E3%2581%259F%25E3%2581%25AE%25E6%259B%25B8%25E3%2581%2584%25E3%2581%259FCSS%25E3%2581%258C%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2582%2592%25E8%258B%25A6%25E3%2581%2597%25E3%2582%2581%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t___yagi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q0OTUyNDA5NWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t___yagi</dc:creator></item><item><title><![CDATA[HTML修正作業で困ったことまとめと解決策]]></title><description><![CDATA[
+ はじめに
+この記事では、私が仕事中に「普段あまり使わないHTMLを扱ったことで発生したトラブル」と、その解決方法をまとめています。
+HTMLにあまり慣れていない方や、これからHTMLを書いてみようという方にも参考になる内容を目指しています。
+
+
+ トラブル1：ターミナルからChromeでHTMLをプレビューできない
+
+ 背景
+ローカルにリポジトリをcloneしたとき、Finderからファイルにアクセスできず、
+HTMLファイルをどうやってChromeで表示すればよいか悩みました。
+
+ 解決策
+Macの場合：
+open -a "Google Chrome" index.html
+または...]]></description><link>https://zenn.dev/sudonotfound/articles/f331a30ba47ba8</link><guid isPermaLink="true">https://zenn.dev/sudonotfound/articles/f331a30ba47ba8</guid><pubDate>Tue, 17 Jun 2025 09:15:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--izWjj-DR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:HTML%25E4%25BF%25AE%25E6%25AD%25A3%25E4%25BD%259C%25E6%25A5%25AD%25E3%2581%25A7%25E5%259B%25B0%25E3%2581%25A3%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A8%25E8%25A7%25A3%25E6%25B1%25BA%25E7%25AD%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sudonotfound%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NkMDNlYjQ3MWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sudonotfound</dc:creator></item></channel></rss>
