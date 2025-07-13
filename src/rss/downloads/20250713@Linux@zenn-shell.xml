@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「shell」のフィード]]></title><description><![CDATA[Zennのトピック「shell」のRSSフィードです]]></description><link>https://zenn.dev/topics/shell</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/c8d33e6510.jpeg</url><title>Zennの「shell」のフィード</title><link>https://zenn.dev/topics/shell</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 13 Jul 2025 04:18:59 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/shell/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[パイプで途中経過を表示したい時の解決法]]></title><description><![CDATA[今日は、シェルスクリプトについて書きます。
+シェルのパイプで色々と繋げて処理をする際に、途中経過を表示したい時がありました。
+どうやったら綺麗に解決できるかと思って、検討しました。
+
+ 解決策
+&gt;&amp;2 をつけることで、途中経過を表示できます。
+echo "hello world" | xxd -p &gt;&amp;2 | xxd -r -p
+
+ 解説
+このサンプルコードは、hello world を、16進数表示をして、68656c6c6f20776f726c640aとし、もう一度、hello world に戻すというコードです。
+最近OSレベルのコードにハマっているため...]]></description><link>https://zenn.dev/t0/articles/30655fd15e54fb</link><guid isPermaLink="true">https://zenn.dev/t0/articles/30655fd15e54fb</guid><pubDate>Fri, 11 Jul 2025 05:42:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FkbSVEHC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2591%25E3%2582%25A4%25E3%2583%2597%25E3%2581%25A7%25E9%2580%2594%25E4%25B8%25AD%25E7%25B5%258C%25E9%2581%258E%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%25E6%2599%2582%25E3%2581%25AE%25E8%25A7%25A3%25E6%25B1%25BA%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI0NDBhYjE2MmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>つ</dc:creator></item><item><title><![CDATA[Claude Codeのbashコマンドを柔軟に制御するツールを作ってみた（rm -rf ~/も防げます）]]></title><description><![CDATA[
+ はじめに
+Claude Code は便利ですが、rm -rf ~/のような危険なコマンドも実行してしまう可能性があります。そこで、Claude Code のhooks 機能を活用して、bash コマンドの実行を安全かつ柔軟に制御するツールを作ってみました。
+
+実際に rm -rf ~/をブロックしているところ
+
+ セットアップ
+https://github.com/miyaoka/claude-hooks
+
+ 1. リポジトリのクローン
+git clone https://github.com/miyaoka/claude-hooks.git
+
+ 2. settings.json へ...]]></description><link>https://zenn.dev/studio/articles/ec90908f280c2e</link><guid isPermaLink="true">https://zenn.dev/studio/articles/ec90908f280c2e</guid><pubDate>Thu, 10 Jul 2025 16:16:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XFEbpnuK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Claude%2520Code%25E3%2581%25AEbash%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E6%259F%2594%25E8%25BB%259F%25E3%2581%25AB%25E5%2588%25B6%25E5%25BE%25A1%25E3%2581%2599%25E3%2582%258B%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25EF%25BC%2588rm%2520-rf%2520%7E%252F%25E3%2582%2582%25E9%2598%25B2%25E3%2581%2592%25E3%2581%25BE%25E3%2581%2599%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:miyaoka%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UwYmNhNWZkODEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Studio%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FlYTU4ZTc5ZDAuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>miyaoka</dc:creator></item><item><title><![CDATA[【今更】zshデビュー：bashからの移行体験記]]></title><description><![CDATA[はじめまして。nemunekoです=^_^=
+長い間、私はbashを使い続けてきました。特に不満もなかったしね。
+でも、最近勉強会とかでさまざまなツールやコマンドなどをいる機会があり、その中で「zsh」というシェルが紹介されていたので触ってみました。
+今回は、zshへの移行手順と簡単な所感を書いてみました。
+それではどうぞ。
+
+ zshのインストール
+私の環境はUbuntu on WSLなので、aptコマンドでサクッとインストールしました。
+# パッケージリストを更新して
+sudo apt update
+# zshをインストール！
+sudo apt install zsh
+インストールが...]]></description><link>https://zenn.dev/neruneko/articles/afda78a6cef138</link><guid isPermaLink="true">https://zenn.dev/neruneko/articles/afda78a6cef138</guid><pubDate>Thu, 10 Jul 2025 10:30:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fpPWBLZb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E4%25BB%258A%25E6%259B%25B4%25E3%2580%2591zsh%25E3%2583%2587%25E3%2583%2593%25E3%2583%25A5%25E3%2583%25BC%25EF%25BC%259Abash%25E3%2581%258B%25E3%2582%2589%25E3%2581%25AE%25E7%25A7%25BB%25E8%25A1%258C%25E4%25BD%2593%25E9%25A8%2593%25E8%25A8%2598%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nemuneko_san%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdkOWZiNGVlMmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nemuneko_san</dc:creator></item><item><title><![CDATA[rmが怖いのでWindowsのゴミ箱にファイルを送るコマンドを作った]]></title><description><![CDATA[Git Bash for WindowsやMSYS2を使っているとき、ついrmコマンドでファイルを完全削除してしまい困ったことはありませんか？
+わたしはたくさんあります。
+
+
+プロジェクトの掃除中…
+gitにコミットする前の必要なファイルまで削除してしまった
+
+
+もう使わないと思って削除したけど…
+後々必要になり復元したくなった
+
+
+タイプミスで…
+rm * .logと*の後ろにスペースが入ってしまい、すべてが消え去ってしまった…。
+
+
+この記事で紹介するtrashコマンドはこれらの問題を解決します。
+mvで退避させる方法と違い、Windows標準のゴミ箱で一元管理できるのが利点です。
+...]]></description><link>https://zenn.dev/atilol/articles/6aa8148f700247</link><guid isPermaLink="true">https://zenn.dev/atilol/articles/6aa8148f700247</guid><pubDate>Tue, 08 Jul 2025 04:44:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XBQWmVQ2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:rm%25E3%2581%258C%25E6%2580%2596%25E3%2581%2584%25E3%2581%25AE%25E3%2581%25A7Windows%25E3%2581%25AE%25E3%2582%25B4%25E3%2583%259F%25E7%25AE%25B1%25E3%2581%25AB%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E9%2580%2581%25E3%2582%258B%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:atilol%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvYS5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>atilol</dc:creator></item><item><title><![CDATA[シェルで途中まで入力したコマンドを一時保存して後から実行する小技]]></title><description><![CDATA[シェルで長ったらしいコマンドを入力している途中に「先に別のコマンドを実行しておくべきだった」と気付いたことはないでしょうか。とくにワンライナースクリプトLOVEなみなさんは、こういうことがよく発生するのではないでしょうか。こういうときに泣く泣く入力中の文字列を消してから別のコマンドを実行して、いったん削除したコマンドを打ち直しているでしょうか。それとも、文字列をカットしてから後から貼り付けしているでしょうか。
+こういうときに入力中だったコマンドを一時保存して後から実行する小技を紹介します。どこに一時保存するかというと、それはシェルの履歴です。具体的には「入力中だったコマンドの先頭に移動し...]]></description><link>https://zenn.dev/satoru_takeuchi/articles/dd0e68740282d6</link><guid isPermaLink="true">https://zenn.dev/satoru_takeuchi/articles/dd0e68740282d6</guid><pubDate>Mon, 07 Jul 2025 09:41:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TjSKu7bp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2581%25A7%25E9%2580%2594%25E4%25B8%25AD%25E3%2581%25BE%25E3%2581%25A7%25E5%2585%25A5%25E5%258A%259B%25E3%2581%2597%25E3%2581%259F%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E4%25B8%2580%25E6%2599%2582%25E4%25BF%259D%25E5%25AD%2598%25E3%2581%2597%25E3%2581%25A6%25E5%25BE%258C%25E3%2581%258B%25E3%2582%2589%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%25E5%25B0%258F%25E6%258A%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sat%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hjeVUzdFlLV3RJeXdsdjJhYm1ac2VpczZrUnp1ODc5ZFNwT0Vub3c9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sat</dc:creator></item><item><title><![CDATA[【Linux】find コマンド徹底活用術]]></title><description><![CDATA[
+ はじめに
+実務でよく使う「権限変更」「所有者変更」「除外検索」などのテクニックを、find コマンドでの具体例を交えて紹介します。
+
+
+ 一括変更
+
+ ディレクトリ・ファイルの権限を一括変更する
+目的 ：
+/Apl/hogehoge/app 配下のすべてのディレクトリとファイルのパーミッションを 775 に変更する。
+find /Apl/hogehoge/app -type d -exec chmod 775 {} \;
+find /Apl/hogehoge/app -type f -exec chmod 775 {} \;
+解説 ：
+
+
+-type d ：ディレクトリのみ対象
+
+-...]]></description><link>https://zenn.dev/wan0ri/articles/070c58111856e6</link><guid isPermaLink="true">https://zenn.dev/wan0ri/articles/070c58111856e6</guid><pubDate>Sat, 05 Jul 2025 00:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pCwQ52wJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Linux%25E3%2580%2591find%2520%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E5%25BE%25B9%25E5%25BA%2595%25E6%25B4%25BB%25E7%2594%25A8%25E8%25A1%2593%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wan0ri%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IzM2M3Y2U5OTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wan0ri</dc:creator></item><item><title><![CDATA[cclogで快適なClaude Codeセッションログ閲覧と即時レジューム]]></title><description><![CDATA[過去のClaude Codeセッションを瞬時に見つけて再開できるコマンド「cclog」を作りました。
+
+ cclogとは
+cclogは、Claude Codeのセッションログをfzfでインタラクティブに閲覧し、claude --resume によるセッション再開まで快適に行うコマンドです。
+Claude Codeはセッションログを~/.claude/projects/配下にプロジェクトごとに保存しています。cclogはこのログファイルを解析して、使いやすい形で表示します。
+
+
+ 主な機能
+
+ 1. セッション一覧とプレビュー
+$ cclog
+現在のディレクトリのClaude Codeセッ...]]></description><link>https://zenn.dev/choplin/articles/2025-07-03-cclog-introduction</link><guid isPermaLink="true">https://zenn.dev/choplin/articles/2025-07-03-cclog-introduction</guid><pubDate>Fri, 04 Jul 2025 10:39:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dwIpcaNG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:cclog%25E3%2581%25A7%25E5%25BF%25AB%25E9%2581%25A9%25E3%2581%25AAClaude%2520Code%25E3%2582%25BB%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2583%25AD%25E3%2582%25B0%25E9%2596%25B2%25E8%25A6%25A7%25E3%2581%25A8%25E5%258D%25B3%25E6%2599%2582%25E3%2583%25AC%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:choplin%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dabE12ZTl0MHFOaTZmRmhQMUVaelR6WVNmbUg5NERaS0pQLXdtMHc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>choplin</dc:creator></item><item><title><![CDATA[vim-jetpack管理のVimプラグインをシェルから追加削除する]]></title><description><![CDATA[この記事はVim駅伝の368本目の記事です。
+Vimのプラグインをインストールするとき、
+Vundle方式のプラグインマネージャを利用している場合は、
+vimrc、またはvimrcから読み込むTOMLの設定ファイルに設定行を追加し、
+:PlugInstallや:JetpackSyncを実行してプラグインをインストールします。
+しかし、ときにはより手軽にプラグインをインストールしたいもの。
+aptやdnfでパッケージをインストールするように、
+シェルからコマンドを実行してプラグインをインストールし、プラグインを試したいときもあります。
+そんなときに、そのための一般的な方法がある訳ではないで...]]></description><link>https://zenn.dev/nil2/articles/59f9f9c36d6e63</link><guid isPermaLink="true">https://zenn.dev/nil2/articles/59f9f9c36d6e63</guid><pubDate>Fri, 04 Jul 2025 00:28:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IZTE7T0b--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:vim-jetpack%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%25AEVim%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%2592%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2581%258B%25E3%2582%2589%25E8%25BF%25BD%25E5%258A%25A0%25E5%2589%258A%25E9%2599%25A4%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nil2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EwMGVlMjk0YzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nil2</dc:creator></item><item><title><![CDATA[CSVファイルを指定した行数で分割するワンライナー]]></title><description><![CDATA[MacでCSVファイルを指定した行数で分割するワンライナーです。
+SPLIT_SIZE=100000 INPUT="hoge.csv"; BASE=$(basename "$INPUT" .csv); mkdir -p "$BASE"; awk -v sz="$SPLIT_SIZE" -v pref="$BASE/${BASE}_split_" 'NR==1{hdr=$0;next}{fn=sprintf("%s%03d.csv",pref,int((NR-2)/sz)+1);if(!seen[fn]++)print hdr&gt;fn;print&gt;&gt;fn}' "$INPUT"
+]]></description><link>https://zenn.dev/purratto/articles/2280d3413e570c</link><guid isPermaLink="true">https://zenn.dev/purratto/articles/2280d3413e570c</guid><pubDate>Thu, 03 Jul 2025 01:35:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BgwgRz_t--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSV%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E6%258C%2587%25E5%25AE%259A%25E3%2581%2597%25E3%2581%259F%25E8%25A1%258C%25E6%2595%25B0%25E3%2581%25A7%25E5%2588%2586%25E5%2589%25B2%25E3%2581%2599%25E3%2582%258B%25E3%2583%25AF%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%258A%25E3%2583%25BC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:purratto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhODdjNTc4MzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>purratto</dc:creator></item><item><title><![CDATA[bashとzshの違いについて少しだけ掘り下げてみる]]></title><description><![CDATA[
+ はじめに
+bashとzshで若干詰まってモヤモヤしたのでここで掘り下げてみます。
+
+ マシンスペック
+MacBook Air M2 arm64
+
+ 事前知識
+
+ shell
+シェルは、ユーザーとOSカーネルの橋渡しをするコマンドインタプリタです。
+コマンド実行、スクリプト処理、環境管理を担う重要な役割を持ちます 。
+
+ bash
+正式名：Bourne Again SHell（1989年、GNUプロジェクト）。
+POSIX標準に準拠し、LinuxやmacOS（High Sierra以前）ではデフォルトのインタプリタとして広く使われていました。
+ヒストリ機能、補完、ファイルグロブ、変数処...]]></description><link>https://zenn.dev/ka_kan/articles/7483f7358fceb9</link><guid isPermaLink="true">https://zenn.dev/ka_kan/articles/7483f7358fceb9</guid><pubDate>Wed, 02 Jul 2025 21:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xXKzAqC6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:bash%25E3%2581%25A8zsh%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E5%25B0%2591%25E3%2581%2597%25E3%2581%25A0%25E3%2581%2591%25E6%258E%2598%25E3%2582%258A%25E4%25B8%258B%25E3%2581%2592%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kanda%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlOGJhYTMxOGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kanda</dc:creator></item><item><title><![CDATA[ccusageを使ってClaude Codeの直近の利用状況を常にリアルタイムでモニタリングする方法]]></title><description><![CDATA[
+ 書いたあとに気づいた：ここで書いていること全部ccusage単体で出来ていたわ
+https://x.com/shinshin86/status/1939693849552843260
+
+ 直近でどれぐらいClaude Codeを使っているかを確認するためのワンライナー
+直近でどれぐらいClaude Codeを使えているかを確認したくなったので、直近時間（※）のClaude Codeのコストを表示させるワンライナーを作成しました。
+※18:00に実行したら18:00~19:00までの間のClaude Codeのコストが表示されます。
+
+このコマンドは以下のワンライナーで実行可能です。
+...]]></description><link>https://zenn.dev/shinshin86/articles/dcbf786edc82e9</link><guid isPermaLink="true">https://zenn.dev/shinshin86/articles/dcbf786edc82e9</guid><pubDate>Mon, 30 Jun 2025 14:42:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QMf9OrIt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ccusage%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6Claude%2520Code%25E3%2581%25AE%25E7%259B%25B4%25E8%25BF%2591%25E3%2581%25AE%25E5%2588%25A9%25E7%2594%25A8%25E7%258A%25B6%25E6%25B3%2581%25E3%2582%2592%25E5%25B8%25B8%25E3%2581%25AB%25E3%2583%25AA%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E3%2581%25A7%25E3%2583%25A2%25E3%2583%258B%25E3%2582%25BF%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yuki%2520Shindo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2otbHB0MWdFYmtDdUlHMzJOZ2N2SV9wa0YxM0JVYVhuYy03ODNiPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuki Shindo</dc:creator></item><item><title><![CDATA[iPadでターミナル環境を構築する (a-Shell編)]]></title><description><![CDATA[
+ 背景
+iPad はクリエイティブな作業やコンテンツ消費のための優れたデバイスですが、エンジニアにとってはターミナル環境がないことが長年の課題でした。しかし、a-Shell のようなアプリの登場により、iPad 上でも本格的な Shell 環境を構築し、さまざまなコマンドラインツールを実行できるようになりました。
+この記事では、a-Shell を使って iPad で何ができるのか、その設定と基本的な使い方についてまとめます。
+
+ a-Shell とは？
+a-Shell は、iOS/iPadOS 上で動作する、ローカルターミナル環境を提供する無料アプリです。bash や zsh のような...]]></description><link>https://zenn.dev/hashito/articles/73151231fe56c6</link><guid isPermaLink="true">https://zenn.dev/hashito/articles/73151231fe56c6</guid><pubDate>Sun, 29 Jun 2025 00:17:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--chZu0vl0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:iPad%25E3%2581%25A7%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%259F%25E3%2583%258A%25E3%2583%25AB%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%2520%2528a-Shell%25E7%25B7%25A8%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hashito%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFmMmRhOTE0MGMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hashito</dc:creator></item><item><title><![CDATA[コマンド紹介シリーズ：terminalizer]]></title><description><![CDATA[コマンド紹介シリーズ第9回目は、terminalizerというコマンドを紹介します。ターミナルでの作業を録画し、GIFアニメーションを作成するためのツールです。
+なお、第8回は以下になりますので、ぜひご興味があればご覧ください。
+https://zenn.dev/akasan/articles/0bcf36a4251a96
+
+ terminalizerとは？
+terminalizerとは公式の説明によると、
+
+Record your terminal and generate animated gif images or share a web player link www.termi...]]></description><link>https://zenn.dev/akasan/articles/facccc0169d83b</link><guid isPermaLink="true">https://zenn.dev/akasan/articles/facccc0169d83b</guid><pubDate>Sat, 28 Jun 2025 06:45:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iXNIcaWQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E7%25B4%25B9%25E4%25BB%258B%25E3%2582%25B7%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25BA%25EF%25BC%259Aterminalizer%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Akasan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNXJfNDFtel9OY3dPYUtMRE1vc09tbVB6YmxHM0V5N3lNZzI3QWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Akasan</dc:creator></item><item><title><![CDATA[ヒアドキュメントのタブ]]></title><description><![CDATA[ヒアドキュメントを埋め込むとインデントが ... ってなるの、これでなんとかなるかな？
+    cat &lt;&lt;'....END' | sed 's/^ \{8\}//' &gt; /home/$username/yukip.bashrc
+        # env
+        export TZ=Asia/Tokyo
+
+        # history
+        HISTSIZE=200000
+        HISTFILESIZE=20000
+
+        # etc
+        alias ls='ls --color=always'
+        ...]]></description><link>https://zenn.dev/yukip/articles/20250623-1-tab</link><guid isPermaLink="true">https://zenn.dev/yukip/articles/20250623-1-tab</guid><pubDate>Mon, 23 Jun 2025 02:13:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ClvFgBKk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2592%25E3%2582%25A2%25E3%2583%2589%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25AE%25E3%2582%25BF%25E3%2583%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yukip%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0Y2RSb0g4ZS15b0VfTXR0ZDZGeXFZdzR2R0pfVWZJRHlfNmFyYlpFWUdJd1U0PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yukip</dc:creator></item><item><title><![CDATA[SSH秘密鍵のパスフレーズ自動入力]]></title><description><![CDATA[
+ はじめに
+パスフレーズ付の秘密鍵を使って SSH する作業を自動化したい場合に、パスフレーズを自動入力する必要がある。
+例えば、Gitlab CI や GitHub Actions を使って、成果物をサーバーに配置したい場合等が考えられる。
+
+ 準備
+以下を準備してください。
+
+SSH 秘密鍵を環境変数SSH_PRIVATE_KEYに設定
+上記秘密鍵のパスフレーズを環境変数SSH_PASSPHRASEに設定
+
+sshをインストールしていること
+
+
+ 手順
+eval $(ssh-agent -s)
+mkdir -p ~/.ssh
+chmod 700 ~/.ssh
+echo -e "#!...]]></description><link>https://zenn.dev/casl0/articles/c16884f095b574</link><guid isPermaLink="true">https://zenn.dev/casl0/articles/c16884f095b574</guid><pubDate>Sun, 22 Jun 2025 15:05:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5HPTeLe1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SSH%25E7%25A7%2598%25E5%25AF%2586%25E9%258D%25B5%25E3%2581%25AE%25E3%2583%2591%25E3%2582%25B9%25E3%2583%2595%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25BA%25E8%2587%25AA%25E5%258B%2595%25E5%2585%25A5%25E5%258A%259B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:CASL0%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNmRXNEswYjJ6Q0sxNGpWTXFkbHRyQ0Y3RXp3d3kybVJFeHRySDc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>CASL0</dc:creator></item><item><title><![CDATA[pico-jxglib のシェルでファイルシステムを操作する話 (自動補完とヒストリ機能で入力楽々)]]></title><description><![CDATA[pico-jxglib は、ワンボードマイコン Raspberry Pi Pico の Pico SDK プログラミングをサポートするライブラリです。
+https://zenn.dev/ypsitau/articles/2025-01-24-jxglib-intro
+今回は、pico-jxglib のシェル でファイルシステムを操作する方法について解説します。自動補完機能やリダイレクト機能を使って、コマンドラインからファイルやディレクトリを簡単に操作できるようになります。
+
+ ファイルシステムとシェル
+以下の記事で、ファイルシステムの基本的な使い方を紹介しました。
+▶️ pico-jxg...]]></description><link>https://zenn.dev/ypsitau/articles/2025-06-09-fs-shell</link><guid isPermaLink="true">https://zenn.dev/ypsitau/articles/2025-06-09-fs-shell</guid><pubDate>Sun, 22 Jun 2025 08:37:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zUKJ5C-5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:pico-jxglib%2520%25E3%2581%25AE%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2581%25A7%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%2592%25E6%2593%258D%25E4%25BD%259C%25E3%2581%2599%25E3%2582%258B%25E8%25A9%25B1%2520%2528%25E8%2587%25AA%25E5%258B%2595%25E8%25A3%259C%25E5%25AE%258C%25E3%2581%25A8%25E3%2583%2592%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25AA%25E6%25A9%259F%25E8%2583%25BD%25E3%2581%25A7%25E5%2585%25A5%25E5%258A%259B%25E6%25A5%25BD%25E3%2580%2585%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:taka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSlJnRVZJYjlRQXVSb3MwOERCR1Vwek14eDd2aWRPU2RLbnlweFVGUDJJdjJHcF9XYWU9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>taka</dc:creator></item><item><title><![CDATA[Macを交換する度に行う面倒な初期設定を自動化する]]></title><description><![CDATA[
+ はじめに
+ITエンジニアとして働いていると、Macの初期設定を何度も行う機会があります。
+私用PCであれば数年に一度ですが、会社支給のPCを利用していると意外と高頻度で初期設定を行うことになります。
+メモや記憶を頼りに手作業で設定し、古いMacと見比べながら環境を構築して...気付くと半日が消えているなんてことも。
+こんなこと毎回やってられない。。ということで調べてみたらシェルスクリプトを組んでいる人やAnsibleを使っている人など色んな初期設定の自動化パターンを見つけました。
+入れるアプリや設定は人それぞれ好みがあるので、沢山の人の良いとこを参考にさせていただきながら自分なりに試...]]></description><link>https://zenn.dev/fumi_techblog/articles/ede592db153cd7</link><guid isPermaLink="true">https://zenn.dev/fumi_techblog/articles/ede592db153cd7</guid><pubDate>Sun, 22 Jun 2025 01:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lH5pgKaj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mac%25E3%2582%2592%25E4%25BA%25A4%25E6%258F%259B%25E3%2581%2599%25E3%2582%258B%25E5%25BA%25A6%25E3%2581%25AB%25E8%25A1%258C%25E3%2581%2586%25E9%259D%25A2%25E5%2580%2592%25E3%2581%25AA%25E5%2588%259D%25E6%259C%259F%25E8%25A8%25AD%25E5%25AE%259A%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:fumi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDBTUkdTaVJzX3R4LWE2V0lUUzNnYnpCVDc2OTlZTDNNUjhXUnNnTVZZXzVFdkVBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>fumi</dc:creator></item><item><title><![CDATA[GitHooksを利用したコミットメッセージ確認]]></title><description><![CDATA[
+ GitHooksとは
+Git の操作（コミットやプッシュなど）の前後に自動的に実行されるスクリプトのことです。開発のルールや自動化処理をローカルで仕込むことができる、Gitのカスタマイズ機能の一つです。pre-commit&nbsp;フック(コミットメッセージが入力される前に実行)、prepare-commit-msg&nbsp;フック(コミットメッセージエディターが起動する直前、デフォルトメッセージが生成された直後に実行)上記のような複数のフックが存在する。
+
+ commit-msg&nbsp;フック
+
+commit-msg&nbsp;フックは、開発者の書いたコミットメッセージを保...]]></description><link>https://zenn.dev/koki33/articles/794033806c91cd</link><guid isPermaLink="true">https://zenn.dev/koki33/articles/794033806c91cd</guid><pubDate>Fri, 20 Jun 2025 03:19:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2Tn8zLg0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GitHooks%25E3%2582%2592%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2582%25B3%25E3%2583%259F%25E3%2583%2583%25E3%2583%2588%25E3%2583%25A1%25E3%2583%2583%25E3%2582%25BB%25E3%2583%25BC%25E3%2582%25B8%25E7%25A2%25BA%25E8%25AA%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B3%25E3%2583%25BC%25E3%2582%25AD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjNuTTg4NHhEU3JpUnlBdUtXU1lENG9Cc2ZEaTFfWWhPcWkxeUE4RS1kaHcxQnFBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>コーキ</dc:creator></item><item><title><![CDATA[「argparse」 × 「Shell Script」 でパラメータを変えながら Python を一括実行]]></title><description><![CDATA[今回は、パラメータを変えながら、プログラムを一括実行する方法についてまとめてみました。
+『argparse』と『Shell Script』を用いることで、変数の値を変更しつつ、複数回実行することができます。
+!
+この記事でわかること
+
+パラメータを変えながら、プログラムを一括実行する方法
+argparseの基本
+Shell Scriptの基本
+
+
+!
+注意
+
+Shell Script は基本的に Unix 系のシェルでしか動きません
+Windows では WSL、Git Bash、MSYS2 などの Unix 互換環境を入れれば同じスクリプトを実行できます
+
+
+
+ argparse の使...]]></description><link>https://zenn.dev/mugi_cha/articles/1c2c19d46d9e0c</link><guid isPermaLink="true">https://zenn.dev/mugi_cha/articles/1c2c19d46d9e0c</guid><pubDate>Thu, 19 Jun 2025 16:22:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wvapGoh8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258Cargparse%25E3%2580%258D%2520%25C3%2597%2520%25E3%2580%258CShell%2520Script%25E3%2580%258D%2520%25E3%2581%25A7%25E3%2583%2591%25E3%2583%25A9%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E5%25A4%2589%25E3%2581%2588%25E3%2581%25AA%25E3%2581%258C%25E3%2582%2589%2520Python%2520%25E3%2582%2592%25E4%25B8%2580%25E6%258B%25AC%25E5%25AE%259F%25E8%25A1%258C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Mugicha%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA2MjRmMzAxNDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Mugicha</dc:creator></item><item><title><![CDATA[シェルのhistoryに「AWS_ACCESS_KEY_ID=...」が残っていると恥ずかしいから]]></title><description><![CDATA[.bashrc に export AWS_ACCESS_KEY_ID= export AWS_SECRET_ACCESS_KEY= って書くのは趣味じゃない
+けど、使っているツールの都合でこれらの認証情報が環境変数に必要
+けど、認証情報を直接打っちゃうとhistoryに残ってセキュリティ意識が低いみたいで恥ずかしい
+けど、シェルの履歴を無効化するとかもちょっとな〜
+みたいなシーンにいる方のために贈るスニペット
+source &lt;(aws configure export-credentials --format env)
+なんだかスマートな感じがします
+]]></description><link>https://zenn.dev/pal4de/articles/8fcebb22ba1c46</link><guid isPermaLink="true">https://zenn.dev/pal4de/articles/8fcebb22ba1c46</guid><pubDate>Thu, 19 Jun 2025 09:06:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--go9J6Q8h--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2581%25AEhistory%25E3%2581%25AB%25E3%2580%258CAWS_ACCESS_KEY_ID%253D...%25E3%2580%258D%25E3%2581%258C%25E6%25AE%258B%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2581%25A8%25E6%2581%25A5%25E3%2581%259A%25E3%2581%258B%25E3%2581%2597%25E3%2581%2584%25E3%2581%258B%25E3%2582%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%2599%25B4%25E3%2582%258C%25E4%25BA%2595%25E6%2588%25B8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA0ZjYyMGM5N2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>晴れ井戸</dc:creator></item></channel></rss>
