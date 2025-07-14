@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Rust」のフィード]]></title><description><![CDATA[Zennのトピック「Rust」のRSSフィードです]]></description><link>https://zenn.dev/topics/rust</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ba09661577.png</url><title>Zennの「Rust」のフィード</title><link>https://zenn.dev/topics/rust</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 14 Jul 2025 01:22:43 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/rust/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[ABC414: Rustで解く！問題解説]]></title><description><![CDATA[AtCoder Beginner Contest 414のA-E問題をRustで解いた際の解法をまとめました。
+
+ A 問題
+問題
+https://atcoder.jp/contests/abc414/tasks/abc414_a
+解説
+配信を開始時刻 L から終了時刻 R まで視聴できるリスナーの人数を数える問題です。
+リスナーが配信を最初から最後まで見られる条件は、リスナーの視聴可能時間帯が配信の時間帯を完全に含むことになります。
+つまり、 X_i \leq L かつ R \leq Y_i の条件を満たすリスナーの人数を数えれば答えが求まります。
+コード
+
+abc414a.rs
+us...]]></description><link>https://zenn.dev/nakst_hide/articles/f5b3e3a3473e9d</link><guid isPermaLink="true">https://zenn.dev/nakst_hide/articles/f5b3e3a3473e9d</guid><pubDate>Sun, 13 Jul 2025 13:05:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uN1_bD-j--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ABC414%253A%2520Rust%25E3%2581%25A7%25E8%25A7%25A3%25E3%2581%258F%25EF%25BC%2581%25E5%2595%258F%25E9%25A1%258C%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakahide%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YkMxNEpSQnNET01hTGcxTVRQWGNTWS1qYlNQbFRMQTN3ZU9Sdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakahide</dc:creator></item><item><title><![CDATA[Rust 製 OS、 Redox OS に UNIX ドメインソケットを実装した]]></title><description><![CDATA[
+ はじめに
+お久しぶりです。isan です。
+5月から Rust 製 OS である Redox OS の Summer of Code に参加させていただいています。
+先日、そのプログラム中のプロジェクトの1つである UNIX ドメインソケット(UDS) の初期実装が終わりましたので、記事にさせていただきます。(この記事は公式ブログで公開されている RSoC 2025: Implementing Unix Domain Sockets の日本語版です。)
+
+ この記事の目的
+この記事は、私が Summer of Code で行った UNIX ドメインソケット(UDS) 実装の経験を共有...]]></description><link>https://zenn.dev/isan_ethen/articles/66ed9050c3425d</link><guid isPermaLink="true">https://zenn.dev/isan_ethen/articles/66ed9050c3425d</guid><pubDate>Sun, 13 Jul 2025 07:44:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2-KALjxP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%25E8%25A3%25BD%2520OS%25E3%2580%2581%2520Redox%2520OS%2520%25E3%2581%25AB%2520UNIX%2520%25E3%2583%2589%25E3%2583%25A1%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BD%25E3%2582%25B1%25E3%2583%2583%25E3%2583%2588%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:isan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JlNTUwZGVlYjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>isan</dc:creator></item><item><title><![CDATA[RustとWebAssemblyで作るブラウザゲームの最適化手法]]></title><description><![CDATA[
+ はじめに
+近年、Webブラウザ上で動作するゲームの需要が高まっています。特にRustとWebAssembly(Wasm)の組み合わせは、高性能なブラウザゲームを実現するための強力なツールとして注目されています。本記事では、RustとWasmを使用してブラウザゲームを開発する際の最適化手法について解説します。
+
+ なぜRustとWebAssemblyなのか
+JavaScriptだけでゲームを開発する場合と比較して、RustとWasmの組み合わせには以下の利点があります：
+
+
+パフォーマンス: Rustはネイティブに近い速度で実行可能
+
+メモリ安全: Rustの所有権システムによりメモリ...]]></description><link>https://zenn.dev/gregory/articles/c4e30e14c5b873</link><guid isPermaLink="true">https://zenn.dev/gregory/articles/c4e30e14c5b873</guid><pubDate>Sat, 12 Jul 2025 11:17:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Veb-LLqo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A8WebAssembly%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E3%2581%25AE%25E6%259C%2580%25E9%2581%25A9%25E5%258C%2596%25E6%2589%258B%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:gregory%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IzMDYyMjdjZmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>gregory</dc:creator></item><item><title><![CDATA[Go 言語という明快な選択 ― AI 時代に輝く、シンプルさの美学]]></title><description><![CDATA[Go 言語には、妥協を許さない明快さがあります。それは言語設計に込められた『簡潔さへの執念』が、まるで推敲を重ねた文章のように、無駄なく研ぎ澄まされているからです。
+
+ 明示的コードがもたらす保守性
+Go 言語のコードには説明がほとんど不要です。
+func fetchUserData(userID string) (*User, error) {
+    user, err := db.GetUser(userID)
+    if err != nil {
+        return nil, fmt.Errorf("failed to fetch user %s: %w", user...]]></description><link>https://zenn.dev/jnst/articles/69191aa423f144</link><guid isPermaLink="true">https://zenn.dev/jnst/articles/69191aa423f144</guid><pubDate>Sat, 12 Jul 2025 09:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--g6Wdox_j--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Go%2520%25E8%25A8%2580%25E8%25AA%259E%25E3%2581%25A8%25E3%2581%2584%25E3%2581%2586%25E6%2598%258E%25E5%25BF%25AB%25E3%2581%25AA%25E9%2581%25B8%25E6%258A%259E%2520%25E2%2580%2595%2520AI%2520%25E6%2599%2582%25E4%25BB%25A3%25E3%2581%25AB%25E8%25BC%259D%25E3%2581%258F%25E3%2580%2581%25E3%2582%25B7%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2581%2595%25E3%2581%25AE%25E7%25BE%258E%25E5%25AD%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:jnst%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M3YzYyZmQ2ZmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>jnst</dc:creator></item><item><title><![CDATA[Rustでターミナル作業を革新！「tmux-rs」が拓く開発環境の自動化と効率化]]></title><description><![CDATA[
+ Rustでターミナル作業を革新！「tmux-rs」が拓く開発環境の自動化と効率化
+
+ 概要
+多くの開発者に愛用されているターミナルマルチプレクサtmuxに、このたびRustで実装された画期的なライブラリ「tmux-rs」が登場し、大きな注目を集めています。
+tmux-rsは、Rustが持つ安全性と卓越したパフォーマンスを最大限に活かし、従来のtmux操作の枠を超えた柔軟な制御を可能にします。これにより、開発環境の自動化や複雑なワークフローの構築が、より堅牢かつ効率的に行えるようになります。
+本記事では、tmux-rsの主な特徴や具体的な使い方、そして既存のtmux操作方法と比較した際...]]></description><link>https://zenn.dev/yusuke_sato_eh/articles/mcoizb85-rust-tmux</link><guid isPermaLink="true">https://zenn.dev/yusuke_sato_eh/articles/mcoizb85-rust-tmux</guid><pubDate>Sat, 12 Jul 2025 05:58:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0OkX4QFE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%259F%25E3%2583%258A%25E3%2583%25AB%25E4%25BD%259C%25E6%25A5%25AD%25E3%2582%2592%25E9%259D%25A9%25E6%2596%25B0%25EF%25BC%2581%25E3%2580%258Ctmux-rs%25E3%2580%258D%25E3%2581%258C%25E6%258B%2593%25E3%2581%258F%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AE%25E8%2587%25AA%25E5%258B%2595%25E5%258C%2596%25E3%2581%25A8%25E5%258A%25B9%25E7%258E%2587%25E5%258C%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:CEO%2540Engineers%2520Hub%2520...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjBXb3MtWm12c3Rhb0JVZXlmXzRDT2lJazNnVXFaaXVLNklIUnVjRmhIU3NKUVl3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>CEO@Engineers Hub Co. ,Ltd.</dc:creator></item><item><title><![CDATA[インフラエンジニアが作った『hawk』- なぜawkを再発明したのか？]]></title><description><![CDATA[
+ TL;DR
+AWSインフラエンジニアが、日常業務での「JSONやYAMLの構造把握」の課題を解決するために開発したCLIツールhawkの開発背景をお話しします。
+
+💡 課題: AWS CLI出力やK8sマニフェストの構造把握に時間がかかる
+🎯 解決: info機能による一発構造把握 + pandas風の統一クエリ言語
+🚀 結果: 学習コストを下げながら、日常業務を効率化
+
+
+ 背景：インフラエンジニアの日常的な困りごと
+
+ AWS CLIレスポンスとの格闘
+aws ec2 describe-instances --instance-ids i-1234567890abcdef0 &g...]]></description><link>https://zenn.dev/kyonaka/articles/1905716e1514f0</link><guid isPermaLink="true">https://zenn.dev/kyonaka/articles/1905716e1514f0</guid><pubDate>Fri, 11 Jul 2025 17:28:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Libt8aPa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2595%25E3%2583%25A9%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2581%258C%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E3%2580%258Ehawk%25E3%2580%258F-%2520%25E3%2581%25AA%25E3%2581%259Cawk%25E3%2582%2592%25E5%2586%258D%25E7%2599%25BA%25E6%2598%258E%25E3%2581%2597%25E3%2581%259F%25E3%2581%25AE%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kyonaka%2540AWS%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg5NzcxODk2ODAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kyonaka@AWSエンジニア</dc:creator></item><item><title><![CDATA[Rustで使える演算子オーバーロード(C++との比較)]]></title><description><![CDATA[
+
+
+演算子
+C++
+Rust
+Rustトレイト
+備考
+
+
+
+
++
+○
+○
+Add
+
+
+
+-
+○
+○
+Sub
+
+
+
+*
+○
+○
+Mul
+
+
+
+/
+○
+○
+Div
+
+
+
+%
+○
+○
+Rem
+
+
+
++=
+○
+○
+AddAssign
+
+
+
+-=
+○
+○
+SubAssign
+
+
+
+*=
+○
+○
+MulAssign
+
+
+
+/=
+○
+○
+DivAssign
+
+
+
+%=
+○
+○
+RemAssign
+
+
+
+
+==/!=
+
+○
+○
+PartialEq
+
+!=は==で自動実装
+
+
+&lt;,&gt;,&lt;=,&gt;=
+○
+○
+PartialOrd
+すべてPartialOrdで自動実装
+
+
+!
+○
+○
+...]]></description><link>https://zenn.dev/dama_ewep/articles/048eefe42d3316</link><guid isPermaLink="true">https://zenn.dev/dama_ewep/articles/048eefe42d3316</guid><pubDate>Wed, 09 Jul 2025 21:17:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XV-5OA8R--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258B%25E6%25BC%2594%25E7%25AE%2597%25E5%25AD%2590%25E3%2582%25AA%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%2528C%252B%252B%25E3%2581%25A8%25E3%2581%25AE%25E6%25AF%2594%25E8%25BC%2583%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A0%25E3%2581%25BE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyZDQ2MzU3NjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>だま</dc:creator></item><item><title><![CDATA[RustでNTPクライアントを自作して時刻同期の仕組みを探る]]></title><description><![CDATA[
+ はじめに
+普段、NTPはあまり意識しないプロトコルですが、重要なプロトコルです。
+今回は、RustでNTPクライアントを自作して理解を深めます。
+
+ マシンスペック
+MacBook Air M2 arm64
+
+ 事前知識
+
+ NTPとは？
+NTPはNetwork Time Protocolと言い、ネットワークに接続される機器の時刻を同期するためのプロトコルです。
+NTPサーバに同期していない機器は時刻が正確ではありません。インターネットから切り離された状態でOSのセットアップを行うと、日時や時刻が適当なものになります。
+プライベート用の端末で時刻を気にしなければ問題はないのですが、S...]]></description><link>https://zenn.dev/ka_kan/articles/d08c8d3d208796</link><guid isPermaLink="true">https://zenn.dev/ka_kan/articles/d08c8d3d208796</guid><pubDate>Wed, 09 Jul 2025 21:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FRAgcIXy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7NTP%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25A2%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592%25E8%2587%25AA%25E4%25BD%259C%25E3%2581%2597%25E3%2581%25A6%25E6%2599%2582%25E5%2588%25BB%25E5%2590%258C%25E6%259C%259F%25E3%2581%25AE%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%25E3%2582%2592%25E6%258E%25A2%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kanda%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlOGJhYTMxOGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kanda</dc:creator></item><item><title><![CDATA[研究・監査の不正検知・データ品質管理に。5つの法則で見守る統計分析ツール「lawkit」を、Claude CodeとRustで作りました]]></title><description><![CDATA[
+ はじめに
+kako-junです。
+ビジネスや研究において、データ分析は不可欠です。（よう知らんけど）
+しかし、従来の統計分析ツールでは、一度に一つの統計法則しか適用できず、データに潜む複雑なパターンや異常を見逃してしまうことってありませんか？
+例えば、財務データがベンフォードの法則に従っているかを確認するだけでは、パレートの法則や正規分布からの逸脱を見落とし、全体像を把握できないかもしれません。
+今回、こうした課題を解決するために、複数の統計法則を同時に適用し、データの隠れたパターンや異常を自動で検知する「多法則統計分析ツールキット lawkit」を開発し、OSSとして公開しました。...]]></description><link>https://zenn.dev/kako_jun/articles/8a106225ff31d4</link><guid isPermaLink="true">https://zenn.dev/kako_jun/articles/8a106225ff31d4</guid><pubDate>Wed, 09 Jul 2025 12:08:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--w2xczE5K--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25A0%2594%25E7%25A9%25B6%25E3%2583%25BB%25E7%259B%25A3%25E6%259F%25BB%25E3%2581%25AE%25E4%25B8%258D%25E6%25AD%25A3%25E6%25A4%259C%25E7%259F%25A5%25E3%2583%25BB%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%2593%2581%25E8%25B3%25AA%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%25AB%25E3%2580%25825%25E3%2581%25A4%25E3%2581%25AE%25E6%25B3%2595%25E5%2589%2587%25E3%2581%25A7%25E8%25A6%258B%25E5%25AE%2588%25E3%2582%258B%25E7%25B5%25B1%25E8%25A8%2588%25E5%2588%2586%25E6%259E%2590%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2580%258Clawkit%25E3%2580%258D%25E3%2582%2592%25E3%2580%2581Claude%2520Code...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kako-jun%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFmNzk3NTk4OWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kako-jun</dc:creator></item><item><title><![CDATA[次にRustで開発してみたいものが決まりました！]]></title><description><![CDATA[
+ はじめに
+前回、AIチャットボット開発を進めたものの興味が無くなってしまった件について書きました！
+https://zenn.dev/maromaron88/articles/8e87eeb6f159b9
+今回は改めて考えたRustで開発したいものについてお話ししたいと思います！
+自分の興味が湧くもの、それを掘り下げていったときに見つけた原石について紹介します！！
+
+ 自分の興味が湧くものとは・・・
+自分が何に対して興味が湧いて手を動かしたくなるのか。。
+今までの自分を振り返ったときに見えてくるものがありました！
+
+ 専門学校に通っていたとき
+〇 興味が湧かないもの
+ITの専門学校に...]]></description><link>https://zenn.dev/maromaron88/articles/9aca8520cb79f0</link><guid isPermaLink="true">https://zenn.dev/maromaron88/articles/9aca8520cb79f0</guid><pubDate>Wed, 09 Jul 2025 11:35:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--C2zWmFab--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%25AC%25A1%25E3%2581%25ABRust%25E3%2581%25A7%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E3%2581%2584%25E3%2582%2582%25E3%2581%25AE%25E3%2581%258C%25E6%25B1%25BA%25E3%2581%25BE%25E3%2582%258A%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Maromaron88%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY2ZGVjNDJlYzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Maromaron88</dc:creator></item><item><title><![CDATA[開発初心者がRustで作るAIチャットボット！（※初回で最終回のおしらせ。。。）]]></title><description><![CDATA[
+ はじめに
+はい！今回は早めに更新できた気がします！！
+今回はいよいよRustでAIチャットボット開発を進めていきます！
+ですが、今回でAIチャットボット開発は最終回を迎えることになりました。。
+長らくご支援いただいていた皆様の期待に応えることができませんでした。
+最終回の理由は、、AIチャットボット開発に興味がなくなってしまったためです！
+で、他に考えていることの方が圧倒的に興味が湧いているからです！
+なので、本当は詳細にいろいろお伝えしようと思っていましたが、
+ざーっくりお伝えしていきたいと思います！
+Gemini CLIに作ってもらった内容を公開していくような感じですね。。
+では...]]></description><link>https://zenn.dev/maromaron88/articles/8e87eeb6f159b9</link><guid isPermaLink="true">https://zenn.dev/maromaron88/articles/8e87eeb6f159b9</guid><pubDate>Wed, 09 Jul 2025 02:25:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Z31ydVJk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%2596%258B%25E7%2599%25BA%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%258CRust%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258BAI%25E3%2583%2581%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2588%25E3%2583%259C%25E3%2583%2583%25E3%2583%2588%25EF%25BC%2581%25EF%25BC%2588%25E2%2580%25BB%25E5%2588%259D%25E5%259B%259E%25E3%2581%25A7%25E6%259C%2580%25E7%25B5%2582%25E5%259B%259E%25E3%2581%25AE%25E3%2581%258A%25E3%2581%2597%25E3%2582%2589%25E3%2581%259B%25E3%2580%2582%25E3%2580%2582%25E3%2580%2582%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Maromaron88%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY2ZGVjNDJlYzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Maromaron88</dc:creator></item><item><title><![CDATA[簡易なバックグラウンドプロセス管理ツールを実装してみた]]></title><description><![CDATA[
+ はじめに
+ども、最近Claude Codeにすべてをかけているゴリラです。
+Claude Codeくんを使って開発していく中で、ときたまバックグラウンドでプロセスを実行したいときがあります。
+例えばnpm run devで開発サーバーを起動して、playwright mcpで画面の確認をしようとすると、
+Claude Codeくんは普通にnpm run dev &amp;を実行しようとします。
+しかしそれだとバックグラウンドで実行できないので、簡易な管理ツールをCaude Codeくんに作ってもらいました。
+README.mdをClaude Codeくんに食わせてバックグラウンドでプ...]]></description><link>https://zenn.dev/techlead/articles/2025-07-07-rust-ghost</link><guid isPermaLink="true">https://zenn.dev/techlead/articles/2025-07-07-rust-ghost</guid><pubDate>Tue, 08 Jul 2025 06:29:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CLxiinDo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25B0%25A1%25E6%2598%2593%25E3%2581%25AA%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B0%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%2589%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25BB%25E3%2582%25B9%25E7%25AE%25A1%25E7%2590%2586%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%25B4%25E3%2583%25AA%25E3%2583%25A9%2540%25E7%25B5%2590%25E5%25A9%259A%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJmODRjMjM5ZTAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%2589%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdlNGE3Zjg2ODIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ゴリラ@結婚しました</dc:creator></item><item><title><![CDATA[Rust & Wasmでミニシューティングゲームを作る]]></title><description><![CDATA[
+ はじめに
+前回は、TypeScriptを使って、Cnavas上で動作するミニシューティングゲームを作りました。今回も、まったく同じ動作する"Rust &amp; Wasm"版を作りました。流行の"Rust &amp; Wasm"を使うとどれくらい早くなるのか、まったく同じ動作をするゲームを作ることで、体験して比較することが目的です。さて、Rustで作った場合ではどうでしょうか。興味を持って頂いた方は、記事中のTypeScript版と、AssemblyScript版、そして Rust&amp;Wasm版を試してみてください🙂。
+https://zenn.dev/yurioka/arti...]]></description><link>https://zenn.dev/yurioka/articles/9456e36d12f84d</link><guid isPermaLink="true">https://zenn.dev/yurioka/articles/9456e36d12f84d</guid><pubDate>Mon, 07 Jul 2025 16:15:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--efqwPZNI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%2526%2520Wasm%25E3%2581%25A7%25E3%2583%259F%25E3%2583%258B%25E3%2582%25B7%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%2586%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:myurioka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY3YTE2NGMzMzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>myurioka</dc:creator></item><item><title><![CDATA[Claude Code の開発用コンテナ設定(ターミナルから実行用)]]></title><description><![CDATA[
+ はじめに
+Anthropic 公式の Claude Code DevContainer 設定 は VS Code での利用を前提としています。私は VS Code を使っていないため、これをベースに以下の改善を加えました。
+
+
+ターミナルから直接起動できるようにアレンジ
+Node.js のバージョン自動同期
+Rust／Gemini CLI などの追加ツール
+動的ファイアウォール管理
+ホスト macOS で効果音再生
+
+本記事では、公式版を拡張した scripts/claude_dev_container のカスタマイズ内容と実装方法を紹介します。
+
+ ファイル構成
+公式版（Docke...]]></description><link>https://zenn.dev/yourstand_blog/articles/claude-code-dev-container</link><guid isPermaLink="true">https://zenn.dev/yourstand_blog/articles/claude-code-dev-container</guid><pubDate>Mon, 07 Jul 2025 10:26:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Yngd_lxo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Claude%2520Code%2520%25E3%2581%25AE%25E9%2596%258B%25E7%2599%25BA%25E7%2594%25A8%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E8%25A8%25AD%25E5%25AE%259A%2528%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%259F%25E3%2583%258A%25E3%2583%25AB%25E3%2581%258B%25E3%2582%2589%25E5%25AE%259F%25E8%25A1%258C%25E7%2594%25A8%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Kazuhide%2520Oki%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y1MzU3MDc4NmMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Yourstand%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MDc4b2RaZHhabTZhUGg1cW1LZFMyeTM1SHF2Z2x1dGFkZ2YyMzlNekU9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kazuhide Oki</dc:creator></item><item><title><![CDATA[ase2ttf - Asepriteからフォントを作成するツール]]></title><description><![CDATA[Asepriteファイルからフォントを作成するためのツール「ase2ttf」をリリースしました！
+
+https://ase2ttf.com/
+上のサイトを使って簡単にピクセルフォントが作成できます。また、あわせてコマンドラインから同等の機能を扱えるように専用のCLIツールを配布しているほか、Rustで書かれたCLIツールおよびコア部分をOSSとして公開しています。
+https://github.com/nuskey8/ase2ttf
+使い方に関してはnoteの方で詳しく解説しているので、そちらを参考にしていただけると。
+https://note.com/nuskey/n/ne2db297...]]></description><link>https://zenn.dev/nuskey/articles/service-ase2ttf</link><guid isPermaLink="true">https://zenn.dev/nuskey/articles/service-ase2ttf</guid><pubDate>Mon, 07 Jul 2025 09:48:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zpiBNbbv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ase2ttf%2520-%2520Aseprite%25E3%2581%258B%25E3%2582%2589%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nuskey%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZkZTM4NWZlYWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nuskey</dc:creator></item><item><title><![CDATA[ABC413: Rustで解く！問題解説]]></title><description><![CDATA[AtCoder Beginner Contest 413のA-E問題をRustで解いた際の解法をまとめました。
+
+ A 問題
+問題
+https://atcoder.jp/contests/abc413/tasks/abc413_a
+解説
+N 個の品物がサイズ M に全て入るかどうかを判定する問題です。
+各荷物のサイズを表す配列 A の要素をすべて合計し、その合計値が M 以下であれば Yes 、そうでなければ No を出力します。
+コード
+
+abc413a.rs
+use proconio::input;
+
+fn main() {
+    // 入力
+    input! {
+      ...]]></description><link>https://zenn.dev/nakst_hide/articles/578912bbd27863</link><guid isPermaLink="true">https://zenn.dev/nakst_hide/articles/578912bbd27863</guid><pubDate>Sun, 06 Jul 2025 23:03:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wG3NMTqj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ABC413%253A%2520Rust%25E3%2581%25A7%25E8%25A7%25A3%25E3%2581%258F%25EF%25BC%2581%25E5%2595%258F%25E9%25A1%258C%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakahide%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YkMxNEpSQnNET01hTGcxTVRQWGNTWS1qYlNQbFRMQTN3ZU9Sdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakahide</dc:creator></item><item><title><![CDATA[構造を理解した AI ファーストな差分ツール「diffx」を、Claude Code と Rust で作ってリリースしました]]></title><description><![CDATA[―― ケツカンマで消耗するのは、もうやめよう ――
+
+プログラミング中に JSON、YAML などの設定ファイルを git diff で確認するとき、もどかしさを感じたことはありませんか！？
+キーの順番が変わっただけなのに、大量の差分と判定されたり。
+たかがインデントの変更！　ケツカンマ！
+従来の diff ツールはテキストを行単位で比較するため、データの「構造」までは理解してくれません。
+小さなストレス。されど、毎日積もる。
+「もっと賢く、構造を理解した diff ツールが欲しい！」
+……と思ったときには、すでに行動は終わっていたんだ！　怒り駆動開発！
+https://github.c...]]></description><link>https://zenn.dev/kako_jun/articles/1d518f47225f42</link><guid isPermaLink="true">https://zenn.dev/kako_jun/articles/1d518f47225f42</guid><pubDate>Sun, 06 Jul 2025 04:39:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--y9rQrsUw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%25A7%258B%25E9%2580%25A0%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%259F%2520AI%2520%25E3%2583%2595%25E3%2582%25A1%25E3%2583%25BC%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25AA%25E5%25B7%25AE%25E5%2588%2586%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2580%258Cdiffx%25E3%2580%258D%25E3%2582%2592%25E3%2580%2581Claude%2520Code%2520%25E3%2581%25A8%2520Rust%2520%25E3%2581%25A7%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2583%25AA%25E3%2583%25AA%25E3%2583%25BC...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kako-jun%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFmNzk3NTk4OWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kako-jun</dc:creator></item><item><title><![CDATA[RustでUDPを簡単に実装する]]></title><description><![CDATA[
+ はじめに
+rustでUDPを実装してみます。
+
+ マシンスペック
+MacBook Air M2 arm64
+
+ 事前知識
+
+ UDPとは
+UDPとはOSI参照モデルのトランスポート層のプロトコルです。
+
+トランスポート層では、TCPとUDPの代表的なプロトコルがあります。
+TCPは信頼性のある通信、UDPは同報通信すなわちブローだキャストなど、一方的に相手に送りつける通信と捉えていただけると良いと思います。
+TCPがコネクション型の通信、UDPはコネクションレス型の通信になります。TCPとUDPに甲乙はつけ難いのですが、用途によって使い分けます。
+TCPでは、オンデマンドの動画配信な...]]></description><link>https://zenn.dev/ka_kan/articles/00abadaa6ad2ef</link><guid isPermaLink="true">https://zenn.dev/ka_kan/articles/00abadaa6ad2ef</guid><pubDate>Sun, 06 Jul 2025 00:10:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Wb29ArLZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7UDP%25E3%2582%2592%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kanda%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlOGJhYTMxOGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kanda</dc:creator></item><item><title><![CDATA[php-node で PHP スクリプトを実行する]]></title><description><![CDATA[
+ 序文
+php-node は PHP スクリプトを Node.js アプリの一部として実行できるようにするツールです。サーバーサイドの Node.js アプリを新規開発しながら既存の PHP スクリプトを流用することができます。PHP アプリを開発するためだけの HTTP サーバーを作ることもできます。php-node の開発には Rust の napi-rs と ext-php-rs が使われています。
+
+ この記事から学べること
+リクエストをもとにレスポンスを生成するハンドラーの使い方、PHP スクリプトを実行する CLI ツールや HTTP サーバー、グローバルコマンドの作成方法...]]></description><link>https://zenn.dev/masakielastic/articles/20250705-php-node</link><guid isPermaLink="true">https://zenn.dev/masakielastic/articles/20250705-php-node</guid><pubDate>Fri, 04 Jul 2025 22:53:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6kkI1Ves--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:php-node%2520%25E3%2581%25A7%2520PHP%2520%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2582%2592%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masaki%2520Kagaya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc3ODAxZTNiZTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masaki Kagaya</dc:creator></item><item><title><![CDATA[Rustに入門したので構造体のアライメントとパッキングの状態を明らかにする]]></title><description><![CDATA[
+ はじめに
+前回、Rustに入門した記事を書きました。
+https://zenn.dev/ka_kan/articles/2664adeb06a89b
+Rustが手に馴染んでいないので、構造体の実情について深掘りしてみます。
+
+ マシンスペック
+MacBook Air M2 arm64
+
+ 事前知識
+
+ 構造体
+過去の記事にまとめていますので下記をご覧ください。
+https://zenn.dev/ka_kan/articles/60801aed05f5ec
+
+ 準備
+
+ Dockerのセットアップ・接続
+mkdir rust-align &amp;&amp; cd rust-align...]]></description><link>https://zenn.dev/ka_kan/articles/bd46d563420b36</link><guid isPermaLink="true">https://zenn.dev/ka_kan/articles/bd46d563420b36</guid><pubDate>Fri, 04 Jul 2025 21:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_RS1ixke--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AB%25E5%2585%25A5%25E9%2596%2580%25E3%2581%2597%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E6%25A7%258B%25E9%2580%25A0%25E4%25BD%2593%25E3%2581%25AE%25E3%2582%25A2%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25A8%25E3%2583%2591%25E3%2583%2583%25E3%2582%25AD%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AE%25E7%258A%25B6%25E6%2585%258B%25E3%2582%2592%25E6%2598%258E%25E3%2582%2589%25E3%2581%258B%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kanda%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlOGJhYTMxOGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kanda</dc:creator></item></channel></rss>

@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 14 Jul 2025 02:04:54 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Session 5 — East US に gpt-4o-mini を Standard でデプロイしてみた]]></title><description><![CDATA[
+ TL;DR
+
+
+Japan East は Standard でのデプロイは未対応だったので、East US に Standard で gpt-4o-mini をデプロイ
+
+.env に KEY/ENDPOINT を保存 → Hello! 応答確認
+かかったコストは 8 k / 1.7 k tok ≒ ¥0.33 （ほぼタダ！）
+
+
+
+ 1. 今回のゴール
+
+
+
+項目
+内容
+
+
+
+
+モデル
+gpt-4o-mini (Standard SKU, Pay-go)
+
+
+リージョン
+East US
+
+
+デプロイ名
+mini
+
+
+成果物
+
+.env, hello_mini.py, スクショ 3 ...]]></description><link>https://zenn.dev/masau/articles/2025-07-14-session5</link><guid isPermaLink="true">https://zenn.dev/masau/articles/2025-07-14-session5</guid><pubDate>Mon, 14 Jul 2025 00:40:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eYbHFtq8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Session%25205%2520%25E2%2580%2594%2520East%2520US%2520%25E3%2581%25AB%2520gpt-4o-mini%2520%25E3%2582%2592%2520Standard%2520%25E3%2581%25A7%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:MasaU_Tech%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4NTZmODk1MmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>MasaU_Tech</dc:creator></item><item><title><![CDATA[SQLAlchemyのSessionとTransaction：add, flush, commit, refreshの使い分け]]></title><description><![CDATA[
+ はじめに
+SQLAlchemyは、Pythonでデータベースを扱う際の強力なORM（Object-Relational Mapper）です。その中でもSessionオブジェクトは、データベースとの対話の中心的な役割を担います。しかし、Sessionが提供するadd(), flush(), commit(), refresh()といったメソッドは、一見すると似たような働きをするため、その違いや使い分けを正確に理解するのは難しいかもしれません。
+特に、これらのメソッドがデータベースのトランザクションとどのように関連しているかを理解することは、データの一貫性を保ち、意図しないバグを防ぐ上で...]]></description><link>https://zenn.dev/kromiii/articles/8af1d7bc73ae92</link><guid isPermaLink="true">https://zenn.dev/kromiii/articles/8af1d7bc73ae92</guid><pubDate>Sun, 13 Jul 2025 23:30:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TzNpDtOc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SQLAlchemy%25E3%2581%25AESession%25E3%2581%25A8Transaction%25EF%25BC%259Aadd%252C%2520flush%252C%2520commit%252C%2520refres...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroyuki%2520Kuromiya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM4ZWM5ZDUwMDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroyuki Kuromiya</dc:creator></item><item><title><![CDATA[MemOS：LLMに長期記憶を与える次世代メモリ管理システムの実装と活用法]]></title><description><![CDATA[
+ MemOS：LLMに長期記憶を与える次世代メモリ管理システムの実装と活用法
+
+ 概要（なぜ注目すべきか）
+大規模言語モデル（LLM）の最大の課題の一つは、長期的な文脈や記憶の管理です。従来のLLMは、トークン制限により長い会話履歴や大量の情報を保持することが困難でした。
+MemOSは、この課題を解決する革新的なメモリ管理システムです。LLMに「長期記憶」を与えることで、より人間らしい対話や複雑なタスクの実行を可能にします。
+
+ 主な特徴・メリット
+MemOSの主要な特徴は以下の通りです：
+
+ 1. 階層的メモリ管理
+
+
+MemCubeと呼ばれる独自のデータ構造で記憶を効率的に管理
+T...]]></description><link>https://zenn.dev/yusuke_sato_eh/articles/06z71y-memos-llm</link><guid isPermaLink="true">https://zenn.dev/yusuke_sato_eh/articles/06z71y-memos-llm</guid><pubDate>Sun, 13 Jul 2025 17:57:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6Rs4jRbO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:MemOS%25EF%25BC%259ALLM%25E3%2581%25AB%25E9%2595%25B7%25E6%259C%259F%25E8%25A8%2598%25E6%2586%25B6%25E3%2582%2592%25E4%25B8%258E%25E3%2581%2588%25E3%2582%258B%25E6%25AC%25A1%25E4%25B8%2596%25E4%25BB%25A3%25E3%2583%25A1%25E3%2583%25A2%25E3%2583%25AA%25E7%25AE%25A1%25E7%2590%2586%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%25A8%25E6%25B4%25BB%25E7%2594%25A8%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:CEO%2540Engineers%2520Hub%2520...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjBXb3MtWm12c3Rhb0JVZXlmXzRDT2lJazNnVXFaaXVLNklIUnVjRmhIU3NKUVl3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>CEO@Engineers Hub Co. ,Ltd.</dc:creator></item><item><title><![CDATA[seleniumでプロキシを突破したい民]]></title><description><![CDATA[
+ 1.はじめに
+seleniumでwebドライバ自動ダウンロード時、プロキシ城を中々崩せずやっと無理やりこじ開けられたのでメモ。
+
+ 2.筆者バックグラウンド
+エンジニア歴5年目に入った32歳ポンコツなおっさん、AI系の会社からSES業界へ転職し、何でも屋さん的な立ち位置のお仕事中
+
+ 3.状況
++認証プロキシ環境でseleniumを使用していたらwebドライバの自動ダウンロードでエラー吐きまくり。手動でダウンロードすれば解決できるがいちいち面倒なので方法模索
++selenium-wireの使用など検索で上がっている方法は色々試したが上手くいかず・・・
+
+ 4.方法
+結局、seleni...]]></description><link>https://zenn.dev/kankitsu/articles/00d8afb5d58545</link><guid isPermaLink="true">https://zenn.dev/kankitsu/articles/00d8afb5d58545</guid><pubDate>Sun, 13 Jul 2025 13:03:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MZv2h_Lk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:selenium%25E3%2581%25A7%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25AD%25E3%2582%25B7%25E3%2582%2592%25E7%25AA%2581%25E7%25A0%25B4%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%25E6%25B0%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25AC%25E3%2583%25A2%25E3%2583%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YyYzQ4NWNlNjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>レモン</dc:creator></item><item><title><![CDATA[csvから連続でグラフ作成しJpeg画像で保存するPythonプログラム]]></title><description><![CDATA[
+ 概要
+フォルダ内のCSVファイルから簡易的なグラフ画像を連続で自動作成するPythonプログラムを作成した。
+例として大学研究室（半導体デバイス系など）の測定機器（電気特性など）において、生データの簡易的なデータ確認の際での利用を想定している。
+
+ 背景及び使用用途
+半導体デバイス系の研究室において電気特性測定後のデータまとめに苦労することがあった。各測定ポイントごとの測定データがCSVファイル形式で出力され、手作業で波形グラフを作成しデータを確認する作業である。要求を満たす最適条件が確認できればそのデータをもとに詳細な分析は手作業で行うが、その最適データであるかの簡易的な判断の為に...]]></description><link>https://zenn.dev/eito_assy/articles/22184cddcc9ac4</link><guid isPermaLink="true">https://zenn.dev/eito_assy/articles/22184cddcc9ac4</guid><pubDate>Sun, 13 Jul 2025 12:44:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--d82_iJ9H--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:csv%25E3%2581%258B%25E3%2582%2589%25E9%2580%25A3%25E7%25B6%259A%25E3%2581%25A7%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%2595%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597Jpeg%25E7%2594%25BB%25E5%2583%258F%25E3%2581%25A7%25E4%25BF%259D%25E5%25AD%2598%25E3%2581%2599%25E3%2582%258BPython%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2588%25E3%2581%2584%25E3%2581%25A8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0hEOWJ5Szc1R0ZkX3dYWHR0WjdLeFZual9sZmtncVBwQW5wSU43WllKODQ1WEtnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>えいと</dc:creator></item><item><title><![CDATA[【Python初心者完全攻略】データ型と変数をマスターしよう]]></title><description><![CDATA[
+ はじめに
+Pythonを学び始めた初心者の方が最初に出会う概念が、データ型（Data Types） と 変数（Variables)です。この記事では、Pythonの基本的なデータ型と変数を体系的に学習し、実際のコードを通して完全に理解できるようにサポートします。
+
+ 📚 目次
+
+数値型の完全理解
+文字列型をマスターする
+ブール型と論理演算
+変数の使い方とネーミング規則
+型変換の完全攻略
+実践例でスキルアップ
+
+
+
+ 数値型の完全理解
+
+ 整数型 (Integer)
+整数型は小数点のない数値を意味します。
+# 整数型の例
+age = 25
+score = 100
+negative_nu...]]></description><link>https://zenn.dev/hyeon_marina247/articles/063831ba847fef</link><guid isPermaLink="true">https://zenn.dev/hyeon_marina247/articles/063831ba847fef</guid><pubDate>Sun, 13 Jul 2025 12:37:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Zvjq6tzP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%25AE%258C%25E5%2585%25A8%25E6%2594%25BB%25E7%2595%25A5%25E3%2580%2591%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%259E%258B%25E3%2581%25A8%25E5%25A4%2589%25E6%2595%25B0%25E3%2582%2592%25E3%2583%259E%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hyeon%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IzNzUyOTRmNGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hyeon</dc:creator></item><item><title><![CDATA[if文なしで値や処理を切り替え｜条件付きスイッチ機能を追加]]></title><description><![CDATA[コードが前回投稿したライブラリtriggonの PyPI インストール数が、ついに 500 を超えました！
+↓ 基本的な使い方を紹介した記事はこちら
+If文(条件分岐)なしで処理を自動で切り替えるPythonライブラリを開発
+今回は、次回のアップデートで追加予定の新機能の1つをご紹介します。
+このライブラリは、トリガーポイントを通過すると、対応するラベルの値などが切り替わるものです。今回のアップデートにより、関数に「条件式」を渡してトリガーを制御することができるようになります。
+
+ サンプルコード（実装予定）
+(READMEから抜粋)
+tg = Triggon("A", True)
+
+d...]]></description><link>https://zenn.dev/tsuruko/articles/a9c3bcadbcfd17</link><guid isPermaLink="true">https://zenn.dev/tsuruko/articles/a9c3bcadbcfd17</guid><pubDate>Sun, 13 Jul 2025 12:13:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ocnk3IRk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:if%25E6%2596%2587%25E3%2581%25AA%25E3%2581%2597%25E3%2581%25A7%25E5%2580%25A4%25E3%2582%2584%25E5%2587%25A6%25E7%2590%2586%25E3%2582%2592%25E5%2588%2587%25E3%2582%258A%25E6%259B%25BF%25E3%2581%2588%25EF%25BD%259C%25E6%259D%25A1%25E4%25BB%25B6%25E4%25BB%2598%25E3%2581%258D%25E3%2582%25B9%25E3%2582%25A4%25E3%2583%2583%25E3%2583%2581%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E8%25BF%25BD%25E5%258A%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tsuruko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E3ZmU0MDBjMGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tsuruko</dc:creator></item><item><title><![CDATA[USD(Universal Scene Description)をローカルビルドして、Viewerをカスタムしてみる]]></title><description><![CDATA[
+ はじめに
+USD(Universal Scene Description)Viewerを触ることがあったので、色々まとめたいと思います。
+会社でUSD Viewerを導入するにあたって、まずは手始めにスタンドアローンでプレビューするのに使ったり。または、モジュールとして組み込みで使える様になどを行っていました。
+最初は訳わかんなった（ビルド）ですけど、僕みたいなエンジニアではない人や、USDこれから触ろうとしている人に向けて記録として残しておきます。
+ゴールとしては、ビルドしたものをカスタムしてViewerをコントロールするところまでとします。
+とりあえず、サンプルのデータ見てみたい...]]></description><link>https://zenn.dev/testkun08080/articles/python-usdview-a51e8bdf7222cf</link><guid isPermaLink="true">https://zenn.dev/testkun08080/articles/python-usdview-a51e8bdf7222cf</guid><pubDate>Sun, 13 Jul 2025 08:50:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--i28XJBEe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:USD%2528Universal%2520Scene%2520Description%2529%25E3%2582%2592%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E3%2581%2597%25E3%2581%25A6%25E3%2580%2581Viewer%25E3%2582%2592%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25A0%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:testkun08080%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYxMjE5ZTQ2YzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>testkun08080</dc:creator></item><item><title><![CDATA[AI×個人開発で3週間！ゲーム履歴サービスを爆速で作った記録と学び]]></title><description><![CDATA[!
+この記事は、Qiitaで公開した記事をベースに、技術的な背景や開発プロセスでの学びを大幅に加筆・再構成したものです。
+
+
+ 序章：なぜ、「遊んだ記憶」は消えてしまうのか？
+「FF5はリメイク作品何本あって、それのうちどれを遊んだっけ…？」
+「あのヒトは本当にゲームに詳しいけど、どれくらいゲームを遊んでるんだろう？」
+ファミコン、PS2、Switch、ゲームセンター… 無数に散らばるゲームプレイの経験、あなたはどう記録していますか？その曖昧な記憶を形として残せるようにしたい。その衝動に突き動かされて、AIを相棒にたった3週間でゲーム履歴サービス「YouPlayed」を作って公開しました...]]></description><link>https://zenn.dev/fukudakz/articles/1fcfa5f791ec6c</link><guid isPermaLink="true">https://zenn.dev/fukudakz/articles/1fcfa5f791ec6c</guid><pubDate>Sun, 13 Jul 2025 08:17:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_OtNRbRc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AI%25C3%2597%25E5%2580%258B%25E4%25BA%25BA%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25A73%25E9%2580%25B1%25E9%2596%2593%25EF%25BC%2581%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E5%25B1%25A5%25E6%25AD%25B4%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%25E3%2582%2592%25E7%2588%2586%25E9%2580%259F%25E3%2581%25A7%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E8%25A8%2598%25E9%258C%25B2%25E3%2581%25A8%25E5%25AD%25A6%25E3%2581%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:fukudakz%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0NEQ1o5eFM3VlBVODdqNmcteS1rTkswV0NpV3FGRmlTalhQT2VBdTRXaEl5b2pYQmI9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>fukudakz</dc:creator></item><item><title><![CDATA[Python、Django でブログ実装（こつこつ③コメントを書けるようにする、ちょっとデータベースいじり）]]></title><description><![CDATA[今回は、投稿した記事にコメントを書けるようにしよーと思います！
+それでは、ごー♪
+
+ 前回までの記事
+前回
+https://zenn.dev/animalz/articles/71771ba84fc3bd
+前々回
+https://zenn.dev/animalz/articles/30f1cd844a57bf
+
+ 前回までのプロジェクト（コード）
+GitHub: https://github.com/Animalyzm/mikoto_project
+今回のプロジェクトは、django/blog です。
+Git のコミット･メッセージ
+前回: django_blog_2_bugfix
+前々...]]></description><link>https://zenn.dev/animalz/articles/3ef5e6ad182da5</link><guid isPermaLink="true">https://zenn.dev/animalz/articles/3ef5e6ad182da5</guid><pubDate>Sun, 13 Jul 2025 08:06:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2fZHith7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2580%2581Django%2520%25E3%2581%25A7%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%25E5%25AE%259F%25E8%25A3%2585%25EF%25BC%2588%25E3%2581%2593%25E3%2581%25A4%25E3%2581%2593%25E3%2581%25A4%25E2%2591%25A2%25E3%2582%25B3%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592%25E6%259B%25B8%25E3%2581%2591%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E3%2580%2581%25E3%2581%25A1%25E3%2582%2587%25E3%2581%25A3%25E3%2581%25A8%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%2599%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%2584%25E3%2581%2598%25E3%2582%258A%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2581%25AB%25E3%2581%25BE%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk0ZTA2MDVlMTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あにまる</dc:creator></item><item><title><![CDATA[外部からTeamsのチャネルに投稿する方法]]></title><description><![CDATA[
+ はじめに
+
+紹介する仕組みの構成図
+企業のコミュニケーションツールとして、SlackとMicrosoft Teamsは二大巨頭として君臨しています。Slackへの外部連携は比較的オープンで、多くの開発者がBot開発やAPI連携を活用していますが、Teamsはどうでしょうか？
+実は、多くの企業（特に大企業）では、セキュリティポリシーによりTeamsへの外部連携が厳しく制限されています。アプリのインストールには管理者承認が必要だったり、そもそも外部アプリの利用が禁止されていたり...そんな経験はありませんか？
+しかし、Incoming Webhookなら話は別です。これはTeamsの標準...]]></description><link>https://zenn.dev/acntechjp/articles/50fe12c9902e60</link><guid isPermaLink="true">https://zenn.dev/acntechjp/articles/50fe12c9902e60</guid><pubDate>Sun, 13 Jul 2025 04:18:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BoOn7S8c--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25A4%2596%25E9%2583%25A8%25E3%2581%258B%25E3%2582%2589Teams%25E3%2581%25AE%25E3%2583%2581%25E3%2583%25A3%25E3%2583%258D%25E3%2583%25AB%25E3%2581%25AB%25E6%258A%2595%25E7%25A8%25BF%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2583%259E%25E3%2583%2583%25E3%2582%25B5%25E3%2583%25B3%2520%2528Masanori%2520Yos...%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U2ZDA4MDY5ODcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Accenture%2520Japan%2520%2528%25E6%259C%2589%25E5%25BF%2597%2529%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5MzkwNDBmYjYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>マッサン (Masanori Yoshida)</dc:creator></item><item><title><![CDATA[【Streamlitコンポーネント開発】アコーディオンメニューを作った話]]></title><description><![CDATA[
+ 前置き
+こんにちは、データエンジニアの山口歩夢です。
+Streamlitは、Pythonでデータサイエンスや機械学習向けのWebアプリケーションを素早く構築できるフレームワークです。シンプルなPythonコードだけでWebアプリが作れる手軽さが魅力で、開発者にとって非常に便利なツールです。
+一方でその手軽さゆえに、複雑なUI構築や細かなデザイン調整が難しいという課題もあります。標準ウィジェットだけでは、痒いところに手が届かないことも少なくありません。
+そんなときに活躍するのが、Streamlitカスタムコンポーネントです。HTML、CSS、JavaScriptを組み合わせて独自の要素...]]></description><link>https://zenn.dev/gussan_a/articles/54eefc0d9e0ada</link><guid isPermaLink="true">https://zenn.dev/gussan_a/articles/54eefc0d9e0ada</guid><pubDate>Sun, 13 Jul 2025 03:52:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZRg8Wv29--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Streamlit%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25B3%25E3%2583%2588%25E9%2596%258B%25E7%2599%25BA%25E3%2580%2591%25E3%2582%25A2%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25AA%25E3%2583%25B3%25E3%2583%25A1%25E3%2583%258B%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25B1%25B1%25E5%258F%25A3%25E6%25AD%25A9%25E5%25A4%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IzZWQyMjkxYjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>山口歩夢</dc:creator></item><item><title><![CDATA[image to テキスト・ドット絵 converter [python]]]></title><description><![CDATA[画像ファイルをテキストのドット絵にするスクリプトです。
+固定幅フォントの縦横比が、2:1なので、ピクセルがない場合はSpace、上半分にある場合は'、下半分にある場合は.、両方にある場合は:にします。
+from PIL import Image
+import sys
+
+class Main:
+    def __init__(self, path, r=50):
+        image = Image.open(path)
+        width, height = image.size
+        image = image.resize((width//r, height...]]></description><link>https://zenn.dev/fygar256/articles/181182444aecbb</link><guid isPermaLink="true">https://zenn.dev/fygar256/articles/181182444aecbb</guid><pubDate>Sun, 13 Jul 2025 03:40:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Wy3RAlRa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:image%2520to%2520%25E3%2583%2586%25E3%2582%25AD%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BB%25E3%2583%2589%25E3%2583%2583%25E3%2583%2588%25E7%25B5%25B5%2520converter%2520%255Bpython%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:fygar256%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHY3TGluV3VfOE1nWmFqMFBpdVU3VlViZjRmYTlIeHFXbEpDTU10M3lkY1VOakhOVEo9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>fygar256</dc:creator></item><item><title><![CDATA[MCP ServerをPostmanでサクッとテストする（CloudRun x Pulumi x FastMCP）]]></title><description><![CDATA[
+ はじめに
+主要なAPI開発プラットフォームであるPostman に MCP (Model Context Protocol) サーバーをテストする機能が追加されました。これにより、自作のMCPサーバーの動作確認が格段に手軽になっています。
+この記事では、Zennの記事を取得する簡単なMCPサーバーをFastMCPで作成し、Google Cloud Runにデプロイ、そしてPostmanでテストするまでの一連の流れをハンズオン形式で解説します。インフラの構築にはPulumiを使用し、IaC (Infrastructure as Code) を実践していきます。
+今回作成したリポジトリは...]]></description><link>https://zenn.dev/sonicmoov/articles/5654926a8ff2f2</link><guid isPermaLink="true">https://zenn.dev/sonicmoov/articles/5654926a8ff2f2</guid><pubDate>Sun, 13 Jul 2025 03:07:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--U1Y7U4PV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:MCP%2520Server%25E3%2582%2592Postman%25E3%2581%25A7%25E3%2582%25B5%25E3%2582%25AF%25E3%2583%2583%25E3%2581%25A8%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%25EF%25BC%2588CloudRun%2520x%2520Pulumi%2520x%2520FastMCP%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:takemo101%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0YjYwNGE3MzguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25BD%25E3%2583%258B%25E3%2583%2583%25E3%2582%25AF%25E3%2583%25A0%25E3%2583%25BC%25E3%2583%2596%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q3NDBmZGFmNmIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takemo101</dc:creator></item><item><title><![CDATA[Pythonにおける`is`と`==`の挙動の違い]]></title><description><![CDATA[
+ is と == の違い
+Pythonにおける is と == は、どちらも比較演算子だが、その役割は異なる。この違いを理解していないと、意図しない挙動を引き起こす可能性があるため、その挙動と使い分けを明確にしておく。
+
+ ==：等価性の比較
+== 演算子は、2つのオブジェクトの**値が等しいかどうか（等価性, equality）**を比較する。
+# 数値の比較
+a = 100
+b = 100
+print(f"a == b: {a == b}") # True
+
+# リストの比較
+list_a = [1, 2, 3]
+list_b = [1, 2, 3]
+print(f"list_a ...]]></description><link>https://zenn.dev/kromiii/articles/d42f4370c9b252</link><guid isPermaLink="true">https://zenn.dev/kromiii/articles/d42f4370c9b252</guid><pubDate>Sun, 13 Jul 2025 02:16:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Zp9QSx-u--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%2560is%2560%25E3%2581%25A8%2560%253D%253D%2560%25E3%2581%25AE%25E6%258C%2599%25E5%258B%2595%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroyuki%2520Kuromiya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM4ZWM5ZDUwMDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroyuki Kuromiya</dc:creator></item><item><title><![CDATA[【2分探索】 ~ 境界探索の実装まで ~]]></title><description><![CDATA[
+ はじめに
+今回の記事のテーマは２分探索です。競技プログラミングでたまに実装するので、発展した問題まで対応できる考え方・実装を考えます。
+
+ ２分探索
+探索対象が単調列になっている時に使用することができます。計算量がO(log(N))であり、線形探索O(N)と比べて非常に高速です。
+
+ 問題
+配列 li = [1,2,9,18,29,34,44,51,71,98]があります。
+1. ある値xのインデックスを求めてください。
+2. ある値x以上の最小の数のインデックスを求めてください。
+3. ある値xより大きい最小の数のインデックスを求めてください。
+このような問題に対しての実装を考えま...]]></description><link>https://zenn.dev/ahiru75/articles/4e0c7628e81d56</link><guid isPermaLink="true">https://zenn.dev/ahiru75/articles/4e0c7628e81d56</guid><pubDate>Sat, 12 Jul 2025 21:36:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--17XXFShf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%25902%25E5%2588%2586%25E6%258E%25A2%25E7%25B4%25A2%25E3%2580%2591%2520%7E%2520%25E5%25A2%2583%25E7%2595%258C%25E6%258E%25A2%25E7%25B4%25A2%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%25BE%25E3%2581%25A7%2520%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ichikawa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHJFZC02bXhORUxxUExvcGk2WlppOGdjV3dXQXVybXNJU2pVX2lULVpQYTRweEdOOXI9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ichikawa</dc:creator></item><item><title><![CDATA[マスタテーブルをEnumで管理！]]></title><description><![CDATA[
+ マスタテーブルをEnumで管理！
+
+ やりたいこと
+
+マスタテーブルをEnumで管理したい
+マスタテーブルにある表示用の文字列は動的にEnumに追加したい
+
+
+ イメージ
+
+ マスタテーブル
+
+よくあるステータスを管理するマスタテーブル。
+↓入ってる値の例↓
+
+
+
+
+id
+display_name
+
+
+
+
+1
+有効
+
+
+2
+無効
+
+
+
+
+ Enumでやりたいことのイメージ
+class Status(Enum):
+    ACTIVE = 1, "有効"  # ←この`有効`という値はDBから取得したい
+    INACTIVE = 2, "無効"
+
+ただし、上記では実現できない
+
+
+...]]></description><link>https://zenn.dev/shuhei5368/articles/cfabfcd57e2323</link><guid isPermaLink="true">https://zenn.dev/shuhei5368/articles/cfabfcd57e2323</guid><pubDate>Sat, 12 Jul 2025 11:16:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iltlaWi9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259E%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%2586%25E3%2583%25BC%25E3%2583%2596%25E3%2583%25AB%25E3%2582%2592Enum%25E3%2581%25A7%25E7%25AE%25A1%25E7%2590%2586%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shuhei5368%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg4NzZjOGZmOWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shuhei5368</dc:creator></item><item><title><![CDATA[非可逆圧縮はどのくらいで劣化するのか]]></title><description><![CDATA[
+ はじめに
+JPEGを上書き保存し続けると画像が劣化する"という話を聞いたことがありますか？では、一体何回繰り返すと、どのくらい劣化するのでしょうか？
+今回はその劣化の限界を探るため、jpgで画像コーデックを何度も再圧縮し続けて品質の劣化を観測します。
+
+ マシンスペック
+MacBook Air M2 arm64
+
+ 事前知識
+
+ 可逆圧縮
+圧縮したデータを解凍する際に、データを元に戻せる場合は可逆圧縮と言います。品質の劣化がなく、元に戻せることです。
+
+ 非可逆圧縮
+圧縮したデータを解凍する際に、一部のデータが欠損してしまう（＝元に戻らない）ことです。
+
+ 今回の実験
+
+ 準備
+
+ ...]]></description><link>https://zenn.dev/ka_kan/articles/594512ea86bce5</link><guid isPermaLink="true">https://zenn.dev/ka_kan/articles/594512ea86bce5</guid><pubDate>Sat, 12 Jul 2025 08:39:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ATK-ympk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%259D%259E%25E5%258F%25AF%25E9%2580%2586%25E5%259C%25A7%25E7%25B8%25AE%25E3%2581%25AF%25E3%2581%25A9%25E3%2581%25AE%25E3%2581%258F%25E3%2582%2589%25E3%2581%2584%25E3%2581%25A7%25E5%258A%25A3%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%25E3%2581%25AE%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kanda%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlOGJhYTMxOGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kanda</dc:creator></item><item><title><![CDATA[リアルタイムのコードベースインデックス作成]]></title><description><![CDATA[このブログでは、CocoIndex を使ってRAGのためのコードベースのインデックス作成方法をご紹介します。
+CocoIndexは、ネイティブのTree-sitterサポートとリアルタイム更新機能を備えた、コードベースのチャンク化を標準でサポートしています。
+
+内部的にインクリメンタル処理（変更があった部分のみ再処理）を採用しているため、インデックスはほぼリアルタイムで更新されます。
+たとえばコードエディタのような、変更通知を直接プッシュするソースと連携すれば、完全なリアルタイム化も可能です。
+この仕組みはコード検索アプリケーションや、低遅延が求められるAIコード生成システムに関連コンテ...]]></description><link>https://zenn.dev/badmonster/articles/54cae695cc6644</link><guid isPermaLink="true">https://zenn.dev/badmonster/articles/54cae695cc6644</guid><pubDate>Sat, 12 Jul 2025 08:34:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jbxiQS_R--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AA%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2583%2599%25E3%2583%25BC%25E3%2582%25B9%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2587%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E4%25BD%259C%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:BadMonster%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0tnNmhDWmNITUdEamFtN3VSYVlOekpDWF8yRnBZYWN2TmNxQmRHdzBXUzlVbXVYVT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>BadMonster</dc:creator></item><item><title><![CDATA[Pythonを高速化するための簡単テクニック集【AI時代の必須知識】]]></title><description><![CDATA[AI時代ということで、みなさんPythonを使っていますよね。
+Pythonは書きやすく、ライブラリも豊富でAI開発に非常に適しています。ただし、CやRustなどのコンパイル言語と比べると、どうしても処理速度で劣ってしまいます。
+もちろん、CythonやmypycのようにPythonコードを高速化する手段もありますが、すべてのケースに万能というわけではありません。
+そこで本記事では、Pythonコードを簡単に高速化できるテクニックを厳選して紹介します！
+
+ 1. 組み込み関数を使用する
+まさか、リスト内に値があるか確認するのに for 文を使っていませんよね？
+import time
+
+...]]></description><link>https://zenn.dev/ydai20/articles/f95c40d21aedec</link><guid isPermaLink="true">https://zenn.dev/ydai20/articles/f95c40d21aedec</guid><pubDate>Sat, 12 Jul 2025 07:48:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0dBOwM28--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2582%2592%25E9%25AB%2598%25E9%2580%259F%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E7%25B0%25A1%25E5%258D%2598%25E3%2583%2586%25E3%2582%25AF%25E3%2583%258B%25E3%2583%2583%25E3%2582%25AF%25E9%259B%2586%25E3%2580%2590AI%25E6%2599%2582%25E4%25BB%25A3%25E3%2581%25AE%25E5%25BF%2585%25E9%25A0%2588%25E7%259F%25A5%25E8%25AD%2598%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Neosophia%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA1ZGQxYTJlYWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Neosophia</dc:creator></item></channel></rss>
