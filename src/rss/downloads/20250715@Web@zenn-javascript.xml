@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 15 Jul 2025 04:48:43 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Nest.js一旦ここだけ抑えとこ]]></title><description><![CDATA[
+ Nest.js の特徴ざっくり
+
+TypeScript 前提
+Angular 風の構成（Module / Controller / Service）
+DI（依存性注入）が強力
+Express または Fastify を内部で使用
+CLI が便利（nest コマンド）
+
+
+ 最低限知っておくべき構成要素
+
+ 1. Module（モジュール）
+Nest.js は モジュール単位で構成されます。@Module() デコレーターで定義します。
+// app.module.ts
+@Module({
+  imports: [],
+  controllers: [AppController],
+ ...]]></description><link>https://zenn.dev/somuramoto/articles/3fb763a3e9bc7c</link><guid isPermaLink="true">https://zenn.dev/somuramoto/articles/3fb763a3e9bc7c</guid><pubDate>Tue, 15 Jul 2025 01:10:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7jWm_ga7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Nest.js%25E4%25B8%2580%25E6%2597%25A6%25E3%2581%2593%25E3%2581%2593%25E3%2581%25A0%25E3%2581%2591%25E6%258A%2591%25E3%2581%2588%25E3%2581%25A8%25E3%2581%2593%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:So%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI5YjkwYjA1MDkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>So</dc:creator></item><item><title><![CDATA[【javascript】iFrameの高さを動的に変える方法]]></title><description><![CDATA[
+ はじめに
+大手SIerでWEBアプリエンジニアとして働くNaotoです！
+今回は画面でiFrameを使った際に私が躓いた内容と解決方法を共有させていただきます！！
+
+ iFrameの高さが固定されてイケてない
+iFrameでコンテンツを画面内に組み込む際によく直面する問題として、高さ制御が挙げられます。iFrameの高さは特に指定していない場合、内部のコンテンツがレンダリングされたタイミングで自動調整してくれます。
+ですが、内部のコンテンツにドリルダウンやアコーディオンなどの動的要素があった場合、無駄な余白が生じたり、高さが足りずにiFrame内でスクロールが発生してしまいます。
+今...]]></description><link>https://zenn.dev/t_naoto/articles/98ffa3391b09cb</link><guid isPermaLink="true">https://zenn.dev/t_naoto/articles/98ffa3391b09cb</guid><pubDate>Tue, 15 Jul 2025 00:20:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8KvnMA6_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590javascript%25E3%2580%2591iFrame%25E3%2581%25AE%25E9%25AB%2598%25E3%2581%2595%25E3%2582%2592%25E5%258B%2595%25E7%259A%2584%25E3%2581%25AB%25E5%25A4%2589%25E3%2581%2588%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Naoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU3M2RjZjQzMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Naoto</dc:creator></item><item><title><![CDATA[React の基礎 〜主作用から見る React の役割〜]]></title><description><![CDATA[この記事は社内で実施した勉強会の一部を再編したものです。
+
+ はじめに
+React使ってますか？
+関わっているプロダクトで毎日書いているという人もいれば、普段フロントエンドを書かないので既存のコードをちょちょいと修正して終わりという人もいるかと思います。普段あまり意識していないかもしれませんが、Reactでは主作用と副作用をきっちり分けて考えることが非常に重要です。
+この記事ではReactの基礎について書きますが、その主作用に焦点を置いて 「Reactとは一体何なのか」 から解説します。
+
+ 主な対象読者
+
+Reactの基礎を学びたい初学者
+基礎を復習したい中級者
+「俺たちは雰囲気でRe...]]></description><link>https://zenn.dev/socialdog/articles/react-effect-basic</link><guid isPermaLink="true">https://zenn.dev/socialdog/articles/react-effect-basic</guid><pubDate>Mon, 14 Jul 2025 23:07:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aev4RzCD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%2520%25E3%2580%259C%25E4%25B8%25BB%25E4%25BD%259C%25E7%2594%25A8%25E3%2581%258B%25E3%2582%2589%25E8%25A6%258B%25E3%2582%258B%2520React%2520%25E3%2581%25AE%25E5%25BD%25B9%25E5%2589%25B2%25E3%2580%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%259F%25E3%2582%258D%25E3%2581%2590%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I2ZjYwOGI5M2MuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:SocialDog%2520TechBlog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEwZjg0M2YzMTcuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たろぐ</dc:creator></item><item><title><![CDATA[第5回 kintone カスタマイズをプラグイン化する]]></title><description><![CDATA[
+ kintone カスタマイズをプラグイン化する
+〜再利用性・共有性を高める実装〜
+
+ はじめに
+前回までで、保守性と応用性を高めたJavaScriptカスタマイズが完成しました！
+今回は、そのカスタマイズをプラグイン化して、より使いやすく共有しやすい形にします。
+目標：カスタマイズをプラグイン化して、チーム全体で活用できる仕組みを作る
+これまでのカスタマイズは、JSEdit for kintoneプラグイン内にJavaScriptコードを書く形でした。
+今回は、独自のプラグインを作成することで、より柔軟で管理しやすい仕組みを構築します！
+これまでの成果：
+
+詳細画面・編集画面・新規作...]]></description><link>https://zenn.dev/chiquwagohan/articles/knt05-202507150700</link><guid isPermaLink="true">https://zenn.dev/chiquwagohan/articles/knt05-202507150700</guid><pubDate>Mon, 14 Jul 2025 22:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--l7yOdN7A--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25AC%25AC5%25E5%259B%259E%2520kintone%2520%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25BA%25E3%2582%2592%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A1%25E3%2581%258F%25E3%2582%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVjMWE0NGVmYWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ちくわ</dc:creator></item><item><title><![CDATA[Array.reduce()を使った重複排除と最新レコード抽出のテクニック]]></title><description><![CDATA[
+ はじめに
+データ処理でよくある課題として、「同じIDを持つレコードが複数存在する場合、最新のもののみを取得したい」というケースがあります。今回は、Array.reduce()を使った効率的な解決方法を紹介します。
+
+ 実際のケース：リトライ処理での最新レコード抽出
+
+ 問題設定
+以下のような「商品の処理履歴データ」があるとします：
+interface ProcessedItem {
+  productId: string;
+  retrySequence: number;  // 0=初回, 1=1回目再処理, 2=2回目再処理...
+  status: 'COMPLETED' | ...]]></description><link>https://zenn.dev/shigerufukada/articles/8fab727504091a</link><guid isPermaLink="true">https://zenn.dev/shigerufukada/articles/8fab727504091a</guid><pubDate>Mon, 14 Jul 2025 13:54:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nZ6hftRY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Array.reduce%2528%2529%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E9%2587%258D%25E8%25A4%2587%25E6%258E%2592%25E9%2599%25A4%25E3%2581%25A8%25E6%259C%2580%25E6%2596%25B0%25E3%2583%25AC%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E6%258A%25BD%25E5%2587%25BA%25E3%2581%25AE%25E3%2583%2586%25E3%2582%25AF%25E3%2583%258B%25E3%2583%2583%25E3%2582%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Fukada%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhmZGZhNTRjOGMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Fukada</dc:creator></item><item><title><![CDATA[【TS】公式ドキュメントから学ぶTypeScriptの概要]]></title><description><![CDATA[
+ はじめに
+
+ReactやNext.jsで良く出てくるから、TypeScriptを学ぼうと思いTypeScriptの公式ドキュメントを見たが、全部英語...
+「とりあえず入りの『Getting Start』を理解しないと始まらない！」そんな思いで筆者がドキュメントの内容を嚙み砕き、そこに独自で調べた内容を加えたものが、本記事の内容です。
+筆者はJSに触れたことがあるので、本記事の対象も自然とJSの経験者になる想定です、悪しからず...
+
+
+ 1. TypeScriptとは
+TypeScriptとはJavaScriptの機能はそのままに、Javaを始めとした静的コンパイラ言語のように型定...]]></description><link>https://zenn.dev/k__azuki/articles/090b46d78eadcf</link><guid isPermaLink="true">https://zenn.dev/k__azuki/articles/090b46d78eadcf</guid><pubDate>Mon, 14 Jul 2025 12:00:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6Y81BlvM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590TS%25E3%2580%2591%25E5%2585%25AC%25E5%25BC%258F%25E3%2583%2589%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2588%25E3%2581%258B%25E3%2582%2589%25E5%25AD%25A6%25E3%2581%25B6TypeScript%25E3%2581%25AE%25E6%25A6%2582%25E8%25A6%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258F%25E3%2582%2589%25E3%2581%2592%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IxNzdjYzRlNGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>くらげ</dc:creator></item><item><title><![CDATA[【JavaScript】Web APIインターフェースを使ってみた-其の3:FileReader・FileList]]></title><description><![CDATA[
+ このシリーズについて
+「JavaScriptのＷeb APIインターフェースにもっと詳しくなりたい」という思いの下、実際に使ってみたものを紹介しつつ有用性や活用する場面をまとめているシリーズです。
+※MDNで多数のAPIとそのインターフェースが公開されています。
+https://developer.mozilla.org/ja/docs/Web/API
+今回で3本目の記事ですね。
+
+ FileReader・FileList
+今回はファイルAPIのインターフェースの【FileReader】と【FileList】を取り上げます。
+https://developer.mozilla.org...]]></description><link>https://zenn.dev/inob/articles/263c3b0523ba98</link><guid isPermaLink="true">https://zenn.dev/inob/articles/263c3b0523ba98</guid><pubDate>Mon, 14 Jul 2025 09:53:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--APXblbk_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591Web%2520API%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%2595%25E3%2582%25A7%25E3%2583%25BC%25E3%2582%25B9%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F-%25E5%2585%25B6%25E3%2581%25AE3%253AFileReader%25E3%2583%25BBFileList%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:i-nob%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc2YzUzNTQyOGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>i-nob</dc:creator></item><item><title><![CDATA[「WebAssemblyによるフロントエンドの高速化：次世代のWebパフォーマンス」]]></title><description><![CDATA[
+ はじめに
+フロントエンド開発において、パフォーマンスは常に重要な課題です。特に複雑なアプリケーションやゲーム、動画編集ツールなどでは、JavaScriptだけでは限界を感じる場面も多いでしょう。そこで注目されているのが**WebAssembly（Wasm）**です。
+WebAssemblyは、ブラウザ上でネイティブに近い速度で実行できるバイナリ形式の技術で、C/C++、Rust、Goなどの言語で書かれたコードをWeb上で動作させることができます。本記事では、WebAssemblyの基本から実践的な活用方法まで解説します。
+
+
+ WebAssemblyとは？
+WebAssemblyは、...]]></description><link>https://zenn.dev/bafsos/articles/58d8656c21cad9</link><guid isPermaLink="true">https://zenn.dev/bafsos/articles/58d8656c21cad9</guid><pubDate>Mon, 14 Jul 2025 07:54:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5fTRTTvR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258CWebAssembly%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AE%25E9%25AB%2598%25E9%2580%259F%25E5%258C%2596%25EF%25BC%259A%25E6%25AC%25A1%25E4%25B8%2596%25E4%25BB%25A3%25E3%2581%25AEWeb%25E3%2583%2591%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%259E%25E3%2583%25B3%25E3%2582%25B9%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:bosriwalyy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUxRd1BrNW5kT0hKOFRDdHhtanZZdjlyM1BJdS05aWhNU3FNR0gyRU9tWHduV2NRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>bosriwalyy</dc:creator></item><item><title><![CDATA[AIと一緒に作る！農薬散布ドローン自律航行システムの開発体験記]]></title><description><![CDATA[
+ AIと一緒に作る！農薬散布ドローン自律航行システムの開発体験記
+
+ はじめに：AIって実はこんなに身近だった！
+「AIを使ったプログラミングって、すごく難しそう...」そう思っていませんか？実は、最新のAI技術を使えば、プログラミング初心者でも本格的なシステムを作ることができるんです！
+今回は、私がAI（Claude）の力を借りて、農薬散布ドローンの自律航行システムを開発した体験をシェアします。このシステムは、Google Mapsを使って田んぼの形を認識し、最大100機のドローンを効率的に制御して農薬散布を行うWebアプリケーションです。
+この記事を読めば、AIがどのようにプログラ...]]></description><link>https://zenn.dev/renue/articles/eb6c0ac3301c64</link><guid isPermaLink="true">https://zenn.dev/renue/articles/eb6c0ac3301c64</guid><pubDate>Mon, 14 Jul 2025 02:17:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BO3Le08J--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AI%25E3%2581%25A8%25E4%25B8%2580%25E7%25B7%2592%25E3%2581%25AB%25E4%25BD%259C%25E3%2582%258B%25EF%25BC%2581%25E8%25BE%25B2%25E8%2596%25AC%25E6%2595%25A3%25E5%25B8%2583%25E3%2583%2589%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25B3%25E8%2587%25AA%25E5%25BE%258B%25E8%2588%25AA%25E8%25A1%258C%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2581%25AE%25E9%2596%258B%25E7%2599%25BA%25E4%25BD%2593%25E9%25A8%2593%25E8%25A8%2598%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:renue%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QyMTQ0YTkzZjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>renue</dc:creator></item><item><title><![CDATA[第4回 保守性と応用性を高める工夫]]></title><description><![CDATA[
+ 保守性と応用性を高める工夫
+〜UI変更への対応と他要素への応用〜
+
+ はじめに
+前回までで、詳細画面・編集画面・新規作成画面で「アプリの説明」を非表示にする実装が完成しました。
+今回は、より実用的で保守性の高いコードにするための工夫を解説します！
+目標：kintoneのUI変更に強く、他の要素にも応用できるコードを作る
+現在のコードは動作しますが、kintoneのUI変更や他の要素への応用を考えると、
+さらなる改善の余地があります。今回は、そんな課題を解決するテクニックを紹介します！
+現在のコード：
+(function() {
+  'use strict';
+
+  const hid...]]></description><link>https://zenn.dev/chiquwagohan/articles/knt04-202507140700</link><guid isPermaLink="true">https://zenn.dev/chiquwagohan/articles/knt04-202507140700</guid><pubDate>Sun, 13 Jul 2025 22:00:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SlFeieZd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25AC%25AC4%25E5%259B%259E%2520%25E4%25BF%259D%25E5%25AE%2588%25E6%2580%25A7%25E3%2581%25A8%25E5%25BF%259C%25E7%2594%25A8%25E6%2580%25A7%25E3%2582%2592%25E9%25AB%2598%25E3%2582%2581%25E3%2582%258B%25E5%25B7%25A5%25E5%25A4%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A1%25E3%2581%258F%25E3%2582%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVjMWE0NGVmYWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ちくわ</dc:creator></item><item><title><![CDATA[GitHub ActionsでKnipを使ってデッドコードを自動検出・レポートする]]></title><description><![CDATA[
+ 何？
+KnipをGitHub Actionsで自動実行し、デッドコードを定期的に検出・レポートするよう設定をします。
+
+ GitHub Actionsワークフローに組み込み
+jobs:
+  report-dead-code:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        w...]]></description><link>https://zenn.dev/tkrtmy/articles/2025-07-14-github-actions-knip-dead-code-detection</link><guid isPermaLink="true">https://zenn.dev/tkrtmy/articles/2025-07-14-github-actions-knip-dead-code-detection</guid><pubDate>Sun, 13 Jul 2025 16:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LJdQhM6t--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GitHub%2520Actions%25E3%2581%25A7Knip%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2583%2587%25E3%2583%2583%25E3%2583%2589%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E6%25A4%259C%25E5%2587%25BA%25E3%2583%25BB%25E3%2583%25AC%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tkrtmy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU0ZDk4ZjM3MTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tkrtmy</dc:creator></item><item><title><![CDATA[Biome2.0のGritQLプラグインでDOM要素の直接利用を禁止してみた]]></title><description><![CDATA[
+ はじめに
+Claude CodeなどのAI Agentを使ってコーディングを行う際に、プロジェクト固有のUIライブラリやデザインシステムを使ってくれなかった経験はありませんか？
+これらを指示文に明記しても、コンテキストが大きいと忘れてしまい、従ってくれない場合があります。
+このような場合、ESLintやBiomeなどのLinterを使って、プロジェクト固有のコーディング規約を自動化することができます。
+ただし、ESLintは実行速度の問題があり、AI Agentと組み合わせて使う際のiteration速度を遅くする要因となりえます。
+そこで、この記事では先日v2.0がリリースされ、B...]]></description><link>https://zenn.dev/bmth/articles/biomejs-gritql-plugin</link><guid isPermaLink="true">https://zenn.dev/bmth/articles/biomejs-gritql-plugin</guid><pubDate>Sun, 13 Jul 2025 15:24:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--X2TgT944--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Biome2.0%25E3%2581%25AEGritQL%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%25A7DOM%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%25AE%25E7%259B%25B4%25E6%258E%25A5%25E5%2588%25A9%25E7%2594%25A8%25E3%2582%2592%25E7%25A6%2581%25E6%25AD%25A2%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2598%25E3%2582%2587%25E3%2581%2586%25E3%2581%2592%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYzZTk3NzVhNTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>じょうげん</dc:creator></item><item><title><![CDATA[【学びログ】OAuth実装中に感じたTypeScriptの必要性]]></title><description><![CDATA[
+ はじめに
+現在、個人開発中のツールで GitHub の OAuth を使う必要があり、その仕組みを理解するために、自前で OAuth 認証のフローを実装して学んでいました。
+GitHubリポジトリはこちら
+その中で、「このコード、値が存在しない場合、普通にクラッシュするな…」という場面に遭遇しました。
+今回、簡易的なサーバーを JavaScript で実装していたため、TypeScript は使用していませんでしたが、この一件で「やっぱり TypeScript って大事だ」と強く実感したので、学びのログとして残します。
+
+ JavaScript で起こりかけた事故
+以下のコードが実際...]]></description><link>https://zenn.dev/yuji6523/articles/oauth-typescript-split</link><guid isPermaLink="true">https://zenn.dev/yuji6523/articles/oauth-typescript-split</guid><pubDate>Sun, 13 Jul 2025 09:46:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1T0r2mn---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%25AD%25A6%25E3%2581%25B3%25E3%2583%25AD%25E3%2582%25B0%25E3%2580%2591OAuth%25E5%25AE%259F%25E8%25A3%2585%25E4%25B8%25AD%25E3%2581%25AB%25E6%2584%259F%25E3%2581%2598%25E3%2581%259FTypeScript%25E3%2581%25AE%25E5%25BF%2585%25E8%25A6%2581%25E6%2580%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yuji%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhjMzIxNGViMjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuji</dc:creator></item><item><title><![CDATA[非同期処理 (memo)]]></title><description><![CDATA[
+ 実践的な非同期処理の使用例
+APIから取得する関数をAIに書かせたのだが、その解説が非同期処理を理解するにはとてもいい解説だと思ったので残しておく。
+実際のコード
+
+js
+const fetchOnsenList = async () =&gt; {
+      try {
+        const response = await fetch('http://localhost:3000/api/onsen');
+        if (!response.ok) {
+          throw new Error (`HTTP error! status: ${respon...]]></description><link>https://zenn.dev/tqw000402/articles/0e80954d0eb361</link><guid isPermaLink="true">https://zenn.dev/tqw000402/articles/0e80954d0eb361</guid><pubDate>Sun, 13 Jul 2025 04:50:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SlHLZl1C--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%25E5%2587%25A6%25E7%2590%2586%2520%2528memo%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tqqqqw%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc5ZmIyMTczNTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tqqqqw</dc:creator></item><item><title><![CDATA[try...catch構文 (memo)]]></title><description><![CDATA[
+ あまり習うことのないtry...catch
+
+try...catch構文は、エラーが起きる可能性のあるコードを安全に実行し、失敗したときに変わりの処理を実行する構文。
+
+.js
+try {
+  // ここに「エラーが出るかも？」なコードを書く
+} catch (error) {
+  // try 内でエラーが出たら、ここで代わりの処理を行う
+}
+
+あまり教材などで出てくる機会がないので、ここにメモっておく。
+API関連でよく出てくる構文なので覚えておこう。
+]]></description><link>https://zenn.dev/tqw000402/articles/1ebac8c4be0ad8</link><guid isPermaLink="true">https://zenn.dev/tqw000402/articles/1ebac8c4be0ad8</guid><pubDate>Sun, 13 Jul 2025 03:58:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3tir1Z4C--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:try...catch%25E6%25A7%258B%25E6%2596%2587%2520%2528memo%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tqqqqw%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc5ZmIyMTczNTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tqqqqw</dc:creator></item><item><title><![CDATA[第3回 kintoneでアプリの説明を非表示にする]]></title><description><![CDATA[
+ kintoneでアプリの説明を非表示にする
+〜詳細画面・編集画面対応の実装ステップ〜
+
+ はじめに
+前回は、JSEdit for kintoneプラグインの導入と設定方法を解説しました。
+今回は、いよいよ実際のJavaScriptコードを書いて、「アプリの説明」を画面ごとに制御していきます！
+目標：詳細画面と編集画面と新規作成画面で「アプリの説明」を非表示にする。一覧表示のときだけ表示させる
+
+
+ JavaScriptカスタマイズの基本
+
+ kintoneのイベントについて
+kintoneでは、画面の状態変化に応じて様々なイベントが用意されています：
+
+
+app.record.det...]]></description><link>https://zenn.dev/chiquwagohan/articles/knt03-202507130700</link><guid isPermaLink="true">https://zenn.dev/chiquwagohan/articles/knt03-202507130700</guid><pubDate>Sat, 12 Jul 2025 22:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ogJVRvmW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25AC%25AC3%25E5%259B%259E%2520kintone%25E3%2581%25A7%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%25AE%25E8%25AA%25AC%25E6%2598%258E%25E3%2582%2592%25E9%259D%259E%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A1%25E3%2581%258F%25E3%2582%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVjMWE0NGVmYWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ちくわ</dc:creator></item><item><title><![CDATA[JavaScriptでABC414(A-C)]]></title><description><![CDATA[https://atcoder.jp/contests/abc414
+
+ A - Streamer Takahashi
+https://atcoder.jp/contests/abc411/tasks/abc414_a
+X_i \le LかつR \le Y_iとなるiの数をカウントすればOK
+やるだけといえばやるだけですけど、入力もらうのがちょっとだるくない……？
+https://atcoder.jp/contests/abc414/submissions/67509347
+1分49秒 AC!
+
+ B - String Too Long
+https://atcoder.jp/contes...]]></description><link>https://zenn.dev/aya_koto/articles/639dbedacc2861</link><guid isPermaLink="true">https://zenn.dev/aya_koto/articles/639dbedacc2861</guid><pubDate>Sat, 12 Jul 2025 13:46:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tkLWsJcm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:JavaScript%25E3%2581%25A7ABC414%2528A-C%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ayasaka-Koto%2520%252F%2520Aya...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VkNTRlMDBjYTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ayasaka-Koto / AyagawaP</dc:creator></item><item><title><![CDATA[【JS・小ネタ】オブジェクトからプロパティを取り出す２つの方法]]></title><description><![CDATA[
+ 背景
+僕は仕事でJSを使っていたのだ。
+そこで、オブジェクト（所謂ディクショナリ）を使っていた。
+const obj = {element1: 1, element2: 2}
+const element1 = obj['element1']
+こんな感じでオブジェクトからプロパティを取り出していたのだ。
+ただ別の日、プライベートで僕は見てしまったんだ。
+別の方法でオブジェクトからプロパティを取り出しているコードを。
+const obj = {element1: 1, element2: 2}
+const element2 = obj.element2
+一体これは何なんだ？
+どんな違いが...]]></description><link>https://zenn.dev/k__azuki/articles/d8d8ab574c168f</link><guid isPermaLink="true">https://zenn.dev/k__azuki/articles/d8d8ab574c168f</guid><pubDate>Sat, 12 Jul 2025 09:09:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0TBA6HPU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JS%25E3%2583%25BB%25E5%25B0%258F%25E3%2583%258D%25E3%2582%25BF%25E3%2580%2591%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%258B%25E3%2582%2589%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2591%25E3%2583%2586%25E3%2582%25A3%25E3%2582%2592%25E5%258F%2596%25E3%2582%258A%25E5%2587%25BA%25E3%2581%2599%25EF%25BC%2592%25E3%2581%25A4%25E3%2581%25AE%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258F%25E3%2582%2589%25E3%2581%2592%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IxNzdjYzRlNGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>くらげ</dc:creator></item><item><title><![CDATA[【JS】React・Next.jsでよく見る変数への代入方法]]></title><description><![CDATA[
+ はじめに
+
+ReactやNext.jsのソースコードを見ていると、中々見慣れない代入方法が多数存在しました。
+本記事では、これら高度な代入方法の紹介に焦点を当てています。
+
+
+ 代入方法
+
+ 1. 通常の代入方法
+
+通常の代入方法は、以下のように一行ずつ代入する方法だと思います。
+自分自身もプレーンなJSでコードを記載する際は、こちらを多用していました。
+
+const name = 'kurage';
+const age = 25;
+
+ 2. 複数の変数を1行で宣言・代入
+
+複数の変数は、以下のように1行で宣言・代入することができます。
+
+// 1行で宣言
+let name, age...]]></description><link>https://zenn.dev/k__azuki/articles/3788d0cdbd3a4e</link><guid isPermaLink="true">https://zenn.dev/k__azuki/articles/3788d0cdbd3a4e</guid><pubDate>Sat, 12 Jul 2025 06:52:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iPnRXyUu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JS%25E3%2580%2591React%25E3%2583%25BBNext.js%25E3%2581%25A7%25E3%2582%2588%25E3%2581%258F%25E8%25A6%258B%25E3%2582%258B%25E5%25A4%2589%25E6%2595%25B0%25E3%2581%25B8%25E3%2581%25AE%25E4%25BB%25A3%25E5%2585%25A5%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258F%25E3%2582%2589%25E3%2581%2592%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IxNzdjYzRlNGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>くらげ</dc:creator></item><item><title><![CDATA[オブジェクト操作を自由自在に操るProxy]]></title><description><![CDATA[JavaScriptのProxyは、オブジェクトの基本的な操作（プロパティの参照、代入、関数の呼び出しなど）をインターセプト（途中で捕捉し横取り）し、その挙動をカスタマイズするための非常に強力な機能です。
+オブジェクトへのアクセスを監視・制御したり、新しい動作を追加したりする際に大変役立ちます。
+
+ 基本的な仕組み
+Proxyは、ターゲットとなるオブジェクトと、そのオブジェクトに対する操作を定義するハンドラーオブジェクトの2つで構成されます。
+const proxy = new Proxy(target, handler);
+
+
+
+パラメータ
+説明
+
+
+
+
+target
+プロキシの対象と...]]></description><link>https://zenn.dev/arima/articles/38aa4889d9dc14</link><guid isPermaLink="true">https://zenn.dev/arima/articles/38aa4889d9dc14</guid><pubDate>Sat, 12 Jul 2025 03:15:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AoqGF43H--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E6%2593%258D%25E4%25BD%259C%25E3%2582%2592%25E8%2587%25AA%25E7%2594%25B1%25E8%2587%25AA%25E5%259C%25A8%25E3%2581%25AB%25E6%2593%258D%25E3%2582%258BProxy%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2582%258A%25E3%2581%25BE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y4MzY5Y2MzN2MuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ありま</dc:creator></item></channel></rss>
