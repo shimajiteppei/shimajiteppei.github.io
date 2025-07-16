@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 16 Jul 2025 01:10:41 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[TypeScript & GraphQL でToDoアプリを開発する #2]]></title><description><![CDATA[
+ ⬅️前回の記事はこちら
+https://zenn.dev/agent_grow/articles/5eda58d7cb3721
+
+ ⭐️バックエンドのセットアップ
+backend/に移動
+% cd ../backend
+Node.jsプロジェクトを初期化
+% npm init -y
+本番用の依存関係をインストール
+
+express@4：Node.js用のWebフレームワーク
+dotenv：.envに設定したポートやキー等を読み込む
+cors：APIをフロントエンドから安全に呼び出す
+@apollo/server &amp; graphql &amp; graphql-tag：Grap...]]></description><link>https://zenn.dev/agent_grow/articles/477f98f021fd2d</link><guid isPermaLink="true">https://zenn.dev/agent_grow/articles/477f98f021fd2d</guid><pubDate>Tue, 15 Jul 2025 23:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GHHv0tlV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%2520%2526%2520GraphQL%2520%25E3%2581%25A7ToDo%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2599%25E3%2582%258B%2520%25232%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2583%25A2%25E3%2583%25A9%25E3%2582%25A6%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NkMDljNjAyYTYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Agent%2520Grow%2520Tech%2520Notes%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RlMWU4MWVlNDYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>モラウ</dc:creator></item><item><title><![CDATA[useEffectでデータフェッチは欠点だらけ？じゃあどうしたらいいの？]]></title><description><![CDATA[
+ はじめに
+突然ですが、useEffect内でfetch関数を使用してデータフェッチを行っている方、たくさんいらっしゃいますよね。
+実はこのアプローチ、公式ドキュメントに「大きな欠点がある」と記載されているんです。
+
+特に完全にクライアントサイドのアプリにおいては、エフェクトの中で fetch コールを書くことはデータフェッチの一般的な方法です。しかし、これは非常に手作業頼りのアプローチであり、大きな欠点があります。
+
+エフェクトでのデータ取得に代わる良い方法は？
+そんな事実に気がついた私が、「じゃあどうしたらいいのか」を考えてまとめてみました。
+クライアントサイドでのデータフェッチに...]]></description><link>https://zenn.dev/sugachan/articles/19c0b1ff267f21</link><guid isPermaLink="true">https://zenn.dev/sugachan/articles/19c0b1ff267f21</guid><pubDate>Tue, 15 Jul 2025 13:29:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vyZUJCMp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:useEffect%25E3%2581%25A7%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%2595%25E3%2582%25A7%25E3%2583%2583%25E3%2583%2581%25E3%2581%25AF%25E6%25AC%25A0%25E7%2582%25B9%25E3%2581%25A0%25E3%2582%2589%25E3%2581%2591%25EF%25BC%259F%25E3%2581%2598%25E3%2582%2583%25E3%2581%2582%25E3%2581%25A9%25E3%2581%2586%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25E3%2581%2584%25E3%2581%2584%25E3%2581%25AE%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2599%25E3%2581%258C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU3MzNlNTIzNjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>すが</dc:creator></item><item><title><![CDATA[Zennの記事を表示するダッシュボードアプリを作成しました]]></title><description><![CDATA[
+ はじめに
+この記事をご覧の皆さんはご存知の通り，Zennは技術記事やアイデアを共有するのに便利なプラットフォームです．
+Markdownをベースとした記法やシンプルなUIは魅力的で，私も気に入って使っています．
+一方で，シンプルすぎると感じる部分もあります．
+個人的に気になるのは，ユーザーの記事一覧のページです．
+例えば，私の場合は
+
+に投稿した記事が一覧表示されていますが，統計情報の表示やソート機能もない素朴なUIです．
+そこで，機能を拡張したダッシュボードアプリを作成しました．
+Vercelでデプロイしたものはこちらです．
+
+
+ユーザー名の設定を変更することで，ご自身の記事を表示...]]></description><link>https://zenn.dev/hiromu_ushihara/articles/c89a2eba29c5a1</link><guid isPermaLink="true">https://zenn.dev/hiromu_ushihara/articles/c89a2eba29c5a1</guid><pubDate>Tue, 15 Jul 2025 07:42:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ViOUunPg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Zenn%25E3%2581%25AE%25E8%25A8%2598%25E4%25BA%258B%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%25E3%2583%2580%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A5%25E3%2583%259C%25E3%2583%25BC%25E3%2583%2589%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:houh%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0k0aEMzQ3pUejlLY215RDVDV3FBUTRNNnkxbnhRTHVvcnVHVlpmRzR0YnlvUFVBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>houh</dc:creator></item><item><title><![CDATA[TailwindCSSのPreflightの適用範囲を限定する方法]]></title><description><![CDATA[
+ はじめに
+あるSaaSのJavaScriptカスタマイズ等でTailwindCSSを利用する場合、TailwindCSSのリセットCSSであるPreflightが既存のUIを破壊する場合が割とよくある。
+しかし、Preflightなしでは注入するReactコンポーネント等のレイアウトが崩れる場合がある。
+そこで、Preflightの適用範囲を限定することで、この問題を解決できると考える。
+
+ 結論
+https://j5cookie.medium.com/scoping-tailwindcss-preflight-for-injected-apps-c30152f6dd8d
+上記リンク...]]></description><link>https://zenn.dev/parmenion/articles/e714403d83b3fe</link><guid isPermaLink="true">https://zenn.dev/parmenion/articles/e714403d83b3fe</guid><pubDate>Tue, 15 Jul 2025 06:17:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--c-eGcR6j--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TailwindCSS%25E3%2581%25AEPreflight%25E3%2581%25AE%25E9%2581%25A9%25E7%2594%25A8%25E7%25AF%2584%25E5%259B%25B2%25E3%2582%2592%25E9%2599%2590%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2591%25E3%2583%25AB%25E3%2583%25A1%25E3%2583%258B%25E3%2582%25AA%25E3%2583%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYyYzdjMDBhZGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>パルメニオン</dc:creator></item><item><title><![CDATA[ChatGPTClientにOpenAI Moderation APIを実装してAIの安全性を向上させる]]></title><description><![CDATA[
+ はじめに
+AIアプリケーションを開発する際、生成されるコンテンツの安全性を確保することは非常に重要です。ユーザーの入力やAIの出力に有害なコンテンツが含まれていないかチェックすることで、より健全なサービスを提供できます。
+この記事では、既存のChatGPTClientクラスにOpenAI Moderation APIを統合し、テキストの有害性チェック機能を実装した事例を紹介します。
+
+ OpenAI Moderation APIとは
+OpenAI Moderation APIは、テキストコンテンツが有害である可能性を検出するためのAPIです。以下のカテゴリで有害性を判定します：
+
+
+...]]></description><link>https://zenn.dev/solt/articles/openai-moderation-api-implementation</link><guid isPermaLink="true">https://zenn.dev/solt/articles/openai-moderation-api-implementation</guid><pubDate>Tue, 15 Jul 2025 05:47:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Sl-ui1An--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ChatGPTClient%25E3%2581%25ABOpenAI%2520Moderation%2520API%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%25A6AI%25E3%2581%25AE%25E5%25AE%2589%25E5%2585%25A8%25E6%2580%25A7%25E3%2582%2592%25E5%2590%2591%25E4%25B8%258A%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25BD%25E3%2583%25AB%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKd056aXlSeXFLbGpzQk12cENQN0VFWXFfWXo0VjU1N2ptdUlRa1c9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ソル</dc:creator></item><item><title><![CDATA[Nest.js一旦ここだけ抑えとこ]]></title><description><![CDATA[
+ Nest.js の特徴ざっくり
+
+TypeScript 前提
+Angular 風の構成（Module / Controller / Service）
+DI（依存性注入）が強力
+Express または Fastify を内部で使用
+CLI が便利（nest コマンド）
+
+
+ 最低限知っておくべき構成要素
+
+ 1. Module（モジュール）
+Nest.js は モジュール単位で構成されます。@Module() デコレーターで定義します。
+// app.module.ts
+@Module({
+  imports: [],
+  controllers: [AppController],
+ ...]]></description><link>https://zenn.dev/somuramoto/articles/3fb763a3e9bc7c</link><guid isPermaLink="true">https://zenn.dev/somuramoto/articles/3fb763a3e9bc7c</guid><pubDate>Tue, 15 Jul 2025 01:10:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7jWm_ga7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Nest.js%25E4%25B8%2580%25E6%2597%25A6%25E3%2581%2593%25E3%2581%2593%25E3%2581%25A0%25E3%2581%2591%25E6%258A%2591%25E3%2581%2588%25E3%2581%25A8%25E3%2581%2593%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:So%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI5YjkwYjA1MDkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>So</dc:creator></item><item><title><![CDATA[第三回 zenncafe 参加レポートと個人的な感想シェア]]></title><description><![CDATA[昨日、Zenncafeの第三回イベントに参加してきました！
+とても学びの多い時間を過ごすことができたので、個人的な感想をシェアしたいと思います！
+https://zenn.connpass.com/event/357434/
+
+ zenncafeとは？
+エンジニアのための情報共有コミュニティ「Zenn」が主催するユーザーグループのオフラインイベントです。
+今回は第三回で、「 TypeScript night AIコーディング」というテーマでした。
+
+
+ LTで感じたこと
+
+ 概要
+今回のLTを聞いていて、重要だと感じたのは、「開発体験」の重要性でした。
+AIに任せるにしても、自分でコーデ...]]></description><link>https://zenn.dev/sunagaku/articles/3fa2ecda6b2966</link><guid isPermaLink="true">https://zenn.dev/sunagaku/articles/3fa2ecda6b2966</guid><pubDate>Tue, 15 Jul 2025 01:03:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--s9ZmzSY9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25AC%25AC%25E4%25B8%2589%25E5%259B%259E%2520zenncafe%2520%25E5%258F%2582%25E5%258A%25A0%25E3%2583%25AC%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25A8%25E5%2580%258B%25E4%25BA%25BA%25E7%259A%2584%25E3%2581%25AA%25E6%2584%259F%25E6%2583%25B3%25E3%2582%25B7%25E3%2582%25A7%25E3%2582%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B9%25E3%2583%258A%25E3%2582%25AC%25E3%2582%25AF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJkNDhmZDc4ZTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>スナガク</dc:creator></item><item><title><![CDATA[【TS】公式ドキュメントから学ぶTypeScriptの概要]]></title><description><![CDATA[
+ はじめに
+
+ReactやNext.jsで良く出てくるから、TypeScriptを学ぼうと思いTypeScriptの公式ドキュメントを見たが、全部英語...
+「とりあえず入りの『Getting Start』を理解しないと始まらない！」そんな思いで筆者がドキュメントの内容を嚙み砕き、そこに独自で調べた内容を加えたものが、本記事の内容です。
+筆者はJSに触れたことがあるので、本記事の対象も自然とJSの経験者になる想定です、悪しからず...
+
+
+ 1. TypeScriptとは
+TypeScriptとはJavaScriptの機能はそのままに、Javaを始めとした静的コンパイラ言語のように型定...]]></description><link>https://zenn.dev/k__azuki/articles/090b46d78eadcf</link><guid isPermaLink="true">https://zenn.dev/k__azuki/articles/090b46d78eadcf</guid><pubDate>Mon, 14 Jul 2025 12:00:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6Y81BlvM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590TS%25E3%2580%2591%25E5%2585%25AC%25E5%25BC%258F%25E3%2583%2589%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2588%25E3%2581%258B%25E3%2582%2589%25E5%25AD%25A6%25E3%2581%25B6TypeScript%25E3%2581%25AE%25E6%25A6%2582%25E8%25A6%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258F%25E3%2582%2589%25E3%2581%2592%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IxNzdjYzRlNGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>くらげ</dc:creator></item><item><title><![CDATA[AWS CDK S3+CloudFrontウェブサイト構築 Typescript #2]]></title><description><![CDATA[
+ はじめに
+以前、AWSCDKでS3静的ウェブサイトホスティング構築をしました。
+https://zenn.dev/michinoku/articles/42c45f187ac06b
+今回はAWSが提供するCDNサービスであるCloudFrontをS3の前に配置してCloudFront経由でS3静的サイトを配信できるようにしていきます。
+
+ CloudFrontを使用する理由
+
+ グローバルへの高速なコンテンツ配信
+AWSのCDN(コンテンツ配信ネットワーク)であるCloudFrontを使用すると、S3に格納されたコンテンツはアクセス元から最も近い場所(エッジロケーション)から配信され...]]></description><link>https://zenn.dev/michinoku/articles/88f1d3a096ca6a</link><guid isPermaLink="true">https://zenn.dev/michinoku/articles/88f1d3a096ca6a</guid><pubDate>Mon, 14 Jul 2025 03:30:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0D7vQUTl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AWS%2520CDK%2520S3%252BCloudFront%25E3%2582%25A6%25E3%2582%25A7%25E3%2583%2596%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E6%25A7%258B%25E7%25AF%2589%2520Typescript%2520%25232%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BF%25E3%2581%25A1%25E3%2581%25AE%25E3%2581%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M5ZjFlMGFjYmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>みちのく</dc:creator></item><item><title><![CDATA[Reactコンポーネントのasを実装する]]></title><description><![CDATA[ツールチップなどのライブラリの外部コンポーネントをラップするコンポーネントを作ってたときにvalidateDOMNestingに関するエラーがでて困ってた。
+特にコンポーネントをラップするタグに意図はなかったので柔軟なasぽい実装ほしかた
+結論
+type Props = {
+  as?: keyof JSX.IntrinsicElements | React.ComponentType&lt;unknown&gt;;
+};
+
+const Container = (props: Props): JSX.Element =&gt; {
+  const { as: Component = "d...]]></description><link>https://zenn.dev/ksyunnnn/articles/62a07241e86d5b</link><guid isPermaLink="true">https://zenn.dev/ksyunnnn/articles/62a07241e86d5b</guid><pubDate>Mon, 14 Jul 2025 02:32:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5OJJEIcp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25AEas%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2593%25E3%2581%25B0%25E3%2581%2597%25E3%2582%2585%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBlZDgzMjFiNTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>こばしゅん</dc:creator></item><item><title><![CDATA[【Capacitor入門-第1回-】WEBアプリからネイティブアプリを簡単に作成したい！]]></title><description><![CDATA[
+ はじめに
+普段はWEBアプリを開発しているtellerです！
+WEBアプリから簡単にネイティブアプリを作成できるというもので、その実用性を連載形式で検証していこうと思います！
+とりあえず、今回はNuxt3で構築した簡単なTODOアプリをCapacitorを用いて、iOSのシミュレーターで起動するところまでやってみようと思います！
+
+ Capacitorとは
+https://capacitorjs.jp/
+上記を参照してみると
+
+Capacitorはどんなウェブアプリでもネイティブアプリにすることができるので iOS、Android、ウェブを横断して同じコードで一つのアプリを 走らせる...]]></description><link>https://zenn.dev/nonejp/articles/nuxt-capacitor1</link><guid isPermaLink="true">https://zenn.dev/nonejp/articles/nuxt-capacitor1</guid><pubDate>Mon, 14 Jul 2025 00:00:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--W97Qu0KG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Capacitor%25E5%2585%25A5%25E9%2596%2580-%25E7%25AC%25AC1%25E5%259B%259E-%25E3%2580%2591WEB%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%258B%25E3%2582%2589%25E3%2583%258D%25E3%2582%25A4%25E3%2583%2586%25E3%2582%25A3%25E3%2583%2596%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:teller%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q1NTJjOGRjY2YuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:NonEntropy%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U3OTZiMDZiMTMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>teller</dc:creator></item><item><title><![CDATA[私が考えたReactフロントエンド環境(React Router v7)]]></title><description><![CDATA[
+ はじめに
+https://github.com/dbd-fish/templete_web_system
+本プロジェクトのReact Router v7を中心としたWebフロントエンド環境を紹介します。
+状態管理やhookはほとんど使用していません。
+１人で考えたため、些細なことでも何か意見があればコメントして頂きたいです。
+本記事の大部分は生成AIに書かせてみました。
+READMEっぽくなってしまう箇所はある程度妥協して筆者が微調整をしました。
+
+ 全体像
+本プロジェクトはDocker Composeを使用したマルチコンテナ構成のWebシステム開発テンプレートです。
+フロントエンド...]]></description><link>https://zenn.dev/dbd_fish/articles/616fad4fd2760d</link><guid isPermaLink="true">https://zenn.dev/dbd_fish/articles/616fad4fd2760d</guid><pubDate>Sun, 13 Jul 2025 23:05:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--p_CHFcbm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25A7%2581%25E3%2581%258C%25E8%2580%2583%25E3%2581%2588%25E3%2581%259FReact%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E7%2592%25B0%25E5%25A2%2583%2528React%2520Router%2520v7%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%258F%25A4%25E6%25B5%25B7%25E3%2580%2580%25E5%25B4%259A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIyMmY4MjFjNDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>古海　崚</dc:creator></item><item><title><![CDATA[GitHub ActionsでKnipを使ってデッドコードを自動検出・レポートする]]></title><description><![CDATA[
+ 何？
+KnipをGitHub Actionsで自動実行し、デッドコードを定期的に検出・レポートするよう設定をします。
+KnipのGitHub Actionsガイド の通りに実装すると、デッドコードが検出された際にCIが失敗ステータスになります。しかし、これではプルリクエストにKnipの修正を強制的に含める必要があるため、プルリクのコメントとして出力する形を採用します。
+CIのチェックとして組み込むと、プルリクにデッドコードの修正を含める必要があります。しかし、コードの削除は慎重に行いたい作業です。また、仮に指摘を無視する場合でも、その判断を1つのプルリクに含めるのは可能であれば避けた...]]></description><link>https://zenn.dev/tkrtmy/articles/2025-07-14-github-actions-knip-dead-code-detection</link><guid isPermaLink="true">https://zenn.dev/tkrtmy/articles/2025-07-14-github-actions-knip-dead-code-detection</guid><pubDate>Sun, 13 Jul 2025 16:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LJdQhM6t--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GitHub%2520Actions%25E3%2581%25A7Knip%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2583%2587%25E3%2583%2583%25E3%2583%2589%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E6%25A4%259C%25E5%2587%25BA%25E3%2583%25BB%25E3%2583%25AC%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tkrtmy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU0ZDk4ZjM3MTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tkrtmy</dc:creator></item><item><title><![CDATA[Biome2.0のGritQLプラグインでDOM要素の直接利用を禁止してみた]]></title><description><![CDATA[
+ はじめに
+Claude CodeなどのAI Agentを使ってコーディングを行う際に、プロジェクト固有のUIライブラリやデザインシステムを使ってくれなかった経験はありませんか？
+これらを指示文に明記しても、コンテキストが大きいと忘れてしまい、従ってくれない場合があります。
+このような場合、ESLintやBiomeなどのLinterを使って、プロジェクト固有のコーディング規約を自動化することができます。
+ただし、ESLintは実行速度の問題があり、AI Agentと組み合わせて使う際のiteration速度を遅くする要因となりえます。
+そこで、この記事では先日v2.0がリリースされ、B...]]></description><link>https://zenn.dev/bmth/articles/biomejs-gritql-plugin</link><guid isPermaLink="true">https://zenn.dev/bmth/articles/biomejs-gritql-plugin</guid><pubDate>Sun, 13 Jul 2025 15:24:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--X2TgT944--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Biome2.0%25E3%2581%25AEGritQL%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%25A7DOM%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%25AE%25E7%259B%25B4%25E6%258E%25A5%25E5%2588%25A9%25E7%2594%25A8%25E3%2582%2592%25E7%25A6%2581%25E6%25AD%25A2%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2598%25E3%2582%2587%25E3%2581%2586%25E3%2581%2592%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYzZTk3NzVhNTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>じょうげん</dc:creator></item><item><title><![CDATA[【TypeScript】`Partial<T>`で柔軟な型定義をマスターしよう]]></title><description><![CDATA[
+ はじめに
+TypeScriptで開発していると、こんな場面はありませんか？
+
+
+ユーザー情報のうち、名前だけを更新する関数を作りたい
+フォームの入力項目が多く、必須項目を段階的に埋めていく処理を書きたい
+テストデータを作りたいけど、毎回すべてのプロパティを定義するのが面倒…
+
+
+こんな「型の一部分だけを扱いたい」という悩みを華麗に解決してくれるのが、今回紹介するPartial&lt;T&gt;です。
+この記事では、Partial&lt;T&gt;の基本的な使い方から、実務で役立つ活用パターン、そして思わぬ落とし穴まで、分かりやすく解説します。
+
+ そもそも Partial&lt;T&...]]></description><link>https://zenn.dev/oharu121/articles/edc01103cf9447</link><guid isPermaLink="true">https://zenn.dev/oharu121/articles/edc01103cf9447</guid><pubDate>Sun, 13 Jul 2025 14:41:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Z1tuiXwD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590TypeScript%25E3%2580%2591%2560Partial%253CT%253E%2560%25E3%2581%25A7%25E6%259F%2594%25E8%25BB%259F%25E3%2581%25AA%25E5%259E%258B%25E5%25AE%259A%25E7%25BE%25A9%25E3%2582%2592%25E3%2583%259E%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:O%2520Haru%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXdQdmFwaGptVTIwMkxrb29lbU5jcDFRREdnRU40NE5RVTB5U0VKdHBqUUJWSjNQMFM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>O Haru</dc:creator></item><item><title><![CDATA[【学びログ】OAuth実装中に感じたTypeScriptの必要性]]></title><description><![CDATA[
+ はじめに
+現在、個人開発中のツールで GitHub の OAuth を使う必要があり、その仕組みを理解するために、自前で OAuth 認証のフローを実装して学んでいました。
+GitHubリポジトリはこちら
+その中で、「このコード、値が存在しない場合、普通にクラッシュするな…」という場面に遭遇しました。
+今回、簡易的なサーバーを JavaScript で実装していたため、TypeScript は使用していませんでしたが、この一件で「やっぱり TypeScript って大事だ」と強く実感したので、学びのログとして残します。
+
+ JavaScript で起こりかけた事故
+以下のコードが実際...]]></description><link>https://zenn.dev/yuji6523/articles/oauth-typescript-split</link><guid isPermaLink="true">https://zenn.dev/yuji6523/articles/oauth-typescript-split</guid><pubDate>Sun, 13 Jul 2025 09:46:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1T0r2mn---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%25AD%25A6%25E3%2581%25B3%25E3%2583%25AD%25E3%2582%25B0%25E3%2580%2591OAuth%25E5%25AE%259F%25E8%25A3%2585%25E4%25B8%25AD%25E3%2581%25AB%25E6%2584%259F%25E3%2581%2598%25E3%2581%259FTypeScript%25E3%2581%25AE%25E5%25BF%2585%25E8%25A6%2581%25E6%2580%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yuji%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhjMzIxNGViMjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuji</dc:creator></item><item><title><![CDATA[Cloud Schedulerで重い繰り返し処理をするな]]></title><description><![CDATA[
+ はじめに
+Cloud Functions for Firebaseを使い始めたとき、「インフラを意識することなく、サーバーサイドの処理を簡単に実装できる」という印象を受けました。しかし、実際にプロダクションで運用してみると、表面的な使いやすさの裏に隠れた「思わぬ挙動」に何度も遭遇しました。
+特に、Firebase経由で使うことで裏のGCPの仕組みが見えにくくなっており、初学者にとっては導入しやすい反面、運用・設計ではしっかりとインフラの理解が必要になります。
+本記事では、筆者が実際に運用で感じた「実践でよくハマる3つのポイント」に絞って解説したいと思います。具体的には、Cloud S...]]></description><link>https://zenn.dev/andmohiko/articles/8dad8991d90dfa</link><guid isPermaLink="true">https://zenn.dev/andmohiko/articles/8dad8991d90dfa</guid><pubDate>Sun, 13 Jul 2025 07:13:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ffIv3kFB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Cloud%2520Scheduler%25E3%2581%25A7%25E9%2587%258D%25E3%2581%2584%25E7%25B9%25B0%25E3%2582%258A%25E8%25BF%2594%25E3%2581%2597%25E5%2587%25A6%25E7%2590%2586%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%25E3%2581%25AA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:andmohiko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFhZjE0NGJhYzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>andmohiko</dc:creator></item><item><title><![CDATA[Mastra + MCP + AWS Lambdaで作るエンジニア求人提案AIエージェント]]></title><description><![CDATA[
+ はじめに
+Mastra と LAPRAS MCP Server を活用し、AWS Lambda 上で動作するエンジニア求人提案 AI エージェントをつくってみました。
+ユーザーが指定した要件に基づき、最適な求人情報を自動的に検索・分析し、Slack 通知を行います。
+Github にコードを公開しています。
+https://github.com/2bo/personal-recruit-agent
+
+ Mastra のバージョンについて
+本記事の執筆時点では version 0.10.10 を使用しています。
+
+ 実行結果
+先に実行結果の例を紹介します。
+
+ 求人要件の入力例
+- L...]]></description><link>https://zenn.dev/2bo/articles/ai-recruit-agent-with-mastra-mcp-lambda</link><guid isPermaLink="true">https://zenn.dev/2bo/articles/ai-recruit-agent-with-mastra-mcp-lambda</guid><pubDate>Sun, 13 Jul 2025 05:34:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MKycMFbW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mastra%2520%252B%2520MCP%2520%252B%2520AWS%2520Lambda%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E6%25B1%2582%25E4%25BA%25BA%25E6%258F%2590%25E6%25A1%2588AI%25E3%2582%25A8%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%25B3%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:2bo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QzZTVkZTRlYzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>2bo</dc:creator></item><item><title><![CDATA[dotenvxを使って環境変数を暗号化して管理する]]></title><description><![CDATA[皆さんは、チームで開発する際に環境変数が書かれている .env ファイルをどのようにして管理・共有してますか？
+私の経験では安全面を考慮して Git の管理下に置かずにチャットなどで環境変数が共有され個々のローカルに作成することが多のですが、ちょっと面倒だと思っています。
+そこで今回は、dotenvx を使用して環境変数を暗号化することで .env ファイル を安全に Git で管理する方法をサンプルコードと一緒にご紹介したいと思います。
+記事内に掲載しているソースコードは Github でも公開しています。
+https://github.com/twosun-8-git/dotenvx...]]></description><link>https://zenn.dev/cocomina/articles/how-to-use-dotenvx</link><guid isPermaLink="true">https://zenn.dev/cocomina/articles/how-to-use-dotenvx</guid><pubDate>Sun, 13 Jul 2025 05:27:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SphtNv3F--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:dotenvx%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E7%2592%25B0%25E5%25A2%2583%25E5%25A4%2589%25E6%2595%25B0%25E3%2582%2592%25E6%259A%2597%25E5%258F%25B7%25E5%258C%2596%25E3%2581%2597%25E3%2581%25A6%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Twosun%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBmN2EyZWFlZTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Twosun</dc:creator></item><item><title><![CDATA[Next.jsとTypeScriptで作るモダンなブログアプリ]]></title><description><![CDATA[
+ はじめに
+
+近年、Reactベースのフレームワークである Next.js と、型安全な開発を実現する TypeScript の組み合わせが人気を集めています。この記事では、Next.jsとTypeScriptを使ってシンプルながらもモダンなブログアプリを構築する方法を紹介します。
+
+ プロジェクトのセットアップ
+
+まずは、Next.jsのプロジェクトを作成します。TypeScriptを利用するため、--typescript フラグを追加します。
+npx create-next-app@latest my-blog --typescript
+cd my-blog
+
+ 必要なライブラリの...]]></description><link>https://zenn.dev/ythggd/articles/1a7be6c0128d99</link><guid isPermaLink="true">https://zenn.dev/ythggd/articles/1a7be6c0128d99</guid><pubDate>Sun, 13 Jul 2025 05:07:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Cf7794xX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%25E3%2581%25A8TypeScript%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%25E3%2583%25A2%25E3%2583%2580%25E3%2583%25B3%25E3%2581%25AA%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dssdf%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMxODc1MzdmMmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dssdf</dc:creator></item></channel></rss>
