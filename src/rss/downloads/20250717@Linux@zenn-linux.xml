@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 17 Jul 2025 12:04:48 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【Linux】/var/tmpがなぜ自動的に消えるのか調べる]]></title><description><![CDATA[
+ はじめに
+Linuxを再起動すると/var/tmp内のファイルは自動的に消えてしまうというとよく耳にします。どういう仕組みで自動的に削除されるのか気になったので、調べてみました。
+
+ 1.systemd-tmpfilesについて
+/var/tmpが削除される根拠を調べていると、「systemd-tmpfiles」によって削除サイクルが管理されているという情報にたどり着きました。
+
+ systemd-tmpfilesとは
+Linuxにおける一時ファイルやディレクトリの作成、削除、パーティション設定を管理するsystemdのコンポーネント(ツール)であり、OS再起動後に必要なディレクトリ...]]></description><link>https://zenn.dev/eiken/articles/aec9d306e1059e</link><guid isPermaLink="true">https://zenn.dev/eiken/articles/aec9d306e1059e</guid><pubDate>Wed, 16 Jul 2025 23:54:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fHv95GAp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Linux%25E3%2580%2591%252Fvar%252Ftmp%25E3%2581%258C%25E3%2581%25AA%25E3%2581%259C%25E8%2587%25AA%25E5%258B%2595%25E7%259A%2584%25E3%2581%25AB%25E6%25B6%2588%25E3%2581%2588%25E3%2582%258B%25E3%2581%25AE%25E3%2581%258B%25E8%25AA%25BF%25E3%2581%25B9%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:enjine%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZS5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>enjine</dc:creator></item><item><title><![CDATA[nmcliコマンドについての理解を深めたい]]></title><description><![CDATA[
+ nmcliとは
+nmcliは、NetworkManagerを操作するためのコマンドラインツール。
+コマンドでネットワーク設定を簡単にすることが可能。
+
+ nmcliのオプション
+
+接続一覧の確認
+
+nmcli connection show
+
+有線接続の開始/停止
+
+nmcli connection up/down
+
+IPアドレスの設定
+
+nmcli connection modify
+
+DHCPから静的IPへ変更
+
+mncli connection modify &lt;デバイス名&gt; ipv4.method manual
+
+接続プロファイルの作成
+
+nmcli connect...]]></description><link>https://zenn.dev/kasumi98/articles/6b83c6779d8953</link><guid isPermaLink="true">https://zenn.dev/kasumi98/articles/6b83c6779d8953</guid><pubDate>Wed, 16 Jul 2025 23:39:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8_naJJ4x--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:nmcli%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25AE%25E7%2590%2586%25E8%25A7%25A3%25E3%2582%2592%25E6%25B7%25B1%25E3%2582%2581%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kasumi98%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDgzZW0xZUZKM2VPNm5SR0VqVU5DVnFqRjRvcmdfdUNXRHUzek9hVzQxYzQ5ZW1sWTU9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kasumi98</dc:creator></item><item><title><![CDATA[Debian 13 RC2 での swaywm]]></title><description><![CDATA[
+ 前提
+Debian 13 (trixie) RC 2 での構築。
+Debian 13 を最小構成でインストールし、言語に関する設定は LANG=en_US.UFT-8 となっており、日本語に関するパッケージは導入していない所から開始している。
+キーボードは日本語配列を利用する。
+#  で開始されるコマンドはrootで実行する。
+$  で開始されるコマンドは一般ユーザで実行する。
+
+ sway インストール
+参考
+https://wiki.debian.org/sway
+https://packages.debian.org/trixie/sway
+sway 関連パッケージの導入
+# ...]]></description><link>https://zenn.dev/yodoy/articles/c529ab4625b7b5</link><guid isPermaLink="true">https://zenn.dev/yodoy/articles/c529ab4625b7b5</guid><pubDate>Wed, 16 Jul 2025 10:30:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yLNszuA0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Debian%252013%2520RC2%2520%25E3%2581%25A7%25E3%2581%25AE%2520swaywm%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2588%25E3%2581%25A9%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk4ZmU5YzVmZjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>よど</dc:creator></item><item><title><![CDATA[Google Pixel & Android 15のターミナルアプリでClaude Codeを動かそう]]></title><description><![CDATA[
+ はじめに
+2025年3月、Google Pixel &amp; Android 15でLinuxターミナル環境が使えるようになりました。Google Pixelユーザーは追加のアプリをインストールすることなく本格的なCLI環境を手に入れられます。
+この記事では、Android 15の新機能「ターミナル」を有効化し、Claude Codeをセットアップする手順を紹介します。また、最後に現時点での注意点も紹介します。
+
+ Android 15のLinuxターミナルとは
+Android 15で導入されたターミナルの主な特徴は次の通りです。
+
+完全なDebianベースのLinux環境であり、...]]></description><link>https://zenn.dev/pepabo/articles/630bd3bddfca43</link><guid isPermaLink="true">https://zenn.dev/pepabo/articles/630bd3bddfca43</guid><pubDate>Tue, 15 Jul 2025 23:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3W_c4D4A--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Google%2520Pixel%2520%2526%2520Android%252015%25E3%2581%25AE%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%259F%25E3%2583%258A%25E3%2583%25AB%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%25A7Claude%2520Code%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%259D%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:kenchan%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA0ZTQxODhhYTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:GMO%25E3%2583%259A%25E3%2583%2591%25E3%2583%259C%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pXV043LVdyTHFyMWh5YU00c2dQcGJuQTFqVTJCeFJ1X3hKdjRMdnEwPXMyNTAtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kenchan</dc:creator></item><item><title><![CDATA[‘echo‘ってナニモン？]]></title><description><![CDATA[
+ はじめに
+プログラミング初学者にとって、ターミナルやシェルスクリプト、GitHubなどで echoってヤツよく見かけますよね！、「いったい何に使うの？」と思ったことはありませんか？
+私もC言語を学習中に、AIにコンパイル警告について質問していたら、コンパイルコマンドで echo "コンパイル成功！" などと入れてきて、「なんこれ？余計な事すんなや！！」と思いました(^_^;)
+この記事では、echoコマンドについて初学者なりにまとめました。
+
+ echoコマンドとは？
+echo は文字列を出力するコマンドです。なんだ、めっちゃシンプルじゃん！
+echo "Hello World"
+実...]]></description><link>https://zenn.dev/wista/articles/4c55ea14cebe97</link><guid isPermaLink="true">https://zenn.dev/wista/articles/4c55ea14cebe97</guid><pubDate>Tue, 15 Jul 2025 21:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--B_OsaCIx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E2%2580%2598echo%25E2%2580%2598%25E3%2581%25A3%25E3%2581%25A6%25E3%2583%258A%25E3%2583%258B%25E3%2583%25A2%25E3%2583%25B3%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wista%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZWhIaEZaUVh5UjBMOFFjMk9jWWNUTkw5QXJYeFAtMUg0RU1BbVVuZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wista</dc:creator></item><item><title><![CDATA[Let’s Run ZundaGPT2 Lite on Raspberry Pi, Linux Mint, and Ubuntu!]]></title><description><![CDATA[
+
+ ZundaGPT2 Lite
+ZundaGPT2 Lite is a lightweight chat client application that lets you interact with AI using APIs provided by OpenAI, Google Gemini, Anthropic Claude, and others.
+While there is a full-featured sister app, ZundaGPT2, this Lite version is streamlined by removing the voice output ...]]></description><link>https://zenn.dev/ledmirage/articles/3a06a4b2ed8ae6</link><guid isPermaLink="true">https://zenn.dev/ledmirage/articles/3a06a4b2ed8ae6</guid><pubDate>Tue, 15 Jul 2025 12:11:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--O7zS1I9i--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Let%25E2%2580%2599s%2520Run%2520ZundaGPT2%2520Lite%2520on%2520Raspberry%2520Pi%252C%2520Linux%2520Mint%252C%2520and...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:led-mirage%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1VnUk9laFNoRXVvVXhuSVl4YVFieFAtZ2VYYTVjSWJrc3NDNzRmUnhYN1l1UTZrRT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>led-mirage</dc:creator></item><item><title><![CDATA[初心者が説明するOSとは何かについて]]></title><description><![CDATA[
+ 💭 私がよく疑問に思っていたこと
+友達に「パソコン何使ってる？」と聞かれて
+「ダイナブックやで」と答えると、
+「じゃあWindowsやな」と返されることがよくあった。
+内心、「いや、ダイナブックやねんけどな〜。どこにもWindowsって書いてないやん…」と少しもやもや（笑）
+調べてみると、**ダイナブックはパソコンの機種（ハードウェア）**で、**Windowsはその中で動いているOS（ソフトウェア）**だということが分かった。
+
+
+ 💻 OSとは？
+OS（オペレーティングシステム）とは、パソコンやスマホなどのコンピューターを動かすための基本ソフトウェアのことです。
+アプリ（例：LI...]]></description><link>https://zenn.dev/harutoom/articles/13588e1dc519d6</link><guid isPermaLink="true">https://zenn.dev/harutoom/articles/13588e1dc519d6</guid><pubDate>Tue, 15 Jul 2025 02:12:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cMi1kvGV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%258C%25E8%25AA%25AC%25E6%2598%258E%25E3%2581%2599%25E3%2582%258BOS%25E3%2581%25A8%25E3%2581%25AF%25E4%25BD%2595%25E3%2581%258B%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%258F%25E3%2583%25AB%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EwNzVjZThmOTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ハル</dc:creator></item><item><title><![CDATA[cockpitとは（Linux）]]></title><description><![CDATA[
+ はじめに
+Linuxをインストールするとデフォルトで稼働しているサービス『cockpit』。firewalldの設定をしていた際にも、『cockpit』が元々許可されていました。
+ふと、どんなサービスなのか気になったので調べてみました。
+root@fedora:~# firewall-cmd --list-all
+FedoraServer (default, active)
+  target: default
+  ingress-priority: 0
+  egress-priority: 0
+  icmp-block-inversion: no
+  interfaces: ens1...]]></description><link>https://zenn.dev/eiken/articles/94755119ad55a3</link><guid isPermaLink="true">https://zenn.dev/eiken/articles/94755119ad55a3</guid><pubDate>Tue, 15 Jul 2025 00:30:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--86tx1H5b--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:cockpit%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%2588Linux%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:enjine%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZS5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>enjine</dc:creator></item><item><title><![CDATA[dnfコマンドについて]]></title><description><![CDATA[
+ はじめに
+毎回dnfコマンドの使い方を調べていたため、業務でよく使うものをまとめました。
+
+ コマンド
+・更新可能なパッケージを表示
+root@fedora:~# dnf check-update
+・パッケージの更新
+root@fedora:~# dnf upgrade &lt;パッケージ名&gt;
+・パッケージのインストール
+root@fedora:~# dnf install &lt;パッケージ名&gt;
+・パッケージの削除
+root@fedora:~# dnf erase &lt;パッケージ名&gt;
+・インストール済みパッケージ表示
+root@fedora:~# dnf li...]]></description><link>https://zenn.dev/eiken/articles/e8d9eb7d6e0073</link><guid isPermaLink="true">https://zenn.dev/eiken/articles/e8d9eb7d6e0073</guid><pubDate>Mon, 14 Jul 2025 23:52:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xO6Rkw3T--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:dnf%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:enjine%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZS5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>enjine</dc:creator></item><item><title><![CDATA[systemd で MCP サーバーを管理できる MCP Server Manager を作ってみた]]></title><description><![CDATA[
+ はじめに
+MCP が流行りはじめ、便利な MCP サーバが開発され続けている一方で、複数の MCP サーバを管理するのが面倒だと思ったことはありませんか？
+そこで、設定ファイルにコマンドを記述するだけで複数のプロセスを管理できる「MCP Server Manager」を開発してみました。
+https://github.com/ksawaray/systemd-mcp
+
+ 特徴
+MCP Server Manager の特徴を以下に記載します。
+
+📝 シンプルな設定ファイル: mcp_server.conf にコマンドを 1 行ずつ記述するだけ
+🎮 CLI 操作: mcpctl コマンド...]]></description><link>https://zenn.dev/ksawaray/articles/48c4aa89d37dfe</link><guid isPermaLink="true">https://zenn.dev/ksawaray/articles/48c4aa89d37dfe</guid><pubDate>Mon, 14 Jul 2025 13:20:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--awGkM9_---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:systemd%2520%25E3%2581%25A7%2520MCP%2520%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%2520MCP%2520Server%2520Manager%2520%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sawara%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTFk3ZVJCaVlzYWNlTmJoS2huaEw1cHJSdFoyc0MyZXlySVphb2Jqc0ZBMEI1LT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sawara</dc:creator></item><item><title><![CDATA[Linus Benedict Torvalds:「私の戦闘力は18000です」]]></title><description><![CDATA[
+ 最初に: Linusを計算してみた
+言わずもがな伝説のエンジニア、linuxカーネルの生みの親です。
+戦闘力はどれくらいでしょう。
+その前に現時点での各平均を少し解説
+
+平均総合スコア: 2734.6点
+平均コード量(bytes): 127万bytes
+平均リポジトリスコア: 60.2点
+
+40人くらいの平均で偏っていると思いますが、まぁこんなもんでしょう
+さてlinusはというと
+
+総合スコア: 17338点
+総コード量: 約12憶bytes
+
+… 別格ですね。
+
+気になるlinuxリポジトリは堂々の100点でした。さすがですね。
+
+ここからもアルゴリズムの精度の良さがうかがえてう...]]></description><link>https://zenn.dev/andyyyy64/articles/50e5cea1192d5c</link><guid isPermaLink="true">https://zenn.dev/andyyyy64/articles/50e5cea1192d5c</guid><pubDate>Mon, 14 Jul 2025 10:49:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--92TbPlXy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linus%2520Benedict%2520Torvalds%253A%25E3%2580%258C%25E7%25A7%2581%25E3%2581%25AE%25E6%2588%25A6%25E9%2597%2598%25E5%258A%259B%25E3%2581%25AF18000%25E3%2581%25A7%25E3%2581%2599%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:andy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUE4MVgxMEJoUzNFMFhaR3NNYkxuTFhSbjF4TGkwWHV0Z05oVFgzemcwLUhSZUNTUT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>andy</dc:creator></item><item><title><![CDATA[【AWS】Amazon Inspector 対応パターン集【Debian】]]></title><description><![CDATA[すべての「Amazon Inspectorの警告は絶対に消せ」という上司を持った方へ
+大変お辛い時間を過ごされたことかと思います。
+解決パターン集を用意しましたのでご一読ください。
+!
+※本記事は2025年に旧アカウントで作成したものを再構成したものです。
+※本記事は個人検証環境を元に構成されています。実際の業務内容や企業の設定とは無関係です。
+※Debian前提です。Ubuntuは多分sudoつければ同様にできます。
+
+
+ A. package.jsonいじれば治るパターン
+一番オーソドックスなパターン
+
+
+
+npm outdatedで該当パッケージ調査
+
+npm listで依存関係チ...]]></description><link>https://zenn.dev/nickelth/articles/amazoninspector01</link><guid isPermaLink="true">https://zenn.dev/nickelth/articles/amazoninspector01</guid><pubDate>Mon, 14 Jul 2025 07:12:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QW77RYrK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590AWS%25E3%2580%2591Amazon%2520Inspector%2520%25E5%25AF%25BE%25E5%25BF%259C%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%25E9%259B%2586%25E3%2580%2590Debian%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%258B%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25AB%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU0Mjc3ODIwNWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ニッケル</dc:creator></item><item><title><![CDATA[ZundaGPT2 Lite を ラズパイ・Linux Mint / Ubuntu で動かそう！]]></title><description><![CDATA[
+
+ 🚀 はじめに
+ZundaGPT2 Lite は OpenAI や Google Gemini、Anthropic Claude などが提供している API を使用してAIとチャットするチャットクライアントアプリです。姉妹アプリに ZundaGPT2 がありますが、ZundaGPT2 Lite は ZundaGPT2 から音声出力機能を省いた軽量バージョンとなっています。
+2024年3月より ZundaGPT2 Lite はWindows用アプリとしてGitHubで公開してきましたが、v1.21.0 からRaspberry Pi OS Bookworm と Linux Mint/Ub...]]></description><link>https://zenn.dev/ledmirage/articles/aa64356242aefb</link><guid isPermaLink="true">https://zenn.dev/ledmirage/articles/aa64356242aefb</guid><pubDate>Mon, 14 Jul 2025 00:00:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BKbdYkaK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ZundaGPT2%2520Lite%2520%25E3%2582%2592%2520%25E3%2583%25A9%25E3%2582%25BA%25E3%2583%2591%25E3%2582%25A4%25E3%2583%25BBLinux%2520Mint%2520%252F%2520Ubuntu%2520%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258B%25E3%2581%259D%25E3%2581%2586%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:led-mirage%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1VnUk9laFNoRXVvVXhuSVl4YVFieFAtZ2VYYTVjSWJrc3NDNzRmUnhYN1l1UTZrRT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>led-mirage</dc:creator></item><item><title><![CDATA[Gentoo で物理キーを使ったディスク暗号化と Secure Boot]]></title><description><![CDATA[
+ はじめに
+特にノートパソコンではデスクトップに比べて紛失するリスクが高まります。万が一の事態に備え、ディスク暗号化によってデータを保護することは重要です。
+しかし、再起動のたびにパスフレーズを入力してディスク暗号化を解除するのは、日々の使用において少なからず煩わしさを感じます。
+これを解消する方法として、物理キー(USB メモリなど)を利用してディスク暗号化の解除を自動化するというものがあります。これによりディスク暗号化をしつつも利便性を保てますが、それでもまだ課題は残ります。
+ディスクが暗号化されていてもシステム起動時にブートローダーやカーネルが改竄されていないかを Secure ...]]></description><link>https://zenn.dev/peloeil/articles/c479440db404c8</link><guid isPermaLink="true">https://zenn.dev/peloeil/articles/c479440db404c8</guid><pubDate>Sun, 13 Jul 2025 01:39:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WNgBEQ_W--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Gentoo%2520%25E3%2581%25A7%25E7%2589%25A9%25E7%2590%2586%25E3%2582%25AD%25E3%2583%25BC%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25B9%25E3%2582%25AF%25E6%259A%2597%25E5%258F%25B7%25E5%258C%2596%25E3%2581%25A8%2520Secure%2520Boot%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B7%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FjMmFlYTFkZmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぷる</dc:creator></item><item><title><![CDATA[🔐 Linuxのパーミッションと所有権の基本と実践]]></title><description><![CDATA[
+ 📝 はじめに
+Linuxでは、すべてのファイルやディレクトリに「誰が」「何をできるか」を制御する仕組み（パーミッション）が設定されています。この仕組みはシステムの安全性と安定性を守るために非常に重要であり、適切に理解し運用することで、不要なセキュリティリスクを避けることができます。
+本記事では、Linuxのパーミッションと所有権の基本的な考え方から、実務でよく使われるコマンド、特殊なパーミッション、そして実践例までを豊富な例とともに解説します。
+
+ 📁 パーミッションとは？
+Linuxのファイルやディレクトリは、3つの権限カテゴリに分かれています：
+
+所有者（owner）：ファイルを...]]></description><link>https://zenn.dev/oit2003/articles/c4c2e480b5641f</link><guid isPermaLink="true">https://zenn.dev/oit2003/articles/c4c2e480b5641f</guid><pubDate>Sun, 13 Jul 2025 01:15:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qGQ_gunm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520%2520Linux%25E3%2581%25AE%25E3%2583%2591%25E3%2583%25BC%25E3%2583%259F%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25A8%25E6%2589%2580%25E6%259C%2589%25E6%25A8%25A9%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E3%2581%25A8%25E5%25AE%259F%25E8%25B7%25B5%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:OIT2003%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUwxN0ZaM1B3YkZyak5GWFVZRnNva000aldZTWZaQzc0MVh1UzhtRDdlZUNJVT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>OIT2003</dc:creator></item><item><title><![CDATA[[はじめての開発]マイクラサーバの自動起動・サーバステータスページをGPT君と実装した話]]></title><description><![CDATA[
+ 1. 自動起動スクリプト実装背景
+Linux上でMinecraftサーバを動かしているが、Linuxもセキュリティ対応などで再起動が必要になることがある。その際、現在はマイクラサーバを手動で停止してから再起動を行っているが、システム起動後にまた手動でサーバを起動しなければならないのが煩わしいと感じていた。
+そこで、システム起動時にサーバを自動実行できないかと思い、GPT君に聞いてみた。
+回答は、「簡単なスクリプトでできます」だった。
+どうやらcronに@rebootという実行オプションがあるらしく、システム起動時に実行してくれるらしい。
+
+
+ 2. サーバ自動起動スクリプトの実装
+そ...]]></description><link>https://zenn.dev/minakamiirisu/articles/5a7ec2a9b1d7a3</link><guid isPermaLink="true">https://zenn.dev/minakamiirisu/articles/5a7ec2a9b1d7a3</guid><pubDate>Sat, 12 Jul 2025 03:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--h46utWjT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E3%2581%25AF%25E3%2581%2598%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25AE%25E9%2596%258B%25E7%2599%25BA%255D%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2581%25AE%25E8%2587%25AA%25E5%258B%2595%25E8%25B5%25B7%25E5%258B%2595%25E3%2583%25BB%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%25B9%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592GPT%25E5%2590%259B%25E3%2581%25A8%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25B0%25B4%25E4%25B8%258A%25E3%2582%25A4%25E3%2583%25AA%25E3%2582%25B9%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmFZUlNOS08taEZCOEltMVBqeFJHc1diZXlSUWFoWmZvOU5RMTdyVVJ6ampuc29FczA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>水上イリス</dc:creator></item><item><title><![CDATA[Ubuntu で使う開発コンテナーでの Gemini CLI ログイン時の問題への対応方法]]></title><description><![CDATA[
+ はじめに
+本記事では、VS Code の開発コンテナー（Dev Container）内で Google の AI アシスタントである Gemini CLI をセットアップし利用する際に発生するログインへの問題へ対処する方法について解説します。
+開発環境をコンテナー化することで、ホストマシンをクリーンに保ちつつ、再現性の高い開発環境を簡単に構築できます。しかし、Gemini CLI のような認証が必要なツールをコンテナー内で利用するには、少し工夫が必要です。ここではホストが Ubuntu 環境の場合についての対処方法を説明します。
+
+ Gemini CLI とは
+Gemini CLI ...]]></description><link>https://zenn.dev/hiro345/articles/20250711_gemini_devcontainers</link><guid isPermaLink="true">https://zenn.dev/hiro345/articles/20250711_gemini_devcontainers</guid><pubDate>Sat, 12 Jul 2025 02:10:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--K-zda4fM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%2520%25E3%2581%25A7%25E4%25BD%25BF%25E3%2581%2586%25E9%2596%258B%25E7%2599%25BA%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2583%25BC%25E3%2581%25A7%25E3%2581%25AE%2520Gemini%2520CLI%2520%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E6%2599%2582%25E3%2581%25AE%25E5%2595%258F%25E9%25A1%258C%25E3%2581%25B8%25E3%2581%25AE%25E5%25AF%25BE%25E5%25BF%259C%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroshi%2520Koyama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k5ZzdjLS0xTFk0S2k0LWw3dVFSSFZRdEdQcWZHYTlibVRJYUtFM0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroshi Koyama</dc:creator></item><item><title><![CDATA[linuxコマンド-pwd-]]></title><description><![CDATA[pwdコマンドは「print working directory」の略で、今いる地点を指し示します。
+linuxには
+Everything is an file --全てはファイルである
+という哲学思想が根底にあります。
+すなわち、pwdは全てがファイルで構成される世界観のなかで、自分が今どの空間にいるかを
+指し示しているコマンドであるとも読めます。
+
+pwd
+$ pwd
+
+
+出力
+$ /Users/user
+
+ファイル世界のなかで自分がどのような位置にいるかということを決定する方法は二種類あります
+それが、論理パスと物理パスです
+============================...]]></description><link>https://zenn.dev/hamlab/articles/1910515a02e816</link><guid isPermaLink="true">https://zenn.dev/hamlab/articles/1910515a02e816</guid><pubDate>Fri, 11 Jul 2025 16:23:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SDVWYoBv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:linux%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589-pwd-%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2593%25E3%2581%25B0%25E3%2582%2584%25E3%2581%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q1ZjYwMmQ1NzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>こばやし</dc:creator></item><item><title><![CDATA[linuxコマンド -echo-]]></title><description><![CDATA[echoコマンドは、「鏡」です
+入力の値をそのまま反映させます
+ただ、加工して鏡に映すものを選択することができます
+echoというコマンドに入力した値を鏡のように出力します。
+
+hello,world
+echo "hello,world!"
+
+
+出力
+hello,world
+
+==================オプション========================
+-n 改行しない
+-e エスケープ文字を有効にする
+
+hello,world
+echo -e "hello¥nworld"
+
+
+出力
+hello
+world
+
+-E エスケープ文字を無効にする(デフォルト）
+
+hello...]]></description><link>https://zenn.dev/hamlab/articles/841ade8b59bf99</link><guid isPermaLink="true">https://zenn.dev/hamlab/articles/841ade8b59bf99</guid><pubDate>Fri, 11 Jul 2025 15:39:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4rPHEQDM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:linux%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%2520-echo-%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2593%25E3%2581%25B0%25E3%2582%2584%25E3%2581%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q1ZjYwMmQ1NzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>こばやし</dc:creator></item><item><title><![CDATA[パイプで途中経過を表示したい時の解決法]]></title><description><![CDATA[今日は、シェルスクリプトについて書きます。
+シェルのパイプで色々と繋げて処理をする際に、途中経過を表示したい時がありました。
+どうやったら綺麗に解決できるかと思って、検討しました。
+
+ 解決策
+&gt;&amp;2 をつけることで、途中経過を表示できます。
+echo "hello world" | xxd -p &gt;&amp;2 | xxd -r -p
+
+ 解説
+このサンプルコードは、hello world を、16進数表示をして、68656c6c6f20776f726c640aとし、もう一度、hello world に戻すというコードです。
+最近OSレベルのコードにハマっているため...]]></description><link>https://zenn.dev/t0/articles/30655fd15e54fb</link><guid isPermaLink="true">https://zenn.dev/t0/articles/30655fd15e54fb</guid><pubDate>Fri, 11 Jul 2025 05:42:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FkbSVEHC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2591%25E3%2582%25A4%25E3%2583%2597%25E3%2581%25A7%25E9%2580%2594%25E4%25B8%25AD%25E7%25B5%258C%25E9%2581%258E%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%25E6%2599%2582%25E3%2581%25AE%25E8%25A7%25A3%25E6%25B1%25BA%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI0NDBhYjE2MmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>つ</dc:creator></item></channel></rss>
