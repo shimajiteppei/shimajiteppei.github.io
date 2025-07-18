@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 18 Jul 2025 07:38:47 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[性能評価指標と意味]]></title><description><![CDATA[
+ さまざまな性能評価指標とその意味
+
+ これを書く目的
+日々、世間では無数の機械学習モデルが作られ、それがさまざまな「性能評価指標」によって評価されています。
+ただしその評価指標は非常に多彩で、筆者はその意味や用途をすぐに忘れてしまいます。
+そこで、ひとつの資料を見れば評価指標の意味をすぐ思いだせるようにするため、本文を書くことにしました。
+
+ 内容・対象読者
+本文には、以下の評価指標の意味と使用場面について解説しています。
+ただし、その実装方法については記載しないので、実装方法を調べている方は他をあたってください。
+
+正解率（Accuracy）
+再現率（Recall）
+適合率（Pre...]]></description><link>https://zenn.dev/mamech/articles/5d46f99dc56b4c</link><guid isPermaLink="true">https://zenn.dev/mamech/articles/5d46f99dc56b4c</guid><pubDate>Fri, 18 Jul 2025 05:27:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ozv5ncDr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2580%25A7%25E8%2583%25BD%25E8%25A9%2595%25E4%25BE%25A1%25E6%258C%2587%25E6%25A8%2599%25E3%2581%25A8%25E6%2584%258F%25E5%2591%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BE%25E3%2582%2581%25E3%2581%25A3%25E3%2581%25A1%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS2sxVlkxLWFoUXJ5WW1uZ1B2VUxVYk5idXdKZ2t3bXpkakh6TUVTUTlycWhpVnN3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>まめっち</dc:creator></item><item><title><![CDATA[テキスト分類モデルを活用した、勘定科目予測]]></title><description><![CDATA[
+ 1. はじめに
+経理業務では、新しい取引先や商品・サービスが日々登場し、従来のルールベース（例：「〇〇会社は交通費」のような固定ルール）では対応しきれないケースが増えています。例えば、「Uber」の経費は交通費？会議費？それとも接待費？このような判断は、利用シーンによって変わり、単純なルールでは分類困難です。こうした課題に対して、過去の分類実績から学習し、文脈を理解して予測する機械学習（テキスト分類モデル）が有効な解決策となります。
+この記事では、FastTextというライブラリを使ってテキスト分類モデルを実現します。
+
+ 2. 予測の概要
+予測には、「予測対象データ」と「学習済みモ...]]></description><link>https://zenn.dev/acntechjp/articles/4adc757a84dd40</link><guid isPermaLink="true">https://zenn.dev/acntechjp/articles/4adc757a84dd40</guid><pubDate>Fri, 18 Jul 2025 03:02:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oo4mVqst--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2586%25E3%2582%25AD%25E3%2582%25B9%25E3%2583%2588%25E5%2588%2586%25E9%25A1%259E%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E3%2582%2592%25E6%25B4%25BB%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2580%2581%25E5%258B%2598%25E5%25AE%259A%25E7%25A7%2591%25E7%259B%25AE%25E4%25BA%2588%25E6%25B8%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2583%259E%25E3%2583%2583%25E3%2582%25B5%25E3%2583%25B3%2520%2528Masanori%2520Yos...%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U2ZDA4MDY5ODcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Accenture%2520Japan%2520%2528%25E6%259C%2589%25E5%25BF%2597%2529%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5MzkwNDBmYjYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>マッサン (Masanori Yoshida)</dc:creator></item><item><title><![CDATA[Session 07 — GitHub API でスター数取得]]></title><description><![CDATA[
+ TL;DR
+
+所要 40 分 で GitHub REST API を叩いてスター数を取得する Python スクリプトを作る
+成果物: sessions/s07/github_api.py ＋ 動作スクショ
+コストは ¥0
+
+必須ステップは「仮想環境 → requests インストール → ブランチ作成 → スクリプト実装 → 実行 → PR」
+VS Code デバッグ使用時は launch.json に \"args\" を追加すると引数エラーを回避
+
+
+ 1. 今日のゴール
+
+
+
+項目
+内容
+
+
+
+
+Session
+07
+
+
+主題
+GitHub API でスター数取得
+
+
+モデル...]]></description><link>https://zenn.dev/masau/articles/2025-07-17-session7</link><guid isPermaLink="true">https://zenn.dev/masau/articles/2025-07-17-session7</guid><pubDate>Fri, 18 Jul 2025 00:11:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Tefn5b-V--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Session%252007%2520%25E2%2580%2594%2520GitHub%2520API%2520%25E3%2581%25A7%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC%25E6%2595%25B0%25E5%258F%2596%25E5%25BE%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:MasaU_Tech%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4NTZmODk1MmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>MasaU_Tech</dc:creator></item><item><title><![CDATA[リアルなダミーデータを自在に生成！PythonライブラリSDVで「値のバリエーション」を拡張するテクニックと活用法📈]]></title><description><![CDATA[
+ はじめに
+機械学習のモデル開発やBIツールのテスト、データ分析の学習教材を作成する際、大量のリアルなダミーデータが必要になることはありませんか？
+実際のプロジェクトでは、以下のような課題に直面することがよくあります：
+
+
+データ分析の学習用教材：受講者に実践的な演習をしてもらうため、リアルな大規模データセットが必要
+
+プロトタイプ開発：実データの一部しか入手できていないが、デモンストレーション用に大規模データが必要
+
+システムテスト：本番環境に近い規模のデータでパフォーマンステストを実施したい
+
+機密性の問題：実データは使えないが、統計的特性を保持した代替データが必要
+
+今回は、Py...]]></description><link>https://zenn.dev/enostech/articles/4dc11e93be2ae8</link><guid isPermaLink="true">https://zenn.dev/enostech/articles/4dc11e93be2ae8</guid><pubDate>Fri, 18 Jul 2025 00:06:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qqNRLIIL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AA%25E3%2582%25A2%25E3%2583%25AB%25E3%2581%25AA%25E3%2583%2580%25E3%2583%259F%25E3%2583%25BC%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E8%2587%25AA%25E5%259C%25A8%25E3%2581%25AB%25E7%2594%259F%25E6%2588%2590%25EF%25BC%2581Python%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AASDV%25E3%2581%25A7%25E3%2580%258C%25E5%2580%25A4%25E3%2581%25AE%25E3%2583%2590%25E3%2583%25AA%25E3%2582%25A8%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2580%258D%25E3%2582%2592%25E6%258B%25A1%25E5%25BC%25B5%25E3%2581%2599%25E3%2582%258B%25E3%2583%2586%25E3%2582%25AF%25E3%2583%258B%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25A8%25E6%25B4%25BB%25E7%2594%25A8%25E6%25B3%2595%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258A%25E3%2581%2595%25E3%2581%25B4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UxY2MwM2MzYWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>おさぴ</dc:creator></item><item><title><![CDATA[ROS 2: Nav2でGPS, IMU, LiDARを使ってGPS Waypoint Followerを動かす- 実機編]]></title><description><![CDATA[
+宇宙系のロボット開発サークルで制御の開発をしています。
+アメリカで行われる火星探査機の世界大会UniversityRoverChallengeに出場した際、Navigation2を使ってGPSポイントを巡るような探査機型ロボットの制御開発をしていたのでその備忘録になります。
+本記事では、Nav2のtutorialにあるnav2_gps_waypoint_follower_demoをベースに、実機のローバーでこのパッケージを実装していく流れを紹介します。
+今回取り扱うパッケージはnav_rover_controlという名前で公開しています。
+https://github.com/Sora...]]></description><link>https://zenn.dev/karisora/articles/0a1543ec9a7cf9</link><guid isPermaLink="true">https://zenn.dev/karisora/articles/0a1543ec9a7cf9</guid><pubDate>Thu, 17 Jul 2025 18:56:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--O3aReMbn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ROS%25202%253A%2520Nav2%25E3%2581%25A7GPS%252C%2520IMU%252C%2520LiDAR%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6GPS%2520Waypoint%2520Follower%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599-...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:karisora%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M4ZjU2YTA1ZjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>karisora</dc:creator></item><item><title><![CDATA[claude codeを使って立方体を回転するコード作らせた]]></title><description><![CDATA[今回はタイトル通り、claude codeを使ったらコンソール画面で立方体を回転させることができるか試してみました。
+
+ 早速使ってみる
+
+ 環境構築
+まずはclaude codeを実行させるための環境を用意しました。
+uv init python_3d_console -p 3.12
+cd python_3d_console
+
+ claude codeログ記録について
+私は普段claude codeのやり取りを保存するために以下のスラッシュコマンドを自作して使ってます。使い方はマークダウン通りで/log_chatコマンドを使います。指定したファイルにプロンプトやclaude codeの...]]></description><link>https://zenn.dev/akasan/articles/11fed840eedaa7</link><guid isPermaLink="true">https://zenn.dev/akasan/articles/11fed840eedaa7</guid><pubDate>Thu, 17 Jul 2025 13:54:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vsid7pjH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:claude%2520code%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E7%25AB%258B%25E6%2596%25B9%25E4%25BD%2593%25E3%2582%2592%25E5%259B%259E%25E8%25BB%25A2%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E4%25BD%259C%25E3%2582%2589%25E3%2581%259B%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Akasan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNXJfNDFtel9OY3dPYUtMRE1vc09tbVB6YmxHM0V5N3lNZzI3QWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Akasan</dc:creator></item><item><title><![CDATA[【Ubuntu】Python実行環境構築例【Apache2】]]></title><description><![CDATA[
+
+ WSL2構成例（Python/DB/Apache）
+※有線LAN接続が前提
+※実際の業務とは無関係な個人検証をもとにした内容です。
+
+ 1.	仮想環境(WSL2)の有効化
+
+ WSLを有効化する
+Windows+R⇒「control」を入力して「Enter」⇒コントロールパネルが開く
+
+コントロールパネル＞プログラム＞プログラムと機能
+「Windowsの機能の有効化または無効化
+
+「Linux用Windowsサブシステム」にチェックを入れる
+
+スクロールして、「仮想マシンプラットフォーム」にもチェックを入れる
+
+変更が完了したら、PCを再起動する。
+
+ WSLのバージョンが2である...]]></description><link>https://zenn.dev/nickelth/articles/ubuntuenvsetup</link><guid isPermaLink="true">https://zenn.dev/nickelth/articles/ubuntuenvsetup</guid><pubDate>Thu, 17 Jul 2025 13:53:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--S4x8slUX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Ubuntu%25E3%2580%2591Python%25E5%25AE%259F%25E8%25A1%258C%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E4%25BE%258B%25E3%2580%2590Apache2%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%258B%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25AB%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU0Mjc3ODIwNWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ニッケル</dc:creator></item><item><title><![CDATA[自身のGitHub traffic情報(ビジター・クローン)をDiscordに通知する]]></title><description><![CDATA[
+ 1. 環境
+OS: Ubuntu24
+プログラム言語: Python 3.13.2
+ライブラリ: requests
+その他: Discord Webhook URL, GitHubアクセストークン
+
+ 2. はじめに
+GitHubでは、リポジトリごとにトラフィック情報を確認できますが、ブラウザ上では個別リポジトリ単位でしか閲覧できないため、複数のリポジトリを管理している場合には確認作業が非常に煩雑です。
+そこで調査したところ、GitHubのWeb APIを利用すれば、リポジトリ単位でトラフィック情報を取得できることが分かりました。これを応用することで、アカウント全体のリポジトリに対し...]]></description><link>https://zenn.dev/alex819/articles/f9bb68f0637082</link><guid isPermaLink="true">https://zenn.dev/alex819/articles/f9bb68f0637082</guid><pubDate>Thu, 17 Jul 2025 13:00:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KJ5PQ2OC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2587%25AA%25E8%25BA%25AB%25E3%2581%25AEGitHub%2520traffic%25E6%2583%2585%25E5%25A0%25B1%2528%25E3%2583%2593%25E3%2582%25B8%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25BB%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25B3%2529%25E3%2582%2592Discord%25E3%2581%25AB%25E9%2580%259A%25E7%259F%25A5%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:alexnet%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDVnYVdYSm0ycUc4R3ktZFZMdVBpWVJaVVFFeVpseS1FUE9IVzROclZNN05kd3RnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>alexnet</dc:creator></item><item><title><![CDATA[Pythonエンジニア必見！アプリ開発とWeb開発の基礎を学べるおすすめ本7選]]></title><description><![CDATA[AIを活用する企業が増えてきたため、Pythonでアプリ開発している企業やAIのチューニングで使用される例が増えてきました。これからPythonエンジニアを目指す方やセカンドスキルで身につけたい方にとって、プログラミングの基礎固めは成功への第一歩です。そこで今回は、アプリ開発の基礎を学べる本や、Web開発に役立つ実践的な書籍を厳選して7冊ご紹介します。プログラミングスキルを磨いてキャリアを一層充実させましょう！
+
+ ポジショニングマップ
+紹介する本が初心者に向いているのかや基礎的なのかをポジショニングしました。
+
+ポジショニングマップ
+
+
+基礎＆初心者：プログラミング初心者にピッタリの本...]]></description><link>https://zenn.dev/headwaters/articles/ae06186cf2cf0d</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/ae06186cf2cf0d</guid><pubDate>Thu, 17 Jul 2025 10:30:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QcgoVMft--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E5%25BF%2585%25E8%25A6%258B%25EF%25BC%2581%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25A8Web%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%25E3%2582%2592%25E5%25AD%25A6%25E3%2581%25B9%25E3%2582%258B%25E3%2581%258A%25E3%2581%2599%25E3%2581%2599%25E3%2582%2581%25E6%259C%25AC7%25E9%2581%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%25B1%25E3%2583%25B3%25E5%2590%2589%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTlSRFk5eEFXaDBwVGgyZnNJX0w2VnFXZmFfYWR4NG9Oc1JhQ1BVV3hkenNGa3hDLW49czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ケン吉</dc:creator></item><item><title><![CDATA[もう環境構築で挫折しない。非エンジニアのためのGitHub Codespaces完全解説]]></title><description><![CDATA[「Python学習を始めたいけど、環境構築でつまづいて諦めた」
+こんな経験はありませんか？私自身、普段はBizDevとして働いており、Pythonは決して得意ではありません。しかし、最近ではGitHub CodespacesとAIの助けを借りて、データ可視化ダッシュボードやチャットボットなどをStreamlitで開発できるようになりました。
+
+ なぜプログラミング学習は「環境構築」で挫折するのか？- プログラミング初心者が直面する3つの壁
+プログラミング学習を始めたばかりの人にとって、環境構築こそが最も困難なステップです。最初の一歩のはずなのに、いきなり高い壁にぶつかることになります。本...]]></description><link>https://zenn.dev/morph_tech_blog/articles/516b241c77d2da</link><guid isPermaLink="true">https://zenn.dev/morph_tech_blog/articles/516b241c77d2da</guid><pubDate>Thu, 17 Jul 2025 09:58:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nfIQBNva--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%2582%25E3%2581%2586%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%25A7%25E6%258C%25AB%25E6%258A%2598%25E3%2581%2597%25E3%2581%25AA%25E3%2581%2584%25E3%2580%2582%25E9%259D%259E%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AEGitHub%2520Codespaces%25E5%25AE%258C%25E5%2585%25A8%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:genki%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzNmMyNTE0NTcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Squadbase%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk5ZDE2MzM0ZjkuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>genki</dc:creator></item><item><title><![CDATA[C/C++の世界に閉じこもっていたオジサンがPythonに触れてみる 　~基礎編~ 第1/10回]]></title><description><![CDATA[
+ はじめに
+こんにちは、NTTデータに勤務する一人のオジサンです。
+これまでC/C++言語を使って、がっつりとポインタやら参照やらに向き合いながら、プログラムを書いてきました。構造体と仲良くなり、クラスに振り回され、newとdeleteに責任を持つ。そんな人生でした。
+しかし時代は変わり、AIだ、データサイエンスだ、機械学習だと騒がれる中、「とりあえずPythonに触れないとまずい」という危機感に駆られて、Pythonの世界へ足を踏み入れた。。。
+そんなオジサンの独り言です。
+
+ 開発スタイルの違いを噛みしめる
+まず、C/C++とPythonの大まかな違い、こうして並べてみると。。。
+...]]></description><link>https://zenn.dev/nttdata_tech/articles/397ee306387342</link><guid isPermaLink="true">https://zenn.dev/nttdata_tech/articles/397ee306387342</guid><pubDate>Thu, 17 Jul 2025 06:57:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RZA0o7EQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:C%252FC%252B%252B%25E3%2581%25AE%25E4%25B8%2596%25E7%2595%258C%25E3%2581%25AB%25E9%2596%2589%25E3%2581%2598%25E3%2581%2593%25E3%2582%2582%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2581%259F%25E3%2582%25AA%25E3%2582%25B8%25E3%2582%25B5%25E3%2583%25B3%25E3%2581%258CPython%25E3%2581%25AB%25E8%25A7%25A6%25E3%2582%258C%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2520%25E3%2580%2580%7E%25E5%259F%25BA%25E7%25A4%258E%25E7%25B7%25A8%7E%2520%25E7%25AC%25AC1%252F10%25E5%259B%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Eiichi%2520Shimizu%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q1ZjRhYzE4MTIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:NTT%2520DATA%2520TECH%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZS5wbmc=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Eiichi Shimizu</dc:creator></item><item><title><![CDATA[不要なコードブロック付加問題修正（開発日記 No.125）]]></title><description><![CDATA[!
+この記事はgemini-2.0-flash-001によって自動生成されています。
+
+
+ 関連リンク
+
+前回の開発日記
+
+
+ はじめに
+昨日は、diary-convert.yml での出力結果に不要なコードブロックが付加されるという問題の調査を行いました。本日は、その修正作業と、関連するIssueのクローズ状況の確認を行います。
+
+ 背景と目的
+開発ツール diary-convert.yml で生成されるMarkdownファイルに、意図しないコードブロックが付加される問題は、記事の可読性を損ね、編集作業を煩雑にするため、早急な解決が必要でした。この問題を解決することで、開発効率の向上と...]]></description><link>https://zenn.dev/centervil/articles/2025-07-05_125_dev-diary</link><guid isPermaLink="true">https://zenn.dev/centervil/articles/2025-07-05_125_dev-diary</guid><pubDate>Wed, 16 Jul 2025 22:31:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HG0vI_6q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25B8%258D%25E8%25A6%2581%25E3%2581%25AA%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2583%2596%25E3%2583%25AD%25E3%2583%2583%25E3%2582%25AF%25E4%25BB%2598%25E5%258A%25A0%25E5%2595%258F%25E9%25A1%258C%25E4%25BF%25AE%25E6%25AD%25A3%25EF%25BC%2588%25E9%2596%258B%25E7%2599%25BA%25E6%2597%25A5%25E8%25A8%2598%2520No.125%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:centervil%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YlVZNXZiN0NvbG1TN0tPQmhqQ2M5V3lIRXYwVVhwZ2YyY2wxYTc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>centervil</dc:creator></item><item><title><![CDATA[PythonコードからLLVM IR 、アセンブリへ可視化する]]></title><description><![CDATA[
+ サマリ
+PythonコードをLLVM IR、アセンブリへ可視化しました。
+
+ マシンスペック
+MacBook Air M2 arm64
+
+ LLVMとは
+公式から引用
+
+The LLVM Project is a collection of modular and reusable compiler and toolchain technologies. Despite its name, LLVM has little to do with traditional virtual machines. The name "LLVM" itself is not an acronym;...]]></description><link>https://zenn.dev/ka_kan/articles/d6987badc17a36</link><guid isPermaLink="true">https://zenn.dev/ka_kan/articles/d6987badc17a36</guid><pubDate>Wed, 16 Jul 2025 21:00:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PxrX-Q6e--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%258B%25E3%2582%2589LLVM%2520IR%2520%25E3%2580%2581%25E3%2582%25A2%25E3%2582%25BB%25E3%2583%25B3%25E3%2583%2596%25E3%2583%25AA%25E3%2581%25B8%25E5%258F%25AF%25E8%25A6%2596%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kanda%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlOGJhYTMxOGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kanda</dc:creator></item><item><title><![CDATA[💻ＲＴＸ5080×CUDA12.9×Faissでベンチとってみた]]></title><description><![CDATA[
+ Faiss-GPU【📊 1536次元 × 100万件】ベンチマーク
+環境構築から測定条件、結果、体感などをシンプルにまとめます。
+
+ 🧠 Faissとは？
+Faiss（Facebook AI Similarity Search）は、大量のベクトルデータから**類似検索（近傍探索）**を高速に行うためのC++/Pythonライブラリです。特に、巨大な特徴ベクトル（埋め込み）を扱う機械学習や検索システムで重宝されます。
+
+特徴：
+
+数百万〜数十億件の高次元ベクトルに対応
+CPUだけでなく GPU（CUDA）対応 の実装あり
+Flat（全件探索）、IVF、PQなど複数のインデックス手法に対...]]></description><link>https://zenn.dev/ueshin/articles/4fa74be84483ba</link><guid isPermaLink="true">https://zenn.dev/ueshin/articles/4fa74be84483ba</guid><pubDate>Wed, 16 Jul 2025 13:03:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ng4LPgGe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520%25EF%25BC%25B2%25EF%25BC%25B4%25EF%25BC%25B85080%25C3%2597CUDA12.9%25C3%2597Faiss%25E3%2581%25A7%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2581%25E3%2581%25A8%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ueshin%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkFUWDVrTThPakhWR0FPeUZ2MHh1TEtxRGYwOC1SSGdHM2tTWUY0MUQ3SGVCQllzN3BHUT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ueshin</dc:creator></item><item><title><![CDATA[Session 6 — Python 基礎を 40 行でおさらいして実行環境を整える]]></title><description><![CDATA[
+ 1. 今日のゴール
+
+
+
+項目
+内容
+
+
+
+
+学習範囲
+Print / 変数 / 条件分岐 / ループ / コレクション / 関数 / 例外
+
+
+使用教材
+
+https://github.com/microsoft/c9-python-getting-started 内 02,04,05,07-09,12-14
+
+
+
+成果物
+
+basics.py（40 行）images/s6-basics.png
+
+
+
+実行環境
+VS Code + .venv（Python 3.12）
+
+
+コスト
+
+¥0（ローカル実行のみ）
+
+
+
+
+
+ 2. 手順ハイライト &lt;small&gt;(40 min...]]></description><link>https://zenn.dev/masau/articles/2025-07-16-session6</link><guid isPermaLink="true">https://zenn.dev/masau/articles/2025-07-16-session6</guid><pubDate>Wed, 16 Jul 2025 12:58:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--K3mTErws--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Session%25206%2520%25E2%2580%2594%2520Python%2520%25E5%259F%25BA%25E7%25A4%258E%25E3%2582%2592%252040%2520%25E8%25A1%258C%25E3%2581%25A7%25E3%2581%258A%25E3%2581%2595%25E3%2582%2589%25E3%2581%2584%25E3%2581%2597%25E3%2581%25A6%25E5%25AE%259F%25E8%25A1%258C%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%2595%25B4%25E3%2581%2588%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:MasaU_Tech%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4NTZmODk1MmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>MasaU_Tech</dc:creator></item><item><title><![CDATA[Vertex AI Gemini 429エラー対策：マルチリージョンフェイルオーバー(という名の力技💪) で安定運用する方法]]></title><description><![CDATA[
+ はじめに
+Google Cloud の Vertex AI Gemini を本格的に活用する際、多くの開発者が直面する課題が 429 Resource exhausted エラー です。
+特に Pay-as-you-go プラン（標準プラン）では、リージョンごとのクォータ制限により、リクエストが頻繁に拒否される状況が発生します。
+従来の単純なリトライ処理では、同一リージョンでの待機時間が長期化し、システム全体の効率が著しく低下する問題がありました。
+本記事では、10リージョンを活用したマルチリージョンフェイルオーバーシステム の実装により、429エラーを効果的に回避する手法をご紹介し...]]></description><link>https://zenn.dev/enostech/articles/360fff4a360b70</link><guid isPermaLink="true">https://zenn.dev/enostech/articles/360fff4a360b70</guid><pubDate>Wed, 16 Jul 2025 08:11:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eaNovMJ---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vertex%2520AI%2520Gemini%2520429%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E5%25AF%25BE%25E7%25AD%2596%25EF%25BC%259A%25E3%2583%259E%25E3%2583%25AB%25E3%2583%2581%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B3%25E3%2583%2595%25E3%2582%25A7%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%25AA%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%2528%25E3%2581%25A8%25E3%2581%2584%25E3%2581%2586%25E5%2590%258D%25E3%2581%25AE%25E5%258A%259B%25E6%258A%2580%2520%2529%2520%25E3%2581%25A7%25E5%25AE%2589%25E5%25AE%259A%25E9%2581%258B...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258A%25E3%2581%2595%25E3%2581%25B4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UxY2MwM2MzYWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>おさぴ</dc:creator></item><item><title><![CDATA[Pythonを使用したAzure FunctionsのVSCodeでのデバッグ方法]]></title><description><![CDATA[
+ はじめに
+Azure Functions を Python で開発していて、VSCode を使ってブレークポイントを仕込むようなデバッグのやり方がまとまっていなかったので記事としてまとめることにしました。
+本記事では、debugpy を使って、Python を使用した Azure Functions にブレークポイントを仕込んでデバッグする方法について紹介します。
+
+ debugpy とは
+debugpyは Microsoft が開発している Python の Debug Adapter Protocol（DAP）の実装です。
+Debug Adapter Protocol（DAP）は...]]></description><link>https://zenn.dev/yamaday/articles/how-to-debug-python-azure-functions</link><guid isPermaLink="true">https://zenn.dev/yamaday/articles/how-to-debug-python-azure-functions</guid><pubDate>Wed, 16 Jul 2025 07:56:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3Tj-HQqg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259FAzure%2520Functions%25E3%2581%25AEVSCode%25E3%2581%25A7%25E3%2581%25AE%25E3%2583%2587%25E3%2583%2590%25E3%2583%2583%25E3%2582%25B0%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yuki%2520Yamada%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhlNTRkZTk0ZWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuki Yamada</dc:creator></item><item><title><![CDATA[Python で Excel ワークシートを操作：追加、削除、移动、非表示]]></title><description><![CDATA[日常の事务作业やデータ処理において、Excel は広く使用されているツールです。Python 开発者にとって、コードを通じて効率的に Excel ワークシートを操作できることは、作業効率を大幅に向上させることができます。
+Free Spire.XLS for Python は机能が强大な Excel 処理ライブラリとして、Excel ワークシートに対する各种操作を実现するための便利なインターフェースを提供しています。本文では、この无料ライブラリを使用して Excel ワークシートの一般的な操作を実现する方法について详细に说明し、追加、削除、非表示、移动という 4 つの典型的なシーンのコー...]]></description><link>https://zenn.dev/codeshare/articles/e65d1e6f0347ef</link><guid isPermaLink="true">https://zenn.dev/codeshare/articles/e65d1e6f0347ef</guid><pubDate>Wed, 16 Jul 2025 05:57:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pVUCUvP3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%2520%25E3%2581%25A7%2520Excel%2520%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%2588%25E3%2582%2592%25E6%2593%258D%25E4%25BD%259C%25EF%25BC%259A%25E8%25BF%25BD%25E5%258A%25A0%25E3%2580%2581%25E5%2589%258A%25E9%2599%25A4%25E3%2580%2581%25E7%25A7%25BB%25E5%258A%25A8%25E3%2580%2581%25E9%259D%259E%25E8%25A1%25A8%25E7%25A4%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Coding%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS2pNeXQxN0FiT2ZZVUtSbzFJOXJYVkZWV3dYeUZUbTlOaV96emV0RllxelhjSlJBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Coding</dc:creator></item><item><title><![CDATA[FCMで複数通知を送るならsend_eachが効率的である理由]]></title><description><![CDATA[
+ はじめに
+Firebase Cloud Messaging (FCM) を用いて複数のユーザーにプッシュ通知を送信する際、firebase-admin SDK for Pythonには複数の方法が存在する。特に send() をループで回す方法と、send_each() を使う方法が考えられるが、どちらを選択すべきであろうか。
+結論を述べると、複数のメッセージを送信する状況では、パフォーマンスとエラーハンドリングの観点から send_each() の使用が強く推奨される。
+本記事では、なぜ send_each() が優れているのか、その具体的な理由とコード例を交えて解説する。
+
+ s...]]></description><link>https://zenn.dev/kromiii/articles/2ccd36ecdfd409</link><guid isPermaLink="true">https://zenn.dev/kromiii/articles/2ccd36ecdfd409</guid><pubDate>Wed, 16 Jul 2025 00:11:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vnZypqRM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:FCM%25E3%2581%25A7%25E8%25A4%2587%25E6%2595%25B0%25E9%2580%259A%25E7%259F%25A5%25E3%2582%2592%25E9%2580%2581%25E3%2582%258B%25E3%2581%25AA%25E3%2582%2589send_each%25E3%2581%258C%25E5%258A%25B9%25E7%258E%2587%25E7%259A%2584%25E3%2581%25A7%25E3%2581%2582%25E3%2582%258B%25E7%2590%2586%25E7%2594%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroyuki%2520Kuromiya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM4ZWM5ZDUwMDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroyuki Kuromiya</dc:creator></item><item><title><![CDATA[【React+Chat-ui-kit】LLM時代の手作りチャット画面の作成手順]]></title><description><![CDATA[
+ 概要
+LLMの登場により, アプリケーション面ではチャット画面を実装したいという要望はあると思う.
+本記事では, お手軽にブラウザ上で動くチャット画面の作成ライブラリchat-ui-kitを紹介する.
+Reactの上で動くため, 軽量かつシンプルな実装ができることが魅力だと思う.
+
+ 技術構成
+
+
+ブラウザ・チャット画面にはjavascript(node.js)を使用する
+
+
+主な技術構成は以下の通り
+
+ブラウザの画面: NextJS (Reactの派生)
++型定義: typescript
+デザイン: bootstrap
+チャット画面: chat-ui-kit-react
+
+
+
+Ma...]]></description><link>https://zenn.dev/akitek/articles/e702dd8869acc5</link><guid isPermaLink="true">https://zenn.dev/akitek/articles/e702dd8869acc5</guid><pubDate>Tue, 15 Jul 2025 14:57:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BxuH6uN6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590React%252BChat-ui-kit%25E3%2580%2591LLM%25E6%2599%2582%25E4%25BB%25A3%25E3%2581%25AE%25E6%2589%258B%25E4%25BD%259C%25E3%2582%258A%25E3%2583%2581%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2588%25E7%2594%25BB%25E9%259D%25A2%25E3%2581%25AE%25E4%25BD%259C%25E6%2588%2590%25E6%2589%258B%25E9%25A0%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Akitek%2527s%2520%25E6%258A%2580%25E8%25A1%2593%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U5ZDc3MGY4ZDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Akitek&apos;s 技術ブログ</dc:creator></item></channel></rss>
