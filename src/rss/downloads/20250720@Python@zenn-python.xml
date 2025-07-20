@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 20 Jul 2025 02:00:43 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[ローカルLLMのシステムコールの使用を確認してみる]]></title><description><![CDATA[
+ はじめに
+LLMを使用する際のPythonライブラリをシステムコールまで掘り下げると、どうなるかを試してみました。
+
+ マシンスペック
+MacBook Air M2 arm64
+
+ 事前知識
+
+ システムコール
+下記の記事で簡単に説明しています。
+https://zenn.dev/ka_kan/articles/b4ac244e17008e
+
+ 準備
+
+ Dockerの準備
+Dockerファイルの準備をします。
+FROM ubuntu:24.04
+RUN apt-get update &amp;&amp; apt-get install -y \
+    build-essentia...]]></description><link>https://zenn.dev/ka_kan/articles/5d59a61ad076c2</link><guid isPermaLink="true">https://zenn.dev/ka_kan/articles/5d59a61ad076c2</guid><pubDate>Sun, 20 Jul 2025 00:46:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Uk264dHf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25ABLLM%25E3%2581%25AE%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25AE%25E4%25BD%25BF%25E7%2594%25A8%25E3%2582%2592%25E7%25A2%25BA%25E8%25AA%258D%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kanda%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlOGJhYTMxOGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kanda</dc:creator></item><item><title><![CDATA[Renderを利用して自分だけのWebサービスをデプロイする]]></title><description><![CDATA[
+ 🔧 ChatGPT × Notion APIで、自分だけの知識データベースを構築しよう！
+
+ ✨ はじめに
+今回はRenderを利用してWebサービスをデプロイする方法を紹介します。
+Renderを利用することで簡単に自分で作成したWebアプリケーションをインターネット上に公開することができます。
+
+ 💡 こんな人におすすめ
+
+自分で作成したWebアプリケーションを公開したいけど、新たにサーバを構築するほどではなく小さく始めたい人
+他のWebサービスとの連携ポイントをインターネット上に公開して個人で利用できるようにしておきたい人(LLMのFunctiionCallingなど)
+
+
+ ...]]></description><link>https://zenn.dev/pwrengineer/articles/a4e159aa3e103e</link><guid isPermaLink="true">https://zenn.dev/pwrengineer/articles/a4e159aa3e103e</guid><pubDate>Sat, 19 Jul 2025 23:10:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--A-BCL64m--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Render%25E3%2582%2592%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E8%2587%25AA%25E5%2588%2586%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25AEWeb%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%25E3%2582%2592%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:PWR%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M5MTM5YzVkZWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>PWR</dc:creator></item><item><title><![CDATA[Pythonのスコープを少しだけ掘り下げる]]></title><description><![CDATA[
+ はじめに
+Pythonはifの中で変数を定義してもifの外でも参照できる仕様で、他の言語とは異なった仕様をしています。Pythonユーザは当たり前かもしれませんが、これを掘り下げてみます。
+
+ マシンスペック
+MacBook Air M2 arm64
+
+ 準備
+
+ プロジェクトの作成
+python用のディレクトリとvenvで環境を作成しておきます。
+python -V           # 例: 3.12.8
+mkdir cpy_scope_lab &amp;&amp; cd $_
+python -m venv venv &amp;&amp; . venv/bin/activate...]]></description><link>https://zenn.dev/ka_kan/articles/dc4462061bdb93</link><guid isPermaLink="true">https://zenn.dev/ka_kan/articles/dc4462061bdb93</guid><pubDate>Sat, 19 Jul 2025 21:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4DCVeupr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AE%25E3%2582%25B9%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2597%25E3%2582%2592%25E5%25B0%2591%25E3%2581%2597%25E3%2581%25A0%25E3%2581%2591%25E6%258E%2598%25E3%2582%258A%25E4%25B8%258B%25E3%2581%2592%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kanda%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlOGJhYTMxOGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kanda</dc:creator></item><item><title><![CDATA[Ruffとpre-commitで安全なPython開発]]></title><description><![CDATA[
+ はじめに
+Ruffは、Pythonコードの静的解析とフォーマットを高速に行うツールです。
+pre-commitは、Gitのコミット前に自動でコードのチェックや整形を実行するツールです。
+この2つを組み合わせることで、コミット前に自動で静的解析とフォーマットを実行できるようになります。
+GitHub ActionsなどのCIで実行するよりも、早い段階で問題を検出・修正できるため、AIエージェント開発にも適しています。
+
+ 事前準備
+
+ uvのインストール
+こちらを参照してください
+https://docs.astral.sh/uv/getting-started/installatio...]]></description><link>https://zenn.dev/iharuoru/articles/f83ff40c6ec3ef</link><guid isPermaLink="true">https://zenn.dev/iharuoru/articles/f83ff40c6ec3ef</guid><pubDate>Sat, 19 Jul 2025 16:42:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--I9WmvZRJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ruff%25E3%2581%25A8pre-commit%25E3%2581%25A7%25E5%25AE%2589%25E5%2585%25A8%25E3%2581%25AAPython%25E9%2596%258B%25E7%2599%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:iharu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJkYWQyZjhkZTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>iharu</dc:creator></item><item><title><![CDATA[SQL超初心者がPythonで勉強ログを作りながら出来たことをまとめた]]></title><description><![CDATA[
+ Pythonで勉強ログを管理しながら学ぶSQL入門
+はじめまして、きょーじゅと申します。
+この記事では、勉強ログを作りながら学んだPythonでのSQLの操作について書いていこうと思います。
+実は基本情報技術者試験や応用情報技術者試験での勉強で登場したSQLを正直何も分からないままに試験を乗り切ってしまったので、その備忘録を兼ねて本記事を作成しました。
+なお、IT業務未経験ゆえに以下のコードはChatGPTにたくさん手伝ってもらいましたが、本記事の文章は人力です(コードもできる限り自分でも理解に努めながら書いています)。
+それゆえに生じる正確性に欠ける点や表現の誤り等についてはご容赦...]]></description><link>https://zenn.dev/kyojyu01/articles/47553cae923423</link><guid isPermaLink="true">https://zenn.dev/kyojyu01/articles/47553cae923423</guid><pubDate>Sat, 19 Jul 2025 16:06:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NdL9YSBA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SQL%25E8%25B6%2585%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%258CPython%25E3%2581%25A7%25E5%258B%2589%25E5%25BC%25B7%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258A%25E3%2581%25AA%25E3%2581%258C%25E3%2582%2589%25E5%2587%25BA%25E6%259D%25A5%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%25E3%2582%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258D%25E3%2582%2587%25E3%2583%25BC%25E3%2581%2598%25E3%2582%2585%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSlZ5WF9abGR3RjFXakZZZkxnQnMyb2RjSUZVb3ZsYU45RjRkU19LdDNfeVFhUmM3X249czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>きょーじゅ</dc:creator></item><item><title><![CDATA[LinuxでWhisperを使った音声入力アプリ作った]]></title><description><![CDATA[
+ はじめに
+最近、Aqua Voiceやsuperwhisperといった音声入力ツールが流行っている気がします。
+しかし、Linuxに対応しているものが少なかったり、ローカル環境で動作するWhisperモデルを活用したツールが見当たらなかったりすることに気づきました。
+そこで、OpenAIのWhisperモデルを利用した無料の音声入力システムを開発しましたので、本記事で紹介します。
+サーバー・クライアント構成にすることで、家の高性能GPUを活用しながら、軽量なノートPCからでも快適に音声入力できる仕組みを実現しました。
+https://github.com/yadokani389/wh...]]></description><link>https://zenn.dev/yadokani389/articles/whisper-typing-20250720</link><guid isPermaLink="true">https://zenn.dev/yadokani389/articles/whisper-typing-20250720</guid><pubDate>Sat, 19 Jul 2025 15:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JAruTckS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25A7Whisper%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E9%259F%25B3%25E5%25A3%25B0%25E5%2585%25A5%25E5%258A%259B%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yadokani%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkxYTdhM2RjOTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yadokani</dc:creator></item><item><title><![CDATA[Koyeb無料でDiscordBotを立ち上げようとしてヘルスチェックで2回ハマった話]]></title><description><![CDATA[
+ 1. はじめに
+Discord Botを無料で24時間運用したい――そんなときに便利なのが、クラウドPaaSの「Koyeb」。
+無料枠でもDockerイメージをデプロイでき、Python製のBotも簡単に動かせます。
+しかし、いざ運用してみると「一晩経つとBotが止まっている」「Instance stoppedのエラーが出る」など、思わぬ落とし穴が…。
+本記事では、KoyebでDiscord Botを安定運用するために実際にハマったポイントと、その解決策をまとめます。
+
+ 読者ターゲット
+
+無料でDiscord Botを運用したい人
+Koyebにデプロイしようとしてハマっている人
+一...]]></description><link>https://zenn.dev/kannna5296/articles/2025-07-19-koyeb-unhealthy</link><guid isPermaLink="true">https://zenn.dev/kannna5296/articles/2025-07-19-koyeb-unhealthy</guid><pubDate>Sat, 19 Jul 2025 09:41:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--M45XnkYI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Koyeb%25E7%2584%25A1%25E6%2596%2599%25E3%2581%25A7DiscordBot%25E3%2582%2592%25E7%25AB%258B%25E3%2581%25A1%25E4%25B8%258A%25E3%2581%2592%25E3%2582%2588%25E3%2581%2586%25E3%2581%25A8%25E3%2581%2597%25E3%2581%25A6%25E3%2583%2598%25E3%2583%25AB%25E3%2582%25B9%25E3%2583%2581%25E3%2582%25A7%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25A72%25E5%259B%259E%25E3%2583%258F%25E3%2583%259E%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25B1%25B1%25E6%25A0%25B9%25E6%25AD%25A3%25E5%25A4%25A7%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM2OGYzNmU4YzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>山根正大</dc:creator></item><item><title><![CDATA[Enumはいいな（Pydanticを添えて）【Python】]]></title><description><![CDATA[
+ はじめに
+Python の Enum は、列挙型を定義するためのクラスです。列挙型は、定数の集合を名前付きで定義し、それらを明示的に扱えるようにすることで、コードの可読性と保守性を高めます。
+
+ Enumの基本
+
+ Enumの定義
+enum モジュールをインポートし、Enum クラスを継承することで列挙型を定義できます。各メンバーは「名前と値」のペアです。
+from enum import Enum
+
+class Color(Enum):
+    RED = 'red'
+    GREEN = 'green'
+    BLUE = 'blue'
+
+ Enumの使用
+Enum メンバー...]]></description><link>https://zenn.dev/iharuoru/articles/6dcbfaa558b8e6</link><guid isPermaLink="true">https://zenn.dev/iharuoru/articles/6dcbfaa558b8e6</guid><pubDate>Sat, 19 Jul 2025 09:28:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XcNUUZ3D--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Enum%25E3%2581%25AF%25E3%2581%2584%25E3%2581%2584%25E3%2581%25AA%25EF%25BC%2588Pydantic%25E3%2582%2592%25E6%25B7%25BB%25E3%2581%2588%25E3%2581%25A6%25EF%25BC%2589%25E3%2580%2590Python%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:iharu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJkYWQyZjhkZTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>iharu</dc:creator></item><item><title><![CDATA[【Python】標準ライブラリ・外部ライブラリまとめ]]></title><description><![CDATA[
+ はじめに
+Pythonで開発を始めたばかりの方にとって、「ライブラリ」という言葉や、その使い方に戸惑うことがあると思います。
+この記事では、標準ライブラリと外部ライブラリの違いや、それらがどのように使えるようになるのかを、わかりやすく解説します。
+
+ 対象読者
+
+MacBook利用者
+Python利用者
+※理由：自分自身がMacを利用しており、その経験を元にしているため
+
+
+ きっかけ
+pipというパッケージマネージャーを使って外部ライブラリをインストールするとなったときに、「あれ、どういう仕組みでインストールし使えるようになるんだ？」と思ったのがきっかけです。
+
+ ライブラリとは
+...]]></description><link>https://zenn.dev/mabo23/articles/72bc847d774661</link><guid isPermaLink="true">https://zenn.dev/mabo23/articles/72bc847d774661</guid><pubDate>Sat, 19 Jul 2025 08:44:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bMUIZ32x--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E6%25A8%2599%25E6%25BA%2596%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2583%25BB%25E5%25A4%2596%25E9%2583%25A8%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mabo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQzM2ZhMmVkZDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mabo</dc:creator></item><item><title><![CDATA[ls とls -lの速度比較]]></title><description><![CDATA[
+ はじめに
+lsコマンドでファイルやディレクトリの確認をしていますが、-lのオプションをつけると差はどのようになるのでしょうか。気になったので簡単に実験してみました。
+
+ マシンスペック
+MacBook Air M2 arm64
+Docker上で実施
+
+ 準備
+
+ ディレクトリの作成
+mkdir -p ~/ls_bench/{build,logs,src}
+cd ~/ls_bench
+解析用のpythonスクリプトを作成しておきます。
+# analyse.py
+import json, pandas as pd, matplotlib.pyplot as plt, sys, pathl...]]></description><link>https://zenn.dev/ka_kan/articles/a3316706f63a08</link><guid isPermaLink="true">https://zenn.dev/ka_kan/articles/a3316706f63a08</guid><pubDate>Sat, 19 Jul 2025 07:11:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--G7YnqwL---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ls%2520%25E3%2581%25A8ls%2520-l%25E3%2581%25AE%25E9%2580%259F%25E5%25BA%25A6%25E6%25AF%2594%25E8%25BC%2583%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kanda%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlOGJhYTMxOGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kanda</dc:creator></item><item><title><![CDATA[aiohttp と httpx の違いを比較する]]></title><description><![CDATA[
+ はじめに
+PythonでHTTPリクエストを送信する際、長らく requests がデファクトスタンダードであった。しかし、非同期処理の重要性が高まるにつれて、asyncio に対応したHTTPクライアントライブラリが求められるようになった。その代表格が aiohttp と httpx である。
+私自身、どちらのライブラリを選択すべきか迷う場面が多々あったため、本記事では両者の違いを整理し、それぞれのユースケースについて考察する。
+
+ aiohttp とは
+aiohttp は、Pythonの非同期Webフレームワークであり、HTTPクライアントとサーバーの両方の機能を提供するライブラ...]]></description><link>https://zenn.dev/kromiii/articles/aiohttp-vs-httpx</link><guid isPermaLink="true">https://zenn.dev/kromiii/articles/aiohttp-vs-httpx</guid><pubDate>Sat, 19 Jul 2025 06:55:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WCk-WFtv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:aiohttp%2520%25E3%2581%25A8%2520httpx%2520%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2582%2592%25E6%25AF%2594%25E8%25BC%2583%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroyuki%2520Kuromiya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM4ZWM5ZDUwMDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroyuki Kuromiya</dc:creator></item><item><title><![CDATA[文字とコードポイントを相互変換するコマンドを作成する]]></title><description><![CDATA[文字とコードポイントを相互変換する処理はシェル芸のよくある題材です。テストケースでこれらの相互変換をよく使うので Bash、Python、Rust でコマンドとして作成してみました。
+
+ Bash での実装
+ord と chr ファイルを用意して次のコードを記載します。
+
+ord
+input="$1"
+echo -n "$input" \
+  | grep -oP . \
+  | while IFS= read -r char; do
+      printf '%X ' "'$char"
+    done
+echo
+
+
+chr
+for cp in "$@"; do
+  printf '...]]></description><link>https://zenn.dev/masakielastic/articles/20250718-chr-and-ord</link><guid isPermaLink="true">https://zenn.dev/masakielastic/articles/20250718-chr-and-ord</guid><pubDate>Fri, 18 Jul 2025 22:55:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ABQ4P-Wv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2596%2587%25E5%25AD%2597%25E3%2581%25A8%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2583%259D%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592%25E7%259B%25B8%25E4%25BA%2592%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masaki%2520Kagaya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc3ODAxZTNiZTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masaki Kagaya</dc:creator></item><item><title><![CDATA[身近なデータで試すPythonの機械学習！　その２　お住まいの地域の不動産取引価格の予測モデル作成]]></title><description><![CDATA[不動産の価格は、立地、築年数、面積など様々な要因によって決まります。これらの要因と実際の取引価格のデータがあれば、機械学習を使って将来の取引価格を予測するモデルを構築できる可能性があります。よく紹介されるモデルとしてscikit-learnを使ったボストンの住宅価格の回帰予測モデルの例が紹介されていますが、身近な例として日本のある地域の不動産の価格の予測モデルの作成を検討してみました。
+この記事では、国土交通省が提供する「不動産取引価格情報」を利用し、Pythonと人気の機械学習ライブラリScikit-learnを使って、不動産価格予測モデルを作成・評価するプロセスを紹介します。皆さんの...]]></description><link>https://zenn.dev/pincolo/articles/753d20982248cc</link><guid isPermaLink="true">https://zenn.dev/pincolo/articles/753d20982248cc</guid><pubDate>Fri, 18 Jul 2025 21:18:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eVAU-Wvq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25BA%25AB%25E8%25BF%2591%25E3%2581%25AA%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2581%25A7%25E8%25A9%25A6%25E3%2581%2599Python%25E3%2581%25AE%25E6%25A9%259F%25E6%25A2%25B0%25E5%25AD%25A6%25E7%25BF%2592%25EF%25BC%2581%25E3%2580%2580%25E3%2581%259D%25E3%2581%25AE%25EF%25BC%2592%25E3%2580%2580%25E3%2581%258A%25E4%25BD%258F%25E3%2581%25BE%25E3%2581%2584%25E3%2581%25AE%25E5%259C%25B0%25E5%259F%259F%25E3%2581%25AE%25E4%25B8%258D%25E5%258B%2595%25E7%2594%25A3%25E5%258F%2596%25E5%25BC%2595%25E4%25BE%25A1%25E6%25A0%25BC%25E3%2581%25AE%25E4%25BA%2588%25E6%25B8%25AC%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E4%25BD%259C%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2594%25E3%2583%25B3%25E3%2582%25B3%25E3%2583%25AD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MxMmRjOWM3YmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ピンコロ</dc:creator></item><item><title><![CDATA[Booleanとは何なのかをRuby, Rust, Pythonで掘り下げる]]></title><description><![CDATA[
+ はじめに
+私のソフトウェアのエンジニアとしての入りはC言語でした。次にPythonを触り、Booleanを見たときに衝撃を覚えたのを思い出します。
+今回は、普段使用しているBooleanをRuby, Rust, Pythonで掘り下げてみます。
+
+ マシンスペック
+MacBook Air M2 arm64
+Docker上で実施
+
+ 準備
+
+ Dockerの起動
+mkdir bool_deepdive &amp;&amp; cd $_
+mkdir -p ruby python rust
+vim Dockerfile
+# =================================...]]></description><link>https://zenn.dev/ka_kan/articles/21754a7a41738f</link><guid isPermaLink="true">https://zenn.dev/ka_kan/articles/21754a7a41738f</guid><pubDate>Fri, 18 Jul 2025 21:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EQJE0pYZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Boolean%25E3%2581%25A8%25E3%2581%25AF%25E4%25BD%2595%25E3%2581%25AA%25E3%2581%25AE%25E3%2581%258B%25E3%2582%2592Ruby%252C%2520Rust%252C%2520Python%25E3%2581%25A7%25E6%258E%2598%25E3%2582%258A%25E4%25B8%258B%25E3%2581%2592%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kanda%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlOGJhYTMxOGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kanda</dc:creator></item><item><title><![CDATA[OpenAI Cookbook 画像生成について試してみた]]></title><description><![CDATA[今回はOpenAI Cookbookで公開されている以下の記事について解説および実験してみました。
+https://cookbook.openai.com/examples/generate_images_with_high_input_fidelity
+
+ Cookbookの概要
+今回取り扱うGenerate images with high input fideltyでは、Image APIおよび画像生成ツールで利用可能なinput_fideltyパラメータを利用して、入力特徴を保持する方法を学ぶことができます。input_fideltyパラメータをhighに設定すると、顔やロゴとい...]]></description><link>https://zenn.dev/akasan/articles/3812171607466e</link><guid isPermaLink="true">https://zenn.dev/akasan/articles/3812171607466e</guid><pubDate>Fri, 18 Jul 2025 13:47:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6Zzv6bzi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OpenAI%2520Cookbook%2520%25E7%2594%25BB%25E5%2583%258F%25E7%2594%259F%25E6%2588%2590%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Akasan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNXJfNDFtel9OY3dPYUtMRE1vc09tbVB6YmxHM0V5N3lNZzI3QWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Akasan</dc:creator></item><item><title><![CDATA[自然言語でSQLを生成する仕組みを実装してみた - 100行のSQL生成までの道のり]]></title><description><![CDATA[
+ 自然言語でSQLを生成する仕組みを実装してみた - 100行のSQL生成までの道のり
+
+ はじめに
+「自然言語をinputとし、そのinputを解釈してSQLを動的に生成する」—— LangChain SQL Database Agentを初めて触った時の感動は今でも忘れられません。テーブル名を指定せずとも意図したテーブルを検索し、「似たような目的を持つレコードは？」という曖昧な質問にも、勝手に単語単位に区切ってlike検索する賢さに驚きました。
+しかし、エンタープライズ環境での実装は想像以上に困難でした。特に「営業の田中さんからの問い合わせだからこのSQL」といった、ユーザーコンテ...]]></description><link>https://zenn.dev/renue/articles/465b744d0ea454</link><guid isPermaLink="true">https://zenn.dev/renue/articles/465b744d0ea454</guid><pubDate>Fri, 18 Jul 2025 09:48:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NLTWxYUA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2587%25AA%25E7%2584%25B6%25E8%25A8%2580%25E8%25AA%259E%25E3%2581%25A7SQL%25E3%2582%2592%25E7%2594%259F%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2520-%2520100%25E8%25A1%258C%25E3%2581%25AESQL%25E7%2594%259F%25E6%2588%2590%25E3%2581%25BE%25E3%2581%25A7%25E3%2581%25AE%25E9%2581%2593%25E3%2581%25AE%25E3%2582%258A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:renue%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QyMTQ0YTkzZjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>renue</dc:creator></item><item><title><![CDATA[pythonインストールでわけのわからんエラーが出たら]]></title><description><![CDATA[新しいスッピン状態のMacにpythonをインストールしたのですが、いろいろと問題があったのでメモしときます。
+
+ pyenvからインストール時のエラー
+pyenvからpythonをインストールすると、インストールはいちおう完了するが、
+ModuleNotFoundError: No module named '_lzma'
+とエラーが出てくる。
+いろいろ調べると、brewでxzをインストールする必要があるとのこと。
+ずっと使っていたMacの中を見てみると、しれっと入っていた。
+先ほどインストールしたpythonをアンインストールし、xzをインストールし、再びpythonをインストールし...]]></description><link>https://zenn.dev/ikema/articles/2f54e71c545676</link><guid isPermaLink="true">https://zenn.dev/ikema/articles/2f54e71c545676</guid><pubDate>Fri, 18 Jul 2025 09:38:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yz43DnvZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:python%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25A7%25E3%2582%258F%25E3%2581%2591%25E3%2581%25AE%25E3%2582%258F%25E3%2581%258B%25E3%2582%2589%25E3%2582%2593%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%258C%25E5%2587%25BA%25E3%2581%259F%25E3%2582%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ikema%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2huYWQzc19tUEJ6UnhRN1VZQ3VWdkNhZmYxdWNnRjBQNTRIUXFGSmc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ikema</dc:creator></item><item><title><![CDATA[AI × Python でゲーム制作に挑戦！]]></title><description><![CDATA[
+ 🎯 目的
+自分でゲーム、作ってみたくないですか？
+興味はあるけどプログラミングなんてわからないよってあきらめてる方も多いと思います。ですが今はAIを活用することでまったく知識がない状態からでも1人で簡易的なアプリでしたらすぐに形にできる時代になりました。
+今回はタイトルの通りプログラミング未経験でもゲームが作れるよということを記事にしたのでまずはぜひ試してみてください！
+
+ 🧰 必要なもの
+
+
+VSCode：プログラムを書くためのエディタ（無料）
+
+Python：プログラミング言語。3.x系ならOK
+
+Pygame：ゲーム制作用のライブラリ（後で入れます）
+
+
+ 🛠️ 作成手順
+VS...]]></description><link>https://zenn.dev/nbs_tokyo/articles/90bcef470e2247</link><guid isPermaLink="true">https://zenn.dev/nbs_tokyo/articles/90bcef470e2247</guid><pubDate>Fri, 18 Jul 2025 09:19:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6L99BZxR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AI%2520%25C3%2597%2520Python%2520%25E3%2581%25A7%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E5%2588%25B6%25E4%25BD%259C%25E3%2581%25AB%25E6%258C%2591%25E6%2588%25A6%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:JinSuzuki080%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRmNWU5MTAzNjYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%258D%25E3%2582%25A4%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25BA%25E6%259D%25B1%25E4%25BA%25AC%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUJHUldoTVRidk5ycnBuU0lPcXQ4VEUzeUdZTktRb1N3d2tEN1dkSjVheXVIcDl3PXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>JinSuzuki080</dc:creator></item><item><title><![CDATA[性能評価指標と意味]]></title><description><![CDATA[
+ さまざまな性能評価指標とその意味
+
+ これを書く目的
+日々、世間では無数の機械学習モデルが作られ、それがさまざまな「性能評価指標」によって評価されています。
+ただしその評価指標は非常に多彩で、筆者はその意味や用途をすぐに忘れてしまいます。
+そこで、ひとつの資料を見れば評価指標の意味をすぐ思いだせるようにするため、本文を書くことにしました。
+
+ 内容・対象読者
+本文には、以下の評価指標の意味と使用場面について解説しています。
+ただし、その実装方法については記載しないので、実装方法を調べている方は他をあたってください。
+
+正解率（Accuracy）
+再現率（Recall）
+適合率（Pre...]]></description><link>https://zenn.dev/mamech/articles/5d46f99dc56b4c</link><guid isPermaLink="true">https://zenn.dev/mamech/articles/5d46f99dc56b4c</guid><pubDate>Fri, 18 Jul 2025 05:27:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ozv5ncDr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2580%25A7%25E8%2583%25BD%25E8%25A9%2595%25E4%25BE%25A1%25E6%258C%2587%25E6%25A8%2599%25E3%2581%25A8%25E6%2584%258F%25E5%2591%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BE%25E3%2582%2581%25E3%2581%25A3%25E3%2581%25A1%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS2sxVlkxLWFoUXJ5WW1uZ1B2VUxVYk5idXdKZ2t3bXpkakh6TUVTUTlycWhpVnN3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>まめっち</dc:creator></item><item><title><![CDATA[テキスト分類モデルを活用した、勘定科目予測]]></title><description><![CDATA[
+ 1. はじめに
+経理業務では、新しい取引先や商品・サービスが日々登場し、従来のルールベース（例：「〇〇会社は交通費」のような固定ルール）では対応しきれないケースが増えています。例えば、「Uber」の経費は交通費？会議費？それとも接待費？このような判断は、利用シーンによって変わり、単純なルールでは分類困難です。こうした課題に対して、過去の分類実績から学習し、文脈を理解して予測する機械学習（テキスト分類モデル）が有効な解決策となります。
+この記事では、FastTextというライブラリを使ってテキスト分類モデルを実現します。
+
+ 2. 予測の概要
+予測には、「予測対象データ」と「学習済みモ...]]></description><link>https://zenn.dev/acntechjp/articles/4adc757a84dd40</link><guid isPermaLink="true">https://zenn.dev/acntechjp/articles/4adc757a84dd40</guid><pubDate>Fri, 18 Jul 2025 03:02:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oo4mVqst--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2586%25E3%2582%25AD%25E3%2582%25B9%25E3%2583%2588%25E5%2588%2586%25E9%25A1%259E%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E3%2582%2592%25E6%25B4%25BB%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2580%2581%25E5%258B%2598%25E5%25AE%259A%25E7%25A7%2591%25E7%259B%25AE%25E4%25BA%2588%25E6%25B8%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2583%259E%25E3%2583%2583%25E3%2582%25B5%25E3%2583%25B3%2520%2528Masanori%2520Yos...%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U2ZDA4MDY5ODcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Accenture%2520Japan%2520%2528%25E6%259C%2589%25E5%25BF%2597%2529%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5MzkwNDBmYjYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>マッサン (Masanori Yoshida)</dc:creator></item></channel></rss>
