@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 21 Jul 2025 07:45:50 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【uv】GitHub CopilotのMCPをクリーンなPython仮想環境で動かす]]></title><description><![CDATA[
+ 初めに
+MCP（Model Context Protocol）という単語を聞いて、そろそろ勉強しようと思いました。
+ということで、Claude Proに課金した勢いで、Claude Desktop経由でGmailか何かのコネクタを使っていろいろ整理させようとしたところ、トークンを大量に使って制限にひっかかる事態になりました。
+そもそもClaude Desktopを使った理由は、本家でドキュメントが充実していると考えたからですが、MCPの特性上、どのプラットフォームでも設定はほぼ同じだと分かりました。
+MCPのテストをするのにClaude Desktopを使う必要はないと考え、私の課金...]]></description><link>https://zenn.dev/mouriman/articles/vscode-mcp-copilot</link><guid isPermaLink="true">https://zenn.dev/mouriman/articles/vscode-mcp-copilot</guid><pubDate>Mon, 21 Jul 2025 06:36:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gh0z69Qh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590uv%25E3%2580%2591GitHub%2520Copilot%25E3%2581%25AEMCP%25E3%2582%2592%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25B3%25E3%2581%25AAPython%25E4%25BB%25AE%25E6%2583%25B3%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2582%25E3%2583%25BC%25E3%2582%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNndScWprdXlLNm9JS3J0bC14Qk11X2ZBUlR5eVR6SGhZWjZjb0d5V2s9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>もーり</dc:creator></item><item><title><![CDATA[pycはいつ更新される【Python】]]></title><description><![CDATA[
+ はじめに
+どうも、bunbookです。普段はAWSをメインに扱っています。
+X：
+https://x.com/bunbook270301
+前回の記事：
+https://zenn.dev/mtaerohand/articles/a8db0ca57a242d
+
+ やったこと
+Pythonを書いていた時、コードの修正が実行結果に反映されていないように見える事案がありました（実際は反映されていました）。
+__pycache__にimportしたモジュールのコンパイル結果がキャッシュされるのは知っていたので、自分の変更によって中の.pycが本当に更新されているのかが気になり、CPythonでキ...]]></description><link>https://zenn.dev/mtaerohand/articles/d67e98cddd2cae</link><guid isPermaLink="true">https://zenn.dev/mtaerohand/articles/d67e98cddd2cae</guid><pubDate>Mon, 21 Jul 2025 06:14:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eLb3fU7s--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:pyc%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25A4%25E6%259B%25B4%25E6%2596%25B0%25E3%2581%2595%25E3%2582%258C%25E3%2582%258B%25E3%2580%2590Python%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:bunbook%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmOTc4Njg2MzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>bunbook</dc:creator></item><item><title><![CDATA[夢に出てきた暗号アルゴリズムを実装して検証する]]></title><description><![CDATA[
+ はじめに
+夢の中で暗号アルゴリズムを説明していました。「文字列を200列の行列に詰め込み、乱数ベクトルとの排他的論理和 (XOR) とスカラー縮約で暗号化する」という内容です。せっかくなので実装し、手順を技術記事にまとめます。
+追記：エンディアンを判定してビッグエンディアン↔︎リトルエンディアンに変換してから上記のアルゴリズムを走らせるものだったのを思い出したのですが、復号不可のため追加の実施は取りやめておきます。
+
+ ⚠️⚠️⚠️結果はうまくいきませんでしたので、気になる方のみ読んでください。⚠️⚠️⚠️
+
+
+ マシンスペック
+MacBook Air M2 arm64
+Docker...]]></description><link>https://zenn.dev/ka_kan/articles/d4f43351bc286a</link><guid isPermaLink="true">https://zenn.dev/ka_kan/articles/d4f43351bc286a</guid><pubDate>Mon, 21 Jul 2025 06:10:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wbphIwQT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25A4%25A2%25E3%2581%25AB%25E5%2587%25BA%25E3%2581%25A6%25E3%2581%258D%25E3%2581%259F%25E6%259A%2597%25E5%258F%25B7%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25B4%25E3%2583%25AA%25E3%2582%25BA%25E3%2583%25A0%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%25A6%25E6%25A4%259C%25E8%25A8%25BC%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kanda%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlOGJhYTMxOGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kanda</dc:creator></item><item><title><![CDATA[Airflowをクラウドに構築してDAGを動かすまで]]></title><description><![CDATA[
+ 1. はじめに
+こんにちは。（心の内では）健康を目指して日々精進しているshimojです。
+最近、業務でAirflowを触る機会があり「便利そうだな」と実感しました。
+Airflowは、ワークフローをコードで記述し、スケジュール実行できるツールで、データエンジニア界隈では広く使われています。
+今回はそのAirflowの挙動をより深く理解するため、クラウドサーバー（Rocky Linux）に導入し、DAGの作成と実行までを一通り試してみます。
+
+ 2. AirflowとDAGについて
+Airflowは、DAG（Directed Acyclic Graph）という形でワークフローをコード...]]></description><link>https://zenn.dev/shimoj_tech/articles/15_airflow_infra_and_dags</link><guid isPermaLink="true">https://zenn.dev/shimoj_tech/articles/15_airflow_infra_and_dags</guid><pubDate>Mon, 21 Jul 2025 03:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--h-K-k6qf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Airflow%25E3%2582%2592%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%2589%25E3%2581%25AB%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2597%25E3%2581%25A6DAG%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599%25E3%2581%25BE%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shimoj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjdXNDRtMERSV3hFQXBFRDRWZlBING5aY1h3d25UTVp3aExfbHdJQ0VGPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shimoj</dc:creator></item><item><title><![CDATA[競技プログラミングにおける正規表現]]></title><description><![CDATA[
+ もってきた
+もともとQiitaで書いてた↓の記事をZennでも公開することにしました。
+競技プログラミングにおける正規表現
+投稿日自体は古いですが、内容は今でも通用するものと思われます。
+
+ はじめに
+最近、脳トレがてら AtCoder の過去問を解いています。
+AtCoderProblems の 簡単な問題から順に解いてる感じです。
+やっていて気づきましたが、文字列処理の問題で正規表現を使うと簡単に解ける場合が結構あります。
+ソートや貪欲アルゴリズムなど気づけば簡単なパターンがあるのは経験している方も多いと思いますが、そんな感じです。
+簡単に解けるかどうかは慣れや人にもよると思いま...]]></description><link>https://zenn.dev/ayadev/articles/ac29027017c737</link><guid isPermaLink="true">https://zenn.dev/ayadev/articles/ac29027017c737</guid><pubDate>Mon, 21 Jul 2025 03:24:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--znFKElpi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25AB%25B6%25E6%258A%2580%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E6%25AD%25A3%25E8%25A6%258F%25E8%25A1%25A8%25E7%258F%25BE%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2582%2584%25E3%2581%259B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lyVjJ4VVZTS0RGNUoyNElXZ1RTaUdjcU5oZHVqSzFIWmpZdUlIPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あやせ</dc:creator></item><item><title><![CDATA[Pythonで実装する、IPアドレスベースの同時接続数制限]]></title><description><![CDATA[
+ はじめに
+前回の記事では、アイドル状態のTCP接続が大量に存在すると、サーバーのメモリが枯渇しうること を確認しました。悪意のあるユーザーや、バグのあるクライアントからの過剰な接続は、サービス全体を停止させる原因となります。
+では、特定のユーザー（IPアドレス）からの過剰な接続を防ぐには、どうすれば良いのでしょうか？
+今回は、IPアドレスごとに同時接続数を制限するシンプルなレートリミッタを、Pythonのasyncioを使って実装します。
+
+ マシンスペック
+MacBook Air M2 arm64
+
+ 準備
+
+ Dockerファイルの作成
+# Dockerfile
+FROM pyt...]]></description><link>https://zenn.dev/ka_kan/articles/da68a53ba66965</link><guid isPermaLink="true">https://zenn.dev/ka_kan/articles/da68a53ba66965</guid><pubDate>Mon, 21 Jul 2025 00:11:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6hQzET5j--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%25E3%2580%2581IP%25E3%2582%25A2%25E3%2583%2589%25E3%2583%25AC%25E3%2582%25B9%25E3%2583%2599%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%25AE%25E5%2590%258C%25E6%2599%2582%25E6%258E%25A5%25E7%25B6%259A%25E6%2595%25B0%25E5%2588%25B6%25E9%2599%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kanda%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlOGJhYTMxOGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kanda</dc:creator></item><item><title><![CDATA[しおりのないPDFに半自動でしおりを付けるPython製コマンドラインツール]]></title><description><![CDATA[
+ 背景
+PDFを閲覧している場合，しおり[1]があると便利である。
+現在，PDFを作成するさまざまなツールでしおりを付与することができるが，古いPDFや単に作成者が忘れた場合など，必ずしも付いているとは限らない。
+しおりは作成者だけが付与できるわけではなく，別のユーザにも可能であるし，すでにしおりが存在している場合にはそれを編集することもできる（たとえば，Acrobatのしおり機能を使えばよい）。
+しかし，対象のPDF文書の見出しをひとつひとつ手でコピペしたり手入力したりでやっていくのはきわめて煩雑である。
+そこで、しおりのないPDFの本文情報からしおり情報を自動的に生成し、（もちろん...]]></description><link>https://zenn.dev/misgnros/articles/8ea87f2a7a74e8</link><guid isPermaLink="true">https://zenn.dev/misgnros/articles/8ea87f2a7a74e8</guid><pubDate>Sun, 20 Jul 2025 21:08:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jR1wOXn7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%2597%25E3%2581%258A%25E3%2582%258A%25E3%2581%25AE%25E3%2581%25AA%25E3%2581%2584PDF%25E3%2581%25AB%25E5%258D%258A%25E8%2587%25AA%25E5%258B%2595%25E3%2581%25A7%25E3%2581%2597%25E3%2581%258A%25E3%2582%258A%25E3%2582%2592%25E4%25BB%2598%25E3%2581%2591%25E3%2582%258BPython%25E8%25A3%25BD%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:misgnros%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmMDBkYjc1NGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>misgnros</dc:creator></item><item><title><![CDATA[PythonでDocker上のソケットバッファについて観察する]]></title><description><![CDATA[
+ はじめに
+普段、ソケット通信を使っていて1クライアントあたりのリソースの消費と、同時接続数の限界はどこなんだろう？と疑問に思い、実験してみました。
+シナリオとしては、YoutubeやTVでの紹介など何かを契機にたくさんのアクセスが生じた場合を想定します。
+本記事ではコードは公開せず、その現象を観測する実験手法と結果を共有します。あくまで参考としてご覧いただきたく、よろしくお願いします。
+
+ マシンスペック
+MacBook Air M2 arm64
+
+ 準備
+
+ Dockerファイルの作成
+# Dockerfile
+FROM python:3.11-slim
+
+# procps: fr...]]></description><link>https://zenn.dev/ka_kan/articles/c6d0985b11c748</link><guid isPermaLink="true">https://zenn.dev/ka_kan/articles/c6d0985b11c748</guid><pubDate>Sun, 20 Jul 2025 21:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PBGFgwXF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7Docker%25E4%25B8%258A%25E3%2581%25AE%25E3%2582%25BD%25E3%2582%25B1%25E3%2583%2583%25E3%2583%2588%25E3%2583%2590%25E3%2583%2583%25E3%2583%2595%25E3%2582%25A1%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E8%25A6%25B3%25E5%25AF%259F%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kanda%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlOGJhYTMxOGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kanda</dc:creator></item><item><title><![CDATA[PythonのPathオブジェクトを使って検索すると便利]]></title><description><![CDATA[
+ 前提
+
+
+Google Colabは、ディレクトリ構成やGUIの機能が今後変更される可能性があることに注意してください。
+
+
+Colabを起動して、/content/sample_dataの下にtest dirとhoge.csvを作成した状況を前提とします。
+
+
+/content# tree
+.
+└── sample_data
+    ├── anscombe.json
+    ├── california_housing_test.csv
+    ├── california_housing_train.csv
+    ├── mnist_test.csv
+    ├── mnis...]]></description><link>https://zenn.dev/shundeveloper/articles/a087d6923c9cb0</link><guid isPermaLink="true">https://zenn.dev/shundeveloper/articles/a087d6923c9cb0</guid><pubDate>Sun, 20 Jul 2025 12:36:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eDN5BcRE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AEPath%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E6%25A4%259C%25E7%25B4%25A2%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E4%25BE%25BF%25E5%2588%25A9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shunsock%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY3Y2U4NzUxNzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shunsock</dc:creator></item><item><title><![CDATA[Claude Codeの公式コンテナをPython用にカスタマイズする]]></title><description><![CDATA[
+ はじめに
+Claude Code が話題になってからしばらく経ち、基本的な使い方には慣れてきた方も多いのではないでしょうか。そうなると、次は「並列で動かす」「完全に手放しで動かす」といった、より高度な使い方にも挑戦してみたくなるはずです。私自身もその一人です。
+こうした上級的な運用を目指すうえで避けて通れないのが、サンドボックス環境の構築です。AI に高い権限を与える以上、それに見合ったリスクヘッジが求められます（自分の環境をぶっ壊されてからではもう遅いですね）。
+そこで今回は、Anthropic 公式の Claude Code 向け開発コンテナ（DevContainer）の構成をベ...]]></description><link>https://zenn.dev/rktm/articles/19965599005b88</link><guid isPermaLink="true">https://zenn.dev/rktm/articles/19965599005b88</guid><pubDate>Sun, 20 Jul 2025 10:30:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XkacgbmS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Claude%2520Code%25E3%2581%25AE%25E5%2585%25AC%25E5%25BC%258F%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2582%2592Python%25E7%2594%25A8%25E3%2581%25AB%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Rick%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZkMTQ1MDUyZWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Rick</dc:creator></item><item><title><![CDATA[Redis + Lambda(Python) + Docker Composeで実現する日次バッチ処理システム]]></title><description><![CDATA[
+ 🚀 背景・モチベーション
+SAA（AWS認定ソリューションアーキテクトアソシエイト）を勉強している中で、「自分でAWSのサービスを組み合わせて何か作ってみたい」と思い、実際に手を動かしてみることにしました。
+題材として選んだのは、広告システムのクリックログ集計です。
+「Redisのカウンターでクリック数を記録し、日次でLambda（Python）バッチを動かしてCTR（クリック率）を計測・集計する」という仕組みを構築してみました。
+マーケティングや広告分野の経験はありません。
+そのため、マーケティング的な観点や指標の捉え方が本職の方とは異なる部分もあるかもしれませんが、「AWSサービ...]]></description><link>https://zenn.dev/perpouh/articles/5e825a0cd31df7</link><guid isPermaLink="true">https://zenn.dev/perpouh/articles/5e825a0cd31df7</guid><pubDate>Sun, 20 Jul 2025 10:03:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DjPCD3pN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Redis%2520%252B%2520Lambda%2528Python%2529%2520%252B%2520Docker%2520Compose%25E3%2581%25A7%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%25E6%2597%25A5%25E6%25AC%25A1%25E3%2583%2590%25E3%2583%2583%25E3%2583%2581%25E5%2587%25A6%25E7%2590%2586%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:perpouh%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNkYmY2MTBiNDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>perpouh</dc:creator></item><item><title><![CDATA[Pythonのインデント = ブロックを決めている実装を追う]]></title><description><![CDATA[
+ はじめに
+Pythonのコードブロックはインデント4つなどで決めていますが、実装はどうなっているのでしょうか？気になったので調べてみました。
+
+ 準備
+cpythonは下記のgithubリポジトリで公開されています。
+今回は、ローカルでファイルを確認したいためクローンします。
+https://github.com/python/cpython
+
+ cpythonをクローン
+git clone https://github.com/python/cpython.git
+cd cpython
+
+ 調査
+
+ 対象ファイル
+
+/Parser/lexer/lexer.c - メインのトークナイ...]]></description><link>https://zenn.dev/ka_kan/articles/2d34fe529667e3</link><guid isPermaLink="true">https://zenn.dev/ka_kan/articles/2d34fe529667e3</guid><pubDate>Sun, 20 Jul 2025 08:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--L6EszHM---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2587%25E3%2583%25B3%25E3%2583%2588%25E2%2580%25AF%253D%25E2%2580%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2583%2583%25E3%2582%25AF%25E3%2582%2592%25E6%25B1%25BA%25E3%2582%2581%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E5%25AE%259F%25E8%25A3%2585%25E3%2582%2592%25E8%25BF%25BD%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kanda%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlOGJhYTMxOGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kanda</dc:creator></item><item><title><![CDATA[ここから始める Powertools for AWS Lambda (Python) - Typing 編 -]]></title><description><![CDATA[
+ はじめに
+こんにちは。
+Penetrator プロダクト開発部で主にインフラを担当している遠藤です。
+みなさん元気に Lambda Life を送っていますか?
+AWS Lambda で開発をしていると、Lambda 独自の開発方法で迷うこともあると思います。
+また、ログ出力、メトリクス収集、トレーシングなど、運用面での課題に直面することもあるかもしれません。
+そんな課題を解決してくれるのが、AWS 公式が提供する Powertools for AWS Lambda です。
+今回は、このライブラリの中でも導入しやすい Typing 機能について、実際の使用イメージと共に紹介します。
+...]]></description><link>https://zenn.dev/where/articles/3c4e01c3c93435</link><guid isPermaLink="true">https://zenn.dev/where/articles/3c4e01c3c93435</guid><pubDate>Sun, 20 Jul 2025 05:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hXHkO6l3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%2593%25E3%2581%2593%25E3%2581%258B%25E3%2582%2589%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258B%2520Powertools%2520for%2520AWS%2520Lambda%2520%2528Python%2529%2520-%2520Typing%2520%25E7%25B7%25A8%2520-%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:yendoooo%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1ZThlODg2OTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Penetrator%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1pIMi0wVWlCN2lZaUJidUZiN3lYVlU2YnRrdFJvb09WY3RVU3BiazBITHRtNlA4ZFo9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yendoooo</dc:creator></item><item><title><![CDATA[[第1回]初心者のPythonつまずき日記～辞書（dict）編～]]></title><description><![CDATA[
+ 単体で見ると怖くない辞書（dict）
+Pythonの勉強を始めて10日ほどが経ち、これまで順調だった私もついに初めての「つまずきポイント」にぶつかりました。それが「辞書（dict）」です。
+辞書（dict）は一見とてもシンプルです。
+中身は、波かっこ {} で囲まれた キー（key）とバリュー（value） のペアで構成され、コロン : を使って両者を結びます。実際に最小構文で書くと、以下のようになります。
+dictionary = { 'key': 'value' }
+この構造だけを見ると、「なんだ簡単じゃん」と思ってしまいます。
+私もそう思い込んでいたせいで、結果として Chat...]]></description><link>https://zenn.dev/yuji168/articles/til-2025-07-20</link><guid isPermaLink="true">https://zenn.dev/yuji168/articles/til-2025-07-20</guid><pubDate>Sun, 20 Jul 2025 05:09:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--y7wO2u4p--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E7%25AC%25AC1%25E5%259B%259E%255D%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%25AEPython%25E3%2581%25A4%25E3%2581%25BE%25E3%2581%259A%25E3%2581%258D%25E6%2597%25A5%25E8%25A8%2598%25EF%25BD%259E%25E8%25BE%259E%25E6%259B%25B8%25EF%25BC%2588dict%25EF%25BC%2589%25E7%25B7%25A8%25EF%25BD%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yuji-RE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsveS5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuji-RE</dc:creator></item><item><title><![CDATA[ChatGPT API × Pythonで業務を自動化してみた（テンプレ付き）]]></title><description><![CDATA[はじめに
+「日報作成」「メール文案」「コードのリファクタ」など、日常業務で“ちょっと面倒”な作業、ありませんか？
+最近では、ChatGPT APIをPythonから呼び出すことで、こうした作業を自動化できるようになってきました。
+この記事では、
+ChatGPT APIを使った自動化の基本構成
+実務で役立つ活用例（＋テンプレコード）
+エラー回避のコツ
+をまとめて解説します。
+実際に使ってみた内容をベースにしており、すぐに試せるテンプレコード付きです！
+
+ ChatGPT APIを使う準備
+
+OpenAI APIキーの取得
+OpenAI公式サイト にアクセスし、APIキーを取得します。
+
+取...]]></description><link>https://zenn.dev/atnettec/articles/1c8e8437c2d9d2</link><guid isPermaLink="true">https://zenn.dev/atnettec/articles/1c8e8437c2d9d2</guid><pubDate>Sun, 20 Jul 2025 03:24:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qdkpBuoN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ChatGPT%2520API%2520%25C3%2597%2520Python%25E3%2581%25A7%25E6%25A5%25AD%25E5%258B%2599%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E5%258C%2596%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25EF%25BC%2588%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AC%25E4%25BB%2598%25E3%2581%258D%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%25AB%2599%25E8%25A6%258B%2520%25E9%259D%2592%25E7%25A3%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlmM2QwNGJkOWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>髙見 青磁</dc:creator></item><item><title><![CDATA[ローカルLLMのシステムコールの使用を確認してみる]]></title><description><![CDATA[
+ はじめに
+LLMを使用する際のPythonライブラリをシステムコールまで掘り下げると、どうなるかを試してみました。
+
+ マシンスペック
+MacBook Air M2 arm64
+
+ 事前知識
+
+ システムコール
+下記の記事で簡単に説明しています。
+https://zenn.dev/ka_kan/articles/b4ac244e17008e
+
+ 準備
+
+ Dockerの準備
+Dockerファイルの準備をします。
+FROM ubuntu:24.04
+RUN apt-get update &amp;&amp; apt-get install -y \
+    build-essentia...]]></description><link>https://zenn.dev/ka_kan/articles/5d59a61ad076c2</link><guid isPermaLink="true">https://zenn.dev/ka_kan/articles/5d59a61ad076c2</guid><pubDate>Sun, 20 Jul 2025 00:46:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Uk264dHf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25ABLLM%25E3%2581%25AE%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25AE%25E4%25BD%25BF%25E7%2594%25A8%25E3%2582%2592%25E7%25A2%25BA%25E8%25AA%258D%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kanda%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlOGJhYTMxOGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kanda</dc:creator></item><item><title><![CDATA[Renderを利用して自分だけのWebサービスをデプロイする]]></title><description><![CDATA[
+ 🔧 Renderを利用して自分だけのWebサービスをデプロイする
+
+ ✨ はじめに
+今回はRenderを利用してWebサービスをデプロイする方法を紹介します。
+Renderを利用することで簡単に自分で作成したWebアプリケーションをインターネット上に公開することができます。
+
+ 💡 こんな人におすすめ
+
+自分で作成したWebアプリケーションを公開したいけど、新たにサーバを構築するほどではなく小さく始めたい人
+他のWebサービスとの連携ポイントをインターネット上に公開して個人で利用できるようにしておきたい人(LLMのFunctiionCallingなど)
+
+
+ 💡事前準備
+
+デプロイし...]]></description><link>https://zenn.dev/pwrengineer/articles/a4e159aa3e103e</link><guid isPermaLink="true">https://zenn.dev/pwrengineer/articles/a4e159aa3e103e</guid><pubDate>Sat, 19 Jul 2025 23:10:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--A-BCL64m--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Render%25E3%2582%2592%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E8%2587%25AA%25E5%2588%2586%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25AEWeb%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%25E3%2582%2592%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:PWR%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M5MTM5YzVkZWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>PWR</dc:creator></item><item><title><![CDATA[Pythonのスコープを少しだけ掘り下げる]]></title><description><![CDATA[
+ はじめに
+Pythonはifの中で変数を定義してもifの外でも参照できる仕様で、他の言語とは異なった仕様をしています。Pythonユーザは当たり前かもしれませんが、これを掘り下げてみます。
+
+ マシンスペック
+MacBook Air M2 arm64
+
+ 準備
+
+ プロジェクトの作成
+python用のディレクトリとvenvで環境を作成しておきます。
+python -V           # 例: 3.12.8
+mkdir cpy_scope_lab &amp;&amp; cd $_
+python -m venv venv &amp;&amp; . venv/bin/activate...]]></description><link>https://zenn.dev/ka_kan/articles/dc4462061bdb93</link><guid isPermaLink="true">https://zenn.dev/ka_kan/articles/dc4462061bdb93</guid><pubDate>Sat, 19 Jul 2025 21:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4DCVeupr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AE%25E3%2582%25B9%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2597%25E3%2582%2592%25E5%25B0%2591%25E3%2581%2597%25E3%2581%25A0%25E3%2581%2591%25E6%258E%2598%25E3%2582%258A%25E4%25B8%258B%25E3%2581%2592%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kanda%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlOGJhYTMxOGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kanda</dc:creator></item><item><title><![CDATA[Ruffとpre-commitで安全なPython開発]]></title><description><![CDATA[
+ はじめに
+Ruffは、Pythonコードの静的解析とフォーマットを高速に行うツールです。
+pre-commitは、Gitのコミット前に自動でコードのチェックや整形を実行するツールです。
+この2つを組み合わせることで、コミット前に自動で静的解析とフォーマットを実行できるようになります。
+GitHub ActionsなどのCIで実行するよりも、早い段階で問題を検出・修正できるため、AIエージェント開発にも適しています。
+
+ 事前準備
+
+ uvのインストール
+こちらを参照してください
+https://docs.astral.sh/uv/getting-started/installatio...]]></description><link>https://zenn.dev/iharuoru/articles/f83ff40c6ec3ef</link><guid isPermaLink="true">https://zenn.dev/iharuoru/articles/f83ff40c6ec3ef</guid><pubDate>Sat, 19 Jul 2025 16:42:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--I9WmvZRJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ruff%25E3%2581%25A8pre-commit%25E3%2581%25A7%25E5%25AE%2589%25E5%2585%25A8%25E3%2581%25AAPython%25E9%2596%258B%25E7%2599%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:iharu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJkYWQyZjhkZTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>iharu</dc:creator></item><item><title><![CDATA[SQL超初心者がPythonで勉強ログを作りながら出来たことをまとめた]]></title><description><![CDATA[
+ Pythonで勉強ログを管理しながら学ぶSQL入門
+はじめまして、きょーじゅと申します。
+この記事では、勉強ログを作りながら学んだPythonでのSQLの操作について書いていこうと思います。
+実は基本情報技術者試験や応用情報技術者試験での勉強で登場したSQLを正直何も分からないままに試験を乗り切ってしまったので、その備忘録を兼ねて本記事を作成しました。
+なお、IT業務未経験ゆえに以下のコードはChatGPTにたくさん手伝ってもらいましたが、本記事の文章は人力です(コードもできる限り自分でも理解に努めながら書いています)。
+それゆえに生じる正確性に欠ける点や表現の誤り等についてはご容赦...]]></description><link>https://zenn.dev/kyojyu01/articles/47553cae923423</link><guid isPermaLink="true">https://zenn.dev/kyojyu01/articles/47553cae923423</guid><pubDate>Sat, 19 Jul 2025 16:06:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NdL9YSBA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SQL%25E8%25B6%2585%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%258CPython%25E3%2581%25A7%25E5%258B%2589%25E5%25BC%25B7%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258A%25E3%2581%25AA%25E3%2581%258C%25E3%2582%2589%25E5%2587%25BA%25E6%259D%25A5%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%25E3%2582%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258D%25E3%2582%2587%25E3%2583%25BC%25E3%2581%2598%25E3%2582%2585%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSlZ5WF9abGR3RjFXakZZZkxnQnMyb2RjSUZVb3ZsYU45RjRkU19LdDNfeVFhUmM3X249czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>きょーじゅ</dc:creator></item></channel></rss>

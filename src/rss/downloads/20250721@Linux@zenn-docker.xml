@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Docker」のフィード]]></title><description><![CDATA[Zennのトピック「Docker」のRSSフィードです]]></description><link>https://zenn.dev/topics/docker</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/75b80a5922.png</url><title>Zennの「Docker」のフィード</title><link>https://zenn.dev/topics/docker</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 21 Jul 2025 07:25:36 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/docker/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[[Docker+Python+pahcer] AtCoder AHC 向けの環境を構築する]]></title><description><![CDATA[
+ 目的
+
+長期AHCに備えて、ローカルでテスト実行を簡単に実行できる環境の構築を目指す
+今後、PCを変更する際などに備えてDocker上で構築し、再セットアップが容易な状態を目指す
+
+
+ 構築する環境の概要
+
+VSCode上でpythonのコードを実行できる
+
+pacherを導入し、手元で繰り返しテストできる
+
+
+ 環境
+
+MacBook Air M1チップ
+
+
+ 手順
+
+ 事前インストール
+
+VSCode
+拡張機能として以下を追加
+
+Docker
+Dev Containers
+
+
+Docker Desktop
+
+
+ 作業用フォルダを作成
+
+atcoderフォルダを作成し、その直下に....]]></description><link>https://zenn.dev/miso253udon/articles/f67e2552b81d07</link><guid isPermaLink="true">https://zenn.dev/miso253udon/articles/f67e2552b81d07</guid><pubDate>Sun, 20 Jul 2025 14:17:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--71gwU--z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BDocker%252BPython%252Bpahcer%255D%2520AtCoder%2520AHC%2520%25E5%2590%2591%25E3%2581%2591%25E3%2581%25AE%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:miso253oudon%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA5MTQ0ODZlMjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>miso253oudon</dc:creator></item><item><title><![CDATA[[AI Challenge 2025] WSL2でDockerを起動させまくっていたらボリュームを圧迫していた]]></title><description><![CDATA[
+ Ubuntuのサイズが800GBを超えていた
+自動運転AIチャレンジでDockerでビルドする場面が多いと思いますがが、何も考えずに自動化を図ってDocker Buildを繰り返していたら、いつの間にかUbuntuのボリュームサイズが爆増してCドライブを潰しにかかっていたので。
+スクショを取る余裕がないくらい容量圧迫してしまったので、解決策のみ簡単に記載。同じことで悲しい思いをする前に......
+
+ 解決策
+
+ 1. docker system prune
+docker system df というコマンドを打つと、現在Dockerの使用状況が分かる。自動化図っているとおそらく Bu...]]></description><link>https://zenn.dev/fleagne/articles/7cc302a4248a81</link><guid isPermaLink="true">https://zenn.dev/fleagne/articles/7cc302a4248a81</guid><pubDate>Sun, 20 Jul 2025 13:26:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TZ6mwSR7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BAI%2520Challenge%25202025%255D%2520WSL2%25E3%2581%25A7Docker%25E3%2582%2592%25E8%25B5%25B7%25E5%258B%2595%25E3%2581%2595%25E3%2581%259B%25E3%2581%25BE%25E3%2581%258F%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2581%259F%25E3%2582%2589%25E3%2583%259C%25E3%2583%25AA%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%2592%25E5%259C%25A7%25E8%25BF%25AB%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:fleagne%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JhMTg0YjlmYWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>fleagne</dc:creator></item><item><title><![CDATA[Redis + Lambda(Python) + Docker Composeで実現する日次バッチ処理システム]]></title><description><![CDATA[
+ 🚀 背景・モチベーション
+SAA（AWS認定ソリューションアーキテクトアソシエイト）を勉強している中で、「自分でAWSのサービスを組み合わせて何か作ってみたい」と思い、実際に手を動かしてみることにしました。
+題材として選んだのは、広告システムのクリックログ集計です。
+「Redisのカウンターでクリック数を記録し、日次でLambda（Python）バッチを動かしてCTR（クリック率）を計測・集計する」という仕組みを構築してみました。
+マーケティングや広告分野の経験はありません。
+そのため、マーケティング的な観点や指標の捉え方が本職の方とは異なる部分もあるかもしれませんが、「AWSサービ...]]></description><link>https://zenn.dev/perpouh/articles/5e825a0cd31df7</link><guid isPermaLink="true">https://zenn.dev/perpouh/articles/5e825a0cd31df7</guid><pubDate>Sun, 20 Jul 2025 10:03:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DjPCD3pN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Redis%2520%252B%2520Lambda%2528Python%2529%2520%252B%2520Docker%2520Compose%25E3%2581%25A7%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%25E6%2597%25A5%25E6%25AC%25A1%25E3%2583%2590%25E3%2583%2583%25E3%2583%2581%25E5%2587%25A6%25E7%2590%2586%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:perpouh%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNkYmY2MTBiNDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>perpouh</dc:creator></item><item><title><![CDATA[WSL2+Docker+VSCode（Cursor）+PHPでXdebug3を設定し、デバッグする方法]]></title><description><![CDATA[
+ WSL、Docker、VSCode（Cursor）でXDebugをセットアップする方法 (WSL環境でVSCodeを起動するケース)
+DockerとWSL (Windows Subsystem for Linux) を利用したPHP開発環境で、VSCodeを使ってXDebugによるデバッグを行うための手順を解説します。この方法は、VSCodeをWSL上で直接起動するケースを想定しています。
+※VSCodeをフォークしたCursorでも同様の設定が可能です。Cursorを使って開発されている方でも参考にしていただければと思います。
+まだ経験が少ないエンジニアがCursorやCline、...]]></description><link>https://zenn.dev/oip/articles/a13c0b318d47dd</link><guid isPermaLink="true">https://zenn.dev/oip/articles/a13c0b318d47dd</guid><pubDate>Sun, 20 Jul 2025 07:28:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BkNoO9nN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WSL2%252BDocker%252BVSCode%25EF%25BC%2588Cursor%25EF%25BC%2589%252BPHP%25E3%2581%25A7Xdebug3%25E3%2582%2592%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%2597%25E3%2580%2581%25E3%2583%2587%25E3%2583%2590%25E3%2583%2583%25E3%2582%25B0%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nkp25%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhhMWNjOGFjNGMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nkp25</dc:creator></item><item><title><![CDATA[GitLab CI/CDからGitHub Actionsに乗り換えてみた話]]></title><description><![CDATA[
+ はじめに
+会社ではずっとGitLab CI/CDを使っていたのですが、個人プロジェクトでGitHub Actionsを初めて使ってみました。そこで気づいたのが、環境の違いによってDockerの必要性が大きく変わるということです。
+今回は、GitLab CI/CDとGitHub Actionsの違いを実際のNext.js + Vercel配置例を通して比較してみたいと思います。特に、なぜGitLabではDockerが必要で、GitHub Actionsでは必須ではないのかについて解説します。
+
+ CI/CD環境分離の3つのアプローチ
+CI/CDパイプラインで最も重要な課題の一つが環境分...]]></description><link>https://zenn.dev/sonsu/articles/43ca5d3cfe750c</link><guid isPermaLink="true">https://zenn.dev/sonsu/articles/43ca5d3cfe750c</guid><pubDate>Sat, 19 Jul 2025 17:00:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7_Iemttp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GitLab%2520CI%252FCD%25E3%2581%258B%25E3%2582%2589GitHub%2520Actions%25E3%2581%25AB%25E4%25B9%2597%25E3%2582%258A%25E6%258F%259B%25E3%2581%2588%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sonsu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U2ZGVkNzE0NjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sonsu</dc:creator></item><item><title><![CDATA[[Dify] 1. DockerでDifyを立ち上げる]]></title><description><![CDATA[
+ 執筆日
+2025/07/19
+
+ 概要
+今更Dify？と思われるかもしれませんが、僕もそう思います。色々思うところあってオープンソースは便利だけど開発が活発過ぎて大変そう、廃れたときにそれ使い続けるのどうなんだろう、というダブスタな忌避をしていたため、ちょっと触ってなるほどね～くらいにとどめていました。LLM開発も色々と経験してやっぱりPoC段階でどんな運用か固まっていなかったり、LLM性能を試したいだけの時は簡単に試せる環境の提供方法としてDify便利だなあという気持ちになったので今後しばらく簡単な使い方のまとめブログを書いていきたいと思います。
+というわけで初回は立ち上げです。ブ...]]></description><link>https://zenn.dev/hwskodani/articles/4f3fa5e41e7dc6</link><guid isPermaLink="true">https://zenn.dev/hwskodani/articles/4f3fa5e41e7dc6</guid><pubDate>Sat, 19 Jul 2025 12:37:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aYrDHaoY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BDify%255D%25201.%2520Docker%25E3%2581%25A7Dify%25E3%2582%2592%25E7%25AB%258B%25E3%2581%25A1%25E4%25B8%258A%25E3%2581%2592%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kodani%2520takushi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZmNzIzMThiZjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kodani takushi</dc:creator></item><item><title><![CDATA[WebFramework n本ノック 準備編]]></title><description><![CDATA[
+ なんの記事？
+様々なWebフレームワーク触るにあたっての事前準備
+https://github.com/slopwell/web-framework-n-knocks
+
+ Webフレームワークで実装するもの
+ヘルスチェック + 何かしらを登録、一覧、詳細API
+
+GET /health
+GET /{domain}s
+GET /{domain}/id
+POST /{domain}
+
+やらないこと
+
+認証の実装
+ORMの選定
+画面側の実装
+
+
+ 全体像
+
+📁ROOT
+
+📁 &lt;WebFramework1&gt;
+
+📁src FW向けのプログラム
+📝compose.yaml 特定FW向...]]></description><link>https://zenn.dev/slopwelljp/articles/98b1ebf6604f58</link><guid isPermaLink="true">https://zenn.dev/slopwelljp/articles/98b1ebf6604f58</guid><pubDate>Sat, 19 Jul 2025 08:06:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--V0yJGIO4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WebFramework%2520n%25E6%259C%25AC%25E3%2583%258E%25E3%2583%2583%25E3%2582%25AF%2520%25E6%25BA%2596%25E5%2582%2599%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2599%25E3%2582%258D%25E3%2581%25A3%25E3%2581%25BA%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NlYTkxZDE2M2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>すろっぺる</dc:creator></item><item><title><![CDATA[dbt + Docker + PostgreSQL環境でのデータ変換]]></title><description><![CDATA[
+ dbtでデータ変換を学んでみた
+データエンジニアとして、より効率的なデータ変換の方法を学びたい！
+本記事では、dbt（data build tool）を使ったPostgreSQL環境でのデータ変換を、実際のプロジェクトを通じて学んだことをまとめています。
+dbtは多くの企業で導入されているため、これを機にdbtが使えるエンジニアを目指します。
+
+💡 対象読者
+
+データエンジニアとして成長したい方
+SQLは知っているがdbtは初めての方
+データ変換の効率化に興味がある方
+
+
+
+ 目次
+このパートでは以下のステップで進めていきます。
+
+Docker環境でのPostgreSQLセットアップ...]]></description><link>https://zenn.dev/1ie_1uv/articles/3cbe06de0a209d</link><guid isPermaLink="true">https://zenn.dev/1ie_1uv/articles/3cbe06de0a209d</guid><pubDate>Sat, 19 Jul 2025 06:36:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bcMY4SFj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:dbt%2520%252B%2520Docker%2520%252B%2520PostgreSQL%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7%25E3%2581%25AE%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%25A4%2589%25E6%258F%259B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Luv%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lUcGNWMFh3Q0tEWFF5NndZbGVsd0lGdXpUejNmX0Rxc0ZydG9JbkE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Luv</dc:creator></item><item><title><![CDATA[【Docker+ntfy】ntfyをDockerでどっかーんするだけ]]></title><description><![CDATA[最近、XよりMisskeyの方が利用頻度が増えてきたので手持ちのデバイス全部に通知が来るようにしたくなりました。
+「WebPushでええやん」ってなりそうですが、iOS26(dev beta)だと"ホーム画面に追加"の項目がバグり散らかしててホーム画面に追加できない -&gt; 通知を登録できないという悲しいことになっちゃったのでできないわけです。(というか、Appleが厳しいのもあるのか以前使ったときも通知が来ない事が多かったのですが)
+てなわけで、Misskeyのwebhookをcf workersに送りつけて、それをntfyで全デバイスに送りつける構成を作ろうと思います。が、今回は...]]></description><link>https://zenn.dev/r64/articles/c707617aa019d0</link><guid isPermaLink="true">https://zenn.dev/r64/articles/c707617aa019d0</guid><pubDate>Sat, 19 Jul 2025 04:35:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5_fnl6Ur--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Docker%252Bntfy%25E3%2580%2591ntfy%25E3%2582%2592Docker%25E3%2581%25A7%25E3%2581%25A9%25E3%2581%25A3%25E3%2581%258B%25E3%2583%25BC%25E3%2582%2593%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A0%25E3%2581%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ruka64%2528%25E3%2582%258B%25E3%2581%258B%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBiZDlmOWU5NzEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ruka64(るか)</dc:creator></item><item><title><![CDATA[なぜKubernetesが必要なのか？Dockerだけではダメ？K8sとDockerの扱うケース比較]]></title><description><![CDATA[最近のWeb開発やマイクロサービスでは「Docker」や「Kubernetes」の名前が頻出します。
+でも、こう思ったことはありませんか？
+
+「Dockerで動いてるならそれでよくない？Kubernetesって複雑じゃない？」
+「KubernetesとDockerの違いあまり良く分かってないし、、」
+
+本記事では、Dockerだけでは解決できない運用課題と、それをKubernetes（K8s）がどのように補うのかを、初心者にもわかるように解説します。
+
+
+ Dockerのすごいところ
+まずはDockerの利点をおさらいします。
+
+環境依存をなくせる（どこでも同じ環境で動く）
+
+docke...]]></description><link>https://zenn.dev/rrr068/articles/db17d71ba88665</link><guid isPermaLink="true">https://zenn.dev/rrr068/articles/db17d71ba88665</guid><pubDate>Sat, 19 Jul 2025 01:30:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tjiaOmAG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25AA%25E3%2581%259CKubernetes%25E3%2581%258C%25E5%25BF%2585%25E8%25A6%2581%25E3%2581%25AA%25E3%2581%25AE%25E3%2581%258B%25EF%25BC%259FDocker%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25A7%25E3%2581%25AF%25E3%2583%2580%25E3%2583%25A1%25EF%25BC%259FK8s%25E3%2581%25A8Docker%25E3%2581%25AE%25E6%2589%25B1%25E3%2581%2586%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B9%25E6%25AF%2594%25E8%25BC%2583%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E4%25BA%2594%25E5%258F%25B3%25E8%25A1%259B%25E9%2596%2580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ExY2Y0YjhkYTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>五右衛門</dc:creator></item><item><title><![CDATA[sshだけのコンテナ（改）]]></title><description><![CDATA[
+ はじめに
+
+sshd だけのコンテナをつくる
+ベースは debian を使用
+google compute engine みたいな感じで使いたい
+ユーザを作成する
+ユーザ固有の設定はシェルへ
+シェルをコンテナ作成時に実行する
+
+
+ 環境
+
+ i5-14400
+
+windows11 pro
+powershell 7
+wsl2 ubuntu24.04
+sshd (apt)
+docker (snap)
+
+
+ i5-10400
+
+windows11 home
+powershell 7
+wsl2 ubuntu24.04 ( いらなかったかも？ )
+vscode
+
+
+ 操作
+
+ i5-14400...]]></description><link>https://zenn.dev/yukip/articles/20250719-1-container-ssh</link><guid isPermaLink="true">https://zenn.dev/yukip/articles/20250719-1-container-ssh</guid><pubDate>Fri, 18 Jul 2025 16:56:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DlARHHlK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ssh%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25EF%25BC%2588%25E6%2594%25B9%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yukip%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0Y2RSb0g4ZS15b0VfTXR0ZDZGeXFZdzR2R0pfVWZJRHlfNmFyYlpFWUdJd1U0PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yukip</dc:creator></item><item><title><![CDATA[【Docker基本】Dockerfileと関連用語完全ガイド]]></title><description><![CDATA[
+ 1. Dockerfileとは？
+Dockerfileは、Dockerでコンテナイメージを自動的にビルドするためのテキストベースの設定ファイルです。
+
+
+ 2. 核心用語解説
+
+ 🐳 Docker
+
+
+
+コンテナ化プラットフォーム: アプリケーションとその実行環境を一つのパッケージにまとめて、どこでも同じように実行できるようにする技術
+
+仮想化との違い: VMより軽量で高速（OSカーネルを共有）
+
+
+ 📦 コンテナ(Container)
+
+
+
+定義: アプリケーションとその実行に必要なすべて（ライブラリ、依存関係、設定など）を一つにまとめた実行単位
+
+特徴: 隔離された環境、可搬性、...]]></description><link>https://zenn.dev/cruway/articles/03a1453fbe7daf</link><guid isPermaLink="true">https://zenn.dev/cruway/articles/03a1453fbe7daf</guid><pubDate>Fri, 18 Jul 2025 12:24:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZiawLEPI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Docker%25E5%259F%25BA%25E6%259C%25AC%25E3%2580%2591Dockerfile%25E3%2581%25A8%25E9%2596%25A2%25E9%2580%25A3%25E7%2594%25A8%25E8%25AA%259E%25E5%25AE%258C%25E5%2585%25A8%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258F%25E3%2582%258B%25E3%2581%25B8%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4NDg3OTFhZGMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>くるへい</dc:creator></item><item><title><![CDATA[Dockerコンテナ内でGemini CLIを使う方法]]></title><description><![CDATA[OSSの開発に参加しているとき、Dockerコンテナ内でGemini CLIを使いたくなりました。
+その備忘録を載せます。
+
+ 開発環境が、docker-compose.ymlとして配られていた
+とても親切なOSSでした！
+docker-composeファイルとシステム全体の初期化用のスクリプトをディレクトリにダウンロードして、
+docker compose up -dを叩けば、localhostで起動しました。
+
+ しかし、Gemini CLIをDockerコンテナ内で使う方法がわからない
+Gemini CLIをDockerコンテナ内で使うために、システム全体の初期化用のスクリプトであ...]]></description><link>https://zenn.dev/0xyusuke/articles/acfd7fd80ab1f6</link><guid isPermaLink="true">https://zenn.dev/0xyusuke/articles/acfd7fd80ab1f6</guid><pubDate>Fri, 18 Jul 2025 10:12:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--81MeLgjZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E5%2586%2585%25E3%2581%25A7Gemini%2520CLI%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yusuke%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZnZ0WmRlX2xEd1R3bmxpekFYVkhXRl82VHJ5NVQ1VDZSYmNwSW9RUT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yusuke</dc:creator></item><item><title><![CDATA[colimaでdevcontainerが起動しなかった際の対処法]]></title><description><![CDATA[
+ 背景
+
+Claude Codeをdevcontainer環境で使いたいと思った
+VS Codeに拡張機能をインストールし、devcontainerを使うための準備をした
+しかし"Remote-Containers: Reopen in Container"で開発コンテナを開こうとすると「Docker バージョン 17.12.0 以降が必要です。」とエラーが出てDocker Desktopのインストールを促された
+Docker Desktopは使用しておらず社内でもcolimaが推奨されているため、このためにDocker Desktopをインストールするのは避けたい
+
+https://...]]></description><link>https://zenn.dev/miup/articles/devcontainer_with_colima</link><guid isPermaLink="true">https://zenn.dev/miup/articles/devcontainer_with_colima</guid><pubDate>Fri, 18 Jul 2025 03:36:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--e3MrRUgA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:colima%25E3%2581%25A7devcontainer%25E3%2581%258C%25E8%25B5%25B7%25E5%258B%2595%25E3%2581%2597%25E3%2581%25AA%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%25E9%259A%259B%25E3%2581%25AE%25E5%25AF%25BE%25E5%2587%25A6%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BF%25E3%2581%2586P%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgwY2JhMWEyMGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>みうP</dc:creator></item><item><title><![CDATA[【Docker初心者向け】WordPress開発環境でメール受信を実現する3つの方法]]></title><description><![CDATA[
+ はじめに
+WordPress の開発環境を構築する際、テストメールの送受信機能は非常に重要です。この記事では、Docker を利用して WordPress 開発環境にメール受信機能（Mailpit）を統合する複数の方法を紹介します。Docker 初心者の方向けに、各構成案の compose.yaml ファイルの作成手順と、それぞれのメリット・デメリットを詳しく解説します。
+自身の開発目的に合った最適な Docker イメージを選択し、compose.yamlファイルを効果的に作成できるようになることを目指しましょう。
+ここでは、主に以下の 3 つの構成案を提案します。
+
+
+
+構成案
+...]]></description><link>https://zenn.dev/hiro345/articles/20250718_wp_and_mail</link><guid isPermaLink="true">https://zenn.dev/hiro345/articles/20250718_wp_and_mail</guid><pubDate>Thu, 17 Jul 2025 22:58:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--r3u6ioG6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Docker%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591WordPress%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7%25E3%2583%25A1%25E3%2583%25BC%25E3%2583%25AB%25E5%258F%2597%25E4%25BF%25A1%25E3%2582%2592%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B3%25E3%2581%25A4%25E3%2581%25AE%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroshi%2520Koyama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k5ZzdjLS0xTFk0S2k0LWw3dVFSSFZRdEdQcWZHYTlibVRJYUtFM0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroshi Koyama</dc:creator></item><item><title><![CDATA[toml?yaml? 違い調査]]></title><description><![CDATA[
+ はじめに
+最近Rustで何か作りたいという衝動からRustのプロジェクトを作ってみている。
+パッケージマネージャーとしてRustはCargoというものを使用している。その依存関係が記載されているファイルはCargo.tomlという。
+おや、yamlじゃなくてtoml?
+yamlもtomlもなんとなく認知しているだけだったので、違いについて簡単に調べてみる。
+（※全部は無理なので一部にします）
+
+ 結論
+
+記法は違うが、そんなに違わない！
+アプリで取り入れるなら、ユースケースに応じて選定するべき！（後述）
+
+
+ 調査
+
+ YAML の書き方
+こんな感じで書く。
+
+配列の表現は以下の通り...]]></description><link>https://zenn.dev/marakasu/articles/0ab80bf9238848</link><guid isPermaLink="true">https://zenn.dev/marakasu/articles/0ab80bf9238848</guid><pubDate>Thu, 17 Jul 2025 18:30:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3KoW198Q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:toml%253Fyaml%253F%2520%25E9%2581%2595%25E3%2581%2584%25E8%25AA%25BF%25E6%259F%25BB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:MAETA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ0MjIxYmE1MTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>MAETA</dc:creator></item><item><title><![CDATA[Dev Container で起動した Claude Code から Hooks でホストの Mac に通知する]]></title><description><![CDATA[masaki です。
+弊社では生成 AI を業務に積極的に取り入れています。
+これまでにも以下のような記事を公開してきました。
+https://zenn.dev/socialplus/articles/d92f1296c8403a
+https://zenn.dev/socialplus/articles/618bc1016bc51c
+最近はコードアシストにとどまらず、エージェント型 AI ツールを活用する動きが活発になっています。
+今回は、よく話題にもなり弊社でも利用している Claude Code について、少し便利になる通知設定のテクニックをご紹介します。
+
+ はじめに
+Claude...]]></description><link>https://zenn.dev/socialplus/articles/ea9be95301ae99</link><guid isPermaLink="true">https://zenn.dev/socialplus/articles/ea9be95301ae99</guid><pubDate>Thu, 17 Jul 2025 09:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--m-0lKZtY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Dev%2520Container%2520%25E3%2581%25A7%25E8%25B5%25B7%25E5%258B%2595%25E3%2581%2597%25E3%2581%259F%2520Claude%2520Code%2520%25E3%2581%258B%25E3%2582%2589%2520Hooks%2520%25E3%2581%25A7%25E3%2583%259B%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25AE%2520Mac%2520%25E3%2581%25AB%25E9%2580%259A%25E7%259F%25A5%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:masaki%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4Mjg2YmNjMDEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Social%2520PLUS%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU3YWM1MjkxMTEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>masaki</dc:creator></item><item><title><![CDATA[Docker の mysql コンテナに mysql コマンドで接続できない]]></title><description><![CDATA[
+ はじめに
+今回、Dcoker の mysql コンテナを起動している状態で、mysql コマンドで接続できませんでした。解決に時間がかかったため、内容を共有します。
+
+ 環境
+$ sw_vers
+ProductName:		macOS
+ProductVersion:		15.5
+BuildVersion:		24F74
+
+$ docker --version
+Docker version 28.3.0, build 38b7060
+
+$ docker compose version
+Docker Compose version v2.38.1-desktop.1
+
+$ mysql -...]]></description><link>https://zenn.dev/hiroto_ohira/articles/5b4f69b6fcac2d</link><guid isPermaLink="true">https://zenn.dev/hiroto_ohira/articles/5b4f69b6fcac2d</guid><pubDate>Thu, 17 Jul 2025 06:02:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iPQPlaCI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%2520%25E3%2581%25AE%2520mysql%2520%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2581%25AB%2520mysql%2520%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25A7%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AA%25E3%2583%25BC%25E3%2583%25AA%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E3OGJjN2JkNTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>オーリア</dc:creator></item><item><title><![CDATA[📝 Go vs C# Todo App を Docker化して比較してみた！]]></title><description><![CDATA[
+ はじめに
+
+エンジニア4ヶ月目のSomeです！
+前回、業務で使っているC#でTodoアプリを作ってDocker化してみました。
+
+
+前回の記事: C# TodoアプリのDocker化
+
+
+今回はGo言語とDockerを勉強中なので、同じ機能のTodoアプリをGoで作って、C#版と比較してみました！
+結果が想像以上にすごかったので、共有します😊
+
+ 🔧 環境
+
+
+MacBook Air (M3)
+メモリ: 16GB
+Go: 1.21（勉強中）
+.NET: 8.0（業務で使用）
+
+
+
+ **⚡ 結果まとめ - **
+
+
+
+項目
+C#
+Go
+差
+
+
+
+
+📦 イメージサイズ
+379MB
+11...]]></description><link>https://zenn.dev/some55/articles/0d8f4e4432a86f</link><guid isPermaLink="true">https://zenn.dev/some55/articles/0d8f4e4432a86f</guid><pubDate>Wed, 16 Jul 2025 22:26:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GbRHftIG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520%2520Go%2520vs%2520C%2523%2520Todo%2520App%2520%25E3%2582%2592%2520Docker%25E5%258C%2596%25E3%2581%2597%25E3%2581%25A6%25E6%25AF%2594%25E8%25BC%2583%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:some%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQzNWYzNjQ4YWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>some</dc:creator></item><item><title><![CDATA[VS Code Dev Container で構築する Gemini CLI 開発環境チュートリアル]]></title><description><![CDATA[
+ VS Code Dev Container で構築する Gemini CLI 開発環境チュートリアル
+
+ 1. はじめに
+Google の Gemini CLI (@google/gemini-cli) は、ターミナルからGeminiモデルを対話的に利用できる強力なツールです。この記事では、naoyoshinori/docker-gemini-cli というDockerイメージと Visual Studio Code の Dev Containers を利用して、クリーンで再利用可能なGemini CLI開発環境を構築する手順を解説します。
+Dev Containers を使うことで...]]></description><link>https://zenn.dev/naoyoshinori/articles/ea3ceeb96e6494</link><guid isPermaLink="true">https://zenn.dev/naoyoshinori/articles/ea3ceeb96e6494</guid><pubDate>Wed, 16 Jul 2025 12:37:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KTXpO-Ez--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VS%2520Code%2520Dev%2520Container%2520%25E3%2581%25A7%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%2520Gemini%2520CLI%2520%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E3%2583%2581%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%2588%25E3%2583%25AA%25E3%2582%25A2%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:naoyoshinori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0syYTlYZmVLMW1WSGpQZGEzZmZFX2RfWktiSmpST3lRNDlXcGpiTTA5Q3dnZUw1Q0o9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>naoyoshinori</dc:creator></item></channel></rss>
