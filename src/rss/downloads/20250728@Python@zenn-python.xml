@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 28 Jul 2025 07:58:39 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Pythonで性格診断アプリ！？]]></title><description><![CDATA[
+ 🧠 【プログラミング初心者向け】Python Streamlit x 機械学習で作る性格診断AI
+機械学習の代表的なタスクであるテキスト分類に挑戦してみませんか？今回は、Python で scikit-learn を使って、キーワードから性格を診断するAIアプリを作成します。TF-IDFとランダムフォレストを使った本格的な機械学習アプリを、初心者でも理解できるように詳しく解説していきます。
+読み進めていくと、コード量が多く感じるかもしれませんが、可読性工場目的で改行を多用しているためですので！
+
+機械学習、テキスト処理、分類問題まで含む本格的なAIアプリを、ステップバイステップで学ん...]]></description><link>https://zenn.dev/sola_au/articles/21bc89fdb31690</link><guid isPermaLink="true">https://zenn.dev/sola_au/articles/21bc89fdb31690</guid><pubDate>Mon, 28 Jul 2025 07:43:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--b5_0fcuA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E6%2580%25A7%25E6%25A0%25BC%25E8%25A8%25BA%25E6%2596%25AD%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25EF%25BC%2581%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SOLA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWNNYlhBdFBoeHNoM0ttS0NPTkRWU0tOY2hDenZ6ZVBvaTZ5MzdvNTh3SnBEMWpYdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SOLA</dc:creator></item><item><title><![CDATA[【Cursor】FastMCPサーバにstreamable-httpトランスポートで接続する]]></title><description><![CDATA[2025年5月ごろからCursor が streamable-httpトランスポートが受け付けられるようになっています。FastMCPで接続できるか確認しました。
+Python 3.11.10
+FastMCP 2.10.5
+Cursor 1.2.2
+
+ ソースコード
+from fastmcp import FastMCP
+
+# FastMCPサーバーを作成
+mcp = FastMCP(name="Sample MCP Server")
+
+@mcp.tool(
+    name="solve_programming_issue",
+    description="プログラミングの問題や困...]]></description><link>https://zenn.dev/birf/articles/fa8e575e46c24e</link><guid isPermaLink="true">https://zenn.dev/birf/articles/fa8e575e46c24e</guid><pubDate>Sun, 27 Jul 2025 21:57:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--plrWniI5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Cursor%25E3%2580%2591FastMCP%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2581%25ABstreamable-http%25E3%2583%2588%25E3%2583%25A9%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25A7%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Birf%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgwMzUwMjNjNmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Birf</dc:creator></item><item><title><![CDATA[Render.com&SupabaseでGitHub連携チャットアプリを始めて個人開発した記録]]></title><description><![CDATA[
+現在は電気通信事業の申請中のため、サイトは一時的に非公開となっています(8/1公開予定)
+本記事は個人的な体験・感想に基づくものであり、内容の正確性を保証するものではありません
+
+
+ 初めに
+個人開発で作ったWebアプリを公開してみたいと思ったことはありませんか？
+私もまさにそんな気持ちから個人開発を始めました。
+それで作成したwebサービスはgithubと連携ができるchat toolです。作成した理由は普段Google Chat を使っていますが、Discord のようにチャンネルが作れないことに不満がありました。
+また、複数の TODO 管理サービスも試しましたが、どれも継続して...]]></description><link>https://zenn.dev/codseowner/articles/9f4006c9454522</link><guid isPermaLink="true">https://zenn.dev/codseowner/articles/9f4006c9454522</guid><pubDate>Sun, 27 Jul 2025 14:06:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WfNfA5nj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Render.com%2526Supabase%25E3%2581%25A7GitHub%25E9%2580%25A3%25E6%2590%25BA%25E3%2583%2581%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E5%25A7%258B%25E3%2582%2581%25E3%2581%25A6%25E5%2580%258B%25E4%25BA%25BA%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2597%25E3%2581%259F%25E8%25A8%2598%25E9%258C%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:codseowner%2Cx_90%2Cy_121/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>codseowner</dc:creator></item><item><title><![CDATA[Python の typing.Union における型順序の上書き現象]]></title><description><![CDATA[
+ Python の typing.Union における型順序の上書き現象
+huggingface/transformers の PR 39467 で Union[str, dict] と Union[dict, str] の順序の違いでエラーが発生していたというのを見かけた。そんなことがあり得るのかと驚き、実際に確認してみることにした。
+調べてみると、Python の typing.Union には特定の条件下で型の順序が上書きされるという興味深い挙動があることが分かった。なかなかにややこしい挙動であり、将来この現象について思い出せるよう、その詳細をここに残しておく。
+なお、確認には ...]]></description><link>https://zenn.dev/shuto51/articles/6cdb0d82d77d3a</link><guid isPermaLink="true">https://zenn.dev/shuto51/articles/6cdb0d82d77d3a</guid><pubDate>Sun, 27 Jul 2025 13:02:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uBoeNxPO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%2520%25E3%2581%25AE%2520typing.Union%2520%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E5%259E%258B%25E9%25A0%2586%25E5%25BA%258F%25E3%2581%25AE%25E4%25B8%258A%25E6%259B%25B8%25E3%2581%258D%25E7%258F%25BE%25E8%25B1%25A1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:s_takahashi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3ODZkNGIxMWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>s_takahashi</dc:creator></item><item><title><![CDATA[Seleniumを使用したZenn記事の自動投稿]]></title><description><![CDATA[
+ こんにちは、Zenn！
+これは自動生成された記事のサンプル内容です。
+
+ セクション1
+ここにコンテンツが入ります。
+
+ セクション2
+さらにコンテンツが続きます。
+
+&lt;script async src="https://platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
+]]></description><link>https://zenn.dev/sunwood_ai_labs/articles/selenium-zenn-auto-post</link><guid isPermaLink="true">https://zenn.dev/sunwood_ai_labs/articles/selenium-zenn-auto-post</guid><pubDate>Sun, 27 Jul 2025 13:00:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WvnBbQIQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Selenium%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259FZenn%25E8%25A8%2598%25E4%25BA%258B%25E3%2581%25AE%25E8%2587%25AA%25E5%258B%2595%25E6%258A%2595%25E7%25A8%25BF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Maki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDdpSmVyNldLVlpKLUd4N054QWVuSFVtYXQ3MUhhd1NXaU5hRG5FTnZiMXZZdHBIaGs9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Maki</dc:creator></item><item><title><![CDATA[sliding_window_viewは本当に高速？実測で分かったNumPyの適用指針]]></title><description><![CDATA[「NumPyを使えば高速になる」は本当でしょうか？
+n-gram処理において、NumPyのsliding_window_viewと従来のPythonループをMac Air M4で実測比較したところ、驚くべき結果が得られました。
+実測結果のハイライト：
+
+📉 文字列データ: 従来のPythonループが x1.3倍 高速
+📈 数値データ: NumPyが x2.45倍 高速
+🎯 環境依存: Apple M4の特性が大きく影響
+
+この記事では、理論と実践の重要な乖離を実証し、データサイエンティストやエンジニアが直面する「本当に最適化できているのか？」という疑問に、実測データで答えます。
+あなたが...]]></description><link>https://zenn.dev/furunag/articles/cad53a57efd880</link><guid isPermaLink="true">https://zenn.dev/furunag/articles/cad53a57efd880</guid><pubDate>Sun, 27 Jul 2025 12:55:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GzGqtfVJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:sliding_window_view%25E3%2581%25AF%25E6%259C%25AC%25E5%25BD%2593%25E3%2581%25AB%25E9%25AB%2598%25E9%2580%259F%25EF%25BC%259F%25E5%25AE%259F%25E6%25B8%25AC%25E3%2581%25A7%25E5%2588%2586%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259FNumPy%25E3%2581%25AE%25E9%2581%25A9%25E7%2594%25A8%25E6%258C%2587%25E9%2587%259D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:furufuru%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1RYN0hDNFhJMk5WQkdnZzF1VVhQVUx1eDlvYVZBZkNfd3NrdS1mVlJXbkpqS3B3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>furufuru</dc:creator></item><item><title><![CDATA[ここから始める Powertools for AWS Lambda (Python) - JMESPath 編 -]]></title><description><![CDATA[
+ はじめに
+こんにちは。
+Penetrator プロダクト開発部で主にインフラを担当している遠藤です。
+みなさん元気に Lambda Life を送っていますか?
+Lambda 関数で JSON データを扱う際、複雑にネストされた構造から特定のデータを抽出したり、配列をフィルタリングしたりする処理に苦労した経験のある方もいらっしゃると思います。
+そんな課題を解決してくれるのが、Powertools for AWS Lambda の JMESPath Functions 機能です。
+今回はこの機能について、実際の使用イメージと共に紹介します。
+なお、今後も Powertools for ...]]></description><link>https://zenn.dev/where/articles/59f254ad53af7b</link><guid isPermaLink="true">https://zenn.dev/where/articles/59f254ad53af7b</guid><pubDate>Sun, 27 Jul 2025 12:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--r0vQaMJ6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%2593%25E3%2581%2593%25E3%2581%258B%25E3%2582%2589%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258B%2520Powertools%2520for%2520AWS%2520Lambda%2520%2528Python%2529%2520-%2520JMESPath%2520%25E7%25B7%25A8%2520-%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:yendoooo%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1ZThlODg2OTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Penetrator%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1pIMi0wVWlCN2lZaUJidUZiN3lYVlU2YnRrdFJvb09WY3RVU3BiazBITHRtNlA4ZFo9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yendoooo</dc:creator></item><item><title><![CDATA[理論も理解しないでデータ解析するんですか？？(機械学習チートシート)]]></title><description><![CDATA[
+ 機械学習チートシート
+
+対象読者：機械学習に関する講義を履修済みの大学生や社会人の方
+数式の導出過程に重きを置いていますが、細かい説明や背景は省いているので、これを最初の学習用としないでください
+参考までにPythonでのデータ解析用コードを記しています
+
+
+
+ 概要
+
+ 教師あり学習
+
+入力データと出力データから関数のパラメータを予測
+
+
+
+ 教師なし学習
+
+入力データだけから関数のパラメータを予測
+
+
+
+ 強化学習
+
+与えられた状態において報酬を最大化する行動を推定
+
+
+
+ データ前処理
+
+ 標準化
+
+平均が0、標準偏差が1となるように変換
+単位や尺度の影響を取り除く
+
+
+z =...]]></description><link>https://zenn.dev/aom1do/articles/f483bc6755513c</link><guid isPermaLink="true">https://zenn.dev/aom1do/articles/f483bc6755513c</guid><pubDate>Sun, 27 Jul 2025 09:46:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6fG5aEPP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2590%2586%25E8%25AB%2596%25E3%2582%2582%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25A7%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E8%25A7%25A3%25E6%259E%2590%25E3%2581%2599%25E3%2582%258B%25E3%2582%2593%25E3%2581%25A7%25E3%2581%2599%25E3%2581%258B%25EF%25BC%259F%25EF%25BC%259F%2528%25E6%25A9%259F%25E6%25A2%25B0%25E5%25AD%25A6%25E7%25BF%2592%25E3%2583%2581%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%2588%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2581%258A%25E3%2581%25BF%25E3%2581%25A9%25E3%2582%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q2NGUxNzQ2YzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あおみどり</dc:creator></item><item><title><![CDATA[FastMCP2 を使って MCP Server をひとまとめにしよう！]]></title><description><![CDATA[
+ 最初にまとめ
+
+複数の MCP Server をひとまとめにして、MCP Server 設定の手間を減らします
+MCP Server を Devcontainer(Docker Desktop) の仮想環境から利用できるようにします
+
+詳細は以降で説明します。
+
+ この記事の概要
+Python OSS である FastMCP 2.0 を用いて、それぞれバラバラな Transport である複数の MCP Server をひとまとめにした MCP Server を作成します。
+「ひとまとめにして何が嬉しいの？？」と疑問をお持ちかもしれませんが、筆者は自身の開発環境で次のような課題があり...]]></description><link>https://zenn.dev/pura3/articles/a80c7e012f6a89</link><guid isPermaLink="true">https://zenn.dev/pura3/articles/a80c7e012f6a89</guid><pubDate>Sun, 27 Jul 2025 09:23:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HUun7SCK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:FastMCP2%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%2520MCP%2520Server%2520%25E3%2582%2592%25E3%2581%25B2%25E3%2581%25A8%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25AB%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:pura3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA4MWNiNjhiOWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>pura3</dc:creator></item><item><title><![CDATA[Amazon Connect によるチャットフロー構築：コンタクト属性から Lambda、Lex 連携まで]]></title><description><![CDATA[Amazon Connect のコンタクト属性の基本的な設定から、Lambda を使った動的な更新、Lexとの連携による問い合わせ属性の活用まで、段階的に紹介します。フロー分岐での条件判定、セッション属性を使った動的な処理、
+エラー調査のためのログ活用など、実際の開発で使える具体的な実装パターンを記載しています。]]></description><link>https://zenn.dev/enumura/books/7ff57ef375e0ab</link><guid isPermaLink="true">https://zenn.dev/enumura/books/7ff57ef375e0ab</guid><pubDate>Sun, 27 Jul 2025 05:32:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HDPZDSCQ--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci83MWVlYWNiOGFjLmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>enumura1</dc:creator></item><item><title><![CDATA[PyTorch Nightly版を“爆速”インストールする最短ルート]]></title><description><![CDATA[
+ 概要
+RTX 5060tiのようなRTX50シリーズは、普通のpytorchに対応していないようなので、pytorch nightly版をインストールしてみました。
+（ほかの記事でも紹介されていますが、私は他の方の記事のやり方でうまくインストールできなかったので、私なりのやり方を紹介します。）
+
+ インストール方法
+pip install torch==2.9.0.dev20250716 torchvision==0.24.0.dev20250717 torchaudio==2.8.0.dev20250717 --index-url https://download.pytorch....]]></description><link>https://zenn.dev/gorilla_lion/articles/56b7f6eb18ae71</link><guid isPermaLink="true">https://zenn.dev/gorilla_lion/articles/56b7f6eb18ae71</guid><pubDate>Sun, 27 Jul 2025 04:42:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PrfbTAPH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PyTorch%2520Nightly%25E7%2589%2588%25E3%2582%2592%25E2%2580%259C%25E7%2588%2586%25E9%2580%259F%25E2%2580%259D%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%25E6%259C%2580%25E7%259F%25AD%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B4%25E3%2583%25AA%25E3%2583%25A9%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25AA%25E3%2583%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYxYmU3MzBjYzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ゴリラライオン</dc:creator></item><item><title><![CDATA[Session 12 — Prompt Flow で LLM→Python パイプラインを構築する]]></title><description><![CDATA[
+GenAI&nbsp;40 Days ポートフォリオ — Session&nbsp;12
+
+
+
+ TL;DR
+
+Prompt&nbsp;Flow&nbsp;CLI&nbsp;v1.18 で pf flow init + YAML ベース接続 を採用
+Azure&nbsp;OpenAI を aoai-mini 接続として登録（api_base は https://… 必須）
+
+LLM ノード → Python ノード へつなぎ、改行を除去する後処理を実装
+
+pf flow test は --stream オプション不要、成功ログをスクショ 📸
+5 リクエスト試算で ≈&nbsp;¥4、累...]]></description><link>https://zenn.dev/masau/articles/2025-07-26-session12</link><guid isPermaLink="true">https://zenn.dev/masau/articles/2025-07-26-session12</guid><pubDate>Sat, 26 Jul 2025 16:12:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SjMLbEV7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Session%25C2%25A012%2520%25E2%2580%2594%2520Prompt%2520Flow%2520%25E3%2581%25A7%2520LLM%25E2%2586%2592Python%2520%25E3%2583%2591%25E3%2582%25A4%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:MasaU_Tech%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4NTZmODk1MmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>MasaU_Tech</dc:creator></item><item><title><![CDATA[【Python】すべてのサブフォルダからファイルをルートディレクトリに移動]]></title><description><![CDATA[import os
+import shutil
+
+def move_all_files_to_current_dir():
+    # スクリプトのあるディレクトリを取得
+    base_dir = os.path.abspath(os.path.dirname(__file__))
+
+    for root, dirs, files in os.walk(base_dir):
+        # base_dir 自体はファイルを移動しない（移動先なので）
+        if root == base_dir:
+            continue
+        for f...]]></description><link>https://zenn.dev/glisan/articles/1b279af1808f52</link><guid isPermaLink="true">https://zenn.dev/glisan/articles/1b279af1808f52</guid><pubDate>Sat, 26 Jul 2025 13:24:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YZRU0kVC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E3%2581%2599%25E3%2581%25B9%25E3%2581%25A6%25E3%2581%25AE%25E3%2582%25B5%25E3%2583%2596%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AB%25E3%2583%2580%25E3%2581%258B%25E3%2582%2589%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25AC%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AA%25E3%2581%25AB%25E7%25A7%25BB%25E5%258B%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B0%25E3%2583%25AA%25E3%2583%2583%25E3%2582%25B5%25E3%2583%25B3%25E3%2583%2589%25E3%2580%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M0MzU1YzBlZDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>グリッサンド。</dc:creator></item><item><title><![CDATA[簡単なSSHならDiscordのBOTでよくない？]]></title><description><![CDATA[どうも、TailScaleの環境構築に挫折した人です。
+Windows民にはSSHなんてわかんねぇよ！
+で、どうにかして外出先でも家のPCで実行しなきゃいけないコマンドがあったので、どうにかしたいなって思った矢先、DiscordのBOTでよくない？と思いまして。
+まあもちろん万が一アカウントハッキングされたりしたら終わるのでホワイトリスト型にしたりと対策を講じながらやっていく形になります。
+!
+注意！！
+この記事では、本来とてもデリケートなコマンドラインを公開している形になります。
+最低限以下の設定はしときましょう！
+
+ここで作成したBOTと自分だけのまっさらなサーバーで行いましょう。
+...]]></description><link>https://zenn.dev/glisan/articles/676c3fbb65e5e7</link><guid isPermaLink="true">https://zenn.dev/glisan/articles/676c3fbb65e5e7</guid><pubDate>Sat, 26 Jul 2025 12:28:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--14rugQla--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AASSH%25E3%2581%25AA%25E3%2582%2589Discord%25E3%2581%25AEBOT%25E3%2581%25A7%25E3%2582%2588%25E3%2581%258F%25E3%2581%25AA%25E3%2581%2584%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B0%25E3%2583%25AA%25E3%2583%2583%25E3%2582%25B5%25E3%2583%25B3%25E3%2583%2589%25E3%2580%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M0MzU1YzBlZDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>グリッサンド。</dc:creator></item><item><title><![CDATA[SAM系のCPU速度の比較]]></title><description><![CDATA[
+ 初めに
+CPUでも動きそうなSAM系がいくつかでているので試してみます。
+比較するのは以下
+https://github.com/facebookresearch/sam2
+https://github.com/NVIDIA-AI-IOT/nanosam
+https://github.com/xinghaochen/TinySAM
+https://github.com/ChaoningZhang/MobileSAM
+
+ サンプル画像
+https://www.pakutaso.com/20240715194post-51253.html
+https://www.pakutaso.com...]]></description><link>https://zenn.dev/piment/articles/ee78e816e1d05b</link><guid isPermaLink="true">https://zenn.dev/piment/articles/ee78e816e1d05b</guid><pubDate>Sat, 26 Jul 2025 10:45:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aKKpTPei--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SAM%25E7%25B3%25BB%25E3%2581%25AECPU%25E9%2580%259F%25E5%25BA%25A6%25E3%2581%25AE%25E6%25AF%2594%25E8%25BC%2583%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B4%25E3%2583%25BC%25E3%2581%25BE%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RiODU4NjI1MzIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぴーまん</dc:creator></item><item><title><![CDATA[ポートフォリオで天気アプリを作ってみた｜React + AWS SAM のサーバーレス構成]]></title><description><![CDATA[
+ はじめに
+ポートフォリオとして作成した天気アプリを紹介します。
+日本の主要都市の気象データを比較できるWebアプリで、フロントエンドはReact + Tailwind CSS、バックエンドはPython + AWS SAMによるサーバーレス構成で構築しています。
+▶ アプリURL: https://d3najlyap0uyr2.cloudfront.net/
+
+ アプリ概要
+このアプリは以下の5都市の天気データを比較表示できるWebアプリです。
+OpenWeather のAPIから取得した気象データを使用しています。
+
+札幌（最北都道府県）
+東京（首都）
+金沢（日本海側）
+高知（太平...]]></description><link>https://zenn.dev/ak0047/articles/2025-07-weather-app-intro</link><guid isPermaLink="true">https://zenn.dev/ak0047/articles/2025-07-weather-app-intro</guid><pubDate>Sat, 26 Jul 2025 10:17:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--X54GVleG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AA%25E3%2582%25AA%25E3%2581%25A7%25E5%25A4%25A9%25E6%25B0%2597%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25EF%25BD%259CReact%2520%252B%2520AWS%2520SAM%2520%25E3%2581%25AE%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2583%25AC%25E3%2582%25B9%25E6%25A7%258B%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ak0047%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU0M2Y3M2FiZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ak0047</dc:creator></item><item><title><![CDATA[FastAPIからリアルタイムでOpenAPIドキュメントをファイル出力する仕組みを作ってみた]]></title><description><![CDATA[
+ やりたいこと
+FastAPIからOpenAPIドキュメントを出力する処理を自動化したい。
+
+ やったこと
+開発時にAPIを起動時した際、OpenAPIドキュメントを自動でファイル出力し、かつ、コードの変更があった時にホットリロードでOpenAPIドキュメントを再生成するようにしました。
+サンプルコードをGitHubに置いておきました。
+https://github.com/k-ibaraki/auto-gen-openapi-in-fastapi
+元々は実プロジェクトでやったやつでして、そのままでは公開できないので、公開用シンプル版としてClaude Codeにリライトさせたものにな...]]></description><link>https://zenn.dev/ncdc/articles/3a205daa946b4b</link><guid isPermaLink="true">https://zenn.dev/ncdc/articles/3a205daa946b4b</guid><pubDate>Sat, 26 Jul 2025 09:49:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BbSa_HDS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:FastAPI%25E3%2581%258B%25E3%2582%2589%25E3%2583%25AA%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E3%2581%25A7OpenAPI%25E3%2583%2589%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E5%2587%25BA%25E5%258A%259B%25E3%2581%2599%25E3%2582%258B%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%2584%25E3%2581%25B0%25E3%2582%2589%25E3%2581%258D%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhODZhNDA5ZDMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:NCDC%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lXRjZXeUJCMTBrRDZNaV9Fa0tLQi13WFJSUC04eFlJbDV5eWljPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>いばらき</dc:creator></item><item><title><![CDATA[【資格勉強】G検定を2週間で取得する方法]]></title><description><![CDATA[
+ この記事の目的
+この記事の目的はG検定に2週間で合格するための勉強法や資格を取るメリットを共有することです。
+前提知識として高校数学の微分積分を理解している必要がありますが、そこさえ知っていれば2週間で合格可能です。
+AIエンジニアを目指してキャッチアップした内容の共有になりますので、何かの形でお役に立てれば光栄です。
+
+
+ 資格取得で得られる力
+G検定ではAIに関する幅広い知識を得ることができます。
+具体的な内容は下記のようになります。
+
+AIの歴史
+AIブームの推移やモデルの移り変わりを学ぶことができ、AI技術の背景を知ることができます。
+AIの仕組み
+ディープラーニングの中でも...]]></description><link>https://zenn.dev/zenn_mita/articles/99b078347b819b</link><guid isPermaLink="true">https://zenn.dev/zenn_mita/articles/99b078347b819b</guid><pubDate>Sat, 26 Jul 2025 09:41:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3BIsjc5b--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E8%25B3%2587%25E6%25A0%25BC%25E5%258B%2589%25E5%25BC%25B7%25E3%2580%2591G%25E6%25A4%259C%25E5%25AE%259A%25E3%2582%25922%25E9%2580%25B1%25E9%2596%2593%25E3%2581%25A7%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mita%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg5MGU0YzEwYjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mita</dc:creator></item><item><title><![CDATA[argparseのtype引数を型指定だと誤解していた - 実際は変換関数の指定]]></title><description><![CDATA[
+ argparseのtype引数を型指定だと誤解していた - 実際は変換関数の指定
+Python の argparse モジュールを使っていて、add_argument メソッドの type 引数について誤解していたことに気づいた。
+これまで type 引数は単純に引数の型を指定するものだと思っていた。しかし実際には、この引数はコマンドライン引数を指定された型に変換するための関数を指定するものだった。CLI から渡された引数は常に文字列として受け取られ、type 引数で指定された関数を通じて変換される仕組みになっているようだ。
+将来同じような誤解をしないよう、またすぐに思い出せるように...]]></description><link>https://zenn.dev/shuto51/articles/fbe22957a6fdd6</link><guid isPermaLink="true">https://zenn.dev/shuto51/articles/fbe22957a6fdd6</guid><pubDate>Sat, 26 Jul 2025 08:35:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KMICqLI9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:argparse%25E3%2581%25AEtype%25E5%25BC%2595%25E6%2595%25B0%25E3%2582%2592%25E5%259E%258B%25E6%258C%2587%25E5%25AE%259A%25E3%2581%25A0%25E3%2581%25A8%25E8%25AA%25A4%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2581%259F%2520-%2520%25E5%25AE%259F%25E9%259A%259B%25E3%2581%25AF%25E5%25A4%2589%25E6%258F%259B%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25AE%25E6%258C%2587%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:s_takahashi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3ODZkNGIxMWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>s_takahashi</dc:creator></item><item><title><![CDATA[【資格勉強】AI実装検定A級を１週間で取得する方法]]></title><description><![CDATA[
+ この記事の目的
+この記事の目的はAI実装検定A級に１週間で合格するための勉強法や資格を取るメリットを共有することです。
+前提知識として高校数学の微分積分を理解している必要がありますが、そこさえ知っていれば1週間で合格可能です。
+AIエンジニアを目指してキャッチアップした内容の共有になりますので、何かの形でお役に立てれば光栄です！
+
+ 資格取得で得られる力
+AI実装検定A級ではコーディング力、AI知識、数学知識が下記レベルで身につくと感じています。
+
+コーディング力
+0から1は難しいが1から10のコーディングが可能。基本的なPythonの文法を理解し、調べながら機械学習モデル構築やアプ...]]></description><link>https://zenn.dev/zenn_mita/articles/da1165c3a82f86</link><guid isPermaLink="true">https://zenn.dev/zenn_mita/articles/da1165c3a82f86</guid><pubDate>Sat, 26 Jul 2025 07:43:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4FIz2XxG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E8%25B3%2587%25E6%25A0%25BC%25E5%258B%2589%25E5%25BC%25B7%25E3%2580%2591AI%25E5%25AE%259F%25E8%25A3%2585%25E6%25A4%259C%25E5%25AE%259AA%25E7%25B4%259A%25E3%2582%2592%25EF%25BC%2591%25E9%2580%25B1%25E9%2596%2593%25E3%2581%25A7%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mita%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg5MGU0YzEwYjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mita</dc:creator></item></channel></rss>
