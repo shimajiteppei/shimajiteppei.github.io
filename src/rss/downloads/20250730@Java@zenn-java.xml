@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Java」のフィード]]></title><description><![CDATA[Zennのトピック「Java」のRSSフィードです]]></description><link>https://zenn.dev/topics/java</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/5c47bb8423.png</url><title>Zennの「Java」のフィード</title><link>https://zenn.dev/topics/java</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 30 Jul 2025 07:13:48 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/java/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[JVM を読む | JVM をハックする その２ - 前提知識構築編]]></title><description><![CDATA[前回の続きです。前回はこちらから。
+https://zenn.dev/peyang/articles/reading-jvm-chapter-03
+このシリーズは，JVM の仕様書を読み解くためのガイドとして構成しています。
+JVM の仕様書は非常に長大で難解な内容が多いため，各セクションごとに要点をまとめていきます。
+また，JVM の内部構造や動作原理を知ることで，Java のパフォーマンスやセキュリティ，メモリ管理の仕組みを深く理解する試みです。
+シリーズはこちらから。
+https://zenn.dev/peyang/articles/reading-jvm-chapter-00
+
+...]]></description><link>https://zenn.dev/peyang/articles/reading-jvm-chapter-03-01</link><guid isPermaLink="true">https://zenn.dev/peyang/articles/reading-jvm-chapter-03-01</guid><pubDate>Wed, 30 Jul 2025 07:10:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7h4P_RBg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JVM%2520%25E3%2582%2592%25E8%25AA%25AD%25E3%2582%2580%2520%257C%2520JVM%2520%25E3%2582%2592%25E3%2583%258F%25E3%2583%2583%25E3%2582%25AF%25E3%2581%2599%25E3%2582%258B%2520%25E3%2581%259D%25E3%2581%25AE%25EF%25BC%2592%2520-%2520%25E5%2589%258D%25E6%258F%2590%25E7%259F%25A5%25E8%25AD%2598%25E6%25A7%258B%25E7%25AF%2589%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BA%25E3%2582%2584%25E3%2582%2593%25E3%2581%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FDTlBFdS1sYWswV1I1UzlCc3VjNEkwLVFMNjVQQWQzQzdIcWJvT2R0MTd5QXc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぺやんぐ</dc:creator></item><item><title><![CDATA[flutter ビルドエラー「ERROR: JAVA_HOME is set to an invalid directory...」と対処]]></title><description><![CDATA[
+ エラー
+ERROR: JAVA_HOME is set to an invalid directory: C:\Program Files\Android\Android Studio...
+
+ 対処法
+コマンドプロンプトで以下を実行
+flutter config --jdk-dir="%JAVA_HOME%"
+]]></description><link>https://zenn.dev/kikinomemo/articles/f0bc9bd87d53ff</link><guid isPermaLink="true">https://zenn.dev/kikinomemo/articles/f0bc9bd87d53ff</guid><pubDate>Wed, 30 Jul 2025 01:33:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Zz85Y-Kb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:flutter%2520%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2580%258CERROR%253A%2520JAVA_HOME%2520is%2520set%2520to%2520an%2520invalid%2520dire...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25A1%25E3%2583%25A2%25E5%25B8%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvay5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>メモ帳</dc:creator></item><item><title><![CDATA[JVM を読む | JVM をハックする その１ - 環境構築編]]></title><description><![CDATA[前回の続きです。前回はこちらから。
+https://zenn.dev/peyang/articles/reading-jvm-chapter-02-12-13
+このシリーズは，JVM の仕様書を読み解くためのガイドとして構成しています。
+JVM の仕様書は非常に長大で難解な内容が多いため，各セクションごとに要点をまとめていきます。
+また，JVM の内部構造や動作原理を知ることで，Java のパフォーマンスやセキュリティ，メモリ管理の仕組みを深く理解する試みです。
+シリーズはこちらから。
+https://zenn.dev/peyang/articles/reading-jvm-chapte...]]></description><link>https://zenn.dev/peyang/articles/reading-jvm-chapter-03</link><guid isPermaLink="true">https://zenn.dev/peyang/articles/reading-jvm-chapter-03</guid><pubDate>Tue, 29 Jul 2025 22:29:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ODRZqpXT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JVM%2520%25E3%2582%2592%25E8%25AA%25AD%25E3%2582%2580%2520%257C%2520JVM%2520%25E3%2582%2592%25E3%2583%258F%25E3%2583%2583%25E3%2582%25AF%25E3%2581%2599%25E3%2582%258B%2520%25E3%2581%259D%25E3%2581%25AE%25EF%25BC%2591%2520-%2520%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BA%25E3%2582%2584%25E3%2582%2593%25E3%2581%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FDTlBFdS1sYWswV1I1UzlCc3VjNEkwLVFMNjVQQWQzQzdIcWJvT2R0MTd5QXc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぺやんぐ</dc:creator></item><item><title><![CDATA[【DAY50】Javaで再構築：設計から実装までを体系的に再学習する]]></title><description><![CDATA[
+ Javaを軸としたバックエンド技術の再構築
+これまで複数のバックエンドポートフォリオを実装してきたが、アーキテクチャ設計・テスト戦略・設計原則（SOLID / DRY / KISSなど）への理解が浅く、結果として保守性・拡張性に欠ける実装になっていた。
+本日よりJavaを中心に据えたバックエンド技術の再構築に着手する。
+
+
+ 選定言語としてのJavaの優位性
+Javaは以下の観点で再学習のベースとして最適と判断した：
+
+
+静的型付けにより、コンパイル時の型安全性が高い
+オブジェクト指向設計（OOP）の原則を体系的に学べる
+
+Spring BootによるDIコンテナ、AOP、トランザク...]]></description><link>https://zenn.dev/keisuke4649/articles/day50-pg-connection</link><guid isPermaLink="true">https://zenn.dev/keisuke4649/articles/day50-pg-connection</guid><pubDate>Tue, 29 Jul 2025 20:42:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--o-lt3I5f--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590DAY50%25E3%2580%2591Java%25E3%2581%25A7%25E5%2586%258D%25E6%25A7%258B%25E7%25AF%2589%25EF%25BC%259A%25E8%25A8%25AD%25E8%25A8%2588%25E3%2581%258B%25E3%2582%2589%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%25BE%25E3%2581%25A7%25E3%2582%2592%25E4%25BD%2593%25E7%25B3%25BB%25E7%259A%2584%25E3%2581%25AB%25E5%2586%258D%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:keisuke%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1N6RW9ldTZzVFN5UDFTUEpZazlwSkFDYUVwMGhWeGRQYzVIcHlzeXpKdlBKUGpHcWZ0dz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>keisuke</dc:creator></item><item><title><![CDATA[JVM を読む | JVM の構造その８ - 閑話：JVM が満たすべき要件と原則について]]></title><description><![CDATA[前回の続きです。前回はこちらから。
+https://zenn.dev/peyang/articles/reading-jvm-chapter-02-11-5-10
+このシリーズは，JVM の仕様書を読み解くためのガイドとして構成しています。
+JVM の仕様書は非常に長大で難解な内容が多いため，各セクションごとに要点をまとめていきます。
+また，JVM の内部構造や動作原理を知ることで，Java のパフォーマンスやセキュリティ，メモリ管理の仕組みを深く理解する試みです。
+シリーズはこちらから。
+https://zenn.dev/peyang/articles/reading-jvm-chap...]]></description><link>https://zenn.dev/peyang/articles/reading-jvm-chapter-02-12-13</link><guid isPermaLink="true">https://zenn.dev/peyang/articles/reading-jvm-chapter-02-12-13</guid><pubDate>Tue, 29 Jul 2025 16:01:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lGYfaGis--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JVM%2520%25E3%2582%2592%25E8%25AA%25AD%25E3%2582%2580%2520%257C%2520JVM%2520%25E3%2581%25AE%25E6%25A7%258B%25E9%2580%25A0%25E3%2581%259D%25E3%2581%25AE%25EF%25BC%2598%2520-%2520%25E9%2596%2591%25E8%25A9%25B1%25EF%25BC%259AJVM%2520%25E3%2581%258C%25E6%25BA%2580%25E3%2581%259F%25E3%2581%2599%25E3%2581%25B9%25E3%2581%258D%25E8%25A6%2581%25E4%25BB%25B6%25E3%2581%25A8%25E5%258E%259F%25E5%2589%2587%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BA%25E3%2582%2584%25E3%2582%2593%25E3%2581%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FDTlBFdS1sYWswV1I1UzlCc3VjNEkwLVFMNjVQQWQzQzdIcWJvT2R0MTd5QXc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぺやんぐ</dc:creator></item><item><title><![CDATA[今までのラムダ式、これからのラムダ式（Java）]]></title><description><![CDATA[
+ 今までのラムダ式、これからのラムダ式（Java）
+
+ はじめに
+Javaでラムダ式が導入されて以来、私たちは簡潔に処理を書けるようになった。しかし、try-catch や チェック例外 の存在が、ラムダ式の「軽さ」を奪ってきたのも事実だ。
+この記事では、従来のラムダ式の限界を整理し、そこから一歩踏み込んで構造的に解決したユーティリティ Lamb を紹介する。これは単なるツールではなく、「ラムダ式のこれからの書き方」を再定義する設計思想でもある。
+
+
+ 今までのラムダ式
+
+ ❌ final var での宣言ができない
+final var fn = (String str) -&gt; ...]]></description><link>https://zenn.dev/menimani/articles/891c9f96331a6d</link><guid isPermaLink="true">https://zenn.dev/menimani/articles/891c9f96331a6d</guid><pubDate>Tue, 29 Jul 2025 15:07:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jmvwnvGf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BB%258A%25E3%2581%25BE%25E3%2581%25A7%25E3%2581%25AE%25E3%2583%25A9%25E3%2583%25A0%25E3%2583%2580%25E5%25BC%258F%25E3%2580%2581%25E3%2581%2593%25E3%2582%258C%25E3%2581%258B%25E3%2582%2589%25E3%2581%25AE%25E3%2583%25A9%25E3%2583%25A0%25E3%2583%2580%25E5%25BC%258F%25EF%25BC%2588Java%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:menimani%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ5MWM5YzcyOTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>menimani</dc:creator></item><item><title><![CDATA[JVM を読む | JVM の構造その７ - オブジェクトとフローの制御について]]></title><description><![CDATA[前回の続きです。前回はこちらから。
+https://zenn.dev/peyang/articles/reading-jvm-chapter-02-11-1-4
+このシリーズは，JVM の仕様書を読み解くためのガイドとして構成しています。
+JVM の仕様書は非常に長大で難解な内容が多いため，各セクションごとに要点をまとめていきます。
+また，JVM の内部構造や動作原理を知ることで，Java のパフォーマンスやセキュリティ，メモリ管理の仕組みを深く理解する試みです。
+シリーズはこちらから。
+https://zenn.dev/peyang/articles/reading-jvm-chapt...]]></description><link>https://zenn.dev/peyang/articles/reading-jvm-chapter-02-11-5-10</link><guid isPermaLink="true">https://zenn.dev/peyang/articles/reading-jvm-chapter-02-11-5-10</guid><pubDate>Tue, 29 Jul 2025 14:51:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--52VkSwjy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JVM%2520%25E3%2582%2592%25E8%25AA%25AD%25E3%2582%2580%2520%257C%2520JVM%2520%25E3%2581%25AE%25E6%25A7%258B%25E9%2580%25A0%25E3%2581%259D%25E3%2581%25AE%25EF%25BC%2597%2520-%2520%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25A8%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25BC%25E3%2581%25AE%25E5%2588%25B6%25E5%25BE%25A1%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BA%25E3%2582%2584%25E3%2582%2593%25E3%2581%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FDTlBFdS1sYWswV1I1UzlCc3VjNEkwLVFMNjVQQWQzQzdIcWJvT2R0MTd5QXc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぺやんぐ</dc:creator></item><item><title><![CDATA[Spring Boot + LocalStorage で作る TODO アプリ完全ガイド]]></title><description><![CDATA[
+ Spring Boot + LocalStorage で作る TODO アプリ完全ガイド
+
+ 概要
+この記事では、Spring Boot、Bootstrap、JavaScript を使用して、LocalStorage にデータを保存する TODO アプリケーションを作成する方法を詳しく解説します。
+完成したコードは以下のリポジトリで確認できます：
+https://github.com/Inosuke0718/todo_demo
+初心者の方でも理解しやすいよう、実装手順を丁寧に説明していきます。
+
+ 完成イメージ
+以下が今回作成する TODO アプリの動作デモです：
+
+
+ 技術スタック...]]></description><link>https://zenn.dev/imohuke/articles/spring_boot_todo</link><guid isPermaLink="true">https://zenn.dev/imohuke/articles/spring_boot_todo</guid><pubDate>Tue, 29 Jul 2025 08:14:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DU1Pdt4U--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Spring%2520Boot%2520%252B%2520LocalStorage%2520%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%2520TODO%2520%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E5%25AE%258C%25E5%2585%25A8%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2584%25E3%2582%2582%25E3%2581%25B5%25E3%2581%2591%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlhNjM2MmM4MzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>いもふけ</dc:creator></item><item><title><![CDATA[JVM を読む | JVM の構造その６ - 命令セット概論と型の関係について]]></title><description><![CDATA[前回の続きです。前回はこちらから。
+https://zenn.dev/peyang/articles/reading-jvm-chapter-02-9-10
+このシリーズは，JVM の仕様書を読み解くためのガイドとして構成しています。
+JVM の仕様書は非常に長大で難解な内容が多いため，各セクションごとに要点をまとめていきます。
+また，JVM の内部構造や動作原理を知ることで，Java のパフォーマンスやセキュリティ，メモリ管理の仕組みを深く理解する試みです。
+シリーズはこちらから。
+https://zenn.dev/peyang/articles/reading-jvm-chapter...]]></description><link>https://zenn.dev/peyang/articles/reading-jvm-chapter-02-11-1-4</link><guid isPermaLink="true">https://zenn.dev/peyang/articles/reading-jvm-chapter-02-11-1-4</guid><pubDate>Tue, 29 Jul 2025 07:35:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mnnSGVPB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JVM%2520%25E3%2582%2592%25E8%25AA%25AD%25E3%2582%2580%2520%257C%2520JVM%2520%25E3%2581%25AE%25E6%25A7%258B%25E9%2580%25A0%25E3%2581%259D%25E3%2581%25AE%25EF%25BC%2596%2520-%2520%25E5%2591%25BD%25E4%25BB%25A4%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E6%25A6%2582%25E8%25AB%2596%25E3%2581%25A8%25E5%259E%258B%25E3%2581%25AE%25E9%2596%25A2%25E4%25BF%2582%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BA%25E3%2582%2584%25E3%2582%2593%25E3%2581%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FDTlBFdS1sYWswV1I1UzlCc3VjNEkwLVFMNjVQQWQzQzdIcWJvT2R0MTd5QXc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぺやんぐ</dc:creator></item><item><title><![CDATA[入門JUnitエクステンション: @SpringBootTestの正体]]></title><description><![CDATA[
+ この記事は何？
+Spring Bootを使ってテストする場合、テストクラスに@SpringBootTestアノテーションを付加します。
+このアノテーションのソースコードは次のようになっています。
+
+SpringBootTest.java
+...
+@ExtendWith(SpringExtension.class)
+public @interface SpringBootTest {
+    ...
+
+ここで出てきた @ExtendWith アノテーションは、JUnitでエクステンションを登録するためのものです。
+この記事では、JUnitのエクステンションとは何かを解説していきます。
+...]]></description><link>https://zenn.dev/masatoshi_tada/articles/8afd6b68eaeb7f</link><guid isPermaLink="true">https://zenn.dev/masatoshi_tada/articles/8afd6b68eaeb7f</guid><pubDate>Tue, 29 Jul 2025 07:12:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--d2l4TDzZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2585%25A5%25E9%2596%2580JUnit%25E3%2582%25A8%25E3%2582%25AF%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25B3%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%253A%2520%2540SpringBootTest%25E3%2581%25AE%25E6%25AD%25A3%25E4%25BD%2593%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masatoshi%2520Tada%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FlNzY1NjBmYTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masatoshi Tada</dc:creator></item><item><title><![CDATA[JVM を読む | JVM の構造その５ - 特別なメソッドと例外処理について]]></title><description><![CDATA[前回の続きです。前回はこちらから。
+https://zenn.dev/peyang/articles/reading-jvm-chapter-02-7-8
+このシリーズは，JVM の仕様書を読み解くためのガイドとして構成しています。
+JVM の仕様書は非常に長大で難解な内容が多いため，各セクションごとに要点をまとめていきます。
+また，JVM の内部構造や動作原理を知ることで，Java のパフォーマンスやセキュリティ，メモリ管理の仕組みを深く理解する試みです。
+シリーズはこちらから。
+https://zenn.dev/peyang/articles/reading-jvm-chapter-...]]></description><link>https://zenn.dev/peyang/articles/reading-jvm-chapter-02-9-10</link><guid isPermaLink="true">https://zenn.dev/peyang/articles/reading-jvm-chapter-02-9-10</guid><pubDate>Tue, 29 Jul 2025 03:07:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wKLcWamD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JVM%2520%25E3%2582%2592%25E8%25AA%25AD%25E3%2582%2580%2520%257C%2520JVM%2520%25E3%2581%25AE%25E6%25A7%258B%25E9%2580%25A0%25E3%2581%259D%25E3%2581%25AE%25EF%25BC%2595%2520-%2520%25E7%2589%25B9%25E5%2588%25A5%25E3%2581%25AA%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E3%2581%25A8%25E4%25BE%258B%25E5%25A4%2596%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BA%25E3%2582%2584%25E3%2582%2593%25E3%2581%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FDTlBFdS1sYWswV1I1UzlCc3VjNEkwLVFMNjVQQWQzQzdIcWJvT2R0MTd5QXc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぺやんぐ</dc:creator></item><item><title><![CDATA[Java 8以降でMapに追加されたメソッドたち]]></title><description><![CDATA[
+ この記事は何？
+Javaでマップはちょいちょい使いますね。この記事では、Java 8以降で導入された比較的新しいメソッドを中心に紹介します。
+
+ 環境
+JDK 21
+
+ 超基本的な使い方
+put()で値の追加、get()で値の取得ができますね。
+// マップを生成
+Map&lt;String, Integer&gt; fruitsMap = new HashMap&lt;&gt;();
+// マップにフルーツの名前と数量を追加
+fruitsMap.put("apple", 10);
+fruitsMap.put("banana", 20);
+fruitsMap.put("orange"...]]></description><link>https://zenn.dev/masatoshi_tada/articles/a6e5eb1da52ec0</link><guid isPermaLink="true">https://zenn.dev/masatoshi_tada/articles/a6e5eb1da52ec0</guid><pubDate>Tue, 29 Jul 2025 02:34:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SYy0J-4Y--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25208%25E4%25BB%25A5%25E9%2599%258D%25E3%2581%25A7Map%25E3%2581%25AB%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2595%25E3%2582%258C%25E3%2581%259F%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E3%2581%259F%25E3%2581%25A1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masatoshi%2520Tada%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FlNzY1NjBmYTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masatoshi Tada</dc:creator></item><item><title><![CDATA[JVM を読む | JVM の構造その４ - オブジェクトの表現と浮動小数点数の計算について]]></title><description><![CDATA[前回の続きです。前回はこちらから。
+https://zenn.dev/peyang/articles/reading-jvm-chapter-02-6
+このシリーズは，JVM の仕様書を読み解くためのガイドとして構成しています。
+JVM の仕様書は非常に長大で難解な内容が多いため，各セクションごとに要点をまとめていきます。
+また，JVM の内部構造や動作原理を知ることで，Java のパフォーマンスやセキュリティ，メモリ管理の仕組みを深く理解する試みです。
+シリーズはこちらから。
+https://zenn.dev/peyang/articles/reading-jvm-chapter-00...]]></description><link>https://zenn.dev/peyang/articles/reading-jvm-chapter-02-7-8</link><guid isPermaLink="true">https://zenn.dev/peyang/articles/reading-jvm-chapter-02-7-8</guid><pubDate>Mon, 28 Jul 2025 23:51:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KN85GJYp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JVM%2520%25E3%2582%2592%25E8%25AA%25AD%25E3%2582%2580%2520%257C%2520JVM%2520%25E3%2581%25AE%25E6%25A7%258B%25E9%2580%25A0%25E3%2581%259D%25E3%2581%25AE%25EF%25BC%2594%2520-%2520%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25AE%25E8%25A1%25A8%25E7%258F%25BE%25E3%2581%25A8%25E6%25B5%25AE%25E5%258B%2595%25E5%25B0%258F%25E6%2595%25B0%25E7%2582%25B9%25E6%2595%25B0%25E3%2581%25AE%25E8%25A8%2588%25E7%25AE%2597%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BA%25E3%2582%2584%25E3%2582%2593%25E3%2581%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FDTlBFdS1sYWswV1I1UzlCc3VjNEkwLVFMNjVQQWQzQzdIcWJvT2R0MTd5QXc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぺやんぐ</dc:creator></item><item><title><![CDATA[Spock を使って Unit テストを書いてみる]]></title><description><![CDATA[
+ はじめに
+Java のテストというと JUnit を使うことが多いかと思いますが、今回は Spock というテストフレームワークを使ってみて、とても便利だったので紹介します。
+Spock は Groovy ベースのテストフレームワークで、特にBehavior Driven Development(BDD)スタイルのテストを書くのに適しています。
+JUnit と比べて、より表現力豊かなテストを書くことができ、読みやすさも向上します。
+この記事では基本的な Spock の使い方、使う際の注意したいポイントをいくつか紹介します。
+以下は公式のドキュメントです。詳細な情報は公式ドキュメントを...]]></description><link>https://zenn.dev/rakuten_tech/articles/spock-test-practice</link><guid isPermaLink="true">https://zenn.dev/rakuten_tech/articles/spock-test-practice</guid><pubDate>Mon, 28 Jul 2025 14:38:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OasKh0xR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Spock%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%2520Unit%2520%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E6%259B%25B8%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Tsubasa%2520Nomura%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLmRldi9pbWFnZXMvZGVmYXVsdC1wdWJsaWNhdGlvbi1hdmF0YXIucG5n%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Rakuten%2520Volunteers%2520Te...%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvdC5wbmc=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tsubasa Nomura</dc:creator></item><item><title><![CDATA[JVM を読む | JVM の構造その３ - フレームについて]]></title><description><![CDATA[前回の続きです。前回はこちらから。
+https://zenn.dev/peyang/articles/reading-jvm-chapter-02-5
+このシリーズは，JVM の仕様書を読み解くためのガイドとして構成しています。
+JVM の仕様書は非常に長大で難解な内容が多いため，各セクションごとに要点をまとめていきます。
+また，JVM の内部構造や動作原理を知ることで，Java のパフォーマンスやセキュリティ，メモリ管理の仕組みを深く理解する試みです。
+シリーズはこちらから。
+https://zenn.dev/peyang/articles/reading-jvm-chapter-00...]]></description><link>https://zenn.dev/peyang/articles/reading-jvm-chapter-02-6</link><guid isPermaLink="true">https://zenn.dev/peyang/articles/reading-jvm-chapter-02-6</guid><pubDate>Mon, 28 Jul 2025 08:31:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9VzYc-sa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JVM%2520%25E3%2582%2592%25E8%25AA%25AD%25E3%2582%2580%2520%257C%2520JVM%2520%25E3%2581%25AE%25E6%25A7%258B%25E9%2580%25A0%25E3%2581%259D%25E3%2581%25AE%25EF%25BC%2593%2520-%2520%25E3%2583%2595%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%25A0%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BA%25E3%2582%2584%25E3%2582%2593%25E3%2581%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FDTlBFdS1sYWswV1I1UzlCc3VjNEkwLVFMNjVQQWQzQzdIcWJvT2R0MTd5QXc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぺやんぐ</dc:creator></item><item><title><![CDATA[ストリームAPIのまとめ(後編)[Java入門]]]></title><description><![CDATA[
+ はじめに
+こんにちは。
+プログラミング初心者wakinozaと申します。
+Java勉強中に調べたことを記事にまとめています。
+十分気をつけて執筆していますが、なにぶん初心者が書いた記事なので、理解が浅い点などあるかと思います。
+間違い等あれば、指摘いただけると助かります。
+記事を参考にされる方は、初心者の記事であることを念頭において、お読みいただけると幸いです。
+
+ 対象読者
+
+Javaを勉強中の方
+Java SE11 Gold試験を勉強中の方
+JavaのストリームAPIのメソッドを知りたい方
+
+
+ 目次
+1. インスタンス生成のメソッド
+2. 中間操作のメソッド
+3. 終端操作のメ...]]></description><link>https://zenn.dev/wakinoza/articles/64a4d77cfa677f</link><guid isPermaLink="true">https://zenn.dev/wakinoza/articles/64a4d77cfa677f</guid><pubDate>Mon, 28 Jul 2025 07:13:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--d_SgKw0g--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25A0API%25E3%2581%25AE%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2528%25E5%25BE%258C%25E7%25B7%25A8%2529%255BJava%25E5%2585%25A5%25E9%2596%2580%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wakinoza%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkYzVjNWY5ZWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wakinoza</dc:creator></item><item><title><![CDATA[JVM を読む - はじめに]]></title><description><![CDATA[はじめまして。こちらは Peyang （ぺやんぐ）です。
+私は Java や JVM 関連の技術が大変大好きで，日々 JVM の仕組みや Java 言語の特性を遊びながら学んでいます。
+ここでは，その中で得られた知見を記事として執筆し，また共有しながら皆々様とわいわいできればと思います。
+
+ Java って？ JVM との関係は？
+Java 言語は組み込み向けのプログラミング言語として 90 年代に確立されたオブジェクト指向型の言語です。
+当時としては画期的な「専用仮想マシン上で動作する仕組み」を取り入れ，「Write Once, Run Anywhere」（一度書けばどこでも動く）など...]]></description><link>https://zenn.dev/peyang/articles/reading-jvm-chapter-00</link><guid isPermaLink="true">https://zenn.dev/peyang/articles/reading-jvm-chapter-00</guid><pubDate>Mon, 28 Jul 2025 07:01:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wT3lBy-a--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JVM%2520%25E3%2582%2592%25E8%25AA%25AD%25E3%2582%2580%2520-%2520%25E3%2581%25AF%25E3%2581%2598%25E3%2582%2581%25E3%2581%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BA%25E3%2582%2584%25E3%2582%2593%25E3%2581%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FDTlBFdS1sYWswV1I1UzlCc3VjNEkwLVFMNjVQQWQzQzdIcWJvT2R0MTd5QXc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぺやんぐ</dc:creator></item><item><title><![CDATA[JVM を読む | JVM の構造その２ - データ領域について]]></title><description><![CDATA[前回の続きです。前回はこちらから。
+https://zenn.dev/peyang/articles/reading-jvm-chapter-02-1-4
+このシリーズは，JVM の仕様書を読み解くためのガイドとして構成しています。
+JVM の仕様書は非常に長大で難解な内容が多いため，各セクションごとに要点をまとめていきます。
+また，JVM の内部構造や動作原理を知ることで，Java のパフォーマンスやセキュリティ，メモリ管理の仕組みを深く理解する試みです。
+シリーズはこちらから。
+https://zenn.dev/peyang/articles/reading-jvm-chapter-...]]></description><link>https://zenn.dev/peyang/articles/reading-jvm-chapter-02-5</link><guid isPermaLink="true">https://zenn.dev/peyang/articles/reading-jvm-chapter-02-5</guid><pubDate>Mon, 28 Jul 2025 06:54:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nt1lZoaI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JVM%2520%25E3%2582%2592%25E8%25AA%25AD%25E3%2582%2580%2520%257C%2520JVM%2520%25E3%2581%25AE%25E6%25A7%258B%25E9%2580%25A0%25E3%2581%259D%25E3%2581%25AE%25EF%25BC%2592%2520-%2520%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E9%25A0%2598%25E5%259F%259F%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BA%25E3%2582%2584%25E3%2582%2593%25E3%2581%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FDTlBFdS1sYWswV1I1UzlCc3VjNEkwLVFMNjVQQWQzQzdIcWJvT2R0MTd5QXc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぺやんぐ</dc:creator></item><item><title><![CDATA[JVM を読む | JVM の構造その１ - 型について]]></title><description><![CDATA[前回の続きです。前回はこちらから。
+https://zenn.dev/peyang/articles/reading-jvm-chapter-01
+このシリーズは，JVM の仕様書を読み解くためのガイドとして構成しています。
+JVM の仕様書は非常に長大で難解な内容が多いため，各セクションごとに要点をまとめていきます。
+また，JVM の内部構造や動作原理を知ることで，Java のパフォーマンスやセキュリティ，メモリ管理の仕組みを深く理解する試みです。
+シリーズはこちらから。
+https://zenn.dev/peyang/articles/reading-jvm-chapter-00
+
+...]]></description><link>https://zenn.dev/peyang/articles/reading-jvm-chapter-02-1-4</link><guid isPermaLink="true">https://zenn.dev/peyang/articles/reading-jvm-chapter-02-1-4</guid><pubDate>Mon, 28 Jul 2025 05:57:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5ihcRGqp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JVM%2520%25E3%2582%2592%25E8%25AA%25AD%25E3%2582%2580%2520%257C%2520JVM%2520%25E3%2581%25AE%25E6%25A7%258B%25E9%2580%25A0%25E3%2581%259D%25E3%2581%25AE%25EF%25BC%2591%2520-%2520%25E5%259E%258B%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BA%25E3%2582%2584%25E3%2582%2593%25E3%2581%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FDTlBFdS1sYWswV1I1UzlCc3VjNEkwLVFMNjVQQWQzQzdIcWJvT2R0MTd5QXc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぺやんぐ</dc:creator></item><item><title><![CDATA[JavaプログラマのためのCプログラミング入門]]></title><description><![CDATA[本書は以下の書籍を掲載したものになります。
+　書名：JavaプログラマのためのC作法 虎の巻
+　著者：Lepton(れぷとん)
+　発行：株式会社翔泳社 2009年3/10初版
+株式会社翔泳社と著者(Lepton)との出版契約が終了し、掲載が可能となりました。
+なお、本記事は元書籍の発行時点における内容となっており、修正は加えずそのまま掲載します(気が向いたら今後改訂するかも知れません)。
+
+本書の対象読者層としては、次のような方を想定しています。
+
+- 実務でJava を使っているなど、Java でプログラミング経験のあるプログラマ
+- Cはまったくやったことが無いか、大学・専門学校等でかじった程度
+- 実務でC を使うことは今後ともあまり考えられないかも知れないが、趣味・一般教養として知的好奇心からCを知りたいと思ってる
+- オープンソースソフトウェアなどでよくCが使われているので、それらのコードを読みたいと思ったことがある
+
+また本書は、ある程度のJava の知識を前提としています。そして、「Java と比較して、Cはどこが違うのか（似ているのか）」という視点で、Cの文法その他を解説しています。もちろん2 つの言語の比較だけではなく、最後までお読みいただければ、基本的なC のプログラミングができるようになっているはずです。
+]]></description><link>https://zenn.dev/lepton31/books/49232ffb97ae6c</link><guid isPermaLink="true">https://zenn.dev/lepton31/books/49232ffb97ae6c</guid><pubDate>Mon, 28 Jul 2025 05:12:47 GMT</pubDate><dc:creator>lepton31</dc:creator></item></channel></rss>
