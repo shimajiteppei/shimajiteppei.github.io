@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Docker」のフィード]]></title><description><![CDATA[Zennのトピック「Docker」のRSSフィードです]]></description><link>https://zenn.dev/topics/docker</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/75b80a5922.png</url><title>Zennの「Docker」のフィード</title><link>https://zenn.dev/topics/docker</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 01 Aug 2025 07:15:51 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/docker/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[硬派なDockerfile]]></title><description><![CDATA[Docker代替についてが話題になりつつありますが、まだしばらくがDockerが使われ続けると信じてDockerfileの記事を書きます。
+Dockerfileに書いちゃえば環境移行時の問題は起きないよね、とも言い切れないことも多く、環境移行に対してロバストな（硬派な・・？）Dockerfileについての小ネタをまとめてみました。
+
+
+ 1. プロキシ問題
+社内ネットワークなどでは プロキシ設定が必須の場合があります。
+公式ドキュメントでも推奨されているのは、~/.docker/config.json に proxy 設定を書いて Docker デーモン／CLI に反映させる 方法であり...]]></description><link>https://zenn.dev/headwaters/articles/5cee7e6f3f85da</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/5cee7e6f3f85da</guid><pubDate>Thu, 31 Jul 2025 13:08:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MEEWr56_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:%25E7%25A1%25AC%25E6%25B4%25BE%25E3%2581%25AADockerfile%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E9%2598%25BF%25E4%25B9%2585%25E6%25B4%25A5%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk2NjJhOTg2OGQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>阿久津</dc:creator></item><item><title><![CDATA[WoL&Parsecで家のWindowsPCを外から操作する]]></title><description><![CDATA[
+ はじめに
+普段外出時にはMacBookAirを使用していますが外出先からWindowsPCでゲーム作業がしたくなったためやってみたメモです.
+
+ 必要なもの
+
+WindowsPC(動かす対象)
+ノートPC(外部から操作する用)
+動かす対象と同一LAN内にあるサーバ(ラズパイとかでOK)
+Cloudflareのアカウント
+ドメイン
+
+
+ 構成
+
+
+LAN外にあるノートPCからCloudflareトンネル経由でLAN内のサーバへアクセス
+LAN内のサーバがマジックパケットを送信(遠隔でPC起動)
+起動したPCをParsec使って操作
+
+といった流れで外部からの操作を実現しています
+
+ 構...]]></description><link>https://zenn.dev/nenfa/articles/819b2ceac39a19</link><guid isPermaLink="true">https://zenn.dev/nenfa/articles/819b2ceac39a19</guid><pubDate>Thu, 31 Jul 2025 05:13:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--q3bKypyY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WoL%2526Parsec%25E3%2581%25A7%25E5%25AE%25B6%25E3%2581%25AEWindowsPC%25E3%2582%2592%25E5%25A4%2596%25E3%2581%258B%25E3%2582%2589%25E6%2593%258D%25E4%25BD%259C%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25B9%25B4%25E6%2599%25AE%2540%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdkZDc2ZDJmY2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>年普@</dc:creator></item><item><title><![CDATA[つくよみちゃんの会話データでLLM-JPをファインチューニングした話]]></title><description><![CDATA[
+ つくよみちゃんの会話データでLLM-JPをファインチューニングした話
+
+ はじめに
+こんにちは！今回はつくよみちゃん会話AI育成計画のデータを使って、LLM-JP 3.1 1.8B Instruct4をファインチューニングしてみました。
+つくよみちゃんらしい会話ができるモデルを作るまでの過程を、実装の詳細と一緒に紹介していきます。
+
+ なぜこのプロジェクトを始めたか
+
+ 背景
+
+日本語の会話AIを作りたい
+つくよみちゃんの公式データが公開されている
+LLM-JPという日本語特化のモデルがある
+でも、実際にファインチューニングするのは大変そう...
+
+
+ 目標
+
+つくよみちゃんらしい会...]]></description><link>https://zenn.dev/yukiharada1228/articles/ed272e5544672d</link><guid isPermaLink="true">https://zenn.dev/yukiharada1228/articles/ed272e5544672d</guid><pubDate>Thu, 31 Jul 2025 03:27:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ClK2E3h_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25A4%25E3%2581%258F%25E3%2582%2588%25E3%2581%25BF%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%25E3%2581%25AE%25E4%25BC%259A%25E8%25A9%25B1%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2581%25A7LLM-JP%25E3%2582%2592%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2581%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%258B%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yukiharada1228%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZjYmI4YjNhMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yukiharada1228</dc:creator></item><item><title><![CDATA[Docker × Rails × rbenv環境でrailsコマンドが見つからない理由と対処法]]></title><description><![CDATA[
+ はじめに
+!
+chatGPTの解答も含まれます
+
+RailsやRubyプロジェクトをDocker＋rbenvで運用する際、
+「railsコマンドが見つからない」「bundle exec railsが動かない」といったトラブルに悩まされたことはありませんか？
+この記事では、docker-compose.ymlのcommand:設定の影響や、正しいコンソール起動方法をまとめます。
+
+
+ 1. docker-compose.ymlのcommand:設定の正体
+例えば、下記のようなcommand:が指定されていることがあります。
+command: /bin/bash -c "source ~...]]></description><link>https://zenn.dev/hi_kun0912/articles/c19b394319c8ec</link><guid isPermaLink="true">https://zenn.dev/hi_kun0912/articles/c19b394319c8ec</guid><pubDate>Thu, 31 Jul 2025 02:32:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OGJntN13--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%2520%25C3%2597%2520Rails%2520%25C3%2597%2520rbenv%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7rails%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%258C%25E8%25A6%258B%25E3%2581%25A4%25E3%2581%258B%25E3%2582%2589%25E3%2581%25AA%25E3%2581%2584%25E7%2590%2586%25E7%2594%25B1%25E3%2581%25A8%25E5%25AF%25BE%25E5%2587%25A6%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%2581%25AF%25E5%25AD%2590%25E6%25BA%25BA%25E6%2584%259B%25E3%2583%2591%25E3%2583%2591%2540%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VhYjMzZWZkYTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>息子溺愛パパ@エンジニア</dc:creator></item><item><title><![CDATA[Laravel 12 + Inertia.js を nginx + php-fpm サイドカー構成で動作できるDockerイメージの作り方]]></title><description><![CDATA[
+ mermaid.jsによるイメージ図
+これが一般的なサイドカー構成である。このメリットは
+
+
+プロセスの分離：nginxとphp-fpmを別コンテナに分離することで、それぞれのライフサイクルを独立して管理できる。リロードや再起動の影響を最小限に抑える。
+
+スケーラビリティの向上：トラフィックが集中した場合、nginxのレイヤーをスケールアウトすることで負荷分散を効かせやすくなる。PHP側を複製せずともフロントを一時的に強化可能。
+
+責務の分離：nginxはリバースプロキシやSSL終端処理、静的ファイルの配信に専念し、php-fpmは動的リクエスト処理のみに集中できる。設定ファイルや監...]]></description><link>https://zenn.dev/catatsumuri/articles/7d5d5f77d3268d</link><guid isPermaLink="true">https://zenn.dev/catatsumuri/articles/7d5d5f77d3268d</guid><pubDate>Wed, 30 Jul 2025 20:56:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OcERqbte--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Laravel%252012%2520%252B%2520Inertia.js%2520%25E3%2582%2592%2520nginx%2520%252B%2520php-fpm%2520%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2589%25E3%2582%25AB%25E3%2583%25BC%25E6%25A7%258B%25E6%2588%2590%25E3%2581%25A7%25E5%258B%2595%25E4%25BD%259C%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258BDo...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25EF%25BE%2593%25EF%25BD%25AF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VlMzM1YzM5ZjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ﾓｯ</dc:creator></item><item><title><![CDATA[エンジニア必見！curl | bash が危険な理由と安全なDocker環境構築]]></title><description><![CDATA[
+ 🐳 はじめに
+!
+自身での技術調査とchatGPTを併用し、整理した記事になります。
+
+Dockerfileを書いていると、apt や curl をよく使いますよね。
+でも実は、その使い方を誤ると 「セキュリティリスク」 に直結することをご存知でしょうか？
+
+
+ ⚠️ なぜ curl | bash が危険なのか
+よく見かける例：
+curl -s https://example.com/install.sh | bash
+
+ 危険な理由
+
+スクリプトを確認せずに実行
+root 権限で動作することが多い
+改ざんされていれば即アウト
+
+
+
+ ✅ apt install は安全なのか？
+ap...]]></description><link>https://zenn.dev/hi_kun0912/articles/9f86ce1ef4925b</link><guid isPermaLink="true">https://zenn.dev/hi_kun0912/articles/9f86ce1ef4925b</guid><pubDate>Wed, 30 Jul 2025 09:02:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hGD3VMcR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E5%25BF%2585%25E8%25A6%258B%25EF%25BC%2581curl%2520%257C%2520bash%2520%25E3%2581%258C%25E5%258D%25B1%25E9%2599%25BA%25E3%2581%25AA%25E7%2590%2586%25E7%2594%25B1%25E3%2581%25A8%25E5%25AE%2589%25E5%2585%25A8%25E3%2581%25AADocker%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%2581%25AF%25E5%25AD%2590%25E6%25BA%25BA%25E6%2584%259B%25E3%2583%2591%25E3%2583%2591%2540%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VhYjMzZWZkYTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>息子溺愛パパ@エンジニア</dc:creator></item><item><title><![CDATA[🛡️ SafeTalk開発環境構築ガイド（macOS M4対応）]]></title><description><![CDATA[
+ はじめに
+SafeTalkは、AI駆動型デジタルケア・対応プラットフォームです。サイバーいじめや憎悪表現をリアルタイムで検知し、被害者に感情的支援を提供するサービスを開発しています。
+日本のAI新卒採用を目指すポートフォリオプロジェクトとして、最新の技術スタックを活用した実用的なWebアプリケーションの構築過程を記録しています。
+
+ プロジェクト概要
+
+ 主要機能
+
+
+リアルタイム感情分析: 日本語特化BERTモデルによる高精度分析
+
+GPTベースメンタルケアチャットボット: 24時間365日の匿名相談サービス
+
+プライバシー優先設計: ゼロトラストデータ処理方式
+
+
+ 技術スタック...]]></description><link>https://zenn.dev/hyeon_marina247/articles/13c4425787c522</link><guid isPermaLink="true">https://zenn.dev/hyeon_marina247/articles/13c4425787c522</guid><pubDate>Wed, 30 Jul 2025 02:55:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yzZJJ80g--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520%2520SafeTalk%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%25EF%25BC%2588macOS%2520M4%25E5%25AF%25BE%25E5%25BF%259C%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hyeon%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IzNzUyOTRmNGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hyeon</dc:creator></item><item><title><![CDATA[Omeka S Docker の紹介：デジタルコレクションのための最新かつセキュアなソリューション]]></title><description><![CDATA[!
+本記事はAIが作成しました。
+
+Omeka S Docker へようこそ！このプロジェクトは、大学、ギャラリー、図書館、アーカイブ、博物館向けの Web パブリケーションシステムである Omeka S の本番環境対応 Docker セットアップを提供します。
+📦 GitHub リポジトリ: https://github.com/nakamura196/omeka-s-docker
+
+ なぜ Omeka S Docker なのか？
+デジタルコレクションの管理は複雑である必要はありません。そのため、Omeka S のデプロイと管理を簡素化する Docker ベースのソリューションを作成し...]]></description><link>https://zenn.dev/nakamura196/articles/153c6c349e8157</link><guid isPermaLink="true">https://zenn.dev/nakamura196/articles/153c6c349e8157</guid><pubDate>Wed, 30 Jul 2025 00:44:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GmZerhAm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Omeka%2520S%2520Docker%2520%25E3%2581%25AE%25E7%25B4%25B9%25E4%25BB%258B%25EF%25BC%259A%25E3%2583%2587%25E3%2582%25B8%25E3%2582%25BF%25E3%2583%25AB%25E3%2582%25B3%25E3%2583%25AC%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E6%259C%2580%25E6%2596%25B0%25E3%2581%258B%25E3%2581%25A4%25E3%2582%25BB%25E3%2582%25AD%25E3%2583%25A5%25E3%2582%25A2%25E3%2581%25AA%25E3%2582%25BD%25E3%2583%25AA%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakamura196%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pkd3BpX1gzTWIzV3VqTnVnV2tPTlJlU3VsNFNTN1BNMWlPQm9LRm5JPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakamura196</dc:creator></item><item><title><![CDATA[【Docker】port is already allocated エラーの解決手順]]></title><description><![CDATA[
+ はじめに
+Dockerを使って開発をしていると、「Bind for 0.0.0.0:3000 failed: port is already allocated」エラーに遭遇することがあります。これは指定したポートが既に他のプロセスやコンテナによって使用されているときに発生します。
+解決策はシンプルで、何がポートを使用しているか確認し、該当するコンテナやプロセスを適切に停止することです。
+では実際にその手順について説明していきます。
+
+ 急ぎの方への最短解決パス
+!
+細けぇことはいいからぱぱっと解決すっぞという方へ
+以下のコマンドを順番に実行すれば、たいてい解決するかと思います。
+
+...]]></description><link>https://zenn.dev/n_haru2/articles/1b0e5af17e5440</link><guid isPermaLink="true">https://zenn.dev/n_haru2/articles/1b0e5af17e5440</guid><pubDate>Tue, 29 Jul 2025 17:50:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--toWDaj8T--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Docker%25E3%2580%2591port%2520is%2520already%2520allocated%2520%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%25AE%25E8%25A7%25A3%25E6%25B1%25BA%25E6%2589%258B%25E9%25A0%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:pen2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkYmJjY2MwZmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>pen2</dc:creator></item><item><title><![CDATA[MITRE ATT&CK Navigatorをコンテナで用意する]]></title><description><![CDATA[コンテナ環境にMITRE ATT&amp;CK Navigatorを用意する手順について記載します。
+将来的に社内SOC、可視化支援、レポート作成用途での導入を踏まえた、検証目的での環境を想定しています。
+MITRE ATT&amp;CK Navigatorをローカルで用意する必要性については、attack-navigator公式リポジトリの以下の内容を基にしています。
+https://github.com/mitre-attack/attack-navigator?tab=readme-ov-file#usage
+
+重要事項： GitHub  PagesでホストされているNavigat...]]></description><link>https://zenn.dev/sesamum/articles/1f06dcdf8b3757</link><guid isPermaLink="true">https://zenn.dev/sesamum/articles/1f06dcdf8b3757</guid><pubDate>Tue, 29 Jul 2025 11:11:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yYW4tlzX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:MITRE%2520ATT%2526CK%2520Navigator%25E3%2582%2592%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2581%25A7%25E7%2594%25A8%25E6%2584%258F%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2594%25E3%2581%25BE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdiNTAyNjcxNTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ごま</dc:creator></item><item><title><![CDATA[ネットワークの観察 - 第5回 SSHポートフォワーディングを解析する]]></title><description><![CDATA[
+ はじめに
+Mac（ホスト）とDocker環境でSSHポートフォワーディングの3種類（ローカル-L、リモート-R、ダイナミック-D）を実験・観察する手順です。
+
+ マシンスペック
+MacBook Air M2 arm64
+Docker上で実施
+
+ 準備
+
+ 必要なツール
+# sshpass（パスワード認証用）
+brew install hudochenkov/sshpass/sshpass
+
+# Wireshark（任意・パケット解析用）
+brew install --cask wireshark
+
+ プロジェクト構成
+ssh-portforward-lab/
+├── docker-c...]]></description><link>https://zenn.dev/ka_kan/articles/b4590b36e10c64</link><guid isPermaLink="true">https://zenn.dev/ka_kan/articles/b4590b36e10c64</guid><pubDate>Tue, 29 Jul 2025 10:36:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jU4FXANP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%258D%25E3%2583%2583%25E3%2583%2588%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E3%2581%25AE%25E8%25A6%25B3%25E5%25AF%259F%2520-%2520%25E7%25AC%25AC5%25E5%259B%259E%2520SSH%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AF%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%2592%25E8%25A7%25A3%25E6%259E%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kanda%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlOGJhYTMxOGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kanda</dc:creator></item><item><title><![CDATA[「前近代日本-アジア関係資料デジタルアーカイブ」のビューアを試す]]></title><description><![CDATA[
+ 概要
+「前近代日本-アジア関係資料デジタルアーカイブ」が2025年7月25日に公開されました。
+https://asia-da.lit.kyushu-u.ac.jp/
+また、以下でビューアが公開されています。
+https://github.com/localmedialabs/tei_comparative_viewer
+本記事では、本ビューアを試した記録を共有します。
+結果、以下のように、セルフホストすることができました。
+https://tei-comparative-viewer.aws.ldas.jp/
+
+以下の「海東諸国紀」のXMLファイルを読み込んでいます。
+https:...]]></description><link>https://zenn.dev/nakamura196/articles/b05408b6a8d57b</link><guid isPermaLink="true">https://zenn.dev/nakamura196/articles/b05408b6a8d57b</guid><pubDate>Tue, 29 Jul 2025 10:07:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--b4007Sn6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258C%25E5%2589%258D%25E8%25BF%2591%25E4%25BB%25A3%25E6%2597%25A5%25E6%259C%25AC-%25E3%2582%25A2%25E3%2582%25B8%25E3%2582%25A2%25E9%2596%25A2%25E4%25BF%2582%25E8%25B3%2587%25E6%2596%2599%25E3%2583%2587%25E3%2582%25B8%25E3%2582%25BF%25E3%2583%25AB%25E3%2582%25A2%25E3%2583%25BC%25E3%2582%25AB%25E3%2582%25A4%25E3%2583%2596%25E3%2580%258D%25E3%2581%25AE%25E3%2583%2593%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%25A2%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakamura196%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pkd3BpX1gzTWIzV3VqTnVnV2tPTlJlU3VsNFNTN1BNMWlPQm9LRm5JPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakamura196</dc:creator></item><item><title><![CDATA[Sassで指定したスタイルが反映されないときの原因と解決法]]></title><description><![CDATA[Laravel × Sass を使っているときに、Sassで書いたスタイルが反映されず「検証ツールで確認しても変化が見えない」という経験はありませんか？
+今回は、背景色を #ccc に変更したのに反映されなかったケースを例に、原因と解決までの流れを解説します。
+
+
+ 🐛 発生した問題
+Sassファイルに以下を記述しました。
+.example__exampleitem__hoge__huga {
+    background-color: #ccc;
+}
+ところが、ブラウザの検証ツールでは background-color: #fff; のままで、#ccc の指定が表示されませんでした。
+...]]></description><link>https://zenn.dev/hi_kun0912/articles/f71cfa05f937b0</link><guid isPermaLink="true">https://zenn.dev/hi_kun0912/articles/f71cfa05f937b0</guid><pubDate>Tue, 29 Jul 2025 09:25:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tEDHamNA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Sass%25E3%2581%25A7%25E6%258C%2587%25E5%25AE%259A%25E3%2581%2597%25E3%2581%259F%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%258C%25E5%258F%258D%25E6%2598%25A0%25E3%2581%2595%25E3%2582%258C%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AE%25E5%258E%259F%25E5%259B%25A0%25E3%2581%25A8%25E8%25A7%25A3%25E6%25B1%25BA%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%2581%25AF%25E5%25AD%2590%25E6%25BA%25BA%25E6%2584%259B%25E3%2583%2591%25E3%2583%2591%2540%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VhYjMzZWZkYTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>息子溺愛パパ@エンジニア</dc:creator></item><item><title><![CDATA[【prometheus】 の理解を深める]]></title><description><![CDATA[
+ はじめに
+以前、Prometheus と Grafana の環境構築を行いました。構築自体はできたものの、仕組みの理解が浅かったため、理解を深める目的で今回アウトプットすることにしました。
+https://zenn.dev/eiken/articles/a5a61770531c70
+
+ 1. prometheus とは
+prometheus は、システムやアプリケーションから収集した メトリクス（時系列データ） をもとに、監視や可視化を行うオープンソースのソフトウェアです。
+少し難しく書くとすれば、エクスポーターなどから HTTP 経由でメトリクスを収集し、内部の時系列データベースに...]]></description><link>https://zenn.dev/eiken/articles/75b1b640cb744c</link><guid isPermaLink="true">https://zenn.dev/eiken/articles/75b1b640cb744c</guid><pubDate>Tue, 29 Jul 2025 07:52:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xSCSL6bk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590prometheus%25E3%2580%2591%2520%25E3%2581%25AE%25E7%2590%2586%25E8%25A7%25A3%25E3%2582%2592%25E6%25B7%25B1%25E3%2582%2581%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:enjine%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZS5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>enjine</dc:creator></item><item><title><![CDATA[Docker環境でSupabase OAuth認証が失敗する問題と解決策【Next.js + Google OAuth】]]></title><description><![CDATA[
+ はじめに
+Docker環境でSupabaseのOAuth認証を導入する場合、公式のドキュメント通りに進めても様々な問題に遭遇します。
+これは、Dockerコンテナ内とブラウザでSupabaseへのアクセス方法が異なるためです。
+本記事では、このDocker環境特有の課題を解決する具体的な手順を、実装コードと共に詳しく解説します。同じ問題で困っている方の参考になれば幸いです。
+事前準備
+
+Next.jsとSupabaseの基本的な設定知識（公式クイックスタート）
+Google OAuth設定の経験（公式ガイド）
+
+完全なサンプルコード
+この記事で解説するすべてのコードはGitHubリポ...]]></description><link>https://zenn.dev/t98o84/articles/fcf97addf38bda</link><guid isPermaLink="true">https://zenn.dev/t98o84/articles/fcf97addf38bda</guid><pubDate>Tue, 29 Jul 2025 04:31:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--07hnTZPc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7Supabase%2520OAuth%25E8%25AA%258D%25E8%25A8%25BC%25E3%2581%258C%25E5%25A4%25B1%25E6%2595%2597%25E3%2581%2599%25E3%2582%258B%25E5%2595%258F%25E9%25A1%258C%25E3%2581%25A8%25E8%25A7%25A3%25E6%25B1%25BA%25E7%25AD%2596%25E3%2580%2590Next.js%2520%252B%2520Google%2520OAuth%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Takuya%2520Ohashi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkFwbkVNek81dDRpWXkzaFhURUlkWTdkMlhLSm1PY3hKXzdfam1INUg4VllabD1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Takuya Ohashi</dc:creator></item><item><title><![CDATA[Raspberry Pi + Yocto + docker compose]]></title><description><![CDATA[作りたいものの全体像（このスクラップ）から参照しています
+https://zenn.dev/takumique/scraps/dc811f9f30d004
+
+ 作りたいもの
+こちらの記事で作成したコンテナおよびその他コンテナをdocker-composeを使用して起動します。
+https://zenn.dev/takumique/articles/01d115c0c706d9
+
+ docker-composeのインストール
+meta-virtualizationにdocker-composeがありますので、これを使います。
+
+ local.conf
+CORE_IMAGE_EXTRA_IN...]]></description><link>https://zenn.dev/takumique/articles/e2dcb85f32c1aa</link><guid isPermaLink="true">https://zenn.dev/takumique/articles/e2dcb85f32c1aa</guid><pubDate>Mon, 28 Jul 2025 22:18:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--e6yJvjPx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Raspberry%2520Pi%2520%252B%2520Yocto%2520%252B%2520docker%2520compose%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takumique%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3I4X01CVk1NS3pLWDBiYWdESTdCRXV5dEdxMHpHLUdWSWE1emhJc1MxYkFTU3J3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takumique</dc:creator></item><item><title><![CDATA[ネットワークの観察 - 第4回 telnetを解析する]]></title><description><![CDATA[
+ はじめに
+telnetの接続はどのようになっているのでしょうか？今回はwiresharkを使用して確認してみます。
+
+ マシンスペック
+MacBook Air M2 arm64
+Docker上で実施
+
+ 準備
+
+ wiresharkのインストール
+brew install --cask wireshark
+
+ ファイル構成
+telnet_lab/
+├── docker-compose.yml
+├── server/
+│   └── Dockerfile
+└── client/
+    └── Dockerfile
+
+ サーバ側のDockerfile（server/Dockerfile...]]></description><link>https://zenn.dev/ka_kan/articles/a18ae97f8bd791</link><guid isPermaLink="true">https://zenn.dev/ka_kan/articles/a18ae97f8bd791</guid><pubDate>Mon, 28 Jul 2025 21:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IOw_zpq1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%258D%25E3%2583%2583%25E3%2583%2588%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E3%2581%25AE%25E8%25A6%25B3%25E5%25AF%259F%2520-%2520%25E7%25AC%25AC4%25E5%259B%259E%2520telnet%25E3%2582%2592%25E8%25A7%25A3%25E6%259E%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kanda%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlOGJhYTMxOGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kanda</dc:creator></item><item><title><![CDATA[3年前に使っていたDocker ComposeとLinuxサービスファイルの備忘録]]></title><description><![CDATA[
+ ✅ はじめに
+本記事では、3年前の開発環境で実際に使用していた Docker Compose 設定と、
+Linux上でコンテナを自動起動する systemd のサービス定義を備忘録として残します。
+使用目的は、SQL Server（MSSQL）コンテナを構成し、定期的に稼働させる開発用途です。
+
+OS：Ubuntu 20.04 LTS
+Docker：20.x 系（Docker Compose CLI）
+コンテナ：SQL Server 2022 on Linux（Microsoft公式）
+
+
+
+ ✅ ディレクトリ構成（例）
+project-root/
+├── docker-compos...]]></description><link>https://zenn.dev/mono_tec/articles/zenn_docker_systemd_tips</link><guid isPermaLink="true">https://zenn.dev/mono_tec/articles/zenn_docker_systemd_tips</guid><pubDate>Mon, 28 Jul 2025 13:44:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--T4tBxh7v--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:3%25E5%25B9%25B4%25E5%2589%258D%25E3%2581%25AB%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2581%259FDocker%2520Compose%25E3%2581%25A8Linux%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AE%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mono-tec%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTZaVkRsSjViekNjM2RteXoyM3FGV0JEMldnZUttRnByaXR2aktHWHBFMFVudlNnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mono-tec</dc:creator></item><item><title><![CDATA[Go Todo App Docker最適化記録 - 60MB→23MB軽量化への道のり 🚀]]></title><description><![CDATA[
+ Go Todo App Docker最適化記録 - 60MB→23MB軽量化への道のり 🚀
+
+ はじめに
+エンジニア4ヶ月目のSomeです！
+前回、Go Todo App PostgreSQL化で、GoアプリをPostgreSQL対応にして本格的なWebアプリケーションを構築しました。アプリとしての機能は完成したものの、Dockerについてもっと深く学びたくなり、今回はDocker最適化にチャレンジしてみました。
+普段の業務ではC#を使っていて、まだDockerは導入されていません。しかし、今後Goを使った開発や、Docker環境の導入も検討されているため、個人学習として取り組むこと...]]></description><link>https://zenn.dev/some55/articles/ebe2fc96889c1a</link><guid isPermaLink="true">https://zenn.dev/some55/articles/ebe2fc96889c1a</guid><pubDate>Mon, 28 Jul 2025 11:12:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4bh69QiY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Go%2520Todo%2520App%2520Docker%25E6%259C%2580%25E9%2581%25A9%25E5%258C%2596%25E8%25A8%2598%25E9%258C%25B2%2520-%252060MB%25E2%2586%259223MB%25E8%25BB%25BD%25E9%2587%258F%25E5%258C%2596%25E3%2581%25B8%25E3%2581%25AE%25E9%2581%2593%25E3%2581%25AE%25E3%2582%258A%2520%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:some%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQzNWYzNjQ4YWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>some</dc:creator></item><item><title><![CDATA[官報とは。python/UV/Docker/GitHubActionsで通知システムを勢いだけで構築してみたが。]]></title><description><![CDATA[
+
+ はじめに（なぜに作った？）
+参院選が終わってまた色々と変わりそうだけど、若い年代の投票率が増えたのは良い傾向だなぁと思っているこの頃です。
+移民問題、帰化人などなど騒がれていますが、そこで興味持ったのが官報。
+全く日常で使わないものですけど、一旦購読してみようかなと思った日、、RSSもなければ通知だけXアカウントも見つからず。
+となれば、
+とりあえず作っちゃえということで…
+
+ 目指す全体の構成
+
+
+官報スクレイパー GitHub Action を作る
+汎用的なスクレイピングアクションの作成(公式ページをスクレイピングして情報を抽出する（PDFリンクと、書く官報の目次タイトルとリン...]]></description><link>https://zenn.dev/testkun08080/articles/githubaction-python-06736ff9d25672</link><guid isPermaLink="true">https://zenn.dev/testkun08080/articles/githubaction-python-06736ff9d25672</guid><pubDate>Mon, 28 Jul 2025 10:42:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9XILMRNj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25AE%2598%25E5%25A0%25B1%25E3%2581%25A8%25E3%2581%25AF%25E3%2580%2582python%252FUV%252FDocker%252FGitHubActions%25E3%2581%25A7%25E9%2580%259A%25E7%259F%25A5%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%2592%25E5%258B%25A2%25E3%2581%2584%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25A7%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E3%2581%258C%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:testkun08080%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYxMjE5ZTQ2YzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>testkun08080</dc:creator></item></channel></rss>
