@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「CSS」のフィード]]></title><description><![CDATA[Zennのトピック「CSS」のRSSフィードです]]></description><link>https://zenn.dev/topics/css</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/98e1680a6c.png</url><title>Zennの「CSS」のフィード</title><link>https://zenn.dev/topics/css</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 03 Aug 2025 12:04:46 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/css/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[何を作ろうか、、]]></title><description><![CDATA[こんにちは。最近投稿ができていなくて申し訳ありませんでした。なんで投稿できていないかというと言い訳みたいになるんですが（ほんとに言い訳）何を作ろうか悩んでいてですね、、、、
+それでこの記事を見てくれた方はコメントなどで＊＊＊をつくったら？とコメントしてくれると励みにもなるのでとてもうれしいです！（あんまり難しいのにはしないで）
+]]></description><link>https://zenn.dev/ak0331/articles/0f6374c798cbbb</link><guid isPermaLink="true">https://zenn.dev/ak0331/articles/0f6374c798cbbb</guid><pubDate>Sat, 02 Aug 2025 02:33:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1P1NiWg_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BD%2595%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258D%25E3%2581%2586%25E3%2581%258B%25E3%2580%2581%25E3%2580%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ak0331%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU3NTdjZjk1YzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ak0331</dc:creator></item><item><title><![CDATA[svgを分解して一部のスタイルだけ変える]]></title><description><![CDATA[svg分解してスタイルつけたときの備忘録です
+
+ きっかけ
+クリックのたびにアイコン(svg)の一部の色を変更したいが
+クリックのたびに表示するアイコンをすべて用意できない
+(アイコンの色だけ違うsvgファイルはたくさん作りたくない....)
+
+ 環境
+windows 11
+vscode
+chrome
+
+ 分解する
+pathごとにまとまっていれば、分解が可能です
+pathがM...Zが1つのpathです
+!
+M...Zが1つしかなかった場合、諦めてsvgを用意するか、svgをつくってみるかになります
+
+&lt;svg xmlns="http://www.w3.org/2000/svg" ...]]></description><link>https://zenn.dev/tanaa/articles/0a22bf5e3c95a4</link><guid isPermaLink="true">https://zenn.dev/tanaa/articles/0a22bf5e3c95a4</guid><pubDate>Fri, 01 Aug 2025 09:00:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gMrorKFY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:svg%25E3%2582%2592%25E5%2588%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%25A6%25E4%25B8%2580%25E9%2583%25A8%25E3%2581%25AE%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25A0%25E3%2581%2591%25E5%25A4%2589%25E3%2581%2588%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tana%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQxNWJiOGQ5NTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tana</dc:creator></item><item><title><![CDATA[脱・手動調整！フォントサイズも幅も clamp() で自動レスポンシブにしよう]]></title><description><![CDATA[
+ clamp() / min() / max() の違いと使い分け方を徹底解説！
+「文字サイズを調整したいけど、vwを使うと大きくなりすぎる…」
+「メディアクエリで制御するのは手間。最小と最大をもっと簡単に指定したい！」
+「画面幅に合わせて、もっと滑らかにサイズ調整したい」
+そんなときに便利なのが clamp() をはじめとした、CSSの関数 clamp() / min() / max() です。
+これらを正しく使えば、メディアクエリを減らして、より柔軟なレスポンシブデザインが実現できます。
+この記事では、それぞれの違いと使い分け方、具体的な実装例をわかりやすく解説します！
+
+
+ 🧠 ...]]></description><link>https://zenn.dev/jabo_sack/articles/c6febb72961899</link><guid isPermaLink="true">https://zenn.dev/jabo_sack/articles/c6febb72961899</guid><pubDate>Fri, 01 Aug 2025 08:41:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Q2uCPsqb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2584%25B1%25E3%2583%25BB%25E6%2589%258B%25E5%258B%2595%25E8%25AA%25BF%25E6%2595%25B4%25EF%25BC%2581%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25BA%25E3%2582%2582%25E5%25B9%2585%25E3%2582%2582%2520clamp%2528%2529%2520%25E3%2581%25A7%25E8%2587%25AA%25E5%258B%2595%25E3%2583%25AC%25E3%2582%25B9%25E3%2583%259D%25E3%2583%25B3%25E3%2582%25B7%25E3%2583%2596%25E3%2581%25AB%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:saku%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0xPbnFrMDRKVThqY19FYnZINFBkNks3akdYOGRMZTYwWUxDV3pXT3Fad3pqSlFmYz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>saku</dc:creator></item><item><title><![CDATA[フォーカスインジケーターの実装ってどんなのが良いのだろうと悩み、眠れない夜を過ごした。]]></title><description><![CDATA[
+ 一言で言うと
+フォーカスインジケーターは
+
+コントラストを最優先
+太さは2px以上がベスト
+box-shadow・outline-offsetなどを使い二重になるようにする
+状態ごとの差別化
+:focus-visibleを使用する
+
+
+ ある日事件は起きた
+弊サービス、ランサーズのサイトを見ていて気づいてしまった。
+ボタンのフォーカスが見づらすぎる。。
+
+
+
+フォーカス前
+フォーカス後
+
+
+
+
+
+
+
+
+
+いやサイゼの間違い探しかよw
+アウトラインの色とボタンの色がほとんど同じになっているみたい。
+詳しく調べてみると、ボタンなどに使われている会社のメインカラー#0268ccと、Chro...]]></description><link>https://zenn.dev/lancers/articles/1b6bbf1046a303</link><guid isPermaLink="true">https://zenn.dev/lancers/articles/1b6bbf1046a303</guid><pubDate>Fri, 01 Aug 2025 00:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BFBEKa5v--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B8%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25A9%25E3%2582%2593%25E3%2581%25AA%25E3%2581%25AE%25E3%2581%258C%25E8%2589%25AF%25E3%2581%2584%25E3%2581%25AE%25E3%2581%25A0%25E3%2582%258D%25E3%2581%2586%25E3%2581%25A8%25E6%2582%25A9%25E3%2581%25BF%25E3%2580%2581%25E7%259C%25A0%25E3%2582%258C%25E3%2581%25AA%25E3%2581%2584%25E5%25A4%259C%25E3%2582%2592%25E9%2581%258E%25E3%2581%2594%25E3%2581%2597%25E3%2581%259F%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%2595%25E3%2581%2596%25E3%2581%25AA%25E3%2581%25BF%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IzNWQwNTJiY2EuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%25A9%25E3%2583%25B3%25E3%2582%25B5%25E3%2583%25BC%25E3%2582%25BA%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFlMzYyZWY0MzcuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>さざなみ</dc:creator></item><item><title><![CDATA[CSS の擬似クラス:has()を使いこなす！子要素から親要素を選択する実践的な活用方法！]]></title><description><![CDATA[
+ はじめに
+こんにちは、安立です。
+今回はCSSの擬似クラス:has()に関してです。
+数年前まで長〜い間、CSSででは子要素から親要素を選択する事が不可能でした。
+そんな中、CSS Selectors Level 4で導入された擬似クラスの:has()が、2022年くらいからブラウザでサポートされ始めました。
+これによって、遂に親要素セレクタがが実現されました！やったね！！！
+さて、それでは擬似クラス:has()がどんなものなのか、実践的な活用方法を紹介しますね。
+
+
+ :has()疑似クラスとは?
+
+ 基本的な構文
+基本的構文は以下のように書きます。
+/* 基本構文 */
+親要素:...]]></description><link>https://zenn.dev/sonicmoov/articles/5dcea67e4e15de</link><guid isPermaLink="true">https://zenn.dev/sonicmoov/articles/5dcea67e4e15de</guid><pubDate>Thu, 31 Jul 2025 02:57:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zeqJSAR_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%2520%25E3%2581%25AE%25E6%2593%25AC%25E4%25BC%25BC%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%253Ahas%2528%2529%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%2593%25E3%2581%25AA%25E3%2581%2599%25EF%25BC%2581%25E5%25AD%2590%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%258B%25E3%2582%2589%25E8%25A6%25AA%25E8%25A6%2581%25E7%25B4%25A0%25E3%2582%2592%25E9%2581%25B8%25E6%258A%259E%25E3%2581%2599%25E3%2582%258B%25E5%25AE%259F%25E8%25B7%25B5%25E7%259A%2584%25E3%2581%25AA%25E6%25B4%25BB%25E7%2594%25A8%25E6%2596%25B9%25E6%25B3%2595%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E5%25AE%2589%25E7%25AB%258B%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0YjYwNGE3MzguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25BD%25E3%2583%258B%25E3%2583%2583%25E3%2582%25AF%25E3%2583%25A0%25E3%2583%25BC%25E3%2583%2596%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ5OTlmM2U4MGIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>安立</dc:creator></item><item><title><![CDATA[ブラウザ全画面アニメーションにおける最適な制作手法とパフォーマンスの検証記録]]></title><description><![CDATA[
+ 概要
+Webサイトの世界観を演出する手段の一つとして、ページ全体に何かしら（雪や桜がよくある）を降らせて雰囲気を出す、というアニメーションを求められることがたまにあります。
+どの手法で作ると制作時間の短縮ができ、実行時の負荷が低くなるか試しました。
+
+ サンプルで制作するアニメーション
+画面全体を10個ほどの雪の結晶がゆっくりと回転して左右に振れながら落下するアニメーション
+
+ CSSアニメーション
+
+
+ ◼️制作時
+メリット
+
+CSSとHTMLのみで実装できるため、制作スピードが速い
+アニメーションの調整（速度・位置・透明度など）がCSS変数やセレクタで直感的にできる
+デザイナーで...]]></description><link>https://zenn.dev/astaster/articles/ccdc2ac1559d7b</link><guid isPermaLink="true">https://zenn.dev/astaster/articles/ccdc2ac1559d7b</guid><pubDate>Thu, 31 Jul 2025 01:51:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CwTSgyCB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E5%2585%25A8%25E7%2594%25BB%25E9%259D%25A2%25E3%2582%25A2%25E3%2583%258B%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E6%259C%2580%25E9%2581%25A9%25E3%2581%25AA%25E5%2588%25B6%25E4%25BD%259C%25E6%2589%258B%25E6%25B3%2595%25E3%2581%25A8%25E3%2583%2591%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%259E%25E3%2583%25B3%25E3%2582%25B9%25E3%2581%25AE%25E6%25A4%259C%25E8%25A8%25BC%25E8%25A8%2598%25E9%258C%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25A2%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25B9%25E3%2582%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc3NjNlMmFmZjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>株式会社アスタスタ</dc:creator></item><item><title><![CDATA[【HTML, CSS, JavaScript】フォームの良い書き方]]></title><description><![CDATA[JavaScriptオタクの綾坂ことです。
+https://axtech.dev/
+諸事情でお問い合わせフォームを作る機会があり、非常に困ったので備忘録として書いておきます。
+
+ HTML
+
+ フォーム全体
+
+全体はformタグで囲みます。
+
+PHPで送信プログラムを書いている場合など、JSを書かなくても送信まで終わらせることができる場合はformタグの属性で送信周りの指定をするらしい
+
+
+入力項目群はul &gt; li、その他のセクションはdivで囲うといい感じになると思います
+
+
+example.html
+&lt;form action=""&gt;
+    &lt;div cla...]]></description><link>https://zenn.dev/aya_koto/articles/08bcb1eacb585b</link><guid isPermaLink="true">https://zenn.dev/aya_koto/articles/08bcb1eacb585b</guid><pubDate>Wed, 30 Jul 2025 08:23:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aDy75Sxc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590HTML%252C%2520CSS%252C%2520JavaScript%25E3%2580%2591%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%25A0%25E3%2581%25AE%25E8%2589%25AF%25E3%2581%2584%25E6%259B%25B8%25E3%2581%258D%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ayasaka-Koto%2520%252F%2520Aya...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VkNTRlMDBjYTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ayasaka-Koto / AyagawaP</dc:creator></item><item><title><![CDATA[homeの作成]]></title><description><![CDATA[今回はホーム画面（linkでほかのサイトに飛べる仕組み）をつくった。
+これが結構苦戦した。苦戦したのはいつも使わせてもらっているrenderという無料でwebサイトが公開できるところである。
+今回した理由としてはこれからもゲームのようなものを作ろうと思ったから。
+リンク↓
+https://zenn-home.onrender.com/
+＜＜＜このリンクは使えなくなる可能性があります＞＞＞
+]]></description><link>https://zenn.dev/ak0331/articles/e5fcd1b38f2d38</link><guid isPermaLink="true">https://zenn.dev/ak0331/articles/e5fcd1b38f2d38</guid><pubDate>Wed, 30 Jul 2025 05:06:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tZbRfLlD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:home%25E3%2581%25AE%25E4%25BD%259C%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ak0331%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU3NTdjZjk1YzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ak0331</dc:creator></item><item><title><![CDATA[CSS 変数のスコープについての問題、そしてその問題に対処するツールの提案]]></title><description><![CDATA[こんにちは。
+今回は CSS 変数のスコープについての問題と対処法について語ろうと思います。
+
+ CSS 変数のスコープ問題とは
+まず、「CSS 変数のスコープについての問題」の解説ですが、現在の CSS Custom Properties には以下のような問題があると私は考えています。
+・特定の変数がどのスコープで有効なのかが軽く読むだけでは分かりづらい
+例えば、以下のような単純なコード例で考えてみましょう。
+.scope-1 {
+  --text-color: red;
+}
+
+.scope-2 {
+  /* 変数 `--text-color` はどこから来ている？本当にここで使える？...]]></description><link>https://zenn.dev/kei874/articles/6e3bbfb568834b</link><guid isPermaLink="true">https://zenn.dev/kei874/articles/6e3bbfb568834b</guid><pubDate>Tue, 29 Jul 2025 11:00:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NzrYsQNy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%2520%25E5%25A4%2589%25E6%2595%25B0%25E3%2581%25AE%25E3%2582%25B9%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2597%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25AE%25E5%2595%258F%25E9%25A1%258C%25E3%2580%2581%25E3%2581%259D%25E3%2581%2597%25E3%2581%25A6%25E3%2581%259D%25E3%2581%25AE%25E5%2595%258F%25E9%25A1%258C%25E3%2581%25AB%25E5%25AF%25BE%25E5%2587%25A6%25E3%2581%2599%25E3%2582%258B%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25AE%25E6%258F%2590%25E6%25A1%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk1YWRhNzY4ZGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kei</dc:creator></item><item><title><![CDATA[はてなブックマークエントリー一覧を個人的に快適にするカスタムCSS]]></title><description><![CDATA[よくはてなブックマークのエントリー一覧を見ます。最近はネガティブな雰囲気を感じるタイトルのエントリーをわざわざ見に行って、ひたすらモヤモヤした気分になるということを繰り返しがちだったので、カスタムCSSを導入して未然に防ぐことにします。
+主に、何にクリックの手が吸い寄せられるかってのを考えて、ひとまずこれを非表示にすれば、はてなブックマークに入り浸る時間が減るだろうと考えました。その一覧です。
+
+何人がブックマークしたのかのリンク（ブックマークした人たちのコメント一覧ページに遷移する）
+特定サイトのリンクを含むエントリー
+
+
+ 導入したカスタムCSS
+※StylusというChrome拡張...]]></description><link>https://zenn.dev/itsumoonazicode/articles/4925fbf92e9196</link><guid isPermaLink="true">https://zenn.dev/itsumoonazicode/articles/4925fbf92e9196</guid><pubDate>Mon, 28 Jul 2025 11:05:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--l1OMpEBA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25AF%25E3%2581%25A6%25E3%2581%25AA%25E3%2583%2596%25E3%2583%2583%25E3%2582%25AF%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2588%25E3%2583%25AA%25E3%2583%25BC%25E4%25B8%2580%25E8%25A6%25A7%25E3%2582%2592%25E5%2580%258B%25E4%25BA%25BA%25E7%259A%2584%25E3%2581%25AB%25E5%25BF%25AB%25E9%2581%25A9%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25A0CSS%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:itsumoonazicode%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg5Y2VhODUwYWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>itsumoonazicode</dc:creator></item><item><title><![CDATA[Portalを内部で利用するコンポーネントにおけるz-indexの考え方]]></title><description><![CDATA[フロントエンドを担当している三谷です。
+TAIANでは多くのプロダクトでRadix UIを利用していますが、画面全面に表示する必要のあるDialogやDropdown Menuの内部で、Portalというコンポーネントが利用されています。
+ほかの有名どころのUIコンポーネントライブラリでも、Portalが提供されています。
+https://mui.com/material-ui/react-portal/
+https://chakra-ui.com/docs/components/portal
+https://mantine.dev/core/portal/
+PortalはReactのc...]]></description><link>https://zenn.dev/taian/articles/e8e1814962d84a</link><guid isPermaLink="true">https://zenn.dev/taian/articles/e8e1814962d84a</guid><pubDate>Mon, 28 Jul 2025 06:24:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Hh70Wpp---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Portal%25E3%2582%2592%25E5%2586%2585%25E9%2583%25A8%25E3%2581%25A7%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258Bz-index%25E3%2581%25AE%25E8%2580%2583%25E3%2581%2588%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:mitani.i%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E2MWVkNzdkZjYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:TAIAN%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzM2Y2MTdmMmQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mitani.i</dc:creator></item><item><title><![CDATA[flex: 1 1 auto を分解！意味と必要な場面を図解で解説]]></title><description><![CDATA[
+ 【完全理解】flex: 1 1 auto を分解してみたら、Flexboxの本質が見えた
+こんにちは。新人Webコーダーのsakuです。今回はFlexboxの中でも特に「毎回コピペして使ってるけど、実は意味をわかっていない人が多い」
+
+flex: 1 1 auto;
+
+この指定について、完全に分解して理解してみましょう。
+
+
+ 🤔 よくある悩み
+
+
+flex: 1 ってよく見るけど、なんとなく使ってるだけ
+最初の2つの 1 1 って何？ auto って幅のこと？
+これ使うとレイアウトがうまく並ぶ気がするけど、なぜ？
+
+そんな方のために、「なぜそうなるのか」まで納得できるように、図解と...]]></description><link>https://zenn.dev/jabo_sack/articles/110005fa25efef</link><guid isPermaLink="true">https://zenn.dev/jabo_sack/articles/110005fa25efef</guid><pubDate>Mon, 28 Jul 2025 01:53:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gNVS0NSC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:flex%253A%25201%25201%2520auto%2520%25E3%2582%2592%25E5%2588%2586%25E8%25A7%25A3%25EF%25BC%2581%25E6%2584%258F%25E5%2591%25B3%25E3%2581%25A8%25E5%25BF%2585%25E8%25A6%2581%25E3%2581%25AA%25E5%25A0%25B4%25E9%259D%25A2%25E3%2582%2592%25E5%259B%25B3%25E8%25A7%25A3%25E3%2581%25A7%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:saku%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0xPbnFrMDRKVThqY19FYnZINFBkNks3akdYOGRMZTYwWUxDV3pXT3Fad3pqSlFmYz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>saku</dc:creator></item><item><title><![CDATA[flex-growとflex-shrinkの違い]]></title><description><![CDATA[みなさん、こんにちは🐒
+Flexboxレイアウトを活用しまくっているおさるです。
+この間、友人からCSSプロパティのflex-growとflex-shrinkの違いについて質問されたので、せっかくなので記事にしてみます...笑
+
+ ⚖️ それぞれの概要
+flex-growは拡張の割合、flex-shrinkは縮小の割合と、それぞれ指定できるものが違います。
+
+
+
+プロパティ
+余白があるとき
+子要素たちが親要素より大きすぎるとき
+
+
+
+
+flex-grow
+拡張の割合を決める
+影響しない
+
+
+flex-shrink
+影響しない
+縮小の割合を決める
+
+
+
+
+ ✅ 実際の使い分け
+
+
+
+使用シ...]]></description><link>https://zenn.dev/osaru07m/articles/c95c66b47b3901</link><guid isPermaLink="true">https://zenn.dev/osaru07m/articles/c95c66b47b3901</guid><pubDate>Sun, 27 Jul 2025 07:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OyNc8ZV5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:flex-grow%25E3%2581%25A8flex-shrink%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258A%25E3%2581%2595%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUyNGJlYWFmOTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>おさる</dc:creator></item><item><title><![CDATA[akのプログラミング日記１個目]]></title><description><![CDATA[今日はゲームを作ろうと思う。（超簡易的なものを）
+お昼ごろにできた。
+内容としてはコインを投げて表示する。おわり
+今回はhtml,cssを重点的にまなんでみた。できたのがこれ↓
+&lt;リンクがあったとこ。&gt;
+まあ簡単な奴。午前はこれ。
+＜＜＜このurlは予告なしに使えなくなる可能性があります＞＞＞
+あたらしいリンク↓
+https://zenn-home.onrender.com/
+このリンクについては次の記事で。↑
+]]></description><link>https://zenn.dev/ak0331/articles/018ed308db73ef</link><guid isPermaLink="true">https://zenn.dev/ak0331/articles/018ed308db73ef</guid><pubDate>Sun, 27 Jul 2025 03:55:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iZWXXtPH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ak%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E6%2597%25A5%25E8%25A8%2598%25EF%25BC%2591%25E5%2580%258B%25E7%259B%25AE%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ak0331%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU3NTdjZjk1YzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ak0331</dc:creator></item><item><title><![CDATA[デザインの4原則とこれから意識したいこと]]></title><description><![CDATA[転職用のポートフォリオに載せるためのwebサイトを作成中です。要件定義〜デプロイまで一人でやっています。その過程でデザインの工程がボトルネックとなっているのでデザインで学んだことを記録として残そうと思います。記録として残すことでデザインに詰まったときに見返すのが狙いです。
+!
+何か特別なテクニックやデザイン手法を紹介するような記事ではございませんのであしからず。
+
+
+ デザインの4原則
+どうやらデザインには4原則というものがあるそうなので調べて実践して見ました。
+はじめに、以下の動画が大変勉強になりました。
+https://www.youtube.com/watch?v=emyoiX5U...]]></description><link>https://zenn.dev/harasho_404/articles/88f2c25ce67989</link><guid isPermaLink="true">https://zenn.dev/harasho_404/articles/88f2c25ce67989</guid><pubDate>Sun, 27 Jul 2025 01:22:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--f4WcoT1H--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2582%25B6%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%25AE4%25E5%258E%259F%25E5%2589%2587%25E3%2581%25A8%25E3%2581%2593%25E3%2582%258C%25E3%2581%258B%25E3%2582%2589%25E6%2584%258F%25E8%25AD%2598%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%25E3%2581%2593%25E3%2581%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:harasho%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY5NzlhNjEzOTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>harasho</dc:creator></item><item><title><![CDATA[UIが崩れる？paddingとmarginの正しい使い分け【CSSレイアウト基礎】]]></title><description><![CDATA[
+ はじめに
+私が実際にbootstrapのdatepickerでUI崩れに悩んだ際に調査した内容になります。
+padding と margin はどちらも CSS の「余白」を扱うプロパティですが、役割も影響範囲もまったく違うんです。以下で詳しく整理してみましょう👇
+
+
+ 🧱 基本構造：ボックスモデル
+CSS のボックスモデルは以下のような構造になっています：
++-----------------------------+
+|         margin              |
+|  +-----------------------+  |
+|  |      border  ...]]></description><link>https://zenn.dev/nosho/articles/8354cda9484b2d</link><guid isPermaLink="true">https://zenn.dev/nosho/articles/8354cda9484b2d</guid><pubDate>Fri, 25 Jul 2025 07:42:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9YYd2XX1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:UI%25E3%2581%258C%25E5%25B4%25A9%25E3%2582%258C%25E3%2582%258B%25EF%25BC%259Fpadding%25E3%2581%25A8margin%25E3%2581%25AE%25E6%25AD%25A3%25E3%2581%2597%25E3%2581%2584%25E4%25BD%25BF%25E3%2581%2584%25E5%2588%2586%25E3%2581%2591%25E3%2580%2590CSS%25E3%2583%25AC%25E3%2582%25A4%25E3%2582%25A2%25E3%2582%25A6%25E3%2583%2588%25E5%259F%25BA%25E7%25A4%258E%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:meltulto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkxZWY2ZTNkNmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>meltulto</dc:creator></item><item><title><![CDATA[CSSを利用してアクセシビリティの意識をしてみる]]></title><description><![CDATA[みなさん、普段アクセシビリティを意識してwebサイトを作っていますか？
+HTMLは意識をしている場合が多いと思いますが、CSSはよく忘れがちになるところもあるかと思います。。（実際に筆者もちゃんと意識していないと忘れがちです。。）
+そこで、今回はCSSを用いてアクセシビリティを意識して作るためのポイントを2つ紹介します。
+（今後他の方法についても紹介していきたいと思っています。）
+
+ クリッカブルエリアの調整
+スライダーのページネーションなどデザイン都合上、小さくしないといけないがちゃんとクリックできるようにしたいと思ったことはありませんか？
+UIとしては以下の状態です。
+参考: Swi...]]></description><link>https://zenn.dev/gemcook/articles/css-accessibility-tips</link><guid isPermaLink="true">https://zenn.dev/gemcook/articles/css-accessibility-tips</guid><pubDate>Fri, 25 Jul 2025 03:27:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--syWUD92o--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%25E3%2582%2592%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E3%2582%25A2%25E3%2582%25AF%25E3%2582%25BB%25E3%2582%25B7%25E3%2583%2593%25E3%2583%25AA%25E3%2583%2586%25E3%2582%25A3%25E3%2581%25AE%25E6%2584%258F%25E8%25AD%2598%25E3%2582%2592%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:miwashutaro0611%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyYzJiNzVlZTIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Gemcook%2520Tech%2520Blog%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhZDA3YjNmMmIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>miwashutaro0611</dc:creator></item><item><title><![CDATA[(CSS) box-sizingとmix-blend-modeについて]]></title><description><![CDATA[わかると役にたつ！
+CSSの二つの効果についてまとめてみました。
+
+ box-sizing の基本まとめ
+デフォルトは content-box
+
+ box-sizing: content-box
+
+
+width／height は「コンテンツ部分だけ」のサイズ
+
+padding・border を追加すると、全体のボックスサイズが大きくなる
+
+
+.box {
+  box-sizing: content-box; /* デフォルト */
+  width: 200px;
+  padding: 10px;
+  border: 5px solid #000;
+}
+/* 全体サイズ = 200 + 1...]]></description><link>https://zenn.dev/hyoni/articles/be7fe9a57cd8ba</link><guid isPermaLink="true">https://zenn.dev/hyoni/articles/be7fe9a57cd8ba</guid><pubDate>Thu, 24 Jul 2025 04:45:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--65hy8-wV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2528CSS%2529%2520box-sizing%25E3%2581%25A8mix-blend-mode%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2592%25E3%2583%25A7%25E3%2583%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0sxdWxlU2pkSzlwbDVxZnp3QVlUcFhCNk9xUEhkZGpKWjRUVlRPTl9lMHdYODhLdkg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ヒョニ</dc:creator></item><item><title><![CDATA[ヘッドレスUIライブラリの比較（Radix UI、ヘッドレスUI、React Aria Components、Ark UI）]]></title><description><![CDATA[
+ Radix UI、ヘッドレスUI、React Aria Components、Ark UIの比較
+Reactのスタイル手法について調べていく中で、ベースとなるヘッドレスUIライブラリについて整理しました。
+
+ ヘッドレスUIとは？
+まず「ヘッドレスUI」とは、その名の通り「頭（見た目やスタイル）がないUI」という意味です。一般的なUIライブラリ（例: Material-UI, Ant Designなど）が、あらかじめ決められたデザインと機能の両方を提供するのに対し、ヘッドレスUIは機能、アクセシビリティ、キーボード操作、状態管理などのロジック部分のみを提供し、見た目のスタイリングは完...]]></description><link>https://zenn.dev/watasi/articles/ae79856d134a17</link><guid isPermaLink="true">https://zenn.dev/watasi/articles/ae79856d134a17</guid><pubDate>Wed, 23 Jul 2025 23:13:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--z4e6Gc7A--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2583%25AC%25E3%2582%25B9UI%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2581%25AE%25E6%25AF%2594%25E8%25BC%2583%25EF%25BC%2588Radix%2520UI%25E3%2580%2581%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2583%25AC%25E3%2582%25B9UI%25E3%2580%2581React%2520Aria%2520Components%25E3%2580%2581Ar...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258F%25E3%2581%259F%25E3%2581%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDg4ZlZoampiUk5DQU1Rc2JMOUZIcXgwb2FHZWEzTXVpZ0gyb18waUprcGJPOHNBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>わたし</dc:creator></item><item><title><![CDATA[TypeScript でデザイントークン管理 ➜ Vite で CSS 変数を自動生成する方法]]></title><description><![CDATA[
+ 🌟 はじめに — 目的と背景
+「デザイントークンをコードで一元管理したい」
+これまでは私のプロジェクトでも、Figma 上で決めたカラーパレットや余白などを 共通の CSS 変数ファイル（variable.css） に直接記述して管理していました。
+しかし、実際の開発では TypeScript 側にトークンとして定義されていなかったため、必要な値を使うたびに Figma や CSS ファイルを探して手動でコピペする という非効率な運用になっていました。
+この記事では、TypeScript で定義したデザイントークンからカスタムプロパティ（CSS 変数）を自動生成し、Vite のビルド...]]></description><link>https://zenn.dev/hhh/articles/f4e135aaf6ad97</link><guid isPermaLink="true">https://zenn.dev/hhh/articles/f4e135aaf6ad97</guid><pubDate>Wed, 23 Jul 2025 03:28:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--v7sD7oAS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%2520%25E3%2581%25A7%25E3%2583%2587%25E3%2582%25B6%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2588%25E3%2583%25BC%25E3%2582%25AF%25E3%2583%25B3%25E7%25AE%25A1%25E7%2590%2586%2520%25E2%259E%259C%2520Vite%2520%25E3%2581%25A7%2520CSS%2520%25E5%25A4%2589%25E6%2595%25B0%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E7%2594%259F%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hhh%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNiM2FkYTFlMjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hhh</dc:creator></item></channel></rss>

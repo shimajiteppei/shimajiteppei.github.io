@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 03 Aug 2025 11:05:38 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[bunとhonoで諸々の検証をやるための下準備をした話]]></title><description><![CDATA[最初はhonoについて気になってhonoを使おうと思い、honoについて調べてたらほかにもORMであればKyselyやDrizzle ORMなどいろいろ出てきたり、bunが出てきたりいろいろしたので、手始めにbun+honoで環境構築でもしてみようかなという感じです。
+ただ「Hello world!」までやってもあれなので、それっぽくテンプレートのように作ります。なので、以下の項目をざっくり満たそうかなという感じです。
+
+bun+honoでコードがかける
+DB(Postgres)用にcompose.yamlを用意
+テスト関連の簡単なコード
+Lintとコードフォーマット
+
+使用しているOS...]]></description><link>https://zenn.dev/baba0119/articles/0f2d0bcb84c85a</link><guid isPermaLink="true">https://zenn.dev/baba0119/articles/0f2d0bcb84c85a</guid><pubDate>Sun, 03 Aug 2025 09:02:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--x7n17bCB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:bun%25E3%2581%25A8hono%25E3%2581%25A7%25E8%25AB%25B8%25E3%2580%2585%25E3%2581%25AE%25E6%25A4%259C%25E8%25A8%25BC%25E3%2582%2592%25E3%2582%2584%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E4%25B8%258B%25E6%25BA%2596%25E5%2582%2599%25E3%2582%2592%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:varvar%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0ZGI3ZTBiMDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>varvar</dc:creator></item><item><title><![CDATA[Next.js + Laravel構成でのAPIレスポンスのCRUD-ableなTypeScript型設計パターン]]></title><description><![CDATA[
+ はじめに
+Next.js（フロントエンド）とLaravel（バックエンド）構成で、
+
+CREATE時にはidなしの型定義をしたい
+UPDATE時にはidありで、required、optional、excludedの型を管理したい
+READ時には、APIによってリレーションが異なるので柔軟に対応したい
+
+というニーズがあり、TypeScriptの型設計を工夫しました。
+
+ 前提条件
+
+Next.js（TypeScript）
+Laravel API
+
+
+ サンプルドメイン
+記事では以下のシンプルなブログシステムを例に説明します：
+
+
+Post（投稿）：記事のメイン情報
+
+Comment（...]]></description><link>https://zenn.dev/karlovic/articles/92f9bd4173e95e</link><guid isPermaLink="true">https://zenn.dev/karlovic/articles/92f9bd4173e95e</guid><pubDate>Sun, 03 Aug 2025 08:58:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--no8xow0t--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%2520%252B%2520Laravel%25E6%25A7%258B%25E6%2588%2590%25E3%2581%25A7%25E3%2581%25AEAPI%25E3%2583%25AC%25E3%2582%25B9%25E3%2583%259D%25E3%2583%25B3%25E3%2582%25B9%25E3%2581%25AECRUD-able%25E3%2581%25AATypeScript%25E5%259E%258B%25E8%25A8%25AD%25E8%25A8%2588%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kasaoka%2520Takumi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VlYjg1MmFkZWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kasaoka Takumi</dc:creator></item><item><title><![CDATA[無職が Claude Code を使って 3 週間かけて OSS ライブラリを開発したけど誰も使ってくれなかった話]]></title><description><![CDATA[
+ 無職が Claude Code を使って 3 週間かけて OSS ライブラリを開発したけど誰も使ってくれなかった話
+
+注意: この記事はAI（Claude Code）を活用して執筆されました。内容は筆者の実体験に基づいていますが、一部の文章生成にAIを使用しています。（2025年8月現在の情報を元に書かれています）
+
+
+ 1. 概要
+無職がClaude Codeを使ってChatGPTとの会話履歴をMarkdownに変換するツールを開発したが、誰も使ってくれなかった話です。
+リリースして2週間、XでエゴサしたりGitHubのStar数を確認したりしましたが0件でした。これは誰も使ってい...]]></description><link>https://zenn.dev/ikuraikura/articles/2025-08-02-oss</link><guid isPermaLink="true">https://zenn.dev/ikuraikura/articles/2025-08-02-oss</guid><pubDate>Sun, 03 Aug 2025 03:16:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--v0JD0_Pp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2584%25A1%25E8%2581%25B7%25E3%2581%258C%2520Claude%2520Code%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25203%2520%25E9%2580%25B1%25E9%2596%2593%25E3%2581%258B%25E3%2581%2591%25E3%2581%25A6%2520OSS%2520%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2582%2592%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2597%25E3%2581%259F%25E3%2581%2591%25E3%2581%25A9%25E8%25AA%25B0%25E3%2582%2582%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%258F%25E3%2582%258C%25E3%2581%25AA%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Suguru%2520Takahashi%2520%2528...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBjOTU2Y2Y4NzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Suguru Takahashi (高橋 俊)</dc:creator></item><item><title><![CDATA[TypeSpec VS Zod OpenAPI Hono]]></title><description><![CDATA[
+ 全体のコード
+最初に全体のコードをお見せします。例にはTypeSpecのプロジェクトを新しく作成したときに生成されるコードを少しだけ修正して使用しました。修正点は以下の通りです。
+
+POST、PATCHでは id が必要ないため、
+@removeVisibility(Lifecycle.Create, Lifecycle.Update) を追加
+
+@route("{id}/analyze") を @route("/{id}/analyze") に変更 (生成に影響なし)
+
+TypeSpecimport "@typespec/http";
+
+using Http;
+@service(#...]]></description><link>https://zenn.dev/nkfr26/articles/f7817378839a32</link><guid isPermaLink="true">https://zenn.dev/nkfr26/articles/f7817378839a32</guid><pubDate>Sun, 03 Aug 2025 01:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UCZnWzfZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:TypeSpec%2520VS%2520Zod%2520OpenAPI%2520Hono%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AE%25E3%2581%25A3%25E3%2581%258D%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E1NzI3MjA0ZTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>のっきー</dc:creator></item><item><title><![CDATA[Deno KVでステート管理を実装してみた話]]></title><description><![CDATA[
+ はじめに
+CLIのステート管理にDeno KVを使用してみたので、基本的な使い方や所感についてまとめた記事です。
+
+ Deno KVとは
+Deno KVは、Denoに組み込まれたキーバリューストアです。SQLiteベースの実装でローカル開発では簡単に使え、Deno CLI や Deno Deploy でも同じAPIでスケールできる点が魅力的です。
+https://docs.deno.com/deploy/kv/manual/
+特に以下の特徴があります。
+
+シンプルなAPI:
+get、set、delete、listの基本操作（API Reference）
+TypeScript対応: 型...]]></description><link>https://zenn.dev/tetoteto/articles/deno-kv-state-management</link><guid isPermaLink="true">https://zenn.dev/tetoteto/articles/deno-kv-state-management</guid><pubDate>Sat, 02 Aug 2025 23:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nodPD_fd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Deno%2520KV%25E3%2581%25A7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25BC%25E3%2583%2588%25E7%25AE%25A1%25E7%2590%2586%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:TetoTeto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXlIN1NhY21HVFFmR3hWQ1d2R01nX29ETVR0WU82UXJ6WGg1Z3dZOUs4VWRJPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TetoTeto</dc:creator></item><item><title><![CDATA[Denoで一時ディレクトリを自動削除するには]]></title><description><![CDATA[Deno では、Deno.makeTempDir や Deno.makeTempDirSync のような一時ディレクトリを作成する関数が提供されています。しかし、これらの関数は一時ディレクトリを削除する処理を自動的に行ってくれません。そのため、開発者は適切なエラーハンドリングのもと一時ディレクトリを削除する処理を別途組み込む必要があります。このような処理は try/finally パターンを使って実装することが一般的ですが、コードが冗長になりがちです。
+この記事では、using 宣言を利用することで、自動的に削除される一時ディレクトリを実現する方法を紹介します。
+
+ 前提条件
+
+Type...]]></description><link>https://zenn.dev/wintery_fish/articles/deno-using-tempdir</link><guid isPermaLink="true">https://zenn.dev/wintery_fish/articles/deno-using-tempdir</guid><pubDate>Sat, 02 Aug 2025 11:56:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--M37mPpCX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Deno%25E3%2581%25A7%25E4%25B8%2580%25E6%2599%2582%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25AC%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AA%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E5%2589%258A%25E9%2599%25A4%25E3%2581%2599%25E3%2582%258B%25E3%2581%25AB%25E3%2581%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%25AE%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNiM2NjNjFjNzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>鮗</dc:creator></item><item><title><![CDATA[OpenNext + Drizzle で Cloudflare D1 環境を最も楽に構築する]]></title><description><![CDATA[
+ はじめに
+OpenNext + Cloudflare D1 を使った開発で、ローカル環境での開発・テスト・本番への移行を効率的に行いたいと考えたことはありませんか。
+愚直に実現しようとすると、環境ごとに異なる設定ファイルを用意したり、テストデータの管理に手間がかかります。Drizzle のエコシステム（drizzle-orm、drizzle-kit、drizzle-seed）を活用することで、これらの課題を解決し、シームレスな開発体験を実現する方法を紹介します。
+この記事では、実際の @opennextjs/cloudflare プロジェクト構成を参考に、ローカル開発からテスト実装、...]]></description><link>https://zenn.dev/nikaera/articles/cloudflare-opennext-drizzle</link><guid isPermaLink="true">https://zenn.dev/nikaera/articles/cloudflare-opennext-drizzle</guid><pubDate>Sat, 02 Aug 2025 06:55:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6iaqkFfX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OpenNext%2520%252B%2520Drizzle%2520%25E3%2581%25A7%2520Cloudflare%2520D1%2520%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%259C%2580%25E3%2582%2582%25E6%25A5%25BD%25E3%2581%25AB%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nikaera%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdkOGE0NDE3YjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nikaera</dc:creator></item><item><title><![CDATA[【初心者向け】TypeScript環境構築：これだけでOK！]]></title><description><![CDATA[
+ TypeScript環境構築ガイド【初心者向け】
+
+「TypeScriptを始めてみたいけど、どうやって環境構築すればいいか分からない…」
+という方向けに、TypeScriptの基本的な環境構築手順をわかりやすく解説します。
+この記事の手順に沿って進めるだけで、すぐに開発を始められます。
+
+
+
+ 1. 必要なツールの準備
+TypeScriptで開発を始めるには、以下のツールが必要です。
+
+
+Node.js
+JavaScriptの実行環境です。TypeScriptで書いたコードを最終的に実行するためには必須です。
+
+
+npm/yarn
+パッケージ管理ツールです。Node.jsをインスト...]]></description><link>https://zenn.dev/yu_fu/articles/5ea822e915bbf4</link><guid isPermaLink="true">https://zenn.dev/yu_fu/articles/5ea822e915bbf4</guid><pubDate>Fri, 01 Aug 2025 17:01:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OOkYrv8v--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591TypeScript%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25EF%25BC%259A%25E3%2581%2593%25E3%2582%258C%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25A7OK%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2586%25E3%2583%25BC%25E3%2581%25B5%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE0ZDE0NTNmNjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ゆーふー</dc:creator></item><item><title><![CDATA[GLSL / WGSLに変換できるシェーダ言語を作った]]></title><description><![CDATA[Claude Code に作ってもらいました 😭
+https://glre.dev/docs
+https://github.com/tseijp/glre
+
+ 開発背景
+
+ WebGL より強力な WebGPU API の登場
+WebGL ライブラリの Three.js が WebGPU 対応を進めており、Apple のサポートも進歩して、WebGPU の実用性が高まってきました。WebGL は GLSL（OpenGL Shading Language）で記述しますが、WebGPU は WGSL（WebGPU Shading Language）で書きます。Three.js で WebGP...]]></description><link>https://zenn.dev/jp/articles/9c62b0de08312b</link><guid isPermaLink="true">https://zenn.dev/jp/articles/9c62b0de08312b</guid><pubDate>Fri, 01 Aug 2025 14:59:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1ttxHwu---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GLSL%2520%252F%2520WGSL%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25BC%25E3%2583%2580%25E8%25A8%2580%25E8%25AA%259E%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tsei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM5OTQ2NmI5NjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tsei</dc:creator></item><item><title><![CDATA[Turborepoのgeneratorでmonorepoパッケージの雛形を自動生成する]]></title><description><![CDATA[こんにちは、monorepoでpackageを管理しているようなプロジェクトにおいて、
+新しくpackageを追加する時に毎回既存のpackageをコピペしてゴニョゴニョする、なんて経験無いですか？
+私はよくあります、、笑
+turborepoを利用しているプロジェクトではgeneratorを使うことで、
+動的にstarter的なpackageを自動生成することが出来るのでそれについて紹介します。
+
+
+ turbo genコマンドについて
+TUIの対話形式でファイルを生成出来るコマンドです。
+内部的にはPlopがファイル生成部分を担っており、
+動的な部分はHandlebarsというテンプレ...]]></description><link>https://zenn.dev/huuya/articles/625821fd5620ef</link><guid isPermaLink="true">https://zenn.dev/huuya/articles/625821fd5620ef</guid><pubDate>Fri, 01 Aug 2025 14:48:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KnL5_m3H--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Turborepo%25E3%2581%25AEgenerator%25E3%2581%25A7monorepo%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25AE%25E9%259B%259B%25E5%25BD%25A2%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E7%2594%259F%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:huuya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzZDJmYTZjYjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>huuya</dc:creator></item><item><title><![CDATA[noFallthroughCasesInSwitchを指定してfallthroughを検出する]]></title><description><![CDATA[
+ はじめに
+switch文に break を書き忘れると、意図しないフォールスルーが発生する。
+TypeScriptでは、noFallthroughCasesInSwitchオプションを有効にすることで、
+静的解析の段階でこのミスを検知できる。
+本記事では、このオプションの有無による挙動の違いを解説する。
+
+ noFallthroughCasesInSwitch
+
+noFallthroughCasesInSwitchはswitch文のfallthroughを禁止するコンパイラオプションです。
+
+https://typescriptbook.jp/reference/tsconfig/n...]]></description><link>https://zenn.dev/taisei_tech/articles/ef04c2de9ae1df</link><guid isPermaLink="true">https://zenn.dev/taisei_tech/articles/ef04c2de9ae1df</guid><pubDate>Fri, 01 Aug 2025 12:34:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--C2oXm2vq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:noFallthroughCasesInSwitch%25E3%2582%2592%25E6%258C%2587%25E5%25AE%259A%25E3%2581%2597%25E3%2581%25A6fallthrough%25E3%2582%2592%25E6%25A4%259C%25E5%2587%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:T%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FjZGE1NmE4YzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>T</dc:creator></item><item><title><![CDATA[kintoneのクエリ文字列を型安全に組み立てる【kintone functional query】]]></title><description><![CDATA[
+ はじめに
+皆様はkintoneのクエリをTypeScriptで扱う際、どのような手段を取っていますか。
+たとえばコーディング段階で完全に決まっているクエリであれば、それこそ文字列でベタ書きする方が多いのではないかと思いますし、昔利用したことのあるiPaaSのMakeではおそらく内部的にトヨクモさんのkintone-query-builderが利用されていたように思います。
+https://github.com/toyokumo/kintone-query-builder-js/tree/main
+しかし、このどちらの方法もTypeScriptのコード補完やエラー検知の恩恵をうまく得る...]]></description><link>https://zenn.dev/parmenion/articles/b4c9103eaaf29c</link><guid isPermaLink="true">https://zenn.dev/parmenion/articles/b4c9103eaaf29c</guid><pubDate>Fri, 01 Aug 2025 11:13:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--23FhwfvM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:kintone%25E3%2581%25AE%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25AA%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E3%2582%2592%25E5%259E%258B%25E5%25AE%2589%25E5%2585%25A8%25E3%2581%25AB%25E7%25B5%2584%25E3%2581%25BF%25E7%25AB%258B%25E3%2581%25A6%25E3%2582%258B%25E3%2580%2590kintone%2520functional%2520query%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2591%25E3%2583%25AB%25E3%2583%25A1%25E3%2583%258B%25E3%2582%25AA%25E3%2583%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYyYzdjMDBhZGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>パルメニオン</dc:creator></item><item><title><![CDATA[PR提出前にやるリファクタリング]]></title><description><![CDATA[PR出す前に最低限やって欲しいと思っているリファクタリングメモ
+
+リファクタリング (refactoring) とは、コンピュータプログラミングにおいて、プログラムの外部から見た動作を変えずにソースコードの内部構造を整理することである。
+https://ja.wikipedia.org/wiki/リファクタリング_(プログラミング)
+
+
+ 想定
+
+期待の新人君
+JavaScript / TypeScript
+フロントエンド
+
+
+ 嗅覚を研ぎ澄ませる🐶
+次の匂いがしたらリファクタリングを検討してみる
+
+不可思議な名前
+重複したコード
+長い関数
+長いパラメータリスト
+複雑なループ
+甘えたコメ...]]></description><link>https://zenn.dev/morimorig3/articles/301b09f80337f3</link><guid isPermaLink="true">https://zenn.dev/morimorig3/articles/301b09f80337f3</guid><pubDate>Fri, 01 Aug 2025 07:12:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hmyEg1hK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PR%25E6%258F%2590%25E5%2587%25BA%25E5%2589%258D%25E3%2581%25AB%25E3%2582%2584%25E3%2582%258B%25E3%2583%25AA%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25AF%25E3%2582%25BF%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:morimorig3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EwOTQyMzMwZjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>morimorig3</dc:creator></item><item><title><![CDATA[JavaScriptを深く知る旅 #1：ホイスティングってなに？]]></title><description><![CDATA[
+ はじめに
+最近 React を学んでいる中で、React の開発者である Dan Abramov さんの記事を読み、自分自身もまったく同じことを感じました。
+JavaScript や TypeScript を強みにしていきたいと考えている自分にとって、やはり JavaScript の基礎をしっかり理解することが欠かせない！！そんな思いが強くなり、この記事を書くことにしました。
+これからしばらく、JavaScript に関する学びをアウトプットしていこうと思っています。
+第1回は「ホイスティング（巻き上げ）」についてです。
+参照元：What is JavaScript made of?...]]></description><link>https://zenn.dev/yuji6523/articles/js-deep-dive-1-hoisting</link><guid isPermaLink="true">https://zenn.dev/yuji6523/articles/js-deep-dive-1-hoisting</guid><pubDate>Fri, 01 Aug 2025 04:11:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--H7XZarYS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2582%2592%25E6%25B7%25B1%25E3%2581%258F%25E7%259F%25A5%25E3%2582%258B%25E6%2597%2585%2520%25231%25EF%25BC%259A%25E3%2583%259B%25E3%2582%25A4%25E3%2582%25B9%25E3%2583%2586%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25AA%25E3%2581%25AB%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yuji%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhjMzIxNGViMjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuji</dc:creator></item><item><title><![CDATA[Zenn記事投稿コンテスト「TypeScriptでやってみた挑戦・学び・工夫」へ協賛しました]]></title><description><![CDATA[こんにちは、エンジニアの山下です。フォルシアは第3回Zenn記事投稿コンテスト「TypeScriptでやってみた挑戦・学び・工夫」に協賛しました。この記事では企業賞決定の経緯や授賞式の様子をレポートします。
+
+ zenn記事投稿コンテストとは
+Zenn記事投稿コンテストは、技術情報共有プラットフォーム「Zenn」を運営するクラスメソッド株式会社様主催の、エンジニア向けの技術記事投稿コンテストです。第3回となる今回のテーマは「TypeScriptでやってみた挑戦・学び・工夫」となっており、TypeScriptにまつわる技術的な試行錯誤や発見、実装の工夫などを広く共有する場となりました。
+h...]]></description><link>https://zenn.dev/forcia_tech/articles/20250723_zenn_contest_wyamashita</link><guid isPermaLink="true">https://zenn.dev/forcia_tech/articles/20250723_zenn_contest_wyamashita</guid><pubDate>Fri, 01 Aug 2025 04:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JOPdOkSR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Zenn%25E8%25A8%2598%25E4%25BA%258B%25E6%258A%2595%25E7%25A8%25BF%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2580%258CTypeScript%25E3%2581%25A7%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E6%258C%2591%25E6%2588%25A6%25E3%2583%25BB%25E5%25AD%25A6%25E3%2581%25B3%25E3%2583%25BB%25E5%25B7%25A5%25E5%25A4%25AB%25E3%2580%258D%25E3%2581%25B8%25E5%258D%2594%25E8%25B3%259B%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:FORCIA%2520Tech%2520Blog%2520%25E9%2581%258B...%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QyMDIwOGYzMDMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:FORCIA%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NkZmRkZTQ5MGUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>FORCIA Tech Blog 運営チーム</dc:creator></item><item><title><![CDATA[Playwright でマイクをモックする]]></title><description><![CDATA[
+ Playwrightとは?
+
+PlaywrightとはE2Eテストを行うためのライブラリです。
+LLMの登場により、コーディング速度は飛躍的に上昇しましたが、コードの品質を保つためにはテストが不可欠です。
+
+https://playwright.dev/
+
+ ブラウザ上のマイクを使うまでの流れ
+
+ 1. ブラウザ標準APIで、マイクへのアクセスをリクエストする
+const userMedia = await navigator.mediaDevices.getUserMedia({
+    audio: {
+      noiseSuppression: true,      // ...]]></description><link>https://zenn.dev/fatricepaddyy/articles/playwrightvoicetests</link><guid isPermaLink="true">https://zenn.dev/fatricepaddyy/articles/playwrightvoicetests</guid><pubDate>Fri, 01 Aug 2025 02:27:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EDxYD7da--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Playwright%2520%25E3%2581%25A7%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25AF%25E3%2582%2592%25E3%2583%25A2%25E3%2583%2583%25E3%2582%25AF%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:FatRicePaddyyyy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZmYmViMDM0NTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>FatRicePaddyyyy</dc:creator></item><item><title><![CDATA[【豆知識】tscのコンパイルエラー<なぜか個別tscに失敗>]]></title><description><![CDATA[
+ 単純処理をtscでコンパイルしようとしたらエラーが出た
+
+ 原因
+個別ファイルに対してtscコンパイルするとtsconfig.jsonの設定が反映されないとのこと。
+なのでファイル全体に対してtscするか、個別ファイルにtscしたいなら実行コマンドにオプションをつける。
+サンプル例(src/add.ts)
+export const add = (a: number, b: number): number =&gt; a + b;
+個別ファイルに対してtscした実行結果
+$ npx tsc src/add.ts
+node_modules/@types/chai/index.d.ts:8...]]></description><link>https://zenn.dev/rust_health/articles/a8e86d995681a3</link><guid isPermaLink="true">https://zenn.dev/rust_health/articles/a8e86d995681a3</guid><pubDate>Thu, 31 Jul 2025 10:27:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--O0lt2XUd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E8%25B1%2586%25E7%259F%25A5%25E8%25AD%2598%25E3%2580%2591tsc%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2591%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%253C%25E3%2581%25AA%25E3%2581%259C%25E3%2581%258B%25E5%2580%258B%25E5%2588%25A5tsc%25E3%2581%25AB%25E5%25A4%25B1%25E6%2595%2597%253E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nagoya_manaka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKeEYzUEdPalNESV9rVk4yV2dUWDJSeEpzOURWU1lMRDVWMng4ei09czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nagoya_manaka</dc:creator></item><item><title><![CDATA[【初心者向け】JWTを使ったNode.js認証機能の実装メモ]]></title><description><![CDATA[
+ 🔰 はじめに
+TypeScript + Node.js を使って JWTによる認証機能 を初めて実装してみました。
+この記事はその備忘録であり、同じようにこれからJWT認証を学びたい方に向けたまとめです。
+
+
+ 👤 対象読者
+
+Node.js でログイン機能の作成を学びたい方
+JWT 認証の流れをコードレベルで理解したい方
+TypeScript＋MySQL環境で認証機構を構築したい方
+
+
+
+ ⚙️ 使用技術スタック
+
+Node.js
+TypeScript
+Express
+JWT（jsonwebtoken パッケージ）
+MySQL（DB接続用）
+その他パッケージ（dotenv, bcr...]]></description><link>https://zenn.dev/tomox2x2/articles/002_jwtnodejs</link><guid isPermaLink="true">https://zenn.dev/tomox2x2/articles/002_jwtnodejs</guid><pubDate>Thu, 31 Jul 2025 09:15:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KJsAv35A--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591JWT%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259FNode.js%25E8%25AA%258D%25E8%25A8%25BC%25E6%25A9%259F%25E8%2583%25BD%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ver.100%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSk9PWm5DX0JxTUFKUmZORUM0QzNBRFZmZ0g4NzIzOU9nT3pkZ3V5aGI0Qk1CMjJhaz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ver.100</dc:creator></item><item><title><![CDATA[CORSエラーにハマった話とその解決メモ]]></title><description><![CDATA[
+ 発生したエラー
+Access to fetch at 'http://localhost:5001/me' from origin 'http://localhost:3000' has been blocked by CORS policy:
+Response to preflight request doesn't pass access control check:
+No 'Access-Control-Allow-Origin' header is present on the requested resource.
+
+ 原因の推測
+サーバー側で Access-Control...]]></description><link>https://zenn.dev/yuji6523/articles/cors-error-access-control-allow-origin</link><guid isPermaLink="true">https://zenn.dev/yuji6523/articles/cors-error-access-control-allow-origin</guid><pubDate>Thu, 31 Jul 2025 03:33:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3lVdYYCv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CORS%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%25AB%25E3%2583%258F%25E3%2583%259E%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%25E3%2581%25A8%25E3%2581%259D%25E3%2581%25AE%25E8%25A7%25A3%25E6%25B1%25BA%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yuji%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhjMzIxNGViMjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuji</dc:creator></item><item><title><![CDATA[TypeScriptのGCはどのように動いているのか]]></title><description><![CDATA[
+ はじめに
+こんにちは。株式会社ソニックムーブの中崎です。
+最近？ JJUG CCC 2025 Springというイベントに参加しました。(もう2ヶ月経ってるやん…)
+参加理由は友人がスピーカーをやるということで、特にJavaのことはよく知らずに参加しました。
+そこでガベージコレクションについてのセッションが2つもあり、普段使っているTypeScriptのGCはどうなっているのか気になって調べてみることにしました！
+
+ GCとは
+プログラムが動作する中で生成されたデータ（オブジェクトや変数など）は、使われなくなっても自動では消えません。そこで登場するのが「ガベージコレクション（以下GC...]]></description><link>https://zenn.dev/sonicmoov/articles/9b45c96b252891</link><guid isPermaLink="true">https://zenn.dev/sonicmoov/articles/9b45c96b252891</guid><pubDate>Thu, 31 Jul 2025 00:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--H8qULBzV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25AEGC%25E3%2581%25AF%25E3%2581%25A9%25E3%2581%25AE%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E5%258B%2595%25E3%2581%2584%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2581%25AE%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:r.nakazaki%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0YjYwNGE3MzguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25BD%25E3%2583%258B%25E3%2583%2583%25E3%2582%25AF%25E3%2583%25A0%25E3%2583%25BC%25E3%2583%2596%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzRzd2RuZ181WjM5VUdEY3I1NW1jdmpPVXpLbkVoSkpqbFB6MUNxOTBLTzdON1p2UT1zOTYtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>r.nakazaki</dc:creator></item></channel></rss>
