@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 05 Aug 2025 09:11:59 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[JavaScriptのMap/SetとWeakMap/WeakSetの違いを実際のコードで検証してみた]]></title><description><![CDATA[
+ はじめに
+TypeScriptのブルーベリー本（プロを目指す人のためのTypeScript入門）を読んでいて、WeakMapとWeakSetについて学びました。本では以下のように説明されていました：
+
+このような違いが発生する理由は、Mapオブジェクトが生き残っていれば列挙系のメソッドを用いてキーの値を取得できるからです。逆に言えば、列挙系のメソッドを廃することでキーのガベージコレクションを可能にしたのがWeakMapであると見ることもできます。
+
+この説明を読んで、実際にどうなるのか気になったので、コードで検証してみました。
+
+ MapとSetの基本
+まず、基本的なMapとSetの...]]></description><link>https://zenn.dev/kyoya08/articles/c53f7454d482b3</link><guid isPermaLink="true">https://zenn.dev/kyoya08/articles/c53f7454d482b3</guid><pubDate>Tue, 05 Aug 2025 07:18:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JAVJxEu2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AEMap%252FSet%25E3%2581%25A8WeakMap%252FWeakSet%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2582%2592%25E5%25AE%259F%25E9%259A%259B%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25A7%25E6%25A4%259C%25E8%25A8%25BC%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AD%25E3%2583%25A7%25E3%2583%25BC%25E3%2583%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE3YjRiMzdmZTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>キョーヤ</dc:creator></item><item><title><![CDATA[JavaScriptの曖昧な型を愛でる会]]></title><description><![CDATA[― typeof null === "object" に乾杯―
+
+JavaScript の型システムはシュレディンガーの猫より多忙である[1]。箱を開けても閉めても、とりあえず鳴き声だけは聞こえる。
+
+
+
+ 0. TL;DR を TL;DR と呼べない長さで
+
+
+typeof null が 'object': 1995 年のタイポが 30 年寝かされワイン化[2]。
+
+NaN !== NaN: 自己否定を習得した数値。哲学科卒の数学者が泣いた。
+
+[] + {} と {} + [] は真逆の結果。演算子より先に人生を見直そう。
+
+0 == "0" だが 0 === "0" ではない。ダイ...]]></description><link>https://zenn.dev/4_4_rest/articles/848c9365d22ba8</link><guid isPermaLink="true">https://zenn.dev/4_4_rest/articles/848c9365d22ba8</guid><pubDate>Tue, 05 Aug 2025 04:49:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iKZQedqG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AE%25E6%259B%2596%25E6%2598%25A7%25E3%2581%25AA%25E5%259E%258B%25E3%2582%2592%25E6%2584%259B%25E3%2581%25A7%25E3%2582%258B%25E4%25BC%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%2585%25A8%25E4%25BC%2591%25E7%25AC%25A6%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VlOGY1YTNlZjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>全休符</dc:creator></item><item><title><![CDATA[JSXとは何か？TypeScriptとの関係を調べた備忘録]]></title><description><![CDATA[
+ JSXとは何か？TypeScriptとの関係を調べた備忘録
+ReactやTypeScriptに触れ始めると、.ts や .tsx といった見慣れない拡張子に出会います。また、&lt;div&gt;Hello&lt;/div&gt; のようなHTMLっぽいコードがJavaScript内に登場することにも戸惑うかもしれません。
+この記事では、JSXとは何か、TypeScriptとの関係、そして関連するファイル拡張子までまとめて見ました。
+
+
+ JSXとは何か？
+JSX（JavaScript XML）は、JavaScript内でHTMLのような構文を記述できるReactの独自記法です。
+
+...]]></description><link>https://zenn.dev/keigo14/articles/c7ead832f2b1cd</link><guid isPermaLink="true">https://zenn.dev/keigo14/articles/c7ead832f2b1cd</guid><pubDate>Tue, 05 Aug 2025 03:46:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FUVPhbqG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JSX%25E3%2581%25A8%25E3%2581%25AF%25E4%25BD%2595%25E3%2581%258B%25EF%25BC%259FTypeScript%25E3%2581%25A8%25E3%2581%25AE%25E9%2596%25A2%25E4%25BF%2582%25E3%2582%2592%25E8%25AA%25BF%25E3%2581%25B9%25E3%2581%259F%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Keigo%2520Shibuya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkzZjc4NDQ4YTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Keigo Shibuya</dc:creator></item><item><title><![CDATA[瞑想、睡眠補助アプリをリリースしました！]]></title><description><![CDATA[
+ はじめに
+
+この度瞑想、睡眠補助アプリ『Meditation Program』をリリースしました!!
+この記事では開発の経緯やアピールポイントについて触れていこうと思います。
+▼ サイトリンク
+https://meditationprogram.vercel.app/
+▼ フィードバックやリクエストもお待ちしております！
+https://docs.google.com/forms/d/e/1FAIpQLSdVdripspZcvvUWHLWqYMQFINBKhNlN7EdjcphakwZKOF-liQ/viewform?usp=sharing&amp;ouid=117697912989...]]></description><link>https://zenn.dev/nababa/articles/f1e908c15d682e</link><guid isPermaLink="true">https://zenn.dev/nababa/articles/f1e908c15d682e</guid><pubDate>Mon, 04 Aug 2025 20:15:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rTjVtOmh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%259E%2591%25E6%2583%25B3%25E3%2580%2581%25E7%259D%25A1%25E7%259C%25A0%25E8%25A3%259C%25E5%258A%25A9%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E3%2583%25AA%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hayato%2520nanba%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZlNDAxZTdjNjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hayato nanba</dc:creator></item><item><title><![CDATA[【React + TypeScript】dnd-kitを使って、ドラッグアンドドロップを実装する。]]></title><description><![CDATA[
+ 初めに
+【React + TypeScript】で、dnd-kitを使ってドラッグアンドドロップを実装していきたいと思います。
+
+ dnd-kitとは？
+以下にdnd-kitについて、簡単にまとめます。
+
+軽量かつモダンな React 用ドラッグ＆ドロップライブラリ
+TypeScript 対応で型安全
+高いカスタマイズ性：柔軟にUIや挙動を制御可能
+アクセシビリティ対応：キーボード操作やスクリーンリーダーを考慮
+並べ替え（Sortable）や階層構造のDnDも可能
+
+
+ 今回の実装の概要
+今回の実装では、同じ親ノード内での子ノードの並び替え（順序変更）が可能です。しかし、異なる親ノー...]]></description><link>https://zenn.dev/daichi09167/articles/429f6127fd2e6f</link><guid isPermaLink="true">https://zenn.dev/daichi09167/articles/429f6127fd2e6f</guid><pubDate>Mon, 04 Aug 2025 11:43:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SC-24_nA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590React%2520%252B%2520TypeScript%25E3%2580%2591dnd-kit%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2580%2581%25E3%2583%2589%25E3%2583%25A9%25E3%2583%2583%25E3%2582%25B0%25E3%2582%25A2%25E3%2583%25B3%25E3%2583%2589%25E3%2583%2589%25E3%2583%25AD%25E3%2583%2583%25E3%2583%2597%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daichi09167%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3YTc4OTEwMDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daichi09167</dc:creator></item><item><title><![CDATA[kintoneアプリのフィールド設定をgit管理するためのCLIツールを作りました。]]></title><description><![CDATA[
+ はじめに
+ある日、私はあるプロジェクトで大量のkintoneアプリを作成することになりました。普通に片手で足りないくらいの数のアプリに両手で足りないくらいのフィールドがあるようなアプリ群だったので、「これを全部自力でぽちぽちするんか...?」と途方に暮れていました。
+しかし実は面白い裏技がありました。
+https://cybozu.dev/ja/kintone/docs/rest-api/apps/add-app/
+https://cybozu.dev/ja/kintone/docs/rest-api/apps/form/add-form-fields/
+https://cybozu...]]></description><link>https://zenn.dev/parmenion/articles/d2c3697d64380c</link><guid isPermaLink="true">https://zenn.dev/parmenion/articles/d2c3697d64380c</guid><pubDate>Mon, 04 Aug 2025 11:06:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gIDTGtYk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:kintone%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%25AE%25E3%2583%2595%25E3%2582%25A3%25E3%2583%25BC%25E3%2583%25AB%25E3%2583%2589%25E8%25A8%25AD%25E5%25AE%259A%25E3%2582%2592git%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%2599%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AECLI%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258A%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2591%25E3%2583%25AB%25E3%2583%25A1%25E3%2583%258B%25E3%2582%25AA%25E3%2583%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYyYzdjMDBhZGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>パルメニオン</dc:creator></item><item><title><![CDATA[Intersection Observer で画面外のCSSアニメーションを停止してパフォーマンスを改善する]]></title><description><![CDATA[CSSアニメーションのanimation-iteration-count: infiniteを指定して、無制限にアニメーションを繰り返している要素は画面外であってもアニメーションが実行され続けます。
+画面外での不要なアニメーションを制御して無駄なCPU・GPUリソース消費を抑えましょう✅
+特にCSSアニメーション多用しているWEBサイトでは効果的かもしれません🙆‍♂️
+
+ Intersection Observer で画面外のCSSアニメーションを制御するコードと実装例
+
+
+ Intersection Observer を使用して画面内・画面外の判定をする
+要素が画面外の時の判定はInt...]]></description><link>https://zenn.dev/kurichan/articles/416e5292703516</link><guid isPermaLink="true">https://zenn.dev/kurichan/articles/416e5292703516</guid><pubDate>Mon, 04 Aug 2025 10:37:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eSJ6qzoj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Intersection%2520Observer%2520%25E3%2581%25A7%25E7%2594%25BB%25E9%259D%25A2%25E5%25A4%2596%25E3%2581%25AECSS%25E3%2582%25A2%25E3%2583%258B%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E5%2581%259C%25E6%25AD%25A2%25E3%2581%2597%25E3%2581%25A6%25E3%2583%2591%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%259E%25E3%2583%25B3%25E3%2582%25B9%25E3%2582%2592%25E6%2594%25B9%25E5%2596%2584%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258F%25E3%2582%258A%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RjN2IzM2RiNTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>くりちゃん</dc:creator></item><item><title><![CDATA[React Hooks: useState入門]]></title><description><![CDATA[
+ 1.はじめに
+こんにちはmikan0131です。
+みなさん、React Hooksを知っていますか？
+これは、関数コンポーネントの中で、状態やライフサイクルを扱うための機能…らしいですが、あんまりピンときませんね。
+多分こういうのはやったほうが早いので、早速、useState()という状態を管理するHookを使ってみましょう。
+
+ 2.useStateについて
+このHookは、
+const [状態, 更新関数] = useState(初期状態)
+というように使います。
+ここでの「状態」と「更新関数」はリンクしており、「更新関数」を実行すると、「状態」を操作することができます。
+
+ 実...]]></description><link>https://zenn.dev/mikan0131/articles/3dccbe2127ddf3</link><guid isPermaLink="true">https://zenn.dev/mikan0131/articles/3dccbe2127ddf3</guid><pubDate>Mon, 04 Aug 2025 09:07:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hz6KGCxY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:React%2520Hooks%253A%2520useState%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mikan0131%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIyNDVjOGU4MTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mikan0131</dc:creator></item><item><title><![CDATA[『JavaScript関数型プログラミング 複雑性を抑える発想と実践法を学ぶ』を読んだ 03]]></title><description><![CDATA[02からのつづき
+
+ Part 2: 関数型デザインとコーディング
+...
+
+ 第5章 複雑性を抑えるデザインパターン
+
+本章のテーマ
+
+命令型エラー処理における問題
+コンテナ（コンテキスト）を利用して不正なデータへのアクセスを防ぐ
+ファンクターをデータ変換のメカニズムとして実装する
+合成を容易にするデータ型としてモナドを理解する
+モナド型を使ってエラー処理戦略を整理する
+モナド型を挟む（インタリーブする）、合成する
+
+
+関数型プログラミングでのエラー処理について
+
+関数型プログラミングへの思い込み
+
+関数型プログラミングは、数値計算上の学術的な課題を解決するためのパラダイムではない
+ま...]]></description><link>https://zenn.dev/shimpei_takeda/articles/e333187ff8005d</link><guid isPermaLink="true">https://zenn.dev/shimpei_takeda/articles/e333187ff8005d</guid><pubDate>Mon, 04 Aug 2025 06:06:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1NLhU4Lt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258EJavaScript%25E9%2596%25A2%25E6%2595%25B0%25E5%259E%258B%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%2520%25E8%25A4%2587%25E9%259B%2591%25E6%2580%25A7%25E3%2582%2592%25E6%258A%2591%25E3%2581%2588%25E3%2582%258B%25E7%2599%25BA%25E6%2583%25B3%25E3%2581%25A8%25E5%25AE%259F%25E8%25B7%25B5%25E6%25B3%2595%25E3%2582%2592%25E5%25AD%25A6%25E3%2581%25B6%25E3%2580%258F%25E3%2582%2592%25E8%25AA%25AD%25E3%2582%2593%25E3%2581%25A0%252003%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Shimpei%2520TAKEDA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U5NjIzYjY5ZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shimpei TAKEDA</dc:creator></item><item><title><![CDATA[『JavaScript関数型プログラミング 複雑性を抑える発想と実践法を学ぶ』を読んだ 02]]></title><description><![CDATA[01からのつづき
+
+ Part 2: 関数型デザインとコーディング
+
+Part 1では、「なぜ関数型なのか」「なぜJavaScriptなのか」に回答した
+Part 2では、実世界の問題を解決することを目的とする
+
+「関数型を理解する」ことがどういうことなのかを学ぶ
+第3章では、容易に把握できるコードを作成することを目標とする
+
+
+map, reduce, filterなどの宣言的で抽象化された関数を利用する
+関数型のスタイルで再帰を利用する方法も紹介する
+
+
+第4章では、第3章で学んだ概念を関数のパイプライン化に適用して、開発を合理化したり、ポイントフリースタイルでプログラムを記述したり...]]></description><link>https://zenn.dev/shimpei_takeda/articles/0570a46218dc12</link><guid isPermaLink="true">https://zenn.dev/shimpei_takeda/articles/0570a46218dc12</guid><pubDate>Mon, 04 Aug 2025 06:04:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mNM8_Z7Z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258EJavaScript%25E9%2596%25A2%25E6%2595%25B0%25E5%259E%258B%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%2520%25E8%25A4%2587%25E9%259B%2591%25E6%2580%25A7%25E3%2582%2592%25E6%258A%2591%25E3%2581%2588%25E3%2582%258B%25E7%2599%25BA%25E6%2583%25B3%25E3%2581%25A8%25E5%25AE%259F%25E8%25B7%25B5%25E6%25B3%2595%25E3%2582%2592%25E5%25AD%25A6%25E3%2581%25B6%25E3%2580%258F%25E3%2582%2592%25E8%25AA%25AD%25E3%2582%2593%25E3%2581%25A0%252002%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Shimpei%2520TAKEDA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U5NjIzYjY5ZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shimpei TAKEDA</dc:creator></item><item><title><![CDATA[『JavaScript関数型プログラミング 複雑性を抑える発想と実践法を学ぶ』を読んだ 01]]></title><description><![CDATA[
+JavaScriptでの関数型プログラミングの実践をさらに深掘りするために、本書を手に取りました。
+本書はかなり網羅的な内容でした。
+一冊目として手に取ると網羅的すぎてオエッとなってしまうかもしれませんが、ひととおり関数型プログラミングの書籍を読んでからだと、ばらばらだった知識が体系的に整理されていくのでオススメです。特にテストやイベント駆動・非同期処理への関数型のアプローチについては非常に実践的でした。
+
+ 序文
+
+著者が大学生や大学院生だったときは、オブジェクト指向デザインが中心だった
+新しい言語が、ソフトウェアの課題へアプローチする方法に対して異なる視点を提供してくれるように、新...]]></description><link>https://zenn.dev/shimpei_takeda/articles/58fb8f88e9b14d</link><guid isPermaLink="true">https://zenn.dev/shimpei_takeda/articles/58fb8f88e9b14d</guid><pubDate>Mon, 04 Aug 2025 06:04:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5X46XJa7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258EJavaScript%25E9%2596%25A2%25E6%2595%25B0%25E5%259E%258B%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%2520%25E8%25A4%2587%25E9%259B%2591%25E6%2580%25A7%25E3%2582%2592%25E6%258A%2591%25E3%2581%2588%25E3%2582%258B%25E7%2599%25BA%25E6%2583%25B3%25E3%2581%25A8%25E5%25AE%259F%25E8%25B7%25B5%25E6%25B3%2595%25E3%2582%2592%25E5%25AD%25A6%25E3%2581%25B6%25E3%2580%258F%25E3%2582%2592%25E8%25AA%25AD%25E3%2582%2593%25E3%2581%25A0%252001%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Shimpei%2520TAKEDA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U5NjIzYjY5ZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shimpei TAKEDA</dc:creator></item><item><title><![CDATA[Next.js App Routerってなに？初心者が導入してみて分かったこと【導入〜使い方】]]></title><description><![CDATA[
+ 記事を書いた背景
+Next.js を使ったサービス開発に従事することになりました。
+これまでもなんとなくで使っていましたが、今回はしっかりと学び直しつつ、その勉強ログとして記事にまとめています。
+※ 間違っている箇所があれば、ぜひコメントで教えてください！
+
+
+ 📌 この記事でわかること
+
+Next.js 13以降で登場した App Router の概要
+Pages Routerとの違い
+App Routerの導入方法
+App Routerの基本構成とファイルの役割
+公式リファレンスまとめ
+
+
+
+ 🚀 App Routerとは？
+Next.js 13で新たに導入されたルーティングの仕...]]></description><link>https://zenn.dev/koffeeed/articles/bc922477f3a619</link><guid isPermaLink="true">https://zenn.dev/koffeeed/articles/bc922477f3a619</guid><pubDate>Mon, 04 Aug 2025 04:21:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wHJiJQqp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%2520App%2520Router%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25AA%25E3%2581%25AB%25EF%25BC%259F%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%258C%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%25A6%25E5%2588%2586%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%25E3%2580%2590%25E5%25B0%258E%25E5%2585%25A5%25E3%2580%259C%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:gyocla817%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NhMDliZWY3NTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>gyocla817</dc:creator></item><item><title><![CDATA[定型作業を自動化！Hygenで効率的なReactコンポーネント作成]]></title><description><![CDATA[
+ はじめに
+React 開発において、新規コンポーネントの作成は繰り返し発生する定型的な作業です。しかし、この作業は単純でありながら手間がかかり、効率化したいポイントでもあります。
+本記事では、コード生成ツールである Hygen を活用して、コンポーネント作成の手間を減らし効率化する方法をご紹介します。
+また、プロジェクトの初期設定だけを行いがちで、設定方法を忘れてしまうことも多いため、備忘録としても活用できるようまとめました。
+
+
+ Hygen とは
+Hygen を使用すると、手作業を回避し、コードベースでカスタム操作を生成、追加、挿入、実行できるため、Redux、React Nat...]]></description><link>https://zenn.dev/hhh/articles/64f2af040b4cf1</link><guid isPermaLink="true">https://zenn.dev/hhh/articles/64f2af040b4cf1</guid><pubDate>Mon, 04 Aug 2025 03:42:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dLDEw-9B--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25AE%259A%25E5%259E%258B%25E4%25BD%259C%25E6%25A5%25AD%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E5%258C%2596%25EF%25BC%2581Hygen%25E3%2581%25A7%25E5%258A%25B9%25E7%258E%2587%25E7%259A%2584%25E3%2581%25AAReact%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25B3%25E3%2583%2588%25E4%25BD%259C%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hhh%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNiM2FkYTFlMjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hhh</dc:creator></item><item><title><![CDATA[リモートMCPサーバーを試す（Resources編）: GitHubリポジトリのファイルをMCP Resource化する]]></title><description><![CDATA[
+ はじめに
+この記事では、GitHubのプライベートリポジトリに保管したmarkdownファイルをResourcesとして提供する、リモートMCP（Model Context Protocol）サーバーを作ることを目標にします。
+
+ Resourcesについて
+MCPでは以下の３つがcore primitivesとして定義されています。
+
+Tools
+Resources
+Prompts
+
+一般にMCPと言ったとき、多くは「MCPサーバーのTools」を指す場合が多いですが、今回はResourcesに焦点を当てた内容になります。[1]
+Resourcesは以下のように説明されています。
+...]]></description><link>https://zenn.dev/ptna/articles/742ac118190f3d</link><guid isPermaLink="true">https://zenn.dev/ptna/articles/742ac118190f3d</guid><pubDate>Sun, 03 Aug 2025 23:02:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8-wiyubB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AA%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2588MCP%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2599%25EF%25BC%2588Resources%25E7%25B7%25A8%25EF%25BC%2589%253A%2520GitHub%25E3%2583%25AA%25E3%2583%259D%25E3%2582%25B8%25E3%2583%2588%25E3%2583%25AA%25E3%2581%25AE%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592MCP%2520Resource%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:hosaka313%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNDZkNWFmNTAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E5%2585%25A8%25E6%2597%25A5%25E6%259C%25AC%25E3%2583%2594%25E3%2582%25A2%25E3%2583%258E%25E6%258C%2587%25E5%25B0%258E%25E8%2580%2585%25E5%258D%2594%25E4%25BC%259A%25EF%25BC%2588%25E3%2583%2594%25E3%2583%2586%25E3%2582%25A3%25E3%2583%258A%25EF%25BC%2589%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lvTjJRYzJRN1V1ZnM1X29EblNkWkt4OFNPSWUzOTBaQTRSTDVOPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hosaka313</dc:creator></item><item><title><![CDATA[TSでMondadを理解する]]></title><description><![CDATA[
+ TL;DR
+
+fp-ts の Introduction series to FP-TS を読んで、関数型を学習してみるシリーズ。
+Monad を TS で学んでみる。
+
+
+ Monad
+モナドとは、プログラミングパターンの 1 つでモナディックな関数を直列に繋げることができるものを指します。
+モナディックとは通常の値を受け取り、ある種の拡張された値を返す関数のことです。
+
+ “モナディックな関数”とは
+まず以下のような関数を考えてみます。
+const toUpper = (s: string): string =&gt; s.toUpperCase();
+この関数は入力として str...]]></description><link>https://zenn.dev/nakayan/articles/98f87450cf1627</link><guid isPermaLink="true">https://zenn.dev/nakayan/articles/98f87450cf1627</guid><pubDate>Sun, 03 Aug 2025 19:15:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TfTxwE0_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TS%25E3%2581%25A7Mondad%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:n%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvbi5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>n</dc:creator></item><item><title><![CDATA[AI駆動開発で使っているバックエンドクラス設計]]></title><description><![CDATA[
+ はじめに
+AI 主導開発が主流となった現在、多くの開発者が Claude Code や GitHub Copilot などのAI ツールを活用したコーディング（バイブコーディング） を行っています。
+しかし、「AI が強力だから設計力は不要」と考えていませんか？実際は逆です。AI に正しいガードレールを提供し、効率的な開発を進めるためには、適切なバックエンド設計パターンの理解がより重要になっています。
+この記事で学べること：
+
+AI 時代に効果的な 3 つの設計パターン（実用的に厳選）
+実際の TypeScript コード例による具体的な実装方法
+AI ツールに明確な指示を出すための...]]></description><link>https://zenn.dev/autumn_m/articles/d1a99bb6-365b-8770-2df2-eed649ffae82</link><guid isPermaLink="true">https://zenn.dev/autumn_m/articles/d1a99bb6-365b-8770-2df2-eed649ffae82</guid><pubDate>Sun, 03 Aug 2025 12:14:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DbFfxtRx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AI%25E9%25A7%2586%25E5%258B%2595%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25A7%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E8%25A8%25AD%25E8%25A8%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2581%258D%25E3%2581%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI0YTZlMDZmYjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あきお</dc:creator></item><item><title><![CDATA[bunとhonoで諸々の検証をやるための下準備をした話]]></title><description><![CDATA[最初はhonoについて気になってhonoを使おうと思い、honoについて調べてたらほかにもORMであればKyselyやDrizzle ORMなどいろいろ出てきたり、bunが出てきたりいろいろしたので、手始めにbun+honoで環境構築でもしてみようかなという感じです。
+ただ「Hello world!」までやってもあれなので、それっぽくテンプレートのように作ります。なので、以下の項目をざっくり満たそうかなという感じです。
+
+bun+honoでコードがかける
+DB(Postgres)用にcompose.yamlを用意
+テスト関連の簡単なコード
+Lintとコードフォーマット
+
+使用しているOS...]]></description><link>https://zenn.dev/baba0119/articles/0f2d0bcb84c85a</link><guid isPermaLink="true">https://zenn.dev/baba0119/articles/0f2d0bcb84c85a</guid><pubDate>Sun, 03 Aug 2025 09:02:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--x7n17bCB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:bun%25E3%2581%25A8hono%25E3%2581%25A7%25E8%25AB%25B8%25E3%2580%2585%25E3%2581%25AE%25E6%25A4%259C%25E8%25A8%25BC%25E3%2582%2592%25E3%2582%2584%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E4%25B8%258B%25E6%25BA%2596%25E5%2582%2599%25E3%2582%2592%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:varvar%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0ZGI3ZTBiMDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>varvar</dc:creator></item><item><title><![CDATA[Next.js + Laravel構成でのAPIレスポンスのCRUD-ableなTypeScript型設計パターン]]></title><description><![CDATA[
+ はじめに
+Next.js（フロントエンド）とLaravel（バックエンド）構成で、
+
+CREATE時にはidなしの型定義をしたい
+UPDATE時にはidありで、required、optional、excludedの型を管理したい
+READ時には、APIによってリレーションが異なるので柔軟に対応したい
+
+というニーズがあり、TypeScriptの型設計を工夫しました。
+
+ 前提条件
+
+Next.js（TypeScript）
+Laravel API
+
+
+ サンプルドメイン
+記事では以下のシンプルなブログシステムを例に説明します：
+
+
+Post（投稿）：記事のメイン情報
+
+Comment（...]]></description><link>https://zenn.dev/karlovic/articles/92f9bd4173e95e</link><guid isPermaLink="true">https://zenn.dev/karlovic/articles/92f9bd4173e95e</guid><pubDate>Sun, 03 Aug 2025 08:58:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--no8xow0t--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%2520%252B%2520Laravel%25E6%25A7%258B%25E6%2588%2590%25E3%2581%25A7%25E3%2581%25AEAPI%25E3%2583%25AC%25E3%2582%25B9%25E3%2583%259D%25E3%2583%25B3%25E3%2582%25B9%25E3%2581%25AECRUD-able%25E3%2581%25AATypeScript%25E5%259E%258B%25E8%25A8%25AD%25E8%25A8%2588%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kasaoka%2520Takumi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VlYjg1MmFkZWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kasaoka Takumi</dc:creator></item><item><title><![CDATA[TypeSpec vs Zod OpenAPI Hono]]></title><description><![CDATA[
+ 全体のコード
+最初に全体のコードをお見せします。例にはTypeSpecのプロジェクトを新しく作成したときに生成されるコードを少しだけ修正して使用しました。修正点は以下の通りです。
+
+POST、PATCHでは id が必要ないため、
+@removeVisibility(Lifecycle.Create, Lifecycle.Update) を追加
+
+@route("{id}/analyze") を @route("/{id}/analyze") に変更 (生成に影響なし)
+
+TypeSpecimport "@typespec/http";
+
+using Http;
+@service(#...]]></description><link>https://zenn.dev/nkfr26/articles/f7817378839a32</link><guid isPermaLink="true">https://zenn.dev/nkfr26/articles/f7817378839a32</guid><pubDate>Sun, 03 Aug 2025 01:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jBB_Xcbc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:TypeSpec%2520vs%2520Zod%2520OpenAPI%2520Hono%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AE%25E3%2581%25A3%25E3%2581%258D%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E1NzI3MjA0ZTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>のっきー</dc:creator></item><item><title><![CDATA[Deno KVでステート管理を実装してみた話]]></title><description><![CDATA[
+ はじめに
+CLIのステート管理にDeno KVを使用してみたので、基本的な使い方や所感についてまとめた記事です。
+
+ Deno KVとは
+Deno KVは、Denoに組み込まれたキーバリューストアです。SQLiteベースの実装でローカル開発では簡単に使え、Deno CLI や Deno Deploy でも同じAPIでスケールできる点が魅力的です。
+https://docs.deno.com/deploy/kv/manual/
+特に以下の特徴があります。
+
+シンプルなAPI:
+get、set、delete、listの基本操作（API Reference）
+TypeScript対応: 型...]]></description><link>https://zenn.dev/tetoteto/articles/deno-kv-state-management</link><guid isPermaLink="true">https://zenn.dev/tetoteto/articles/deno-kv-state-management</guid><pubDate>Sat, 02 Aug 2025 23:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nodPD_fd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Deno%2520KV%25E3%2581%25A7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25BC%25E3%2583%2588%25E7%25AE%25A1%25E7%2590%2586%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:TetoTeto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXlIN1NhY21HVFFmR3hWQ1d2R01nX29ETVR0WU82UXJ6WGg1Z3dZOUs4VWRJPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TetoTeto</dc:creator></item></channel></rss>
