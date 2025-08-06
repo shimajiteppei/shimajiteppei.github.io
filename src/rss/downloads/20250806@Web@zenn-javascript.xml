@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 06 Aug 2025 12:05:29 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[JavaScriptのnormalizeで文字列の「正規化」をして、検索機能の半角・全角の差をシンプルに吸収する]]></title><description><![CDATA[検索機能を実装する際、ユーザーの入力する文字列の全角・半角の違いはよくある課題です。「株式会社アイウエオ」と検索したいユーザーが誤って「株式会社ｱｲｳｴｵ」と半角カナで入力した場合でも、正しく検索結果を返す必要があります。
+また、登録データ自体が「株式会社アイウエオ」と「株式会社ｱｲｳｴｵ」のように全角カナと半角カナや、「株式会社ＡＢＣＤ」と「株式会社ABCD」のように全角英数字と半角英数字が混在しているケースも考えられます。
+
+ normalize で文字列を「正規化」する
+normalize() メソッドは、文字列の Unicode 正規化形式を返します✅
+引数として、以下の4つの ...]]></description><link>https://zenn.dev/kurichan/articles/d7b494f01a5f33</link><guid isPermaLink="true">https://zenn.dev/kurichan/articles/d7b494f01a5f33</guid><pubDate>Wed, 06 Aug 2025 10:45:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--G7s4nCv6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AEnormalize%25E3%2581%25A7%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E3%2581%25AE%25E3%2580%258C%25E6%25AD%25A3%25E8%25A6%258F%25E5%258C%2596%25E3%2580%258D%25E3%2582%2592%25E3%2581%2597%25E3%2581%25A6%25E3%2580%2581%25E6%25A4%259C%25E7%25B4%25A2%25E6%25A9%259F%25E8%2583%25BD%25E3%2581%25AE%25E5%258D%258A%25E8%25A7%2592%25E3%2583%25BB%25E5%2585%25A8%25E8%25A7%2592%25E3%2581%25AE%25E5%25B7%25AE%25E3%2582%2592%25E3%2582%25B7%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2581%25AB%25E5%2590%25B8%25E5%258F%258E%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258F%25E3%2582%258A%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RjN2IzM2RiNTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>くりちゃん</dc:creator></item><item><title><![CDATA[MiniReactでReactの骨格を再現してみた]]></title><description><![CDATA[こんにちは！Reactを普段使っていて、
+「これって中で何が起きてるの？」
+と思ったことありませんか？
+今回は、Reactの超ミニマル版「MiniReact」を自作してみます。
+全部JavaScriptで作ります。難しい依存関係はナシ！
+対応している機能はこちら：
+
+
+関数コンポーネント ✅
+
+
+useState()（複数呼び出し対応）✅
+
+
+JSXっぽい記法（h()関数）✅
+
+
+仮想DOMからの描画 ✅
+
+
+なんと100行以下！
+
+ なぜ作るの？
+Reactはすごく便利だけど、中身はちょっとブラックボックス。
+シンプルなReactを自作すると、次のような仕組みがスッキリ理解できます：
+...]]></description><link>https://zenn.dev/socialplus/articles/60fc2ade727b5b</link><guid isPermaLink="true">https://zenn.dev/socialplus/articles/60fc2ade727b5b</guid><pubDate>Wed, 06 Aug 2025 10:04:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Op3zkEEy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:MiniReact%25E3%2581%25A7React%25E3%2581%25AE%25E9%25AA%25A8%25E6%25A0%25BC%25E3%2582%2592%25E5%2586%258D%25E7%258F%25BE%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:kailma%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4Mjg2YmNjMDEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Social%2520PLUS%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXNXRVZFaTBmMDM2VUhvckNoRzF4UkotZzdtaFpJek8xUkdWcDRjcTBlPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kailma</dc:creator></item><item><title><![CDATA[LLM検索API、どれを使う？MCPで3つのLLM検索を試してみた]]></title><description><![CDATA[
+ 背景
+現在、社内の技術記事をRAG検索して回答するAIチャットボットの開発を行っています。
+しかし、ユーザーが求める情報が社内の技術記事にない場合、十分な情報が得られないままAIチャットボットが回答を作るという問題が発生します。このような場合においてインターネット検索を行い、不足情報を補ってから回答を作ることで問題が解決することを期待しました。
+そこで今回は社内の技術記事のRAG検索の情報不足を補えるようなインターネット検索を行うエージェントを構築するため、LLM検索APIを検証しプロダクト開発に採用する技術を決めたいと思います。
+
+ 検証対象
+うさぎでもわかるLLM検索APIサービ...]]></description><link>https://zenn.dev/serio/articles/6b6e701923e8c4</link><guid isPermaLink="true">https://zenn.dev/serio/articles/6b6e701923e8c4</guid><pubDate>Wed, 06 Aug 2025 06:08:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--myITM2Zf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LLM%25E6%25A4%259C%25E7%25B4%25A2API%25E3%2580%2581%25E3%2581%25A9%25E3%2582%258C%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25EF%25BC%259FMCP%25E3%2581%25A73%25E3%2581%25A4%25E3%2581%25AELLM%25E6%25A4%259C%25E7%25B4%25A2%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25AF%25E3%2581%2597%25E3%2581%258F%25E3%2582%258C%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM4OGEyY2UyNGQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25BB%25E3%2583%25AA%25E3%2582%25AA%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvbS5wbmc=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はしくれ</dc:creator></item><item><title><![CDATA[JavaScriptの円記号文字コード問題：ローカル環境とCI環境でテストが失敗する罠]]></title><description><![CDATA[
+ はじめに
+JavaScript/TypeScriptで日本円の価格表示を実装していると、意外な落とし穴に遭遇することがあります。ローカル環境では通るテストが、CI環境では失敗してしまうという問題です。
+今回は、toLocaleStringを使った価格フォーマット関数のテストで直面した、円記号の文字コード問題とその解決方法について解説します。
+
+注記: この記事は開発過程で発生した実際の問題をもとに、Claude Code（Anthropic社のAIアシスタント）によって生成・整理されました。
+
+
+ 問題の発生：同じコードなのにテスト結果が異なる
+以下のような、数値を日本円形式でフォー...]]></description><link>https://zenn.dev/musc/articles/76ca7199a02a88</link><guid isPermaLink="true">https://zenn.dev/musc/articles/76ca7199a02a88</guid><pubDate>Wed, 06 Aug 2025 03:39:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9SBXJl3a--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AE%25E5%2586%2586%25E8%25A8%2598%25E5%258F%25B7%25E6%2596%2587%25E5%25AD%2597%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E5%2595%258F%25E9%25A1%258C%25EF%25BC%259A%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A8CI%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2581%258C%25E5%25A4%25B1%25E6%2595%2597%25E3%2581%2599%25E3%2582%258B%25E7%25BD%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Juk%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VmNTdjN2NmNzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Juk</dc:creator></item><item><title><![CDATA[【React】reCAPTCHAからCloudflare Turnstileへ移行する際にハマったこと]]></title><description><![CDATA[
+ Cloudflare Turnstileとは
+ボット対策といえば画像を選択させるreCAPTCHAが有名かもしれません。
+ですが、手動でのクリック操作によるUXの低下や料金等の問題が存在しており、その点Cloudflare Turnstileは自動で認証でき、無料で利用できる非常に素晴らしい手法です。
+※ reCAPTCHAもv3は自動で認証が可能です。料金面の問題は以前として存在していますが。
+詳しい説明や導入方法はここでは割愛します。AIに聞いたらパパッとやってくれます。
+記事も無限に存在するので、いい感じのを見つけてください。
+https://www.value-domain....]]></description><link>https://zenn.dev/kyo1941/articles/7ef88a73ff12e5</link><guid isPermaLink="true">https://zenn.dev/kyo1941/articles/7ef88a73ff12e5</guid><pubDate>Tue, 05 Aug 2025 18:51:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GmgNE_Yu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590React%25E3%2580%2591reCAPTCHA%25E3%2581%258B%25E3%2582%2589Cloudflare%2520Turnstile%25E3%2581%25B8%25E7%25A7%25BB%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%25E9%259A%259B%25E3%2581%25AB%25E3%2583%258F%25E3%2583%259E%25E3%2581%25A3%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kyo1941%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzNiSlcyODRTdGR4OEhpTDdYQlUxbWMwU2xTUjdHSG1KMW53cWd4aEFQRF9acFVldz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kyo1941</dc:creator></item><item><title><![CDATA[超高速Webフレームワーク：Elysia.js（ちょっと前に名前が出てきた）とは？Express.jsとの違いを徹底比較]]></title><description><![CDATA[
+ はじめに
+開発メンバーの先輩がちらっと喋っていたので、気になって調べてみました。
+なぜ今、Express.jsではなくElysia.jsを選ぶのか？
+本記事のゴール：Elysia.jsの概要とExpress.jsとの違いを理解し、使い分けできるようになる
+
+ Elysia.jsとは？
+
+ 特徴
+
+Bunに最適化された超軽量・高速なWebフレームワーク
+型安全なAPI設計（TypeScriptに強い）
+高速起動・高パフォーマンス（Express.jsより18倍処理が速いとも言われている）
+プラグインベースの構造
+
+
+ Express.jsを簡単におさらい
+
+Node.jsのデファクトス...]]></description><link>https://zenn.dev/rrr068/articles/04555eea0e9608</link><guid isPermaLink="true">https://zenn.dev/rrr068/articles/04555eea0e9608</guid><pubDate>Tue, 05 Aug 2025 16:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Sqrb-s9z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25B6%2585%25E9%25AB%2598%25E9%2580%259FWeb%25E3%2583%2595%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%25A0%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25EF%25BC%259AElysia.js%25EF%25BC%2588%25E3%2581%25A1%25E3%2582%2587%25E3%2581%25A3%25E3%2581%25A8%25E5%2589%258D%25E3%2581%25AB%25E5%2590%258D%25E5%2589%258D%25E3%2581%258C%25E5%2587%25BA%25E3%2581%25A6%25E3%2581%258D%25E3%2581%259F%25EF%25BC%2589%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259FExpress.js%25E3%2581%25A8%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2582%2592%25E5%25BE%25B9%25E5%25BA%2595%25E6%25AF%2594%25E8%25BC%2583%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E4%25BA%2594%25E5%258F%25B3%25E8%25A1%259B%25E9%2596%2580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ExY2Y0YjhkYTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>五右衛門</dc:creator></item><item><title><![CDATA[JavaScriptを深く知る旅 #2：値渡し・参照の値渡しって？]]></title><description><![CDATA[
+ はじめに
+JavaScriptの基礎を学ぶために、今回は第2回として「値渡し」と「参照の値渡し」についてまとめていきます。
+この概念を理解しておくと、たとえばReactでstateを更新したのに再レンダリングされないといった問題にも、仕組みから納得して対処できるようになります。
+
+ 値渡しってなに？
+「値渡し」とは、変数に格納されている値そのもののコピーを渡すことを指します。
+対象となるのは、string、number、boolean などのプリミティブな値です。
+例えば、変数 x を変数 y に代入し、その後 y の値を変更しても、x の値には影響がありません。
+これは、代入時に値...]]></description><link>https://zenn.dev/yuji6523/articles/js-deep-dive-2-value-vs-reference</link><guid isPermaLink="true">https://zenn.dev/yuji6523/articles/js-deep-dive-2-value-vs-reference</guid><pubDate>Tue, 05 Aug 2025 13:03:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sEE1Fhv4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2582%2592%25E6%25B7%25B1%25E3%2581%258F%25E7%259F%25A5%25E3%2582%258B%25E6%2597%2585%2520%25232%25EF%25BC%259A%25E5%2580%25A4%25E6%25B8%25A1%25E3%2581%2597%25E3%2583%25BB%25E5%258F%2582%25E7%2585%25A7%25E3%2581%25AE%25E5%2580%25A4%25E6%25B8%25A1%25E3%2581%2597%25E3%2581%25A3%25E3%2581%25A6%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yuji%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhjMzIxNGViMjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuji</dc:creator></item><item><title><![CDATA[【120FPS問題の解決策】 gsap.ticker を使用してアニメーションを60FPSで制御する]]></title><description><![CDATA[requestAnimationFrameは、JavaScriptで滑らかなアニメーションを実現する際、ブラウザの描画サイクルに同期してコールバック関数を実行する非常に便利なAPIです✅
+https://developer.mozilla.org/ja/docs/Web/API/Window/requestAnimationFrame
+しかし、近年、リフレッシュレートが120Hzやそれ以上のディスプレイが普及する中で、このAPIを適切に使用しないと、アニメーションが意図せず2倍の速さで実行されてしまう「120FPS問題」が発生してしまいます。
+
+ requestAnimationFram...]]></description><link>https://zenn.dev/kurichan/articles/c340af84e9e1e7</link><guid isPermaLink="true">https://zenn.dev/kurichan/articles/c340af84e9e1e7</guid><pubDate>Tue, 05 Aug 2025 10:47:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Vl5x8YrY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590120FPS%25E5%2595%258F%25E9%25A1%258C%25E3%2581%25AE%25E8%25A7%25A3%25E6%25B1%25BA%25E7%25AD%2596%25E3%2580%2591%2520gsap.ticker%2520%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E3%2582%25A2%25E3%2583%258B%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%259260FPS%25E3%2581%25A7%25E5%2588%25B6%25E5%25BE%25A1%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258F%25E3%2582%258A%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RjN2IzM2RiNTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>くりちゃん</dc:creator></item><item><title><![CDATA[JetBrains 2025.2ぞくぞくリリース！AI Assistantと価格改定まとめ]]></title><description><![CDATA[
+ はじめに
+こんにちは。JetBrains公式代理店NATTOSYSTEMのねばねばです。
+みなさん、Jetbrains各種製品の2025.2バージョンが猛暑をふきとばす勢いでぞくぞくリリースされています。
+今回はJetBrainsが2025年8月に発表したAI Assistant 2025.2新機能と、各種IDE製品の2025.2リリース情報、価格改定のニュースについて紹介いたします。
+
+
+ JetBrains AI Assistant 2025.2の注目ポイント
+
+ ✅ プロジェクトルールでAIにプロジェクト固有の指示を出せる
+プロジェクトごとの命名規則やコーディングスタイルを設定...]]></description><link>https://zenn.dev/nattosystem_jp/articles/ce9856d5f585d6</link><guid isPermaLink="true">https://zenn.dev/nattosystem_jp/articles/ce9856d5f585d6</guid><pubDate>Tue, 05 Aug 2025 07:32:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--w4q0-u19--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JetBrains%25202025.2%25E3%2581%259E%25E3%2581%258F%25E3%2581%259E%25E3%2581%258F%25E3%2583%25AA%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B9%25EF%25BC%2581AI%2520Assistant%25E3%2581%25A8%25E4%25BE%25A1%25E6%25A0%25BC%25E6%2594%25B9%25E5%25AE%259A%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25AD%25E3%2581%25B0%25E3%2581%25AD%25E3%2581%25B0%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RiYWQxMDhjNTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BENATTOSYSTEM%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvbi5wbmc=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ねばねば</dc:creator></item><item><title><![CDATA[【Max9】Max9に実装されたJavaScript v8まとめ]]></title><description><![CDATA[
+ Max9のv8でできること
+
+
+ v8 / v8ui 基本オブジェクト
+
+
+v8 : Max パッチ内で汎用 JavaScript オブジェクトを作成し、高速な V8 エンジンで実行できる。
+
+v8ui : v8 と同じ機能に加え、mgraphics や sketch を用いたカスタム描画・インタラクション UI を構築できる。
+旧 js / jsui より実行速度が大幅に向上し、大規模ロジックや複雑な UI でもパフォーマンスを確保できる。 
+
+
+ JavaScript 言語機能（ES6+）
+
+
+let/const、アロー関数、分割代入、テンプレートリテラル、スプレッド演算子など ...]]></description><link>https://zenn.dev/dsgarage/articles/48576b39c5d445</link><guid isPermaLink="true">https://zenn.dev/dsgarage/articles/48576b39c5d445</guid><pubDate>Tue, 05 Aug 2025 05:55:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9L8QsW3C--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Max9%25E3%2580%2591Max9%25E3%2581%25AB%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2595%25E3%2582%258C%25E3%2581%259FJavaScript%2520v8%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A4%25E3%2581%258B%25E3%2581%2595%25E3%2582%2593%25E3%2581%2595%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M2NzQ1N2RlMTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>つかさんさん</dc:creator></item><item><title><![CDATA[JavaScriptの奇妙な型を巡る旅]]></title><description><![CDATA[― typeof null === "object" に乾杯―
+
+JavaScript の型システムはシュレディンガーの猫より多忙である[1]。箱を開けても閉めても、とりあえず鳴き声だけは聞こえる。
+
+
+
+ 0. TL;DR を TL;DR と呼べない長さで
+
+
+typeof null が 'object': 1995 年のタイポが 30 年寝かされワイン化[2]。
+
+NaN !== NaN: 自己否定を習得した数値。哲学科卒の数学者が泣いた。
+
+[] + {} と {} + [] は真逆の結果。演算子より先に人生を見直そう。
+
+0 == "0" だが 0 === "0" ではない。ダイ...]]></description><link>https://zenn.dev/4_4_rest/articles/848c9365d22ba8</link><guid isPermaLink="true">https://zenn.dev/4_4_rest/articles/848c9365d22ba8</guid><pubDate>Tue, 05 Aug 2025 04:49:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zQNNtTB6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AE%25E5%25A5%2587%25E5%25A6%2599%25E3%2581%25AA%25E5%259E%258B%25E3%2582%2592%25E5%25B7%25A1%25E3%2582%258B%25E6%2597%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%2585%25A8%25E4%25BC%2591%25E7%25AC%25A6%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VlOGY1YTNlZjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>全休符</dc:creator></item><item><title><![CDATA[Vue でテンプレートとロジックを切り分ける | Vue3]]></title><description><![CDATA[
+ 概要
+Vue でウェブアプリケーションを作っているときに、&lt;script&gt;（ロジック）の部分は違うんだけど、&lt;template&gt;（テンプレート）の部分は一緒、ということがあった。そこで、テンプレートとロジックを切り分けて、テンプレートは一つのファイルで使いまわして、ロジックは個々のファイルで管理できるよう構造を考えた。コンポーネントを使えばいいようなものだが、そうすると、テンプレート部分が全てコンポーネントに行ってしまう。テンプレートでは、いくつかのコンポーネントをすでに使用しており、もしテンプレートをコンポーネントにしてしまうと、コンポーネントからコンポーネ...]]></description><link>https://zenn.dev/bbsfish/articles/74fb455977bb33</link><guid isPermaLink="true">https://zenn.dev/bbsfish/articles/74fb455977bb33</guid><pubDate>Tue, 05 Aug 2025 03:44:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OfcTouZT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vue%2520%25E3%2581%25A7%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25A8%25E3%2583%25AD%25E3%2582%25B8%25E3%2583%2583%25E3%2582%25AF%25E3%2582%2592%25E5%2588%2587%25E3%2582%258A%25E5%2588%2586%25E3%2581%2591%25E3%2582%258B%2520%257C%2520Vue3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Y.%2520HSD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSS1ZeDZXOGNtbm1hTFhWM25SNC1QYnFWbTdDVkJ3RXdrT2czUlNnWjlOPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Y. HSD</dc:creator></item><item><title><![CDATA[Vue でスクロールイベントを作成する | Vue3（Options API）]]></title><description><![CDATA[
+ 概要
+Vue でウェブアプリケーションを構築しているときに、ユーザのスクロールを検知してトップへ戻るボタンを表示したり、メニューバーを表示/非表示したりと、やることが多かったので、その時のメモ。
+
+ コード
+
+App.vue
+export default {
+  data() {
+    return {
+      lastScrollY: 0, // 前回のスクロール位置
+    };
+  },
+  methods: {
+    handleScroll() {
+      const currentScrollY = window.scrollY; // 現在のスクロール位置
+...]]></description><link>https://zenn.dev/bbsfish/articles/91fcc5371f0393</link><guid isPermaLink="true">https://zenn.dev/bbsfish/articles/91fcc5371f0393</guid><pubDate>Mon, 04 Aug 2025 15:44:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kjpKGqCI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vue%2520%25E3%2581%25A7%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2520%257C%2520Vue3%25EF%25BC%2588Options%2520API%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Y.%2520HSD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSS1ZeDZXOGNtbm1hTFhWM25SNC1QYnFWbTdDVkJ3RXdrT2czUlNnWjlOPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Y. HSD</dc:creator></item><item><title><![CDATA[ダウンロード欄にファイル項目追加されたことをcookieで検出する方法]]></title><description><![CDATA[
+ 記事で書かれているノウハウは、なんの話なのか？
+formのsubmitでバックエンド側でZipファイルなどを作成し、responseに乗せてダウンロード
+させる場合に、それなりにresponseがブラウザに返ってくるまで時間がかかる処理の場合、
+画面全体表示のスピナーを表示させたいことがあるでしょう。
+無反応な時間が数秒続くと、うまくボタンを押せてないと勘違いされた何度も
+押してしまうかもしれません。
+ただし、通常のformのsubmitの処理と異なり、responseが返ってきても
+ブラウザの右上のダウンロードにファイルの項目が追加されますが、
+画面全体の再表示とはならないため、
+...]]></description><link>https://zenn.dev/tazzae999jp/articles/4b34efd99045fd</link><guid isPermaLink="true">https://zenn.dev/tazzae999jp/articles/4b34efd99045fd</guid><pubDate>Mon, 04 Aug 2025 13:26:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iYb74ShX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2580%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E6%25AC%2584%25E3%2581%25AB%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E9%25A0%2585%25E7%259B%25AE%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2595%25E3%2582%258C%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%25E3%2582%2592cookie%25E3%2581%25A7%25E6%25A4%259C%25E5%2587%25BA%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%25A4%25E3%2581%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEwZmVjMjAxYTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たつお</dc:creator></item><item><title><![CDATA[JavaScriptでオブジェクト配列のユニーク処理はSetではできません。]]></title><description><![CDATA[
+ 問題：Setによるユニーク処理が期待通りに動かない
+配列のユニーク処理といえばSetを使ったワンライナーが定番ですが、オブジェクト配列では期待通りに動きません。
+const users = [
+  {id: 1, name: "田中"},
+  {id: 2, name: "山田"},
+  {id: 1, name: "田中"}
+];
+const uniqueUsersWithSet = [...new Set(users)];
+console.log(uniqueUsersWithSet.length); // 3 ← 期待は2なのに...
+
+ 原因：オブジェクトの比較は参照ベース
+...]]></description><link>https://zenn.dev/third_tech/articles/95819364032bad</link><guid isPermaLink="true">https://zenn.dev/third_tech/articles/95819364032bad</guid><pubDate>Mon, 04 Aug 2025 11:35:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--915UK7G6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25A7%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E9%2585%258D%25E5%2588%2597%25E3%2581%25AE%25E3%2583%25A6%25E3%2583%258B%25E3%2583%25BC%25E3%2582%25AF%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25AFSet%25E3%2581%25A7%25E3%2581%25AF%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25BE%25E3%2581%259B%25E3%2582%2593%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:ueno%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRkNGYzMzMzZDcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BETHIRD%2520%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE2MDIwN2EyYzIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ueno</dc:creator></item><item><title><![CDATA[【JavaScript】スタックトレースの読み方]]></title><description><![CDATA[
+ node inorderTraversalTest.js を実行した結果
+/Users/mavo/project/algorithm-solutions/binary-tree/problems/10_inorderTraversal/js/src/inorderTraversal.js:10
+        arr.push(node.data);
+            ^
+
+TypeError: Cannot read properties of undefined (reading 'push')
+    at inorderTraversalHelper (/Users/m...]]></description><link>https://zenn.dev/mabo23/articles/fe2cfa7d858f8c</link><guid isPermaLink="true">https://zenn.dev/mabo23/articles/fe2cfa7d858f8c</guid><pubDate>Mon, 04 Aug 2025 11:02:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0yCWyNq4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%25AE%25E8%25AA%25AD%25E3%2581%25BF%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mabo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQzM2ZhMmVkZDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mabo</dc:creator></item><item><title><![CDATA[Intersection Observer で画面外のCSSアニメーションを停止してパフォーマンスを改善する]]></title><description><![CDATA[CSSアニメーションのanimation-iteration-count: infiniteを指定して、無制限にアニメーションを繰り返している要素は画面外であってもアニメーションが実行され続けます。
+画面外での不要なアニメーションを制御して無駄なCPU・GPUリソース消費を抑えましょう✅
+特にCSSアニメーション多用しているWEBサイトでは効果的かもしれません🙆‍♂️
+
+ Intersection Observer で画面外のCSSアニメーションを制御するコードと実装例
+
+
+ Intersection Observer を使用して画面内・画面外の判定をする
+要素が画面外の時の判定はInt...]]></description><link>https://zenn.dev/kurichan/articles/416e5292703516</link><guid isPermaLink="true">https://zenn.dev/kurichan/articles/416e5292703516</guid><pubDate>Mon, 04 Aug 2025 10:37:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eSJ6qzoj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Intersection%2520Observer%2520%25E3%2581%25A7%25E7%2594%25BB%25E9%259D%25A2%25E5%25A4%2596%25E3%2581%25AECSS%25E3%2582%25A2%25E3%2583%258B%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E5%2581%259C%25E6%25AD%25A2%25E3%2581%2597%25E3%2581%25A6%25E3%2583%2591%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%259E%25E3%2583%25B3%25E3%2582%25B9%25E3%2582%2592%25E6%2594%25B9%25E5%2596%2584%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258F%25E3%2582%258A%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RjN2IzM2RiNTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>くりちゃん</dc:creator></item><item><title><![CDATA[js templete 挿入用コード]]></title><description><![CDATA[
+
+(function() {
+  
+let html_text_string = `    &lt;div class="replace"&gt;
+         &lt;div class="bbb"&gt;
+
+            &lt;p&gt;aaaaaa&lt;/p&gt;
+            &lt;p&gt;aaaaaa&lt;/p&gt;
+            &lt;p&gt;aaaaaa&lt;/p&gt;
+            &lt;p&gt;aaaaaa&lt;/p&gt;
+            &lt;p&gt;aaaaaa&lt;/p&gt...]]></description><link>https://zenn.dev/kemii/articles/fb32ca702ef5d0</link><guid isPermaLink="true">https://zenn.dev/kemii/articles/fb32ca702ef5d0</guid><pubDate>Mon, 04 Aug 2025 09:18:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HD1i6_lP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:js%2520templete%2520%25E6%258C%25BF%25E5%2585%25A5%25E7%2594%25A8%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kemii%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5ZGYyMjM5ZmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kemii</dc:creator></item><item><title><![CDATA[『JavaScript関数型プログラミング 複雑性を抑える発想と実践法を学ぶ』を読んだ 03]]></title><description><![CDATA[02からのつづき
+
+ Part 2: 関数型デザインとコーディング
+...
+
+ 第5章 複雑性を抑えるデザインパターン
+
+本章のテーマ
+
+命令型エラー処理における問題
+コンテナ（コンテキスト）を利用して不正なデータへのアクセスを防ぐ
+ファンクターをデータ変換のメカニズムとして実装する
+合成を容易にするデータ型としてモナドを理解する
+モナド型を使ってエラー処理戦略を整理する
+モナド型を挟む（インタリーブする）、合成する
+
+
+関数型プログラミングでのエラー処理について
+
+関数型プログラミングへの思い込み
+
+関数型プログラミングは、数値計算上の学術的な課題を解決するためのパラダイムではない
+ま...]]></description><link>https://zenn.dev/shimpei_takeda/articles/e333187ff8005d</link><guid isPermaLink="true">https://zenn.dev/shimpei_takeda/articles/e333187ff8005d</guid><pubDate>Mon, 04 Aug 2025 06:06:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1NLhU4Lt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258EJavaScript%25E9%2596%25A2%25E6%2595%25B0%25E5%259E%258B%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%2520%25E8%25A4%2587%25E9%259B%2591%25E6%2580%25A7%25E3%2582%2592%25E6%258A%2591%25E3%2581%2588%25E3%2582%258B%25E7%2599%25BA%25E6%2583%25B3%25E3%2581%25A8%25E5%25AE%259F%25E8%25B7%25B5%25E6%25B3%2595%25E3%2582%2592%25E5%25AD%25A6%25E3%2581%25B6%25E3%2580%258F%25E3%2582%2592%25E8%25AA%25AD%25E3%2582%2593%25E3%2581%25A0%252003%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Shimpei%2520TAKEDA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U5NjIzYjY5ZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shimpei TAKEDA</dc:creator></item><item><title><![CDATA[『JavaScript関数型プログラミング 複雑性を抑える発想と実践法を学ぶ』を読んだ 02]]></title><description><![CDATA[01からのつづき
+
+ Part 2: 関数型デザインとコーディング
+
+Part 1では、「なぜ関数型なのか」「なぜJavaScriptなのか」に回答した
+Part 2では、実世界の問題を解決することを目的とする
+
+「関数型を理解する」ことがどういうことなのかを学ぶ
+第3章では、容易に把握できるコードを作成することを目標とする
+
+
+map, reduce, filterなどの宣言的で抽象化された関数を利用する
+関数型のスタイルで再帰を利用する方法も紹介する
+
+
+第4章では、第3章で学んだ概念を関数のパイプライン化に適用して、開発を合理化したり、ポイントフリースタイルでプログラムを記述したり...]]></description><link>https://zenn.dev/shimpei_takeda/articles/0570a46218dc12</link><guid isPermaLink="true">https://zenn.dev/shimpei_takeda/articles/0570a46218dc12</guid><pubDate>Mon, 04 Aug 2025 06:04:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mNM8_Z7Z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258EJavaScript%25E9%2596%25A2%25E6%2595%25B0%25E5%259E%258B%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%2520%25E8%25A4%2587%25E9%259B%2591%25E6%2580%25A7%25E3%2582%2592%25E6%258A%2591%25E3%2581%2588%25E3%2582%258B%25E7%2599%25BA%25E6%2583%25B3%25E3%2581%25A8%25E5%25AE%259F%25E8%25B7%25B5%25E6%25B3%2595%25E3%2582%2592%25E5%25AD%25A6%25E3%2581%25B6%25E3%2580%258F%25E3%2582%2592%25E8%25AA%25AD%25E3%2582%2593%25E3%2581%25A0%252002%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Shimpei%2520TAKEDA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U5NjIzYjY5ZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shimpei TAKEDA</dc:creator></item></channel></rss>

@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Docker」のフィード]]></title><description><![CDATA[Zennのトピック「Docker」のRSSフィードです]]></description><link>https://zenn.dev/topics/docker</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/75b80a5922.png</url><title>Zennの「Docker」のフィード</title><link>https://zenn.dev/topics/docker</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 06 Aug 2025 12:05:25 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/docker/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Claude Code 対応 Dev Container 環境構築編 - VS Code でもそれ以外でも]]></title><description><![CDATA[本記事は3部構成の1本目です。
+
+Claude Code 対応 Dev Container 環境構築編 - VS Code でもそれ以外でも
+Python 開発環境最適化編 - uv + pre-commit + GitHub Actions
+Databricks Connect 実践編 - ローカルから Databricks コンピュートを利用
+
+
+ 1. はじめに
+Claude Codeを使いたいけれど環境構築が面倒、チーム全員に同じ開発環境を提供したい、そんな悩みをサクッと解決します。
+この記事では Anthropic のリファレンス実装をベースに、実用的にカスタマイズしたDev ...]]></description><link>https://zenn.dev/genda_jp/articles/2025-08-06-devcontainer-claude-code</link><guid isPermaLink="true">https://zenn.dev/genda_jp/articles/2025-08-06-devcontainer-claude-code</guid><pubDate>Wed, 06 Aug 2025 10:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--unFbBDY2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Claude%2520Code%2520%25E5%25AF%25BE%25E5%25BF%259C%2520Dev%2520Container%2520%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E7%25B7%25A8%2520-%2520VS%2520Code%2520%25E3%2581%25A7%25E3%2582%2582%25E3%2581%259D%25E3%2582%258C%25E4%25BB%25A5%25E5%25A4%2596%25E3%2581%25A7%25E3%2582%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:uma-chan%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNiM2M1MjhkNjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:GENDA%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIyMjZhYmJjODIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>uma-chan</dc:creator></item><item><title><![CDATA[docker-compose.yml の volumes: には何を書く？]]></title><description><![CDATA[
+ 📦 Dockerの「volumes」ってなに？
+DockerでLaravelなどの開発環境を作っていると、docker-compose.yml の中に volumes: というのをよく見かけます。
+でも、初めて見る人にとっては…
+
+volumesってなに？なんかいろいろ書き方あってわからない…！
+
+ってなりませんか？
+この記事では、Dockerの volumes をやさしく説明していきます！
+
+ ✅ そもそも volumes: に書けるのは2種類ある！
+docker-compose.yml の volumes: に書く内容は、実は 2種類のまったく別の仕組みがあります。
+
+
+
+種類
+...]]></description><link>https://zenn.dev/okotokoto/articles/9f8cbb7163f59b</link><guid isPermaLink="true">https://zenn.dev/okotokoto/articles/9f8cbb7163f59b</guid><pubDate>Wed, 06 Aug 2025 08:00:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6rUg03e_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:docker-compose.yml%2520%25E3%2581%25AE%2520volumes%253A%2520%25E3%2581%25AB%25E3%2581%25AF%25E4%25BD%2595%25E3%2582%2592%25E6%259B%25B8%25E3%2581%258F%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:KOTO%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I0ZWE1ODgyZGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KOTO</dc:creator></item><item><title><![CDATA[🔰 Webサーバーを立てるってどういうこと？]]></title><description><![CDATA[この記事では、
+「Webサーバー立ててって言われたけど、どういう意味？」
+「そもそもサーバーって何なの？」
+という状態の過去の私に向けて、「Webサーバーを立てる」とはどういうことなのかを、超やさしく解説していきます！
+少し苦手意識がある人でも読めるように、言葉をできるだけかみ砕いて説明するので、ぜひ最後まで読んでみてください😊
+
+ 🧠 サーバーって、そもそも何？
+「サーバー」っていう言葉、聞いたことはあるけど意味は曖昧……という人も多いのでは？
+実は「サーバー」っていろんな意味で使われているんです。
+
+
+物理サーバー：実体のある「箱型のPC」。データセンターに置かれている。
+
+仮想サー...]]></description><link>https://zenn.dev/okotokoto/articles/a8dfd702a26a5f</link><guid isPermaLink="true">https://zenn.dev/okotokoto/articles/a8dfd702a26a5f</guid><pubDate>Wed, 06 Aug 2025 04:13:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VpoKxAiU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520%2520Web%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592%25E7%25AB%258B%25E3%2581%25A6%25E3%2582%258B%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25A9%25E3%2581%2586%25E3%2581%2584%25E3%2581%2586%25E3%2581%2593%25E3%2581%25A8%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:KOTO%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I0ZWE1ODgyZGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KOTO</dc:creator></item><item><title><![CDATA[Dockerコンテナ内からAmplify clientを使ったAppSyncの接続に失敗したので調査した]]></title><description><![CDATA[最近はAmplifyをガッツリ使っています。GraphQLのコードを自動生成できるので、Amplify clientを利用すれば好きなバックエンドサーバーからAppSyncを呼び出しデータの読み書きを安全に実行可能です。
+今回、ECSで動作させる前提だったDockerコンテナとそこで実行するNode.js（Typescript）のコードからAmplify clientを利用したところ、認証関連のエラーが出たので調査しました。
+
+ 発生したエラー
+UnauthorizedException: Unknown error {
+      recoverySuggestion: `If you...]]></description><link>https://zenn.dev/numa08/articles/4ee19b09e54690</link><guid isPermaLink="true">https://zenn.dev/numa08/articles/4ee19b09e54690</guid><pubDate>Wed, 06 Aug 2025 02:49:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Y9iOeAUA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E5%2586%2585%25E3%2581%258B%25E3%2582%2589Amplify%2520client%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259FAppSync%25E3%2581%25AE%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%25AB%25E5%25A4%25B1%25E6%2595%2597%25E3%2581%2597%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E8%25AA%25BF%25E6%259F%25BB%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:numa08%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE0ZDUxZjg1ZDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>numa08</dc:creator></item><item><title><![CDATA[RabbitMQ のメッセージを永続化するポイント]]></title><description><![CDATA[docker 環境だけでお手軽に確認することができます
+
+ ポイントまとめ
+
+永続化しないとサービス停止時にメッセージが失われてしまう
+キュー作成時に永続化する (デフォルトで永続化するが明示しておいたほうがよい)
+publish 時にもメッセージを永続化する
+
+
+ compose.yml
+services:
+  mq:
+    hostname: rabbitmq
+    container_name: rabbitmq
+    image: rabbitmq:management
+    ports:
+      - 5672:5672
+      - 15672:15672
+   ...]]></description><link>https://zenn.dev/sharl/articles/bfc0517a111684</link><guid isPermaLink="true">https://zenn.dev/sharl/articles/bfc0517a111684</guid><pubDate>Wed, 06 Aug 2025 02:26:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5gO3M6vT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:RabbitMQ%2520%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%2583%25E3%2582%25BB%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E6%25B0%25B8%25E7%25B6%259A%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%25E3%2583%259D%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2582%2583%25E3%2581%2582%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0xuZEM2dlZRUHNRVzBHa1dpdS1DY2trTlVETnVhemF1YjlUVVRkQ3B5dHBqbTBLUXA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しゃある</dc:creator></item><item><title><![CDATA[TiDBローカル環境構築②]]></title><description><![CDATA[TiDBのローカル環境の構築を2回目行なっていきます。
+前回DB環境の構築が出来たましたが、今回はDockerでの環境構築を行なっていきます。
+
+ 前提条件
+Docker Desktopのインストール
+
+ コンテナ環境の構築
+docker-compose.ymlの作成を行います。
+以下のように作成しました。
+version: "3.8"
+
+services:
+  tiup-playground:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tidb-test
+    ports:...]]></description><link>https://zenn.dev/collabostyle/articles/061643402feb5e</link><guid isPermaLink="true">https://zenn.dev/collabostyle/articles/061643402feb5e</guid><pubDate>Wed, 06 Aug 2025 02:00:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--b4fz-v2x--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TiDB%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E2%2591%25A1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%2594%25E3%2581%25A8%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViM2I3NTQxYzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MyOWNkNWUxZTkuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ごと</dc:creator></item><item><title><![CDATA[podman rootless でコンテナ実行で保険かけつつ claude code を定額働かせ放題したいメモ]]></title><description><![CDATA[
+ 背景
+claude code --dangerously-skip-permission で定額働かせ放題して, 寝て起きたらコードができているとかやりたい.
+でも rm ~/ とかあったり, API key を github に勝手にアップとか(gh を設定しているとき)あるっぽいので, サンドボックス環境で動かしたい(claude code クンに 36 協定無視して定額働かせ放題してもらうのだから, AI に労災保険を掛けるのは経営者の義務!)
+Docker はなんかデーモン起動しないなどで壊れていて動かんとか, WSL2 でうまく動かんとか, 有料化でめんどいとかで使えない ...]]></description><link>https://zenn.dev/syoyo/articles/6c5a605e418db1</link><guid isPermaLink="true">https://zenn.dev/syoyo/articles/6c5a605e418db1</guid><pubDate>Tue, 05 Aug 2025 20:56:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yl18-hSW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:podman%2520rootless%2520%25E3%2581%25A7%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%25A7%25E4%25BF%259D%25E9%2599%25BA%25E3%2581%258B%25E3%2581%2591%25E3%2581%25A4%25E3%2581%25A4%2520claude%2520code%2520%25E3%2582%2592%25E5%25AE%259A%25E9%25A1%258D%25E5%2583%258D%25E3%2581%258B%25E3%2581%259B%25E6%2594%25BE%25E9%25A1%258C%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:syoyo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FiZTYxMTY5ZTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>syoyo</dc:creator></item><item><title><![CDATA[【小ネタ】コンテナイメージのレイヤーからファイルを回収する方法]]></title><description><![CDATA[
+ コンテナイメージのレイヤーからファイルを回収する方法
+コンテナイメージのビルド時に一度COPYし、後の命令で削除したファイルを、しばらく後になってコンテナイメージから取り出したくなったことはないでしょうか？私はあります。[1]
+こんな時、ビルド済みのコンテナイメージからファイルを回収できる可能性があります。この記事ではコンテナのlayerからファイルを回収する手法について記載します。
+
+ 結論
+コンテナイメージビルド時にファイルをコピーする操作と削除する操作が別々のlayerとなっている場合、イメージをアーカイブ形式で出力してあげることでファイルを取り出すことが可能です。
+
+ コンテ...]]></description><link>https://zenn.dev/misster/articles/bd99879654d1ca</link><guid isPermaLink="true">https://zenn.dev/misster/articles/bd99879654d1ca</guid><pubDate>Tue, 05 Aug 2025 15:06:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WND-99Pw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%25B0%258F%25E3%2583%258D%25E3%2582%25BF%25E3%2580%2591%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2582%25A4%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25AE%25E3%2583%25AC%25E3%2582%25A4%25E3%2583%25A4%25E3%2583%25BC%25E3%2581%258B%25E3%2582%2589%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E5%259B%259E%25E5%258F%258E%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BF%25E3%2581%2599%25E3%2581%259F%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTEZKbW1CV2tjeHRSa1NNNEpscG4xeHRFR0o5UkRtRjVhLUhybHFtVEJSUEpkZ19BPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>みすたー</dc:creator></item><item><title><![CDATA[公式イメージでLaravelを動かすDocker環境構築]]></title><description><![CDATA[
+ ☕ はじめに
+UbuntuベースDocker構築記事 を書いたら、
+
+次は "公式イメージ" だけで動かすDocker構築も体験したい
+
+と思いました。
+この記事は、Laravelを「公式Dockerイメージだけ」で動かす構成方法を解説します！
+
+ 🔰 そもそも「公式イメージ」とは？
+Dockerでは、コンテナを作るために「イメージ」という設計図のようなものを使います。
+この設計図（イメージ）は、自分でゼロから作ることもできるし、すでに用意されたテンプレートを使うこともできます🔥
+公式イメージとは、Docker Hub というプラットフォームで提供されている、信頼性の高いテンプレート...]]></description><link>https://zenn.dev/okotokoto/articles/97cc30d5b46a82</link><guid isPermaLink="true">https://zenn.dev/okotokoto/articles/97cc30d5b46a82</guid><pubDate>Tue, 05 Aug 2025 06:08:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mqH8N9GJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2585%25AC%25E5%25BC%258F%25E3%2582%25A4%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25A7Laravel%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599Docker%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:KOTO%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I0ZWE1ODgyZGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KOTO</dc:creator></item><item><title><![CDATA[ポータブルエッジサーバ開発環境の製作]]></title><description><![CDATA[
+ 作りたいもの
+スマホアプリから使用する、ポータブルエッジサーバの開発環境を作成していきます。スマホとエッジサーバを同一のモバイルルータに接続し、使用時にはホストマシンなしでオペレーションできる構成を目指します。
+
+
+ ポータブルエッジサーバの概要
+
+ ハードウェア
+手元にあるRaspberry Pi 4 (RasPi4)を使用します。RasPi4の安全なシャットダウン・サーバ監視等のため、こちらも手元にあるタッチパネル付きの液晶ディスプレイ（LCD）を接続しました。
+
+ ソフトウェア
+Yoctoを使用してエッジサーバソフトウェアをビルドします。コンセプトとしてはハードウェア関連の機能...]]></description><link>https://zenn.dev/takumique/articles/a451ffd2393b1f</link><guid isPermaLink="true">https://zenn.dev/takumique/articles/a451ffd2393b1f</guid><pubDate>Mon, 04 Aug 2025 04:05:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Gqnhz2Lf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259D%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%2596%25E3%2583%25AB%25E3%2582%25A8%25E3%2583%2583%25E3%2582%25B8%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AE%25E8%25A3%25BD%25E4%25BD%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takumique%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3I4X01CVk1NS3pLWDBiYWdESTdCRXV5dEdxMHpHLUdWSWE1emhJc1MxYkFTU3J3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takumique</dc:creator></item><item><title><![CDATA[PythonとAzure AI Foundryで実現！写真をアニメ風に変換するAI画像生成アプリの構築]]></title><description><![CDATA[最新の生成AI技術とクラウドネイティブな開発手法を駆使して、画像変換AIアプリケーションを構築する実践ガイドです。
+
+Python一つで完結する開発体験ながら、学べる技術はフルスタックエンジニアレベル。AI時代の開発者に必要なスキルセットを、実践を通じて身につけることができます。
+
+・GPT-4o-miniによる画像解析とDALL-E-3による画像生成を組み合わせ、アップロードした写真を自動でアニメ風に変換するWebアプリを開発します。
+・アーキテクチャはマルチリージョン構成で設計し、East USでのAI処理とJapan Westでのアプリケーション実行を分離。
+・Key Vaultによるセキュアな認証情報管理、Container Registryによる効率的なデプロイ、Terraformによる完全自動化されたインフラ構築まで—企業級の品質を実現します。]]></description><link>https://zenn.dev/kenquichi/books/24506a3c3c4838</link><guid isPermaLink="true">https://zenn.dev/kenquichi/books/24506a3c3c4838</guid><pubDate>Sun, 03 Aug 2025 11:18:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MqV4FLTW--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci9jYTAxMThlYTJmLmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>ケン吉</dc:creator></item><item><title><![CDATA[bunとhonoで諸々の検証をやるための下準備をした話]]></title><description><![CDATA[最初はhonoについて気になってhonoを使おうと思い、honoについて調べてたらほかにもORMであればKyselyやDrizzle ORMなどいろいろ出てきたり、bunが出てきたりいろいろしたので、手始めにbun+honoで環境構築でもしてみようかなという感じです。
+ただ「Hello world!」までやってもあれなので、それっぽくテンプレートのように作ります。なので、以下の項目をざっくり満たそうかなという感じです。
+
+bun+honoでコードがかける
+DB(Postgres)用にcompose.yamlを用意
+テスト関連の簡単なコード
+Lintとコードフォーマット
+
+使用しているOS...]]></description><link>https://zenn.dev/baba0119/articles/0f2d0bcb84c85a</link><guid isPermaLink="true">https://zenn.dev/baba0119/articles/0f2d0bcb84c85a</guid><pubDate>Sun, 03 Aug 2025 09:02:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--x7n17bCB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:bun%25E3%2581%25A8hono%25E3%2581%25A7%25E8%25AB%25B8%25E3%2580%2585%25E3%2581%25AE%25E6%25A4%259C%25E8%25A8%25BC%25E3%2582%2592%25E3%2582%2584%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E4%25B8%258B%25E6%25BA%2596%25E5%2582%2599%25E3%2582%2592%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:varvar%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0ZGI3ZTBiMDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>varvar</dc:creator></item><item><title><![CDATA[Raspberry Pi + Yocto + Docker + FastAPI + Celeryでエッジサービスの実装]]></title><description><![CDATA[作りたいものの全体像から参照しています
+https://zenn.dev/takumique/articles/a451ffd2393b1f
+
+ 作りたいもの
+Raspberry Pi 4 (RasPi4)にYoctoを載せて、その上にdocker/docker-compose環境を構築し、その上にAPI+コアロジックを立ち上げます。
+
+2個の自作コンテナと1個のdocker-hubからダウンロードするコンテナをdocker-composeで実行します。
+
+自作コンテナ
+
+sample-api: gunicorn + uvicorn + fastapiのAPIサーバ
+sample-cor...]]></description><link>https://zenn.dev/takumique/articles/975d70fada1d16</link><guid isPermaLink="true">https://zenn.dev/takumique/articles/975d70fada1d16</guid><pubDate>Sun, 03 Aug 2025 04:45:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GjrMeVTr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Raspberry%2520Pi%2520%252B%2520Yocto%2520%252B%2520Docker%2520%252B%2520FastAPI%2520%252B%2520Celery%25E3%2581%25A7%25E3%2582%25A8%25E3%2583%2583%25E3%2582%25B8%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takumique%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3I4X01CVk1NS3pLWDBiYWdESTdCRXV5dEdxMHpHLUdWSWE1emhJc1MxYkFTU3J3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takumique</dc:creator></item><item><title><![CDATA[Apple Containerでcomposeを使いたい]]></title><description><![CDATA[
+ TL;DR
+
+
+Apple Containerでは現状、compose.ymlを使用したコンテナオーケストレーションはサポートされていない
+
+Compose導入のPRは現在進行中
+コミュニティによる自作ツールはいくつか存在する
+
+公式サポートではないため注意は必要
+
+
+
+!
+関連情報を不定期にウォッチ中です。
+状況が変わり次第、この記事も更新していきます。
+
+
+ 背景
+
+ Apple Containerization Frameworkとは？
+Appleは6月に開催されたWWDC2025にて、Apple Containerization Frameworkを発表しました。
+これにより...]]></description><link>https://zenn.dev/junm0ri/articles/apple-container-compose</link><guid isPermaLink="true">https://zenn.dev/junm0ri/articles/apple-container-compose</guid><pubDate>Sun, 03 Aug 2025 02:41:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AKRVb529--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Apple%2520Container%25E3%2581%25A7compose%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Junm0ri%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNjZTI2ODcxYTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Junm0ri</dc:creator></item><item><title><![CDATA[GOMAXPROCS 自動調整が Go 1.25 でついに本格化 – 過去の課題と運用メリットを解説]]></title><description><![CDATA[
+ はじめに
+Go の並列実行上限を司る GOMAXPROCS。コンテナランタイムが普及するにつれ CPU クォータを無視してホスト全 CPU を使用してしまう 問題が顕在化し、開発・運用の現場では 手動設定 や 外部ライブラリ (uber‑go/automaxprocs など) に頼る状況が続いてきました。Go&nbsp;1.25 ではランタイムが cgroup の CPU 帯域変更を継続監視 し、GOMAXPROCS を 自動的かつ動的 に調整する仕組みが正式採用されます。
+本記事では以下の３つのポイントを整理します。
+
+これまで発生していた課題と代表的ワークアラウンド
+Go&nbs...]]></description><link>https://zenn.dev/motch/articles/8ae8cbbbf15dc6</link><guid isPermaLink="true">https://zenn.dev/motch/articles/8ae8cbbbf15dc6</guid><pubDate>Sun, 03 Aug 2025 01:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--F1UQ23LF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GOMAXPROCS%2520%25E8%2587%25AA%25E5%258B%2595%25E8%25AA%25BF%25E6%2595%25B4%25E3%2581%258C%2520Go%25C2%25A01.25%2520%25E3%2581%25A7%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25AB%25E6%259C%25AC%25E6%25A0%25BC%25E5%258C%2596%2520%25E2%2580%2593%2520%25E9%2581%258E%25E5%258E%25BB%25E3%2581%25AE%25E8%25AA%25B2%25E9%25A1%258C%25E3%2581%25A8%25E9%2581%258B%25E7%2594%25A8%25E3%2583%25A1%25E3%2583%25AA%25E3%2583%2583%25E3%2583%2588%25E3%2582%2592%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:motch%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc4YjU0YzI0ZjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>motch</dc:creator></item><item><title><![CDATA[docker compose up --wait の落とし穴]]></title><description><![CDATA[
+ 再現リポジトリ
+https://github.com/TakashiAihara/docker-compose-wait-test
+
+ 問題
+docker compose up --wait で下記を満たすとき、
+どうあがいても exit code 1 になり、「docker compose の起動に失敗した」と見なされる。
+
+depends_on チェーンの最後に起動するサービスがバッチ系処理であり、実行時間が極端に短い。
+
+
+ 解決
+明示的に sleep 2 とかで待機するか、docker compose wait コマンドで明示的に待つしかないみたいです。
+sleep 1 だと...]]></description><link>https://zenn.dev/takashiaihara/articles/979cb208ca4994</link><guid isPermaLink="true">https://zenn.dev/takashiaihara/articles/979cb208ca4994</guid><pubDate>Sat, 02 Aug 2025 17:50:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kxz8_G6L--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:docker%2520compose%2520up%2520--wait%2520%25E3%2581%25AE%25E8%2590%25BD%25E3%2581%25A8%25E3%2581%2597%25E7%25A9%25B4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:TakashiAihara%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ1ZmFkZDAxMzEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TakashiAihara</dc:creator></item><item><title><![CDATA[Cloud Code + Skaffold：ローカルで爆速開発ループを回してみた]]></title><description><![CDATA[
+ はじめに
+GKE や Cloud Run 上にアプリを素早くデプロイ＆検証したい。
+Cloud Native な開発に興味あるけど、環境構築が面倒など課題になるケースもあります。
+そんな方にオススメなのが「Cloud Code + Skaffold」です！
+本記事では、ローカルでの開発コード変更を即反映できる開発ループを、
+Cloud Code（VS Code 拡張）と Skaffold を組み合わせて実現する方法を紹介します。
+
+ Skaffoldとは
+Skaffold は Google が開発している OSS で、Kubernetes 向けの開発サイクルを効率化します。
+主な機能...]]></description><link>https://zenn.dev/rrr068/articles/b2dae9a5f8346a</link><guid isPermaLink="true">https://zenn.dev/rrr068/articles/b2dae9a5f8346a</guid><pubDate>Sat, 02 Aug 2025 10:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--I5-bLpCL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Cloud%2520Code%2520%252B%2520Skaffold%25EF%25BC%259A%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E3%2581%25A7%25E7%2588%2586%25E9%2580%259F%25E9%2596%258B%25E7%2599%25BA%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%2597%25E3%2582%2592%25E5%259B%259E%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E4%25BA%2594%25E5%258F%25B3%25E8%25A1%259B%25E9%2596%2580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ExY2Y0YjhkYTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>五右衛門</dc:creator></item><item><title><![CDATA[備忘録：Raspberry Pi OSのインストール〜セットアップ手順（ディスプレイ無し）]]></title><description><![CDATA[Raspberry Pi にディスプレイなしで Raspberry Pi OS をインストールしてセットアップする手順の備忘録。
+
+ 1. 動作環境
+
+MacBook Pro
+
+macOS 15.6
+SD カードリーダー
+
+
+Raspberry Pi 4 Model B
+
+Raspberry Pi OS Lite (64-bit)
+
+
+
+
+ 2. Raspberry Pi OS のインストールとセットアップ
+
+ 2.1. SSH 用キーペアの生成
+まず Mac から Raspberry Pi にパスワードなしで ssh で接続するために、以下のコマンドで公開鍵と秘密鍵のペアを生成する。途...]]></description><link>https://zenn.dev/iwazou/articles/raspberrypi-install-memo-b50faffe4d95ca</link><guid isPermaLink="true">https://zenn.dev/iwazou/articles/raspberrypi-install-memo-b50faffe4d95ca</guid><pubDate>Fri, 01 Aug 2025 11:21:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pDPeCJr6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%25EF%25BC%259ARaspberry%2520Pi%2520OS%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2580%259C%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E6%2589%258B%25E9%25A0%2586%25EF%25BC%2588%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25B9%25E3%2583%2597%25E3%2583%25AC%25E3%2582%25A4%25E7%2584%25A1%25E3%2581%2597%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2584%25E3%2582%258F%25E3%2581%259E%25E3%2581%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUlKUmg4NHc5a2k5Y3p0YmtZN0dqd2hwd1V3Yk1vbTFFYUJkaTBsNC1hPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>いわぞう</dc:creator></item><item><title><![CDATA[DockerとOSの関係をちゃんと理解する]]></title><description><![CDATA[Dockerを勉強していたら、Dockerfileの1行目に出てきたこれ：
+FROM ubuntu:22.04
+でも、ふと疑問に思いませんか？
+
+🤔 DockerってホストPCのカーネルを使い回すから軽いんじゃなかったっけ？
+それなのに Ubuntu を指定するってどういうこと？Ubuntuも起動してるの？
+
+この記事ではこの疑問に答えながら、Dockerの「OSイメージ」の正体をわかりやすく解説していきます！
+
+
+ ✅ 結論：カーネルじゃなくて“ユーザー空間”がほしいだけ！
+Dockerが軽量なのは「ホストPCのカーネル（OSの中枢）を使い回す」からです。
+ですが、実行環境としての“ユ...]]></description><link>https://zenn.dev/okotokoto/articles/c7a6b1129826b9</link><guid isPermaLink="true">https://zenn.dev/okotokoto/articles/c7a6b1129826b9</guid><pubDate>Fri, 01 Aug 2025 11:20:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Xt3DyUpY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2581%25A8OS%25E3%2581%25AE%25E9%2596%25A2%25E4%25BF%2582%25E3%2582%2592%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%25E3%2581%25A8%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:KOTO%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I0ZWE1ODgyZGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KOTO</dc:creator></item><item><title><![CDATA[苦手だったDockerとついに向き合った]]></title><description><![CDATA[
+ はじめに
+Docker、正直ずっと苦手でした😭
+「仮想環境が動く？」「Docker Desktop？とりあえず入れろって？」
+今回苦手意識のあったDockerと向き合い、やっとつながった感覚が出てきたので、この記事にまとめます🔥
+この記事では、
+
+Dockerとは何か、そもそも仮想環境ってなに？
+Docker / Docker Compose / Docker Desktop の関係性
+イメージとコンテナの違い
+なぜ開発環境で使うのか
+を、初学者の自分目線でわかりやすく説明していきます。
+
+
+ 🎁 Dockerを使うメリット
+
+✅ ローカルPCの環境差をなくせる（誰でも同じDocke...]]></description><link>https://zenn.dev/okotokoto/articles/ddf4df49bb0575</link><guid isPermaLink="true">https://zenn.dev/okotokoto/articles/ddf4df49bb0575</guid><pubDate>Fri, 01 Aug 2025 11:01:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9g_5_Y7J--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%258B%25A6%25E6%2589%258B%25E3%2581%25A0%25E3%2581%25A3%25E3%2581%259FDocker%25E3%2581%25A8%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25AB%25E5%2590%2591%25E3%2581%258D%25E5%2590%2588%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:KOTO%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I0ZWE1ODgyZGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KOTO</dc:creator></item></channel></rss>
