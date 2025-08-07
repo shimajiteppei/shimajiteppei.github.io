@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 07 Aug 2025 12:05:15 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【マサカリ求む】任意の円柱にかかる空気抵抗を完全に理解した。ただし理屈は不明。]]></title><description><![CDATA[
+ 前回のおさらい
+https://zenn.dev/onlinsanity/articles/19b7e0d17f8122
+ここを参照していただければ大体わかるのですが、
+
+直径:高さが1:1でない場合の空気抵抗値を計算出来るかやってみた
+直径:高さのアスペクト比が大きくなるにつれて誤差も増えた
+何でかはよく分からなかった
+
+ってなところです。
+
+ 式に潜んでいた致命的間違い
+アスペクト比が開くと誤差が開く理由について色々と頭を悩ませていたのですが、
+ある時、閃いて計算した結果から抗力係数を逆算してみました。
+するとどうでしょう。
+アスペクト比が変わっても抗力係数が全く変化していないじ...]]></description><link>https://zenn.dev/onlinsanity/articles/848fe229c59c59</link><guid isPermaLink="true">https://zenn.dev/onlinsanity/articles/848fe229c59c59</guid><pubDate>Thu, 07 Aug 2025 08:52:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BM4Wd_p_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2583%259E%25E3%2582%25B5%25E3%2582%25AB%25E3%2583%25AA%25E6%25B1%2582%25E3%2582%2580%25E3%2580%2591%25E4%25BB%25BB%25E6%2584%258F%25E3%2581%25AE%25E5%2586%2586%25E6%259F%25B1%25E3%2581%25AB%25E3%2581%258B%25E3%2581%258B%25E3%2582%258B%25E7%25A9%25BA%25E6%25B0%2597%25E6%258A%25B5%25E6%258A%2597%25E3%2582%2592%25E5%25AE%258C%25E5%2585%25A8%25E3%2581%25AB%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%259F%25E3%2580%2582%25E3%2581%259F%25E3%2581%25A0%25E3%2581%2597%25E7%2590%2586%25E5%25B1%2588%25E3%2581%25AF%25E4%25B8%258D%25E6%2598%258E%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Toru%2520Kabasawa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pBMFI0MHlxc3NqZWxFQ01HSjR4SVBiTkZmSnBXTlFUc0E3VXhiPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Toru Kabasawa</dc:creator></item><item><title><![CDATA[【マサカリ求む】任意の物体にかかる空力特性について何も分からなくなった。しかも理屈はまだ不明。]]></title><description><![CDATA[
+ 前回のおさらい
+https://zenn.dev/onlinsanity/articles/848fe229c59c59
+を見て頂ければ分かるのですが、
+
+任意の円柱にかかる抗力の求め方を完全に理解した
+アスペクト比を反映する関数が何故か対数関数だった
+係数の0.1がどこから来たのかは不明
+
+ってなところです。
+
+ 極限のお話
+上の記事では極限(アスペクト比＝\infty{})を取ってしまうと抗力係数が\infty{}に発散してしまう点が問題でした。
+そこで、
+
+極限が一定の値(今回の場合は1.2)を取りうる
+アスペクト比が0になっても-\infty{}に発散しない
+
+このような関数...]]></description><link>https://zenn.dev/onlinsanity/articles/491337bd90f590</link><guid isPermaLink="true">https://zenn.dev/onlinsanity/articles/491337bd90f590</guid><pubDate>Thu, 07 Aug 2025 08:52:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6mIZjuRy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2583%259E%25E3%2582%25B5%25E3%2582%25AB%25E3%2583%25AA%25E6%25B1%2582%25E3%2582%2580%25E3%2580%2591%25E4%25BB%25BB%25E6%2584%258F%25E3%2581%25AE%25E7%2589%25A9%25E4%25BD%2593%25E3%2581%25AB%25E3%2581%258B%25E3%2581%258B%25E3%2582%258B%25E7%25A9%25BA%25E5%258A%259B%25E7%2589%25B9%25E6%2580%25A7%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E4%25BD%2595%25E3%2582%2582%25E5%2588%2586%25E3%2581%258B%25E3%2582%2589%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E3%2580%2582%25E3%2581%2597%25E3%2581%258B%25E3%2582%2582%25E7%2590%2586%25E5%25B1%2588%25E3%2581%25AF%25E3%2581%25BE%25E3%2581%25A0%25E4%25B8%258D%25E6%2598%258E%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Toru%2520Kabasawa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pBMFI0MHlxc3NqZWxFQ01HSjR4SVBiTkZmSnBXTlFUc0E3VXhiPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Toru Kabasawa</dc:creator></item><item><title><![CDATA[【転載】【マサカリ求む】高さ対直径が1:1な円柱の空気抵抗について完全に理解したかもしれない]]></title><description><![CDATA[投稿テストを兼ねて、qiitaの自記事からの転載です。
+
+ 何故にそんなことを考えたの？
+当初の目的は、「空気抵抗を最小限にするにはどんな断面がいいの？」という疑問に対する答えでした。
+そのためにこの記事を参考にジューコフスキー翼を作ってみて、その抗力を調べようと思ったのですが、
+「抗力係数が分からねぇ…」という根本的な問題にぶち当たりました(当然ですが)。
+
+ で、それじゃあどうやって抗力を求めるの？
+そこで色々とGoogle先生に聞いてみるも、ほぼ答えは
+
+D[N] = \frac{ 1 }{ 2 } \rho v^2 S C_d [kg/m^3]･[(m/s)^2]･[m^2]
+(...]]></description><link>https://zenn.dev/onlinsanity/articles/2c62f247c6525e</link><guid isPermaLink="true">https://zenn.dev/onlinsanity/articles/2c62f247c6525e</guid><pubDate>Thu, 07 Aug 2025 08:52:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kvXl8PV4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E8%25BB%25A2%25E8%25BC%2589%25E3%2580%2591%25E3%2580%2590%25E3%2583%259E%25E3%2582%25B5%25E3%2582%25AB%25E3%2583%25AA%25E6%25B1%2582%25E3%2582%2580%25E3%2580%2591%25E9%25AB%2598%25E3%2581%2595%25E5%25AF%25BE%25E7%259B%25B4%25E5%25BE%2584%25E3%2581%258C1%253A1%25E3%2581%25AA%25E5%2586%2586%25E6%259F%25B1%25E3%2581%25AE%25E7%25A9%25BA%25E6%25B0%2597%25E6%258A%25B5%25E6%258A%2597%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E5%25AE%258C%25E5%2585%25A8%25E3%2581%25AB%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%259F%25E3%2581%258B%25E3%2582%2582%25E3%2581%2597%25E3%2582%258C%25E3%2581%25AA%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Toru%2520Kabasawa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pBMFI0MHlxc3NqZWxFQ01HSjR4SVBiTkZmSnBXTlFUc0E3VXhiPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Toru Kabasawa</dc:creator></item><item><title><![CDATA[【マサカリ求む】高さが1mの円柱にかかる空気抵抗を完全に理解したかった]]></title><description><![CDATA[
+ 前回のおさらい
+https://zenn.dev/onlinsanity/articles/2c62f247c6525e
+ここを参照していただければ大体分かるとは思うのですが、
+
+直径:高さが1:1な円柱の空気抵抗について調べてみた
+音の性質を勘案して立式してみたところそれっぽいグラフが出た
+直径:高さを変えたらどうなるか分からない
+
+ってなところです。
+立式してみたものが以下です。
+
+v_a[m/s] = \frac{vp \sin^2 \theta}{\rho c^2} ([m/s]･[Pa])/([kg/m^3]･[(m/s)^2])  
+
+
+D[N] = \sum \frac...]]></description><link>https://zenn.dev/onlinsanity/articles/19b7e0d17f8122</link><guid isPermaLink="true">https://zenn.dev/onlinsanity/articles/19b7e0d17f8122</guid><pubDate>Thu, 07 Aug 2025 08:52:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tq5iOdie--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2583%259E%25E3%2582%25B5%25E3%2582%25AB%25E3%2583%25AA%25E6%25B1%2582%25E3%2582%2580%25E3%2580%2591%25E9%25AB%2598%25E3%2581%2595%25E3%2581%258C1m%25E3%2581%25AE%25E5%2586%2586%25E6%259F%25B1%25E3%2581%25AB%25E3%2581%258B%25E3%2581%258B%25E3%2582%258B%25E7%25A9%25BA%25E6%25B0%2597%25E6%258A%25B5%25E6%258A%2597%25E3%2582%2592%25E5%25AE%258C%25E5%2585%25A8%25E3%2581%25AB%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%259F%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Toru%2520Kabasawa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pBMFI0MHlxc3NqZWxFQ01HSjR4SVBiTkZmSnBXTlFUc0E3VXhiPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Toru Kabasawa</dc:creator></item><item><title><![CDATA[古米度診断ツールで年齢を楽しく表現 - ClaudeCode×JavaScript実装解説]]></title><description><![CDATA[
+ はじめに
+誕生日を入力するだけで、あなたの年齢を「古米」で表現するユニークな診断ツールを開発しました。例えば25歳なら「古古古古古古古古古古古古古古古古古古古古古古古古古米」といった具合に、年齢分だけ「古」を並べてお米の名前を生成します。
+!
+本記事の開発およびこの記事執筆は、Claude Code（Anthropic社のAI）との協業で進めました。AI時代の新しい開発スタイルの実践例として参考になれば幸いです。
+
+
+ この記事で分かること
+
+JavaScript による正確な年齢計算の実装方法
+WordPressとの連携による使用回数カウンター機能
+レスポンシブ対応の日付選択UI ...]]></description><link>https://zenn.dev/5naokichi/articles/bab43b62bce861</link><guid isPermaLink="true">https://zenn.dev/5naokichi/articles/bab43b62bce861</guid><pubDate>Thu, 07 Aug 2025 07:32:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DNv-TEbv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%258F%25A4%25E7%25B1%25B3%25E5%25BA%25A6%25E8%25A8%25BA%25E6%2596%25AD%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25A7%25E5%25B9%25B4%25E9%25BD%25A2%25E3%2582%2592%25E6%25A5%25BD%25E3%2581%2597%25E3%2581%258F%25E8%25A1%25A8%25E7%258F%25BE%2520-%2520ClaudeCode%25C3%2597JavaScript%25E5%25AE%259F%25E8%25A3%2585%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AA%25E3%2581%258A%25E3%2581%258D%25E3%2581%25A1%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyYTY0ODViMjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>なおきち</dc:creator></item><item><title><![CDATA[HTML/CSS/JavaScript で、スムーズにテキスト要素がスライドインしてくる仕掛けを作る (Blazor, React)]]></title><description><![CDATA[
+ はじめに
+前回、こんな記事を書きました。
+https://zenn.dev/j_sakamoto/articles/a774e70143cf12
+上記記事内にて、自作した Web アプリ (翻訳字幕システム) の "こだわりポイント" として以下のように言及しておりました。
+
+しかしながら、せっかく (?) 自作でやりきるとした以上、一点だけこだわったところがありました。
+それは逐次の翻訳結果の出現を、しっかりアニメーション表示するようにしたところです。
+音声認識されて返ってきた翻訳結果テキストを、何も考えずに (?) 表示エリアにただ追加してしまうと、既存の前回までの翻訳結果テキス...]]></description><link>https://zenn.dev/j_sakamoto/articles/eb117b9fb0681c</link><guid isPermaLink="true">https://zenn.dev/j_sakamoto/articles/eb117b9fb0681c</guid><pubDate>Wed, 06 Aug 2025 13:43:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8r8tReJ5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:HTML%252FCSS%252FJavaScript%2520%25E3%2581%25A7%25E3%2580%2581%25E3%2582%25B9%25E3%2583%25A0%25E3%2583%25BC%25E3%2582%25BA%25E3%2581%25AB%25E3%2583%2586%25E3%2582%25AD%25E3%2582%25B9%25E3%2583%2588%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%258C%25E3%2582%25B9%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2589%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%2597%25E3%2581%25A6%25E3%2581%258F%25E3%2582%258B%25E4%25BB%2595%25E6%258E%259B%25E3%2581%2591%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2520%2528Blazo...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%2540jsakamoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dVX243dnJ5ZFlLb2NxdUhSUkIxSGZ4NGpVekNsdGNmZ290R2hfNWc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>@jsakamoto</dc:creator></item><item><title><![CDATA[JavaScriptの sort((a, b) => a - b) を理解する]]></title><description><![CDATA[Java Scriptでは、「たった1行」で配列が魔法のように並び替えできるものがありますが、
+その裏側を今回覗き込んでみました。
+JavaScriptで、何気なく書くこの記述：sort((a, b) =&gt; a - b)。
+「なぜこれで並び替えがうまくいくのか？」と疑問に思ったことはないでしょうか。
+私はそう思いました。
+Salesforce JavaScript Developer I 試験対策で登場したこの1行をテーマに、比較関数の仕組み・なぜ a - b が効くのか・NG例など、備忘録的にまとめようと思います。
+
+ ✅ 出典元
+Trailhead モジュール：
+Explore...]]></description><link>https://zenn.dev/tk_salesforce/articles/9e6206945c0a96</link><guid isPermaLink="true">https://zenn.dev/tk_salesforce/articles/9e6206945c0a96</guid><pubDate>Wed, 06 Aug 2025 12:05:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--x9vAqzx7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AE%2520sort%2528%2528a%252C%2520b%2529%2520%253D%253E%2520a%2520-%2520b%2529%2520%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kyohei%2540Salesforce%25E9%2596%258B%25E7%2599%25BA%25E8%2580%2585%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JmNTc0N2IxNDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kyohei@Salesforce開発者</dc:creator></item><item><title><![CDATA[JavaScriptのnormalizeで文字列の「正規化」をして、検索機能の半角・全角の差をシンプルに吸収する]]></title><description><![CDATA[検索機能を実装する際、ユーザーの入力する文字列の全角・半角の違いはよくある課題です。「株式会社アイウエオ」と検索したいユーザーが誤って「株式会社ｱｲｳｴｵ」と半角カナで入力した場合でも、正しく検索結果を返す必要があります。
+また、登録データ自体が「株式会社アイウエオ」と「株式会社ｱｲｳｴｵ」のように全角カナと半角カナや、「株式会社ＡＢＣＤ」と「株式会社ABCD」のように全角英数字と半角英数字が混在しているケースも考えられます。
+
+ normalize で文字列を「正規化」する
+normalize() メソッドは、文字列の Unicode 正規化形式を返します✅
+引数として、以下の4つの ...]]></description><link>https://zenn.dev/kurichan/articles/d7b494f01a5f33</link><guid isPermaLink="true">https://zenn.dev/kurichan/articles/d7b494f01a5f33</guid><pubDate>Wed, 06 Aug 2025 10:45:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--G7s4nCv6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AEnormalize%25E3%2581%25A7%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E3%2581%25AE%25E3%2580%258C%25E6%25AD%25A3%25E8%25A6%258F%25E5%258C%2596%25E3%2580%258D%25E3%2582%2592%25E3%2581%2597%25E3%2581%25A6%25E3%2580%2581%25E6%25A4%259C%25E7%25B4%25A2%25E6%25A9%259F%25E8%2583%25BD%25E3%2581%25AE%25E5%258D%258A%25E8%25A7%2592%25E3%2583%25BB%25E5%2585%25A8%25E8%25A7%2592%25E3%2581%25AE%25E5%25B7%25AE%25E3%2582%2592%25E3%2582%25B7%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2581%25AB%25E5%2590%25B8%25E5%258F%258E%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258F%25E3%2582%258A%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RjN2IzM2RiNTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>くりちゃん</dc:creator></item><item><title><![CDATA[MiniReactでReactの骨格を再現してみた]]></title><description><![CDATA[こんにちは！Reactを普段使っていて、
+「これって中で何が起きてるの？」
+と思ったことありませんか？
+今回は、Reactの超ミニマル版「MiniReact」を自作してみます。
+全部JavaScriptで作ります。難しい依存関係はナシ！
+対応している機能はこちら：
+
+
+関数コンポーネント ✅
+
+
+useState()（複数呼び出し対応）✅
+
+
+JSXっぽい記法（h()関数）✅
+
+
+仮想DOMからの描画 ✅
+
+
+なんと100行以下！
+
+ なぜ作るの？
+Reactはすごく便利だけど、中身はちょっとブラックボックス。
+シンプルなReactを自作すると、次のような仕組みがスッキリ理解できます：
+...]]></description><link>https://zenn.dev/socialplus/articles/60fc2ade727b5b</link><guid isPermaLink="true">https://zenn.dev/socialplus/articles/60fc2ade727b5b</guid><pubDate>Wed, 06 Aug 2025 10:04:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Op3zkEEy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:MiniReact%25E3%2581%25A7React%25E3%2581%25AE%25E9%25AA%25A8%25E6%25A0%25BC%25E3%2582%2592%25E5%2586%258D%25E7%258F%25BE%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:kailma%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4Mjg2YmNjMDEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Social%2520PLUS%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXNXRVZFaTBmMDM2VUhvckNoRzF4UkotZzdtaFpJek8xUkdWcDRjcTBlPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kailma</dc:creator></item><item><title><![CDATA[LLM検索API、どれを使う？MCPで3つのLLM検索を試してみた]]></title><description><![CDATA[
+ 背景
+現在、社内の技術記事をRAG検索して回答するAIチャットボットの開発を行っています。
+しかし、ユーザーが求める情報が社内の技術記事にない場合、十分な情報が得られないままAIチャットボットが回答を作るという問題が発生します。このような場合においてインターネット検索を行い、不足情報を補ってから回答を作ることで問題が解決することを期待しました。
+そこで今回は社内の技術記事のRAG検索の情報不足を補えるようなインターネット検索を行うエージェントを構築するため、LLM検索APIを検証しプロダクト開発に採用する技術を決めたいと思います。
+
+ 検証対象
+うさぎでもわかるLLM検索APIサービ...]]></description><link>https://zenn.dev/serio/articles/6b6e701923e8c4</link><guid isPermaLink="true">https://zenn.dev/serio/articles/6b6e701923e8c4</guid><pubDate>Wed, 06 Aug 2025 06:08:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--myITM2Zf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LLM%25E6%25A4%259C%25E7%25B4%25A2API%25E3%2580%2581%25E3%2581%25A9%25E3%2582%258C%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25EF%25BC%259FMCP%25E3%2581%25A73%25E3%2581%25A4%25E3%2581%25AELLM%25E6%25A4%259C%25E7%25B4%25A2%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25AF%25E3%2581%2597%25E3%2581%258F%25E3%2582%258C%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM4OGEyY2UyNGQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25BB%25E3%2583%25AA%25E3%2582%25AA%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvbS5wbmc=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はしくれ</dc:creator></item><item><title><![CDATA[JavaScriptの円記号文字コード問題：ローカル環境とCI環境でテストが失敗する罠]]></title><description><![CDATA[
+ はじめに
+JavaScript/TypeScriptで日本円の価格表示を実装していると、意外な落とし穴に遭遇することがあります。ローカル環境では通るテストが、CI環境では失敗してしまうという問題です。
+今回は、toLocaleStringを使った価格フォーマット関数のテストで直面した、円記号の文字コード問題とその解決方法について解説します。
+
+注記: この記事は開発過程で発生した実際の問題をもとに、Claude Code（Anthropic社のAIアシスタント）によって生成・整理されました。
+
+
+ 問題の発生：同じコードなのにテスト結果が異なる
+以下のような、数値を日本円形式でフォー...]]></description><link>https://zenn.dev/musc/articles/76ca7199a02a88</link><guid isPermaLink="true">https://zenn.dev/musc/articles/76ca7199a02a88</guid><pubDate>Wed, 06 Aug 2025 03:39:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9SBXJl3a--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AE%25E5%2586%2586%25E8%25A8%2598%25E5%258F%25B7%25E6%2596%2587%25E5%25AD%2597%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E5%2595%258F%25E9%25A1%258C%25EF%25BC%259A%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A8CI%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2581%258C%25E5%25A4%25B1%25E6%2595%2597%25E3%2581%2599%25E3%2582%258B%25E7%25BD%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Juk%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VmNTdjN2NmNzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Juk</dc:creator></item><item><title><![CDATA[【React】reCAPTCHAからCloudflare Turnstileへ移行する際にハマったこと]]></title><description><![CDATA[
+ Cloudflare Turnstileとは
+ボット対策といえば画像を選択させるreCAPTCHAが有名かもしれません。
+ですが、手動でのクリック操作によるUXの低下や料金等の問題が存在しており、その点Cloudflare Turnstileは自動で認証でき、無料で利用できる非常に素晴らしい手法です。
+※ reCAPTCHAもv3は自動で認証が可能です。料金面の問題は以前として存在していますが。
+詳しい説明や導入方法はここでは割愛します。AIに聞いたらパパッとやってくれます。
+記事も無限に存在するので、いい感じのを見つけてください。
+https://www.value-domain....]]></description><link>https://zenn.dev/kyo1941/articles/7ef88a73ff12e5</link><guid isPermaLink="true">https://zenn.dev/kyo1941/articles/7ef88a73ff12e5</guid><pubDate>Tue, 05 Aug 2025 18:51:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GmgNE_Yu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590React%25E3%2580%2591reCAPTCHA%25E3%2581%258B%25E3%2582%2589Cloudflare%2520Turnstile%25E3%2581%25B8%25E7%25A7%25BB%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%25E9%259A%259B%25E3%2581%25AB%25E3%2583%258F%25E3%2583%259E%25E3%2581%25A3%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kyo1941%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzNiSlcyODRTdGR4OEhpTDdYQlUxbWMwU2xTUjdHSG1KMW53cWd4aEFQRF9acFVldz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kyo1941</dc:creator></item><item><title><![CDATA[超高速Webフレームワーク：Elysia.js（ちょっと前に名前が出てきた）とは？Express.jsとの違いを徹底比較]]></title><description><![CDATA[
+ はじめに
+開発メンバーの先輩がちらっと喋っていたので、気になって調べてみました。
+なぜ今、Express.jsではなくElysia.jsを選ぶのか？
+本記事のゴール：Elysia.jsの概要とExpress.jsとの違いを理解し、使い分けできるようになる
+
+ Elysia.jsとは？
+
+ 特徴
+
+Bunに最適化された超軽量・高速なWebフレームワーク
+型安全なAPI設計（TypeScriptに強い）
+高速起動・高パフォーマンス（Express.jsより18倍処理が速いとも言われている）
+プラグインベースの構造
+
+
+ Express.jsを簡単におさらい
+
+Node.jsのデファクトス...]]></description><link>https://zenn.dev/rrr068/articles/04555eea0e9608</link><guid isPermaLink="true">https://zenn.dev/rrr068/articles/04555eea0e9608</guid><pubDate>Tue, 05 Aug 2025 16:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Sqrb-s9z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25B6%2585%25E9%25AB%2598%25E9%2580%259FWeb%25E3%2583%2595%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%25A0%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25EF%25BC%259AElysia.js%25EF%25BC%2588%25E3%2581%25A1%25E3%2582%2587%25E3%2581%25A3%25E3%2581%25A8%25E5%2589%258D%25E3%2581%25AB%25E5%2590%258D%25E5%2589%258D%25E3%2581%258C%25E5%2587%25BA%25E3%2581%25A6%25E3%2581%258D%25E3%2581%259F%25EF%25BC%2589%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259FExpress.js%25E3%2581%25A8%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2582%2592%25E5%25BE%25B9%25E5%25BA%2595%25E6%25AF%2594%25E8%25BC%2583%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E4%25BA%2594%25E5%258F%25B3%25E8%25A1%259B%25E9%2596%2580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ExY2Y0YjhkYTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>五右衛門</dc:creator></item><item><title><![CDATA[JavaScriptを深く知る旅 #2：値渡し・参照の値渡しって？]]></title><description><![CDATA[
+ はじめに
+JavaScriptの基礎を学ぶために、今回は第2回として「値渡し」と「参照の値渡し」についてまとめていきます。
+この概念を理解しておくと、たとえばReactでstateを更新したのに再レンダリングされないといった問題にも、仕組みから納得して対処できるようになります。
+
+ 値渡しってなに？
+「値渡し」とは、変数に格納されている値そのもののコピーを渡すことを指します。
+対象となるのは、string、number、boolean などのプリミティブな値です。
+例えば、変数 x を変数 y に代入し、その後 y の値を変更しても、x の値には影響がありません。
+これは、代入時に値...]]></description><link>https://zenn.dev/yuji6523/articles/js-deep-dive-2-value-vs-reference</link><guid isPermaLink="true">https://zenn.dev/yuji6523/articles/js-deep-dive-2-value-vs-reference</guid><pubDate>Tue, 05 Aug 2025 13:03:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sEE1Fhv4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2582%2592%25E6%25B7%25B1%25E3%2581%258F%25E7%259F%25A5%25E3%2582%258B%25E6%2597%2585%2520%25232%25EF%25BC%259A%25E5%2580%25A4%25E6%25B8%25A1%25E3%2581%2597%25E3%2583%25BB%25E5%258F%2582%25E7%2585%25A7%25E3%2581%25AE%25E5%2580%25A4%25E6%25B8%25A1%25E3%2581%2597%25E3%2581%25A3%25E3%2581%25A6%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yuji%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhjMzIxNGViMjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuji</dc:creator></item><item><title><![CDATA[【120FPS問題の解決策】 gsap.ticker を使用してアニメーションを60FPSで制御する]]></title><description><![CDATA[requestAnimationFrameは、JavaScriptで滑らかなアニメーションを実現する際、ブラウザの描画サイクルに同期してコールバック関数を実行する非常に便利なAPIです✅
+https://developer.mozilla.org/ja/docs/Web/API/Window/requestAnimationFrame
+しかし、近年、リフレッシュレートが120Hzやそれ以上のディスプレイが普及する中で、このAPIを適切に使用しないと、アニメーションが意図せず2倍の速さで実行されてしまう「120FPS問題」が発生してしまいます。
+
+ requestAnimationFram...]]></description><link>https://zenn.dev/kurichan/articles/c340af84e9e1e7</link><guid isPermaLink="true">https://zenn.dev/kurichan/articles/c340af84e9e1e7</guid><pubDate>Tue, 05 Aug 2025 10:47:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Vl5x8YrY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590120FPS%25E5%2595%258F%25E9%25A1%258C%25E3%2581%25AE%25E8%25A7%25A3%25E6%25B1%25BA%25E7%25AD%2596%25E3%2580%2591%2520gsap.ticker%2520%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E3%2582%25A2%25E3%2583%258B%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%259260FPS%25E3%2581%25A7%25E5%2588%25B6%25E5%25BE%25A1%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258F%25E3%2582%258A%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RjN2IzM2RiNTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>くりちゃん</dc:creator></item><item><title><![CDATA[JetBrains 2025.2ぞくぞくリリース！AI Assistantと価格改定まとめ]]></title><description><![CDATA[
+ はじめに
+こんにちは。JetBrains公式代理店NATTOSYSTEMのねばねばです。
+みなさん、Jetbrains各種製品の2025.2バージョンが猛暑をふきとばす勢いでぞくぞくリリースされています。
+今回はJetBrainsが2025年8月に発表したAI Assistant 2025.2新機能と、各種IDE製品の2025.2リリース情報、価格改定のニュースについて紹介いたします。
+
+
+ JetBrains AI Assistant 2025.2の注目ポイント
+
+ ✅ プロジェクトルールでAIにプロジェクト固有の指示を出せる
+プロジェクトごとの命名規則やコーディングスタイルを設定...]]></description><link>https://zenn.dev/nattosystem_jp/articles/ce9856d5f585d6</link><guid isPermaLink="true">https://zenn.dev/nattosystem_jp/articles/ce9856d5f585d6</guid><pubDate>Tue, 05 Aug 2025 07:32:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--w4q0-u19--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JetBrains%25202025.2%25E3%2581%259E%25E3%2581%258F%25E3%2581%259E%25E3%2581%258F%25E3%2583%25AA%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B9%25EF%25BC%2581AI%2520Assistant%25E3%2581%25A8%25E4%25BE%25A1%25E6%25A0%25BC%25E6%2594%25B9%25E5%25AE%259A%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25AD%25E3%2581%25B0%25E3%2581%25AD%25E3%2581%25B0%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RiYWQxMDhjNTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BENATTOSYSTEM%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvbi5wbmc=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ねばねば</dc:creator></item><item><title><![CDATA[【Max9】Max9に実装されたJavaScript v8まとめ]]></title><description><![CDATA[
+ Max9のv8でできること
+
+
+ v8 / v8ui 基本オブジェクト
+
+
+v8 : Max パッチ内で汎用 JavaScript オブジェクトを作成し、高速な V8 エンジンで実行できる。
+
+v8ui : v8 と同じ機能に加え、mgraphics や sketch を用いたカスタム描画・インタラクション UI を構築できる。
+旧 js / jsui より実行速度が大幅に向上し、大規模ロジックや複雑な UI でもパフォーマンスを確保できる。 
+
+
+ JavaScript 言語機能（ES6+）
+
+
+let/const、アロー関数、分割代入、テンプレートリテラル、スプレッド演算子など ...]]></description><link>https://zenn.dev/dsgarage/articles/48576b39c5d445</link><guid isPermaLink="true">https://zenn.dev/dsgarage/articles/48576b39c5d445</guid><pubDate>Tue, 05 Aug 2025 05:55:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9L8QsW3C--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Max9%25E3%2580%2591Max9%25E3%2581%25AB%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2595%25E3%2582%258C%25E3%2581%259FJavaScript%2520v8%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A4%25E3%2581%258B%25E3%2581%2595%25E3%2582%2593%25E3%2581%2595%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M2NzQ1N2RlMTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>つかさんさん</dc:creator></item><item><title><![CDATA[JavaScriptの奇妙な型を巡る旅]]></title><description><![CDATA[― typeof null === "object" に乾杯―
+
+JavaScript の型システムはシュレディンガーの猫より多忙である[1]。箱を開けても閉めても、とりあえず鳴き声だけは聞こえる。
+
+
+
+ 0. TL;DR を TL;DR と呼べない長さで
+
+
+typeof null が 'object': 1995 年のタイポが 30 年寝かされワイン化[2]。
+
+NaN !== NaN: 自己否定を習得した数値。哲学科卒の数学者が泣いた。
+
+[] + {} と {} + [] は真逆の結果。演算子より先に人生を見直そう。
+
+0 == "0" だが 0 === "0" ではない。ダイ...]]></description><link>https://zenn.dev/4_4_rest/articles/848c9365d22ba8</link><guid isPermaLink="true">https://zenn.dev/4_4_rest/articles/848c9365d22ba8</guid><pubDate>Tue, 05 Aug 2025 04:49:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zQNNtTB6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AE%25E5%25A5%2587%25E5%25A6%2599%25E3%2581%25AA%25E5%259E%258B%25E3%2582%2592%25E5%25B7%25A1%25E3%2582%258B%25E6%2597%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%2585%25A8%25E4%25BC%2591%25E7%25AC%25A6%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VlOGY1YTNlZjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>全休符</dc:creator></item><item><title><![CDATA[Vue でテンプレートとロジックを切り分ける | Vue3]]></title><description><![CDATA[
+ 概要
+Vue でウェブアプリケーションを作っているときに、&lt;script&gt;（ロジック）の部分は違うんだけど、&lt;template&gt;（テンプレート）の部分は一緒、ということがあった。そこで、テンプレートとロジックを切り分けて、テンプレートは一つのファイルで使いまわして、ロジックは個々のファイルで管理できるよう構造を考えた。コンポーネントを使えばいいようなものだが、そうすると、テンプレート部分が全てコンポーネントに行ってしまう。テンプレートでは、いくつかのコンポーネントをすでに使用しており、もしテンプレートをコンポーネントにしてしまうと、コンポーネントからコンポーネ...]]></description><link>https://zenn.dev/bbsfish/articles/74fb455977bb33</link><guid isPermaLink="true">https://zenn.dev/bbsfish/articles/74fb455977bb33</guid><pubDate>Tue, 05 Aug 2025 03:44:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OfcTouZT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vue%2520%25E3%2581%25A7%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25A8%25E3%2583%25AD%25E3%2582%25B8%25E3%2583%2583%25E3%2582%25AF%25E3%2582%2592%25E5%2588%2587%25E3%2582%258A%25E5%2588%2586%25E3%2581%2591%25E3%2582%258B%2520%257C%2520Vue3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Y.%2520HSD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSS1ZeDZXOGNtbm1hTFhWM25SNC1QYnFWbTdDVkJ3RXdrT2czUlNnWjlOPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Y. HSD</dc:creator></item><item><title><![CDATA[Vue でスクロールイベントを作成する | Vue3（Options API）]]></title><description><![CDATA[
+ 概要
+Vue でウェブアプリケーションを構築しているときに、ユーザのスクロールを検知してトップへ戻るボタンを表示したり、メニューバーを表示/非表示したりと、やることが多かったので、その時のメモ。
+
+ コード
+
+App.vue
+export default {
+  data() {
+    return {
+      lastScrollY: 0, // 前回のスクロール位置
+    };
+  },
+  methods: {
+    handleScroll() {
+      const currentScrollY = window.scrollY; // 現在のスクロール位置
+...]]></description><link>https://zenn.dev/bbsfish/articles/91fcc5371f0393</link><guid isPermaLink="true">https://zenn.dev/bbsfish/articles/91fcc5371f0393</guid><pubDate>Mon, 04 Aug 2025 15:44:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kjpKGqCI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vue%2520%25E3%2581%25A7%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2520%257C%2520Vue3%25EF%25BC%2588Options%2520API%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Y.%2520HSD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSS1ZeDZXOGNtbm1hTFhWM25SNC1QYnFWbTdDVkJ3RXdrT2czUlNnWjlOPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Y. HSD</dc:creator></item></channel></rss>

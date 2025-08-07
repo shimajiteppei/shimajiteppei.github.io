@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 07 Aug 2025 12:05:10 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【Docker】ファイル権限問題を解決したい]]></title><description><![CDATA[Docker開発を進めているとこのようなファイル権限の問題によく遭遇します。
+$ git pull
+error: unable to unlink old 'app/data.txt': Permission denied
+$ npm install
+Error: EACCES: permission denied, open 'package.json'
+今回はDocker公式ドキュメントに基づいて、Dockerで頻繁に発生する代表的な問題の一つであるこのような権限問題について、原因から解決策まで解説していきます。
+
+ 問題の根本原因
+
+ なぜこのような権限問題が起こるのか
+Docke...]]></description><link>https://zenn.dev/n_haru2/articles/bc19904d8b99d3</link><guid isPermaLink="true">https://zenn.dev/n_haru2/articles/bc19904d8b99d3</guid><pubDate>Thu, 07 Aug 2025 08:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BfLZoUCR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Docker%25E3%2580%2591%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E6%25A8%25A9%25E9%2599%2590%25E5%2595%258F%25E9%25A1%258C%25E3%2582%2592%25E8%25A7%25A3%25E6%25B1%25BA%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:pen2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkYmJjY2MwZmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>pen2</dc:creator></item><item><title><![CDATA[Ubuntu 24.04 に Nvidia Driver を再インストールした]]></title><description><![CDATA[Nvidia 1060 が刺さってるマシンがありまして、久しぶりに sudo apt upgrade -y をしたら nvidia_smi が "NVIDIA-SMI has
+failed because it couldn’t communicate with the NVIDIA driver. Make sure that the latest NVIDIA driver is installed and
+running." と返すようになってハマったメモ。
+
+ 環境
+&gt; neofetch
+            .-/+oossssoo+/-.               ...]]></description><link>https://zenn.dev/at_yasu/articles/ac9f0c61ae6d3c</link><guid isPermaLink="true">https://zenn.dev/at_yasu/articles/ac9f0c61ae6d3c</guid><pubDate>Thu, 07 Aug 2025 01:57:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ul7DsWue--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%252024.04%2520%25E3%2581%25AB%2520Nvidia%2520Driver%2520%25E3%2582%2592%25E5%2586%258D%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:at%2520yasu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lXZTA2UnY4TGJzekdUaGxIcmN4V1pQV1JsTnhJaV9zT0ZSRHpBTnc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>at yasu</dc:creator></item><item><title><![CDATA[GUI が操作不能になった Ubuntu からデータを取り出す方法【リカバリーモード】]]></title><description><![CDATA[
+ はじめに
+Ubuntu をインストールしたノート PC で、GUI ログイン後にマウスとキーボードが効かなくなる問題が発生。リカバリーモードを利用し、PC に保存された重要なデータを USB メモリへ移行した際の手順を記録する。
+
+ PC の環境
+
+
+
+項目
+詳細
+
+
+
+
+機種
+HP Elite
+
+
+OS
+Ubuntu 19.04
+
+
+
+!
+Ubuntu 19.04 は、公式サポートが終了している。セキュリティ上のリスクがあるため、データ救出後は、より新しい LTS（長期サポート）版　へのアップグレードやクリーンインストールを強く推奨する。
+
+
+ 事前準備：USB メモリを用意する
+...]]></description><link>https://zenn.dev/seita621/articles/5b6362bf1ea56e</link><guid isPermaLink="true">https://zenn.dev/seita621/articles/5b6362bf1ea56e</guid><pubDate>Wed, 06 Aug 2025 02:41:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xvWMyki4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GUI%2520%25E3%2581%258C%25E6%2593%258D%25E4%25BD%259C%25E4%25B8%258D%25E8%2583%25BD%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%2520Ubuntu%2520%25E3%2581%258B%25E3%2582%2589%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E5%258F%2596%25E3%2582%258A%25E5%2587%25BA%25E3%2581%2599%25E6%2596%25B9%25E6%25B3%2595%25E3%2580%2590%25E3%2583%25AA%25E3%2582%25AB%25E3%2583%2590%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2589%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SEITA152%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0JGUXdxYVczbWpzZ3BiZlFnM3d6RjNxN0pBQy1ZMmE1UEFPUy1TcXZNYVNJaEh3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SEITA152</dc:creator></item><item><title><![CDATA[ヒアドキュメントのメリットと使用例について]]></title><description><![CDATA[
+ ヒアドキュメント（Here Document）
+
+ 概要
+ヒアドキュメントは、シェルスクリプトで複数行の文字列を扱うための機能。&lt;&lt; 演算子を使用して、指定した区切り文字まで標準入力として扱う。
+私はDockerファイルやビルド検証でよく使う。他にも色々と使える場面があってすごく便利。特に検証でviを何度も編集する時に別の選択肢としてヒアドキュメント使えると便利。
+
+ メリット
+
+
+複数行テキストを直接スクリプト内に記述可能
+文字列連結や改行文字（\n）を使わずに、そのまま複数行を書ける
+
+
+エスケープ処理が不要
+クォート（"）やバックスラッシュ（\）などの特殊文字をエス...]]></description><link>https://zenn.dev/uepon/articles/26907b25edf024</link><guid isPermaLink="true">https://zenn.dev/uepon/articles/26907b25edf024</guid><pubDate>Tue, 05 Aug 2025 11:47:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--btLSBqJj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2592%25E3%2582%25A2%25E3%2583%2589%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%25AA%25E3%2583%2583%25E3%2583%2588%25E3%2581%25A8%25E4%25BD%25BF%25E7%2594%25A8%25E4%25BE%258B%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ue%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lIVW4zSmVfbW43ZlowbXlNVXRtOXpyLWZ1S0J3YjVTVUhnMXJWSFE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ue</dc:creator></item><item><title><![CDATA[Windowsの.urlファイルをLinuxDEでもダブルクリックで開く(+α)メモ]]></title><description><![CDATA[
+ TL;DR
+.urlを受け取ってURL行を取り出すスクリプトを作成した後、application/x-mswinurlをハンドルして先のスクリプトを呼び出すエントリを追加します。
+
+ はじめに
+Windowsが前提で回っている環境では、共有フォルダに格納された.urlファイルを開くことを要求されることが多々あります。
+もちろんテキストエディタで開いてURL行からコピペしても問題ないのですが、頻繁に開く必要がある場合には多少不便なので、これを右クリックメニュー or ダブルクリックで開けるようにしてみました。
+
+
+ 環境
+Fedora 42 (KDE Spin)
+KDE Plasma ...]]></description><link>https://zenn.dev/r_ca/articles/681e9c75a6d288</link><guid isPermaLink="true">https://zenn.dev/r_ca/articles/681e9c75a6d288</guid><pubDate>Mon, 04 Aug 2025 06:38:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--s49iX7ui--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Windows%25E3%2581%25AE.url%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592LinuxDE%25E3%2581%25A7%25E3%2582%2582%25E3%2583%2580%25E3%2583%2596%25E3%2583%25AB%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25A7%25E9%2596%258B%25E3%2581%258F%2528%252B%25CE%25B1%2529%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:r_ca%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJmYTkyYzczNmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>r_ca</dc:creator></item><item><title><![CDATA[自家用AIマシン構築記 #2｜20万円で組むAIマシン、いざ組み立て編！]]></title><description><![CDATA[
+ 前回までのあらすじ
+前回、自家用AIマシンのパーツをセレクトしました。
+コンセプトは「予算20万で作るAIマシン」。ただし、見た目重視❗️
+今回は、その続きです。チョイスしたパーツ一覧については、前回の記事をご参照ください。
+
+
+ 自作PCとLinuxと私
+ここで、ちょっとプライベートな思い出話。
+（お急ぎの方は、この章は飛ばしていただいて構いません💦）
+自分が初めて自作PCに触れたのは、今から二十数年前。まだ新入社員だった頃です。
+自作PCが趣味の先輩から「必要なパーツはすべて準備したので、ラボのファイルサーバ組み立てて」とパーツ一式を渡されたのが、そもそもの始まりです。（創薬研究...]]></description><link>https://zenn.dev/tetrahymena/articles/f2e775cd66a42e</link><guid isPermaLink="true">https://zenn.dev/tetrahymena/articles/f2e775cd66a42e</guid><pubDate>Sun, 03 Aug 2025 08:43:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dPWd-ZWq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2587%25AA%25E5%25AE%25B6%25E7%2594%25A8AI%25E3%2583%259E%25E3%2582%25B7%25E3%2583%25B3%25E6%25A7%258B%25E7%25AF%2589%25E8%25A8%2598%2520%25232%25EF%25BD%259C20%25E4%25B8%2587%25E5%2586%2586%25E3%2581%25A7%25E7%25B5%2584%25E3%2582%2580AI%25E3%2583%259E%25E3%2582%25B7%25E3%2583%25B3%25E3%2580%2581%25E3%2581%2584%25E3%2581%2596%25E7%25B5%2584%25E3%2581%25BF%25E7%25AB%258B%25E3%2581%25A6%25E7%25B7%25A8%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tetrahymena%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVjYzBkMGZjNDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tetrahymena</dc:creator></item><item><title><![CDATA[Gemini CLI で Git のコミットメッセージを自動生成する]]></title><description><![CDATA[
+ はじめに
+ソフトウェア開発において、分かりやすい Git のコミットメッセージを書くことは非常に重要です。後から変更履歴を追いかけたり、他の開発者と共同作業したりする際に、質の高いコミットメッセージは大きな助けとなります。
+しかし、変更内容を正確に要約し、適切なフォーマットで記述するのは意外と手間がかかる作業です。「git diff の結果を眺めながら、うーん、なんて書こうか…」と悩んだ経験は誰にでもあるのではないでしょうか。
+筆者は、VS Code で開発をすることが多く、Copilot による Git コミットメッセージの自動生成が便利で良く使っています。これが便利すぎて、調子に...]]></description><link>https://zenn.dev/hiro345/articles/20250803_gemini_cli_git_comment</link><guid isPermaLink="true">https://zenn.dev/hiro345/articles/20250803_gemini_cli_git_comment</guid><pubDate>Sun, 03 Aug 2025 03:40:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EULrn13R--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Gemini%2520CLI%2520%25E3%2581%25A7%2520Git%2520%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%259F%25E3%2583%2583%25E3%2583%2588%25E3%2583%25A1%25E3%2583%2583%25E3%2582%25BB%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E7%2594%259F%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroshi%2520Koyama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k5ZzdjLS0xTFk0S2k0LWw3dVFSSFZRdEdQcWZHYTlibVRJYUtFM0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroshi Koyama</dc:creator></item><item><title><![CDATA[自家用AIマシン構築記 #1｜クラウドと自作、キミならどちらを選ぶ？ 予算20万円で作るAIマシン]]></title><description><![CDATA[
+ はじめに
+昨今、なかなかフォローしきれないほど、様々なAI系のツールが世の中に出現しています。
+それらの動作原理を理解するには、やはり自分の手を動かすのが何より重要です。
+幸い、私の職場にも最新のGPUを搭載したマシンが導入されました。
+しかし、どうしても業務での利用が優先されてしまい、個人的な学習目的での利用は、ちょっと気が引けますよね。
+また、もし職場のマシンで高負荷なタスクを走らせてシステムをハングさせてしまったら、本来の業務に支障を生じかねません。
+というわけで、個人的な学習や実験を目的として、「自家用AIマシン」の導入計画がスタートしたわけです！
+
+ いくつか選択肢はあるが...]]></description><link>https://zenn.dev/tetrahymena/articles/8d6f8e0dda5643</link><guid isPermaLink="true">https://zenn.dev/tetrahymena/articles/8d6f8e0dda5643</guid><pubDate>Sun, 03 Aug 2025 03:08:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Roiz3h7R--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2587%25AA%25E5%25AE%25B6%25E7%2594%25A8AI%25E3%2583%259E%25E3%2582%25B7%25E3%2583%25B3%25E6%25A7%258B%25E7%25AF%2589%25E8%25A8%2598%2520%25231%25EF%25BD%259C%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%2589%25E3%2581%25A8%25E8%2587%25AA%25E4%25BD%259C%25E3%2580%2581%25E3%2582%25AD%25E3%2583%259F%25E3%2581%25AA%25E3%2582%2589%25E3%2581%25A9%25E3%2581%25A1%25E3%2582%2589%25E3%2582%2592%25E9%2581%25B8%25E3%2581%25B6%25EF%25BC%259F%2520%25E4%25BA%2588%25E7%25AE%259720%25E4%25B8%2587%25E5%2586%2586%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258BAI%25E3%2583%259E%25E3%2582%25B7%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tetrahymena%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVjYzBkMGZjNDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tetrahymena</dc:creator></item><item><title><![CDATA[【RHEL9.6/rsyslog】ログの権限設定方法]]></title><description><![CDATA[どうも！新人エンジニアの前歯すきっ歯です🦷
+「Syslogサーバで運用中にログを取得するユーザーがログの読み取り権限のみ持つ設定をしてほしいんだよね～」とご要望がありました。さぁ、どうしましょう！？…ということで、勉強のために検証してみました！
+
+ ⚙️ 0.本記事について
+
+ ⚙️ 0-1.問題提起
+デフォルト設定のとき、RHELにてrsyslogを通して作成されるログは所有者はroot、ログファイル権限が600で作成されます。 デフォルト設定のままだとその他のユーザーの権限は0のため、Syslogサーバ運用でよくある 「ログの閲覧」や「ログファイルをSCP転送して取得」を行うことがで...]]></description><link>https://zenn.dev/gapteeth/articles/1a602cddf2b0fa</link><guid isPermaLink="true">https://zenn.dev/gapteeth/articles/1a602cddf2b0fa</guid><pubDate>Sat, 02 Aug 2025 23:38:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vYI-f01e--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590RHEL9.6%252Frsyslog%25E3%2580%2591%25E3%2583%25AD%25E3%2582%25B0%25E3%2581%25AE%25E6%25A8%25A9%25E9%2599%2590%25E8%25A8%25AD%25E5%25AE%259A%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%2589%258D%25E6%25AD%25AF%25E3%2581%2599%25E3%2581%258D%25E3%2581%25A3%25E6%25AD%25AF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjZTI5ODhkNzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>前歯すきっ歯</dc:creator></item><item><title><![CDATA[Ubuntuが急にインターネット接続できなくなった【備忘録】]]></title><description><![CDATA[
+ 結論
+Ubuntu 24.0.2 LTSを使用していて突然ネットワークに接続できなくなりました。
+ネットワークドライバーが消えていたため、カーネルのバージョンダウンで対応しました。
+
+ 環境
+
+OS: Ubuntu 24.0.2 LTS
+ネットワークアダプタ: Realtek RTL8111/8168/8211/8411 PCI Express Gigabit Ethernet Controller
+問題発生前のカーネルバージョン: 6.14.0-24-generic
+問題が発生したカーネルバージョン: 6.14.0-27-generic
+
+
+ 症状
+
+突然ネットワークに接続できなく...]]></description><link>https://zenn.dev/hitoshi44/articles/2123ff7daea8d3</link><guid isPermaLink="true">https://zenn.dev/hitoshi44/articles/2123ff7daea8d3</guid><pubDate>Sat, 02 Aug 2025 13:49:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Gj_15kwD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25E3%2581%258C%25E6%2580%25A5%25E3%2581%25AB%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%258D%25E3%2583%2583%25E3%2583%2588%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E3%2580%2590%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Wa2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE1ZDJmNzZjZmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Wa2</dc:creator></item><item><title><![CDATA[RHCSA学習記録 #1：はじめに - なぜブログを始めるのか]]></title><description><![CDATA[
+ はじめまして
+!
+はじめまして、すぐると申します！
+今日から、インフラエンジニアへの第一歩として RHCSA (Red Hat 認定システム管理者) の合格を目指す学習の記録を、このZennに綴っていくことにしました。
+
+
+ なぜRHCSAを目指すのか
+現在はPMOとして、ファシリテートの仕事をしています。サーバー管理の実務経験が乏しく、RHCSAを勉強する過程でサーバー管理者としての土台を築けたらなと思い勉強を始めました。
+　IT関連の資格はいくつか取ったのですが、知識のインプットに偏りがちでした。そこで、実際の開発タスクをこなしていくような試験であるRHCSAを取得しようと決意し...]]></description><link>https://zenn.dev/sknow/articles/cd2ac156921993</link><guid isPermaLink="true">https://zenn.dev/sknow/articles/cd2ac156921993</guid><pubDate>Sat, 02 Aug 2025 08:23:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GFdWpNGb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:RHCSA%25E5%25AD%25A6%25E7%25BF%2592%25E8%25A8%2598%25E9%258C%25B2%2520%25231%25EF%25BC%259A%25E3%2581%25AF%25E3%2581%2598%25E3%2582%2581%25E3%2581%25AB%2520-%2520%25E3%2581%25AA%25E3%2581%259C%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%2592%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258B%25E3%2581%25AE%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2599%25E3%2581%2590%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U2NzRhMThlYWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>すぐる</dc:creator></item><item><title><![CDATA[LinuCレベル1 101試験に合格した話【勉強法や試験の感想など】]]></title><description><![CDATA[
+ はじめに
+
+
+合格の報告 🎊
+
+今日(2025/08/02)LinuCレベル1（101試験）に無事合格することができましたので、これからLinuC 101試験を挑戦する方に向けて、自分の学習方法や試験当日の様子、感想などを共有します。少しでも参考になれば幸いです。@tweet
+
+
+
+
+
+ 私について
+
+
+受験前のスキルレベル
+
+IT業界での経験
+IT業界に転職したのが約3年前。最初2年半ぐらいはオペレーター業務だったので、全然ITと関係ないような仕事をしていました。その間Linuxに触れる機会はほぼなかったです。そこから今年の4月に社内システムを扱う部署に配属され、少し触れる機会があ...]]></description><link>https://zenn.dev/hikuzawa/articles/linuc_lv1_101</link><guid isPermaLink="true">https://zenn.dev/hikuzawa/articles/linuc_lv1_101</guid><pubDate>Sat, 02 Aug 2025 06:26:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--msyy1Ztq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LinuC%25E3%2583%25AC%25E3%2583%2599%25E3%2583%25AB1%2520101%25E8%25A9%25A6%25E9%25A8%2593%25E3%2581%25AB%25E5%2590%2588%25E6%25A0%25BC%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%25E3%2580%2590%25E5%258B%2589%25E5%25BC%25B7%25E6%25B3%2595%25E3%2582%2584%25E8%25A9%25A6%25E9%25A8%2593%25E3%2581%25AE%25E6%2584%259F%25E6%2583%25B3%25E3%2581%25AA%25E3%2581%25A9%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B2%25E3%2581%258F%25E3%2581%2596%25E3%2582%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHM5SloyaEZQQ3A3SUZnNUh4M0ZrVFJoZFRYcm4wMTlMLTFRb2VXVGZHeUVuYUF6NzU9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ひくざわ</dc:creator></item><item><title><![CDATA[日本仏教の宗派をLinuxディストリビューション（とか）にたとえる遊び]]></title><description><![CDATA[
+ 前提!!
+原始仏教～上座部仏教＝UNIX
+最澄＝Linus Torvalds
+
+ Linuxで例えると...
+
+天台宗＝Linuxカーネル
+曹洞宗・臨済宗＝RHEL
+浄土宗＝Debian
+浄土真宗＝Ubuntu
+日蓮宗＝Arch Linux
+真言宗＝NixOS
+※一部ChatGPTに捻り出させています
+
+読んでる本の影響で思いついたけど通じる人がいる気がしない!!!
+https://www.gentosha.co.jp/book/detail/9784344987715/
+]]></description><link>https://zenn.dev/mokume1shine/articles/2321e60faf305b</link><guid isPermaLink="true">https://zenn.dev/mokume1shine/articles/2321e60faf305b</guid><pubDate>Thu, 31 Jul 2025 13:29:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--49WyTNUt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2597%25A5%25E6%259C%25AC%25E4%25BB%258F%25E6%2595%2599%25E3%2581%25AE%25E5%25AE%2597%25E6%25B4%25BE%25E3%2582%2592Linux%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25AA%25E3%2583%2593%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25EF%25BC%2588%25E3%2581%25A8%25E3%2581%258B%25EF%25BC%2589%25E3%2581%25AB%25E3%2581%259F%25E3%2581%25A8%25E3%2581%2588%25E3%2582%258B%25E9%2581%258A%25E3%2581%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%259C%25A8%25E7%259B%25AE%25E5%25A3%25B1%25E5%25BF%2583%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzllYzM2OTI2OGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>木目壱心</dc:creator></item><item><title><![CDATA[Linuxで一時ユーザーを作る方法]]></title><description><![CDATA[
+ Linuxで一時ユーザーを作る方法
+
+ 1. 有効期限付きで新規ユーザーを作成
+sudo useradd -e $(date -d "+7 days" +%F) user1
+sudo passwd user1
+手動で日付を指定する場合：
+sudo useradd -e 2025-08-06 user1
+sudo passwd user1
+
+ 2. 既存ユーザーに後から有効期限を設定
+sudo chage -E $(date -d "+10 days" +%F) user1
+具体的な日付で指定する場合：
+sudo chage -E 2025-08-09 user1
+
+ 3. パスワード...]]></description><link>https://zenn.dev/uepon/articles/b619beb55c21b3</link><guid isPermaLink="true">https://zenn.dev/uepon/articles/b619beb55c21b3</guid><pubDate>Thu, 31 Jul 2025 11:51:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eXo8st67--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25A7%25E4%25B8%2580%25E6%2599%2582%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ue%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lIVW4zSmVfbW43ZlowbXlNVXRtOXpyLWZ1S0J3YjVTVUhnMXJWSFE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ue</dc:creator></item><item><title><![CDATA[VirtualBox上でAnsibleでLEMPサーバーの構築を行う]]></title><description><![CDATA[
+ VirtualBox上でAnsibleでLEMPサーバーの構築を行う
+VirtualBox上でAnsibleを使用してLEMP(Linux・Nginx・MariaDB・PHP)の環境を構築し、Laravelをインストールする
+初学者なので間違っていることがたくさんあると思いますが、ご容赦ください。
+
+[!Note]
+単純な構築のみが目的ですので、ドメイン・SSL設定はしません。
+
+
+ 環境
+
+VirtualBox v7.0
+Debian GNU/Linux 12 (bookworm)
+
+
+ 構成図
+
+ ディレクトリ構成
+できるだけ分割した構成にしようとしましたが、やる気がつきたのでs...]]></description><link>https://zenn.dev/mitate_gengaku/articles/ansible-lemp-server</link><guid isPermaLink="true">https://zenn.dev/mitate_gengaku/articles/ansible-lemp-server</guid><pubDate>Wed, 30 Jul 2025 15:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JkdWQ5aw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VirtualBox%25E4%25B8%258A%25E3%2581%25A7Ansible%25E3%2581%25A7LEMP%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25AE%25E6%25A7%258B%25E7%25AF%2589%25E3%2582%2592%25E8%25A1%258C%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25BE%25A1%25E6%25A5%25AF%25E7%258E%2584%25E5%25B6%25BD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0tQOVRYWHQ5Qm1BLVplcURoLWdxUHl4RVFjMmNsRkhSNk95XzVVSVVhPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>御楯玄嶽</dc:creator></item><item><title><![CDATA[OSの仕組みとシステムコール入門 - 第2回 プロセスの生成と管理]]></title><description><![CDATA[
+ はじめに
+本記事では、OSの仕組みとシステムコール入門として、プロセスの生成・管理・終了について詳しく学びます。
+10回に渡ってOSについて学ぶ講座の第2回目です。
+⚠️本稿は参考資料としてお読みください。
+
+ 本講座の構成（全 10 回）
+
+OSとカーネルの基礎知識
+
+プロセスの生成と管理 ←今回
+
+ファイルシステムの基本
+システムコールの仕組み
+open, read, write の実例と挙動
+ネットワークソケット基礎
+strace/ltrace を使ったシステムコール解析
+マルチプロセス・マルチスレッドの考え方
+実践演習
+まとめ
+
+
+ プロセスとは
+プロセスは「実行中プログラム...]]></description><link>https://zenn.dev/ka_kan/articles/42ffc2b55fd3cd</link><guid isPermaLink="true">https://zenn.dev/ka_kan/articles/42ffc2b55fd3cd</guid><pubDate>Wed, 30 Jul 2025 12:49:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--W2SL3LMa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OS%25E3%2581%25AE%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%25E3%2581%25A8%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%25AB%25E5%2585%25A5%25E9%2596%2580%2520-%2520%25E7%25AC%25AC2%25E5%259B%259E%2520%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25BB%25E3%2582%25B9%25E3%2581%25AE%25E7%2594%259F%25E6%2588%2590%25E3%2581%25A8%25E7%25AE%25A1%25E7%2590%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kanda%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlOGJhYTMxOGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kanda</dc:creator></item><item><title><![CDATA[Adobeで動画→GIF変換したら画像が小さすぎたのでLinuxでやる]]></title><description><![CDATA[
+ ffmpegコマンドについて解説
+
+ 0.はじめに
+先日Flaskアプリについての記事を執筆した際、Adobeのフリーツールでmp4をgifに変換する作業を行った。
+
+満足いく変換ができず複数回試したところで制限が来てしまい、使用できなくなった。
+履歴やCookie削除を行い、もう１度試したが利用できなかった。
+その後、ffmpegコマンドの存在を知り利用。うまくgif変換ができた。
+
+ 1. ffmpegコマンド使用方法
+sudo apt install ffmpeg -y
+Zennに今すぐ載せる用(変換したい動画の名前をinput.mp4にする)
+
+高画質版
+ffmpeg -i ...]]></description><link>https://zenn.dev/nickelth/articles/ffmpegtutorial</link><guid isPermaLink="true">https://zenn.dev/nickelth/articles/ffmpegtutorial</guid><pubDate>Wed, 30 Jul 2025 12:35:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8QZnIe55--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Adobe%25E3%2581%25A7%25E5%258B%2595%25E7%2594%25BB%25E2%2586%2592GIF%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25E7%2594%25BB%25E5%2583%258F%25E3%2581%258C%25E5%25B0%258F%25E3%2581%2595%25E3%2581%2599%25E3%2581%258E%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7Linux%25E3%2581%25A7%25E3%2582%2584%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%258B%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25AB%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU0Mjc3ODIwNWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ニッケル</dc:creator></item><item><title><![CDATA[エンジニア必見！curl | bash が危険な理由と安全なDocker環境構築]]></title><description><![CDATA[
+ 🐳 はじめに
+!
+自身での技術調査とchatGPTを併用し、整理した記事になります。
+
+Dockerfileを書いていると、apt や curl をよく使いますよね。
+でも実は、その使い方を誤ると 「セキュリティリスク」 に直結することをご存知でしょうか？
+
+
+ ⚠️ なぜ curl | bash が危険なのか
+よく見かける例：
+curl -s https://example.com/install.sh | bash
+
+ 危険な理由
+
+スクリプトを確認せずに実行
+root 権限で動作することが多い
+改ざんされていれば即アウト
+
+
+
+ ✅ apt install は安全なのか？
+ap...]]></description><link>https://zenn.dev/hi_kun0912/articles/9f86ce1ef4925b</link><guid isPermaLink="true">https://zenn.dev/hi_kun0912/articles/9f86ce1ef4925b</guid><pubDate>Wed, 30 Jul 2025 09:02:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hGD3VMcR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E5%25BF%2585%25E8%25A6%258B%25EF%25BC%2581curl%2520%257C%2520bash%2520%25E3%2581%258C%25E5%258D%25B1%25E9%2599%25BA%25E3%2581%25AA%25E7%2590%2586%25E7%2594%25B1%25E3%2581%25A8%25E5%25AE%2589%25E5%2585%25A8%25E3%2581%25AADocker%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%2581%25AF%25E5%25AD%2590%25E6%25BA%25BA%25E6%2584%259B%25E3%2583%2591%25E3%2583%2591%2540%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VhYjMzZWZkYTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>息子溺愛パパ@エンジニア</dc:creator></item><item><title><![CDATA[bashのコマンドキャッシュでハマった話]]></title><description><![CDATA[
+ 経緯
+Windows11のWSL2でUbuntuを使っており、qemuをaptでインストールした。
+しかしapt経由でインストールできるqemuはバージョンがかなり古かったので、直接ソースコードを落としてきてビルドすることにした。
+既存のqemuはアンインストールし、ビルドした最新版のqemuをインストールした。
+qemuがインストールされたか確認するためqemu-system-x86_64 --versionを実行したところ、以下のエラーが出た。
+-bash: /usr/bin/qemu-system-x86_64: No such file or directory
+
+ 解決策に...]]></description><link>https://zenn.dev/luxun1910/articles/d2dcc2f0805728</link><guid isPermaLink="true">https://zenn.dev/luxun1910/articles/d2dcc2f0805728</guid><pubDate>Wed, 30 Jul 2025 05:03:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bu2oXHSO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:bash%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2582%25AD%25E3%2583%25A3%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A5%25E3%2581%25A7%25E3%2583%258F%25E3%2583%259E%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258B%25E3%2583%25BC%25E3%2581%2597%25E3%2582%2585%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dBZFdnQnc3NEMtSE9VekhVX05BcGxIeTlvaGdjQTdZMWptTnp3bVVFPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>るーしゅん</dc:creator></item><item><title><![CDATA[【Raspberry Pi】RAMディスク化するとDockerが起動できなくなる]]></title><description><![CDATA[
+ はじめに
+現在、Raspberry Piをベースとした、新しい監視カメラシステムを開発中ですが、そこで利用している様々な技術的なトピックをメモ代わりにまとめていきたいと思います。
+今回は、RAMディスク化すると、Dockerが起動できなくなる問題への対策を説明します。
+※RAMディスク化の方法についてはこちらの記事を参照してください
+https://zenn.dev/daddy_yukio/articles/a722e6c024efaf
+
+ 概要
+Raspberry Piを使用して、IoTデバイスを開発し、実運用していく為に必要なRAMディスク化ですが、一つ大きな問題があります。
+そ...]]></description><link>https://zenn.dev/daddy_yukio/articles/902a9c415945d7</link><guid isPermaLink="true">https://zenn.dev/daddy_yukio/articles/902a9c415945d7</guid><pubDate>Wed, 30 Jul 2025 04:45:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--D6F-hrCo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Raspberry%2520Pi%25E3%2580%2591RAM%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25B9%25E3%2582%25AF%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8Docker%25E3%2581%258C%25E8%25B5%25B7%25E5%258B%2595%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25AA%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yukio%2520Ichikawa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JlZmZiNTY4YWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yukio Ichikawa</dc:creator></item></channel></rss>
