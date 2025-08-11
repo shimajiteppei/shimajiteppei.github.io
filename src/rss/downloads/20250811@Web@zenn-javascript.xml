@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 11 Aug 2025 12:05:06 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Chrome 拡張機能(Manifest v3)で開いてるタブに対して文字列でJSを実行する方法]]></title><description><![CDATA[
+ まえがき
+もともとManifest v2で開発していたものがあり、v3にアップデートするのが面倒で放置していたらついに使えなくなってしまいやむを得ずアップデートすることにしました。
+その時、基本的には マイグレーションガイド の通りにやって動いたのですが、 chrome.tabs.executeScript で対象のタブに文字列でjsを実行している部分だけうまく実行することができませんでした。
+
+ コードの例
+
+ v2 のコード
+もともとこんな感じだったものを
+
+chrome.tabs.executeScript(tabId, {
+  code: "ユーザーが設定した文字列で書かれた...]]></description><link>https://zenn.dev/rabee/articles/chrome-extensions-v2-user-scripts-execute</link><guid isPermaLink="true">https://zenn.dev/rabee/articles/chrome-extensions-v2-user-scripts-execute</guid><pubDate>Mon, 11 Aug 2025 10:15:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_ytwrf1l--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Chrome%2520%25E6%258B%25A1%25E5%25BC%25B5%25E6%25A9%259F%25E8%2583%25BD%2528Manifest%2520v3%2529%25E3%2581%25A7%25E9%2596%258B%25E3%2581%2584%25E3%2581%25A6%25E3%2582%258B%25E3%2582%25BF%25E3%2583%2596%25E3%2581%25AB%25E5%25AF%25BE%25E3%2581%2597%25E3%2581%25A6%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E3%2581%25A7JS%25E3%2582%2592%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:simiraaaa%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlMWYxMzE5MTcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Rabee%2520Tech%2520blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JhMzE5YTc2YzYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>simiraaaa</dc:creator></item><item><title><![CDATA[OpenAPIをベースにクライアントコードの自動生成(axios利用)]]></title><description><![CDATA[
+ はじめに
+API開発において、クライアントコードの手動実装は、時間と労力がかかるだけでなく、API仕様の変更に追従する際のヒューマンエラーを引き起こす可能性が高まります。OpenAPI Generator CLIを活用すれば、OpenAPI定義ファイルからTypeScriptのクライアントコードを自動生成でき、これらの課題を解決できます。
+他にも色々ライブラリ等ありますが個人的に利用していて使いやすかったです。
+本記事では、その具体的な手法と、実践的なクライアント設定について解説します。
+
+ ライブラリインストール
+https://github.com/OpenAPITools/op...]]></description><link>https://zenn.dev/engineer_yyyymm/articles/063a36a86b4d7d</link><guid isPermaLink="true">https://zenn.dev/engineer_yyyymm/articles/063a36a86b4d7d</guid><pubDate>Mon, 11 Aug 2025 10:03:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--llj4kF8f--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OpenAPI%25E3%2582%2592%25E3%2583%2599%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%25AB%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25A2%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25AE%25E8%2587%25AA%25E5%258B%2595%25E7%2594%259F%25E6%2588%2590%2528axios%25E5%2588%25A9%25E7%2594%25A8%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yyyymm%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlOTU0MTM0NjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yyyymm</dc:creator></item><item><title><![CDATA[テストをするときネストをするな - Avoid Nesting when you're Testing]]></title><description><![CDATA[Kent C. Dodds 氏による Avoid Nesting when you're Testing という記事を翻訳させていただきました。
+以下、本文。
+
+これからご紹介するのは、React コンポーネントのテストに適用される一般的なテスト原則です。例に React を使用していますが、この概念正しく理解するのに役立つことを願っています。
+!
+ネスト自体が悪いと言っているのではありません。しかしネストはテストフック（beforeEach など）をコード再利用の手段として使うことを促進し、結果としてメンテナンスしづらいテストになってしまうということです。続きをお読みください。
+
+テス...]]></description><link>https://zenn.dev/jay_es/articles/2025-08-11-avoid-nesting-when-youre-testing</link><guid isPermaLink="true">https://zenn.dev/jay_es/articles/2025-08-11-avoid-nesting-when-youre-testing</guid><pubDate>Mon, 11 Aug 2025 05:54:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--v_WUy2l---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E3%2581%258D%25E3%2583%258D%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%25E3%2581%25AA%2520-%2520Avoid%2520Nesting%2520when%2520you%2527re%2520Testing%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:jay-es%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hTT1NsdjJlWERneXVQbVRNR2xEa2ZZb2pKNnNGcmVjVmFpOWRWTUE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>jay-es</dc:creator></item><item><title><![CDATA[JS/TS学習備忘録]]></title><description><![CDATA[理解を深めるため学習に応じて書き連ねていく
+本届いたら勉強して理解したことを書き連ねていく
+
+ JavaScript
+aaa
+
+ TypeScript
+aaa
+]]></description><link>https://zenn.dev/nanashi123/articles/javascript-typescript-memo</link><guid isPermaLink="true">https://zenn.dev/nanashi123/articles/javascript-typescript-memo</guid><pubDate>Sun, 10 Aug 2025 17:39:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PRTzDj93--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JS%252FTS%25E5%25AD%25A6%25E7%25BF%2592%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nanashi123%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzliZDI1NzkwZTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nanashi123</dc:creator></item><item><title><![CDATA[【cluster】乗り物に乗ってるときにポーズをとらせる（簡易版）]]></title><description><![CDATA[（簡易版なので、ちょっとスクリプトを触った人じゃないとわからないかもしれません～）
+
+こんな風に、乗り物に乗ったときにアニメーションさせる方法について。
+clusterで乗り物に乗っているとき、フツーは両手の位置を固定するだけです（Right GripとLeft Grip）。
+あとAvater Override Animationというのもあって、固定で1つのアニメーションを再生することも可能ですね。
+
+常に同じアニメーションをさせるだけならAvater Override Animationに何か設定するだけで十分
+
+ もうちょっと柔軟にポーズをとらせるには？
+
+
+2つ以上のアニメーショ...]]></description><link>https://zenn.dev/vins/articles/dc021b7dbd782e</link><guid isPermaLink="true">https://zenn.dev/vins/articles/dc021b7dbd782e</guid><pubDate>Sun, 10 Aug 2025 16:16:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lQDAygP5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590cluster%25E3%2580%2591%25E4%25B9%2597%25E3%2582%258A%25E7%2589%25A9%25E3%2581%25AB%25E4%25B9%2597%25E3%2581%25A3%25E3%2581%25A6%25E3%2582%258B%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AB%25E3%2583%259D%25E3%2583%25BC%25E3%2582%25BA%25E3%2582%2592%25E3%2581%25A8%25E3%2582%2589%25E3%2581%259B%25E3%2582%258B%25EF%25BC%2588%25E7%25B0%25A1%25E6%2598%2593%25E7%2589%2588%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:vins%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2c0ZERlaWVTamtQcDFmTDYwS1FhTlpYMkpMeTJOOGtfeWRha1F6PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>vins</dc:creator></item><item><title><![CDATA[(AIに手伝ってもらって)AEDマップをベースに子ども施設マップを作る]]></title><description><![CDATA[
+ はじめに
+シビックテック任意団体 Code for OYAMA (栃木県小山市) の石橋です。
+前回作った「おやまAEDマップ」をベースに「おやま子ども施設マップ」を作ってみました。こちらも栃木県小山市が提供しているオープンデータを利用しています。
+
+ プロジェクト概要
+
+ 開発背景
+小山市がオープンデータカタログとして公開しているオープンデータのなかでおやまAEDマップで利用したもの以外にも緯度経度情報を含んだものがいくつもあります。そのうちの子ども施設情報(保育所、幼稚園、こども園など)を使ってマップアプリを作っていきます。
+おやまAEDマップのプロジェクトはある程度のプログラミ...]]></description><link>https://zenn.dev/bishi/articles/20250810a_article</link><guid isPermaLink="true">https://zenn.dev/bishi/articles/20250810a_article</guid><pubDate>Sun, 10 Aug 2025 15:56:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---m6TuUFP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2528AI%25E3%2581%25AB%25E6%2589%258B%25E4%25BC%259D%25E3%2581%25A3%25E3%2581%25A6%25E3%2582%2582%25E3%2582%2589%25E3%2581%25A3%25E3%2581%25A6%2529AED%25E3%2583%259E%25E3%2583%2583%25E3%2583%2597%25E3%2582%2592%25E3%2583%2599%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%25AB%25E5%25AD%2590%25E3%2581%25A9%25E3%2582%2582%25E6%2596%25BD%25E8%25A8%25AD%25E3%2583%259E%25E3%2583%2583%25E3%2583%2597%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B3%25E3%2581%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y3OTZmNjdkYTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>びし</dc:creator></item><item><title><![CDATA[Svelte5でJSライブラリを作成する方法(素のJS向けにビルドする方法)]]></title><description><![CDATA[
+ まえがき
+なんのJSフレームワークも使っていない純粋な HTML, CSS, JS で構成されたプロジェクトに、リッチな機能を組み込みたい！みたいなときありますよね。
+そういうときにSvelteで実装するための備忘録です。
+ただSvelteが書きたいだけで細かい設定とかに頭使いたくないですよね。
+
+ 下準備
+
+ セットアップコマンドを実行してセットアップする
+公式に書いてある通りにセットアップします。
+https://svelte.jp/docs/kit/creating-a-project
+npx sv create my-app
+my-app のところは自由に変更しても良い。
+省...]]></description><link>https://zenn.dev/rabee/articles/sveltekit-for-vanilla-js-library</link><guid isPermaLink="true">https://zenn.dev/rabee/articles/sveltekit-for-vanilla-js-library</guid><pubDate>Sun, 10 Aug 2025 11:55:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vy8R4-Cn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Svelte5%25E3%2581%25A7JS%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2528%25E7%25B4%25A0%25E3%2581%25AEJS%25E5%2590%2591%25E3%2581%2591%25E3%2581%25AB%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:simiraaaa%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlMWYxMzE5MTcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Rabee%2520Tech%2520blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JhMzE5YTc2YzYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>simiraaaa</dc:creator></item><item><title><![CDATA[Google Chrome拡張機能開発のチュートリアルを実施してみた（コンテンツスクリプト自動実行編）]]></title><description><![CDATA[
+ チュートリアルの概要
+前回はアイコンをクリックすると"Hello Extensions"と表示される簡単なGoogle Chromeの拡張機能を作成しました。
+https://zenn.dev/judenfly/articles/judenfly-20250806
+今回もGoogle公式のチュートリアルに従い、特定のWebページを読み終えるまでの時間を計算して表示する拡張機能を作成します。
+https://developer.chrome.com/docs/extensions/get-started/tutorial/scripts-on-every-tab?hl=ja
+チュートリ...]]></description><link>https://zenn.dev/judenfly/articles/judenfly-20250810</link><guid isPermaLink="true">https://zenn.dev/judenfly/articles/judenfly-20250810</guid><pubDate>Sun, 10 Aug 2025 11:44:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---WMNMtSd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Google%2520Chrome%25E6%258B%25A1%25E5%25BC%25B5%25E6%25A9%259F%25E8%2583%25BD%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AE%25E3%2583%2581%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%2588%25E3%2583%25AA%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%2592%25E5%25AE%259F%25E6%2596%25BD%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25EF%25BC%2588%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2584%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E8%2587%25AA%25E5%258B%2595%25E5%25AE%259F%25E8%25A1%258C%25E7%25B7%25A8%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%2585%2585%25E9%259B%25BB%25E3%2583%2595%25E3%2583%25A9%25E3%2582%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYyY2YyNjg4NDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>充電フライ</dc:creator></item><item><title><![CDATA[JavaScript で配列ループ処理の計算量&メモリ効率を調べてみた]]></title><description><![CDATA[
+ はじめに
+最近、生成AIを使ってプログラミングする際、時間計算量や空間計算量、メモリ効率を気にして書いている事が多いんですが、特に配列ループ処理についての計算量で個人的に誤解してた部分もあり、改めて、JavaScript を使って、配列ループ処理について調査しました。
+!
+今回は、計算量やパフォーマンスにフォーカス当てており、コードの可読性については、ここでは一切考慮してないです。今回は、計算量やパフォーマンスを観点に良し悪しを書いていますが、あくまで、良いコードかどうかについては、パフォーマンスや可読性も含め、考慮されるべきであると(個人的には)考えております。
+
+
+ そもそも、計...]]></description><link>https://zenn.dev/nappa/articles/db4c9c591fb768</link><guid isPermaLink="true">https://zenn.dev/nappa/articles/db4c9c591fb768</guid><pubDate>Sun, 10 Aug 2025 11:15:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dJrHsJni--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%2520%25E3%2581%25A7%25E9%2585%258D%25E5%2588%2597%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%2597%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25AE%25E8%25A8%2588%25E7%25AE%2597%25E9%2587%258F%2526%25E3%2583%25A1%25E3%2583%25A2%25E3%2583%25AA%25E5%258A%25B9%25E7%258E%2587%25E3%2582%2592%25E8%25AA%25BF%25E3%2581%25B9%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nappa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBiZTZlMDkwMDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nappa</dc:creator></item><item><title><![CDATA[【JavaScript】'MODULE_NOT_FOUND' の意味と解決法]]></title><description><![CDATA[
+ はじめに
+JavaScriptでアルゴリズムを実装したときに、VS Codeで出会ったエラーの意味と実際に解決した方法をまとめました。
+
+ メッセージ内容
+node reverseInorderTraversal.js
+node:internal/modules/cjs/loader:1146
+  throw err;
+  ^
+
+Error: Cannot find module '/Users/mavo/project/algorithm-solutions/binary-tree/problems/12_reverseInorderTraversal/js/tests/rever...]]></description><link>https://zenn.dev/mabo23/articles/aa882e7e369c47</link><guid isPermaLink="true">https://zenn.dev/mabo23/articles/aa882e7e369c47</guid><pubDate>Sun, 10 Aug 2025 11:07:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Nan5hKG7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591%2527MODULE_NOT_FOUND%2527%2520%25E3%2581%25AE%25E6%2584%258F%25E5%2591%25B3%25E3%2581%25A8%25E8%25A7%25A3%25E6%25B1%25BA%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mabo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQzM2ZhMmVkZDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mabo</dc:creator></item><item><title><![CDATA[即時実行関数式（IIFE）に名前をつけるということ]]></title><description><![CDATA[JavaScripterの皆さんこんにちは。
+Webアプリを作るおじさんです。
+
+ 🤔 おさらい - IIFEってなんだっけ
+IIFEは、宣言と同時に実行されるJavaScriptの関数式のことですね。
+↓みたいなや〜つです。
+(function() {
+  // 任意の処理
+})();
+使い時は、「任意の処理」の部分を、プライベートなスコープで定義したいときなんかですね。
+
+ 📛 名前付きIIFE
+なんということはない、IIFEの関数に名前をつけるだけです。
+(function myFunc() {
+  // 任意の処理
+})();
+
+ 👉 名前付きIIFEの関数名の参照
+名前をつけた...]]></description><link>https://zenn.dev/www_tocky/articles/82686293e95bf9</link><guid isPermaLink="true">https://zenn.dev/www_tocky/articles/82686293e95bf9</guid><pubDate>Sun, 10 Aug 2025 05:57:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--J7H70amY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%258D%25B3%25E6%2599%2582%25E5%25AE%259F%25E8%25A1%258C%25E9%2596%25A2%25E6%2595%25B0%25E5%25BC%258F%25EF%25BC%2588IIFE%25EF%25BC%2589%25E3%2581%25AB%25E5%2590%258D%25E5%2589%258D%25E3%2582%2592%25E3%2581%25A4%25E3%2581%2591%25E3%2582%258B%25E3%2581%25A8%25E3%2581%2584%25E3%2581%2586%25E3%2581%2593%25E3%2581%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A8%25E3%2581%25A3%25E3%2581%258D%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZkMzM1MmQwODguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>とっきー</dc:creator></item><item><title><![CDATA[petite-vue ⇄ Alpine.js ⇄ sprae の対応表]]></title><description><![CDATA[とても良く似たライトウエイトな JS フレームワークである petite-vue と Alpine.js と sprae の対応表です。最近は datastar の勢いがあるような気がしますが、data- で始まるディレクティブが長すぎるので OJK の好みで却下。
+
+ 紹介
+
+ petite-vue
+
+本格的な JS フレームワークである Vue.js の作者が Alpine.js に触発されて作った（らしい）フレームワーク。今はもうメンテナンスもされていない模様で、「petite-vue」で Google 検索しても OJK の Zenn 本のほうが公式サイトよりも上位にヒットするよ...]]></description><link>https://zenn.dev/ojk/articles/correspondence-chart</link><guid isPermaLink="true">https://zenn.dev/ojk/articles/correspondence-chart</guid><pubDate>Sat, 09 Aug 2025 15:12:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8-t5GhZh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:petite-vue%2520%25E2%2587%2584%2520Alpine.js%2520%25E2%2587%2584%2520sprae%2520%25E3%2581%25AE%25E5%25AF%25BE%25E5%25BF%259C%25E8%25A1%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:OJK%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2l6YV9DYXFDMXM4NVJfdF9wSTlURENXTW1Ca0tqakxMbV9FNEJCPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>OJK</dc:creator></item><item><title><![CDATA[JavaScriptでABC418(A-C)]]></title><description><![CDATA[https://atcoder.jp/contests/abc418
+
+ A - I'm a teapot
+https://atcoder.jp/contests/abc418/tasks/abc418_a
+末尾3文字が"tea"かって聞かれてるので、末尾3文字をとってくればいいですね
+S.slice(-3)です
+https://atcoder.jp/contests/abc418/submissions/68307726
+0分53秒 AC!
+
+ B - You're a teapot
+https://atcoder.jp/contests/abc418/tasks/abc418_b
+B...]]></description><link>https://zenn.dev/aya_koto/articles/74d1a43144f400</link><guid isPermaLink="true">https://zenn.dev/aya_koto/articles/74d1a43144f400</guid><pubDate>Sat, 09 Aug 2025 13:53:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BfCSpe7S--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:JavaScript%25E3%2581%25A7ABC418%2528A-C%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ayasaka-Koto%2520%252F%2520Aya...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VkNTRlMDBjYTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ayasaka-Koto / AyagawaP</dc:creator></item><item><title><![CDATA[サードパーティ Web API（の超基本）]]></title><description><![CDATA[OJKの担当している授業テキストです。fetch でサードパーティのAPIを使う「手順書」のようなものです。セキュリティとか全く考慮していません。]]></description><link>https://zenn.dev/ojk/books/intro-to-webapi</link><guid isPermaLink="true">https://zenn.dev/ojk/books/intro-to-webapi</guid><pubDate>Fri, 08 Aug 2025 14:11:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bKkzQ3Ed--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci83YWVlMjRiNDNlLnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>OJK</dc:creator></item><item><title><![CDATA[ClaudeCodeと作る消費税減税シミュレーター]]></title><description><![CDATA[
+ はじめに
+政治の焦点となっている消費税減税について、「10%から5%になったら実際どれくらい家計が楽になる？」という疑問を数値で可視化するため、政策議論支援ツール「消費税減税シミュレーター」を開発しました。
+本記事では、WordPress子テーマとしての実装から、精密な消費税計算ロジック、リアルタイムUI制御まで、政策議論に活用できる実用的な計算ツールの構築手順を詳しく解説します。
+
+ 本記事について
+今回の開発および記事執筆は、Claude Code（Anthropic社のAI）との協業で進めました。AI時代の新しい開発スタイルの実践例として参考になれば幸いです。
+
+ 自己紹介
+ホ...]]></description><link>https://zenn.dev/5naokichi/articles/44639861cceb7c</link><guid isPermaLink="true">https://zenn.dev/5naokichi/articles/44639861cceb7c</guid><pubDate>Fri, 08 Aug 2025 06:54:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kCLu-duf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ClaudeCode%25E3%2581%25A8%25E4%25BD%259C%25E3%2582%258B%25E6%25B6%2588%25E8%25B2%25BB%25E7%25A8%258E%25E6%25B8%259B%25E7%25A8%258E%25E3%2582%25B7%25E3%2583%259F%25E3%2583%25A5%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AA%25E3%2581%258A%25E3%2581%258D%25E3%2581%25A1%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyYTY0ODViMjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>なおきち</dc:creator></item><item><title><![CDATA[【個人開発】AIを利用した文章変換アプリ]]></title><description><![CDATA[
+サイトURL &gt;&gt; https://ai-text-changer.vercel.app/
+
+ 動機
+生成AiのAPIを活用して簡単なアプリケーションを作りたかった
+
+ 技術スタック
+
+Next.js 15
+JavaScript
+vercel
+gemini-1.5-flash (最も応答が早い)
+cousor (開発環境)
+
+
+ 機能
+
+gemini-apiを使用して、入力された文章をテーマに沿って変換
+変換した文章をXでそのままポスト可能
+Web Share API を使って共有も可能
+
+
+ 使い方
+
+入力エリアに文章を入力
+テーマを選択（現在４種類）し変換を実行
+変換さ...]]></description><link>https://zenn.dev/harumu/articles/f3442a5c41c1fe</link><guid isPermaLink="true">https://zenn.dev/harumu/articles/f3442a5c41c1fe</guid><pubDate>Fri, 08 Aug 2025 04:44:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ve4M0FSa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2580%258B%25E4%25BA%25BA%25E9%2596%258B%25E7%2599%25BA%25E3%2580%2591AI%25E3%2582%2592%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E6%2596%2587%25E7%25AB%25A0%25E5%25A4%2589%25E6%258F%259B%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2582%2589%25E3%2581%259F%25E3%2581%25BE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJjZDJiNjc1NjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しらたま</dc:creator></item><item><title><![CDATA[古米度診断ツールで年齢を楽しく表現 - ClaudeCode×JavaScript実装解説]]></title><description><![CDATA[
+ はじめに
+誕生日を入力するだけで、あなたの年齢を「古米」で表現するユニークな診断ツールを開発しました。例えば25歳なら「古古古古古古古古古古古古古古古古古古古古古古古古古米」といった具合に、年齢分だけ「古」を並べてお米の名前を生成します。
+!
+本記事の開発およびこの記事執筆は、Claude Code（Anthropic社のAI）との協業で進めました。AI時代の新しい開発スタイルの実践例として参考になれば幸いです。
+
+
+ この記事で分かること
+
+JavaScript による正確な年齢計算の実装方法
+WordPressとの連携による使用回数カウンター機能
+レスポンシブ対応の日付選択UI ...]]></description><link>https://zenn.dev/5naokichi/articles/bab43b62bce861</link><guid isPermaLink="true">https://zenn.dev/5naokichi/articles/bab43b62bce861</guid><pubDate>Thu, 07 Aug 2025 07:32:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DNv-TEbv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%258F%25A4%25E7%25B1%25B3%25E5%25BA%25A6%25E8%25A8%25BA%25E6%2596%25AD%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25A7%25E5%25B9%25B4%25E9%25BD%25A2%25E3%2582%2592%25E6%25A5%25BD%25E3%2581%2597%25E3%2581%258F%25E8%25A1%25A8%25E7%258F%25BE%2520-%2520ClaudeCode%25C3%2597JavaScript%25E5%25AE%259F%25E8%25A3%2585%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AA%25E3%2581%258A%25E3%2581%258D%25E3%2581%25A1%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyYTY0ODViMjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>なおきち</dc:creator></item><item><title><![CDATA[HTML/CSS/JavaScript で、スムーズにテキスト要素がスライドインしてくる仕掛けを作る (Blazor, React)]]></title><description><![CDATA[
+ はじめに
+前回、こんな記事を書きました。
+https://zenn.dev/j_sakamoto/articles/a774e70143cf12
+上記記事内にて、自作した Web アプリ (翻訳字幕システム) の "こだわりポイント" として以下のように言及しておりました。
+
+しかしながら、せっかく (?) 自作でやりきるとした以上、一点だけこだわったところがありました。
+それは逐次の翻訳結果の出現を、しっかりアニメーション表示するようにしたところです。
+音声認識されて返ってきた翻訳結果テキストを、何も考えずに (?) 表示エリアにただ追加してしまうと、既存の前回までの翻訳結果テキス...]]></description><link>https://zenn.dev/j_sakamoto/articles/eb117b9fb0681c</link><guid isPermaLink="true">https://zenn.dev/j_sakamoto/articles/eb117b9fb0681c</guid><pubDate>Wed, 06 Aug 2025 13:43:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8r8tReJ5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:HTML%252FCSS%252FJavaScript%2520%25E3%2581%25A7%25E3%2580%2581%25E3%2582%25B9%25E3%2583%25A0%25E3%2583%25BC%25E3%2582%25BA%25E3%2581%25AB%25E3%2583%2586%25E3%2582%25AD%25E3%2582%25B9%25E3%2583%2588%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%258C%25E3%2582%25B9%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2589%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%2597%25E3%2581%25A6%25E3%2581%258F%25E3%2582%258B%25E4%25BB%2595%25E6%258E%259B%25E3%2581%2591%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2520%2528Blazo...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%2540jsakamoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dVX243dnJ5ZFlLb2NxdUhSUkIxSGZ4NGpVekNsdGNmZ290R2hfNWc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>@jsakamoto</dc:creator></item><item><title><![CDATA[JavaScriptの sort((a, b) => a - b) を理解する]]></title><description><![CDATA[Java Scriptでは、「たった1行」で配列が魔法のように並び替えできるものがありますが、
+その裏側を今回覗き込んでみました。
+JavaScriptで、何気なく書くこの記述：sort((a, b) =&gt; a - b)。
+「なぜこれで並び替えがうまくいくのか？」と疑問に思ったことはないでしょうか。
+私はそう思いました。
+Salesforce JavaScript Developer I 試験対策で登場したこの1行をテーマに、比較関数の仕組み・なぜ a - b が効くのか・NG例など、備忘録的にまとめようと思います。
+
+ ✅ 出典元
+Trailhead モジュール：
+Explore...]]></description><link>https://zenn.dev/tk_salesforce/articles/9e6206945c0a96</link><guid isPermaLink="true">https://zenn.dev/tk_salesforce/articles/9e6206945c0a96</guid><pubDate>Wed, 06 Aug 2025 12:05:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--x9vAqzx7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AE%2520sort%2528%2528a%252C%2520b%2529%2520%253D%253E%2520a%2520-%2520b%2529%2520%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kyohei%2540Salesforce%25E9%2596%258B%25E7%2599%25BA%25E8%2580%2585%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JmNTc0N2IxNDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kyohei@Salesforce開発者</dc:creator></item><item><title><![CDATA[JavaScriptのnormalizeで文字列の「正規化」をして、検索機能の半角・全角の差をシンプルに吸収する]]></title><description><![CDATA[検索機能を実装する際、ユーザーの入力する文字列の全角・半角の違いはよくある課題です。「株式会社アイウエオ」と検索したいユーザーが誤って「株式会社ｱｲｳｴｵ」と半角カナで入力した場合でも、正しく検索結果を返す必要があります。
+また、登録データ自体が「株式会社アイウエオ」と「株式会社ｱｲｳｴｵ」のように全角カナと半角カナや、「株式会社ＡＢＣＤ」と「株式会社ABCD」のように全角英数字と半角英数字が混在しているケースも考えられます。
+
+ normalize で文字列を「正規化」する
+normalize() メソッドは、文字列の Unicode 正規化形式を返します✅
+引数として、以下の4つの ...]]></description><link>https://zenn.dev/kurichan/articles/d7b494f01a5f33</link><guid isPermaLink="true">https://zenn.dev/kurichan/articles/d7b494f01a5f33</guid><pubDate>Wed, 06 Aug 2025 10:45:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--G7s4nCv6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AEnormalize%25E3%2581%25A7%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E3%2581%25AE%25E3%2580%258C%25E6%25AD%25A3%25E8%25A6%258F%25E5%258C%2596%25E3%2580%258D%25E3%2582%2592%25E3%2581%2597%25E3%2581%25A6%25E3%2580%2581%25E6%25A4%259C%25E7%25B4%25A2%25E6%25A9%259F%25E8%2583%25BD%25E3%2581%25AE%25E5%258D%258A%25E8%25A7%2592%25E3%2583%25BB%25E5%2585%25A8%25E8%25A7%2592%25E3%2581%25AE%25E5%25B7%25AE%25E3%2582%2592%25E3%2582%25B7%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2581%25AB%25E5%2590%25B8%25E5%258F%258E%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258F%25E3%2582%258A%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RjN2IzM2RiNTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>くりちゃん</dc:creator></item></channel></rss>
