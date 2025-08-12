@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 12 Aug 2025 02:03:42 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[ゼロから始めるPythonとIfcOpenShellでのBIM/3D建築モデル作成入門 建築編 🏗️]]></title><description><![CDATA[こんにちは。竹本です。
+プログラミングで3Dの建物モデルを作ってみたいと考えたことはありませんか？IfcOpenShellというライブラリを使うことで、Pythonで3D建物モデルを作成することが可能です。
+IfcOpenShellは非常に強力なライブラリですが、ドキュメントが少なく、特に日本語の情報は限られています。この記事では、何もない状態からIFCファイルを作成し、床、壁、ドア、窓のある簡単な建物を構築するまでの一連の流れを解説します。
+
+ 対象読者
+
+プログラミングで建築モデルを作ってみたい方
+IfcOpenShellやBIMの初学者
+Pythonの基本的な文法を理解している方
+...]]></description><link>https://zenn.dev/takemoto_toggle/articles/cf8df02f7b4ba7</link><guid isPermaLink="true">https://zenn.dev/takemoto_toggle/articles/cf8df02f7b4ba7</guid><pubDate>Tue, 12 Aug 2025 01:52:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2obVYjYA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25BC%25E3%2583%25AD%25E3%2581%258B%25E3%2582%2589%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258BPython%25E3%2581%25A8IfcOpenShell%25E3%2581%25A7%25E3%2581%25AEBIM%252F3D%25E5%25BB%25BA%25E7%25AF%2589%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E4%25BD%259C%25E6%2588%2590%25E5%2585%25A5%25E9%2596%2580%2520%25E5%25BB%25BA%25E7%25AF%2589%25E7%25B7%25A8%2520%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yuki%2520Takemoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0MjYzN2U1N2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuki Takemoto</dc:creator></item><item><title><![CDATA[ゴルフの因果推論 Part2 ~アメリカ男子ツアーデータを用いた効果検証replication~]]></title><description><![CDATA[
+ はじめに
+前回の記事では、欧州男子プロゴルフツアーのデータを用いた論文のレプリケーションと外的妥当性をチェックすることを試み、日本の男女プロゴルフツアーのデータを用いて同様の分析を行いました。結果として同様の推定結果を取得することができませんでした。
+https://zenn.dev/ka_ichi/articles/cba14600126ba8
+前回の記事では、結びにこの原因として考えられるものを3点挙げて終わりました。
+
+
+大会間のインターバルの違い：欧州ツアーでは連続的な開催が多く、心理的・物理的なcarry-over効果が期待される一方で、日本ツアーでは開催頻度がやや少なく、...]]></description><link>https://zenn.dev/ka_ichi/articles/4ca0753b79073e</link><guid isPermaLink="true">https://zenn.dev/ka_ichi/articles/4ca0753b79073e</guid><pubDate>Tue, 12 Aug 2025 01:01:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--D2-HYB8I--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B4%25E3%2583%25AB%25E3%2583%2595%25E3%2581%25AE%25E5%259B%25A0%25E6%259E%259C%25E6%258E%25A8%25E8%25AB%2596%2520Part2%2520%7E%25E3%2582%25A2%25E3%2583%25A1%25E3%2583%25AA%25E3%2582%25AB%25E7%2594%25B7%25E5%25AD%2590%25E3%2583%2584%25E3%2582%25A2%25E3%2583%25BC%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%259F%25E5%258A%25B9%25E6%259E%259C%25E6%25A4%259C%25E8%25A8%25BCreplication%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ka_ichi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTG51OU9CcTdWcElqcmxTSnZvUFZuOVdCamoxN3B2dTVKWFI2eTFiY2w2Y1h6NGVrTTc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ka_ichi</dc:creator></item><item><title><![CDATA[Pythonで人流トラジェクトリーデータを縦持ちに変換し、移動距離を計算する方法]]></title><description><![CDATA[
+ はじめに
+今回は「人流トラジェクトリーデータ」を取り扱い、会場内の人の動きを可視化する方法をご紹介します。
+人流データをどうやって見せるか考えた結果、
+会場のヒートマップを作って、その上に人の動きの線を重ねてみることにしました。
+生データはトラジェクトリーデータ（時間軸に沿った「横持ち」形式）だったため、
+まずは扱いやすい「縦持ち」形式に変換する処理を行いました。
+
+ 人流データ（サンプル用に作成したもの）
+今回使うデータのサンプルは以下のような構造です。
+
+
+
+
+カラム名
+説明
+
+
+
+
+検知数
+0.1sec間にセンサーが検知した人数
+
+
+time_step
+時間を表すタイムスタンプ...]]></description><link>https://zenn.dev/swatchp/articles/a20e45ac280d1b</link><guid isPermaLink="true">https://zenn.dev/swatchp/articles/a20e45ac280d1b</guid><pubDate>Mon, 11 Aug 2025 12:41:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AK62m5ZL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E4%25BA%25BA%25E6%25B5%2581%25E3%2583%2588%25E3%2583%25A9%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E7%25B8%25A6%25E6%258C%2581%25E3%2581%25A1%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2597%25E3%2580%2581%25E7%25A7%25BB%25E5%258B%2595%25E8%25B7%259D%25E9%259B%25A2%25E3%2582%2592%25E8%25A8%2588%25E7%25AE%2597%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Swatchp%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5YTg2ZTBmZjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Swatchp</dc:creator></item><item><title><![CDATA[YOLOv8によるダストスポット検出AI「KlarSky」開発録:プロトタイプからMLOps、Vertex AIへの道]]></title><description><![CDATA[
+ はじめに
+写真、特に風景や空を撮影する者にとって、センサーダストは長年の課題である。作品を大判プリントした際にはじめて気づく黒い点は、作品の価値を大きく損なう。航空写真作家として活動する筆者も、この問題に長年悩まされてきた。
+
+この課題を解決するため、「印刷前にダストスポットの存在をAIで確実に検出する」ことを目標に、AIダストスポット検出ツール「Project KlarSky」の開発を開始した。本記事は、一個人の切実な悩みから始まったこのプロジェクトが、アイデアの着想からプロトタイピング、MLOpsパイプラインの構築ならびにクラウド(Vertex AI)での最適化と精度改善に至るま...]]></description><link>https://zenn.dev/fujiba/articles/klarsky_summary_article</link><guid isPermaLink="true">https://zenn.dev/fujiba/articles/klarsky_summary_article</guid><pubDate>Mon, 11 Aug 2025 11:27:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7Y5FziU3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:YOLOv8%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2583%2580%25E3%2582%25B9%25E3%2583%2588%25E3%2582%25B9%25E3%2583%259D%25E3%2583%2583%25E3%2583%2588%25E6%25A4%259C%25E5%2587%25BAAI%25E3%2580%258CKlarSky%25E3%2580%258D%25E9%2596%258B%25E7%2599%25BA%25E9%258C%25B2%253A%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2588%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%2597%25E3%2581%258B%25E3%2582%2589MLOps%25E3%2580%2581Vertex%2520AI%25E3%2581%25B8%25E3%2581%25AE%25E9%2581%2593%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:T.Fujiba%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lRVHc3bDFlWTFld1VUOExZTkl5OWROcnpOcTFnNDFSclpFaXhKWU4wPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>T.Fujiba</dc:creator></item><item><title><![CDATA[Ubuntu GRUB復旧記録 - カーネルアップデート後の起動不能から学んだこと]]></title><description><![CDATA[
+ 問題の発生
+ことのはじまりは、2日ほど前になります。　記憶にある限り3日以上放置していたUbuntu PCを起動したところ、GRUBブートメニューにmemtestしか表示されず、Ubuntuのエントリが完全に消失していました。通常の起動ができない状況に直面し、復旧作業を開始することになりました。
+
+ 初期調査と状況把握
+
+ 問題の確認
+インストールメディアからLIVE環境で起動し、grub.cfgを確認したところ、Ubuntuのエントリが完全に削除されていることが判明しました。GRUBの設定ファイルが何らかの理由で破損または書き換えられてしまったようです。
+
+ 復旧方針の検討
+GRU...]]></description><link>https://zenn.dev/hikosakasohtaro/articles/ff504ab8c97f52</link><guid isPermaLink="true">https://zenn.dev/hikosakasohtaro/articles/ff504ab8c97f52</guid><pubDate>Mon, 11 Aug 2025 08:51:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Du5YyVq7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%2520GRUB%25E5%25BE%25A9%25E6%2597%25A7%25E8%25A8%2598%25E9%258C%25B2%2520-%2520%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25AB%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%2587%25E3%2583%25BC%25E3%2583%2588%25E5%25BE%258C%25E3%2581%25AE%25E8%25B5%25B7%25E5%258B%2595%25E4%25B8%258D%25E8%2583%25BD%25E3%2581%258B%25E3%2582%2589%25E5%25AD%25A6%25E3%2582%2593%25E3%2581%25A0%25E3%2581%2593%25E3%2581%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25BD%25A6%25E5%259D%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVmOThiNmFhZjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>彦坂</dc:creator></item><item><title><![CDATA[【Python/GRIB2】NOMADS（NOAA）の気象データから16時間後の気圧予報を取得する]]></title><description><![CDATA[
+ 課題
+気象庁のオープンデータには気圧が含まれていないため、気圧予報ができない。NOMADS（NOAA）の気象予報データから世界の気象データを取得して、日本の気圧を抜き出す。
+
+ なぜ米NOAA？
+日本の気象庁から民間化された「一般財団法人気象業務支援センター」から気象データをプロバイドしてもらうためには、お金がけっこうかかるため小規模でやるにはむずかしいです。情報提供負担金は以下参照です。
+https://www.jmbsc.or.jp/jp/online/c-onlineF.html
+いちおう京都大学のKAGI21プロジェクトでGPV（Grid Point Value）のオリジンデ...]]></description><link>https://zenn.dev/jun_philos/articles/eb67da6823bdf2</link><guid isPermaLink="true">https://zenn.dev/jun_philos/articles/eb67da6823bdf2</guid><pubDate>Mon, 11 Aug 2025 08:50:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1ypVFynB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%252FGRIB2%25E3%2580%2591NOMADS%25EF%25BC%2588NOAA%25EF%25BC%2589%25E3%2581%25AE%25E6%25B0%2597%25E8%25B1%25A1%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2581%258B%25E3%2582%258916%25E6%2599%2582%25E9%2596%2593%25E5%25BE%258C%25E3%2581%25AE%25E6%25B0%2597%25E5%259C%25A7%25E4%25BA%2588%25E5%25A0%25B1%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Jun%252C%2520philos.%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUxNDQyMDJlNzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Jun, philos.</dc:creator></item><item><title><![CDATA[uv run 徹底解説]]></title><description><![CDATA[
+ 免責
+この記事は自作コーディングエージェントShaftを使用し執筆された生成AI記事です。
+https://gitlab.com/tkithrta/shaft
+なぜ今回ほぼ全て生成AIで執筆した内容を投稿したのかというと、以下の理由があります。
+
+現在のShaftのプログラマーペルソナがテクニカルライティングとしてどのぐらい優れているかのベンチマークテスト（テクニカルライターペルソナを追加する予定のため）
+ShaftをPython Scriptとして動かすようになったため動作確認（ソースコードは後述）
+uv公式ドキュメントのRunning scriptsでは最新の情報を含めたオプショ...]]></description><link>https://zenn.dev/tkithrta/articles/e89a79a9e91637</link><guid isPermaLink="true">https://zenn.dev/tkithrta/articles/e89a79a9e91637</guid><pubDate>Mon, 11 Aug 2025 03:28:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IyxDAu_S--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:uv%2520run%2520%25E5%25BE%25B9%25E5%25BA%2595%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%25BB%2592%25E3%2583%25B0%25E6%25A8%25B9%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E0NDRlMTA4ZjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>黒ヰ樹</dc:creator></item><item><title><![CDATA[画像をスクレイピングしながら画像URL一覧ファイル作成]]></title><description><![CDATA[
+ はじめに
+仕事で「記者発表だけされていて、公式サイトにはまだ載っていない」他社製品の情報を調べることになったんですが、
+画像をスクレイピングして、その画像が載っている元のページを見れば分かるんじゃないかな？
+と思って作ってみました。
+
+ この記事でできること
+特定の画像をWebから探し、その画像が掲載されているページURLを取得します。
+画像の類似検索結果を自動で収集できるので、情報調査の効率化に役立ちます。
+
+ 環境
+python3.x
+
+ コード解説
+import datetime
+import os
+import os.path as osp
+from icrawler.bui...]]></description><link>https://zenn.dev/swatchp/articles/3a3512991062cb</link><guid isPermaLink="true">https://zenn.dev/swatchp/articles/3a3512991062cb</guid><pubDate>Mon, 11 Aug 2025 03:25:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oWfxSekC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%25BB%25E5%2583%258F%25E3%2582%2592%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AC%25E3%2582%25A4%25E3%2583%2594%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%2597%25E3%2581%25AA%25E3%2581%258C%25E3%2582%2589%25E7%2594%25BB%25E5%2583%258FURL%25E4%25B8%2580%25E8%25A6%25A7%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E4%25BD%259C%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Swatchp%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5YTg2ZTBmZjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Swatchp</dc:creator></item><item><title><![CDATA[Python(特にFastAPI)開発のための環境構築をする]]></title><description><![CDATA[
+ はじめに
+
+ 現環境
+
+PC : M3 MacBookAir
+OS : Tahoe 26.0 Beta（25A5316i）
+RAM : 16GB
+IDE : Cursor
+Terminal : Warp
+
+
+ 目的
+学習する上で、FastAPIに手を付ける必要ができ、実行環境を整える必要が出てきたため。
+
+ 早速始めていく
+
+ Pythonのダウンロード
+$ python --version
+zsh: command not found: Python
+予想通り、pythonコマンドがみつからない旨のレスポンスです。
+Macの場合はpython3 から始めるようにしてください
+$ p...]]></description><link>https://zenn.dev/leopardkk/articles/set-up-a-development-environment-for-python</link><guid isPermaLink="true">https://zenn.dev/leopardkk/articles/set-up-a-development-environment-for-python</guid><pubDate>Sun, 10 Aug 2025 18:01:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--t_DGjBMS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%2528%25E7%2589%25B9%25E3%2581%25ABFastAPI%2529%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%2592%25BC%25E5%2587%25B0%25E3%2580%2590%25E3%2581%2582%25E3%2581%258A%25E3%2580%2591%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYyZTIwYWYyOTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>蒼凰【あお】</dc:creator></item><item><title><![CDATA[画像×タッチデータのエリア分析をサクッと実装]]></title><description><![CDATA[
+ 1. はじめに
+前回の記事で「画像エリア定義（xy_points.csv）」を作成しました。
+今回はそのエリア定義と、ユーザーの「好き・嫌い」座標データを使って、画像内のどのエリアが好まれているかを集計・可視化します。
+
+ エリア別集計結果
+
+area_summary_rule.xlsx
+前回の記事👉 【Python】画像の中に分割エリアを作って座標ファイルを出力する
+
+ 2. 分析の流れ
+
+画像の読み込みと GUI でのラベリング
+ラベル情報の CSV 保存
+ラベル領域の色分け・描画
+評価データの集計（like / dislike / none）（✅ 今回）
+Excel ファイルへ...]]></description><link>https://zenn.dev/swatchp/articles/abc121f3a6134e</link><guid isPermaLink="true">https://zenn.dev/swatchp/articles/abc121f3a6134e</guid><pubDate>Sun, 10 Aug 2025 13:04:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vNdMd_M4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%25BB%25E5%2583%258F%25C3%2597%25E3%2582%25BF%25E3%2583%2583%25E3%2583%2581%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2581%25AE%25E3%2582%25A8%25E3%2583%25AA%25E3%2582%25A2%25E5%2588%2586%25E6%259E%2590%25E3%2582%2592%25E3%2582%25B5%25E3%2582%25AF%25E3%2583%2583%25E3%2581%25A8%25E5%25AE%259F%25E8%25A3%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Swatchp%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5YTg2ZTBmZjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Swatchp</dc:creator></item><item><title><![CDATA[もうWSLのターミナル迷子にならない！PythonとTkinterで作る自作GUI管理ツール『WSL Orchestrator』]]></title><description><![CDATA[
+ はじめに
+Windows上でLinux環境を動かせるWSL (Windows Subsystem for Linux) は、現代の開発者にとって不可欠なツールになりました。しかし、プロジェクトごとに複数のディストリビューションを使い分けていると、「あれ、あのインスタンスを起動したいんだけど…」「今の状態どうなってるんだっけ？」と、ターミナル上で wsl -l -v コマンドを何度も叩くことになりがちです。
+そんな日々の小さなストレスを解消するために、**「一目で全WSLインスタンスの状態を把握し、直感的に操作できるGUIツール」**を自作しました。
+それが今回紹介する**『WSL O...]]></description><link>https://zenn.dev/ishikori/articles/wsl-orchestrator-intro-20250810</link><guid isPermaLink="true">https://zenn.dev/ishikori/articles/wsl-orchestrator-intro-20250810</guid><pubDate>Sun, 10 Aug 2025 10:01:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Nj54P87k--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%2582%25E3%2581%2586WSL%25E3%2581%25AE%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%259F%25E3%2583%258A%25E3%2583%25AB%25E8%25BF%25B7%25E5%25AD%2590%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%2589%25E3%2581%25AA%25E3%2581%2584%25EF%25BC%2581Python%25E3%2581%25A8Tkinter%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%25E8%2587%25AA%25E4%25BD%259CGUI%25E7%25AE%25A1%25E7%2590%2586%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2580%258EWSL%2520Orches...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ishikori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM1N2FlY2IyM2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ishikori</dc:creator></item><item><title><![CDATA[画像の中に好きなエリアを作って座標ファイルを書き出す方法]]></title><description><![CDATA[
+ 1. はじめに
+本記事の内容はあまり汎用的ではないかもしれませんが、
+画像の上にプロットされたデータのカウントや集計方法をご紹介します。
+今回は内容が多いため、まずは画像のエリア定義方法に絞って解説します。
+
+ エリア定義ファイル
+
+xy_points.csv
+
+ 2. 分析の流れ
+
+画像の読み込みとGUIによるラベリング（✅ 今回）
+ラベル情報の CSV 保存（✅ 今回）
+ラベル領域の色分け・描画（✅ 今回）
+評価データの集計（like / dislike / none）
+Excel ファイルへの出力
+散布図による可視化（参考）
+
+
+ 3. 調査
+仮定の調査なので、エリア定義しやす...]]></description><link>https://zenn.dev/swatchp/articles/689034ab344684</link><guid isPermaLink="true">https://zenn.dev/swatchp/articles/689034ab344684</guid><pubDate>Sun, 10 Aug 2025 07:27:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KS4NLvy7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%25BB%25E5%2583%258F%25E3%2581%25AE%25E4%25B8%25AD%25E3%2581%25AB%25E5%25A5%25BD%25E3%2581%258D%25E3%2581%25AA%25E3%2582%25A8%25E3%2583%25AA%25E3%2582%25A2%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E5%25BA%25A7%25E6%25A8%2599%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E6%259B%25B8%25E3%2581%258D%25E5%2587%25BA%25E3%2581%2599%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Swatchp%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5YTg2ZTBmZjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Swatchp</dc:creator></item><item><title><![CDATA[Datadog LLM Observabilityへの入門]]></title><description><![CDATA[今回は、DatadogのLLM Observabilityの機能を利用して、LLMアプリケーションの結果をDatadogにて取り扱ってみます。
+
+ Datadog LLM Observabilityとは？
+DatadogはObservabilityのSaaSとして絶対的な地位をとっているツールかと思います。LLMの発展に伴い、DatadogでもLLMのObservabilityを対応できるようになっており、その機能が今回紹介する機能になります。この機能を利用することでLLMアプリケーションの問題点の特定やパフォーマンス測定などを行うことができ、より堅牢なLLMアプリケーションの実装を実現...]]></description><link>https://zenn.dev/akasan/articles/c6e1a1a001f863</link><guid isPermaLink="true">https://zenn.dev/akasan/articles/c6e1a1a001f863</guid><pubDate>Sun, 10 Aug 2025 06:07:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--I3CPBBtW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Datadog%2520LLM%2520Observability%25E3%2581%25B8%25E3%2581%25AE%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Akasan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNXJfNDFtel9OY3dPYUtMRE1vc09tbVB6YmxHM0V5N3lNZzI3QWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Akasan</dc:creator></item><item><title><![CDATA[Google ColabでGemma + DeepEval QA評価システム構築ガイド]]></title><description><![CDATA[Google Colabの無料環境でGemma3nモデルを使い、DeepEvalによる高度なLLM as a Judge評価を実現する完全ガイドです。複雑な設定は不要で、環境変数変更だけでプロフェッショナルなQA評価システムが構築できます。
+
+ 🎯 この記事で実現できること
+
+
+無料: Google Colabの無料GPUでGemma3n実行
+
+シンプル: 環境変数変更だけで設定完了
+
+高機能: LLM as a Judge による多角的品質評価
+
+実用的: 日本語対応、バッチ処理、結果分析まで対応
+
+
+https://x.com/hAru_mAki_ch/status/19451588...]]></description><link>https://zenn.dev/sunwood_ai_labs/articles/build-gemma-deepeval-qa-system-colab</link><guid isPermaLink="true">https://zenn.dev/sunwood_ai_labs/articles/build-gemma-deepeval-qa-system-colab</guid><pubDate>Sun, 10 Aug 2025 05:04:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mNxdFlWL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Google%2520Colab%25E3%2581%25A7Gemma%2520%252B%2520DeepEval%2520QA%25E8%25A9%2595%25E4%25BE%25A1%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E6%25A7%258B%25E7%25AF%2589%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Maki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDdpSmVyNldLVlpKLUd4N054QWVuSFVtYXQ3MUhhd1NXaU5hRG5FTnZiMXZZdHBIaGs9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Maki</dc:creator></item><item><title><![CDATA[Zennの自分の全記事をダウンロードしてファイル化するスクリプト]]></title><description><![CDATA[Zennの非公式APIを使って、自分の全記事をダウンロードするスクリプトを書いてみました。
+アシスタントにChatGPTを使いました。
+chmod +x zenndl.pyで実行権を付け、./zenndl.pyで実行させてください。
+
+zenndl.py
+#!/usr/bin/env python3
+import requests
+import os
+from bs4 import BeautifulSoup
+import re
+import html2text
+
+USERNAME = "fygar256"  # ← あなたのZennユーザー名
+OUTPUT_DIR = "./zenn_...]]></description><link>https://zenn.dev/fygar256/articles/6ea9a04679e402</link><guid isPermaLink="true">https://zenn.dev/fygar256/articles/6ea9a04679e402</guid><pubDate>Sun, 10 Aug 2025 04:45:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3CRpEgIU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Zenn%25E3%2581%25AE%25E8%2587%25AA%25E5%2588%2586%25E3%2581%25AE%25E5%2585%25A8%25E8%25A8%2598%25E4%25BA%258B%25E3%2582%2592%25E3%2583%2580%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2597%25E3%2581%25A6%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:fygar256%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHY3TGluV3VfOE1nWmFqMFBpdVU3VlViZjRmYTlIeHFXbEpDTU10M3lkY1VOakhOVEo9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>fygar256</dc:creator></item><item><title><![CDATA[MinIOと データレイクハウス]]></title><description><![CDATA[オブジェクトストレージのオープンソースであるMinIOと
+それを使ったデータレイクハウスについて解説した本です。]]></description><link>https://zenn.dev/evakichi/books/d88a7fe52f46db</link><guid isPermaLink="true">https://zenn.dev/evakichi/books/d88a7fe52f46db</guid><pubDate>Sun, 10 Aug 2025 04:24:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xkiX_Meo--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci9iYTAwOWZhYWVhLmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>evakichi</dc:creator></item><item><title><![CDATA[Instructor: LLMからタイプセーフな構造化データを取得する仕組みとLiteLLMでの導入方法]]></title><description><![CDATA[
+ はじめに
+LLM（Large Language Model）から構造化されたデータを取得する際、JSONフォーマットでの出力を期待しても、実際には不完全な形式や型の不一致が発生することがあります。
+Instructorは、この問題を解決するPythonライブラリで、Pydanticの型検証と自動リトライメカニズムを組み合わせることで、LLMからタイプセーフな構造化データを高い信頼性で取得できます。
+本記事では、Instructorがどのようにしてタイプセーフを実現しているのか、その内部メカニズムをコードベースで解説し、LiteLLMを使った実装方法を紹介します。
+
+ Instruct...]]></description><link>https://zenn.dev/fitness_densuke/articles/instructor-litellm</link><guid isPermaLink="true">https://zenn.dev/fitness_densuke/articles/instructor-litellm</guid><pubDate>Sun, 10 Aug 2025 00:06:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--j00wSfA5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Instructor%253A%2520LLM%25E3%2581%258B%25E3%2582%2589%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%2597%25E3%2582%25BB%25E3%2583%25BC%25E3%2583%2595%25E3%2581%25AA%25E6%25A7%258B%25E9%2580%25A0%25E5%258C%2596%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%25E3%2581%25A8LiteLLM%25E3%2581%25A7%25E3%2581%25AE%25E5%25B0%258E%25E5%2585%25A5%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tamtam%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg4YzUxYzNmMDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tamtam</dc:creator></item><item><title><![CDATA[夏のプロジェクト第2週：PythonからHTMLへ変数を渡して、APIの応答を表示する]]></title><description><![CDATA[
+ 今回のゴール
+前回は、HTMLフォームから送信されたデータをPython(Flask)側で受け取り、ターミナルに表示するところまでを実装しました。
+今回のゴールは、ターミナルに表示するだけでなく、AIからの応答をWebページ上に表示させることです。
+
+ 1. 結果表示用のHTML (result.html) を作成
+まず、AIからの応答を表示するための、新しいHTMLページを用意しました。
+
+templates/result.html
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+    &lt;meta char...]]></description><link>https://zenn.dev/tomeito713/articles/display-api-response</link><guid isPermaLink="true">https://zenn.dev/tomeito713/articles/display-api-response</guid><pubDate>Sat, 09 Aug 2025 17:53:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sfZTKk3y--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25A4%258F%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E7%25AC%25AC2%25E9%2580%25B1%25EF%25BC%259APython%25E3%2581%258B%25E3%2582%2589HTML%25E3%2581%25B8%25E5%25A4%2589%25E6%2595%25B0%25E3%2582%2592%25E6%25B8%25A1%25E3%2581%2597%25E3%2581%25A6%25E3%2580%2581API%25E3%2581%25AE%25E5%25BF%259C%25E7%25AD%2594%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tomeITo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhiOGZiNzdmYTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tomeITo</dc:creator></item><item><title><![CDATA[🚀 FastAPI 実践入門：第三歩目で学ぶテンプレートとセッション管理]]></title><description><![CDATA[
+ 📝 はじめに
+第二歩目では、ルーティング、フォーム処理、バリデーション、エラーハンドリングといったWeb APIの土台を固める要素を扱いました。今回はその続きとして、FastAPIを使ったテンプレートエンジンの利用方法と、セッション管理の基本的な手法を紹介します。これにより、Webアプリとしてのフロントエンド要素とユーザー状態の管理を取り入れた構成が可能になります。テンプレートによって見た目の整ったWebページを提供し、セッションによってログイン状態やユーザーの識別を可能にすることで、より実践的なWebアプリケーションに近づくことができます。
+
+ 🖼️ テンプレートエンジン Jinj...]]></description><link>https://zenn.dev/oit2003/articles/16e8a890251d8a</link><guid isPermaLink="true">https://zenn.dev/oit2003/articles/16e8a890251d8a</guid><pubDate>Sat, 09 Aug 2025 16:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aHlL90Yn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520%2520FastAPI%2520%25E5%25AE%259F%25E8%25B7%25B5%25E5%2585%25A5%25E9%2596%2580%25EF%25BC%259A%25E7%25AC%25AC%25E4%25B8%2589%25E6%25AD%25A9%25E7%259B%25AE%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25A8%25E3%2582%25BB%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E7%25AE%25A1%25E7%2590%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:OIT2003%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUwxN0ZaM1B3YkZyak5GWFVZRnNva000aldZTWZaQzc0MVh1UzhtRDdlZUNJVT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>OIT2003</dc:creator></item><item><title><![CDATA[ここから始める Powertools for AWS Lambda (Python) - Parser 編 -]]></title><description><![CDATA[
+ はじめに
+こんばんは。
+株式会社 WHERE のプロダクト開発部で、主にインフラを担当している えんどぅ です。
+みなさん元気に Lambda Life を送っていますか??
+Lambda 関数の開発において、入力データの解析と検証は非常に重要な処理です。
+API Gateway からのリクエスト、EventBridge からのイベント、SQS メッセージなど、様々な形式のデータを安全かつ効率的に処理する必要があります。
+しかし、手動でのデータ解析と検証は複雑で、型安全性の確保、ネストされた構造の処理、カスタムバリデーションの実装など、多くの課題を抱えています。また、コードの可読性や...]]></description><link>https://zenn.dev/where/articles/1eb061d10d1117</link><guid isPermaLink="true">https://zenn.dev/where/articles/1eb061d10d1117</guid><pubDate>Sat, 09 Aug 2025 15:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QKKYTGmM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%2593%25E3%2581%2593%25E3%2581%258B%25E3%2582%2589%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258B%2520Powertools%2520for%2520AWS%2520Lambda%2520%2528Python%2529%2520-%2520Parser%2520%25E7%25B7%25A8%2520-%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:yendoooo%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1ZThlODg2OTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Penetrator%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1pIMi0wVWlCN2lZaUJidUZiN3lYVlU2YnRrdFJvb09WY3RVU3BiazBITHRtNlA4ZFo9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yendoooo</dc:creator></item></channel></rss>
