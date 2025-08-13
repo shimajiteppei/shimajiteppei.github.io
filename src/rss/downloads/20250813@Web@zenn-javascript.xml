@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 13 Aug 2025 12:04:47 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【JavaScript】参照型と値型の違いをclassListプロパティで体感する]]></title><description><![CDATA[
+ はじめに
+要素.classListプロパティの挙動を確かめるため、以下のコードで id 属性が p2 の pタグ を取得し、その値の変化を観察しました。
+
+ prac1.html
+&lt;body&gt;
+    &lt;div id="target1" class="bg-red"&gt;
+        &lt;p id="p1"&gt;
+            Hello World 1
+        &lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;div id="target2" class="bg-red"&gt;
+        &lt;p i...]]></description><link>https://zenn.dev/mabo23/articles/b2c17fefee90dc</link><guid isPermaLink="true">https://zenn.dev/mabo23/articles/b2c17fefee90dc</guid><pubDate>Wed, 13 Aug 2025 11:31:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RZatA73k--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591%25E5%258F%2582%25E7%2585%25A7%25E5%259E%258B%25E3%2581%25A8%25E5%2580%25A4%25E5%259E%258B%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2582%2592classList%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2591%25E3%2583%2586%25E3%2582%25A3%25E3%2581%25A7%25E4%25BD%2593%25E6%2584%259F%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mabo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQzM2ZhMmVkZDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mabo</dc:creator></item><item><title><![CDATA[ページ離脱時にアラートを出したかった]]></title><description><![CDATA[
+ 概要
+Nuxtで以下の方法でページ離脱をするときに window.confirm('hogehoge') してOKならそのまま遷移、キャンセルなら留まるみたいなことをしたかった
+
+リロード(離脱というかコンポーネントのunmount)
+単純にどっか行く
+ブラウザの「戻る」ボタン
+
+
+ 😥できなかったこと1: beforeunloadイベントの追加
+export default defineComponent({
+  setup() {
+    const handleBeforeUnload = () =&gt; {
+      const isConfirm = window.co...]]></description><link>https://zenn.dev/mt5/articles/41a046d7ddd259</link><guid isPermaLink="true">https://zenn.dev/mt5/articles/41a046d7ddd259</guid><pubDate>Wed, 13 Aug 2025 09:55:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nRpUqeFT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E9%259B%25A2%25E8%2584%25B1%25E6%2599%2582%25E3%2581%25AB%25E3%2582%25A2%25E3%2583%25A9%25E3%2583%25BC%25E3%2583%2588%25E3%2582%2592%25E5%2587%25BA%25E3%2581%2597%25E3%2581%259F%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258A%25E3%2583%25BC%25E3%2581%258F%25E3%2581%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk2OGY2M2MyNTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>おーくぼ</dc:creator></item><item><title><![CDATA[Error: error:0308010C:digital envelope routines::unsupported]]></title><description><![CDATA[
+ これなに
+
+
+npm start でサーバー起動しようとしたら Error: error:0308010C:digital envelope routines::unsupported というエラーが出た
+その時の解決方法をメモ
+
+
+ 原因
+
+Node.js のバージョンと Webpack の互換性の問題
+Node.js v17 以降で OpenSSL の変更が原因で発生するようになった模様で、v16 以前は発生しなかったらしい
+
+
+ 解決方法
+
+ その１：npm_modules フォルダを削除して再インストール
+
+
+npm_modules: フォルダを削除する
+
+npm insta...]]></description><link>https://zenn.dev/su3_hokkaido/articles/2024-12-01_digital_envelop_routines_unsupported</link><guid isPermaLink="true">https://zenn.dev/su3_hokkaido/articles/2024-12-01_digital_envelop_routines_unsupported</guid><pubDate>Wed, 13 Aug 2025 06:50:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4pjniQvH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Error%253A%2520error%253A0308010C%253Adigital%2520envelope%2520routines%253A%253Aunsupported%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Su3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlmY2Q1YTk5MTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Su3</dc:creator></item><item><title><![CDATA[無限ローディングに泣かない！CORSとポート競合の向き合い方]]></title><description><![CDATA[
+ はじめに
+Webアプリケーションを開発していると、デプロイ環境では問題なく動くのに、なぜかローカル環境だけは無限ローディングのままでデータが表示されない、そんな経験ありませんか？
+最近、私自身がまさにこの無限ローディング地獄に陥ってしまいました。GitHub Actionsでデプロイされたプレビュー版は問題なく動きます。しかし、最新にしたはずの自分のローカル環境だと、テーブルがずっとくるくる回りっぱなし。
+ブラウザの開発者ツールを見ても、明確なエラーが分からず頭を抱えました。
+
+ Web開発のセキュリティ「CORS」とは
+無限ローディングの裏に潜んでいた原因、それがCORS(Cros...]]></description><link>https://zenn.dev/emoba_tech/articles/5884b042402326</link><guid isPermaLink="true">https://zenn.dev/emoba_tech/articles/5884b042402326</guid><pubDate>Wed, 13 Aug 2025 05:08:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GCiFg7mG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2584%25A1%25E9%2599%2590%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AB%25E6%25B3%25A3%25E3%2581%258B%25E3%2581%25AA%25E3%2581%2584%25EF%25BC%2581CORS%25E3%2581%25A8%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E7%25AB%25B6%25E5%2590%2588%25E3%2581%25AE%25E5%2590%2591%25E3%2581%258D%25E5%2590%2588%25E3%2581%2584%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:nekoyukichi%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NmNTk5ZjM4YjcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Emoba%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZkMjEyNmVjZDkuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nekoyukichi</dc:creator></item><item><title><![CDATA[Node.jsでマルチCPUコアを使ってスケールする方法（+Kubernetes）]]></title><description><![CDATA[
+ はじめに
+ある日、トラフィックがドカっと増えてアプリが落ちました🥹
+「CPUは2コアあるし、余裕でしょ」と思っていたのに、どうやら1コアしか使われてない様子…
+原因は単純で、Node.jsはデフォルトでマルチコアを使わないんですよね。
+なので今回は、clusterモジュールを使って「疑似マルチコア化」してみた話です。
+
+ そもそもJavaScriptってなんでシングルスレッドなの？
+この設計は、ブラウザの主流用途である「DOM操作との親和性」と「直感的な非同期処理」を実現するために選ばれたもの。
+
+JavaScript is single-threaded by nature. Th...]]></description><link>https://zenn.dev/quicksilversel/articles/enable-multi-cpu-nodejs</link><guid isPermaLink="true">https://zenn.dev/quicksilversel/articles/enable-multi-cpu-nodejs</guid><pubDate>Wed, 13 Aug 2025 01:53:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9KZNr4Qk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Node.js%25E3%2581%25A7%25E3%2583%259E%25E3%2583%25AB%25E3%2583%2581CPU%25E3%2582%25B3%25E3%2582%25A2%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2582%25B9%25E3%2582%25B1%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25EF%25BC%2588%252BKubernetes%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25BE%25E3%2582%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1NmE2MDZlMTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ゾイ</dc:creator></item><item><title><![CDATA[#119　【ThreeJS】自作のモデルを読み込んで夏っぽい雰囲気の出力に挑戦してみた]]></title><description><![CDATA[
+ はじめに
+一時期、趣味で3Dモデリングをやっていた時期があり、前から興味があったThreeJSを触ってみましたので備忘録的な意味を込めて記事にしました。
+
+ 概要
+今回、自作したガチャガチャのモデルを使用して少し夏っぽい雰囲気を感じられるレンダリングを目指して色々と試してみました。
+ThreeJSの機能に触れるということも目的にしていたため、少し遠回りな実装もあると思いますがご了承ください。
+
+ ディレクトリ構成
+今回の最終的なディレクトリ構成は以下のようになります。
+  ├── assets モデルやHDR、テクスチャを格納する
+  │  │
+  │  ├── models
+  │...]]></description><link>https://zenn.dev/nxted_sapporo/articles/57d5b8ef73a73b</link><guid isPermaLink="true">https://zenn.dev/nxted_sapporo/articles/57d5b8ef73a73b</guid><pubDate>Wed, 13 Aug 2025 01:06:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--g0NQaUgi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2523119%25E3%2580%2580%25E3%2580%2590ThreeJS%25E3%2580%2591%25E8%2587%25AA%25E4%25BD%259C%25E3%2581%25AE%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E3%2582%2592%25E8%25AA%25AD%25E3%2581%25BF%25E8%25BE%25BC%25E3%2582%2593%25E3%2581%25A7%25E5%25A4%258F%25E3%2581%25A3%25E3%2581%25BD%25E3%2581%2584%25E9%259B%25B0%25E5%259B%25B2%25E6%25B0%2597%25E3%2581%25AE%25E5%2587%25BA%25E5%258A%259B%25E3%2581%25AB%25E6%258C%2591%25E6%2588%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NXTEDCo.%252C%2520Ltd.%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBmZjQzOTVhYzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NXTEDCo., Ltd.</dc:creator></item><item><title><![CDATA[WASM の約束と現実のギャップ──組み込みデバイスで 142 倍速くするハードウェア加速の可能性]]></title><description><![CDATA[
+ 1. 導入：WASM の「ほぼネイティブ速度」は本当か？
+「WebAssembly（以下、WASM）は C / C++ / Rust などのコードをブラウザでほぼネイティブ速度で動かせる」と聞いたことがある人は多いでしょう。
+しかし、Raspberry Pi で単純なフィボナッチ計算を試してみると、想像以上に遅い……そんな経験はありませんか？
+WASM は、ブラウザ上の性能ボトルネックを解消し、安全かつ高効率でコードを実行するために設計されました。コードをバイナリ形式にコンパイルし、小さなサイズで高速に起動し、ほぼネイティブ速度で動作できるはずです。
+実際、デスクトップ PC やノー...]]></description><link>https://zenn.dev/zoe_nichika/articles/ca1c48ca7ca25a</link><guid isPermaLink="true">https://zenn.dev/zoe_nichika/articles/ca1c48ca7ca25a</guid><pubDate>Wed, 13 Aug 2025 01:04:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0COZ9lDk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WASM%2520%25E3%2581%25AE%25E7%25B4%2584%25E6%259D%259F%25E3%2581%25A8%25E7%258F%25BE%25E5%25AE%259F%25E3%2581%25AE%25E3%2582%25AE%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2597%25E2%2594%2580%25E2%2594%2580%25E7%25B5%2584%25E3%2581%25BF%25E8%25BE%25BC%25E3%2581%25BF%25E3%2583%2587%25E3%2583%2590%25E3%2582%25A4%25E3%2582%25B9%25E3%2581%25A7%2520142%2520%25E5%2580%258D%25E9%2580%259F%25E3%2581%258F%25E3%2581%2599%25E3%2582%258B%25E3%2583%258F%25E3%2583%25BC%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A7%25E3%2582%25A2%25E5%258A%25A0%25E9%2580%259F%25E3%2581%25AE%25E5%258F%25AF%25E8%2583%25BD%25E6%2580%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NichikaP%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiMDI5ZjQ1YmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NichikaP</dc:creator></item><item><title><![CDATA[XSS脆弱性の基礎からDOMPurifyによる防御までReactで学ぶ]]></title><description><![CDATA[
+ XSS(クロスサイトスクリプティング)とは
+XSS（クロスサイトスクリプティング）とは、Webアプリケーションに悪意のあるスクリプト（JavaScriptなど）を埋め込み、ユーザーのブラウザ上で実行させることで情報の盗聴や不正操作を行う攻撃手法です。
+例えば、ブログの記事投稿機能にscriptタグで悪意あるスクリプト（ポップアップ表示や外部サイトへの自動リダイレクトなど）を埋め込んで投稿するケースなどがあります。
+Twitter,Yahooニュース,YouTubeといった著名なサービスでも、
+以下の表のように被害を受けたことがあります。
+
+
+
+サービス
+西暦
+概要
+備考
+
+
+
+
+Tw...]]></description><link>https://zenn.dev/ohimusdev46301/articles/479ac19d593cb5</link><guid isPermaLink="true">https://zenn.dev/ohimusdev46301/articles/479ac19d593cb5</guid><pubDate>Tue, 12 Aug 2025 19:15:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PRSN4lsg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:XSS%25E8%2584%2586%25E5%25BC%25B1%25E6%2580%25A7%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%25E3%2581%258B%25E3%2582%2589DOMPurify%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E9%2598%25B2%25E5%25BE%25A1%25E3%2581%25BE%25E3%2581%25A7React%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Wataru%2520Takiguchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdkOTBhM2EyYTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Wataru Takiguchi</dc:creator></item><item><title><![CDATA[【繰り返し処理の最適化】JavaScriptの setInterval を使わずに GSAP の onRepeat で実装する。]]></title><description><![CDATA[繰り返し処理を実装する際はsetIntervalを使用することが多いかと思いますが、今回はGSAPのonRepeatで実装する方法をご紹介します。
+
+ setInterval で実装する際の気になる点
+setIntervalで繰り返し処理を実装する際の気になる点は以下です。
+
+別タブを選択すると実行間隔が間引きされて実行され続ける
+
+ブラウザはパフォーマンスを最適化するため、アクティブでないタブ（別タブを選択している場合など）のJavaScript実行を制限します。この現象は「スロットリング」と呼ばれ、ブラウザによって実行制限は変化します。
+例えば、以下のコードを実行中に別のタブに切り替...]]></description><link>https://zenn.dev/kurichan/articles/80c12db2c8b2b6</link><guid isPermaLink="true">https://zenn.dev/kurichan/articles/80c12db2c8b2b6</guid><pubDate>Tue, 12 Aug 2025 15:57:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rjoCG-RZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E7%25B9%25B0%25E3%2582%258A%25E8%25BF%2594%25E3%2581%2597%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25AE%25E6%259C%2580%25E9%2581%25A9%25E5%258C%2596%25E3%2580%2591JavaScript%25E3%2581%25AE%2520setInterval%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2582%258F%25E3%2581%259A%25E3%2581%25AB%2520GSAP%25C2%25A0%25E3%2581%25AE%2520onRepeat...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258F%25E3%2582%258A%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RjN2IzM2RiNTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>くりちゃん</dc:creator></item><item><title><![CDATA[WixStudioでVeloを使う Step 38 「新フォーム」]]></title><description><![CDATA[
+ はじめに
+
+最近、WixStudioのフォーム周りの話題が騒がしい。2025年8月1日から旧フォームが使えなくなったらしい。正直新しいものにしか興味が無く古いものは積極的には触らないので、なんとも思ってなかった。しかし、考えてみると僕もたいして新フォームに触れていない。すこし触ってみて分かったことをメモする。
+
+ 準備
+新しくサイトを作成しておく。
+
+ 新フォームを用意する
+まずは新フォームを配置する。
+パーツ追加から「お問い合わせ・フォーム」、「新規フォームを作成」で追加出来る。
+
+新規フォームを作成
+適当に入力欄を追加しておく。今回は「連絡先」から「姓」「名」「メールアドレス」を...]]></description><link>https://zenn.dev/niibori/articles/veloonwixstudio-beginner-0038</link><guid isPermaLink="true">https://zenn.dev/niibori/articles/veloonwixstudio-beginner-0038</guid><pubDate>Tue, 12 Aug 2025 15:14:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yEb0VUek--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WixStudio%25E3%2581%25A7Velo%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2520Step%252038%2520%25E3%2580%258C%25E6%2596%25B0%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%25A0%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Niibori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U4ZDA4Mjg3YTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Niibori</dc:creator></item><item><title><![CDATA[【JavaScript】getElementById("") の結果に子ノードもコンソールに表示された理由をまとめてみた]]></title><description><![CDATA[
+ 疑問
+以下のコードを実行した結果、コンソールに "id" が "bg" の div 要素が出力されると予想しましたが、結果は以下のようになりました。
+このとき、h1 要素も一緒に出力されたことに疑問を持ちました。
+なぜなら、getElementById()メソッドは、指定された単一のノードを取得するはずなのに、h1 要素も一緒に出力されたからです。
+&lt;div&gt;
+    &lt;p id="hw"&gt;Hello World&lt;/p&gt;
+    &lt;div id="hg"&gt;
+        &lt;h1&gt;Have a good day!&lt;/h...]]></description><link>https://zenn.dev/mabo23/articles/32d28dbcf19854</link><guid isPermaLink="true">https://zenn.dev/mabo23/articles/32d28dbcf19854</guid><pubDate>Tue, 12 Aug 2025 11:31:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7WGN5Ta1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591getElementById%2528%2522%2522%2529%2520%25E3%2581%25AE%25E7%25B5%2590%25E6%259E%259C%25E3%2581%25AB%25E5%25AD%2590%25E3%2583%258E%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2582%25E3%2582%25B3%25E3%2583%25B3%25E3%2582%25BD%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25AB%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2595%25E3%2582%258C%25E3%2581%259F%25E7%2590%2586%25E7%2594%25B1%25E3%2582%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mabo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQzM2ZhMmVkZDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mabo</dc:creator></item><item><title><![CDATA[GSAPでスムーススクロールに独自のイージングを適用させるシンプルな実装例]]></title><description><![CDATA[スムーススクロールとはリンクをクリックした際にページ内の目的の要素まで滑らかに移動させるアニメーションのことです。この機能に独自のイージングやアニメーションの間隔を指定する方法を紹介します。
+
+ window.scrollTo では独自のイージングやアニメーションの間隔を指定できない
+初めに、スムーススクロールはJavaScriptのwindow.scrollToを使用して実装するのが一般的だと思いますが、window.scrollToはブラウザの持つデフォルトのスムーススクロール機能が使用されるので、独自のイージングやアニメーションの間隔を指定できません。
+window.scrollT...]]></description><link>https://zenn.dev/kurichan/articles/7c980e20e0c053</link><guid isPermaLink="true">https://zenn.dev/kurichan/articles/7c980e20e0c053</guid><pubDate>Tue, 12 Aug 2025 10:43:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KVZQ5sYH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GSAP%25E3%2581%25A7%25E3%2582%25B9%25E3%2583%25A0%25E3%2583%25BC%25E3%2582%25B9%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25AB%25E7%258B%25AC%25E8%2587%25AA%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%2592%25E9%2581%25A9%25E7%2594%25A8%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%25E3%2582%25B7%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2581%25AA%25E5%25AE%259F%25E8%25A3%2585%25E4%25BE%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258F%25E3%2582%258A%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RjN2IzM2RiNTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>くりちゃん</dc:creator></item><item><title><![CDATA[ChatGPTで Vim ライクなキーバインドを使う]]></title><description><![CDATA[
+ 背景
+Web 版の ChatGPT を Vivaldi でアプリケーション化して使っている。
+長らく使っているが、いくつか不便なところがある。
+一番気になるのは、送信時に Enter じゃなくて Ctrl+Enter で送信したい。Enter は改行にしたい。
+もう一つは、送信後に応答が出力される時や、過去の会話を見返す時に、トラックパッドやマウスを使ってスクロールしないといけないこと。
+入力中に見返したい場合などにもキーボードから手が離れて手間になる。テキストボックスにフォーカスを戻すのも手間。思考が途切れる。
+
+ やったこと
+これを何とかしたくて、Vim ライクなキーバインドの一...]]></description><link>https://zenn.dev/basyura/articles/447d1df9a4db35</link><guid isPermaLink="true">https://zenn.dev/basyura/articles/447d1df9a4db35</guid><pubDate>Tue, 12 Aug 2025 09:29:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CVTL1_3U--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ChatGPT%25E3%2581%25A7%2520Vim%2520%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25AF%25E3%2581%25AA%25E3%2582%25AD%25E3%2583%25BC%25E3%2583%2590%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:basyura%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFhOTA1MGQ3YzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>basyura</dc:creator></item><item><title><![CDATA[【ClaudeCode開発】文字数チェッカー - シンプルなリアルタイム文字カウントツール]]></title><description><![CDATA[
+ はじめに
+「毎日使うものだからこそシンプルに」という思想で、文字数カウント機能のみに特化したWebツールを開発しました。リリース後にユーザーから文字数カウント方式についてのコメントをいただき、Unicode文字数方式への改善も行いました。YouTube台本制作で毎日他社の文字数チェックサービスを使用する中で感じた「余計な機能による複雑さ」を解決しながら、正確な文字カウントを実現するツールです。
+本記事では、リアルタイム文字カウント、3パターンの文字数表示、プライバシー配慮のクライアントサイド設計など、シンプルながら実用的なツールの構築手順を解説します。
+
+ 本記事について
+今回の開発...]]></description><link>https://zenn.dev/5naokichi/articles/f1217311735e1a</link><guid isPermaLink="true">https://zenn.dev/5naokichi/articles/f1217311735e1a</guid><pubDate>Tue, 12 Aug 2025 08:41:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qT_KCNFd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590ClaudeCode%25E9%2596%258B%25E7%2599%25BA%25E3%2580%2591%25E6%2596%2587%25E5%25AD%2597%25E6%2595%25B0%25E3%2583%2581%25E3%2582%25A7%25E3%2583%2583%25E3%2582%25AB%25E3%2583%25BC%2520-%2520%25E3%2582%25B7%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2581%25AA%25E3%2583%25AA%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E6%2596%2587%25E5%25AD%2597%25E3%2582%25AB%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%2588%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AA%25E3%2581%258A%25E3%2581%258D%25E3%2581%25A1%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyYTY0ODViMjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>なおきち</dc:creator></item><item><title><![CDATA[Alpine.jsライクな軽量フレームワーク「sprae」]]></title><description><![CDATA[Alpine.js や petite-vue によく似たプログレッシブ・エンハンスメントなフロンドエンドフレームワークの「sprae」をざっくり紹介します。「: しか使わない！」という潔さが好きです。超マイナーで、まだバグが多そう。
+https://github.com/dy/sprae
+以下、Alpine.js との比較で書いています。
+
+ 変数とコンテント
+Alpine.js と使い方は同じです。petite-vue のような {{ }} は使えません。
+
+ sprae
+&lt;body&gt;
+  &lt;p&gt;&lt;span :text="message"&gt;&lt;/...]]></description><link>https://zenn.dev/ojk/articles/intro-to-sprae</link><guid isPermaLink="true">https://zenn.dev/ojk/articles/intro-to-sprae</guid><pubDate>Tue, 12 Aug 2025 06:27:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qlF7BwTJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Alpine.js%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25AF%25E3%2581%25AA%25E8%25BB%25BD%25E9%2587%258F%25E3%2583%2595%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%25A0%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E3%2580%258Csprae%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:OJK%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2l6YV9DYXFDMXM4NVJfdF9wSTlURENXTW1Ca0tqakxMbV9FNEJCPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>OJK</dc:creator></item><item><title><![CDATA[「UIが固まる」を解決！Vite + Web Workerでサクサク描画を実現]]></title><description><![CDATA[
+ はじめに
+Webアプリで重い処理を実行すると、ローディング中にUIが固まってしまう経験はないでしょうか。
+JavaScriptは基本的にシングルスレッドで動作するため、CPUを占有するような処理が走ると描画やイベント処理がブロックされ、アニメーションやスクロールがカクつきます。
+そこで登場するのが Web Worker。
+メインスレッドとは別スレッドでJavaScriptを実行できる仕組みで、重い処理をオフロードすることでUIを滑らかに保てます。
+この記事では、Vite + プレーンなJavaScriptでWeb Workerの効果を体感できるサンプルプロジェクトを作成し、メインスレ...]]></description><link>https://zenn.dev/yu8/articles/6abba033b5cca9</link><guid isPermaLink="true">https://zenn.dev/yu8/articles/6abba033b5cca9</guid><pubDate>Tue, 12 Aug 2025 04:47:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WxtX4_Wx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258CUI%25E3%2581%258C%25E5%259B%25BA%25E3%2581%25BE%25E3%2582%258B%25E3%2580%258D%25E3%2582%2592%25E8%25A7%25A3%25E6%25B1%25BA%25EF%25BC%2581Vite%2520%252B%2520Web%2520Worker%25E3%2581%25A7%25E3%2582%25B5%25E3%2582%25AF%25E3%2582%25B5%25E3%2582%25AF%25E6%258F%258F%25E7%2594%25BB%25E3%2582%2592%25E5%25AE%259F%25E7%258F%25BE%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:zawa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcwNGNlYzY0YzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zawa</dc:creator></item><item><title><![CDATA[JS/TS学習備忘録]]></title><description><![CDATA[理解を深めるため学習に応じて書き連ねていく
+本届いたら勉強して理解したことを書き連ねていく
+
+ JavaScript
+aaa
+
+ TypeScript
+aaa
+]]></description><link>https://zenn.dev/nanashi123/articles/javascript-typescript-learn-memo</link><guid isPermaLink="true">https://zenn.dev/nanashi123/articles/javascript-typescript-learn-memo</guid><pubDate>Mon, 11 Aug 2025 18:53:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PRTzDj93--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JS%252FTS%25E5%25AD%25A6%25E7%25BF%2592%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nanashi123%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzliZDI1NzkwZTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nanashi123</dc:creator></item><item><title><![CDATA[Chrome 拡張機能(Manifest v3)で開いてるタブに対して文字列でJSを実行する方法]]></title><description><![CDATA[
+ まえがき
+もともとManifest v2で開発していたものがあり、v3にアップデートするのが面倒で放置していたらついに使えなくなってしまいやむを得ずアップデートすることにしました。
+その時、基本的には マイグレーションガイド の通りにやって動いたのですが、 chrome.tabs.executeScript で対象のタブに文字列でjsを実行している部分だけうまく実行することができませんでした。
+
+ コードの例
+
+ v2 のコード
+もともとこんな感じだったものを
+
+chrome.tabs.executeScript(tabId, {
+  code: "ユーザーが設定した文字列で書かれた...]]></description><link>https://zenn.dev/rabee/articles/chrome-extensions-v2-user-scripts-execute</link><guid isPermaLink="true">https://zenn.dev/rabee/articles/chrome-extensions-v2-user-scripts-execute</guid><pubDate>Mon, 11 Aug 2025 10:15:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_ytwrf1l--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Chrome%2520%25E6%258B%25A1%25E5%25BC%25B5%25E6%25A9%259F%25E8%2583%25BD%2528Manifest%2520v3%2529%25E3%2581%25A7%25E9%2596%258B%25E3%2581%2584%25E3%2581%25A6%25E3%2582%258B%25E3%2582%25BF%25E3%2583%2596%25E3%2581%25AB%25E5%25AF%25BE%25E3%2581%2597%25E3%2581%25A6%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E3%2581%25A7JS%25E3%2582%2592%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:simiraaaa%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlMWYxMzE5MTcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Rabee%2520Tech%2520blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JhMzE5YTc2YzYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>simiraaaa</dc:creator></item><item><title><![CDATA[OpenAPIをベースにクライアントコードの自動生成(axios利用)]]></title><description><![CDATA[
+ はじめに
+API開発において、クライアントコードの手動実装は、時間と労力がかかるだけでなく、API仕様の変更に追従する際のヒューマンエラーを引き起こす可能性が高まります。OpenAPI Generator CLIを活用すれば、OpenAPI定義ファイルからTypeScriptのクライアントコードを自動生成でき、これらの課題を解決できます。
+他にも色々ライブラリ等ありますが個人的に利用していて使いやすかったです。
+本記事では、その具体的な手法と、実践的なクライアント設定について解説します。
+
+ ライブラリインストール
+https://github.com/OpenAPITools/op...]]></description><link>https://zenn.dev/engineer_yyyymm/articles/063a36a86b4d7d</link><guid isPermaLink="true">https://zenn.dev/engineer_yyyymm/articles/063a36a86b4d7d</guid><pubDate>Mon, 11 Aug 2025 10:03:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--llj4kF8f--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OpenAPI%25E3%2582%2592%25E3%2583%2599%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%25AB%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25A2%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25AE%25E8%2587%25AA%25E5%258B%2595%25E7%2594%259F%25E6%2588%2590%2528axios%25E5%2588%25A9%25E7%2594%25A8%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yyyymm%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlOTU0MTM0NjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yyyymm</dc:creator></item><item><title><![CDATA[テストをするときネストをするな - Avoid Nesting when you're Testing]]></title><description><![CDATA[Kent C. Dodds 氏による Avoid Nesting when you're Testing という記事を翻訳させていただきました。
+以下、本文。
+
+これからご紹介するのは、React コンポーネントのテストに適用される一般的なテスト原則です。例に React を使用していますが、この概念正しく理解するのに役立つことを願っています。
+!
+ネスト自体が悪いと言っているのではありません。しかしネストはテストフック（beforeEach など）をコード再利用の手段として使うことを促進し、結果としてメンテナンスしづらいテストになってしまうということです。続きをお読みください。
+
+テス...]]></description><link>https://zenn.dev/jay_es/articles/2025-08-11-avoid-nesting-when-youre-testing</link><guid isPermaLink="true">https://zenn.dev/jay_es/articles/2025-08-11-avoid-nesting-when-youre-testing</guid><pubDate>Mon, 11 Aug 2025 05:54:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--v_WUy2l---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E3%2581%258D%25E3%2583%258D%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%25E3%2581%25AA%2520-%2520Avoid%2520Nesting%2520when%2520you%2527re%2520Testing%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:jay-es%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hTT1NsdjJlWERneXVQbVRNR2xEa2ZZb2pKNnNGcmVjVmFpOWRWTUE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>jay-es</dc:creator></item></channel></rss>
