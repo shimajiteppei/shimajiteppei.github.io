@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 14 Aug 2025 12:05:08 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Node.jsのモジュール解決とnpm workspacesにおけるモノレポ参照の仕組み]]></title><description><![CDATA[
+ はじめに
+モノレポを利用しはじめるにあたって、npm workspacesで他パッケージのモジュールを参照する仕組みを調べたのでまとめました。
+
+ 1. Node.js の基本モジュール解決ルール
+Node.jsでは、require('foo') のようにモジュール名が渡されたとき、次の順で探索します。
+
+
+コアモジュールの確認
+http や fs など、Node.jsに組み込みのモジュールがあればそれを即座に返す。
+
+
+相対／絶対パス指定の確認
+./foo や /path/to/foo のようにパスで指定された場合は、そのパスを直接解決。
+
+
+名前（識別子）による探索
+現在のファイ...]]></description><link>https://zenn.dev/papanyanko/articles/how-nodejs-resolves-workspace-in-npm-workspaces</link><guid isPermaLink="true">https://zenn.dev/papanyanko/articles/how-nodejs-resolves-workspace-in-npm-workspaces</guid><pubDate>Thu, 14 Aug 2025 11:58:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uw6Yp70F--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Node.js%25E3%2581%25AE%25E3%2583%25A2%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AB%25E8%25A7%25A3%25E6%25B1%25BA%25E3%2581%25A8npm%2520workspaces%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E3%2583%25A2%25E3%2583%258E%25E3%2583%25AC%25E3%2583%259D%25E5%258F%2582%25E7%2585%25A7%25E3%2581%25AE%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:papanyanko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RmZGFlNzE5YTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>papanyanko</dc:creator></item><item><title><![CDATA[小規模プロジェクトのフルスタックな開発はFirebaseがオススメ！]]></title><description><![CDATA[
+ はじめに
+フルスタックWebアプリケーションの開発において、ソースコードの設計やインフラ管理の複雑さはしばしば開発の障壁となります。
+しかし、Firebaseを活用することで、これらの課題を大幅に軽減できます。今回は、実際の開発経験を基に、最近のFirebaseのオススメポイントをご紹介します。
+
+ プロジェクト概要
+今回紹介するシステムは以下の技術スタックで構築されています：
+
+
+フロントエンド: Next.js 15.0.0 (React 18)
+
+バックエンド: Firebase Functions (Node.js 22)
+
+ホスティング: Firebase App Host...]]></description><link>https://zenn.dev/doctormate/articles/4bc21ca82aec4e</link><guid isPermaLink="true">https://zenn.dev/doctormate/articles/4bc21ca82aec4e</guid><pubDate>Thu, 14 Aug 2025 09:44:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--S3_UhJph--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25B0%258F%25E8%25A6%258F%25E6%25A8%25A1%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25AE%25E3%2583%2595%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25AA%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AFFirebase%25E3%2581%258C%25E3%2582%25AA%25E3%2582%25B9%25E3%2582%25B9%25E3%2583%25A1%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%2582%25E3%2581%25A4%25E3%2581%258A%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FiYmEzODYwNjQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2589%25E3%2582%25AF%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25A1%25E3%2582%25A4%25E3%2583%2588%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTEhSS3VneTdNNmRpXzNTUXdRZUNVS0FoQTRzS1BrdHFicnJPVGlQVXJ0STZXSndWZlU9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>もつお</dc:creator></item><item><title><![CDATA[DDDのServiceパターンをTypeScript関数型アプローチで実装する実践ガイド]]></title><description><![CDATA[
+ はじめに
+ドメイン駆動設計（DDD）を学ぶ際、多くの開発者がつまずくポイントの一つが「Service」の理解と適切な実装です。特に、EntityやValue Objectには属さないビジネスロジックをどう扱うべきか、どのようにServiceを分類し実装すべきかについては、実践的な指針が不足しがちです。
+本記事では、TypeScriptの関数型アプローチを用いて、DDDにおけるServiceパターンを実装する方法を詳しく解説します。クラスベースの実装ではなく、関数と型を活用したモダンなアプローチで、保守性と可読性を両立させる手法をお伝えします。
+対象読者
+
+DDDの基本概念は理解してい...]]></description><link>https://zenn.dev/kimkiyong/articles/920d5637f5bc4f</link><guid isPermaLink="true">https://zenn.dev/kimkiyong/articles/920d5637f5bc4f</guid><pubDate>Thu, 14 Aug 2025 03:35:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UUPWJbsi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:DDD%25E3%2581%25AEService%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%2592TypeScript%25E9%2596%25A2%25E6%2595%25B0%25E5%259E%258B%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2581%25E3%2581%25A7%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%25E5%25AE%259F%25E8%25B7%25B5%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258D%25E3%2582%2587%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZlNGVhN2QzODAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>きょん</dc:creator></item><item><title><![CDATA[【TypeScript】interface配列の数値プロパティの合計をreduceで求める]]></title><description><![CDATA[
+ はじめに
+TypeScriptで、interface に定義された数値プロパティを持つオブジェクトの配列から、
+その合計値を求めたい場面があります。
+この処理に便利な reduce メソッドについて、備忘録としてまとめます。
+
+ サンプルコード
+interface Fruit {
+  name: string;
+  price: number;
+}
+
+const fruits: Fruit[] = [
+  { name: 'Apple', price: 120 },
+  { name: 'Banana', price: 80 },
+  { name: 'Orange', price:...]]></description><link>https://zenn.dev/fd2025/articles/df54a4428bc47c</link><guid isPermaLink="true">https://zenn.dev/fd2025/articles/df54a4428bc47c</guid><pubDate>Wed, 13 Aug 2025 12:50:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--L4jVhK-N--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590TypeScript%25E3%2580%2591interface%25E9%2585%258D%25E5%2588%2597%25E3%2581%25AE%25E6%2595%25B0%25E5%2580%25A4%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2591%25E3%2583%2586%25E3%2582%25A3%25E3%2581%25AE%25E5%2590%2588%25E8%25A8%2588%25E3%2582%2592reduce%25E3%2581%25A7%25E6%25B1%2582%25E3%2582%2581%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:fd2025%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzMzVlNTI5MmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>fd2025</dc:creator></item><item><title><![CDATA[Error: error:0308010C:digital envelope routines::unsupported]]></title><description><![CDATA[
+ これなに
+
+
+npm start でサーバー起動しようとしたら Error: error:0308010C:digital envelope routines::unsupported というエラーが出た
+その時の解決方法をメモ
+
+
+ 原因
+
+Node.js のバージョンと Webpack の互換性の問題
+Node.js v17 以降で OpenSSL の変更が原因で発生するようになった模様で、v16 以前は発生しなかったらしい
+
+
+ 解決方法
+
+ その１：npm_modules フォルダを削除して再インストール
+
+
+npm_modules: フォルダを削除する
+
+npm insta...]]></description><link>https://zenn.dev/su3_hokkaido/articles/2024-12-01_digital_envelop_routines_unsupported</link><guid isPermaLink="true">https://zenn.dev/su3_hokkaido/articles/2024-12-01_digital_envelop_routines_unsupported</guid><pubDate>Wed, 13 Aug 2025 06:50:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4pjniQvH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Error%253A%2520error%253A0308010C%253Adigital%2520envelope%2520routines%253A%253Aunsupported%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Su3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlmY2Q1YTk5MTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Su3</dc:creator></item><item><title><![CDATA[react-markdownでテーブルの結合セルを実現したい]]></title><description><![CDATA[
+ はじめに
+TypeScript + react-markdown + Tailwind CSSでMarkdownパーサーを作っていたら、「テーブルの縦結合セルを追加してほしい」と急な依頼が。
+Markdownの標準仕様ではテーブルの結合セルはサポートされていないので、これは結構な難題（技術選定の段階でMDXが選ばれるはず）。でも締切は迫っているし、なんとかして対応しなければ...
+今回はどのようなアイディアで乗り切ったかと、残る課題を紹介します。
+!
+完璧な解決策ではないと思います。注意点をよく読んでください🙏
+
+
+ 基本的なアイデア
+そこで考えたのが、特殊な記法を追加して、reac...]]></description><link>https://zenn.dev/melonps/articles/d3399ddcafac66</link><guid isPermaLink="true">https://zenn.dev/melonps/articles/d3399ddcafac66</guid><pubDate>Wed, 13 Aug 2025 05:01:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VXT5QIE7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:react-markdown%25E3%2581%25A7%25E3%2583%2586%25E3%2583%25BC%25E3%2583%2596%25E3%2583%25AB%25E3%2581%25AE%25E7%25B5%2590%25E5%2590%2588%25E3%2582%25BB%25E3%2583%25AB%25E3%2582%2592%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Melonps%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I1YWM4NmJmOTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Melonps</dc:creator></item><item><title><![CDATA[Hono RPCで型安全なAPIを作ることによる開発体験]]></title><description><![CDATA[
+ Hono RPCとは
+公式の引用
+
+The RPC feature allows sharing of the API specifications between the server and the client.
+
+翻訳
+
+RPC 機能を使用すると、サーバーとクライアント間で API 仕様を共有できます。
+
+つまり、Hono RPCはAPIのリクエストとレスポンスのプロパティとその型を共有できる機能です。
+これを使用すると、フロントエンド側の実装時のミスを大幅な軽減に繋がるため、バグを大幅に減らすことが出来ます。
+
+ Hono RPCのメリット
+Hono RPCを導入することに...]]></description><link>https://zenn.dev/emoba_tech/articles/2f8a8decc59b34</link><guid isPermaLink="true">https://zenn.dev/emoba_tech/articles/2f8a8decc59b34</guid><pubDate>Wed, 13 Aug 2025 04:59:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hLnCVh7E--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Hono%2520RPC%25E3%2581%25A7%25E5%259E%258B%25E5%25AE%2589%25E5%2585%25A8%25E3%2581%25AAAPI%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%25E3%2581%2593%25E3%2581%25A8%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E9%2596%258B%25E7%2599%25BA%25E4%25BD%2593%25E9%25A8%2593%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:riku546%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NmNTk5ZjM4YjcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Emoba%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSng4dzRfNDdycmhLRDVhSVlEYnJfTEw4TEtRVE9jU0FEUW9yN3JjaEVBZmg3eGZRPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>riku546</dc:creator></item><item><title><![CDATA[FSD × LangChain × Remix × AI でポートフォリオサイトを作ってみた！]]></title><description><![CDATA[みなさん、こんにちは！
+「あれ・・・、最近、重力定数変わった？」
+…って思うくらい体重増加が進んでいる、フロントエンドエンジニアの @nyaomaru です！
+前回の記事では、FSD (Feature-Sliced Design) とは何か？について、概略ではありますが説明させていただきました。
+https://zenn.dev/nyaomaru/articles/learn-fsd-design
+今回は FSD を Remix に適用しつつ、LangChain で AI ターミナル UIを載せたポートフォリオの作り方を、実例ベースでサクッと紹介していきます。
+
+デモ 👉 https:/...]]></description><link>https://zenn.dev/nyaomaru/articles/fsd-portfolio</link><guid isPermaLink="true">https://zenn.dev/nyaomaru/articles/fsd-portfolio</guid><pubDate>Wed, 13 Aug 2025 00:21:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SIdcDe8o--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:FSD%2520%25C3%2597%2520LangChain%2520%25C3%2597%2520Remix%2520%25C3%2597%2520AI%2520%25E3%2581%25A7%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AA%25E3%2582%25AA%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nyaomaru%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZiNzViM2IxYTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nyaomaru</dc:creator></item><item><title><![CDATA[【TypeScript】enumを使ったっていいじゃないか]]></title><description><![CDATA[TypeScriptで定数をどのように表現するか、というのは意外に意見が分かれるテーマです。本稿では、enumの特徴とその代替手段を整理し、何を採用すべきかを考えてみます。
+enumを推奨しないという意見が多いのは知っていても、何故そう言われているのか、を理解していますか？
+「使ってはダメ」と思考停止するのではなく、この記事を読むことでメリット・デメリットを理解して自分で選択できるようになる、かもしれません！
+
+ 列挙型（enum）とは
+enumはJavaScriptにはないTypeScript独自の構文で、定数を集合としてまとめて扱うことができます。
+enum Mode {
+  Aut...]]></description><link>https://zenn.dev/rikson/articles/2025-08-13_rikson_let-me-use-enums-in-typescript</link><guid isPermaLink="true">https://zenn.dev/rikson/articles/2025-08-13_rikson_let-me-use-enums-in-typescript</guid><pubDate>Tue, 12 Aug 2025 23:47:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hN6DouPi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590TypeScript%25E3%2580%2591enum%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2581%2584%25E3%2581%2598%25E3%2582%2583%25E3%2581%25AA%25E3%2581%2584%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Riku%2520Takeuchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IxYzNlZGUwNTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Riku Takeuchi</dc:creator></item><item><title><![CDATA[TypeScript & GraphQL でToDoアプリを開発する #6]]></title><description><![CDATA[
+ ⬅️前回の記事はこちら
+https://zenn.dev/agent_grow/articles/b9fae76d86be49
+
+ ダークモード/ライトモード &amp; 日本語/英語 切り替え機能を実装
+
+ ⭐️ダークモード/ライトモード 切り替え機能を実装
+index.vueのscript setupに追記
+
+index.vue
+import { useTheme } from 'vuetify'
+
+const theme = useTheme()
+
+const toggleTheme = () =&gt; {
+  theme.global.name.value = theme....]]></description><link>https://zenn.dev/agent_grow/articles/939d9197dd87c5</link><guid isPermaLink="true">https://zenn.dev/agent_grow/articles/939d9197dd87c5</guid><pubDate>Tue, 12 Aug 2025 23:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--K2n7qYlu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%2520%2526%2520GraphQL%2520%25E3%2581%25A7ToDo%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2599%25E3%2582%258B%2520%25236%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2583%25A2%25E3%2583%25A9%25E3%2582%25A6%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NkMDljNjAyYTYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Agent%2520Grow%2520Tech%2520Notes%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RlMWU4MWVlNDYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>モラウ</dc:creator></item><item><title><![CDATA[【繰り返し処理の最適化】JavaScriptの setInterval を使わずに GSAP の onRepeat で実装する。]]></title><description><![CDATA[繰り返し処理を実装する際はsetIntervalを使用することが多いかと思いますが、今回はGSAPのonRepeatで実装する方法をご紹介します。
+
+ setInterval で実装する際の気になる点
+setIntervalで繰り返し処理を実装する際の気になる点は以下です。
+
+別タブを選択すると実行間隔が間引きされて実行され続ける
+
+ブラウザはパフォーマンスを最適化するため、アクティブでないタブ（別タブを選択している場合など）のJavaScript実行を制限します。この現象は「スロットリング」と呼ばれ、ブラウザによって実行制限は変化します。
+例えば、以下のコードを実行中に別のタブに切り替...]]></description><link>https://zenn.dev/kurichan/articles/80c12db2c8b2b6</link><guid isPermaLink="true">https://zenn.dev/kurichan/articles/80c12db2c8b2b6</guid><pubDate>Tue, 12 Aug 2025 15:57:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rjoCG-RZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E7%25B9%25B0%25E3%2582%258A%25E8%25BF%2594%25E3%2581%2597%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25AE%25E6%259C%2580%25E9%2581%25A9%25E5%258C%2596%25E3%2580%2591JavaScript%25E3%2581%25AE%2520setInterval%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2582%258F%25E3%2581%259A%25E3%2581%25AB%2520GSAP%25C2%25A0%25E3%2581%25AE%2520onRepeat...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258F%25E3%2582%258A%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RjN2IzM2RiNTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>くりちゃん</dc:creator></item><item><title><![CDATA[shadcn/uiのスタイリングにはtweakcnが便利かもしれない]]></title><description><![CDATA[tweakcn は shadcn/ui のデザイントークンをWeb上のテーマエディタで調整できるツールです。現在は41種類のテーマプリセットが用意されており、それらをベースにデザインをカスタマイズできます
+作成したデザイントークンはshadcnの形式のCSSとして出力できるので、簡単にアプリケーションに取り込めます。また、テーマの import / export もできるみたいなので継続的なメンテナンスも楽そうです
+https://tweakcn.com/
+
+
+ テーマエディタ
+テーマエディタの画面はこんな感じです
+https://tweakcn.com/editor/theme
+
+We...]]></description><link>https://zenn.dev/tf63/articles/tweakcn-tf63-20250812</link><guid isPermaLink="true">https://zenn.dev/tf63/articles/tweakcn-tf63-20250812</guid><pubDate>Tue, 12 Aug 2025 15:51:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eF8eVGu---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:shadcn%252Fui%25E3%2581%25AE%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AB%25E3%2581%25AFtweakcn%25E3%2581%258C%25E4%25BE%25BF%25E5%2588%25A9%25E3%2581%258B%25E3%2582%2582%25E3%2581%2597%25E3%2582%258C%25E3%2581%25AA%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tf63%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FmZTY2YTY1ZTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tf63</dc:creator></item><item><title><![CDATA[GSAPでスムーススクロールに独自のイージングを適用させるシンプルな実装例]]></title><description><![CDATA[スムーススクロールとはリンクをクリックした際にページ内の目的の要素まで滑らかに移動させるアニメーションのことです。この機能に独自のイージングやアニメーションの間隔を指定する方法を紹介します。
+
+ window.scrollTo では独自のイージングやアニメーションの間隔を指定できない
+初めに、スムーススクロールはJavaScriptのwindow.scrollToを使用して実装するのが一般的だと思いますが、window.scrollToはブラウザの持つデフォルトのスムーススクロール機能が使用されるので、独自のイージングやアニメーションの間隔を指定できません。
+window.scrollT...]]></description><link>https://zenn.dev/kurichan/articles/7c980e20e0c053</link><guid isPermaLink="true">https://zenn.dev/kurichan/articles/7c980e20e0c053</guid><pubDate>Tue, 12 Aug 2025 10:43:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KVZQ5sYH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GSAP%25E3%2581%25A7%25E3%2582%25B9%25E3%2583%25A0%25E3%2583%25BC%25E3%2582%25B9%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25AB%25E7%258B%25AC%25E8%2587%25AA%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%2592%25E9%2581%25A9%25E7%2594%25A8%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%25E3%2582%25B7%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2581%25AA%25E5%25AE%259F%25E8%25A3%2585%25E4%25BE%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258F%25E3%2582%258A%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RjN2IzM2RiNTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>くりちゃん</dc:creator></item><item><title><![CDATA[TSでApplicativeをなんとなく理解する]]></title><description><![CDATA[
+ TL;DR
+
+fp-ts の Introduction series to FP-TS を読んで、関数型を学習してみるシリーズ。
+
+前回は TS で Monad を何となく学んでみました。
+今までの学習から Functor や Monad は単なる Type Class であり、関数型プログラミングのデザインパターンの 1 つであることは理解できました。
+今回は もう一つ代表的な例として挙げられる Applicative を学んでみます。
+
+ Applicative
+アプリカティブはモナドに似ていますが少し違います。
+モナドとの違いはモナドはモナディックな関数を直列に繋げるのに対して...]]></description><link>https://zenn.dev/nakayan/articles/729b121aea9750</link><guid isPermaLink="true">https://zenn.dev/nakayan/articles/729b121aea9750</guid><pubDate>Tue, 12 Aug 2025 10:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_n5XxxD_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TS%25E3%2581%25A7Applicative%25E3%2582%2592%25E3%2581%25AA%25E3%2582%2593%25E3%2581%25A8%25E3%2581%25AA%25E3%2581%258F%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:n%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvbi5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>n</dc:creator></item><item><title><![CDATA[Pulumiで始めたインフラ構成管理、1年使ってみた感想]]></title><description><![CDATA[
+ はじめに
+はじめまして！
+チャットコマースサービス「CARU」でPdMをしている satoharu と申します。
+先日 tfuka が技術選定の記事を公開しましたが、これらのインフラは Pulumi という構成管理ツールで管理しています。
+https://zenn.dev/cyberace/articles/c8eb552a6ab39a
+日本でのプロダクトでの導入事例を耳にしたことがなく、また初めて聞いた方も多いのではないでしょうか。
+今回は、なぜ構成管理に Pulumi を採用したのか、また、実際に採用してどうだったのかをご共有できればと思います。
+
+ Pulumiって何?
+Pul...]]></description><link>https://zenn.dev/cyberace/articles/599c8d9f6dca1f</link><guid isPermaLink="true">https://zenn.dev/cyberace/articles/599c8d9f6dca1f</guid><pubDate>Tue, 12 Aug 2025 03:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--u22RDfBM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Pulumi%25E3%2581%25A7%25E5%25A7%258B%25E3%2582%2581%25E3%2581%259F%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2595%25E3%2583%25A9%25E6%25A7%258B%25E6%2588%2590%25E7%25AE%25A1%25E7%2590%2586%25E3%2580%25811%25E5%25B9%25B4%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E6%2584%259F%25E6%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:satoharu%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhlMDdjNGVkZjcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:CyberACE%2520Tech%2520Blog%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVhNDYzMzk4ZTMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>satoharu</dc:creator></item><item><title><![CDATA[②（配列の基本概念、配列の宣言、配列への値の代入）TypeScript]]></title><description><![CDATA[前回の続き配列についてです。
+
+ 配列の基本概念
+まずは、前回のおさらい。。。
+配列とは、「複数のものを順番にいれる箱みたいなもの」
+'１つの変数'に'１つの値'しか入れれない「普通の変数」とは違って、配列はたくさんの値をまとめて管理できる。
+イメージとしたら、、1つの箱の中に、小さい仕切りをつけて、そこに順番に物をいれていく。
+例えば）　ケーキの種類を入れる配列
+['ショートケーキ', 'モンブラン', 'ミルクレープ']
+
+ 配列の宣言（３つの方法）
+1.最初から中身を入れて作る。
+let cakes = ['ショートケーキ', 'モンブラン', 'ミルクレープ'];
+
+2.からっぽ...]]></description><link>https://zenn.dev/puku/articles/2476b2eb732215</link><guid isPermaLink="true">https://zenn.dev/puku/articles/2476b2eb732215</guid><pubDate>Tue, 12 Aug 2025 01:12:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BxrfM_WD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E2%2591%25A1%25EF%25BC%2588%25E9%2585%258D%25E5%2588%2597%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E6%25A6%2582%25E5%25BF%25B5%25E3%2580%2581%25E9%2585%258D%25E5%2588%2597%25E3%2581%25AE%25E5%25AE%25A3%25E8%25A8%2580%25E3%2580%2581%25E9%2585%258D%25E5%2588%2597%25E3%2581%25B8%25E3%2581%25AE%25E5%2580%25A4%25E3%2581%25AE%25E4%25BB%25A3%25E5%2585%25A5%25EF%25BC%2589TypeScript%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mayuka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q3MmIzMjJhNGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mayuka</dc:creator></item><item><title><![CDATA[Denoのフロントエンド開発の動向【2025年夏】]]></title><description><![CDATA[以前に以下のような記事を書きました。
+https://zenn.dev/uki00a/articles/frontend-development-in-deno-2024-winter
+上記記事の公開から一年以上が経過し、その間にDenoにおけるフロントエンド開発に関する様々なアップデートがありました。この記事では重要そうな話題に限定していくつか紹介いたします。
+
+ Deno本体のアップデート
+Deno v2の正式リリース付近のタイミングから、Deno本体でフロントエンド関連の機能の拡充が少しずつ進められています。
+
+ deno bundleコマンドの再導入
+deno bundleコマン...]]></description><link>https://zenn.dev/uki00a/articles/frontend-development-in-deno-2025-summer</link><guid isPermaLink="true">https://zenn.dev/uki00a/articles/frontend-development-in-deno-2025-summer</guid><pubDate>Mon, 11 Aug 2025 23:34:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5DwhlKe3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Deno%25E3%2581%25AE%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AE%25E5%258B%2595%25E5%2590%2591%25E3%2580%25902025%25E5%25B9%25B4%25E5%25A4%258F%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:uki00a%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhlMzg5NzFkZjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>uki00a</dc:creator></item><item><title><![CDATA[JS/TS学習備忘録]]></title><description><![CDATA[理解を深めるため学習に応じて書き連ねていく
+本届いたら勉強して理解したことを書き連ねていく
+
+ JavaScript
+aaa
+
+ TypeScript
+aaa
+]]></description><link>https://zenn.dev/nanashi123/articles/javascript-typescript-learn-memo</link><guid isPermaLink="true">https://zenn.dev/nanashi123/articles/javascript-typescript-learn-memo</guid><pubDate>Mon, 11 Aug 2025 18:53:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PRTzDj93--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JS%252FTS%25E5%25AD%25A6%25E7%25BF%2592%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nanashi123%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzliZDI1NzkwZTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nanashi123</dc:creator></item><item><title><![CDATA[息子専用アプリ開発①(React)]]></title><description><![CDATA[!
+個人的な備忘録ではありますが、改善点などあればご指摘お願いします。
+
+!
+ChatGPT使用
+
+
+
+ Dockerfile（開発用）
+FROM node:20-alpine            # ベースに軽量な Node.js 公式イメージ(Alpine)を使用
+WORKDIR /app                   # 以後の作業ディレクトリを /app に固定
+EXPOSE 5173                    # Vite の開発サーバ既定ポート(5173)を宣言（実際の公開は compose 側で行う）
+CMD ["npm", "run", "dev", ...]]></description><link>https://zenn.dev/hi_kun0912/articles/3dca5bcf172587</link><guid isPermaLink="true">https://zenn.dev/hi_kun0912/articles/3dca5bcf172587</guid><pubDate>Mon, 11 Aug 2025 10:41:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gFmPVZDq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2581%25AF%25E5%25AD%2590%25E5%25B0%2582%25E7%2594%25A8%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E9%2596%258B%25E7%2599%25BA%25E2%2591%25A0%2528React%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%2581%25AF%25E5%25AD%2590%25E6%25BA%25BA%25E6%2584%259B%25E3%2583%2591%25E3%2583%2591%2540%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VhYjMzZWZkYTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>息子溺愛パパ@エンジニア</dc:creator></item><item><title><![CDATA[半年で5つの個人開発プロダクトを作ってわかったこと]]></title><description><![CDATA[2023年から個人開発をはじめているdondonbeと申します。
+Next.jsとTypeScriptが好物で、DB運用コストを考えるのが苦手です。
+半年で個人開発のプロダクトを5つ＋アルファ作ってきたので、これまでやってきたことや学びなどを共有します。
+
+ 個人開発をしている背景と目的
+個人開発はプログラミングを始めたときにはやりたいとは考えていませんでしたが、2年前から物価高騰の波がきていたことと、給料が毎年上がるわけじゃないということがわかり、将来不安を抱えていたこと。
+そして、本業の出版系業務において、アフィリエイト収益を作ることは現実的な選択肢だと把握しており、個人開発＋広告・...]]></description><link>https://zenn.dev/dononbe/articles/541621725f9252</link><guid isPermaLink="true">https://zenn.dev/dononbe/articles/541621725f9252</guid><pubDate>Mon, 11 Aug 2025 10:36:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EsAE4zBw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%258D%258A%25E5%25B9%25B4%25E3%2581%25A75%25E3%2581%25A4%25E3%2581%25AE%25E5%2580%258B%25E4%25BA%25BA%25E9%2596%258B%25E7%2599%25BA%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2580%25E3%2582%25AF%25E3%2583%2588%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2582%258F%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dondonbe%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMzYjc5MGZhMzEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dondonbe</dc:creator></item></channel></rss>
