@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Rust」のフィード]]></title><description><![CDATA[Zennのトピック「Rust」のRSSフィードです]]></description><link>https://zenn.dev/topics/rust</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ba09661577.png</url><title>Zennの「Rust」のフィード</title><link>https://zenn.dev/topics/rust</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 19 Aug 2025 11:25:53 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/rust/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Rustでトレイト境界のような形で変数を束縛する【dyn】]]></title><description><![CDATA[当然ですが、Rustは基本的にコンパイル時に変数に束縛する値の型を判明させる必要があります。しかし、場合によっては実行時に型を決定したいことがあります。
+
+ 例code
+例えばこんな感じで各llmを選んで使うプログラムがあったとします。
+
+ main.rs
+trait Responder {
+    fn respond(&amp;self) -&gt; Result&lt;String, std::io::Error&gt;;
+}
+
+struct OpenAI {
+    model: String,
+}
+
+impl OpenAI {
+    fn new(model: &amp;st...]]></description><link>https://zenn.dev/uliboooo/articles/9f0add249046d9</link><guid isPermaLink="true">https://zenn.dev/uliboooo/articles/9f0add249046d9</guid><pubDate>Tue, 19 Aug 2025 10:16:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dXe99G7m--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7%25E3%2583%2588%25E3%2583%25AC%25E3%2582%25A4%25E3%2583%2588%25E5%25A2%2583%25E7%2595%258C%25E3%2581%25AE%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AA%25E5%25BD%25A2%25E3%2581%25A7%25E5%25A4%2589%25E6%2595%25B0%25E3%2582%2592%25E6%259D%259F%25E7%25B8%259B%25E3%2581%2599%25E3%2582%258B%25E3%2580%2590dyn%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Uliboooo%2528%25E3%2581%2586%25E3%2582%258A%25E3%2581%25BC%25E3%2581%2586%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0MTFjYWRhM2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Uliboooo(うりぼう)</dc:creator></item><item><title><![CDATA[なぜ私たちは Debezium を Rust で書き直さなかったのか]]></title><description><![CDATA[
+ここ数年、コミュニティやフォーラム、さらにはお客様からも、同じ質問を何度もいただきました。
+「システムが Rust で書かれているのなら、なぜ Debezium を Rust で書き直さないのですか？」
+
+RisingWaveは、リアルタイムイベントデータの処理・分析・管理を、最もシンプルかつコスト効率の高い形で実現するために設計されたリアルタイムイベントストリーミングプラットフォームです。さらに、Apache Iceberg™のオープンテーブル形式をネイティブにサポートしており、PostgreSQL互換のSQLインターフェースと、DataFrameスタイルのPythonインターフェー...]]></description><link>https://zenn.dev/rwcolinpeng/articles/696cd239b016b0</link><guid isPermaLink="true">https://zenn.dev/rwcolinpeng/articles/696cd239b016b0</guid><pubDate>Tue, 19 Aug 2025 08:48:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LBomeuSe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25AA%25E3%2581%259C%25E7%25A7%2581%25E3%2581%259F%25E3%2581%25A1%25E3%2581%25AF%2520Debezium%2520%25E3%2582%2592%2520Rust%2520%25E3%2581%25A7%25E6%259B%25B8%25E3%2581%258D%25E7%259B%25B4%25E3%2581%2595%25E3%2581%25AA%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25AE%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:RisingWave%2520Labs%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmZmFjMDNiZWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>RisingWave Labs</dc:creator></item><item><title><![CDATA[`Option<T>` のよく使うメソッドを書いてみる]]></title><description><![CDATA[
+ Option&lt;T&gt; のよく使うメソッドを書いてみる
+前回 は Option&lt;T&gt; の基本的な使い方と bool に変換するメソッドを紹介しました。
+今回は Option&lt;T&gt; のメソッドのうち、ドクターメイト株式会社のコードベースでよく使われているものを感覚的に選び、グループ化しつつ適当に書き出してみます。
+全部のメソッドは紹介しません。たとえば、ドクターメイト株式会社の運用上 &amp;mut Option&lt;T&gt; を使用していないので、そういったメソッドは出てきません。
+では、さっそくはじめましょう。
+
+ Option&lt;T&gt...]]></description><link>https://zenn.dev/doctormate/articles/c33520c865d85e</link><guid isPermaLink="true">https://zenn.dev/doctormate/articles/c33520c865d85e</guid><pubDate>Tue, 19 Aug 2025 03:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3bXR42L4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2560Option%253CT%253E%2560%2520%25E3%2581%25AE%25E3%2582%2588%25E3%2581%258F%25E4%25BD%25BF%25E3%2581%2586%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E3%2582%2592%25E6%259B%25B8%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:bouzuya%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FiYmEzODYwNjQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2589%25E3%2582%25AF%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25A1%25E3%2582%25A4%25E3%2583%2588%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lqVElDaW81T2gxMjNQSzhqQXkydnJpTDh6dC1SWUZvUnYzd0tjb3c9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>bouzuya</dc:creator></item><item><title><![CDATA[クリーンアーキテクチャ入門 Part 4: 実践的な開発フローとAI活用]]></title><description><![CDATA[
+ クリーンアーキテクチャ入門 Part 4: 実践的な開発フローとAI活用
+
+ はじめに
+Part1〜3でクリーンアーキテクチャの理論と実装について学んだら、最後は実践的な開発フローとAI活用について詳しく学んでいきます。この記事では、実際の開発現場でクリーンアーキテクチャを活用する方法と、AIツールを活用して効率的に開発を進める方法について理解を深めていきます。
+この記事で学べること：
+
+実践的な開発フロー
+AIを活用した構成チェック
+よくある問題と解決策
+段階的な学習アプローチ
+成功の指標とベストプラクティス
+
+
+ 実践的な開発フロー
+
+ 開発時のチェックリスト
+新しい機能を実装す...]]></description><link>https://zenn.dev/collabostyle/articles/29b4a97c5d9e0a</link><guid isPermaLink="true">https://zenn.dev/collabostyle/articles/29b4a97c5d9e0a</guid><pubDate>Mon, 18 Aug 2025 23:33:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--riQKXmGW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%25A2%25E3%2583%25BC%25E3%2582%25AD%25E3%2583%2586%25E3%2582%25AF%25E3%2583%2581%25E3%2583%25A3%25E5%2585%25A5%25E9%2596%2580%2520Part%25204%253A%2520%25E5%25AE%259F%25E8%25B7%25B5%25E7%259A%2584%25E3%2581%25AA%25E9%2596%258B%25E7%2599%25BA%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25BC%25E3%2581%25A8AI%25E6%25B4%25BB%25E7%2594%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:yushi-s%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViM2I3NTQxYzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSk1DWlFPZDBzMmF6VWgtQ0lVZjRvTnVxeW5ZUUswU0g2N3M3M1hVbjFvQldPRDJBPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yushi-s</dc:creator></item><item><title><![CDATA[クリーンアーキテクチャ入門 Part 3: 外部システムとの連携（Infrastructure層・Presentation層）]]></title><description><![CDATA[
+ クリーンアーキテクチャ入門 Part 3: 外部システムとの連携（Infrastructure層・Presentation層）
+
+ はじめに
+Part2でビジネスロジックの設計について学んだら、次は外部システムとの連携について詳しく学んでいきます。この記事では、Infrastructure層とPresentation層の実装に焦点を当て、データベース、外部API、HTTPレスポンスの処理について理解を深めていきます。
+この記事で学べること：
+
+Infrastructure層での外部システムとの連携
+Presentation層でのHTTPリクエスト・レスポンスの処理
+技術的詳細の隠蔽方...]]></description><link>https://zenn.dev/collabostyle/articles/87b3d8c96283fb</link><guid isPermaLink="true">https://zenn.dev/collabostyle/articles/87b3d8c96283fb</guid><pubDate>Mon, 18 Aug 2025 23:33:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qRF-ACt7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%25A2%25E3%2583%25BC%25E3%2582%25AD%25E3%2583%2586%25E3%2582%25AF%25E3%2583%2581%25E3%2583%25A3%25E5%2585%25A5%25E9%2596%2580%2520Part%25203%253A%2520%25E5%25A4%2596%25E9%2583%25A8%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2581%25A8%25E3%2581%25AE%25E9%2580%25A3%25E6%2590%25BA%25EF%25BC%2588Infrastructure%25E5%25B1%25A4%25E3%2583%25BBPresenta...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:yushi-s%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViM2I3NTQxYzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSk1DWlFPZDBzMmF6VWgtQ0lVZjRvTnVxeW5ZUUswU0g2N3M3M1hVbjFvQldPRDJBPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yushi-s</dc:creator></item><item><title><![CDATA[RustのMapはとりあえず IndexMap を使用すればいい]]></title><description><![CDATA[
+ 背景
+Rustで辞書型のデータ構造を扱う際にはHashMapとBTreeMapの二種類があってどちらを使うかよく悩みますよね。私は今まではよくBTreeMapのほうを使用していました。確かにHashMapのほうが多くの操作がO(1)でBTreeMapのO(logN)よりも理論上は速いのですが、Nがそこまで大きくない場合にはあまり有意な差は出ず、むしろキーの順番がランダムに変わるということで、すべての要素に対して処理を行う際にソートを忘れると結果の再現性に影響が出る場合がありました。
+
+図は筆者が社内勉強会で作成したスライドより
+一方でBTreeMapのほうにも問題があって、CodeL...]]></description><link>https://zenn.dev/lucidfrontier45/articles/6c76ad2ce52523</link><guid isPermaLink="true">https://zenn.dev/lucidfrontier45/articles/6c76ad2ce52523</guid><pubDate>Mon, 18 Aug 2025 11:45:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--f49d5wpQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AEMap%25E3%2581%25AF%25E3%2581%25A8%25E3%2582%258A%25E3%2581%2582%25E3%2581%2588%25E3%2581%259A%2520IndexMap%2520%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258C%25E3%2581%25B0%25E3%2581%2584%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:lucidfrontier45%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcxY2RkYzI0MmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>lucidfrontier45</dc:creator></item><item><title><![CDATA[Rust 小ネタ: serde_dynamo で `#[serde(from = "&str")]` が動かなくてびっくりした。]]></title><description><![CDATA[こんにちは。Fairy Devices株式会社 となんらかの関わりがある nogiro (Twitter (現 Twitter): @nogiro_iota) です。
+Amazon DynamoDB と Rust プログラムのやり取りのために serde_dynamo でシリアライズ、デシリアライズしているのですが、#[serde(from = "&amp;str")] を使うとデシリアライズでエラーが発生します。
+といってもこの記事にはタイトル以上の情報はあんまりないです。#[serde(from = "String")] にしたら動きます。ソースコードはいちおう読みました。
+
+ 前置...]]></description><link>https://zenn.dev/fairydevices/articles/593a73efb2f7e7</link><guid isPermaLink="true">https://zenn.dev/fairydevices/articles/593a73efb2f7e7</guid><pubDate>Mon, 18 Aug 2025 06:29:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--x7QYHszd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%25E5%25B0%258F%25E3%2583%258D%25E3%2582%25BF%253A%2520serde_dynamo%2520%25E3%2581%25A7%2520%2560%2523%255Bserde%2528from%2520%253D%2520%2522%2526str%2522%2529%255D%2560%2520%25E3%2581%258C%25E5%258B%2595%25E3%2581%258B%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25A6...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:nogiro%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5MjE4ODkwNjAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2595%25E3%2582%25A7%25E3%2582%25A2%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%2587%25E3%2583%2590%25E3%2582%25A4%25E3%2582%25BB%25E3%2582%25BA%25E5%2585%25AC%25E5%25BC%258F%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI2NGU1YjkxNmIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nogiro</dc:creator></item><item><title><![CDATA[クリーンアーキテクチャ入門 Part 2: ビジネスロジックの設計（Domain層・Application層）]]></title><description><![CDATA[
+ クリーンアーキテクチャ入門 Part 2: ビジネスロジックの設計（Domain層・Application層）
+
+ はじめに
+Part1でクリーンアーキテクチャの基本概念を理解したら、次はビジネスロジックの設計について詳しく学んでいきます。この記事では、Domain層とApplication層の実装に焦点を当て、実際のコード例を通じて理解を深めていきます。
+この記事で学べること：
+
+Domain層でのビジネスルールの実装
+Application層でのユースケースの実装
+依存性注入による疎結合の実現
+実際のデータフローとテスト方法
+
+
+ Domain層の詳細実装
+Domain層は、アプ...]]></description><link>https://zenn.dev/collabostyle/articles/15c28b365eb03e</link><guid isPermaLink="true">https://zenn.dev/collabostyle/articles/15c28b365eb03e</guid><pubDate>Mon, 18 Aug 2025 03:58:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qztKgmEY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%25A2%25E3%2583%25BC%25E3%2582%25AD%25E3%2583%2586%25E3%2582%25AF%25E3%2583%2581%25E3%2583%25A3%25E5%2585%25A5%25E9%2596%2580%2520Part%25202%253A%2520%25E3%2583%2593%25E3%2582%25B8%25E3%2583%258D%25E3%2582%25B9%25E3%2583%25AD%25E3%2582%25B8%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25AE%25E8%25A8%25AD%25E8%25A8%2588%25EF%25BC%2588Domain%25E5%25B1%25A4%25E3%2583%25BBApplication%25E5%25B1%25A4%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:yushi-s%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViM2I3NTQxYzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSk1DWlFPZDBzMmF6VWgtQ0lVZjRvTnVxeW5ZUUswU0g2N3M3M1hVbjFvQldPRDJBPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yushi-s</dc:creator></item><item><title><![CDATA[（メモ）Rust で WebAssembly 上でファイルを読みたい]]></title><description><![CDATA[!
+Wasm 初心者の自分用メモです。全体的に、まだあまり手を動かして試せてないので、間違ってる内容もあるかもです。
+
+
+ WASI の場合
+試してないですが、WASI には filesystem API があるので（使う WebAssembly ランタイムがそれをサポートしているなら）ファイルの読み書きはできそうです。
+https://github.com/WebAssembly/wasi-filesystem
+
+ Node.js などの場合
+fs モジュールを提供している JavaScript ランタイムの場合は、それが提供している関数を持ってくれば使えるようになるらしいです。以下は...]]></description><link>https://zenn.dev/yutannihilation/articles/95303dddeb8044</link><guid isPermaLink="true">https://zenn.dev/yutannihilation/articles/95303dddeb8044</guid><pubDate>Sun, 17 Aug 2025 23:53:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ODon25X5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%2588%25E3%2583%25A1%25E3%2583%25A2%25EF%25BC%2589Rust%2520%25E3%2581%25A7%2520WebAssembly%2520%25E4%25B8%258A%25E3%2581%25A7%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E8%25AA%25AD%25E3%2581%25BF%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yutannihilation%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2cxWXFZLWt6LTVmNFhSNVdXbjFNOVBpaWxaMkdYNHkwNjdtZy1VOEE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yutannihilation</dc:creator></item><item><title><![CDATA[緑コーダーがRustで解説してみた(ABC419 A～E)]]></title><description><![CDATA[AtCoder Beginner Contest 419のA～E問題を緑コーダーが自分なりの解説と解答コードをまとめました。
+参考になりましたら幸いです。
+
+ ABC419-A
+問題
+https://atcoder.jp/contests/abc419/tasks/abc419_a
+与えられた文字列を特定のルールに従って変換する問題です。
+解説
+問題文に記載された変換ルールを整理すると以下表の通りになるため、この内容に沿って変換します。
+
+
+
+変換前の文字列
+変換後の文字列
+
+
+
+
+red
+SSS
+
+
+blue
+FFF
+
+
+green
+MMM
+
+
+上記以外
+Unknown
+
+
+
+コード
+...]]></description><link>https://zenn.dev/nakst_hide/articles/8e5e8d1a8ebc0c</link><guid isPermaLink="true">https://zenn.dev/nakst_hide/articles/8e5e8d1a8ebc0c</guid><pubDate>Sun, 17 Aug 2025 23:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nRb8_MQK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25B7%2591%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25BC%25E3%2581%258CRust%25E3%2581%25A7%25E8%25A7%25A3%25E8%25AA%25AC%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2528ABC419%2520A%25EF%25BD%259EE%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakahide%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk1YTJjNWQyNTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakahide</dc:creator></item><item><title><![CDATA[Rustにおける動的ディスパッチ vs 静的ディスパッチのパフォーマンス比較]]></title><description><![CDATA[
+ Rustにおける動的ディスパッチ vs 静的ディスパッチのパフォーマンス比較
+
+ はじめに
+Rustを学んでいると、必ずと言っていいほど出会うのが「トレイトオブジェクト」と「ジェネリクス」です。これらは同じ多態性を実現する方法ですが、実装方法が大きく異なります。
+
+
+トレイトオブジェクト (Box&lt;dyn Trait&gt;): 動的ディスパッチ
+
+ジェネリクス (&lt;T: Trait&gt;): 静的ディスパッチ
+
+この記事では、実際のベンチマークコードを作成して、両者のパフォーマンス差を測定し、なぜこの差が生まれるのかを技術的に解説します。
+
+ 動的ディスパッチと静的デ...]]></description><link>https://zenn.dev/collabostyle/articles/9e6a972e9866df</link><guid isPermaLink="true">https://zenn.dev/collabostyle/articles/9e6a972e9866df</guid><pubDate>Sun, 17 Aug 2025 21:40:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OiR1Eo3l--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E5%258B%2595%25E7%259A%2584%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25B9%25E3%2583%2591%25E3%2583%2583%25E3%2583%2581%2520vs%2520%25E9%259D%2599%25E7%259A%2584%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25B9%25E3%2583%2591%25E3%2583%2583%25E3%2583%2581%25E3%2581%25AE%25E3%2583%2591%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%259E%25E3%2583%25B3%25E3%2582%25B9%25E6%25AF%2594%25E8%25BC%2583%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:yushi-s%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViM2I3NTQxYzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSk1DWlFPZDBzMmF6VWgtQ0lVZjRvTnVxeW5ZUUswU0g2N3M3M1hVbjFvQldPRDJBPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yushi-s</dc:creator></item><item><title><![CDATA[[読書感想]Rustの学習の為にLINEのbotを作る本を買ってみた話]]></title><description><![CDATA[お盆休みで時間があったので、何かRustの本を買って軽い学習をしたいと思っていました。ネットで検索したらLINEbotを作ることができる良さそうなものが見つかったので買って読んでみました。その時に読んだ本の紹介＆学習の記録として本記事を執筆しました。
+本記事の内容としては、個人的に書籍の良かったと思った点、LINEbot制作セクションの簡単な手順紹介をしていきたいと思います。
+
+ 今回購入した本
+本を選ぶ際に気にした点としては、２～３日で読み切れるように比較的軽い本を選んだこと。
+Rustの言語を使ってハンズオン形式のもので最終的に何かを作る体験ができるようなもの。
+上記二点を抑えてネッ...]]></description><link>https://zenn.dev/yone5/articles/fe8db8a3f2d44b</link><guid isPermaLink="true">https://zenn.dev/yone5/articles/fe8db8a3f2d44b</guid><pubDate>Sun, 17 Aug 2025 14:59:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WNNrspxh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E8%25AA%25AD%25E6%259B%25B8%25E6%2584%259F%25E6%2583%25B3%255DRust%25E3%2581%25AE%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%25AE%25E7%2582%25BA%25E3%2581%25ABLINE%25E3%2581%25AEbot%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%25E6%259C%25AC%25E3%2582%2592%25E8%25B2%25B7%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yoneko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RhN2NkNWJjNTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yoneko</dc:creator></item><item><title><![CDATA[Position Based Dynamics で作るソフトボディ&流体シミュレーション]]></title><description><![CDATA[Position Based Dynamics という手法を用いて、ブラウザ上で動作する物理シミュレーションを実装しました。ぶよぶよしたソフトボディが水に浮かびます。
+
+マウスでソフトボディをドラッグしたり、ウィンドウのリサイズでシミュレーション領域の大きさを変えられます。いろいろといじって遊んでみてください。
+Demo :
+https://floaty-fluid.netlify.app/
+Repository :
+https://github.com/matsuoka-601/Floaty
+シミュレーションのソルバーは大半を TypeScript で実装しており、ボトルネックとなる流...]]></description><link>https://zenn.dev/sparkle/articles/c9cd3bd4ec80be</link><guid isPermaLink="true">https://zenn.dev/sparkle/articles/c9cd3bd4ec80be</guid><pubDate>Sun, 17 Aug 2025 06:21:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QPTh_soW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Position%2520Based%2520Dynamics%2520%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%25E3%2582%25BD%25E3%2583%2595%25E3%2583%2588%25E3%2583%259C%25E3%2583%2587%25E3%2582%25A3%2526%25E6%25B5%2581%25E4%25BD%2593%25E3%2582%25B7%25E3%2583%259F%25E3%2583%25A5%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:matsuoka-601%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTFdlWDU3WmVCejFrS2J3MEYtUFhnZUZrS1EzNXVtV3VUUFQyNm1NbmZyPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>matsuoka-601</dc:creator></item><item><title><![CDATA[wasm-pack なしで Rust コードを NPM パッケージ化する]]></title><description><![CDATA[
+ これまでのあらすじ
+先月、rustwasm がアーカイブされることが Rust 公式ブログでアナウンスされていました。rustwasm は、wasm-bindgen や wasm-pack をホストしている GitHub の origanization です。元となっていた Rust and WebAssembly ワーキンググループはもう活動してないので、混乱を避けるため、GitHub 上も実態に合わせよう、という経緯らしいです。
+https://blog.rust-lang.org/inside-rust/2025/07/21/sunsetting-the-rustwasm-gi...]]></description><link>https://zenn.dev/yutannihilation/articles/5c795a302f2c51</link><guid isPermaLink="true">https://zenn.dev/yutannihilation/articles/5c795a302f2c51</guid><pubDate>Sat, 16 Aug 2025 09:24:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--t4__zjlK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:wasm-pack%2520%25E3%2581%25AA%25E3%2581%2597%25E3%2581%25A7%2520Rust%2520%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%2520NPM%2520%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yutannihilation%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2cxWXFZLWt6LTVmNFhSNVdXbjFNOVBpaWxaMkdYNHkwNjdtZy1VOEE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yutannihilation</dc:creator></item><item><title><![CDATA[Arduino Uno環境下で動く診断ワークフローツール「dvcdbg」をリリースしました]]></title><description><![CDATA[
+📝 本記事は技術詳細編です。開発ストーリーはこちらで読めます。
+対象読者：Arduino Uno（ATmega328P）などメモリ制約の厳しい環境で、最小限の依存でログ/I2Cデバッグを回したい人。
+
+
+ dvcdbgとは
+dvcdbg は no_std 対応の軽量デバッグ補助クレートです。
+機能は以下。
+
+
+SerialLogger による軽量ロギング
+
+
+scan_i2c! によるI2Cアドレススキャン
+
+
+write_hex! のバッファHex表示
+
+
+measure_cycles! の実行サイクル計測
+
+
+quick_diag! の一発診断ワークフロー（I2Cスキャン＋任意コー...]]></description><link>https://zenn.dev/placeless/articles/zenn_article-26</link><guid isPermaLink="true">https://zenn.dev/placeless/articles/zenn_article-26</guid><pubDate>Fri, 15 Aug 2025 22:19:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KKZTvsBj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Arduino%2520Uno%25E7%2592%25B0%25E5%25A2%2583%25E4%25B8%258B%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258F%25E8%25A8%25BA%25E6%2596%25AD%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2580%258Cdvcdbg%25E3%2580%258D%25E3%2582%2592%25E3%2583%25AA%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Placeless%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0VmQkZHLW5HaTlYX192SU4xUGNHUVFiTFFMOV9wYmZ5VWVVdlhlNUpfY291ZD1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Placeless</dc:creator></item><item><title><![CDATA[Arduino UnoでRustデバドラを作ろうとしたら別のOSSが生まれた]]></title><description><![CDATA[
+📝 本記事はストーリー編です。技術詳細はこちらで読めます。
+
+
+ はじめに - なぜRustでデバドラを作ったのか
+RustでArduino Unoが動くavr-halを見つけ、example通りにビルドするとLチカ成功。
+「これは…ディスプレイも動かしたくなるやつ！」という流れに。
+2025年7月末、37℃の酷暑の中、電気街で部品を調達（朦朧としながら…）。
+しかし、既存クレートは非同期専用やUno非対応ばかり。
+なので 「こうなったら自分で作るしかない！」 と腹をくくる。
+
+
+ 最初の壁 - 初期化シーケンスとデータシート地獄 - 砂嵐との戦い
+ディスプレイドライバは「初期化シーケ...]]></description><link>https://zenn.dev/placeless/articles/zenn_article-25</link><guid isPermaLink="true">https://zenn.dev/placeless/articles/zenn_article-25</guid><pubDate>Fri, 15 Aug 2025 22:19:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--C0XO-L9_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Arduino%2520Uno%25E3%2581%25A7Rust%25E3%2583%2587%25E3%2583%2590%25E3%2583%2589%25E3%2583%25A9%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258D%25E3%2581%2586%25E3%2581%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25E5%2588%25A5%25E3%2581%25AEOSS%25E3%2581%258C%25E7%2594%259F%25E3%2581%25BE%25E3%2582%258C%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Placeless%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0VmQkZHLW5HaTlYX192SU4xUGNHUVFiTFFMOV9wYmZ5VWVVdlhlNUpfY291ZD1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Placeless</dc:creator></item><item><title><![CDATA[クリーンアーキテクチャ入門 Part 1: 基礎概念と4つの層の全体像]]></title><description><![CDATA[
+ クリーンアーキテクチャ入門 Part 1: 基礎概念と4つの層の全体像
+
+ はじめに
+クリーンアーキテクチャは、ソフトウェアの保守性と拡張性を向上させるための設計パターンです。このシリーズでは、実際のRustプロジェクトのコードを例に、段階的にクリーンアーキテクチャを学んでいきます。
+この記事で学べること：
+
+クリーンアーキテクチャの基本概念
+4つの層の役割と関係性
+依存関係の方向性
+実際のプロジェクト構造
+
+
+ クリーンアーキテクチャとは
+クリーンアーキテクチャは、内側の層が外側の層に依存しない設計原則に基づいています。これにより、ビジネスロジックが技術的な詳細から独立し、テストし...]]></description><link>https://zenn.dev/collabostyle/articles/1089b482fd59fe</link><guid isPermaLink="true">https://zenn.dev/collabostyle/articles/1089b482fd59fe</guid><pubDate>Tue, 12 Aug 2025 23:19:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ei-BC0JF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%25A2%25E3%2583%25BC%25E3%2582%25AD%25E3%2583%2586%25E3%2582%25AF%25E3%2583%2581%25E3%2583%25A3%25E5%2585%25A5%25E9%2596%2580%2520Part%25201%253A%2520%25E5%259F%25BA%25E7%25A4%258E%25E6%25A6%2582%25E5%25BF%25B5%25E3%2581%25A84%25E3%2581%25A4%25E3%2581%25AE%25E5%25B1%25A4%25E3%2581%25AE%25E5%2585%25A8%25E4%25BD%2593%25E5%2583%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:yushi-s%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViM2I3NTQxYzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSk1DWlFPZDBzMmF6VWgtQ0lVZjRvTnVxeW5ZUUswU0g2N3M3M1hVbjFvQldPRDJBPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yushi-s</dc:creator></item><item><title><![CDATA[国土数値情報のデータとRustで逆ジオコーディングを実装した]]></title><description><![CDATA[初投稿です。個人開発の備忘録的な記事になります。何か不備等ありましたらコメントにてお知らせください。
+
+ 本記事について
+
+
+国土数値情報の住居表示住所のデータを使って逆ジオコーディングを実装しました。
+普段仕事ではGoとPythonばかり使っているので、今回はRustでの実装にチャレンジしました。
+さらに少し踏み込んで、API形式の実装にしてみました。
+
+
+ モチベーション
+普段の業務において、ユーザの位置情報とその地点の地理情報を取り扱うことが多いため、私にとって逆ジオコーディングは非常に身近な存在です。
+自作できたら面白そうだよなーと考えていたところで、幸運にもちょうど会社の先輩も...]]></description><link>https://zenn.dev/ymasumoto/articles/ac63f2b18fcf54</link><guid isPermaLink="true">https://zenn.dev/ymasumoto/articles/ac63f2b18fcf54</guid><pubDate>Tue, 12 Aug 2025 23:16:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sCLuqRl3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%259B%25BD%25E5%259C%259F%25E6%2595%25B0%25E5%2580%25A4%25E6%2583%2585%25E5%25A0%25B1%25E3%2581%25AE%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2581%25A8Rust%25E3%2581%25A7%25E9%2580%2586%25E3%2582%25B8%25E3%2582%25AA%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yskmasumoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE5ZThiZDg1ODcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yskmasumoto</dc:creator></item><item><title><![CDATA[Rust × WebAssembly(Wasm) × Edge処理 Google Cloudで「サービス拡張」を試してみた]]></title><description><![CDATA[
+ はじめに
+Rust × WebAssembly(Wasm) × Edge処理を試してみました。
+WebAssemblyのプロジェクトの1つに、Web Assembly for Proxies（Proxy-Wasm）で、通信(Envoy)に拡張機能を追加できます。
+そのProxy-Wasmが、Google Cloudの「サービス拡張」として組み込まれ、Edge処理で使えます。
+多数のサンプル(Rust、Go、C++)が公開されているため、使ってみることにしました。
+目標としては、Rustを使って簡易なBasic認証の実装です
+Authorizationヘッダーをチェックする認証を行いま...]]></description><link>https://zenn.dev/quantum/articles/cb244797d69744</link><guid isPermaLink="true">https://zenn.dev/quantum/articles/cb244797d69744</guid><pubDate>Tue, 12 Aug 2025 05:07:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CiltEwxb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%25C3%2597%2520WebAssembly%2528Wasm%2529%2520%25C3%2597%2520Edge%25E5%2587%25A6%25E7%2590%2586%2520Google%2520Cloud%25E3%2581%25A7%25E3%2580%258C%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%25E6%258B%25A1%25E5%25BC%25B5%25E3%2580%258D%25E3%2582%2592%25E8%25A9%25A6...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Quantum%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU0NjBhZGJiYzEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Quantum</dc:creator></item><item><title><![CDATA[`null` 代わりの `Option<T>` という基本的なデータ型]]></title><description><![CDATA[
+ null 代わりの Option&lt;T&gt; という基本的なデータ型
+Rust には Option&lt;T&gt; という型があります。だいたいこういう定義です。
+enum Option&lt;T&gt; {
+    None,
+    Some(T),
+}
+Rust は暗黙に null を許容する参照型……のようなものはありません。代わりに明示的に Option&lt;T&gt; 型を使用します。値がないことを None 、値があることを Some で示します。 (いきなり余談ですが std::ptr::null があるので null がないはウソになりますね)
+Optio...]]></description><link>https://zenn.dev/doctormate/articles/7100b404d89917</link><guid isPermaLink="true">https://zenn.dev/doctormate/articles/7100b404d89917</guid><pubDate>Tue, 12 Aug 2025 03:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_VFoJFZF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2560null%2560%2520%25E4%25BB%25A3%25E3%2582%258F%25E3%2582%258A%25E3%2581%25AE%2520%2560Option%253CT%253E%2560%2520%25E3%2581%25A8%25E3%2581%2584%25E3%2581%2586%25E5%259F%25BA%25E6%259C%25AC%25E7%259A%2584%25E3%2581%25AA%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%259E%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:bouzuya%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FiYmEzODYwNjQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2589%25E3%2582%25AF%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25A1%25E3%2582%25A4%25E3%2583%2588%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lqVElDaW81T2gxMjNQSzhqQXkydnJpTDh6dC1SWUZvUnYzd0tjb3c9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>bouzuya</dc:creator></item></channel></rss>
