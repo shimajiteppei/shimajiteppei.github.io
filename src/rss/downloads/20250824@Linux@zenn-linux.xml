@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 24 Aug 2025 08:49:35 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[シンボリックリンクと自己参照ループ]]></title><description><![CDATA[
+ シンボリックリンクと自己参照ループ
+
+ シンボリックリンクとは
+シンボリックリンク（Symbolic Link）は、ファイルやディレクトリを参照するための特殊なファイル。実体を持たず、リンク先のパス情報のみを保持する。
+作成例
+ln -s /path/to/target symlink
+確認例
+ls -l symlink
+# symlink -&gt; /path/to/target
+
+readlink symlink
+# /path/to/target
+
+ なぜ自己参照ループになるのか？
+自己参照ループが発生する原因は、シンボリックリンクが実際のファイル・ディレクトリを指さず、別の...]]></description><link>https://zenn.dev/uepon/articles/60884699be20b1</link><guid isPermaLink="true">https://zenn.dev/uepon/articles/60884699be20b1</guid><pubDate>Sun, 24 Aug 2025 07:53:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--e7xVGhdx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B7%25E3%2583%25B3%25E3%2583%259C%25E3%2583%25AA%25E3%2583%2583%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25AF%25E3%2581%25A8%25E8%2587%25AA%25E5%25B7%25B1%25E5%258F%2582%25E7%2585%25A7%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ue%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lIVW4zSmVfbW43ZlowbXlNVXRtOXpyLWZ1S0J3YjVTVUhnMXJWSFE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ue</dc:creator></item><item><title><![CDATA[Synology NAS用のトンネルを AWS Lightsail で格安構築]]></title><description><![CDATA[
+ 概要
+自宅ネットワーク内の Synology NAS に外部からアクセスするため、AWS Lightsail でトンネルサーバを構築する方法を解説します
+記事自体は Synology NAS についての解説ですが、自宅ネットワーク内の任意のサーバを外部公開したい場合にも応用できます。
+では早速解説と行きたいところですが、しかしその前に数ある選択肢から Lightsail へ至った経緯から始めます
+
+ QuickConnect は重い
+簡単に設定できて無料の QuickConnect は魅力的ですが、全ての通信が Synology社のサーバを経由する仕組みであり、通信速度が遅いため利用...]]></description><link>https://zenn.dev/forrep/articles/55265886706638</link><guid isPermaLink="true">https://zenn.dev/forrep/articles/55265886706638</guid><pubDate>Sun, 24 Aug 2025 06:43:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hyB3C4Ye--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Synology%2520NAS%25E7%2594%25A8%25E3%2581%25AE%25E3%2583%2588%25E3%2583%25B3%25E3%2583%258D%25E3%2583%25AB%25E3%2582%2592%2520AWS%2520Lightsail%2520%25E3%2581%25A7%25E6%25A0%25BC%25E5%25AE%2589%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:forrep%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgyMTYwNDM3ZWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>forrep</dc:creator></item><item><title><![CDATA[git logを実行したらコマンドが打てなくなった？！lessビューアとは？]]></title><description><![CDATA[
+ 発生した症状
+git logやsystemctl status XXを実行した結果、「~」と書かれた行が末尾に続き、コマンド入力ができなくなった！
+以下出力イメージ）
+● docker.service - Docker Application Container Engine
+     Loaded: loaded (/lib/systemd/system/docker.service; enabled; vendor preset: enabled)
+     Active: active (running) since Fri 2025-08-22 10:23:15 JST; 2...]]></description><link>https://zenn.dev/micchi55555/articles/86bc7a1a167db2</link><guid isPermaLink="true">https://zenn.dev/micchi55555/articles/86bc7a1a167db2</guid><pubDate>Sun, 24 Aug 2025 03:17:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fm0xmCZF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:git%2520log%25E3%2582%2592%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%258C%25E6%2589%2593%25E3%2581%25A6%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25EF%25BC%259F%25EF%25BC%2581less%25E3%2583%2593%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%25A2%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sakih5%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhjMzkyY2E1MjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sakih5</dc:creator></item><item><title><![CDATA[Prometheus + Grafana + AlertManager 監視環境構築]]></title><description><![CDATA[Prometheus を使用し、サーバーリソースやアプリケーションの監視環境を構築しました。
+監視メトリクスの収集には Prometheus を、監視項目の視覚化には Grafana を、異常検知後のアラート発火には Alertmanager を使用しました。
+※MacBook上のDockerコンテナにて環境を構築
+※監視対象は、EC2インスタンス]]></description><link>https://zenn.dev/eiken/books/21a8c94412da31</link><guid isPermaLink="true">https://zenn.dev/eiken/books/21a8c94412da31</guid><pubDate>Sat, 23 Aug 2025 23:39:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iJQ5PlMt--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci85YjNjZDI2OTIwLmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>enjine</dc:creator></item><item><title><![CDATA[OracleLinux8.10 に Oracle Database 21c を構成する]]></title><description><![CDATA[
+ 前提
+続きです。
+https://zenn.dev/asterisk9101/articles/oraclelinux8-2
+
+ Oracle Database 21c のインストーラの準備
+インストーラを展開します。
+cd /u01/app/oracle/product/21.3.0/dbhome_1
+unzip -q ~/db_home.zip
+
+ Oracle Database 21c をインストールする
+export LANG=C
+export DISPLAY=:0
+./runInstaller
+Set Up Software Only を選びます。自分で作った方が理解が捗る...]]></description><link>https://zenn.dev/asterisk9101/articles/oraclelinux8-3</link><guid isPermaLink="true">https://zenn.dev/asterisk9101/articles/oraclelinux8-3</guid><pubDate>Sat, 23 Aug 2025 10:39:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oNCB1cLl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OracleLinux8.10%2520%25E3%2581%25AB%2520Oracle%2520Database%252021c%2520%25E3%2582%2592%25E6%25A7%258B%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A4%259A%25E7%2594%25B0%25E6%25B0%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKd3hvZ1pLNDVtSmdsUDlROUZPUTcyRXg4eV9MeFdmejdma0V1aTA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>多田氏</dc:creator></item><item><title><![CDATA[The Battle with Ghostty]]></title><description><![CDATA[
+ Overview
+My goal here is to keep a record of it as a reference, along with the configuration steps and notes.
+
+ Environment
+
+Gentoo Linux 6.12.2
+KDE Plasma 6.2.x
+GTK4
+Ghostty 1.1.3
+
+
+ Ghostty
+https://ghostty.org/
+https://github.com/ghostty-org/ghostty/tree/e3e69269e5a3bbeb4f15f34464b7968d646ad9...]]></description><link>https://zenn.dev/exelion/articles/e249292735c499</link><guid isPermaLink="true">https://zenn.dev/exelion/articles/e249292735c499</guid><pubDate>Sat, 23 Aug 2025 07:06:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jYHFEMNQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:The%2520Battle%2520with%2520Ghostty%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kei%2520Sawamura%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI0MWNlZWQ3ZWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kei Sawamura</dc:creator></item><item><title><![CDATA[[Linux]: Systemdについて調べたメモ]]></title><description><![CDATA[
+ [Linux]: Systemdについて調べたメモ
+
+ Systemdとは
+Linuxの起動時の処理やシステムの管理、デーモンプログラムの起動などを行うソフトウェア群でRedHat社のエンジニアが開発を開始した。
+以前使用されていたSysVinitの代わりに多くのLinuxディストリビューションに採用されている。
+initが行ってきた制御やランレベル、起動過程を置き換え、ユーザーログインやシステムコンソール、デバイスホットプラグ、ロギングを処理し、Linuxにおける共通するサービスを統合する。
+カーネルが一番最初に生成するユーザープロセスでプロセス番号「1」が与えられる
+主な機能
+
+...]]></description><link>https://zenn.dev/mitate_gengaku/articles/linux-systemd</link><guid isPermaLink="true">https://zenn.dev/mitate_gengaku/articles/linux-systemd</guid><pubDate>Fri, 22 Aug 2025 14:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--e3NCi2-X--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BLinux%255D%253A%2520Systemd%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E8%25AA%25BF%25E3%2581%25B9%25E3%2581%259F%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25BE%25A1%25E6%25A5%25AF%25E7%258E%2584%25E5%25B6%25BD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0tQOVRYWHQ5Qm1BLVplcURoLWdxUHl4RVFjMmNsRkhSNk95XzVVSVVhPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>御楯玄嶽</dc:creator></item><item><title><![CDATA[[Linux]: Linuxでユーザーを追加するメモ]]></title><description><![CDATA[
+ [Linux]: Linuxでユーザーを追加するメモ
+単なる備忘録です。
+
+ ユーザーの追加
+useradd -m -d /home/ユーザー名 -u 1000 -U ユーザー名
+
+ オプション
+よく使いそうなものだけ
+
+
+
+オプション
+意味
+
+
+
+
+-m
+ホームディレクトリを作成する
+
+
+-d ディレクトリ名
+ホームディレクトリのパスを指定する
+
+
+-u UID
+UID指定
+
+
+-U
+ユーザー名と同じグループを作成する
+
+
+-g GID
+GID指定
+
+
+
+
+ パスワード変更
+下記コマンド実行後、パスワードを設定する
+passwd ユーザー 
+
+ サブグループ追加
+-aを指定しない場...]]></description><link>https://zenn.dev/mitate_gengaku/articles/linux-user-summary</link><guid isPermaLink="true">https://zenn.dev/mitate_gengaku/articles/linux-user-summary</guid><pubDate>Thu, 21 Aug 2025 14:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--M-R6mo-o--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BLinux%255D%253A%2520Linux%25E3%2581%25A7%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%25E3%2582%2592%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2599%25E3%2582%258B%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25BE%25A1%25E6%25A5%25AF%25E7%258E%2584%25E5%25B6%25BD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0tQOVRYWHQ5Qm1BLVplcURoLWdxUHl4RVFjMmNsRkhSNk95XzVVSVVhPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>御楯玄嶽</dc:creator></item><item><title><![CDATA[NFSでksoftirqdが詰まる → softnet_statで裏どりし、netdev_budget調整で90s→40sに短縮した話]]></title><description><![CDATA[
+ この記事で言いたいこと（TL;DR）
+
+NFS 読み込み時に ksoftirqd が占有してユーザ処理が遅延。
+
+/proc/net/softnet_stat の 3列目（time_squeeze＝NAPIポーリングの失敗数） がガンガン増えており、「SoftIRQの処理時間が足りていない」状況を確認。
+
+net.core.netdev_budget / net.core.netdev_budget_usecs を 2倍程度に拡大したところ、約90秒 → 約40秒まで短縮。
+
+
+
+ 背景・構成
+
+
+ホストA上: VMA（アプリ実行）
+
+ホストB上: VMB（ここで NetApp St...]]></description><link>https://zenn.dev/publictrain/articles/877d25b41e8c34</link><guid isPermaLink="true">https://zenn.dev/publictrain/articles/877d25b41e8c34</guid><pubDate>Thu, 21 Aug 2025 12:22:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vG3_phhR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:NFS%25E3%2581%25A7ksoftirqd%25E3%2581%258C%25E8%25A9%25B0%25E3%2581%25BE%25E3%2582%258B%2520%25E2%2586%2592%2520softnet_stat%25E3%2581%25A7%25E8%25A3%258F%25E3%2581%25A9%25E3%2582%258A%25E3%2581%2597%25E3%2580%2581netdev_budget%25E8%25AA%25BF%25E6%2595%25B4%25E3%2581%25A790s...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2596%25E3%2581%25A3%25E3%2581%258D%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVhMWJlNWMxNjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ざっきー</dc:creator></item><item><title><![CDATA[自宅サーバーでサクッとDokuWikiを立ち上げる方法（RHEL9編）]]></title><description><![CDATA[
+ 自宅サーバーでサクッとDokuWikiを立ち上げる方法（RHEL9編）
+
+ 1. はじめに
+今回は自宅サーバーにDokuWikiをサクッと立ち上げる手順をまとめます。
+データベース不要でPHPだけで動くので、Linux初心者でも比較的簡単にセットアップできます。
+
+ 2. DokuWikiとは？
+
+DokuWikiは、データベースを前提としない、使い易く汎用性の高いオープンソースのウィキソフトウェアです。​きれいで可読性の高い構文は利用者に愛されています。 管理・バックアップ・統合化が容易なところは管理者に好まれます。 DokuWiki はアクセス制御機能と認証への接続機能を内蔵して...]]></description><link>https://zenn.dev/mnemoco/articles/34ccaea0ccb664</link><guid isPermaLink="true">https://zenn.dev/mnemoco/articles/34ccaea0ccb664</guid><pubDate>Wed, 20 Aug 2025 15:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wlmEFqMv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2587%25AA%25E5%25AE%2585%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25A7%25E3%2582%25B5%25E3%2582%25AF%25E3%2583%2583%25E3%2581%25A8DokuWiki%25E3%2582%2592%25E7%25AB%258B%25E3%2581%25A1%25E4%25B8%258A%25E3%2581%2592%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25EF%25BC%2588RHEL9%25E7%25B7%25A8%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mnemoco%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFiOWU2ZWY5NTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mnemoco</dc:creator></item><item><title><![CDATA[M2 MacBookにVoid Linuxをインストールする]]></title><description><![CDATA[元記事は以下。
+https://omemoji.com/articles/asahi_linux_install
+
+ はじめに
+https://x.com/omemoji_art/status/1955116274100605103
+MacBook Air (M2, 2022) に arm64 アーキテクチャの Void Linux をインストールすることに成功した。本記事ではインストールの方法、および実際に使ってみた感想や Tips などについて記す。なお、この記事は Linux にある程度慣れている人向けであり、初めて Linux に触れる人には全くおすすめできない。
+Void Li...]]></description><link>https://zenn.dev/omemoji/articles/asahi_linux_install</link><guid isPermaLink="true">https://zenn.dev/omemoji/articles/asahi_linux_install</guid><pubDate>Tue, 19 Aug 2025 16:06:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--u0qBNqGv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:M2%2520MacBook%25E3%2581%25ABVoid%2520Linux%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:omemoji%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNzQxRlRSQTdWczlMWHBwa19oQmU3eVByd0tPRXpFOExqb1dNZFpndz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>omemoji</dc:creator></item><item><title><![CDATA[RHEL9でタブ補完が効かないときの解決方法]]></title><description><![CDATA[
+ RHEL9にbash-completionを入れてTabキー補完を快適にする
+
+ 1. はじめに
+AWS EC2にRHEL9を立ち上げたら、あれ？タブ補完が効かない、、、となりました。ファイル名やディレクトリ名は補完されるけど、gitやdnfのオプション補完がないと、地味にストレスです。
+というわけでbash-completionを入れて解決していきます。
+
+ 2. bash-completionとは？
+ざっくりいうと、Bashの補完をめっちゃ便利にしてくれる仕組みです。
+公式リポジトリの説明ではこうなってます：
+
+bash-completion は、 Bash シェルのコマンド ラ...]]></description><link>https://zenn.dev/mnemoco/articles/45b52c358c363c</link><guid isPermaLink="true">https://zenn.dev/mnemoco/articles/45b52c358c363c</guid><pubDate>Tue, 19 Aug 2025 15:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--l8hxcCQF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:RHEL9%25E3%2581%25A7%25E3%2582%25BF%25E3%2583%2596%25E8%25A3%259C%25E5%25AE%258C%25E3%2581%258C%25E5%258A%25B9%25E3%2581%258B%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AE%25E8%25A7%25A3%25E6%25B1%25BA%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mnemoco%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFiOWU2ZWY5NTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mnemoco</dc:creator></item><item><title><![CDATA[[Windows]Surface Go(第1世代)に MX Linux を入れるまでの記録]]></title><description><![CDATA[
+ はじめに
+Windows 10 のサポート終了が近づいています。手元のデバイスを有効活用したいため、Surface Go(第1世代)に MX Linux を導入しました。本書では、実際に発生したつまずきを踏まえて整理した新OS導入手順をまとめています。
+
+ 対象者
+
+Surface Go(第1世代)を持っている人
+手元のPCのWindowsを削除したい人
+手元のPCに新しいOSを入れたい人
+
+
+ 前提
+
+ 全体の流れ
+
+Windows OS 削除 → USB から起動 → Live 起動 → 日本語設定 → PC本体(内蔵 eMMC)へインストール完了
+
+
+ 要点
+
+新しめの USB...]]></description><link>https://zenn.dev/ykbone/articles/4b6e98c870240c</link><guid isPermaLink="true">https://zenn.dev/ykbone/articles/4b6e98c870240c</guid><pubDate>Tue, 19 Aug 2025 11:22:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UFROXjAd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BWindows%255DSurface%2520Go%2528%25E7%25AC%25AC1%25E4%25B8%2596%25E4%25BB%25A3%2529%25E3%2581%25AB%2520MX%2520Linux%2520%25E3%2582%2592%25E5%2585%25A5%25E3%2582%258C%25E3%2582%258B%25E3%2581%25BE%25E3%2581%25A7%25E3%2581%25AE%25E8%25A8%2598%25E9%258C%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ykbone%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U3ZTRlYzk3ZDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ykbone</dc:creator></item><item><title><![CDATA[【備忘録】nodejs，npmのバージョンをあげる]]></title><description><![CDATA[
+ 状況
+nodejs，npmのバージョンを上げたい．なんかnvmが使えない．linux
+
+ やること
+$ sudo npm install n -g
+$ sudo n lts
+# 古いやつの削除
+$ sudo apt purge nodejs npm
+インストールしたやつが見つからない場合
+$ node -v
+  bash: /usr/bin/node: No such file or directory
+# シェルのコマンドキャッシュをリセット
+$ hash -r
+]]></description><link>https://zenn.dev/xiakou/articles/manage-version-node</link><guid isPermaLink="true">https://zenn.dev/xiakou/articles/manage-version-node</guid><pubDate>Tue, 19 Aug 2025 05:03:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DINMyWoF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%25E3%2580%2591nodejs%25EF%25BC%258Cnpm%25E3%2581%25AE%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E3%2581%2582%25E3%2581%2592%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:taihui%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUxMDVmMDQ0OWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>taihui</dc:creator></item><item><title><![CDATA[CentOS 6.2 で XDMCP を有効にする]]></title><description><![CDATA[CentOS 6.2 で XDMCP を有効にする方法です。
+【直接設定ファイルを修正する方法です】
+
+ 1. XDMCP を利用したいサーバへログインします。
+
+ 2. XDMCP 接続が利用できるように gdm の設定を変更します。
+# vi /etc/gdm/custom.conf
+以下の [xdmcp] セクションへ "Enable=true" を追加します。
+[xdmcp]
+Enable=true
+
+ 3. gdm へ対して設定を反映します。
+# kill -HUP `cat /var/run/gdm.pid`
+※サーバ再起動でも反映します。
+
+ 4. iptables の追加...]]></description><link>https://zenn.dev/flosslabs/articles/7060e3173af608</link><guid isPermaLink="true">https://zenn.dev/flosslabs/articles/7060e3173af608</guid><pubDate>Tue, 19 Aug 2025 01:10:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--k2_Y3X2B--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CentOS%25206.2%2520%25E3%2581%25A7%2520XDMCP%2520%25E3%2582%2592%25E6%259C%2589%25E5%258A%25B9%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:FLOSSLABS%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzJJRWs4SkdXUXhzTHFwVXZNSk9VdXY0eXk1MjlaSUZMX0d5aGxOUklXZ0s3RnZRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>FLOSSLABS</dc:creator></item><item><title><![CDATA[【Linux】キャッシュについて]]></title><description><![CDATA[
+ はじめに
+Linuxのメモリキャッシュについて調べる機会があったので、備忘録として残しておきます。
+
+ /proc/sys/vm/drop_cachesとは
+Linuxでメモリキャッシュを解放するために使用されるファイルです。
+このファイルに数値（1~3）を書き込むことで、特定のメモリキャッシュを手動で解放できます。
+
+1 : ページキャッシュ
+2 : dentryキャッシュとinodeキャッシュ
+3 : ページキャッシュ、dentryキャッシュ、inodeキャッシュすべて
+ここで、ページキャッシュやinodeというワードはなんとなくイメージがつきやすいですが、dentryは聞きなれ...]]></description><link>https://zenn.dev/eiken/articles/e0d5e18ad55a23</link><guid isPermaLink="true">https://zenn.dev/eiken/articles/e0d5e18ad55a23</guid><pubDate>Mon, 18 Aug 2025 22:46:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VVrIWFZE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Linux%25E3%2580%2591%25E3%2582%25AD%25E3%2583%25A3%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A5%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:enjine%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZS5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>enjine</dc:creator></item><item><title><![CDATA[[Windows]RufusでLive USBを作る手順と diskpartで通常USBに戻す方法]]></title><description><![CDATA[
+
+ はじめに
+Windows 10のサポート終了が近づくなか、USBメモリでLive USBを作成しておきたい人も多いはずです。また、WindowsでLinuxなどのISOイメージから起動用USBを作成したあと、そのUSBメモリを通常のストレージ用途へ戻したい場面は少なくありません。さらに、USBメモリは「フォーマット」だけでは元に戻らないことがあります。本記事では、Rufusを使ったLive USBの作成手順と、diskpartで通常のUSBに戻す手順をまとめます。
+
+ 対象者
+
+Windows 10 または 11 で起動用USBを作成したい人
+作成済みのLive USBを通常のUS...]]></description><link>https://zenn.dev/ykbone/articles/edee1ed3479dec</link><guid isPermaLink="true">https://zenn.dev/ykbone/articles/edee1ed3479dec</guid><pubDate>Mon, 18 Aug 2025 13:25:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2Y33p8dk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BWindows%255DRufus%25E3%2581%25A7Live%2520USB%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%25E6%2589%258B%25E9%25A0%2586%25E3%2581%25A8%2520diskpart%25E3%2581%25A7%25E9%2580%259A%25E5%25B8%25B8USB%25E3%2581%25AB%25E6%2588%25BB%25E3%2581%2599%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ykbone%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U3ZTRlYzk3ZDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ykbone</dc:creator></item><item><title><![CDATA[【備忘】AWS EC2に追加のEBSをアタッチしてマウントする]]></title><description><![CDATA[
+ 目的
+普段意識しないこともある、EC2の容量拡張の方法とその理解を深める
+
+ 環境
+
+EC2
+
+Alma Linix 10
+
+
+
+
+ 状態の確認
+以下からnvme0n1というデバイスが接続されており、それが3つのパーテーションに分割されていることがわかる。また、そのボリュームがEBSであることもわかる。
+root# lsblk
+NAME        MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
+nvme0n1     259:0    0   10G  0 disk
+├─nvme0n1p1 259:1    0    1M  0 part
+├─nvme0...]]></description><link>https://zenn.dev/degurum/articles/4b81474ba4b4a8</link><guid isPermaLink="true">https://zenn.dev/degurum/articles/4b81474ba4b4a8</guid><pubDate>Mon, 18 Aug 2025 08:46:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wjY5faJl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2582%2599%25E5%25BF%2598%25E3%2580%2591AWS%2520EC2%25E3%2581%25AB%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%25AEEBS%25E3%2582%2592%25E3%2582%25A2%25E3%2582%25BF%25E3%2583%2583%25E3%2583%2581%25E3%2581%2597%25E3%2581%25A6%25E3%2583%259E%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A7%25E3%2581%2590%25E3%2582%2589%25E3%2582%2580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QxNmNlOWY3MjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>でぐらむ</dc:creator></item><item><title><![CDATA[作業環境を移行する技術]]></title><description><![CDATA[
+ 日記
+Lemur Pro が結構古くなってきて動作が全体的に不安定になってきたのと、最近現場で開発をする機会が相対的に増えてきたのでAdder WS に買い替えた。
+以前より仕事環境のポータビリティにはこだわってきたのだが、今回それが効を奏して相当スムーズに移行ができたので、そのノウハウを共有したい。
+
+ dotfiles
+tan-t/dotfiles に各種設定ファイルを配置している。
+これ自体はhome-managerの設定ファイルとNeoVimの設定ファイルの組み合わせになっており、 home-managerをインストールしてswitchすればすぐに各種ツール群が同じ設定でイン...]]></description><link>https://zenn.dev/tan_t/articles/3d16efa515a07c</link><guid isPermaLink="true">https://zenn.dev/tan_t/articles/3d16efa515a07c</guid><pubDate>Sun, 17 Aug 2025 14:05:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bwdN-9WF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BD%259C%25E6%25A5%25AD%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E7%25A7%25BB%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%25E6%258A%2580%25E8%25A1%2593%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tan_t%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvdC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tan_t</dc:creator></item><item><title><![CDATA[ゼロから始めるAnsible入門ハンズオン]]></title><description><![CDATA[
+ はじめに
+
+ この資料の目的
+この資料は、Ansibleを全く触ったことがない方に向けて、「むずかしい事前準備なしに、Ansibleの便利さをちょっと体験してみる」ことを目指して作成しました。
+サーバーの構築や設定作業で、こんな経験はありませんか？
+
+手順書が長く、作業中に手順を飛ばしてしまった…
+複数のサーバーに同じ設定をするのが大変…
+手作業なので、人によって設定が微妙に違ってしまう…
+
+Ansibleは、そんな悩みを解決してくれる「構成管理ツール」です。サーバーの構築手順や作業手順をコードとして記述することで、自動化を実現し、誰がやっても同じ結果になるようにしてくれます。
+この...]]></description><link>https://zenn.dev/ryo0122mrr/articles/04f41e6b99da45</link><guid isPermaLink="true">https://zenn.dev/ryo0122mrr/articles/04f41e6b99da45</guid><pubDate>Sun, 17 Aug 2025 12:51:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3s9x79CE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25BC%25E3%2583%25AD%25E3%2581%258B%25E3%2582%2589%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258BAnsible%25E5%2585%25A5%25E9%2596%2580%25E3%2583%258F%25E3%2583%25B3%25E3%2582%25BA%25E3%2582%25AA%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ms%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgxM2QyYTkwNjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ms</dc:creator></item></channel></rss>
