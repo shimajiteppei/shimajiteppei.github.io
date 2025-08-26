@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Java」のフィード]]></title><description><![CDATA[Zennのトピック「Java」のRSSフィードです]]></description><link>https://zenn.dev/topics/java</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/5c47bb8423.png</url><title>Zennの「Java」のフィード</title><link>https://zenn.dev/topics/java</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 26 Aug 2025 02:02:38 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/java/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Java23でリリースされた機能を触ってみた！！（下書き供養）]]></title><description><![CDATA[去年のアドベントカレンダー用に下書きしていた記事があったので供養します😇
+(この記事自体は別の媒体で公開されました)
+半年ちょっと前の記事ですが、読んでいてこんなことも知らなかったのか。。。と思う場面のちょこちょこあったのですが供養なのであえてそのままにしています🙇
+現在は、JavaとTypeScript(React)で実装されたアプリケーションの開発案件に参画しています。
+今回は、JJUG CCC 2024 Fallにスタッフ参加した時に、
+Java23で実装されたコードのクイズがあって今まで触ってきたJavaとあまりにも雰囲気が変わっていたので、『これは触ってみなくては！！』と思い、...]]></description><link>https://zenn.dev/h_kohe/articles/01eab4d4a05df2</link><guid isPermaLink="true">https://zenn.dev/h_kohe/articles/01eab4d4a05df2</guid><pubDate>Sun, 24 Aug 2025 14:42:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--awyRWHAH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java23%25E3%2581%25A7%25E3%2583%25AA%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%2595%25E3%2582%258C%25E3%2581%259F%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E8%25A7%25A6%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25EF%25BC%2581%25EF%25BC%2581%25EF%25BC%2588%25E4%25B8%258B%25E6%259B%25B8%25E3%2581%258D%25E4%25BE%259B%25E9%25A4%258A%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:KOHE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MwMDQxMTQ1ZjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KOHE</dc:creator></item><item><title><![CDATA[Java仮想マシン（JVM）を読解しながら理解する #5]]></title><description><![CDATA[https://zenn.dev/h_kohe/articles/9eb8bde7884acc
+こちらの記事の続きです。
+よんでいる公式ドキュメント
+https://docs.oracle.com/javase/specs/jvms/se17/html/jvms-2.html
+この2章だけでもまだまだ先のあるでなかかなの絶望を感じていますが。。。
+以下の記事でJavaチャンピオンの1人でもある谷本さんが、
+
+また、勉強会にもよく参加していました。中でも印象的だったのは、「Tomcatのコードを全部読むなんて普通だよね」と平然と話す人がいるような、レベルの高い勉強会があったことです。
+
+と...]]></description><link>https://zenn.dev/h_kohe/articles/5cbf90982e0c29</link><guid isPermaLink="true">https://zenn.dev/h_kohe/articles/5cbf90982e0c29</guid><pubDate>Sun, 24 Aug 2025 14:01:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GULXYzJv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E4%25BB%25AE%25E6%2583%25B3%25E3%2583%259E%25E3%2582%25B7%25E3%2583%25B3%25EF%25BC%2588JVM%25EF%25BC%2589%25E3%2582%2592%25E8%25AA%25AD%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%25AA%25E3%2581%258C%25E3%2582%2589%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2520%25235%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:KOHE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MwMDQxMTQ1ZjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KOHE</dc:creator></item><item><title><![CDATA[【無料】Spring Boot TODO アプリを Render.com にデプロイする完全ガイド]]></title><description><![CDATA[
+ 【無料】Spring Boot TODO アプリを Render.com にデプロイする完全ガイド
+このガイドでは、前回の記事で作成した Spring Boot TODO アプリケーションを Render.com にデプロイする手順を説明します。
+!
+📚 前提記事: Spring Boot + LocalStorage で作る TODO アプリ完全ガイド
+まだ TODO アプリを作成していない方は、上記の記事を参考にアプリケーションを作成してください。
+
+
+ 前提条件
+
+前回の記事で作成した Spring Boot TODO アプリ
+GitHub アカウント
+Render.com ア...]]></description><link>https://zenn.dev/imohuke/articles/spring-boot-render-deploy</link><guid isPermaLink="true">https://zenn.dev/imohuke/articles/spring-boot-render-deploy</guid><pubDate>Sat, 23 Aug 2025 14:05:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--X6NAy3_b--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E7%2584%25A1%25E6%2596%2599%25E3%2580%2591Spring%2520Boot%2520TODO%2520%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%2520Render.com%2520%25E3%2581%25AB%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%2599%25E3%2582%258B%25E5%25AE%258C%25E5%2585%25A8%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2584%25E3%2582%2582%25E3%2581%25B5%25E3%2581%2591%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlhNjM2MmM4MzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>いもふけ</dc:creator></item><item><title><![CDATA[Gradle Multi-Project構成でCircleCIのrerun failed testsを実行する際の設定]]></title><description><![CDATA[
+ これなに
+CircleCIの"rerun failed tests"を有効にしているのですが、Flaky testに出会したので目論見通り"rerun failed tests"を実行したところ、そのテストだけが実行され成功したけど違う理由でエラーになったので、それの対処法を残しておくページです。
+
+ 起きたエラー
+9: Task failed with an exception.
+-----------
+* What went wrong:
+Execution failed for task ':example2:test'.
+&gt; No tests found for giv...]]></description><link>https://zenn.dev/moneyforward/articles/dea4ce51db47e6</link><guid isPermaLink="true">https://zenn.dev/moneyforward/articles/dea4ce51db47e6</guid><pubDate>Thu, 21 Aug 2025 08:31:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--feN8PvXb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Gradle%2520Multi-Project%25E6%25A7%258B%25E6%2588%2590%25E3%2581%25A7CircleCI%25E3%2581%25AErerun%2520failed%2520tests%25E3%2582%2592%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%25E9%259A%259B%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:sh-ogawa%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUwOTQ4MTI2ZjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Money%2520Forward%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dQMUxWY0xrRDB3M0E3clJtNWdQRWxmUVA2aDBUdjdDakpoLXRQU3c9czI1MC1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sh-ogawa</dc:creator></item><item><title><![CDATA[【Java】MacでJava開発の環境構築を行う -VSCode編-]]></title><description><![CDATA[
+ 概要
+大学院生活も残り半年ちょっととなりました。人生最後の夏休みが始まり，研究と並行して何か開発したいなと思い，遅ればせながらもJavaに触れておこうと思いました。
+まずは慣れ親しんだVScodeで環境構築を行ったので，備忘録としてまとめておきます。
+
+ 対象読者
+
+Java開発の環境構築を行いたい人
+Mac，VScodeで開発を行う人
+
+
+ 実行環境
+
+M2 Mac (macOS Sequoia 15.5)
+Visual Studio code 1.102.0
+Java 24 (JDK 24.0.2)
+
+
+ （1）JDK(Java Development Kit)をインストールする...]]></description><link>https://zenn.dev/gucchi612/articles/20250820java_env</link><guid isPermaLink="true">https://zenn.dev/gucchi612/articles/20250820java_env</guid><pubDate>Wed, 20 Aug 2025 12:58:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YzaABHui--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591Mac%25E3%2581%25A7Java%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AE%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E3%2582%2592%25E8%25A1%258C%25E3%2581%2586%2520-VSCode%25E7%25B7%25A8-%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Gucchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q1MzgyZTg2Y2MuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Gucchi</dc:creator></item><item><title><![CDATA[良いコード／悪いコードで学ぶ設計入門]]></title><description><![CDATA[「ITエンジニア本大賞2023」技術書部門で大賞受賞という事で、京都までの新幹線で暇つぶしに読んでみたら凄かった。
+良いパターン悪いパターンを見抜く力がつくんじゃないかなと思う。
+悪いコードを最初にみせてるので結構ためになる。
+ドメイン駆動設計も詳しく書いてあるので、駆け出しのエンジニアはベストバイの本なのではないのでしょうか。
+]]></description><link>https://zenn.dev/satorusugaya/articles/30ae49e36a24a7</link><guid isPermaLink="true">https://zenn.dev/satorusugaya/articles/30ae49e36a24a7</guid><pubDate>Wed, 20 Aug 2025 04:28:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LL6RWssC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2589%25AF%25E3%2581%2584%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25EF%25BC%258F%25E6%2582%25AA%25E3%2581%2584%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6%25E8%25A8%25AD%25E8%25A8%2588%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%258F%2585%25E8%25B0%25B7%25E8%25A6%259A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhiYzQ5NDA0ODIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>菅谷覚</dc:creator></item><item><title><![CDATA[【初心者向け】Javaアノテーション解説]]></title><description><![CDATA[
+ はじめに
+はじめまして、株式会社BTMの弓削多と申します。
+最近現場が変わりまして、「Java + Spring Boot」の環境で開発しております。
+今まではPHPを用いての開発を担当していましたので、環境がガラッと変わりました。
+毎回アプリケーションをビルドしなくてはいけなかったり、型をしっかりと指定しなくてはいけなかったりと、PHPとは違うことばかりで戸惑っていました。
+中でも一番混乱したのが、Javaのアノテーションという概念です。
+PHPには同じような概念で「アトリビュート」という機能があるそうですが、私は馴染みがなかったためソースコードの理解が難しかったです。
+ソースコー...]]></description><link>https://zenn.dev/b_tm/articles/35c902cf0d724c</link><guid isPermaLink="true">https://zenn.dev/b_tm/articles/35c902cf0d724c</guid><pubDate>Wed, 20 Aug 2025 02:59:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fHpm2xct--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591Java%25E3%2582%25A2%25E3%2583%258E%25E3%2583%2586%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:y-yugeta%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcwNTNjYmFlMjMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEBTM%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkRNYmYxdXo4T1E2bkI4c1JMSWtKMWdKOWxfSUMyX1JMNHh3dGJTZXNKOV96bVZZMD1zOTYtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>y-yugeta</dc:creator></item><item><title><![CDATA[Netty の Socket で SO_LINGER を設定する]]></title><description><![CDATA[
+ はじめに
+ちょっと Netty で SO_LINGER の設定をしたかったんだけどドキュメントが雑過ぎて最初良く分からなかったので[1]メモ。
+
+ Linux の SO_LINGER の設定方法
+Linux では（Un*x はみんなそうなんじゃないかな？）setSockOpt(3p) で SO_LINGER の設定ができる。Linux の man だと setSockOpt には詳しく書いてなくて、socket(7) に SO_LINGER の設定が書いてあるので、見ると以下のような構造体で設定することになっている。
+struct linger {
+    int l_onoff; ...]]></description><link>https://zenn.dev/kariya_mitsuru/articles/4346f16caf3aff</link><guid isPermaLink="true">https://zenn.dev/kariya_mitsuru/articles/4346f16caf3aff</guid><pubDate>Tue, 19 Aug 2025 14:44:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_WJe-rT_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Netty%2520%25E3%2581%25AE%2520Socket%2520%25E3%2581%25A7%2520SO_LINGER%2520%25E3%2582%2592%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2582%258A%25E3%2582%2584%25E3%2581%25BF%25E3%2581%25A4%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvay5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かりやみつる</dc:creator></item><item><title><![CDATA[Java の switch 文は enum の網羅性をチェックしてくれない]]></title><description><![CDATA[
+ はじめに
+タイトル通り。これに気付かずしばらく悩んでしまったアホなオレを笑ってくれ。
+
+ switch 文
+Java には太古の昔から switch 文ってのがある。
+public static void judgment(int answer) {
+    switch (answer) {
+        case 42:
+            System.out.println("正解！");
+            break;
+        default:
+            System.out.println("残念！");
+            brea...]]></description><link>https://zenn.dev/kariya_mitsuru/articles/918f2de6199d69</link><guid isPermaLink="true">https://zenn.dev/kariya_mitsuru/articles/918f2de6199d69</guid><pubDate>Tue, 19 Aug 2025 14:41:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ELa3I34N--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%2520%25E3%2581%25AE%2520switch%2520%25E6%2596%2587%25E3%2581%25AF%2520enum%2520%25E3%2581%25AE%25E7%25B6%25B2%25E7%25BE%2585%25E6%2580%25A7%25E3%2582%2592%25E3%2583%2581%25E3%2582%25A7%25E3%2583%2583%25E3%2582%25AF%25E3%2581%2597%25E3%2581%25A6%25E3%2581%258F%25E3%2582%258C%25E3%2581%25AA%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2582%258A%25E3%2582%2584%25E3%2581%25BF%25E3%2581%25A4%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvay5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かりやみつる</dc:creator></item><item><title><![CDATA[AI開発に適した言語とは？Python以外の最強言語もご紹介！]]></title><description><![CDATA[AI開発というと、まず思い浮かぶのはPythonですよね。でも実は、Python以外にも優秀な選択肢があるんです。
+今回は、AI開発に適した言語の特徴から、Python以外の最強言語まで、実践的な視点でご紹介していきます。
+また、本記事に辿り着いた方は個人でAI開発へ着手することに興味をお持ちかもしれません。そういった方へ向けたAIエンジニアに必要なものについて解説した記事がありますので、よろしければそちらも参考にしてください。
+参考: AI開発の勉強は独学でもできる！初心者がAIエンジニアに必要な知識や必要勉強時間の解説 - Leograph株式会社
+
+ AI開発の基本
+プログラミング...]]></description><link>https://zenn.dev/kodamaleograph/articles/92b832dac239dd</link><guid isPermaLink="true">https://zenn.dev/kodamaleograph/articles/92b832dac239dd</guid><pubDate>Tue, 19 Aug 2025 04:50:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nU0toL6z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AI%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AB%25E9%2581%25A9%25E3%2581%2597%25E3%2581%259F%25E8%25A8%2580%25E8%25AA%259E%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259FPython%25E4%25BB%25A5%25E5%25A4%2596%25E3%2581%25AE%25E6%259C%2580%25E5%25BC%25B7%25E8%25A8%2580%25E8%25AA%259E%25E3%2582%2582%25E3%2581%2594%25E7%25B4%25B9%25E4%25BB%258B%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25A4%25E3%2583%2581%25E3%2583%25BB%25E3%2583%25AC%25E3%2582%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSnRtODctbUZWbVRicDlZUFNMaW9sNjZpQ1UxR0ZSU09SMmp2WExtdzhvUkh4MlV3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ケーイチ・レオ</dc:creator></item><item><title><![CDATA[JVMのGarbage Collectionを理解する]]></title><description><![CDATA[
+ はじめに
+こんにちは、Javaのアプリを運用しているゾイです！
+最近、アプリのパフォーマンスに問題があり、調査したところGarbage Collection（GC）が原因ではないかと疑っていました🤔
+そこで、GCがどのように動作しているかを正しく理解し、最適化する必要がありました。
+この記事では、JVMのGarbage Collectionの基本から、実際に観察した問題とその対策について詳しく解説したいと思います。
+
+ ⚠️ TL;DR – Major GCに注意！
+
+Major GC（別名 Full GC）が発生するとアプリ全体が停止します。しかもガチで止まります😵
+Major G...]]></description><link>https://zenn.dev/quicksilversel/articles/understanding-garbage-collection</link><guid isPermaLink="true">https://zenn.dev/quicksilversel/articles/understanding-garbage-collection</guid><pubDate>Tue, 19 Aug 2025 01:11:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--y9W-uk-B--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JVM%25E3%2581%25AEGarbage%2520Collection%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25BE%25E3%2582%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1NmE2MDZlMTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ゾイ</dc:creator></item><item><title><![CDATA[SpringとSpringBootを使っているリポジトリのアップデート作業をwithCopilotでやった振り返り]]></title><description><![CDATA[
+ はじめに
+お久しぶりです、k1mu21です
+世間ではclaudecodeが話題になっていたり、Copilotを導入している企業がここ数ヶ月で一気に増えた印象があります
+話題が沸騰中のAIですが、アップデート作業もAIに任せている、任せたい人がいると思います。
+自分がここ数ヶ月でSpringBootとSpringで動いていたリポジトリをアップデートしたのですが、
+ずっとCopilotを使い倒して作業していたのでその際得た経験を書きたいと思います
+色々な方の参考になれば幸いです！
+
+ Springリポジトリの作業に関して
+大体去年の12月くらいに3,4週間かけてリリースした内容になります...]]></description><link>https://zenn.dev/aeon_mall/articles/libraryupdate</link><guid isPermaLink="true">https://zenn.dev/aeon_mall/articles/libraryupdate</guid><pubDate>Mon, 18 Aug 2025 16:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--N0aEOAVX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Spring%25E3%2581%25A8SpringBoot%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2583%25AA%25E3%2583%259D%25E3%2582%25B8%25E3%2583%2588%25E3%2583%25AA%25E3%2581%25AE%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%2587%25E3%2583%25BC%25E3%2583%2588%25E4%25BD%259C%25E6%25A5%25AD%25E3%2582%2592withCopilot%25E3%2581%25A7%25E3%2582%2584%25E3%2581%25A3%25E3%2581%259F%25E6%258C%25AF%25E3%2582%258A%25E8%25BF%2594%25E3%2582%258A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:K1mu21%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pQTVZGRmo2VFhvRWtISFp4NDFTZHJoSTQwdVQxVWhEVHNJLXQ3VHc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>K1mu21</dc:creator></item><item><title><![CDATA[Javaとの比較で学ぶScalaの等価比較：なぜ同じ値でもfalseにならないのか]]></title><description><![CDATA[!
+「同じ 421 なのに false!?」――Java で一度は踏む “auto-boxing と == の罠”。
+Scala ではどうして起きにくいの？REPL で確かめながら、値の等価と参照の同一の違いを、初学者向けにやさしく整理します。
+
+!
+『Scala スケーラブルプログラミング 第4版』 第11章「Scala のクラス階層」11.2 節の内容を REPL で確認できる形に再構成しました。
+
+
+ 1. まずは Java の “あるある” を確認（背景）
+Java では：
+
+プリミティブ同士の == … 値を比較（例: int）
+参照型同士の == … 参照（アドレス）を比較（...]]></description><link>https://zenn.dev/exmedia/articles/scala-qeuality-vs-java</link><guid isPermaLink="true">https://zenn.dev/exmedia/articles/scala-qeuality-vs-java</guid><pubDate>Mon, 18 Aug 2025 12:17:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--u7GzAZCL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E3%2581%25A8%25E3%2581%25AE%25E6%25AF%2594%25E8%25BC%2583%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6Scala%25E3%2581%25AE%25E7%25AD%2589%25E4%25BE%25A1%25E6%25AF%2594%25E8%25BC%2583%25EF%25BC%259A%25E3%2581%25AA%25E3%2581%259C%25E5%2590%258C%25E3%2581%2598%25E5%2580%25A4%25E3%2581%25A7%25E3%2582%2582false%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%2589%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25AE%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:exMedia%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdjNzZmZjNmMmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>exMedia</dc:creator></item><item><title><![CDATA[ヤマレコのアプリが落ちたのでバグレポートを読んでみた]]></title><description><![CDATA[
+ これなに
+
+ヤマレコのアプリが開けなくなった
+普段直接デバイスとかエミュレーターのデバッグをしているだけだったので、ちょっと初めてバグレポートを見てみた
+今回そのバグレポートを読んだ時に気づいたメモとかバグレポート確認手順などをまとめました
+
+
+ バグレポート生成方法
+
+ Developer options を開く
+自分のは Additional Settings というセクションに入っていましたが、これはメーカーごとに置き場所が若干違う可能性あります。
+
+
+ Bug report 作成を実行する
+フルレポートは量が多くて選別が大変そうな気がしたので、interactive にしまし...]]></description><link>https://zenn.dev/su3_hokkaido/articles/2025-06-25_yamareco_app_error</link><guid isPermaLink="true">https://zenn.dev/su3_hokkaido/articles/2025-06-25_yamareco_app_error</guid><pubDate>Mon, 18 Aug 2025 08:20:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JAK3Tp1e--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25A4%25E3%2583%259E%25E3%2583%25AC%25E3%2582%25B3%25E3%2581%25AE%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%258C%25E8%2590%25BD%25E3%2581%25A1%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E3%2583%2590%25E3%2582%25B0%25E3%2583%25AC%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2582%2592%25E8%25AA%25AD%25E3%2582%2593%25E3%2581%25A7%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Su3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlmY2Q1YTk5MTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Su3</dc:creator></item><item><title><![CDATA[マルチスレッドの基本<後編＞[Java入門]]]></title><description><![CDATA[
+ はじめに
+こんにちは。
+プログラミング初心者wakinozaと申します。
+Java勉強中に調べたことを記事にまとめています。
+十分気をつけて執筆していますが、なにぶん初心者が書いた記事なので、理解が浅い点などあるかと思います。
+間違い等あれば、指摘いただけると助かります。
+記事を参考にされる方は、初心者の記事であることを念頭において、お読みいただけると幸いです。
+
+ 対象読者
+
+Javaを勉強中の方
+Java SE11 Gold試験を勉強中の方
+JavaのFutureインターフェースとCallableインターフェースについて知りたい方
+
+
+ 目次
+1. スレッド結果の受け取り方
+2....]]></description><link>https://zenn.dev/wakinoza/articles/2016704b0f3d71</link><guid isPermaLink="true">https://zenn.dev/wakinoza/articles/2016704b0f3d71</guid><pubDate>Mon, 18 Aug 2025 05:46:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mENDQLWQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259E%25E3%2583%25AB%25E3%2583%2581%25E3%2582%25B9%25E3%2583%25AC%25E3%2583%2583%25E3%2583%2589%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%253C%25E5%25BE%258C%25E7%25B7%25A8%25EF%25BC%259E%255BJava%25E5%2585%25A5%25E9%2596%2580%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wakinoza%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkYzVjNWY5ZWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wakinoza</dc:creator></item><item><title><![CDATA[【minecraft】LunaChatをアップデートした]]></title><description><![CDATA[https://github.com/f1w3/LunaChat
+アップデートされたLunaChatは上記からダウンロード出来ます。
+
+ はじめに
+LunaChatはminecraftサーバーでローマ字チャットを日本語に変換してくれるプラグインです。
+元のレポジトリはこちらになります
+https://github.com/ucchyocean/LunaChat
+本記事はこちらをフォークし、アップデートした内容となります。
+
+ 何が起きていたか
+LunaChatは互換性が高く、(執筆当時)最新の1.21.8でも何事も無く動作していました。
+ですが、Multiverse-core(以下mv)...]]></description><link>https://zenn.dev/f1w3/articles/b8e420a897e5e8</link><guid isPermaLink="true">https://zenn.dev/f1w3/articles/b8e420a897e5e8</guid><pubDate>Sat, 16 Aug 2025 07:49:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yxmSWw1Y--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590minecraft%25E3%2580%2591LunaChat%25E3%2582%2592%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%2587%25E3%2583%25BC%25E3%2583%2588%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:f1w3_%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAxYzgyOTk4NjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>f1w3_</dc:creator></item><item><title><![CDATA[kotlinが文法で優れているところを挙げてみる]]></title><description><![CDATA[筆者の知識範囲でkotlinが優れているところをjavaと比較してあげてみる
+比較することによって、kotlinは学んで損がないことを記載。
+気づいたタイミングで記載しているため、随時更新予定です。
+kotlinを学んでいる経緯としてはAndroidアプリ開発を個人で学んでみたかったからです。
+
+ セミコロンが不要
+末尾にセミコロンが要らないのは結構楽ですね。
+
+ when文がラムダ構文に使用可能
+javaのswitch文はcaseで記載しないのといけないのに対して、kotlinはラムダ構文のように記載できる
+javaはbreakを記載しないといけないので、kotlinのほうが読みやすい...]]></description><link>https://zenn.dev/favopg/articles/0689ccd5a999b7</link><guid isPermaLink="true">https://zenn.dev/favopg/articles/0689ccd5a999b7</guid><pubDate>Fri, 15 Aug 2025 01:27:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--U-W5kyrv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:kotlin%25E3%2581%258C%25E6%2596%2587%25E6%25B3%2595%25E3%2581%25A7%25E5%2584%25AA%25E3%2582%258C%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2581%25A8%25E3%2581%2593%25E3%2582%258D%25E3%2582%2592%25E6%258C%2599%25E3%2581%2592%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25A4%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M4NWJkZTE0NzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>イッシー</dc:creator></item><item><title><![CDATA[JDBI『Superfluous named parameters』エラーの原因と対処法]]></title><description><![CDATA[
+ はじめに
+JDBIで動的クエリを書く際に、以下のようなコードでUnableToCreateStatementException: Superfluous named parametersエラーが発生することがあります。
+val sql = if (scope == SearchScope.WORLDWIDE) {
+    "SELECT * FROM ufo_sightings"
+} else {
+    "SELECT * FROM ufo_sightings WHERE location_id = :locationId"
+}
+
+val query = handle.create...]]></description><link>https://zenn.dev/cozy_corner/articles/7cc9950e2c9931</link><guid isPermaLink="true">https://zenn.dev/cozy_corner/articles/7cc9950e2c9931</guid><pubDate>Thu, 14 Aug 2025 16:35:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LuRbEHzB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JDBI%25E3%2580%258ESuperfluous%2520named%2520parameters%25E3%2580%258F%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%25AE%25E5%258E%259F%25E5%259B%25A0%25E3%2581%25A8%25E5%25AF%25BE%25E5%2587%25A6%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:cozy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXZPQmtpb0ZoNWxDcExyLWdrc0pqYXRORXI3VWhQeDdZUGRyX3RoRUpuUjNPTkZiNzM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>cozy</dc:creator></item><item><title><![CDATA[【DAY65】Spring Boot改修計画：Firebaseでは実現できないJAVAの強み]]></title><description><![CDATA[
+ はじめに
+過去に作成したSpring BootベースのWEBシステムが手元にあり、編集や改修が可能な状態。そのため、これを活かして、今のニーズに合わせた改善を進めていこうと考えている。最近取り組んでいたシステムもあるので、その回収にまずは集中してみた。
+ただ、新たなアイディアが浮かんでいない状態で、どう進めるべきか迷う部分もあるが、まずはSpring Bootの改修を進めることにした。
+
+ Firebaseの限界と、Java（Spring Boot）の選択理由
+Firebaseの無料枠は個人開発や小規模なシステムには十分有用だが、以下の点で限界を感じている。
+
+
+バックエンドの自由度...]]></description><link>https://zenn.dev/keisuke4649/articles/day65-pg-connection</link><guid isPermaLink="true">https://zenn.dev/keisuke4649/articles/day65-pg-connection</guid><pubDate>Wed, 13 Aug 2025 20:42:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Oem-sW_Z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590DAY65%25E3%2580%2591Spring%2520Boot%25E6%2594%25B9%25E4%25BF%25AE%25E8%25A8%2588%25E7%2594%25BB%25EF%25BC%259AFirebase%25E3%2581%25A7%25E3%2581%25AF%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%2584JAVA%25E3%2581%25AE%25E5%25BC%25B7%25E3%2581%25BF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:keisuke%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1N6RW9ldTZzVFN5UDFTUEpZazlwSkFDYUVwMGhWeGRQYzVIcHlzeXpKdlBKUGpHcWZ0dz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>keisuke</dc:creator></item><item><title><![CDATA[【DAY64】新規開発 or 改修？JavaとFirebaseの選択で迷ったら]]></title><description><![CDATA[
+ はじめに
+とりあえず、過去のSpring Bootで作ったやつがまだ編集できる状態なので、これをベースに再構築できないかと考え中。
+ただ、ここ最近のプライベートでの経験から、新しいWEBシステムをゼロから作るという選択肢も出てきた。
+そこで、「今の資産を活かす改修」か「新たに作るべきか」、さらに「Java（Spring Boot）」か「Firebase（＋フロント）」かという技術的な選択も含めて、方向性を整理してみる。
+
+ Firebaseではできないこと、Javaでできること
+Firebaseは無料枠でもそれなりに使えるし、スピード感はある。ただ、以下の点で限界もある：
+
+ロジック...]]></description><link>https://zenn.dev/keisuke4649/articles/day64-pg-connection</link><guid isPermaLink="true">https://zenn.dev/keisuke4649/articles/day64-pg-connection</guid><pubDate>Tue, 12 Aug 2025 20:42:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uZO0Egyl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590DAY64%25E3%2580%2591%25E6%2596%25B0%25E8%25A6%258F%25E9%2596%258B%25E7%2599%25BA%2520or%2520%25E6%2594%25B9%25E4%25BF%25AE%25EF%25BC%259FJava%25E3%2581%25A8Firebase%25E3%2581%25AE%25E9%2581%25B8%25E6%258A%259E%25E3%2581%25A7%25E8%25BF%25B7%25E3%2581%25A3%25E3%2581%259F%25E3%2582%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:keisuke%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1N6RW9ldTZzVFN5UDFTUEpZazlwSkFDYUVwMGhWeGRQYzVIcHlzeXpKdlBKUGpHcWZ0dz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>keisuke</dc:creator></item></channel></rss>

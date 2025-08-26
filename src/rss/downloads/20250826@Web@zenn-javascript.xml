@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 26 Aug 2025 10:00:49 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Astro.jsでmicroCMSを読み込むまで：一覧取得。]]></title><description><![CDATA[
+ Astro.jsでmicroCMSを読み込む
+
+ １ .envの設定
+MICROCMS_SERVICE_DOMAIN=xxxx
+MICROCMS_API_KEY=yyyyyyyyyyyyyy
+・MICROCMS_SERVICE_DOMAINは自分の管理画面URL（https://xxxx.microcms.io/ ）のxxxx部分
+・MICROCMS_API_KEYは管理画面右上にあるAPIプレビューをクリックしたいときに表示（下記）される"X-MICROCMS-API-KEY"の値
+
+ 2 microCMS JavaScript SDKのインストール
+npm install mic...]]></description><link>https://zenn.dev/tonkachi/articles/690833fb3e938b</link><guid isPermaLink="true">https://zenn.dev/tonkachi/articles/690833fb3e938b</guid><pubDate>Tue, 26 Aug 2025 04:12:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8hIvgnpH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Astro.js%25E3%2581%25A7microCMS%25E3%2582%2592%25E8%25AA%25AD%25E3%2581%25BF%25E8%25BE%25BC%25E3%2582%2580%25E3%2581%25BE%25E3%2581%25A7%25EF%25BC%259A%25E4%25B8%2580%25E8%25A6%25A7%25E5%258F%2596%25E5%25BE%2597%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:TONKACHI%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSms2NkhqbndManU3TUxjWVQ2cXpnalRrQjZoelE1bi14NWFvUU5QLTdVLWw5OENTMi09czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TONKACHI</dc:creator></item><item><title><![CDATA[gsapでスクロール判定で一文字ごとにアニメーションをさせる]]></title><description><![CDATA[
+]]></description><link>https://zenn.dev/tonkachi/articles/64237c9aa15988</link><guid isPermaLink="true">https://zenn.dev/tonkachi/articles/64237c9aa15988</guid><pubDate>Tue, 26 Aug 2025 04:04:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mNswK4Un--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:gsap%25E3%2581%25A7%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%25E5%2588%25A4%25E5%25AE%259A%25E3%2581%25A7%25E4%25B8%2580%25E6%2596%2587%25E5%25AD%2597%25E3%2581%2594%25E3%2581%25A8%25E3%2581%25AB%25E3%2582%25A2%25E3%2583%258B%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:TONKACHI%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSms2NkhqbndManU3TUxjWVQ2cXpnalRrQjZoelE1bi14NWFvUU5QLTdVLWw5OENTMi09czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TONKACHI</dc:creator></item><item><title><![CDATA[角をとっただけでは勝てないリバーシの亜種を作った]]></title><description><![CDATA[「オセロ(リバーシ)って、角取ったら勝ちなんでしょ？」という風潮に抗うべく、角をとっただけでは勝てない『POW POW REVERSI』というリバーシの亜種を作った。
+これ。
+早送りでお送ります。
+
+なにが違うのかというと、２つの追加ルールがある。
+
+石に点数がある。最初は２点で１回ひっくり返るごとに2,4,8,16,32...と点数が倍になる。
+
+
+合計1000点を超えたらその時点で勝ち。 盤面が埋まったら点数が大きいほうが勝ち。
+
+表計算ソフトのPOW関数のように2乗で増えていくからPOW POW REVERSI。
+どんなに盤面を制圧されても2^10=1024を1個でも作れば一発逆転...]]></description><link>https://zenn.dev/pepabo/articles/087530fa5ac5ef</link><guid isPermaLink="true">https://zenn.dev/pepabo/articles/087530fa5ac5ef</guid><pubDate>Tue, 26 Aug 2025 00:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bz-CcoNH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25A7%2592%25E3%2582%2592%25E3%2581%25A8%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25A7%25E3%2581%25AF%25E5%258B%259D%25E3%2581%25A6%25E3%2581%25AA%25E3%2581%2584%25E3%2583%25AA%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B7%25E3%2581%25AE%25E4%25BA%259C%25E7%25A8%25AE%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:kurehajime%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA0ZTQxODhhYTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:GMO%25E3%2583%259A%25E3%2583%2591%25E3%2583%259C%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q2MTA1MTEwMTEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kurehajime</dc:creator></item><item><title><![CDATA[複数タブの状態同期に便利な BroadcastChannel APIを使ってみよう]]></title><description><![CDATA[最近、タブ間でのデータ同期方法としてBroadcast Channel APIの存在を知ったので、使い方やユースケースをなどを紹介します。
+MDN - Broadcast Channel API
+
+ Broadcast Channel APIとは
+同一オリジンの複数コンテキスト（タブ/window/iframe/Worker）間で、シンプルなPub/Subを実現するWeb標準APIです。
+同名のチャンネルを各コンテキストで生成し、messageイベントにリスナーを登録すると、postMessageで送った値が同名チャネルの全コンテキストに届きます。
+&lt;script type="mo...]]></description><link>https://zenn.dev/galapagos/articles/f3efd726bb7391</link><guid isPermaLink="true">https://zenn.dev/galapagos/articles/f3efd726bb7391</guid><pubDate>Tue, 26 Aug 2025 00:25:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--T-_PBu2J--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25A4%2587%25E6%2595%25B0%25E3%2582%25BF%25E3%2583%2596%25E3%2581%25AE%25E7%258A%25B6%25E6%2585%258B%25E5%2590%258C%25E6%259C%259F%25E3%2581%25AB%25E4%25BE%25BF%25E5%2588%25A9%25E3%2581%25AA%2520BroadcastChannel%2520API%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:rm.%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBlMWFiMTkxYzQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25AC%25E3%2583%25A9%25E3%2583%2591%25E3%2582%25B4%25E3%2582%25B9%25EF%25BC%2588%25E6%259C%2589%25E5%25BF%2597%25EF%25BC%2589%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QyNDYyM2I3YjcuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>rm.</dc:creator></item><item><title><![CDATA[Angular20 の SSR 時の HttpClient を考える]]></title><description><![CDATA[
+ はじめに
+前回、HonoとAngular20でSSRする方法をまとめました。
+https://zenn.dev/nao50/articles/angular20-hono-ssr
+今回はAngularのSSR時のHTTP Clientを比較していこうと思います。
+
+'hono/client' の hc を使ったRPCを使う
+'@angular/common/http' の HttpClient を使う
+'@angular/common/http' の httpResource を使う
+
+
+ 'hono/client' の hc を使ったRPC機能を使う
+Honoにはサーバー側で定義し...]]></description><link>https://zenn.dev/nao50/articles/angular20-ssr-httpclient-compare</link><guid isPermaLink="true">https://zenn.dev/nao50/articles/angular20-ssr-httpclient-compare</guid><pubDate>Mon, 25 Aug 2025 23:29:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jlvtSVMD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Angular20%2520%25E3%2581%25AE%2520SSR%2520%25E6%2599%2582%25E3%2581%25AE%2520HttpClient%2520%25E3%2582%2592%25E8%2580%2583%25E3%2581%2588%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nao%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiY2YzZDIyYTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nao</dc:creator></item><item><title><![CDATA[Vueのライフサイクルについて]]></title><description><![CDATA[
+ ライフサイクルの歴史
+Vue.jsのライフサイクルは、バージョンアップを重ねるごとに、より直感的で分かりやすく進化してきました。主な変遷はVue 1.xから2.x、そして2.xから3.x（特にComposition APIの導入）で見られます。
+
+ Vue 1.x
+Vueの初期バージョンである1.xでは、ライフサイクルフックは以下のような名前でした。今見ると少し分かりにくい部分もありますね。
+
+
+init: インスタンスが作成された直後。
+
+created: データ監視などが設定された後。
+
+beforeCompile: テンプレートがコンパイルされる前。
+
+compiled: テン...]]></description><link>https://zenn.dev/shunsuke_stack/articles/8b977f2ade2646</link><guid isPermaLink="true">https://zenn.dev/shunsuke_stack/articles/8b977f2ade2646</guid><pubDate>Mon, 25 Aug 2025 08:50:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8R5Ftky6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vue%25E3%2581%25AE%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2595%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25AF%25E3%2583%25AB%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Nakajima.js%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFhZmNlYzMzOWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Nakajima.js</dc:creator></item><item><title><![CDATA[Angular20 を Hono で SSR する]]></title><description><![CDATA[
+ はじめに
+HonoとAngular20でServer Side Rendering(SSR)します。
+Angular18 でSSRした記事は以下にあります。
+https://zenn.dev/nao50/articles/angular18-hono-ssr
+
+ Angular を Hono で SSR
+Angularはプロジェクト生成時にSSRを指定することでexpressベースのサーバーコードが生成されます。
+最近は以下の記事を参考にnpxでプロジェクトを作成しました。
+https://kasaharu.hatenablog.com/entry/20241222/17348390...]]></description><link>https://zenn.dev/nao50/articles/angular20-hono-ssr</link><guid isPermaLink="true">https://zenn.dev/nao50/articles/angular20-hono-ssr</guid><pubDate>Sun, 24 Aug 2025 22:03:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--X4zhw-g5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Angular20%2520%25E3%2582%2592%2520Hono%2520%25E3%2581%25A7%2520SSR%2520%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nao%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiY2YzZDIyYTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nao</dc:creator></item><item><title><![CDATA[JavaScriptでABC420(A-E)]]></title><description><![CDATA[https://atcoder.jp/contests/abc420
+
+ A - What month is it?
+https://atcoder.jp/contests/abc420/tasks/abc420_a
+XとYを足して12で割ったあまりを求めると月になります
+答えが12月の場合だけ0になっちゃうので、そこだけ||演算子とかで拾い上げればOK
+https://atcoder.jp/contests/abc420/submissions/68732622
+00分51秒 AC!
+
+ B - Most Minority
+https://atcoder.jp/contests/abc...]]></description><link>https://zenn.dev/aya_koto/articles/a453cd6652a2f4</link><guid isPermaLink="true">https://zenn.dev/aya_koto/articles/a453cd6652a2f4</guid><pubDate>Sun, 24 Aug 2025 13:46:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1fRxhAwv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:JavaScript%25E3%2581%25A7ABC420%2528A-E%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ayasaka-Koto%2520%252F%2520Aya...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VkNTRlMDBjYTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ayasaka-Koto / AyagawaP</dc:creator></item><item><title><![CDATA[【JavaScript】CommonJSについて初心者メモ]]></title><description><![CDATA[
+ はじめに
+アルゴリズム問題を解いていく中で、ファイルの内容を別のファイルで使えるようにするためには2つの方法があるとわかりました。
+ES ModuleとCommonJSです。
+この記事では、CommonJSについて実際に使用してわかったことをまとめていきます。
+
+ CommonJSとは
+CommonJSは、主にNode.jsというサーバーサイドでJavaScriptを動かす環境で使われてきた、モジュールの仕組みです。
+これは、ESモジュールが登場する前のNode.jsにおける事実上の標準でした。
+
+ CommonJSの役割
+CommonJSもESモジュールと同じく、コードを複数のファ...]]></description><link>https://zenn.dev/mabo23/articles/bb6f1517900c90</link><guid isPermaLink="true">https://zenn.dev/mabo23/articles/bb6f1517900c90</guid><pubDate>Sun, 24 Aug 2025 11:50:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ye8YWY8a--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591CommonJS%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mabo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQzM2ZhMmVkZDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mabo</dc:creator></item><item><title><![CDATA[Redmine AI Helperプラグインにインライン補完機能を追加した話]]></title><description><![CDATA[
+ この記事は
+Redmine AI Helperプラグインに新機能を追加しました。
+チケットの編集フォームおよびコメント追加フォームにインライン補完機能を追加したので、紹介します。
+
+ インライン補完とは
+文章をキーボードから入力している際に、AIが続きを予測して表示する機能です。
+GitHub CopilotやVS Codeなどでコードを編集している時に表示される補完機能と同じようなイメージです。
+
+
+補完内容が気に入った場合：Tabキーで確定
+補完内容をキャンセルしたい場合：Escキーでキャンセル
+そのまま文章を入力し続けた場合：一度補完が消えるが、キー入力を止めると再度続きから補...]]></description><link>https://zenn.dev/haru_iida/articles/ai_helper_issue_completion</link><guid isPermaLink="true">https://zenn.dev/haru_iida/articles/ai_helper_issue_completion</guid><pubDate>Sun, 24 Aug 2025 05:49:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OrTga-C3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Redmine%2520AI%2520Helper%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%25AB%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E8%25A3%259C%25E5%25AE%258C%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:haru_iida%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2g1dnZCTVV6aGszeVZpSEVxbmdKQ0tsM0lIUmczR2lKX19SN25Dc2RNPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>haru_iida</dc:creator></item><item><title><![CDATA[Deno.serveを使った中継用APサーバー]]></title><description><![CDATA[
+ はじめに
+Deno.serve を使った（ローカルで動かすこと前提の）中継用のアプリケーションサーバーの話です。「サードパーティ Web API（の超基本）」に書いていたものを（元チャプターは Hono を使ったものに変えた上で）単体記事に移行しました。OJK の担当している授業の参考記事です。
+「サードパーティ Web API（の超基本）」では、ブラウザーから直接サードパーティ API に fetch することを前提としていましたが、セキュリティ（CORS）の関係上、ブラウザーから直接 fetch できないことがあります。そこで、ローカル（自分の PC）に fetch を中継するア...]]></description><link>https://zenn.dev/ojk/articles/deno-apserver</link><guid isPermaLink="true">https://zenn.dev/ojk/articles/deno-apserver</guid><pubDate>Sun, 24 Aug 2025 03:07:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qYWCQkcC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Deno.serve%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E4%25B8%25AD%25E7%25B6%2599%25E7%2594%25A8AP%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:OJK%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2l6YV9DYXFDMXM4NVJfdF9wSTlURENXTW1Ca0tqakxMbV9FNEJCPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>OJK</dc:creator></item><item><title><![CDATA[JavaScriptの基礎をもう一度おさらいしたい【配列操作/配列メソッド編】]]></title><description><![CDATA[以前はUdemyを中心に受講していたのですが、学んだきり仕事でも使うことがなく1,2年経過していました...
+復習として、後から見返せるように記事として残してみたいと思います。
+何編かに分けたいと思いますが、今回は配列操作/配列メソッド編です。
+以前私が受講したUdemy講座はこちらです。
+
+ガチで学びたい人のためのWEB開発徹底実践コース
+モダンJavaScriptの基礎から始める挫折しないためのReact入門
+
+以下MDNを参考にして進めていきます
+https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide
+
+ 配列
+配列は値...]]></description><link>https://zenn.dev/kaze_wind/articles/d1edbed43bafdf</link><guid isPermaLink="true">https://zenn.dev/kaze_wind/articles/d1edbed43bafdf</guid><pubDate>Sun, 24 Aug 2025 01:34:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WQaqCym7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%25E3%2582%2592%25E3%2582%2582%25E3%2581%2586%25E4%25B8%2580%25E5%25BA%25A6%25E3%2581%258A%25E3%2581%2595%25E3%2582%2589%25E3%2581%2584%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%25E3%2580%2590%25E9%2585%258D%25E5%2588%2597%25E6%2593%258D%25E4%25BD%259C%252F%25E9%2585%258D%25E5%2588%2597%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E7%25B7%25A8%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%259C%2540%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E5%258B%2589%25E5%25BC%25B7%25E4%25B8%25AD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNjc0N2UwNzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かぜ@フロントエンド勉強中</dc:creator></item><item><title><![CDATA[自分専用の複数LLM対応チャットボットを作った]]></title><description><![CDATA[複数LLMを切り替えて使えるチャットボット(ChatGPTクローン)はあまりない気がしていて、あっても自前のapiKeyを使えないものがほとんどかと思う。
+自前のapiKeyを使えたとして、知らないサービスにそれを預けるのは気が引ける。
+ということで、自分専用のチャットボットを作った。
+localだけで動けばいいのであれば、LibreChat というOSSが完成度高くてよかったが、
+使ってるうちにやはり複数端末でやりたいとなってきて、いちいち環境構築するのは面倒なので、ホスティングしたくなった。
+LibreChatは機能もりもりでホスティングするのが少し面倒そうなので、一から自前で作るこ...]]></description><link>https://zenn.dev/tinoue/articles/create-chat-bot-with-multiple-llm</link><guid isPermaLink="true">https://zenn.dev/tinoue/articles/create-chat-bot-with-multiple-llm</guid><pubDate>Sat, 23 Aug 2025 14:14:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LohZ_O80--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2587%25AA%25E5%2588%2586%25E5%25B0%2582%25E7%2594%25A8%25E3%2581%25AE%25E8%25A4%2587%25E6%2595%25B0LLM%25E5%25AF%25BE%25E5%25BF%259C%25E3%2583%2581%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2588%25E3%2583%259C%25E3%2583%2583%25E3%2583%2588%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tinoue723%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvdC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tinoue723</dc:creator></item><item><title><![CDATA[WebGL・Three.js入門①]]></title><description><![CDATA[
+ はじめに
+こんにちは。この記事は、学習の備忘録としてまとめていこうと思っています。
+解説を目的としているわけではなく、自身の反芻のための意味合いが強いためご容赦ください。
+!
+なお、npm や Three.js ライブラリはインストール済みの前提で記載しております。
+
+
+
+ WebGL について
+WebGL は主要なモダンブラウザ（Chrome, FireFox, Safari, Edge）に対応しており、Web ページ上で 2D・3D グラフィックスを描画できる技術です。
+元々はデスクトップ PC 上でグラフィックスを描画できるOpenGLという API がありました。その後スマホ...]]></description><link>https://zenn.dev/boa/articles/209159a0aea0b1</link><guid isPermaLink="true">https://zenn.dev/boa/articles/209159a0aea0b1</guid><pubDate>Sat, 23 Aug 2025 12:40:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IQchJuTt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:WebGL%25E3%2583%25BBThree.js%25E5%2585%25A5%25E9%2596%2580%25E2%2591%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tanebi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjZGVWN1NUFUYnh3RS1Wa0RmRVJERXRhcUNqWVVBMG5qOTVHOFVZanc1OTBTNVlsVT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tanebi</dc:creator></item><item><title><![CDATA[stateでオブジェクトを扱う #9]]></title><description><![CDATA[
+ 📢 このシリーズについて
+このシリーズは、React公式ドキュメント（ https://ja.react.dev/ ）を(できるだけ)全て読み、学んだことやコード例、自分なりの補足をまとめていくチャレンジの記録です。
+
+ 目的
+
+
+Reactの基礎〜応用を公式の正しい情報で体系的に理解する
+自分の言葉でアウトプットして知識を定着させる
+
+このシリーズでは、ただ内容をなぞるのではなく、「自分がReactを使っていても気づかなかった事実や落とし穴」 を重点的にまとめます。
+読んだときに「へぇ、そうなんだ！」となったポイントは必ず記録します！
+
+ 目次 - 本記事で取り扱う内容
+
+Java...]]></description><link>https://zenn.dev/miry/articles/1a5e4fb258b89c</link><guid isPermaLink="true">https://zenn.dev/miry/articles/1a5e4fb258b89c</guid><pubDate>Sat, 23 Aug 2025 05:06:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GYTZK3Nb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:state%25E3%2581%25A7%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2582%2592%25E6%2589%25B1%25E3%2581%2586%2520%25239%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%259F_miry41%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI2OGQ2MTRjZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>タカミ_miry41</dc:creator></item><item><title><![CDATA[HTML・CSS「配置と大きさ」入門]]></title><description><![CDATA[HTMLとCSSを学び始めると、最初に直面する壁のひとつが「配置」と「大きさ」です。 テキストや画像を思った位置に置けない、スマホとPCで見え方が変わる、横スクロールが出てしまう……。こうした経験は誰もが一度はするものです。
+なぜこのような問題が起きるのでしょうか？ その理由は、ブラウザが「画面」や「要素のサイズ」をどのように解釈しているかを、正しく理解できていないからです。
+本書では、以下の流れで解説を進めます。
+1. Viewport（表示領域）の基本 スマホやPCでの見え方の違いを整理し、正しい画面サイズの捉え方を学びます。
+2. 要素の大きさとbox-sizing CSSの幅・高さ指定の仕組みを理解し、狙ったとおりのサイズで要素を配置する方法を身につけます。
+3. レイアウトの基礎（FlexboxとGrid） モダンなレイアウト方法を使って、要素をきれいに並べる方法を学びます。
+4. Canvasと解像度 高解像度ディスプレイでも崩れない描画を行うために、ピクセルと解像度の関係を理解します。
+最終的に、あなたは「ブラウザがどのように配置と大きさを決めているのか」を体系的に理解し、狙ったレイアウトを安定して作れるようになります。
+プログラミングの経験が少なくても問題ありません。 サンプルコードを実際にコピペしながら、少しずつ動かして確認してみてください。 「配置と大きさ」を制御できるようになると、Web制作の楽しさがぐっと広がります。]]></description><link>https://zenn.dev/sosa/books/html-css-style-nyumon</link><guid isPermaLink="true">https://zenn.dev/sosa/books/html-css-style-nyumon</guid><pubDate>Sat, 23 Aug 2025 04:09:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yBF05mTm--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci8xZDk0NTZiM2U3LmpwZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>sosa</dc:creator></item><item><title><![CDATA[React Tokyoフェス2026 参加者募集開始！]]></title><description><![CDATA[https://x.com/ReactTokyo/status/1959061705486737810
+React Tokyoコミュニティではこれまで月一回のペースでミートアップを実施してきていますが、この度その延長線上で大規模イベントを開催することにしました。2026年2月28日 港区浜松町にて！
+特設ページはこちら👇
+https://react-tokyo.vercel.app/fes2026
+ミートアップは40人規模ですが、フェスは10倍の400人規模を予定しています。開催日もミートアップは平日なのに対して、フェスは週末開催です。普段ミートアップに参加できない人も参加していただける...]]></description><link>https://zenn.dev/react_tokyo/articles/a910f7999e9bde</link><guid isPermaLink="true">https://zenn.dev/react_tokyo/articles/a910f7999e9bde</guid><pubDate>Sat, 23 Aug 2025 01:35:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MRWDz6lr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520Tokyo%25E3%2583%2595%25E3%2582%25A7%25E3%2582%25B92026%2520%25E5%258F%2582%25E5%258A%25A0%25E8%2580%2585%25E5%258B%259F%25E9%259B%2586%25E9%2596%258B%25E5%25A7%258B%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:daishi%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc2NGYyYjY2ODAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:React%2520Tokyo%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcwZGNhM2E2Y2IuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daishi</dc:creator></item><item><title><![CDATA[JavaScriptの基礎をもう一度おさらいしたい【this/クロージャ編】]]></title><description><![CDATA[
+ JavaScript復習記事（this・クロージャ編）
+以前はUdemyを中心に受講していたのですが、学んだきり仕事でも使うことがなく1,2年経過していました...
+復習として、後から見返せるように記事として残してみたいと思います。
+何編かに分けたいと思いますが、今回はthisとクロージャ編です。
+以前私が受講したUdemy講座はこちらです。
+
+ガチで学びたい人のためのWEB開発徹底実践コース
+モダンJavaScriptの基礎から始める挫折しないためのReact入門
+
+以下MDNを参考にして進めていきます
+https://developer.mozilla.org/ja/docs/W...]]></description><link>https://zenn.dev/kaze_wind/articles/663b8b09391916</link><guid isPermaLink="true">https://zenn.dev/kaze_wind/articles/663b8b09391916</guid><pubDate>Fri, 22 Aug 2025 14:40:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4ch2FHJw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%25E3%2582%2592%25E3%2582%2582%25E3%2581%2586%25E4%25B8%2580%25E5%25BA%25A6%25E3%2581%258A%25E3%2581%2595%25E3%2582%2589%25E3%2581%2584%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%25E3%2580%2590this%252F%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A3%25E7%25B7%25A8%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%259C%2540%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E5%258B%2589%25E5%25BC%25B7%25E4%25B8%25AD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNjc0N2UwNzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かぜ@フロントエンド勉強中</dc:creator></item><item><title><![CDATA[stateの"置き換え"と"更新"との三角関係 #8]]></title><description><![CDATA[
+ 📢 このシリーズについて
+このシリーズは、React公式ドキュメント（ https://ja.react.dev/ ）を(できるだけ)全て読み、学んだことやコード例、自分なりの補足をまとめていくチャレンジの記録です。
+
+ 目的
+
+
+Reactの基礎〜応用を公式の正しい情報で体系的に理解する
+自分の言葉でアウトプットして知識を定着させる
+
+このシリーズでは、ただ内容をなぞるのではなく、「自分がReactを使っていても気づかなかった事実や落とし穴」 を重点的にまとめます。
+読んだときに「へぇ、そうなんだ！」となったポイントは必ず記録します！
+
+ 目次 - 本記事で取り扱う内容
+
+“ 待て...]]></description><link>https://zenn.dev/miry/articles/ad820e08e9687a</link><guid isPermaLink="true">https://zenn.dev/miry/articles/ad820e08e9687a</guid><pubDate>Fri, 22 Aug 2025 13:56:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DsYyGsxE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:state%25E3%2581%25AE%2522%25E7%25BD%25AE%25E3%2581%258D%25E6%258F%259B%25E3%2581%2588%2522%25E3%2581%25A8%2522%25E6%259B%25B4%25E6%2596%25B0%2522%25E3%2581%25A8%25E3%2581%25AE%25E4%25B8%2589%25E8%25A7%2592%25E9%2596%25A2%25E4%25BF%2582%2520%25238%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%259F_miry41%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI2OGQ2MTRjZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>タカミ_miry41</dc:creator></item><item><title><![CDATA[async awaitについて調べてみた]]></title><description><![CDATA[
+ async awaitの歴史について
+async/awaitは、非同期処理を同期処理のように直感的に書くためのシンタックスシュガー（構文上の工夫）です。その歴史は、非同期処理の複雑さをいかに解消するかというプログラミング言語の進化の歴史そのものと言えます。
+
+ async/await 登場以前：コールバック地獄とPromise
+async/awaitが生まれる前、非同期処理は主にコールバック関数によって実現されていました。しかし、処理が連続するとコールバック関数が入れ子になり、コードが深くネストしてしまう「コールバック地獄（Callback Hell）」と呼ばれる問題が発生し、可読性...]]></description><link>https://zenn.dev/shunsuke_stack/articles/ed131cab179dc2</link><guid isPermaLink="true">https://zenn.dev/shunsuke_stack/articles/ed131cab179dc2</guid><pubDate>Fri, 22 Aug 2025 07:59:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GTpBBGvc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:async%2520await%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E8%25AA%25BF%25E3%2581%25B9%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Nakajima.js%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFhZmNlYzMzOWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Nakajima.js</dc:creator></item></channel></rss>

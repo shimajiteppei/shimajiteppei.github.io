@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Rust」のフィード]]></title><description><![CDATA[Zennのトピック「Rust」のRSSフィードです]]></description><link>https://zenn.dev/topics/rust</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ba09661577.png</url><title>Zennの「Rust」のフィード</title><link>https://zenn.dev/topics/rust</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 26 Aug 2025 03:50:25 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/rust/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【備忘録】cargo build --releaseについて]]></title><description><![CDATA[最近Rustにハマりそうな初学者です。
+鬼ググりとLLMを活用して書き上げたので、間違いなどあればコメントいただけますと幸いです🙇
+
+ この記事について
+Rustの開発において、cargo build --releaseは本番環境向けの高速なバイナリを作るための重要なコマンドです。
+この記事では、リリースビルドがどのように動作し、どんな最適化が行われるのか、そしてどう使うべきかを詳しく解説します。
+
+ リリースビルドとデバッグビルドの違い
+
+ 基本的な動作の違い
+普段使っているcargo buildコマンドはデバッグビルドを実行します。
+これは開発中のデバッグのしやすさを重視した設定でコ...]]></description><link>https://zenn.dev/dokusy/articles/51dd9f228af539</link><guid isPermaLink="true">https://zenn.dev/dokusy/articles/51dd9f228af539</guid><pubDate>Mon, 25 Aug 2025 12:59:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--baf-2bK0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%25E3%2580%2591cargo%2520build%2520--release%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A9%25E3%2581%2585%25E3%2581%258F%25E3%2581%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiYTU0YmQxZDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>どぅくし</dc:creator></item><item><title><![CDATA[Rust 所有権クイズ！]]></title><description><![CDATA[
+ はじめに
+こんにちは、ファスト株式会社のYTです！
+突然ですが、Rustクイズです！
+以下のコードのうち、ターミナルにこんにちは！と出力されるのはどれでしょうか?
+1: Some(greet)
+fn main() {
+    let greet = Some(String::from("こんにちは！"));
+
+    match greet {
+        Some(greet) =&gt; println!("あいさつをします！"),
+        None =&gt; println!("あいさつしません！"),
+    };
+
+    println!("{}", gre...]]></description><link>https://zenn.dev/fast/articles/0f6efdaed1ec6d</link><guid isPermaLink="true">https://zenn.dev/fast/articles/0f6efdaed1ec6d</guid><pubDate>Mon, 25 Aug 2025 09:21:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--H0aPgoga--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%25E6%2589%2580%25E6%259C%2589%25E6%25A8%25A9%25E3%2582%25AF%25E3%2582%25A4%25E3%2582%25BA%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:YT%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzljYTEzZDEyMWEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:FAST%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHhoaTdpLUpwaHdzY21VRFRSMGh0ZzFGd1ZXMDA1S3IyeV9RVzZFWXZNNEU2YndxVjg9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>YT</dc:creator></item><item><title><![CDATA[ひとくちメモ: VSCode で rust-analyzer 拡張をまともに動かす]]></title><description><![CDATA[後述ながら、これは Remote-SSH 環境が前提なので注意。
+
+ 結論
+あんたの $HOME が /home/mystere であると仮定して、以下を settings.json に追記する。また、この設定は環境間で非可搬である。よって、settingsSync.ignoredSettings にも以下の内容に対応するエントリーを追加することで、設定の同期を部分的に切ることをおすすめする。
+{
+  "rust-analyzer.cargo.extraEnv": {
+    "CARGO": "/home/mystere/.cargo/bin/cargo",
+    "RUSTUP":...]]></description><link>https://zenn.dev/argi_berri/articles/2784c7c880a6f0</link><guid isPermaLink="true">https://zenn.dev/argi_berri/articles/2784c7c880a6f0</guid><pubDate>Sat, 23 Aug 2025 15:09:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xfL_kbCR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25B2%25E3%2581%25A8%25E3%2581%258F%25E3%2581%25A1%25E3%2583%25A1%25E3%2583%25A2%253A%2520VSCode%2520%25E3%2581%25A7%2520rust-analyzer%2520%25E6%258B%25A1%25E5%25BC%25B5%25E3%2582%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2582%25E3%2581%25AB%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ARGIA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RhYWQwM2NmMzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ARGIA</dc:creator></item><item><title><![CDATA[ChatGPTを使ってRustで新しいプログラミング言語をつくり始めた話（フォルダ構成の再編と出力先の統一）]]></title><description><![CDATA[
+ 目的
+
+役割別にクレートを整理して保守性を高める
+生成物（transpile 結果・実行バイナリ）の置き場所を統一して、開発時の混乱を防止
+
+
+ 新フォルダ構成
+.
+├── examples
+│   └── main.pyro            # ← 実行デフォルトを hello.pyro から main.pyro に変更
+└── pyro
+    └── crates
+        ├── pyroc            # 解析（AST/Parser）
+        │   ├── Cargo.toml
+        │   └── src
+        │   ...]]></description><link>https://zenn.dev/collabostyle/articles/a5de8760430be4</link><guid isPermaLink="true">https://zenn.dev/collabostyle/articles/a5de8760430be4</guid><pubDate>Sat, 23 Aug 2025 12:58:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ooQG6s8y--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ChatGPT%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6Rust%25E3%2581%25A7%25E6%2596%25B0%25E3%2581%2597%25E3%2581%2584%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E8%25A8%2580%25E8%25AA%259E%25E3%2582%2592%25E3%2581%25A4%25E3%2581%258F%25E3%2582%258A%25E5%25A7%258B%25E3%2582%2581%25E3%2581%259F%25E8%25A9%25B1%25EF%25BC%2588%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AB%25E3%2583%2580%25E6%25A7%258B%25E6%2588%2590%25E3%2581%25AE%25E5%2586%258D%25E7%25B7%25A8%25E3%2581%25A8%25E5%2587%25BA%25E5%258A%259B%25E5%2585%2588%25E3%2581%25AE%25E7%25B5%25B1%25E4%25B8%2580%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%2594%25E3%2581%25A8%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViM2I3NTQxYzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MyOWNkNWUxZTkuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ごと</dc:creator></item><item><title><![CDATA[ChatGPTを使ってRustで新しいプログラミング言語をつくり始めた話（変数宣言）]]></title><description><![CDATA[
+ はじめに
+本記事では、自作プログラミング言語Pyroに変数宣言機能を追加した過程をご紹介いたします。
+PyroはPythonライクな構文を持ち、Rustにトランスパイルして実行可能な軽量言語です。
+今回はPyro独自のキーワードletprを導入し、変数を扱えるようにしました。
+
+ 背景
+前回の実装でPyroは整数リテラルと四則演算に対応しました。
+しかし実際にプログラムを書く際には、値を保持して再利用する仕組みが不可欠です。
+そこでPyro専用の変数宣言キーワードとしてletprを導入しました。
+例：
+
+examples/hello.pyro
+letpr x = 10
+letpr y...]]></description><link>https://zenn.dev/collabostyle/articles/7f74434b74936d</link><guid isPermaLink="true">https://zenn.dev/collabostyle/articles/7f74434b74936d</guid><pubDate>Sat, 23 Aug 2025 07:14:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YHEuN821--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ChatGPT%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6Rust%25E3%2581%25A7%25E6%2596%25B0%25E3%2581%2597%25E3%2581%2584%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E8%25A8%2580%25E8%25AA%259E%25E3%2582%2592%25E3%2581%25A4%25E3%2581%258F%25E3%2582%258A%25E5%25A7%258B%25E3%2582%2581%25E3%2581%259F%25E8%25A9%25B1%25EF%25BC%2588%25E5%25A4%2589%25E6%2595%25B0%25E5%25AE%25A3%25E8%25A8%2580%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%2594%25E3%2581%25A8%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViM2I3NTQxYzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MyOWNkNWUxZTkuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ごと</dc:creator></item><item><title><![CDATA[Go+Vue2 のOSSデスクトップアプリをRust/tauriに移行した]]></title><description><![CDATA[こんにちは。ふろーです。
+主題通り。 Go+Vue2 で作成されたデスクトップアプリ(ただしUIはブラウザ)をRust/tauri に移行した際のノートです。
+!
+この記事は人間が書きました
+
+
+ 元プロジェクト
+vmix-utility という、配信プロダクション向けスイッチャーソフトウェアである「vMix」のサポートツールです。
+vMix自体にHTTP APIが内蔵されており、特定のURLを叩くことで様々なアクションを実施することが出来ます。
+localhost:8088/api エンドポイントを叩くと所定の形式のXMLを取得することができ、各種Input(カメラなど映像ソースのよう...]]></description><link>https://zenn.dev/hiiraginil/articles/b926c0e94b3fdc</link><guid isPermaLink="true">https://zenn.dev/hiiraginil/articles/b926c0e94b3fdc</guid><pubDate>Fri, 22 Aug 2025 17:39:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wNpsWsFV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Go%252BVue2%2520%25E3%2581%25AEOSS%25E3%2583%2587%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%2588%25E3%2583%2583%25E3%2583%2597%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592Rust%252Ftauri%25E3%2581%25AB%25E7%25A7%25BB%25E8%25A1%258C%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:FlowingSPDG%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkzNTg5OTE3MTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>FlowingSPDG</dc:creator></item><item><title><![CDATA[ChatGPTを使ってRustで新しいプログラミング言語をつくり始めた話(四則演算)]]></title><description><![CDATA[
+ はじめに
+本記事では、自作プログラミング言語 Pyro に四則演算機能を追加した過程をご紹介いたします。
+Pyro は Python ライクな構文を持ち、Rust にトランスパイルして実行可能な軽量言語です。
+
+ プロジェクト構成
+プロジェクトは Cargo ワークスペースとして構成されています。
+pyro_lang_test/
+├── Cargo.toml
+└── crates
+    ├── pyroc        # フロントエンド（字句解析・構文解析）
+    ├── pyrorts      # Rust コード生成
+    └── pyroc-bin    # CLI ...]]></description><link>https://zenn.dev/collabostyle/articles/08d14d0ee9e0f1</link><guid isPermaLink="true">https://zenn.dev/collabostyle/articles/08d14d0ee9e0f1</guid><pubDate>Fri, 22 Aug 2025 13:26:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sxjKFt6E--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ChatGPT%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6Rust%25E3%2581%25A7%25E6%2596%25B0%25E3%2581%2597%25E3%2581%2584%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E8%25A8%2580%25E8%25AA%259E%25E3%2582%2592%25E3%2581%25A4%25E3%2581%258F%25E3%2582%258A%25E5%25A7%258B%25E3%2582%2581%25E3%2581%259F%25E8%25A9%25B1%2528%25E5%259B%259B%25E5%2589%2587%25E6%25BC%2594%25E7%25AE%2597%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%2594%25E3%2581%25A8%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViM2I3NTQxYzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MyOWNkNWUxZTkuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ごと</dc:creator></item><item><title><![CDATA[Next.js はどうやって React Compiler を実行しているのか]]></title><description><![CDATA[
+ はじめに：React Compilerの登場と、Next.jsにおける疑問
+2025/04/21、Reactチームは待望のReact Compilerの安定版リリース候補を発表しました。このCompilerは、Reactコンポーネントが不要な再レンダリングを自動的にスキップできるようにコードを最適化し、開発者が手動でuseMemoやuseCallbackといった最適化フックを記述する負担を減らすことを目指しています。
+Next.jsでは、v15からReact Compilerを実験的にサポートするようになりました。
+ただ、React Compilerが記事執筆時点でBabelプラグイ...]]></description><link>https://zenn.dev/ishiharu/articles/how-nextjs-uses-react-compiler</link><guid isPermaLink="true">https://zenn.dev/ishiharu/articles/how-nextjs-uses-react-compiler</guid><pubDate>Thu, 21 Aug 2025 17:48:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5a2sC-68--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%2520%25E3%2581%25AF%25E3%2581%25A9%25E3%2581%2586%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A6%2520React%2520Compiler%2520%25E3%2582%2592%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2581%25AE%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2584%25E3%2581%2597%25E3%2581%25AF%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFjZDdlMWYxNjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>いしはる</dc:creator></item><item><title><![CDATA[Rust で型推論を高速かつ安全に実装]]></title><description><![CDATA[簡単、高速、安全。Rc / RefCell の威力を知ってほしい。
+
+ データ型の定義
+
+ 型
+まずは普通に型 T を定義します。たとえば、ブーリアン型 \rm Bool と関数型 T \to T だけの型システムなら、以下のようになります。
+enum Ty {
+    Bool,
+    Func(Rc&lt;Ty&gt;, Rc&lt;Ty&gt;),
+}
+Box ではなく Rc を使っています：これから型推論を実装しますが、型 T を型変数 \alpha に代入するとき、参照カウントをインクリメントするだけで T を clone できます。
+
+ 型変数
+次に、型変数 \alpha,...]]></description><link>https://zenn.dev/toga/articles/rust-type-inference</link><guid isPermaLink="true">https://zenn.dev/toga/articles/rust-type-inference</guid><pubDate>Thu, 21 Aug 2025 15:25:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fGQZIZBQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%25E3%2581%25A7%25E5%259E%258B%25E6%258E%25A8%25E8%25AB%2596%25E3%2582%2592%25E9%25AB%2598%25E9%2580%259F%25E3%2581%258B%25E3%2581%25A4%25E5%25AE%2589%25E5%2585%25A8%25E3%2581%25AB%25E5%25AE%259F%25E8%25A3%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A8%25E3%2581%258C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q1NTBlNjIzOTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>とが</dc:creator></item><item><title><![CDATA[足を止めて見る #1 〜 RustのDisplayトレイト 〜]]></title><description><![CDATA[
+ 足を止めて見よう
+皆さんは日々仕事をしていく中で、分かっているつもりで利用している技術が一体どのような原理で動いているのか？ちゃんと振り返っていますか？
+過去を振り返ると、自分のエンジニア力が向上していた時って「分からないことに直面したら分かるまで調べる」を地道にやっていた期間だなと感じます。
+僕自身はこれを「足を止めて見る」と呼んでいます。
+僕は会社のテックブログのネタを利用して、この「足を止めて見る」をやっていこうと思います！
+
+ std::fmt::Display トレイトを実装しよう
+構造体に対して println! や to_string() を利用したくなった時に必要とな...]]></description><link>https://zenn.dev/doctormate/articles/dive_1_display_trait</link><guid isPermaLink="true">https://zenn.dev/doctormate/articles/dive_1_display_trait</guid><pubDate>Thu, 21 Aug 2025 03:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lh3-yimx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25B6%25B3%25E3%2582%2592%25E6%25AD%25A2%25E3%2582%2581%25E3%2581%25A6%25E8%25A6%258B%25E3%2582%258B%2520%25231%2520%25E3%2580%259C%2520Rust%25E3%2581%25AEDisplay%25E3%2583%2588%25E3%2583%25AC%25E3%2582%25A4%25E3%2583%2588%2520%25E3%2580%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2583%259B%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25B3%25E3%2582%25B7%25E3%2583%25A5%25E3%2582%25A6%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FiYmEzODYwNjQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2589%25E3%2582%25AF%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25A1%25E3%2582%25A4%25E3%2583%2588%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZVhWLXBJYnZkcjBBYW40R3NVdEpoemk2eFBNczEyem9zVUszREtKV0tTa2c9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ホリケンシュウ</dc:creator></item><item><title><![CDATA[ChatGPTを使ってRustで新しいプログラミング言語をつくり始めた話]]></title><description><![CDATA[
+ はじめに
+「自分の言語をつくる」――プログラミングに携わっていると、一度は考えたことがある人も多いと思います。
+今回、Rustを用いて新しいプログラミング言語を設計・実装し始めました。
+目指すのは次のような言語です：
+
+Pythonに近い記法で扱いやすい
+高速に動作する
+Web開発に特化した機能を標準で備える
+
+言語名は Pyro（パイロ） としました。
+
+ 前提条件
+cargoがインストールされている
+Rustが動く環境である
+
+ 現時点でできること
+現状はまだ最小限の機能しか実装していません。
+以下のようなコード：
+
+examples/app.pyro
+print("Hello,...]]></description><link>https://zenn.dev/collabostyle/articles/9bd16a97291d01</link><guid isPermaLink="true">https://zenn.dev/collabostyle/articles/9bd16a97291d01</guid><pubDate>Wed, 20 Aug 2025 06:32:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QX1rtea8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ChatGPT%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6Rust%25E3%2581%25A7%25E6%2596%25B0%25E3%2581%2597%25E3%2581%2584%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E8%25A8%2580%25E8%25AA%259E%25E3%2582%2592%25E3%2581%25A4%25E3%2581%258F%25E3%2582%258A%25E5%25A7%258B%25E3%2582%2581%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%2594%25E3%2581%25A8%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViM2I3NTQxYzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MyOWNkNWUxZTkuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ごと</dc:creator></item><item><title><![CDATA[Vibe codingでStreamDeck互換機を自作した]]></title><description><![CDATA[こんにちは。ふろーです。
+主題通りですが、Vibe codingでElgato StreamDeckと互換性があるハードウェアを開発してみました。
+!
+この記事は人間が書きました
+
+https://x.com/FlowingSPDG/status/1957565195859157272
+
+ 背景情報
+StreamDeckの開発者コミュニティは凄まじく、StreamDeck公式ソフトウェアのプラグインのみならずドライバを自作する人や、companionのようなプロダクション用途を想定した代替ソフトウェアも存在するほどです。
+そのため、StreamDeckが利用するUSB HIDのプロトコル...]]></description><link>https://zenn.dev/hiiraginil/articles/396fb53521d8d8</link><guid isPermaLink="true">https://zenn.dev/hiiraginil/articles/396fb53521d8d8</guid><pubDate>Tue, 19 Aug 2025 16:22:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--smcC4S5E--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vibe%2520coding%25E3%2581%25A7StreamDeck%25E4%25BA%2592%25E6%258F%259B%25E6%25A9%259F%25E3%2582%2592%25E8%2587%25AA%25E4%25BD%259C%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:FlowingSPDG%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkzNTg5OTE3MTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>FlowingSPDG</dc:creator></item><item><title><![CDATA[Rustでトレイト境界のような形で変数を束縛する【dyn】]]></title><description><![CDATA[当然ですが、Rustは基本的にコンパイル時に変数に束縛する値の型を判明させる必要があります。しかし、場合によっては実行時に型を決定したいことがあります。
+
+ 例code
+例えばこんな感じで各llmを選んで使うプログラムがあったとします。
+
+ main.rs
+trait Responder {
+    fn respond(&amp;self) -&gt; Result&lt;String, std::io::Error&gt;;
+}
+
+struct OpenAI {
+    model: String,
+}
+
+impl OpenAI {
+    fn new(model: &amp;st...]]></description><link>https://zenn.dev/uliboooo/articles/9f0add249046d9</link><guid isPermaLink="true">https://zenn.dev/uliboooo/articles/9f0add249046d9</guid><pubDate>Tue, 19 Aug 2025 10:16:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dXe99G7m--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7%25E3%2583%2588%25E3%2583%25AC%25E3%2582%25A4%25E3%2583%2588%25E5%25A2%2583%25E7%2595%258C%25E3%2581%25AE%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AA%25E5%25BD%25A2%25E3%2581%25A7%25E5%25A4%2589%25E6%2595%25B0%25E3%2582%2592%25E6%259D%259F%25E7%25B8%259B%25E3%2581%2599%25E3%2582%258B%25E3%2580%2590dyn%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Uliboooo%2528%25E3%2581%2586%25E3%2582%258A%25E3%2581%25BC%25E3%2581%2586%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0MTFjYWRhM2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Uliboooo(うりぼう)</dc:creator></item><item><title><![CDATA[なぜ私たちは Debezium を Rust で書き直さなかったのか]]></title><description><![CDATA[
+ここ数年、コミュニティやフォーラム、さらにはお客様からも、同じ質問を何度もいただきました。
+「システムが Rust で書かれているのなら、なぜ Debezium を Rust で書き直さないのですか？」
+
+RisingWaveは、リアルタイムイベントデータの処理・分析・管理を、最もシンプルかつコスト効率の高い形で実現するために設計されたリアルタイムイベントストリーミングプラットフォームです。さらに、Apache Iceberg™のオープンテーブル形式をネイティブにサポートしており、PostgreSQL互換のSQLインターフェースと、DataFrameスタイルのPythonインターフェー...]]></description><link>https://zenn.dev/rwcolinpeng/articles/696cd239b016b0</link><guid isPermaLink="true">https://zenn.dev/rwcolinpeng/articles/696cd239b016b0</guid><pubDate>Tue, 19 Aug 2025 08:48:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LBomeuSe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25AA%25E3%2581%259C%25E7%25A7%2581%25E3%2581%259F%25E3%2581%25A1%25E3%2581%25AF%2520Debezium%2520%25E3%2582%2592%2520Rust%2520%25E3%2581%25A7%25E6%259B%25B8%25E3%2581%258D%25E7%259B%25B4%25E3%2581%2595%25E3%2581%25AA%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25AE%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:RisingWave%2520Labs%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmZmFjMDNiZWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>RisingWave Labs</dc:creator></item><item><title><![CDATA[`Option<T>` のよく使うメソッドを書いてみる]]></title><description><![CDATA[
+ Option&lt;T&gt; のよく使うメソッドを書いてみる
+前回 は Option&lt;T&gt; の基本的な使い方と bool に変換するメソッドを紹介しました。
+今回は Option&lt;T&gt; のメソッドのうち、ドクターメイト株式会社のコードベースでよく使われているものを感覚的に選び、グループ化しつつ適当に書き出してみます。
+全部のメソッドは紹介しません。たとえば、ドクターメイト株式会社の運用上 &amp;mut Option&lt;T&gt; を使用していないので、そういったメソッドは出てきません。
+では、さっそくはじめましょう。
+
+ Option&lt;T&gt...]]></description><link>https://zenn.dev/doctormate/articles/c33520c865d85e</link><guid isPermaLink="true">https://zenn.dev/doctormate/articles/c33520c865d85e</guid><pubDate>Tue, 19 Aug 2025 03:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3bXR42L4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2560Option%253CT%253E%2560%2520%25E3%2581%25AE%25E3%2582%2588%25E3%2581%258F%25E4%25BD%25BF%25E3%2581%2586%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E3%2582%2592%25E6%259B%25B8%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:bouzuya%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FiYmEzODYwNjQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2589%25E3%2582%25AF%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25A1%25E3%2582%25A4%25E3%2583%2588%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lqVElDaW81T2gxMjNQSzhqQXkydnJpTDh6dC1SWUZvUnYzd0tjb3c9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>bouzuya</dc:creator></item><item><title><![CDATA[クリーンアーキテクチャ入門 Part 4: 実践的な開発フローとAI活用]]></title><description><![CDATA[
+ クリーンアーキテクチャ入門 Part 4: 実践的な開発フローとAI活用
+
+ はじめに
+Part1〜3でクリーンアーキテクチャの理論と実装について学んだら、最後は実践的な開発フローとAI活用について詳しく学んでいきます。この記事では、実際の開発現場でクリーンアーキテクチャを活用する方法と、AIツールを活用して効率的に開発を進める方法について理解を深めていきます。
+この記事で学べること：
+
+実践的な開発フロー
+AIを活用した構成チェック
+よくある問題と解決策
+段階的な学習アプローチ
+成功の指標とベストプラクティス
+
+
+ 実践的な開発フロー
+
+ 開発時のチェックリスト
+新しい機能を実装す...]]></description><link>https://zenn.dev/collabostyle/articles/29b4a97c5d9e0a</link><guid isPermaLink="true">https://zenn.dev/collabostyle/articles/29b4a97c5d9e0a</guid><pubDate>Mon, 18 Aug 2025 23:33:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--riQKXmGW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%25A2%25E3%2583%25BC%25E3%2582%25AD%25E3%2583%2586%25E3%2582%25AF%25E3%2583%2581%25E3%2583%25A3%25E5%2585%25A5%25E9%2596%2580%2520Part%25204%253A%2520%25E5%25AE%259F%25E8%25B7%25B5%25E7%259A%2584%25E3%2581%25AA%25E9%2596%258B%25E7%2599%25BA%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25BC%25E3%2581%25A8AI%25E6%25B4%25BB%25E7%2594%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:yushi-s%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViM2I3NTQxYzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSk1DWlFPZDBzMmF6VWgtQ0lVZjRvTnVxeW5ZUUswU0g2N3M3M1hVbjFvQldPRDJBPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yushi-s</dc:creator></item><item><title><![CDATA[クリーンアーキテクチャ入門 Part 3: 外部システムとの連携（Infrastructure層・Presentation層）]]></title><description><![CDATA[
+ クリーンアーキテクチャ入門 Part 3: 外部システムとの連携（Infrastructure層・Presentation層）
+
+ はじめに
+Part2でビジネスロジックの設計について学んだら、次は外部システムとの連携について詳しく学んでいきます。この記事では、Infrastructure層とPresentation層の実装に焦点を当て、データベース、外部API、HTTPレスポンスの処理について理解を深めていきます。
+この記事で学べること：
+
+Infrastructure層での外部システムとの連携
+Presentation層でのHTTPリクエスト・レスポンスの処理
+技術的詳細の隠蔽方...]]></description><link>https://zenn.dev/collabostyle/articles/87b3d8c96283fb</link><guid isPermaLink="true">https://zenn.dev/collabostyle/articles/87b3d8c96283fb</guid><pubDate>Mon, 18 Aug 2025 23:33:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qRF-ACt7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%25A2%25E3%2583%25BC%25E3%2582%25AD%25E3%2583%2586%25E3%2582%25AF%25E3%2583%2581%25E3%2583%25A3%25E5%2585%25A5%25E9%2596%2580%2520Part%25203%253A%2520%25E5%25A4%2596%25E9%2583%25A8%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2581%25A8%25E3%2581%25AE%25E9%2580%25A3%25E6%2590%25BA%25EF%25BC%2588Infrastructure%25E5%25B1%25A4%25E3%2583%25BBPresenta...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:yushi-s%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViM2I3NTQxYzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSk1DWlFPZDBzMmF6VWgtQ0lVZjRvTnVxeW5ZUUswU0g2N3M3M1hVbjFvQldPRDJBPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yushi-s</dc:creator></item><item><title><![CDATA[RustのMapはとりあえず IndexMap を使用すればいい]]></title><description><![CDATA[
+ 背景
+Rustで辞書型のデータ構造を扱う際にはHashMapとBTreeMapの二種類があってどちらを使うかよく悩みますよね。私は今まではよくBTreeMapのほうを使用していました。確かにHashMapのほうが多くの操作がO(1)でBTreeMapのO(logN)よりも理論上は速いのですが、Nがそこまで大きくない場合にはあまり有意な差は出ず、むしろキーの順番がランダムに変わるということで、すべての要素に対して処理を行う際にソートを忘れると結果の再現性に影響が出る場合がありました。
+
+図は筆者が社内勉強会で作成したスライドより
+一方でBTreeMapのほうにも問題があって、CodeL...]]></description><link>https://zenn.dev/lucidfrontier45/articles/6c76ad2ce52523</link><guid isPermaLink="true">https://zenn.dev/lucidfrontier45/articles/6c76ad2ce52523</guid><pubDate>Mon, 18 Aug 2025 11:45:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--f49d5wpQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AEMap%25E3%2581%25AF%25E3%2581%25A8%25E3%2582%258A%25E3%2581%2582%25E3%2581%2588%25E3%2581%259A%2520IndexMap%2520%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258C%25E3%2581%25B0%25E3%2581%2584%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:lucidfrontier45%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcxY2RkYzI0MmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>lucidfrontier45</dc:creator></item><item><title><![CDATA[Rust 小ネタ: serde_dynamo で `#[serde(from = "&str")]` が動かなくてびっくりした。]]></title><description><![CDATA[こんにちは。Fairy Devices株式会社 となんらかの関わりがある nogiro (Twitter (現 Twitter): @nogiro_iota) です。
+Amazon DynamoDB と Rust プログラムのやり取りのために serde_dynamo でシリアライズ、デシリアライズしているのですが、#[serde(from = "&amp;str")] を使うとデシリアライズでエラーが発生します。
+といってもこの記事にはタイトル以上の情報はあんまりないです。#[serde(from = "String")] にしたら動きます。ソースコードはいちおう読みました。
+
+ 前置...]]></description><link>https://zenn.dev/fairydevices/articles/593a73efb2f7e7</link><guid isPermaLink="true">https://zenn.dev/fairydevices/articles/593a73efb2f7e7</guid><pubDate>Mon, 18 Aug 2025 06:29:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--x7QYHszd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%25E5%25B0%258F%25E3%2583%258D%25E3%2582%25BF%253A%2520serde_dynamo%2520%25E3%2581%25A7%2520%2560%2523%255Bserde%2528from%2520%253D%2520%2522%2526str%2522%2529%255D%2560%2520%25E3%2581%258C%25E5%258B%2595%25E3%2581%258B%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25A6...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:nogiro%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5MjE4ODkwNjAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2595%25E3%2582%25A7%25E3%2582%25A2%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%2587%25E3%2583%2590%25E3%2582%25A4%25E3%2582%25BB%25E3%2582%25BA%25E5%2585%25AC%25E5%25BC%258F%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI2NGU1YjkxNmIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nogiro</dc:creator></item><item><title><![CDATA[クリーンアーキテクチャ入門 Part 2: ビジネスロジックの設計（Domain層・Application層）]]></title><description><![CDATA[
+ クリーンアーキテクチャ入門 Part 2: ビジネスロジックの設計（Domain層・Application層）
+
+ はじめに
+Part1でクリーンアーキテクチャの基本概念を理解したら、次はビジネスロジックの設計について詳しく学んでいきます。この記事では、Domain層とApplication層の実装に焦点を当て、実際のコード例を通じて理解を深めていきます。
+この記事で学べること：
+
+Domain層でのビジネスルールの実装
+Application層でのユースケースの実装
+依存性注入による疎結合の実現
+実際のデータフローとテスト方法
+
+
+ Domain層の詳細実装
+Domain層は、アプ...]]></description><link>https://zenn.dev/collabostyle/articles/15c28b365eb03e</link><guid isPermaLink="true">https://zenn.dev/collabostyle/articles/15c28b365eb03e</guid><pubDate>Mon, 18 Aug 2025 03:58:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qztKgmEY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%25A2%25E3%2583%25BC%25E3%2582%25AD%25E3%2583%2586%25E3%2582%25AF%25E3%2583%2581%25E3%2583%25A3%25E5%2585%25A5%25E9%2596%2580%2520Part%25202%253A%2520%25E3%2583%2593%25E3%2582%25B8%25E3%2583%258D%25E3%2582%25B9%25E3%2583%25AD%25E3%2582%25B8%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25AE%25E8%25A8%25AD%25E8%25A8%2588%25EF%25BC%2588Domain%25E5%25B1%25A4%25E3%2583%25BBApplication%25E5%25B1%25A4%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:yushi-s%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViM2I3NTQxYzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSk1DWlFPZDBzMmF6VWgtQ0lVZjRvTnVxeW5ZUUswU0g2N3M3M1hVbjFvQldPRDJBPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yushi-s</dc:creator></item></channel></rss>
