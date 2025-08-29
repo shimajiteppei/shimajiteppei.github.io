@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 29 Aug 2025 06:37:34 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Pythonを電卓代わりする人へ！大きな数字をカンマ区切りで自動表示する方法]]></title><description><![CDATA[突然ですが、Pythonの対話モードを電卓代わりに使っていますか？
+Pythonの対話モードでの計算は非常に直感的であり、ちょっと複雑な計算をするときに便利です。
+$ python
+Python 3.10.0 (default, Apr 14 2024, 11:30:24) [Clang 12.0.0 (clang-1200.0.32.29)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+&gt;&gt;&gt; 3+3*2
+9
+しかし難点もあり桁数の大きな数字を扱うとき...]]></description><link>https://zenn.dev/yagiyuki/articles/python-calculator</link><guid isPermaLink="true">https://zenn.dev/yagiyuki/articles/python-calculator</guid><pubDate>Fri, 29 Aug 2025 06:23:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--y1KWt_xH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2582%2592%25E9%259B%25BB%25E5%258D%2593%25E4%25BB%25A3%25E3%2582%258F%25E3%2582%258A%25E3%2581%2599%25E3%2582%258B%25E4%25BA%25BA%25E3%2581%25B8%25EF%25BC%2581%25E5%25A4%25A7%25E3%2581%258D%25E3%2581%25AA%25E6%2595%25B0%25E5%25AD%2597%25E3%2582%2592%25E3%2582%25AB%25E3%2583%25B3%25E3%2583%259E%25E5%258C%25BA%25E5%2588%2587%25E3%2582%258A%25E3%2581%25A7%25E8%2587%25AA%25E5%258B%2595%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yagiyuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRmZmIzYzYyYjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yagiyuki</dc:creator></item><item><title><![CDATA[Pythonのパッケージ管理の基礎をマスターする]]></title><description><![CDATA[ここでは、Pythonのパッケージ管理について解説する。
+初心者にとってはとっつきにくいテーマだが、学べばコード理解が格段に進むので、わかりやすく解説したい。
+
+ モジュール、パッケージ、ライブラリの違いを理解しよう
+
+ 基本的な用語の整理
+まずは、よく混同されがちな3つの用語を明確にしておこう。
+
+
+モジュール: 1つのPythonファイル（例：math_utils.py）
+
+パッケージ: __init__.pyを含むディレクトリで複数のモジュールをまとめたもの
+
+ライブラリ: 複数のパッケージやモジュールの集合（例：pandas、numpy）
+
+
+ パッケージの構造例
+実際のパッケー...]]></description><link>https://zenn.dev/start_code/articles/94329ff266e90d</link><guid isPermaLink="true">https://zenn.dev/start_code/articles/94329ff266e90d</guid><pubDate>Fri, 29 Aug 2025 05:02:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ngIqfltE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AE%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%25E3%2582%2592%25E3%2583%259E%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A0%25AA%25EF%25BC%2589%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2580%2580%25E6%259D%25BE%25E6%259C%25AC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA0MmZkYjQ1NGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>株）スタートコード　松本</dc:creator></item><item><title><![CDATA[RAGとフィードバックを活用した、継続学習する返信生成サービスの作成]]></title><description><![CDATA[
+ はじめに
+WED株式会社でMLエンジニアをしています、ishi2kiです。
+WEDでは、ユーザーの方々からレシートを買い取るアプリ「ONE」を開発運用しています。
+今回、生成AIの力を借りてユーザーからの問い合わせへの返信内容を自動で生成するサービスを作成したので紹介します。
+
+ 現状の課題
+ユーザーからの問い合わせでエスカレーションが発生した場合、ZendeskからSlackに通知が飛びます。
+それを確認し、UCが問い合わせへの返信を作成していたのですが、これには多くの工数がかかっていました。
+そこで今回、過去の問い合わせデータを活用し、新規問い合わせに対する返信を自動で生成するA...]]></description><link>https://zenn.dev/wed_engineering/articles/uc_support_ai</link><guid isPermaLink="true">https://zenn.dev/wed_engineering/articles/uc_support_ai</guid><pubDate>Fri, 29 Aug 2025 03:56:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mlNWeyun--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:RAG%25E3%2581%25A8%25E3%2583%2595%25E3%2582%25A3%25E3%2583%25BC%25E3%2583%2589%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2582%2592%25E6%25B4%25BB%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2580%2581%25E7%25B6%2599%25E7%25B6%259A%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%2599%25E3%2582%258B%25E8%25BF%2594%25E4%25BF%25A1%25E7%2594%259F%25E6%2588%2590%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%25E3%2581%25AE%25E4%25BD%259C%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:ishi2ki%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIxYjlmMzI3YWMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:WED%2520Engineering%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MwMmZhZjBjOWUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ishi2ki</dc:creator></item><item><title><![CDATA[`uv pip install torch --torch-backend=auto`で互換性の高いPyTorchをインストールする流れ]]></title><description><![CDATA[チューリングのMLOpsエンジニアの岩政です。
+先日ポストした内容が思いのほか拡散されたので、個人的な再現性が保ちやすい PyTorchの環境構築の流れ についてまとめた記事です。
+https://x.com/colum2131/status/1960520833438482930
+本記事の主な対象は、Linux OSでNVIDIA GPUが搭載されているマシンでPyTorchをインストールする方です。他のOSやWSL2などで同様の操作が可能かは保証しません。
+
+ 1. 結論
+本記事で紹介したい流れを具体的なコマンドをもとに先に紹介します。
+
+ 1.1 NVIDIA Driverのインス...]]></description><link>https://zenn.dev/turing_motors/articles/ab155fe6653660</link><guid isPermaLink="true">https://zenn.dev/turing_motors/articles/ab155fe6653660</guid><pubDate>Fri, 29 Aug 2025 02:30:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wdF0r_z9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2560uv%2520pip%2520install%2520torch%2520--torch-backend%253Dauto%2560%25E3%2581%25A7%25E4%25BA%2592%25E6%258F%259B%25E6%2580%25A7%25E3%2581%25AE%25E9%25AB%2598%25E3%2581%2584PyTorch...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:colum2131%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VhNmQ4MDk1OGQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Tech%2520Blog%2520-%2520Turing%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RhZDZiMjhmMmEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>colum2131</dc:creator></item><item><title><![CDATA[PythonでもAWS Lamda用のデプロイパッケージをクロスビルドする]]></title><description><![CDATA[
+ 背景
+AWS Lambda Web Adapter (LWA)[1]という任意のHTTPサーバーをAWS Lambdaアプリに変換する方法を知ってLambdaでデプロイするモチベーションが上がっていたところ、せっかくだからよりコスパがいいArm64環境を使いたいと思いました。AWS Lambdaへはzipファイルとコンテナーイメージを利用する2つの方法があります。マルチプラットフォーム対応のコンテナーを作る方法Dockerの公式doc[2]にあるように以下の3つの方法があります。
+
+QEMU(エミュレーター)を使用する
+複数のnative環境を用意する
+クロスコンパイルする
+
+1はオ...]]></description><link>https://zenn.dev/lucidfrontier45/articles/dd38e25209ebca</link><guid isPermaLink="true">https://zenn.dev/lucidfrontier45/articles/dd38e25209ebca</guid><pubDate>Fri, 29 Aug 2025 01:41:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kcB-bJt4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E3%2582%2582AWS%2520Lamda%25E7%2594%25A8%25E3%2581%25AE%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E3%2582%25AF%25E3%2583%25AD%25E3%2582%25B9%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:lucidfrontier45%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcxY2RkYzI0MmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>lucidfrontier45</dc:creator></item><item><title><![CDATA[CPythonにGoのDeferを実装してみよう]]></title><description><![CDATA[
+ CPythonにGoのDeferを実装してみよう
+この記事では、CPythonの内部構造を軽く見ていくために、新しい文法を最新CPython(3.14)に実装する。
+GoのDeferとは？
+
+
+Goに存在する特別なキーワードであり、deferで登録された関数は、その関数のScopeの外に抜け出す際に実行される
+
+
+LIFOで、登録された逆順に実行されていく
+
+
+主に、GoではCleanup関数を事前に登録する形で利用する
+   f, err := os.Open(somefile)
+   if err != nil {
+       return err
+   }
+   defer ...]]></description><link>https://zenn.dev/avilen_techblog/articles/2793f630d3902d</link><guid isPermaLink="true">https://zenn.dev/avilen_techblog/articles/2793f630d3902d</guid><pubDate>Fri, 29 Aug 2025 01:15:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qgZeen3r--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CPython%25E3%2581%25ABGo%25E3%2581%25AEDefer%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2583%25A6%25E3%2583%25B3%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25BD%25E3%2583%25B3%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc5Njc0NzEyN2EuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEAVILEN%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0FabThCeVJPNFlLcTJlcXA4ektoc005emhFaEFMZlU1YTFCMW1iX1hBWU5rQ0hBPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ユンジェソン</dc:creator></item><item><title><![CDATA[ChemPy -Optional dependenciesなしの場合-]]></title><description><![CDATA[
+ 背景
+ChemPyを使ってみるにあたって、kinetics以外のExamplesのコードを走らせるのであれば、optional dependenciesは不要なはずなので、確認のため走らせてみました。
+
+ Installation
+今回は、Windows 10のvenvの仮想環境にinstallしてみました。
+まず仮想環境を作成、アクティベートして、
+$ py -3.13 -m venv &lt;my_venv&gt;
+$ cd &lt;my_venv&gt;
+$ Scripts\activate.bat
+この仮想環境にinstallします。
+(my_venv)$ py -3.13 ...]]></description><link>https://zenn.dev/pejpo/articles/f7544cab6b4252</link><guid isPermaLink="true">https://zenn.dev/pejpo/articles/f7544cab6b4252</guid><pubDate>Thu, 28 Aug 2025 23:46:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--c7XE0J6g--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ChemPy%2520-Optional%2520dependencies%25E3%2581%25AA%25E3%2581%2597%25E3%2581%25AE%25E5%25A0%25B4%25E5%2590%2588-%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Dr_O%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IyZGEzYWJiZTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Dr_O</dc:creator></item><item><title><![CDATA[AtCoder Beginner Contest 419 C - King's Summit]]></title><description><![CDATA[
+ AtCoder Beginner Contest 419 C - King's Summit
+問題はこちら
+
+ 問題を解く時の思考の流れ
+
+
+N 人の人にとって一番都合のいいマスがわかると嬉しい
+
+
+1 を求めるためには、全探索だとマスの数だけかかり、グリッドの大きさは 10^9 行 10^9 列のため間に合わなさそう
+
+
+そもそも2次元で複雑な気がするので、1次元で考えてみたい
+
+
+1次元の場合で考えてみる
+a. x 軸上に M 人の人がおり、はじめ i 人目はマス x_i にいるとする
+b. この場合、都合のいいマスは、「みんなにとっての中心っぽい」場所にありそう
+c. b をよ...]]></description><link>https://zenn.dev/u_u/articles/27681ff0387c22</link><guid isPermaLink="true">https://zenn.dev/u_u/articles/27681ff0387c22</guid><pubDate>Thu, 28 Aug 2025 12:44:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sc6urIJ_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AtCoder%2520Beginner%2520Contest%2520419%2520C%2520-%2520King%2527s%2520Summit%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E2%259C%25BFu_u%25E2%259C%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RiNWIwZjVjNTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>✿u_u✿</dc:creator></item><item><title><![CDATA[pip installでcommand not found: pipが出た時の対処方]]></title><description><![CDATA[
+ エラーに関して
+Python のパッケージをインストールする際によく使われる pip install。
+ところが環境によっては command not found: pip というエラーに遭遇することがあります。
+$ pip install aws-mfa
+zsh: command not found: pip
+
+ なぜエラーになるのか？
+最近の macOS では、システム標準の Python が「外部から直接パッケージを追加できない管理環境」となっているため、pip が最初から利用できないケースがあります。
+もしインストールしたいのが「Python製のCLIツール」であれば、pip...]]></description><link>https://zenn.dev/fumi_techblog/articles/a4fbbc55686bc4</link><guid isPermaLink="true">https://zenn.dev/fumi_techblog/articles/a4fbbc55686bc4</guid><pubDate>Thu, 28 Aug 2025 10:41:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PH0WSyHG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:pip%2520install%25E3%2581%25A7command%2520not%2520found%253A%2520pip%25E3%2581%258C%25E5%2587%25BA%25E3%2581%259F%25E6%2599%2582%25E3%2581%25AE%25E5%25AF%25BE%25E5%2587%25A6%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:fumi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDBTUkdTaVJzX3R4LWE2V0lUUzNnYnpCVDc2OTlZTDNNUjhXUnNnTVZZXzVFdkVBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>fumi</dc:creator></item><item><title><![CDATA[Github Actionsで作るウェブページ更新監視ツール（AI要約機能追加編）]]></title><description><![CDATA[この記事では，以前の記事で作成したWebページ更新監視ツールに，機能を追加します．
+具体的には，OpenAI APIを利用して，更新があったページの更新内容の差分を要約して通知する機能を実装します．
+
+
+ 現行版の問題点と改善案
+前回の記事で作成したアプリケーションでは，Webページに更新があった場合には，更新があった旨とhtmlの差分がメールで通知されるようになっていました．
+しかし，htmlの生の差分テキストは人間が読むようにはできていません．
+綺麗に構造化されたページならまだしも，そうでないページの場合には目も当てられません．
+そのため実際の運用では，更新通知があった後にブラウザで...]]></description><link>https://zenn.dev/hiromu_ushihara/articles/550c9f0bf109ab</link><guid isPermaLink="true">https://zenn.dev/hiromu_ushihara/articles/550c9f0bf109ab</guid><pubDate>Thu, 28 Aug 2025 08:24:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_JIyU0cY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Github%2520Actions%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%25E3%2582%25A6%25E3%2582%25A7%25E3%2583%2596%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E6%259B%25B4%25E6%2596%25B0%25E7%259B%25A3%25E8%25A6%2596%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25EF%25BC%2588AI%25E8%25A6%2581%25E7%25B4%2584%25E6%25A9%259F%25E8%2583%25BD%25E8%25BF%25BD%25E5%258A%25A0%25E7%25B7%25A8%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:houh%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0k0aEMzQ3pUejlLY215RDVDV3FBUTRNNnkxbnhRTHVvcnVHVlpmRzR0YnlvUFVBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>houh</dc:creator></item><item><title><![CDATA[Pythonで電車揺れのアニメーションを作ろう]]></title><description><![CDATA[
+ やりたいこと
+まず揺らす対象の画像を用意します
+これは僕が適当に描いた電車の車内です
+
+走行中の音源はこちらを使います
+この音源に合わせて先ほどの画像を良い感じに揺らそうというのが今回の目的です
+↓こんな感じになります
+
+
+ やること
+揺らすために以下の二つの処理をします
+
+音源を読み込んでデータを最大値で正規化する
+乱数で揺らす方向のベクトルを生成して揺らす
+
+
+ 1.音源を読み込んでデータを最大値で正規化する
+librosaを使います
+import librosa
+
+class AudioInformation:
+    def __init__(self, audio_file...]]></description><link>https://zenn.dev/midry3125/articles/c9f04f3dccd29d</link><guid isPermaLink="true">https://zenn.dev/midry3125/articles/c9f04f3dccd29d</guid><pubDate>Thu, 28 Aug 2025 08:11:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aOwHGEwn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E9%259B%25BB%25E8%25BB%258A%25E6%258F%25BA%25E3%2582%258C%25E3%2581%25AE%25E3%2582%25A2%25E3%2583%258B%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258D%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%2581%25A0%25E7%2580%25AC%25E7%25B7%2591%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzliNDAzYjRmOWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>遠瀬緑</dc:creator></item><item><title><![CDATA[Python＋Streamlitで属性別価格感度を可視化 - Van Westendorp PSM分析 #2]]></title><description><![CDATA[
+ 📌はじめに
+前回はこの手法を、価格に対する消費者の主観的な受容範囲を可視化するVan Westendorp分析を紹介しました。
+しかし、年齢や価値観、購買スタイルによって、適正価格の感覚は人によって異なることが予想されます。
+そこで本記事では、Van Westendorp分析を 属性に基づきグループを分けて実施し、
+ターゲット別の価格感度を可視化する方法 を紹介します。
+前回のおさらい：Van Westendorpとは❓
+Van Westendorp Price Sensitivity Meter（PSM分析）は、
+価格に対する消費者の受け止め方を可視化するための手法です。
+消費者に...]]></description><link>https://zenn.dev/swatchp/articles/5081b0a081728d</link><guid isPermaLink="true">https://zenn.dev/swatchp/articles/5081b0a081728d</guid><pubDate>Thu, 28 Aug 2025 04:16:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BZqaVz8U--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25EF%25BC%258BStreamlit%25E3%2581%25A7%25E5%25B1%259E%25E6%2580%25A7%25E5%2588%25A5%25E4%25BE%25A1%25E6%25A0%25BC%25E6%2584%259F%25E5%25BA%25A6%25E3%2582%2592%25E5%258F%25AF%25E8%25A6%2596%25E5%258C%2596%2520-%2520Van%2520Westendorp%2520PSM%25E5%2588%2586%25E6%259E%2590%2520%25232%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Swatch-p%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5YTg2ZTBmZjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Swatch-p</dc:creator></item><item><title><![CDATA[Pythonの型ヒントについて初心者が知るべきことを解説する]]></title><description><![CDATA[
+ はじめに
+初投稿にしては渋い内容だが、Pythonの型ヒントについて解説したい。
+例えば、あなたが新たにプロジェクトにアサインされたとて、この関数を見て、すぐに正しく使えるだろうか？
+def authenticate_user(credentials, token):
+・credentialsって何？ユーザー名とパスワードの辞書？特定のクラスのオブジェクト
+・tokenって文字列？それとも何かのオブジェクト？
+・戻り値は何が返ってくるの？True/False？ユーザー情報？
+こういった疑問が湧いてくるはずだ。
+Pythonは動的型付け言語であり、コードが大規模になるにつれて「この変数...]]></description><link>https://zenn.dev/start_code/articles/1285ec02f18476</link><guid isPermaLink="true">https://zenn.dev/start_code/articles/1285ec02f18476</guid><pubDate>Thu, 28 Aug 2025 03:48:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XxQBBjUx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AE%25E5%259E%258B%25E3%2583%2592%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%258C%25E7%259F%25A5%25E3%2582%258B%25E3%2581%25B9%25E3%2581%258D%25E3%2581%2593%25E3%2581%25A8%25E3%2582%2592%25E8%25A7%25A3%25E8%25AA%25AC%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A0%25AA%25EF%25BC%2589%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2580%2580%25E6%259D%25BE%25E6%259C%25AC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA0MmZkYjQ1NGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>株）スタートコード　松本</dc:creator></item><item><title><![CDATA[PythonのTypedDictとクラスの使い分け]]></title><description><![CDATA[
+ はじめに
+Pythonで型ヒントを活用する中で、データ構造を定義する方法としてTypedDictとクラス（特にdataclasses）は頻繁に利用されます。両者は似た目的で使えますが、その背景にある設計思想や適したユースケースは異なります。
+私自身、どちらを使うべきか迷う場面が多々ありました。この記事では、TypedDictとクラスのそれぞれの特徴を整理し、どのような基準で使い分けるべきか、具体的なコード例を交えながら解説します。
+
+ TypedDictとは
+TypedDictは、typingモジュールで提供される機能で、辞書（dict）のキーとその値の型を静的に検査するために使われ...]]></description><link>https://zenn.dev/kromiii/articles/c909fb1528a008</link><guid isPermaLink="true">https://zenn.dev/kromiii/articles/c909fb1528a008</guid><pubDate>Wed, 27 Aug 2025 23:41:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xj1iKcWv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AETypedDict%25E3%2581%25A8%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E5%2588%2586%25E3%2581%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroyuki%2520Kuromiya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM4ZWM5ZDUwMDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroyuki Kuromiya</dc:creator></item><item><title><![CDATA[ChatGPTを使ってRustで新しいプログラミング言語をつくり始めた話（if分岐）]]></title><description><![CDATA[
+ 前回までのおさらい
+前回はPyroに「変数定義」を導入しました。
+letprというPyro独自の構文をRustのletに変換できるようにし、変数を使ったプログラムを書けるようにしました。
+letpr x = 10
+print(x)
+
+ 今回のテーマ: if分岐
+次の一歩として、if分岐を実装しました。
+Pyroでは「数値が0以外なら真」というルールで判定しています。
+例：
+letpr x = 10
+if x {
+    print("x は 0 以外です")
+} else {
+    print("x は 0 です")
+}
+
+ 実装のポイント
+
+AST (Stmt) に If を追加...]]></description><link>https://zenn.dev/collabostyle/articles/4f8776681b3bcb</link><guid isPermaLink="true">https://zenn.dev/collabostyle/articles/4f8776681b3bcb</guid><pubDate>Wed, 27 Aug 2025 23:34:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JRYQrlgG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ChatGPT%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6Rust%25E3%2581%25A7%25E6%2596%25B0%25E3%2581%2597%25E3%2581%2584%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E8%25A8%2580%25E8%25AA%259E%25E3%2582%2592%25E3%2581%25A4%25E3%2581%258F%25E3%2582%258A%25E5%25A7%258B%25E3%2582%2581%25E3%2581%259F%25E8%25A9%25B1%25EF%25BC%2588if%25E5%2588%2586%25E5%25B2%2590%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%2594%25E3%2581%25A8%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViM2I3NTQxYzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MyOWNkNWUxZTkuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ごと</dc:creator></item><item><title><![CDATA[遅ればせ: linter/formatter理解メモ]]></title><description><![CDATA[リンターとフォーマッタの違いについて、、理解が進んだのでメモ。
+超恥ずかしいことに、あんまり具体的にイメージできずエンジニア6年間やってました。
+Python環境での整理です。
+
+ リンター
+「その書き方だと動かない可能性がある」とか「ルール違反してるコードがある」とかを
+動かす前にチェックする。
+if文書きすぎてネストが深くなりすぎてるよ〜〜とかをチェックするのもこっち。
+これらを「静的解析」って言うらしいけど、「静的解析」っていう単語が直感的じゃなくてよくわかんないのであんまり好きではない...
+例えばこんなことをする⇩
+
+未使用のimport削除
+import並び替え
+不要な変数削...]]></description><link>https://zenn.dev/kannna5296/articles/2025-08-20-linter-formatter</link><guid isPermaLink="true">https://zenn.dev/kannna5296/articles/2025-08-20-linter-formatter</guid><pubDate>Wed, 27 Aug 2025 15:18:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qj3LQX0C--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%2581%2585%25E3%2582%258C%25E3%2581%25B0%25E3%2581%259B%253A%2520linter%252Fformatter%25E7%2590%2586%25E8%25A7%25A3%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hirosuban%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM2OGYzNmU4YzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hirosuban</dc:creator></item><item><title><![CDATA[Line Works 掲示板APIを使うpythonライブラリ書いてもらいました。]]></title><description><![CDATA[https://pypi.org/project/line-works-board/
+作ってみました。ほとんどCursorに書いてもらっています。
+リポジトリは下記
+https://github.com/niohx/line-works-board
+Service Account認証のみ対応しています。
+自分用に作ったライブラリなので、使えないときはどこがだめか教えて下さい。
+]]></description><link>https://zenn.dev/yoheikusano/articles/e8c33ab0d3d442</link><guid isPermaLink="true">https://zenn.dev/yoheikusano/articles/e8c33ab0d3d442</guid><pubDate>Wed, 27 Aug 2025 14:01:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QztNwq98--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Line%2520Works%2520%25E6%258E%25B2%25E7%25A4%25BA%25E6%259D%25BFAPI%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586python%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E6%259B%25B8%25E3%2581%2584%25E3%2581%25A6%25E3%2582%2582%25E3%2582%2589%25E3%2581%2584%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%258D%2589%25E9%2587%258E%25E6%25B4%258B%25E5%25B9%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzZDIwYTZkZDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>草野洋平</dc:creator></item><item><title><![CDATA[Teamsをもっと便利に！Azureで作るセキュアなRAGボット開発]]></title><description><![CDATA[
+ はじめに
+Microsoft Teamsは多くの企業で日常的に利用されており、業務の中心的なプラットフォームになっています。しかし、情報がチャネルやファイルに分散し、「必要な資料や決定事項がすぐに見つからない」という課題もあります。
+そこで本記事では、Azureのサービス群を活用して、社内ドキュメントに関する質問に答えてくれる RAG（Retrieval-Augmented Generation）対応のTeamsボット を開発した過程を紹介します。特に、シークレット情報を持たせずにマネージドIDを用いてセキュアに認証する構成 に重点を置いています。
+
+ 開発環境
+今回の開発で利用した...]]></description><link>https://zenn.dev/ryok/articles/develop-teams-rag-bot</link><guid isPermaLink="true">https://zenn.dev/ryok/articles/develop-teams-rag-bot</guid><pubDate>Wed, 27 Aug 2025 13:02:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sThQZbcR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Teams%25E3%2582%2592%25E3%2582%2582%25E3%2581%25A3%25E3%2581%25A8%25E4%25BE%25BF%25E5%2588%25A9%25E3%2581%25AB%25EF%25BC%2581Azure%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%25E3%2582%25BB%25E3%2582%25AD%25E3%2583%25A5%25E3%2582%25A2%25E3%2581%25AARAG%25E3%2583%259C%25E3%2583%2583%25E3%2583%2588%25E9%2596%258B%25E7%2599%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ryok%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc3MjU0NDY4YzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryok</dc:creator></item><item><title><![CDATA[Streamlit Creatorsに選出いただくまでの話]]></title><description><![CDATA[
+ はじめに
+データエンジニアの山口歩夢です！
+このたび、ご縁があってStreamlit Creatorsのメンバーに選出いただきました。
+本記事では、自分がStreamlit Creatorsに選出いただくまでの経緯をまとめてみました。
+自分のコメントや感想は、以下のプレスリリースに記載いただきましたので、併せてご覧いただけると幸いです。
+https://datumstudio.jp/information/streamlit-creators-2025/
+
+ 本題
+
+ Streamlit Creatorsとは
+Streamlit Creatorsは、Streamlitが公式に認定して...]]></description><link>https://zenn.dev/dataheroes/articles/029fa3e891cd97</link><guid isPermaLink="true">https://zenn.dev/dataheroes/articles/029fa3e891cd97</guid><pubDate>Wed, 27 Aug 2025 11:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sub0pKv8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Streamlit%2520Creators%25E3%2581%25AB%25E9%2581%25B8%25E5%2587%25BA%25E3%2581%2584%25E3%2581%259F%25E3%2581%25A0%25E3%2581%258F%25E3%2581%25BE%25E3%2581%25A7%25E3%2581%25AE%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E5%25B1%25B1%25E5%258F%25A3%25E6%25AD%25A9%25E5%25A4%25A2%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUxNDFkYTVlNTUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Snowflake%2520Data%2520Heroes%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IzZWQyMjkxYjAuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>山口歩夢</dc:creator></item><item><title><![CDATA[Azure OpenAI 40days Day8 — Functions × SignalR でリアルタイム配信（ローカル完走）]]></title><description><![CDATA[
+ ✍️ TL;DR
+
+到達点: Functions（Python v1）＋SignalR で LLM 応答を逐次配信し、ブラウザで体感できる状態にした
+学び: SignalR 出力は func.Out[str] に JSON、negotiate は **HTTP out (return)** 必須、`"return"` は 単一引用ヒアストリングで JSON 保存
+コスト: テストは短文＋gpt4o-mini-chat で極小（入出力トークン×単価）
+
+
+
+ 🧭 今日のゴール
+
+
+negotiate で {url, accessToken} を返す
+
+broadcast でメッセージ配...]]></description><link>https://zenn.dev/masau/articles/azure_openai_40days_day8_functions_signalr</link><guid isPermaLink="true">https://zenn.dev/masau/articles/azure_openai_40days_day8_functions_signalr</guid><pubDate>Wed, 27 Aug 2025 07:40:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Xt9P2lnb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Azure%2520OpenAI%252040days%2520Day8%2520%25E2%2580%2594%2520Functions%2520%25C3%2597%2520SignalR%2520%25E3%2581%25A7%25E3%2583%25AA%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E9%2585%258D%25E4%25BF%25A1%25EF%25BC%2588...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:MasaU_Tech%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4NTZmODk1MmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>MasaU_Tech</dc:creator></item></channel></rss>
