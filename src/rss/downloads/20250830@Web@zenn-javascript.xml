@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 30 Aug 2025 01:44:34 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[AWSのAIエディタKiroを触ってみた]]></title><description><![CDATA[
+ Kiroとは
+
+Kiroは「vibe codingをviable codeへ」と進化させるAIエージェント搭載のIDE
+2025年7月にAWSがリリースした
+VSCodeライクのエディタで、AIの仕様駆動開発が魅力
+
+https://kiro.dev/
+
+ 料金体系
+現状（2025/7/17）の料金体系は以下のようです。
+https://kiro.dev/pricing/
+
+
+KIRO FREE
+
+インタラクションが50回まで
+SpecsやAgent hooksなどの基本機能は使用可能
+
+
+
+KIRO PRO
+
+インタラクションが1000回まで
+
+
+
+KIRO PRO+
+
+インタラク...]]></description><link>https://zenn.dev/ryome/articles/dfe62ba65a10af</link><guid isPermaLink="true">https://zenn.dev/ryome/articles/dfe62ba65a10af</guid><pubDate>Sat, 30 Aug 2025 00:16:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--T6yU3esf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AWS%25E3%2581%25AEAI%25E3%2582%25A8%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25BFKiro%25E3%2582%2592%25E8%25A7%25A6%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ryome%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hZNnRKMExiZTFHTnlzbWo0UXJNLXM4VWd4WHNTTC16dmhoak10NXc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryome</dc:creator></item><item><title><![CDATA[【個人開発】底値表アプリを開発した話]]></title><description><![CDATA[
+ 概要
+
+底値表アプリ（Price Table）は、商品の価格情報を手軽に管理できるWebアプリ
+PWA対応によりオフラインでも利用可能
+PCだけでなくモバイルにも対応
+データのエクスポート/インポートはJSON形式
+GitHub Pagesで無料公開・運用中
+
+
+ 底値表アプリを作った背景
+私はかなりの節約家で普段からレシートを持ち帰って家計簿をつけています。
+節約家な私は 商品を1円でも安く買いたい ので、家計簿と一緒に買った商品の価格比較をExcelで行っていました。
+そんなある日、スーパーで買い物をしていた時に「その場でスマホを使って価格を記録して残しておくアプリがあれば良いの...]]></description><link>https://zenn.dev/ryome/articles/85b6054751f4a1</link><guid isPermaLink="true">https://zenn.dev/ryome/articles/85b6054751f4a1</guid><pubDate>Sat, 30 Aug 2025 00:16:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1G1-8Hnj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2580%258B%25E4%25BA%25BA%25E9%2596%258B%25E7%2599%25BA%25E3%2580%2591%25E5%25BA%2595%25E5%2580%25A4%25E8%25A1%25A8%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ryome%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hZNnRKMExiZTFHTnlzbWo0UXJNLXM4VWd4WHNTTC16dmhoak10NXc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryome</dc:creator></item><item><title><![CDATA[Chrome で JavaScript から言語検出・翻訳がブラウザ単独でできるようになった話]]></title><description><![CDATA[
+ はじめに
+こんにちは、hamaguchi です
+普段仕事ではバックエンドエンジニアとして Ruby on Rails を使ったウェブサービスの開発を行なっていますが、プライベートで色々作ったりする中ではバックエンドだけではなくフロントエンドやインフラの領域も触らざるを得ないため色々と勉強中です
+特に TypeScript は慣れておくと便利そうだけどあんまりよくわかっていないので早めに仲良くなっておきたいなと思っています
+最近のブラウザは外国語のページを開くと「翻訳しますか？」と聞いてくれたりしますよね？
+ここでの翻訳は誰がやっているのかというと、ブラウザ自身が行なっているわけではな...]]></description><link>https://zenn.dev/socialplus/articles/2f1a8cba74cb79</link><guid isPermaLink="true">https://zenn.dev/socialplus/articles/2f1a8cba74cb79</guid><pubDate>Fri, 29 Aug 2025 09:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QIBsMbg7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Chrome%2520%25E3%2581%25A7%2520JavaScript%2520%25E3%2581%258B%25E3%2582%2589%25E8%25A8%2580%25E8%25AA%259E%25E6%25A4%259C%25E5%2587%25BA%25E3%2583%25BB%25E7%25BF%25BB%25E8%25A8%25B3%25E3%2581%258C%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E5%258D%2598%25E7%258B%25AC%25E3%2581%25A7%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:t.hamaguchi%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4Mjg2YmNjMDEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Social%2520PLUS%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNiOWVkODEwMmUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t.hamaguchi</dc:creator></item><item><title><![CDATA[『検索機能』の実装をJavaScript、React(Nextjs)で比較]]></title><description><![CDATA[ブログ内の検索機能をJavaScript(Vanilla JS)、React（Nextjs）それぞれで実装してみます。
+https://www.masato-tech-blog.com/
+筆者はReact（Nextjs）から入ったためVanilla JSの経験が乏しく、
+あえてVanilla JSを使うことで、React（Nextjs）を使えることのメリットを実感するのが目的となります。
+
+ 目次
+
+全体の比較
+JavaScript(Vanilla JS)での実装
+Reactでの実装
+結果整理
+さいごに
+
+
+ 1. 全体の比較
+&lt;全体のイメージ&gt;
+Vanilla JS版: j...]]></description><link>https://zenn.dev/masato24524/articles/22488fcdf8c2fa</link><guid isPermaLink="true">https://zenn.dev/masato24524/articles/22488fcdf8c2fa</guid><pubDate>Fri, 29 Aug 2025 04:12:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bWATl2xb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258E%25E6%25A4%259C%25E7%25B4%25A2%25E6%25A9%259F%25E8%2583%25BD%25E3%2580%258F%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25E3%2582%2592JavaScript%25E3%2580%2581React%2528Nextjs%2529%25E3%2581%25A7%25E6%25AF%2594%25E8%25BC%2583%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masato%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgwODU5NjQ1YjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masato</dc:creator></item><item><title><![CDATA[Vueのリアクティブについて]]></title><description><![CDATA[
+ リアクティブについて
+Vue.jsの最も重要な特徴の一つが、このリアクティブシステムです。これは、ひと言でいうと「データが変更されると、そのデータに依存するHTML（DOM）が自動的に更新される仕組み」のことです。これにより、開発者はDOMを直接操作するコードを書く必要がなくなり、データ管理に集中できます。
+
+
+ リアクティブの基本的な仕組み 💡
+Vueは、アプリケーションで使われるデータ（dataオブジェクトやref、reactiveで作成されたもの）を常に監視しています。
+
+
+追跡 (Tracking): コンポーネントが描画される際、Vueはどのデータがどこで使われているかを記...]]></description><link>https://zenn.dev/shunsuke_stack/articles/99b93ae7254089</link><guid isPermaLink="true">https://zenn.dev/shunsuke_stack/articles/99b93ae7254089</guid><pubDate>Fri, 29 Aug 2025 01:40:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KMYzUYBl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vue%25E3%2581%25AE%25E3%2583%25AA%25E3%2582%25A2%25E3%2582%25AF%25E3%2583%2586%25E3%2582%25A3%25E3%2583%2596%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Nakajima.js%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFhZmNlYzMzOWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Nakajima.js</dc:creator></item><item><title><![CDATA[【ポートフォリオ 04 検証】ラズパイから動的HTMLを取得して動作検証するまで]]></title><description><![CDATA[
+ はじめに
+前回、擬似観光スポットのHTMLを「DOM操作」「連想配列」「オブジェクト」を使用して、動的HTMLとして実装しました。
+詳しくは、以下の記事をご参照ください
+https://qiita.com/mabo23/items/f82ec0bb46c128b7e64a
+開発中は、VS Code右下にある「Go Live」をクリックすることで、自分のPC上にローカルサーバを設置し、ブラウザ上での表示を確認していました。
+今回は、WebサーバをPC外部に構築し、そこからHTMLを取得して、ブラウザに表示していくプロセスを記事にまとめていきます。
+
+ 前提
+
+Ubuntu Server...]]></description><link>https://zenn.dev/mabo23/articles/117bcb018b60cf</link><guid isPermaLink="true">https://zenn.dev/mabo23/articles/117bcb018b60cf</guid><pubDate>Fri, 29 Aug 2025 00:53:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Fhlz6KPQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AA%25E3%2582%25AA%252004%2520%25E6%25A4%259C%25E8%25A8%25BC%25E3%2580%2591%25E3%2583%25A9%25E3%2582%25BA%25E3%2583%2591%25E3%2582%25A4%25E3%2581%258B%25E3%2582%2589%25E5%258B%2595%25E7%259A%2584HTML%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2597%25E3%2581%25A6%25E5%258B%2595%25E4%25BD%259C%25E6%25A4%259C%25E8%25A8%25BC%25E3%2581%2599%25E3%2582%258B%25E3%2581%25BE%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mabo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQzM2ZhMmVkZDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mabo</dc:creator></item><item><title><![CDATA[Next.js サーバーアクションの bind の挙動を整理する]]></title><description><![CDATA[Next.js のサーバーアクションを使っていて、bind の書き方がよくわからないと感じることがありました。
+特に「引数はどう渡るのか」「null って何なのか」が最初はつかみにくかったです。
+この記事ではそれを順番に整理します。
+
+ サーバーアクションに引数を渡す方法
+サーバーアクションをフォームに渡すとき、次のように bind を使って引数を埋め込めます。
+&lt;form action={updateUser.bind(null, userId)}&gt;
+  &lt;input name="name" /&gt;
+  &lt;button type="submit"&gt;Sa...]]></description><link>https://zenn.dev/ud/articles/7dd54bb3ce0452</link><guid isPermaLink="true">https://zenn.dev/ud/articles/7dd54bb3ce0452</guid><pubDate>Thu, 28 Aug 2025 23:54:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6e4C0W9w--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%2520%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25A2%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AE%2520bind%2520%25E3%2581%25AE%25E6%258C%2599%25E5%258B%2595%25E3%2582%2592%25E6%2595%25B4%25E7%2590%2586%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:UD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lwUGh4NnVtTjRvcWJINjdRbjFvOTY3WlNEWl9vWnNXLTZpQW1LZGVzPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>UD</dc:creator></item><item><title><![CDATA[【個人開発】ライフプランアプリを開発しました]]></title><description><![CDATA[
+ ライフプランアプリを作りました
+以下にサイトを公開しています。
+https://ryomeblog.github.io/shin-lifeplan-app/
+
+
+ 概要
+
+Webで簡単にライフプランを管理するためのアプリ
+
+家計簿をつける習慣がある人の次のアクションをサポートするために作られた
+家計簿のように口座を作ってカテゴリ別に支出や収入、振替なども管理できる
+
+未来の収支なども可視化してライフプランごとに切り替えることができる
+
+収支のテンプレート化や収支をイベントと紐づけて管理もできる
+
+資産（株式や債券など）管理やFIRE計画を立てることも可能
+レポートによるカテゴリ別の人...]]></description><link>https://zenn.dev/ryome/articles/84e1e54ffa3cb9</link><guid isPermaLink="true">https://zenn.dev/ryome/articles/84e1e54ffa3cb9</guid><pubDate>Thu, 28 Aug 2025 21:30:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bcHEtFeG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2580%258B%25E4%25BA%25BA%25E9%2596%258B%25E7%2599%25BA%25E3%2580%2591%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2595%25E3%2583%2597%25E3%2583%25A9%25E3%2583%25B3%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ryome%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hZNnRKMExiZTFHTnlzbWo0UXJNLXM4VWd4WHNTTC16dmhoak10NXc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryome</dc:creator></item><item><title><![CDATA[p5.jsでプログラミング学習（ブロック崩しを作ろう）]]></title><description><![CDATA[
+ 🎮 ブロック崩し JavaScript ワークシート
+
+ 🎮 ステップ0：ゲームの構成を理解しよう
+まず、ブロック崩しに必要な要素は以下の通りです：
+
+
+
+要素
+説明
+
+
+
+
+ボール
+自動で動き、壁やブロックに当たる
+
+
+パドル
+プレイヤーが左右に動かすバー
+
+
+ブロック群
+ボールが当たると消える障害物
+
+
+スコア
+ブロックを崩すと加算される
+
+
+ゲームの状態
+ゲームオーバーやクリアの判定
+
+
+
+
+ ブロック崩しに必要なJavaScriptの知識一覧
+
+
+
+機能・要素
+関連する知識
+
+
+
+
+パドルの操作
+キーボードイベント、条件分岐
+
+
+ボールの動き
+変数、座標、速度、draw()ル...]]></description><link>https://zenn.dev/kiyalab/articles/1cfca700a98138</link><guid isPermaLink="true">https://zenn.dev/kiyalab/articles/1cfca700a98138</guid><pubDate>Thu, 28 Aug 2025 18:24:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0la1818m--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:p5.js%25E3%2581%25A7%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E5%25AD%25A6%25E7%25BF%2592%25EF%25BC%2588%25E3%2583%2596%25E3%2583%25AD%25E3%2583%2583%25E3%2582%25AF%25E5%25B4%25A9%25E3%2581%2597%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258D%25E3%2581%2586%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kiyalab%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSi1xejRzdkh0RTQ5TE14QkNKWkJ0b2xsMlFTYTdvTjRQM05HX3M2c0N2aVZ1RVNnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kiyalab</dc:creator></item><item><title><![CDATA[【js】shuffle-text.jsを使う]]></title><description><![CDATA[
+]]></description><link>https://zenn.dev/tonkachi/articles/eb901fc6a1378c</link><guid isPermaLink="true">https://zenn.dev/tonkachi/articles/eb901fc6a1378c</guid><pubDate>Thu, 28 Aug 2025 11:02:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RvhY_L_O--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590js%25E3%2580%2591shuffle-text.js%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:TONKACHI%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSms2NkhqbndManU3TUxjWVQ2cXpnalRrQjZoelE1bi14NWFvUU5QLTdVLWw5OENTMi09czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TONKACHI</dc:creator></item><item><title><![CDATA[【js】エリア内でマウスストーカーを表示]]></title><description><![CDATA[
+]]></description><link>https://zenn.dev/tonkachi/articles/223e56216cbd38</link><guid isPermaLink="true">https://zenn.dev/tonkachi/articles/223e56216cbd38</guid><pubDate>Thu, 28 Aug 2025 08:31:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mVYz8c9C--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590js%25E3%2580%2591%25E3%2582%25A8%25E3%2583%25AA%25E3%2582%25A2%25E5%2586%2585%25E3%2581%25A7%25E3%2583%259E%25E3%2582%25A6%25E3%2582%25B9%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25BC%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:TONKACHI%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSms2NkhqbndManU3TUxjWVQ2cXpnalRrQjZoelE1bi14NWFvUU5QLTdVLWw5OENTMi09czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TONKACHI</dc:creator></item><item><title><![CDATA[夏休みの終わりこそ復習しておきたい、ES2016以降のモダンJavaScript再入門]]></title><description><![CDATA[!
+この記事は、CYBOZU SUMMER BLOG FES '25の記事です。
+
+
+ はじめに
+夏も終わりに近づいてきましたね。みなさん夏休みはいかがお過ごしでしょうか？海に山に、はたまたエアコンの効いた部屋でJavaScriptでコーディング三昧もアリかなと思ったりもします。ところで、コーヒー片手にコードを書きながら、「うわっ...私のJavaScript、古すぎない...？」とふと思ったことがありませんか？
+ECMAScript 6(以下ES6)が正式リリースされた2015年からかれこれ10年も経ちましたね。ES6はPromise、クラス構文やアロー関数など強力な機能を一気に導入し...]]></description><link>https://zenn.dev/cybozu_frontend/articles/js_after_es7</link><guid isPermaLink="true">https://zenn.dev/cybozu_frontend/articles/js_after_es7</guid><pubDate>Thu, 28 Aug 2025 08:18:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--J5gM5P-y--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25A4%258F%25E4%25BC%2591%25E3%2581%25BF%25E3%2581%25AE%25E7%25B5%2582%25E3%2582%258F%25E3%2582%258A%25E3%2581%2593%25E3%2581%259D%25E5%25BE%25A9%25E7%25BF%2592%25E3%2581%2597%25E3%2581%25A6%25E3%2581%258A%25E3%2581%258D%25E3%2581%259F%25E3%2581%2584%25E3%2580%2581ES2016%25E4%25BB%25A5%25E9%2599%258D%25E3%2581%25AE%25E3%2583%25A2%25E3%2583%2580%25E3%2583%25B3JavaScript%25E5%2586%258D%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:xiao%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VjOTA1OThlNjEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%259C%25E3%2582%25A6%25E3%2582%25BA%2520%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UyMDViMjk5ZjEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>xiao</dc:creator></item><item><title><![CDATA[【js】canvasに格子状の線を時間差で描く]]></title><description><![CDATA[
+]]></description><link>https://zenn.dev/tonkachi/articles/4181181f55124a</link><guid isPermaLink="true">https://zenn.dev/tonkachi/articles/4181181f55124a</guid><pubDate>Thu, 28 Aug 2025 08:06:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fFShIiPE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590js%25E3%2580%2591canvas%25E3%2581%25AB%25E6%25A0%25BC%25E5%25AD%2590%25E7%258A%25B6%25E3%2581%25AE%25E7%25B7%259A%25E3%2582%2592%25E6%2599%2582%25E9%2596%2593%25E5%25B7%25AE%25E3%2581%25A7%25E6%258F%258F%25E3%2581%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:TONKACHI%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSms2NkhqbndManU3TUxjWVQ2cXpnalRrQjZoelE1bi14NWFvUU5QLTdVLWw5OENTMi09czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TONKACHI</dc:creator></item><item><title><![CDATA[【alpine.js】アコーディオン]]></title><description><![CDATA[
+]]></description><link>https://zenn.dev/tonkachi/articles/d3e85d1e6c30bc</link><guid isPermaLink="true">https://zenn.dev/tonkachi/articles/d3e85d1e6c30bc</guid><pubDate>Thu, 28 Aug 2025 06:48:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Tr6P8w0z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590alpine.js%25E3%2580%2591%25E3%2582%25A2%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25AA%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:TONKACHI%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSms2NkhqbndManU3TUxjWVQ2cXpnalRrQjZoelE1bi14NWFvUU5QLTdVLWw5OENTMi09czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TONKACHI</dc:creator></item><item><title><![CDATA[【gsap/css】scrollTriggerでactive付与し下線アニメーション]]></title><description><![CDATA[
+]]></description><link>https://zenn.dev/tonkachi/articles/57ea47768c662e</link><guid isPermaLink="true">https://zenn.dev/tonkachi/articles/57ea47768c662e</guid><pubDate>Thu, 28 Aug 2025 05:45:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sxCIRPZ2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590gsap%252Fcss%25E3%2580%2591scrollTrigger%25E3%2581%25A7active%25E4%25BB%2598%25E4%25B8%258E%25E3%2581%2597%25E4%25B8%258B%25E7%25B7%259A%25E3%2582%25A2%25E3%2583%258B%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:TONKACHI%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSms2NkhqbndManU3TUxjWVQ2cXpnalRrQjZoelE1bi14NWFvUU5QLTdVLWw5OENTMi09czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TONKACHI</dc:creator></item><item><title><![CDATA[【gsap】scrollTriggerとSplitTextで1文字ずつアニメーションさせる]]></title><description><![CDATA[
+
+ HTML
+    &lt;div class={`${css.title} fv_title`}&gt;
+      FIRST LINE&lt;br /&gt;
+      SECOND LINE&lt;br /&gt;
+      THIRD LINE
+    &lt;/div&gt;
+
+
+ js import
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import { SplitText } from 'gsap/SplitText';
+
+ js...]]></description><link>https://zenn.dev/tonkachi/articles/c149d5f19199ca</link><guid isPermaLink="true">https://zenn.dev/tonkachi/articles/c149d5f19199ca</guid><pubDate>Thu, 28 Aug 2025 02:28:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6mRTD9NO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590gsap%25E3%2580%2591scrollTrigger%25E3%2581%25A8SplitText%25E3%2581%25A71%25E6%2596%2587%25E5%25AD%2597%25E3%2581%259A%25E3%2581%25A4%25E3%2582%25A2%25E3%2583%258B%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:TONKACHI%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSms2NkhqbndManU3TUxjWVQ2cXpnalRrQjZoelE1bi14NWFvUU5QLTdVLWw5OENTMi09czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TONKACHI</dc:creator></item><item><title><![CDATA[【gsap】ページ内スクロールのナビゲーションにカレントを付与する]]></title><description><![CDATA[
+
+ navの設定
+      &lt;div class={`${css.nav_block} sticky_block`}&gt;
+        &lt;ul class={`${css.nav} nav`}&gt;
+          &lt;li&gt;
+            &lt;a href="#section1" id="navitem1"&gt; 01- xxxx &lt;/a&gt;
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;a href="#section2" id="navitem2"...]]></description><link>https://zenn.dev/tonkachi/articles/d30c9cff57e751</link><guid isPermaLink="true">https://zenn.dev/tonkachi/articles/d30c9cff57e751</guid><pubDate>Thu, 28 Aug 2025 02:21:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nGAnrP2F--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590gsap%25E3%2580%2591%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E5%2586%2585%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25AE%25E3%2583%258A%25E3%2583%2593%25E3%2582%25B2%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AB%25E3%2582%25AB%25E3%2583%25AC%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592%25E4%25BB%2598%25E4%25B8%258E%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:TONKACHI%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSms2NkhqbndManU3TUxjWVQ2cXpnalRrQjZoelE1bi14NWFvUU5QLTdVLWw5OENTMi09czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TONKACHI</dc:creator></item><item><title><![CDATA[【gsap・lenis】慣性スクロール]]></title><description><![CDATA[SITE
+
+ install
+bun install lenis
+or
+&lt;script src="https://unpkg.com/lenis@1.3.3/dist/lenis.min.js"&gt;&lt;/script&gt; 
+
+ 設定
+@import 'lenis/dist/lenis.css';
+or
+&lt;link rel="stylesheet" href="https://unpkg.com/lenis@1.3.3/dist/lenis.css"&gt;
+
+ gsap-scrolltriggerと一緒に設定する
+  window.addEventListener...]]></description><link>https://zenn.dev/tonkachi/articles/8d0176e92d25f1</link><guid isPermaLink="true">https://zenn.dev/tonkachi/articles/8d0176e92d25f1</guid><pubDate>Thu, 28 Aug 2025 02:13:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Wp1j6w0C--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590gsap%25E3%2583%25BBlenis%25E3%2580%2591%25E6%2585%25A3%25E6%2580%25A7%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:TONKACHI%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSms2NkhqbndManU3TUxjWVQ2cXpnalRrQjZoelE1bi14NWFvUU5QLTdVLWw5OENTMi09czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TONKACHI</dc:creator></item><item><title><![CDATA[サインアップ画面を作成してみた]]></title><description><![CDATA[
+ 関連記事
+https://zenn.dev/shunsuke_stack/articles/3b7759f0053ca6
+https://zenn.dev/shunsuke_stack/articles/bdf5b784bd6f8b
+
+ 画面の完成系
+
+
+ログインのテキストボタンはログイン画面に戻る
+入力項目に関してはユーザ認証コンポーネントを活用
+パスワードの入力に6文字以上のバリデーションを追加
+サインアップ完了の際はログイン画面に遷移する
+
+
+ FirebaseのcreateUserWithEmailAndPasswordメソッドについて
+createUserWithEmail...]]></description><link>https://zenn.dev/shunsuke_stack/articles/88dedd7c5a2341</link><guid isPermaLink="true">https://zenn.dev/shunsuke_stack/articles/88dedd7c5a2341</guid><pubDate>Thu, 28 Aug 2025 01:02:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cyZhYt_X--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E7%2594%25BB%25E9%259D%25A2%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Nakajima.js%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFhZmNlYzMzOWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Nakajima.js</dc:creator></item><item><title><![CDATA[【ポートフォリオ 04】JavaScriptで海外旅行スポットサイト風ページを作成 ~DOM操作とクラス設計を実践]]></title><description><![CDATA[
+ はじめに
+現在、未経験からバックエンドエンジニアを目指し、RecursionCSというコンピュータサイエンスの基礎をプロジェクトを通じて学習できるサイトを使用して、学習しています。
+そのプロジェクトの一環で、JavaScriptを使ってDOM操作を行なうプロジェクトを自分専用にカスタマイズし、実際に訪れたことがある海外の観光スポットをまとめました。
+この記事では、実際にDOM操作・連想配列・オブジェクトを使って作成したポートフォリオについて紹介していきます。
+※ なお、RecursionCSのプロジェクトでは、『Emotion Onomatopoeia Dictionary』というプ...]]></description><link>https://zenn.dev/mabo23/articles/406456b5c598d1</link><guid isPermaLink="true">https://zenn.dev/mabo23/articles/406456b5c598d1</guid><pubDate>Thu, 28 Aug 2025 00:52:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--M8AlWXqT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AA%25E3%2582%25AA%252004%25E3%2580%2591JavaScript%25E3%2581%25A7%25E6%25B5%25B7%25E5%25A4%2596%25E6%2597%2585%25E8%25A1%258C%25E3%2582%25B9%25E3%2583%259D%25E3%2583%2583%25E3%2583%2588%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E9%25A2%25A8%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%2520%7EDOM%25E6%2593%258D%25E4%25BD%259C%25E3%2581%25A8%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E8%25A8%25AD%25E8%25A8%2588%25E3%2582%2592%25E5%25AE%259F%25E8%25B7%25B5%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mabo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQzM2ZhMmVkZDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mabo</dc:creator></item></channel></rss>
