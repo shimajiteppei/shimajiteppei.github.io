@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 01 Sep 2025 11:34:36 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[PythonとBeautifulSoupで作る、基本のWebスクレイピング実践ガイド]]></title><description><![CDATA[
+ はじめに
+Webサイトから特定の情報を自動で収集する「Webスクレイピング」。APIが提供されていないサイトの情報を取得したい場合などに非常に強力な技術です。
+この記事では、自身の書き溜めていたメモを元に、Pythonの定番ライブラリであるrequestsとBeautifulSoupを使った、最も基本的なWebスクレイピングの手順を解説します。
+
+ 必要なライブラリ
+まずは、必要なライブラリをインストールします。
+pip install requests beautifulsoup4
+
+
+requests: HTTPリクエストを簡単に送信するためのライブラリ
+
+BeautifulSo...]]></description><link>https://zenn.dev/meantix/articles/3903a0a10b481e</link><guid isPermaLink="true">https://zenn.dev/meantix/articles/3903a0a10b481e</guid><pubDate>Mon, 01 Sep 2025 11:01:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pDHbdOSX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A8BeautifulSoup%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%25E3%2580%2581%25E5%259F%25BA%25E6%259C%25AC%25E3%2581%25AEWeb%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AC%25E3%2582%25A4%25E3%2583%2594%25E3%2583%25B3%25E3%2582%25B0%25E5%25AE%259F%25E8%25B7%25B5%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:meantix%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvbS5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>meantix</dc:creator></item><item><title><![CDATA[C/C++の世界に閉じこもっていたオジサンがPythonに触れてみる 　~基礎編~ 第3/10回]]></title><description><![CDATA[
+ はじめに
+こんにちは、NTTデータに勤務する一人のオジサンです。
+これまでC/C++言語を使って、がっつりとポインタやら参照やらに向き合いながら、プログラムを書いてきました。構造体と仲良くなり、クラスに振り回され、newとdeleteに責任を持つ。そんな人生でした。
+しかし時代は変わり、AIだ、データサイエンスだ、機械学習だと騒がれる中、「とりあえずPythonに触れないとまずい」という危機感に駆られて、Pythonの世界へ足を踏み入れた。。。
+そんなオジサンの独り言です。
+
+ 型定義のない世界に立ちすくむ
+早速Pythonのコードを書いてみることにする。
+// cpp
+int x ...]]></description><link>https://zenn.dev/nttdata_tech/articles/b5b597856b0321</link><guid isPermaLink="true">https://zenn.dev/nttdata_tech/articles/b5b597856b0321</guid><pubDate>Mon, 01 Sep 2025 09:18:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--r-9rB51_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:C%252FC%252B%252B%25E3%2581%25AE%25E4%25B8%2596%25E7%2595%258C%25E3%2581%25AB%25E9%2596%2589%25E3%2581%2598%25E3%2581%2593%25E3%2582%2582%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2581%259F%25E3%2582%25AA%25E3%2582%25B8%25E3%2582%25B5%25E3%2583%25B3%25E3%2581%258CPython%25E3%2581%25AB%25E8%25A7%25A6%25E3%2582%258C%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2520%25E3%2580%2580%7E%25E5%259F%25BA%25E7%25A4%258E%25E7%25B7%25A8%7E%2520%25E7%25AC%25AC3%252F10%25E5%259B%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Eiichi%2520Shimizu%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q1ZjRhYzE4MTIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:NTT%2520DATA%2520TECH%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZS5wbmc=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Eiichi Shimizu</dc:creator></item><item><title><![CDATA[Gemini CLIとペアプロして、天気予報ツールを開発してみた]]></title><description><![CDATA[
+ はじめに
+この記事では、GoogleのAIアシスタントであるGemini CLIと対話しながら、一つのツールを開発していくプロセスを、実際の開発記としてご紹介します。
+今回作成するのは、「気象庁のデータとGemini APIを使って未来の天気を予測するツール」です。RaspberryPi上で動作させ、最終的にはHTMLでレポートを出力するところまでを目指します。
+AIとペアプログラミングをすると、開発がどのように進むのか？ どんなエラーに遭遇し、どう解決していくのか？
+そのリアルな過程を追体験できるような記事になっています。
+
+ 主役紹介：Gemini CLI
+この記事のもう一人の主...]]></description><link>https://zenn.dev/meantix/articles/b170968f250737</link><guid isPermaLink="true">https://zenn.dev/meantix/articles/b170968f250737</guid><pubDate>Mon, 01 Sep 2025 08:53:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xtAoMOjH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Gemini%2520CLI%25E3%2581%25A8%25E3%2583%259A%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AD%25E3%2581%2597%25E3%2581%25A6%25E3%2580%2581%25E5%25A4%25A9%25E6%25B0%2597%25E4%25BA%2588%25E5%25A0%25B1%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:meantix%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvbS5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>meantix</dc:creator></item><item><title><![CDATA[学習記録_Python実践レシピ(第1章、第18章)]]></title><description><![CDATA[
+ 1. 仮想環境と Python バージョン
+
+ 仮想環境の作成
+python3 -m venv .venv
+
+実行したときの Python 実行ファイル をコピーして .venv 内に環境を作る
+「ディレクトリの階層」は関係なく、実行に使った Python のバージョン がその仮想環境で使われる
+
+例：
+$ python3 --version
+Python 3.11.8
+$ python3 -m venv .venv
+→ この .venv では Python 3.11.8 が使われる
+
+
+ 2. Linuxコマンド
+
+
+which python → どのパスの Python が実行さ...]]></description><link>https://zenn.dev/r3b8bx2/articles/114a9cfa9218c5</link><guid isPermaLink="true">https://zenn.dev/r3b8bx2/articles/114a9cfa9218c5</guid><pubDate>Mon, 01 Sep 2025 07:30:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PzwQJ2bI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25AD%25A6%25E7%25BF%2592%25E8%25A8%2598%25E9%258C%25B2_Python%25E5%25AE%259F%25E8%25B7%25B5%25E3%2583%25AC%25E3%2582%25B7%25E3%2583%2594%2528%25E7%25AC%25AC1%25E7%25AB%25A0%25E3%2580%2581%25E7%25AC%25AC18%25E7%25AB%25A0%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:R%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VjZjI1ZjY2YzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>R</dc:creator></item><item><title><![CDATA[学習記録_Python実践レシピ(第11章、第13章、第14章、第17章)]]></title><description><![CDATA[
+ 1. pathlib（パス操作）
+
+ 1-1. 純粋パス（Pure paths）
+
+
+PurePath は OS に依存せず、パス文字列を操作するだけ。
+実際のファイルやディレクトリが存在していなくても操作可能。
+I/O を伴わないため、文字列操作感覚で使える。
+
+from pathlib import PurePath
+
+p = PurePath("folder/subfolder/file.txt")
+print(p.parent)  # folder/subfolder
+print(p.name)    # file.txt
+print(p.suffix)  # .txt
+
+ ...]]></description><link>https://zenn.dev/r3b8bx2/articles/5853a149e2efa0</link><guid isPermaLink="true">https://zenn.dev/r3b8bx2/articles/5853a149e2efa0</guid><pubDate>Mon, 01 Sep 2025 07:27:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--c099T6wI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25AD%25A6%25E7%25BF%2592%25E8%25A8%2598%25E9%258C%25B2_Python%25E5%25AE%259F%25E8%25B7%25B5%25E3%2583%25AC%25E3%2582%25B7%25E3%2583%2594%2528%25E7%25AC%25AC11%25E7%25AB%25A0%25E3%2580%2581%25E7%25AC%25AC13%25E7%25AB%25A0%25E3%2580%2581%25E7%25AC%25AC14%25E7%25AB%25A0%25E3%2580%2581%25E7%25AC%25AC17%25E7%25AB%25A0%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:R%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VjZjI1ZjY2YzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>R</dc:creator></item><item><title><![CDATA[「Pandas使うよりPolarsの方がいいよ」は本当かもね？？]]></title><description><![CDATA[こんにちは☀️
+TRUSTART株式会社のみつです！
+最近は、大きめなデータを扱うことが多いです。
+そんな中、先輩エンジニアにpandasよりもPolarsの方がいいという話を聞き、Polarsを使うようになったんですが、「本当に？？」という気持ちもどこかにありました。（自分の知らないもの恐怖症）
+実際に使ってみるとすごく早い気がして、いいじゃん！や使う中での学びもあり、少しまとめてみた記事になります。
+
+ 😕扱うデータが重すぎる
+
+扱っているデータは、本当に大きくPC壊れちゃうんじゃないかと思うぐらいです。
+数十万件〜数百万件のデータは、普通にある。
+数千万件のデータだって、至る所に。...]]></description><link>https://zenn.dev/trustart_dev/articles/92197b5069c265</link><guid isPermaLink="true">https://zenn.dev/trustart_dev/articles/92197b5069c265</guid><pubDate>Mon, 01 Sep 2025 04:15:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WXEAPTCJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258CPandas%25E4%25BD%25BF%25E3%2581%2586%25E3%2582%2588%25E3%2582%258APolars%25E3%2581%25AE%25E6%2596%25B9%25E3%2581%258C%25E3%2581%2584%25E3%2581%2584%25E3%2582%2588%25E3%2580%258D%25E3%2581%25AF%25E6%259C%25AC%25E5%25BD%2593%25E3%2581%258B%25E3%2582%2582%25E3%2581%25AD%25EF%25BC%259F%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:mi2__user%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU4Y2I1MTc4ODAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:TRUSTART%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI4Mzg0MzQ2ZDEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mi2__user</dc:creator></item><item><title><![CDATA[【デザインパターン】Pythonにおけるファクトリーメソッドの整理]]></title><description><![CDATA[
+ はじめに
+ソフトウェア開発において、オブジェクトをどのように生成するかは、コードの柔軟性や拡張性に大きな影響を与える。機能追加のたびに、オブジェクト生成部分のコードをあちこち修正するのは避けたい。
+ここでは、オブジェクト生成にまつわる問題を解決するためのデザインパターン、「ファクトリーメソッド (Factory Method)」パターンについて、自身の理解を整理し、備忘録としてまとめておく。
+
+ 背景と課題
+ファクトリーメソッドがない場合に、どのような問題が起こりうるかを整理する。
+例えば、様々な形式でレポートを出力する機能を考える。最初はPDF形式のみだったとする。
+# repor...]]></description><link>https://zenn.dev/moldy_pug/articles/factory_method</link><guid isPermaLink="true">https://zenn.dev/moldy_pug/articles/factory_method</guid><pubDate>Mon, 01 Sep 2025 04:09:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fSR-ekts--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2583%2587%25E3%2582%25B6%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%25E3%2580%2591Python%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E3%2581%25AE%25E6%2595%25B4%25E7%2590%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sato%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0MjNlZTQwOTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sato</dc:creator></item><item><title><![CDATA[開催報告：【第一回】ケモインフォマティクス×ハッカソン合宿 in 横浜]]></title><description><![CDATA[
+
+ 協働で挑むケモインフォマティクス：合宿活動報告
+AIやデータサイエンスの進展により、化学研究のアプローチは大きく変化しています。中でもケモインフォマティクスは、新規分子の設計、物性予測、創薬支援など、多様な分野でその存在感を高めており、研究者にとって不可欠なツールとなりつつあります。
+本合宿では、ケモインフォマティクスの知見を実践的に活用しながら、参加者同士が協力して課題に取り組むハッカソン形式のセッションを実施しました。各自の専門性や視点を持ち寄り、短期間でアイデアを練り上げて成果を創出する過程は、まさに協働の力を実感する貴重な機会となりました。
+また、合宿の冒頭には、参加者によ...]]></description><link>https://zenn.dev/poclab_techblog/articles/3e6a35c3da3d72</link><guid isPermaLink="true">https://zenn.dev/poclab_techblog/articles/3e6a35c3da3d72</guid><pubDate>Mon, 01 Sep 2025 02:05:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DEaXXsJF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%2596%258B%25E5%2582%25AC%25E5%25A0%25B1%25E5%2591%258A%25EF%25BC%259A%25E3%2580%2590%25E7%25AC%25AC%25E4%25B8%2580%25E5%259B%259E%25E3%2580%2591%25E3%2582%25B1%25E3%2583%25A2%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2595%25E3%2582%25A9%25E3%2583%259E%25E3%2583%2586%25E3%2582%25A3%25E3%2582%25AF%25E3%2582%25B9%25C3%2597%25E3%2583%258F%25E3%2583%2583%25E3%2582%25AB%25E3%2582%25BD%25E3%2583%25B3%25E5%2590%2588%25E5%25AE%25BF%2520in%2520%25E6%25A8%25AA%25E6%25B5%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Chihiro%2520Tada%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhlNDdlZDRkNDIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Poclab%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc5NjIwNjRjNmQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Chihiro Tada</dc:creator></item><item><title><![CDATA[WebSocketとHTTPショートコネクションの技術進化と比較分析]]></title><description><![CDATA[
+ WebSocketとHTTPショートコネクションの技術進化と比較分析
+現代のWebアプリケーションにおいて、クライアントとサーバー間の通信方式は、アプリケーションのパフォーマンスとユーザーエクスペリエンスに直接的な影響を与えます。初期の静的Webページから今日のリアルタイムコラボレーションツールまで、通信プロトコルの進化は常に「効率性」と「リアルタイム性」という2つのコアニーズを中心に展開されてきました。本稿では、HTTPショートコネクション、HTTPロングコネクション及びその派生技術を深く分析し、最終的にWebSocketの設計理念とアプリケーションシナリオを比較します。また、Py...]]></description><link>https://zenn.dev/taiga_yamamoto/articles/39d2cc9d4a1487</link><guid isPermaLink="true">https://zenn.dev/taiga_yamamoto/articles/39d2cc9d4a1487</guid><pubDate>Sun, 31 Aug 2025 14:09:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sTPTGUi4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WebSocket%25E3%2581%25A8HTTP%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25B3%25E3%2583%258D%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AE%25E6%258A%2580%25E8%25A1%2593%25E9%2580%25B2%25E5%258C%2596%25E3%2581%25A8%25E6%25AF%2594%25E8%25BC%2583%25E5%2588%2586%25E6%259E%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Taiga%2520Yamamoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGNWMEs0N0tCSkhhMXpRV3lLNm0tdjh1X1U4N1VPQ2xBazBVOVpubVF5dWZBLT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Taiga Yamamoto</dc:creator></item><item><title><![CDATA[PythonでL9直交表を使ったコンジョイント分析 #2 – 効用値計算編（ファーストチョイス追加）]]></title><description><![CDATA[
+ 📌はじめに
+これまでに推定した効用値（part-worth）は「数字の表」にとどまらず、実際に予測シェア（占有率）を計算するために使えます。
+その一番シンプルな方法が ファーストチョイス（First Choice） です。
+各回答者が「効用値が最も高いプロファイルを1つ選ぶ」と仮定して集計すると、
+選択肢の人気度がすぐにわかります。
+PythonでL9直交表を使ったコンジョイント分析#2 – 効用値計算編
+のコードにファーストチョイスを追加してみます。
+
+
+ 📌前回のおさらい
+コード#============================================
+# 0. ...]]></description><link>https://zenn.dev/swatchp/articles/029079e9bed998</link><guid isPermaLink="true">https://zenn.dev/swatchp/articles/029079e9bed998</guid><pubDate>Sun, 31 Aug 2025 14:08:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bmdtSVCK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7L9%25E7%259B%25B4%25E4%25BA%25A4%25E8%25A1%25A8%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E3%2582%25B3%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%25A7%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2588%25E5%2588%2586%25E6%259E%2590%2520%25232%2520%25E2%2580%2593%2520%25E5%258A%25B9%25E7%2594%25A8%25E5%2580%25A4%25E8%25A8%2588%25E7%25AE%2597%25E7%25B7%25A8%25EF%25BC%2588%25E3%2583%2595%25E3%2582%25A1%25E3%2583%25BC%25E3%2582%25B9%25E3%2583%2588%25E3%2583%2581%25E3%2583%25A7%25E3%2582%25A4%25E3%2582%25B9%25E8%25BF%25BD%25E5%258A%25A0%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Swatch-p%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5YTg2ZTBmZjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Swatch-p</dc:creator></item><item><title><![CDATA[【AIで執筆】AWS Glueで汚いデータを綺麗にするETLパイプラインを作ってみた]]></title><description><![CDATA[
+ 注意事項
+データ加工絡みの案件をよく見るから勉強する＆過去にAWS Glueのテスターをした経験を思い出すがてら、AWS Glueの処理を作成してみました。
+Claude codeを使用して以下のプロジェクトを作成しました。
+https://github.com/dbd-fish/glue-test
+最後にAIに以下の記事を執筆してもらい、私が軽く添削しました。
+
+ AWS Glueで汚いデータを綺麗にするETLパイプラインを作ってみた
+
+ はじめに
+最近、仕事でデータがめちゃくちゃ汚くて困ってました。
+日付は「2025-01-20」だったり「20/01/2025」だったり「2025...]]></description><link>https://zenn.dev/dbd_fish/articles/b2782346f03e66</link><guid isPermaLink="true">https://zenn.dev/dbd_fish/articles/b2782346f03e66</guid><pubDate>Sun, 31 Aug 2025 13:42:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Jm7BioKH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590AI%25E3%2581%25A7%25E5%259F%25B7%25E7%25AD%2586%25E3%2580%2591AWS%2520Glue%25E3%2581%25A7%25E6%25B1%259A%25E3%2581%2584%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E7%25B6%25BA%25E9%25BA%2597%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258BETL%25E3%2583%2591%25E3%2582%25A4%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%258F%25A4%25E6%25B5%25B7%25E3%2580%2580%25E5%25B4%259A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIyMmY4MjFjNDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>古海　崚</dc:creator></item><item><title><![CDATA[Transformer に触れてみる (1)]]></title><description><![CDATA[
+ 目的
+
+
+機械学習エンジニアのためのTransformers をパラパラめくってもさっぱり理解できる気がしない。
+arXiv:1706.03762 Attention Is All You Need のいつもの N 字型のアーキテクチャを見るのはもう飽きた。
+
+のを何とかしたい。
+
+ Vibe coding
+そこで時代の波に乗って、GPT-4.1 にお願いして vibe coding で学習素材を作らせた。勿論生産性爆上がりなので一気に凄いものができてしまった・・・ということは勿論なくて、試行錯誤を繰り返し何時間もリテイクしまくって、漸く動くようになった。勿論自分でも調べて、「エラー...]]></description><link>https://zenn.dev/derwind/articles/dwd-transformer01</link><guid isPermaLink="true">https://zenn.dev/derwind/articles/dwd-transformer01</guid><pubDate>Sun, 31 Aug 2025 12:53:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nTTuh7hO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Transformer%2520%25E3%2581%25AB%25E8%25A7%25A6%25E3%2582%258C%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2520%25281%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:derwind%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFiNjBiZDcwMDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>derwind</dc:creator></item><item><title><![CDATA[はじめまして]]></title><description><![CDATA[はじめまして、SSzkです。
+この投稿がZennにおける初投稿となります。
+「これ、地味だけどちょっと便利かも...？」と思ってもらえるようなIT技術ネタのノウハウを発信してまいります。
+最近はPythonやPowershellを活用した業務効率化をちょくちょくやっており、まずはその切り口からマイペースに発信していきます。
+これからどうぞよろしくお願いします。
+Xやnoteでの発信やソフトウェアの販売もしております。
+併せてご愛顧いただけますと幸いです。
+https://lit.link/chottobenri
+]]></description><link>https://zenn.dev/chotto_benri/articles/7a280e8a5e3dda</link><guid isPermaLink="true">https://zenn.dev/chotto_benri/articles/7a280e8a5e3dda</guid><pubDate>Sun, 31 Aug 2025 11:46:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_Pkc9poA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25AF%25E3%2581%2598%25E3%2582%2581%25E3%2581%25BE%25E3%2581%2597%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SSzk%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JkYzJlMzk4MWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SSzk</dc:creator></item><item><title><![CDATA[LeetCodeを頑張るログ]]></title><description><![CDATA[!
+最終更新日：2025-08-31
+
+
+ 背景
+本記事は LeetCode を解きながら理解を整理し、進捗を記録していくシリーズです。
+案件の配属や転職時に技術面接を受ける機会が増えてきたため、その場に応じて対応できるよう理解を深めておきたいと思ったのがきっかけです。
+また、データ構造とアルゴリズムをしっかり学んでおくと、
+いいコードがわかったり、よくないコードの判断基準にもなるからとアドバイスを受けたことがきっかけでもあります。
+ずっと前から、競技プログラミングにも興味を持ち始めたというのもありますが...。
+※LeetCodeがなんぞやというのは他の記事でもいっぱい説明してあります...]]></description><link>https://zenn.dev/akagikouzanh/articles/f6c0c4498a44fb</link><guid isPermaLink="true">https://zenn.dev/akagikouzanh/articles/f6c0c4498a44fb</guid><pubDate>Sun, 31 Aug 2025 11:28:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rAf8jVYc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LeetCode%25E3%2582%2592%25E9%25A0%2591%25E5%25BC%25B5%25E3%2582%258B%25E3%2583%25AD%25E3%2582%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:akagikouzanh%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFlMmVlMTlkMmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>akagikouzanh</dc:creator></item><item><title><![CDATA[#1:LeetCode-TwoSumをやってみる]]></title><description><![CDATA[
+ 問題(翻訳)
+
+
+TwoSum (Difficulty: Easy)
+
+
+整数配列 nums と整数 target が与えられています。
+合計が target になるような 2 つの数のインデックス を返してください。
+各入力には 必ず 1 つの解 が存在すると仮定してよいものとします。
+同じ要素を 2 回使用することはできません。
+答えは 任意の順序 で返して構いません。
+
+
+ 制約
+
+
+ 2 &lt;= nums.length &lt;= 10^4 
+
+
+ -10^9 &lt;= nums[i] &lt;= 10^9 
+
+
+ -10^9 &lt;= target &lt;= 10...]]></description><link>https://zenn.dev/akagikouzanh/articles/731cb7a423502f</link><guid isPermaLink="true">https://zenn.dev/akagikouzanh/articles/731cb7a423502f</guid><pubDate>Sun, 31 Aug 2025 11:15:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1WRw6qDh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25231%253ALeetCode-TwoSum%25E3%2582%2592%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:akagikouzanh%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFlMmVlMTlkMmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>akagikouzanh</dc:creator></item><item><title><![CDATA[Cursorのターミナルでpyenvの設定が効かないとき]]></title><description><![CDATA[
+ 問題
+Cursorのターミナルでpyenvの設定が効かなかった。Cursorを再起動しても変わらない。
+macのターミナル
+$ python --version
+Python 3.10.16
+Cursorのターミナル
+$ python --version
+Python 3.12.2
+
+pyenv local 3.10.16 &amp;&amp; python --version
+Python 3.12.2
+
+ 解決策
+Cursorには独自のPythonの設定があるので、それを変更する。
+
+Cmd + Shift + P (Mac) または Ctrl + Shift + P (Wind...]]></description><link>https://zenn.dev/yuzutaro/articles/4d88f70e392854</link><guid isPermaLink="true">https://zenn.dev/yuzutaro/articles/4d88f70e392854</guid><pubDate>Sun, 31 Aug 2025 09:12:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6wayE-yv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Cursor%25E3%2581%25AE%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%259F%25E3%2583%258A%25E3%2583%25AB%25E3%2581%25A7pyenv%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%258C%25E5%258A%25B9%25E3%2581%258B%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25A8%25E3%2581%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%25A3%25E3%2581%258F%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcwMTQ2NTg5OGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たっくん</dc:creator></item><item><title><![CDATA[【Flask入門】Flaskでフォームを作って入力を受け取るまで（コード解説編）]]></title><description><![CDATA[
+ 【Flask入門】Flaskでフォームを作って入力を受け取るまで（コード解説編）
+前回の記事では「「Flask入門】Flaskでフォームを作って入力を受け取るまで」でフォームから入力を送信できるところまで作りました。
+今回はそのコードを1行ずつ解説していきます。
+
+
+ app.py の解説
+from flask import Flask, request, render_template
+flask ライブラリから必要な機能をインポートしています。
+
+
+Flask : アプリ本体を作るためのクラス
+
+request : フォームなどから送られたデータを受け取るためのオブジェクト
+
+r...]]></description><link>https://zenn.dev/abs_abe/articles/f282a21d1854d4</link><guid isPermaLink="true">https://zenn.dev/abs_abe/articles/f282a21d1854d4</guid><pubDate>Sun, 31 Aug 2025 07:31:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ia2EIPO6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Flask%25E5%2585%25A5%25E9%2596%2580%25E3%2580%2591Flask%25E3%2581%25A7%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E5%2585%25A5%25E5%258A%259B%25E3%2582%2592%25E5%258F%2597%25E3%2581%2591%25E5%258F%2596%25E3%2582%258B%25E3%2581%25BE%25E3%2581%25A7%25EF%25BC%2588%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E8%25A7%25A3%25E8%25AA%25AC%25E7%25B7%25A8%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEABS%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzgtcmdpOWVUVGJva09LTzlHai1xaGVOS1F2d2lmQ1NUQkN6ODM4dENETXhXWFVrOD1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>株式会社ABS</dc:creator></item><item><title><![CDATA[Vertex AI Pipelinesに入門してみよう]]></title><description><![CDATA[今回はVertex AI Pipelinesに入門するための最もシンプルなところを紹介しようと思います。
+
+ Vertex AI Pipelinesとは？
+Vertex AI Pipelinesは、MLのパイプラインを記述することができるサービスになります。MLワークフローをおーけストレートすることにより、データ準備からモデルの学習、モニタリングまで全て自動で行うことができるようになります。MLOpsを実現するためにはMLのライフサイクルを可能な限り自動化するための取り組みが必要であり、そのための手段としてとても有益なツールとなります。
+パイプラインを記述するためにはKubeflow P...]]></description><link>https://zenn.dev/akasan/articles/5697384428538b</link><guid isPermaLink="true">https://zenn.dev/akasan/articles/5697384428538b</guid><pubDate>Sun, 31 Aug 2025 07:18:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--stTreRXj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vertex%2520AI%2520Pipelines%25E3%2581%25AB%25E5%2585%25A5%25E9%2596%2580%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Akasan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNXJfNDFtel9OY3dPYUtMRE1vc09tbVB6YmxHM0V5N3lNZzI3QWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Akasan</dc:creator></item><item><title><![CDATA[【Azure OpenAI 40日】 Day10：Blob→Azure AI Searchで最小RAGを構築]]></title><description><![CDATA[
+ ✍️ TL;DR
+
+今日の到達点：Blobに置いたMarkdown/テキストを Indexer でSearchへ自動取り込みし、Pythonから検索ヒットを確認
+学び：
+
+RG再利用で資産を持ち越す運用が楽になる
+Index → Data Source → Indexer の順で作ると事故りにくい
+つまずきは「キー不一致」「不要設定」で起きやすいが最小構成で回避できる
+
+
+コスト：Search Freeで0円（不可ならBasicの時間課金/短時間）＋ Storageはほぼゼロ
+
+
+
+ 🧭 今日のゴール
+
+既存RG（Japan East）上で Blob → Search の最小RAG土...]]></description><link>https://zenn.dev/masau/articles/azure-openai-40days-day10-search-blob</link><guid isPermaLink="true">https://zenn.dev/masau/articles/azure-openai-40days-day10-search-blob</guid><pubDate>Sun, 31 Aug 2025 07:12:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KpiCiKHl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Azure%2520OpenAI%252040%25E6%2597%25A5%25E3%2580%2591%2520Day10%25EF%25BC%259ABlob%25E2%2586%2592Azure%2520AI%2520Search%25E3%2581%25A7%25E6%259C%2580%25E5%25B0%258FRAG%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:MasaU_Tech%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4NTZmODk1MmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>MasaU_Tech</dc:creator></item><item><title><![CDATA[【Flask入門】Flaskでフォームを作って入力を受け取るまで]]></title><description><![CDATA[この記事では、Flaskでフォームを作って入力を受け取るまでの手順をまとめます。
+コピペで動かすだけでなく、フォルダ構成からコードの意味まで理解していきます。
+
+
+ 1. フォルダ構成を準備する
+現在の app.py があるフォルダに templates というフォルダを作ります。
+その中に index.html を置きます。
+study-log/
+├── app.py
+└── templates/　←フォルダ追加
+└── index.html　←ファイル追加
+
+
+templates/ : HTMLファイルを置くフォルダ（Flaskのルール）
+
+index.html : トップページ用の...]]></description><link>https://zenn.dev/abs_abe/articles/676af8eeb73519</link><guid isPermaLink="true">https://zenn.dev/abs_abe/articles/676af8eeb73519</guid><pubDate>Sun, 31 Aug 2025 05:30:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--piFa675---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Flask%25E5%2585%25A5%25E9%2596%2580%25E3%2580%2591Flask%25E3%2581%25A7%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E5%2585%25A5%25E5%258A%259B%25E3%2582%2592%25E5%258F%2597%25E3%2581%2591%25E5%258F%2596%25E3%2582%258B%25E3%2581%25BE%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEABS%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzgtcmdpOWVUVGJva09LTzlHai1xaGVOS1F2d2lmQ1NUQkN6ODM4dENETXhXWFVrOD1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>株式会社ABS</dc:creator></item></channel></rss>
