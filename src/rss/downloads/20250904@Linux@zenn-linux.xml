@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 04 Sep 2025 11:40:37 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[PHPとfontforgeで実装するWebフォント変換サーバー]]></title><description><![CDATA[
+ はじめに
+Webサイトで好きなフォントを使いたい時、「Webフォント」は非常に強力な選択肢です。しかし、フォント形式にはOTF, TTF, WOFF, WOFF2, EOT, SVGなど様々な種類があり、クロスブラウザ対応を考えると複数の形式を用意する必要があって面倒ですよね。
+また、フォントファイルをサーバーにアップロードして変換ツールにかける、という作業も手間がかかります。
+この記事では、そんな手間を解消するために、PHPのプログラムからサーバーサイドでフォント形式を自動変換する仕組みを実装した際の知見を共有します。
+
+ やりたいこと
+
+ユーザーがフォームからOTFまたはTTF形...]]></description><link>https://zenn.dev/meantix/articles/6a843355b89f64</link><guid isPermaLink="true">https://zenn.dev/meantix/articles/6a843355b89f64</guid><pubDate>Thu, 04 Sep 2025 10:18:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ymlOr5yx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PHP%25E3%2581%25A8fontforge%25E3%2581%25A7%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258BWeb%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25B3%25E3%2583%2588%25E5%25A4%2589%25E6%258F%259B%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:meantix%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk0MmJjZjY3YmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>meantix</dc:creator></item><item><title><![CDATA[Linuxなら一時ファイルはunlinkで実現可能]]></title><description><![CDATA[一時ファイルを実現する方法としてunlinkを使った方法がある。
+openでファイルディスクリプタを取得した状態でunlinkすると、ファイルディスクリプタをcloseしたタイミングでファイルの削除されるのだ。
+unlinkはOSが持っているファイルへの参照を消すイメージで、そのファイルへの参照カウントが1減る。すでにopenしていた場合は、そのファイルディスクリプタが最後の参照になり、closeでファイルの参照カウントが0になるとファイルは削除される。
+以下、実験を行った。unlinkしておいた一時ファイルは自動的に消去されていることがわかる。
+$ ls 
+Makefile  main...]]></description><link>https://zenn.dev/hideki1217/articles/daf22f1b6bdb4e</link><guid isPermaLink="true">https://zenn.dev/hideki1217/articles/daf22f1b6bdb4e</guid><pubDate>Wed, 03 Sep 2025 00:56:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--j0hknG5s--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25AA%25E3%2582%2589%25E4%25B8%2580%25E6%2599%2582%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AFunlink%25E3%2581%25A7%25E5%25AE%259F%25E7%258F%25BE%25E5%258F%25AF%25E8%2583%25BD%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:h1de_n_n%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ3MWI5NzMyZTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>h1de_n_n</dc:creator></item><item><title><![CDATA[ロボット屋さんのためのUbuntuターミナル超入門]]></title><description><![CDATA[!
+この記事の一部はChatGPTを使用して書かれています。
+
+ROS Japan UG #59 研究教育におけるROSの活用にて、「ROSの初学者向けのコマンドのチートシートはありませんか？」→「思いつきません。作りましょう！」という質疑応答を見て、作ってみました。
+ChatGPT（無料版）に下地を出していただいて、私なりに足したり引いたりしたものになります。あまり時間をかけず作ったものですので、「これはいるでしょ！」「これはいらないのでは？」みたいなご意見があればZennのコメントやXなどでいただけますと大変助かります。
+
+ Ubuntu ターミナル チートシート
+
+ 🖥️ ターミナ...]]></description><link>https://zenn.dev/kimushun1101/articles/ros2-beginners-ubuntu-terminal</link><guid isPermaLink="true">https://zenn.dev/kimushun1101/articles/ros2-beginners-ubuntu-terminal</guid><pubDate>Tue, 02 Sep 2025 21:23:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--s0B0Sphp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AD%25E3%2583%259C%25E3%2583%2583%25E3%2583%2588%25E5%25B1%258B%25E3%2581%2595%25E3%2582%2593%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AEUbuntu%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%259F%25E3%2583%258A%25E3%2583%25AB%25E8%25B6%2585%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%259C%25A8%25E6%259D%2591%2520%25E9%25A7%25BF%25E4%25BB%258B%2520%252F%2520Shunsuke%2520K...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VjZWFjYzFhNTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>木村 駿介 / Shunsuke KIMURA</dc:creator></item><item><title><![CDATA[[Linux]: zshを初期設定用ウィザードのメモ]]></title><description><![CDATA[
+ [Linux]: zshを初期設定用ウィザードのメモ
+zshを初回起動すると以下のような設定ウィザードが起動するので意味などを調べたメモ
+
+ 設定ウィザード
+This is the Z Shell configuration function for new users,
+zsh-newuser-install.
+You are seeing this message because you have no zsh startup files
+(the files .zshenv, .zprofile, .zshrc, .zlogin in the directory
+~).  Th...]]></description><link>https://zenn.dev/mitate_gengaku/articles/linux-zsh-initialize-wizard</link><guid isPermaLink="true">https://zenn.dev/mitate_gengaku/articles/linux-zsh-initialize-wizard</guid><pubDate>Tue, 02 Sep 2025 13:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--c4gVDSx0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BLinux%255D%253A%2520zsh%25E3%2582%2592%25E5%2588%259D%25E6%259C%259F%25E8%25A8%25AD%25E5%25AE%259A%25E7%2594%25A8%25E3%2582%25A6%25E3%2582%25A3%25E3%2582%25B6%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25BE%25A1%25E6%25A5%25AF%25E7%258E%2584%25E5%25B6%25BD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0tQOVRYWHQ5Qm1BLVplcURoLWdxUHl4RVFjMmNsRkhSNk95XzVVSVVhPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>御楯玄嶽</dc:creator></item><item><title><![CDATA[もう迷わない！.bash_profileと.bashrcの使い分けと読み込み順のメモ]]></title><description><![CDATA[
+ はじめに
+Linux環境でCUIを使っていると、エイリアスや環境変数の設定で.bash_profileや.bashrcといったファイルを編集しますよね。
+しかし、「.bashrcにエイリアスを書いたのに、SSHでログインし直したら使えない…なぜ？」といった経験はありませんか？
+この記事では、自身のメモを元に、この2つのファイルがいつ、どのような順番で読み込まれるのか、そしてどのように使い分けるべきかを簡潔にまとめます。
+
+ 結論ファースト：シェルの種類で使い分ける
+まず結論です。
+
+
+.bash_profile: ログインシェルが起動する時に1回だけ読み込まれる。
+
+.bashrc:...]]></description><link>https://zenn.dev/meantix/articles/98a1678841de89</link><guid isPermaLink="true">https://zenn.dev/meantix/articles/98a1678841de89</guid><pubDate>Tue, 02 Sep 2025 12:04:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--He82EfAB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%2582%25E3%2581%2586%25E8%25BF%25B7%25E3%2582%258F%25E3%2581%25AA%25E3%2581%2584%25EF%25BC%2581.bash_profile%25E3%2581%25A8.bashrc%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E5%2588%2586%25E3%2581%2591%25E3%2581%25A8%25E8%25AA%25AD%25E3%2581%25BF%25E8%25BE%25BC%25E3%2581%25BF%25E9%25A0%2586%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:meantix%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk0MmJjZjY3YmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>meantix</dc:creator></item><item><title><![CDATA[【Linux】 tmpfs について]]></title><description><![CDATA[
+ はじめに
+df コマンドを使用すると以下のように出力されます。
+$ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        4.0M     0  4.0M   0% /dev
+tmpfs           475M     0  475M   0% /dev/shm
+tmpfs           190M  436K  190M   1% /run
+/dev/xvda1       20G  4.1G   16G  21% /
+tmpfs           475M     0  475M ...]]></description><link>https://zenn.dev/eiken/articles/6eb1751d32dc02</link><guid isPermaLink="true">https://zenn.dev/eiken/articles/6eb1751d32dc02</guid><pubDate>Tue, 02 Sep 2025 01:33:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XVxyEbcO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Linux%25E3%2580%2591%2520tmpfs%2520%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:enjine%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZS5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>enjine</dc:creator></item><item><title><![CDATA[Proxmox VE のマシンのディスクを縮小(xfs, LVM, LUKS)]]></title><description><![CDATA[RHEL マシンがあまりディスクスペースを使っていないため、ディスクを縮小しました。
+自分用のメモです。
+
+ 今回行うこと
+32GB のディスクを 16GB に縮小します。
+16GB のディスクにデータをコピーして、32GB のディスクを削除することで縮小を実現します。
+Proxmox VE 上で lvreduce を使って縮小はしません。
+
+ 環境
+OS: Rocky Linux 10.0
+Boot: UEFI
+FDE (LVM on LUKS): yes
+root@localhost:~# df -h /
+Filesystem           Size  Used Avail U...]]></description><link>https://zenn.dev/bad_company/articles/8790fe8bda6b74</link><guid isPermaLink="true">https://zenn.dev/bad_company/articles/8790fe8bda6b74</guid><pubDate>Mon, 01 Sep 2025 16:02:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DMX2J-gT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Proxmox%2520VE%2520%25E3%2581%25AE%25E3%2583%259E%25E3%2582%25B7%25E3%2583%25B3%25E3%2581%25AE%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25B9%25E3%2582%25AF%25E3%2582%2592%25E7%25B8%25AE%25E5%25B0%258F%2528xfs%252C%2520LVM%252C%2520LUKS%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:warspitenavy%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLmRldi9pbWFnZXMvZGVmYXVsdC1wdWJsaWNhdGlvbi1hdmF0YXIucG5n%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2590%25E3%2583%2583%25E3%2583%2589%25E3%2582%25AB%25E3%2583%25B3%25E3%2583%2591%25E3%2583%258B%25E3%2583%25BC%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NlNzRkZjhkOGEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>warspitenavy</dc:creator></item><item><title><![CDATA[Linux→Windows11にSSH公開鍵認証で接続する]]></title><description><![CDATA[
+ はじめに
+LinuxからWindowsへのSSH接続を環境設定含めてやってみました。
+
+ 環境
+Linux、Windowsの環境は以下の記事で作成した仮想環境を使用します。
+https://zenn.dev/marogram/articles/d7244dc3192d7f
+https://zenn.dev/marogram/articles/58163a05b3461d
+また、WindowsのOpenSSHサーバーの有効化は以下の記事になります。
+https://zenn.dev/marogram/articles/5ab3344fd0170f
+
+ 事前準備(Windows/ホスト)...]]></description><link>https://zenn.dev/marogram/articles/1c50c4b00bd9e9</link><guid isPermaLink="true">https://zenn.dev/marogram/articles/1c50c4b00bd9e9</guid><pubDate>Mon, 01 Sep 2025 14:12:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cOYIisD5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E2%2586%2592Windows11%25E3%2581%25ABSSH%25E5%2585%25AC%25E9%2596%258B%25E9%258D%25B5%25E8%25AA%258D%25E8%25A8%25BC%25E3%2581%25A7%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:maho%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk0ZGI3OTkyMmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>maho</dc:creator></item><item><title><![CDATA[デバイスドライバ開発に入門してみた]]></title><description><![CDATA[
+ 概要
+最近、デバイスドライバ関係の業務にアサインされました。
+理解を深めるため、簡単なデバイスドライバを実装してみました。
+今回実装したのは、キャラクタデバイスです。また、最小の実装を試しただけで、実際のハードの制御はしていません。
+他にもブロックデバイス、ネットワークデバイスがありますが、今回は触れません。
+
+ 動作環境
+本記事では、以下の環境で動作を確認しています。
+
+カーネル : 5.15.0-1084-raspi
+OS : Ubuntu 22.04
+カーネルヘッダがインストール済み
+
+例: Debian/Ubuntu: sudo apt-get install build-e...]]></description><link>https://zenn.dev/shu_kitamura/articles/3829dc564b007b</link><guid isPermaLink="true">https://zenn.dev/shu_kitamura/articles/3829dc564b007b</guid><pubDate>Sun, 31 Aug 2025 15:55:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--t7TzJWr8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2583%2590%25E3%2582%25A4%25E3%2582%25B9%25E3%2583%2589%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2590%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AB%25E5%2585%25A5%25E9%2596%2580%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Skit%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FjZjhiN2M4YmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Skit</dc:creator></item><item><title><![CDATA[WindowsでAWS LambdaにデプロイするZIPファイルを作ったらエラーになった]]></title><description><![CDATA[
+ 背景
+前回はPythonでも簡単にクロスビルドができ、AWS Lambda Web Adapter(LWA)と合わせるとAWS Lambdaの開発が非常にはかどるということを紹介しました。
+https://zenn.dev/lucidfrontier45/articles/dd38e25209ebca
+この方法でZIPファイルを作成し、LWAのレポジトリに書かれている設定
+https://github.com/awslabs/aws-lambda-web-adapter?tab=readme-ov-file#lambda-functions-packaged-as-zip-packa...]]></description><link>https://zenn.dev/lucidfrontier45/articles/4ade72800eb829</link><guid isPermaLink="true">https://zenn.dev/lucidfrontier45/articles/4ade72800eb829</guid><pubDate>Sun, 31 Aug 2025 14:55:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wQaHxkq6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Windows%25E3%2581%25A7AWS%2520Lambda%25E3%2581%25AB%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%2599%25E3%2582%258BZIP%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E3%2582%2589%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:lucidfrontier45%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcxY2RkYzI0MmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>lucidfrontier45</dc:creator></item><item><title><![CDATA[Linux環境構築]]></title><description><![CDATA[https://zenn.dev/t_hada/scraps/3abbdd5db687b3
+この理解を自分の言葉をまとめる。
+https://zenn.dev/articles/5f7937502fb53e/edit
+GPTにまとめさせたのとどっちがいいのか勝負だ。
+
+ LinuxにPythonを入れる
+ここではLinuxにPythonをいれて一番基礎の環境構築をすることを目的とする。ついでに、現代の必須環境であるLLM, Gemini CLIもいれる。
+
+ ターミナルを開く
+まずは兎にも角にもターミナルを開くことが大事。今回はSSHで既に環境構築された端末から入る。この場合SSHを繋い...]]></description><link>https://zenn.dev/t_hada/articles/bcd1f6679e3d74</link><guid isPermaLink="true">https://zenn.dev/t_hada/articles/bcd1f6679e3d74</guid><pubDate>Sat, 30 Aug 2025 11:39:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IUISf2PG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Linux%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tsubasa%2520Hada%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSW9vSFBmTUtDVW9jRTc0MGIyU3J1MkVCWDJlRnlOcXRrcjZhMko5eElvN1J1X3RkR0Y9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tsubasa Hada</dc:creator></item><item><title><![CDATA[Linux開発環境の最短セットアップと「apt / pip / venv / npm / Docker」の関係]]></title><description><![CDATA[「pandas が入っているのに import できない」「どの venv で動いているのか分からない」——はじめて VS Code＋Jupyter を使う人が踏みがちな落とし穴を、最短で動かす手順と仕組みの見取り図で解消します。読み終わる頃には、「何をどこに入れればよいか／なぜエラーになるか」が説明できる状態になります。
+
+ 道具の役割を一行で
+Docker ＝ OSごと箱             （一番広い）
+apt    ＝ Linux 用の配布物管理  （Python本体やCライブラリなど）
+pip    ＝ Python用の配布物管理 （numpy, pandas など）
+ve...]]></description><link>https://zenn.dev/t_hada/articles/5f7937502fb53e</link><guid isPermaLink="true">https://zenn.dev/t_hada/articles/5f7937502fb53e</guid><pubDate>Sat, 30 Aug 2025 10:36:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--l-H2--UA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AE%25E6%259C%2580%25E7%259F%25AD%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2581%25A8%25E3%2580%258Capt%2520%252F%2520pip%2520%252F%2520venv%2520%252F%2520npm%2520%252F%2520Docker%25E3%2580%258D%25E3%2581%25AE%25E9%2596%25A2%25E4%25BF%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tsubasa%2520Hada%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSW9vSFBmTUtDVW9jRTc0MGIyU3J1MkVCWDJlRnlOcXRrcjZhMko5eElvN1J1X3RkR0Y9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tsubasa Hada</dc:creator></item><item><title><![CDATA[OrbStackでLinux🐧の仮想マシンを作りたい]]></title><description><![CDATA[
+ 初めに
+手軽にLinuxを触れる環境が欲しいなと思い、DockerではなくOrbStackでLinuxの仮想マシンを作ってみました。
+
+ 環境
+macOS Sequoia
+
+ 手順
+
+ OrbStackインストール
+$ brew install orbstack
+🍺  orbstack was successfully installed!
+
+ Linuxサーバを作る(CLI)
+最初に使えるOSを確認します。
+$ orb create --help
+
+Supported distros: alma  alpine  arch  centos  debian  devuan  fedo...]]></description><link>https://zenn.dev/marogram/articles/d7244dc3192d7f</link><guid isPermaLink="true">https://zenn.dev/marogram/articles/d7244dc3192d7f</guid><pubDate>Sat, 30 Aug 2025 08:40:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--66M0EoFC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OrbStack%25E3%2581%25A7Linux%2520%25E3%2581%25AE%25E4%25BB%25AE%25E6%2583%25B3%25E3%2583%259E%25E3%2582%25B7%25E3%2583%25B3%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258A%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:maho%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk0ZGI3OTkyMmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>maho</dc:creator></item><item><title><![CDATA[LPIC305　ファイル名とファイルパス]]></title><description><![CDATA[
+ ファイル名
+cgroup.procs
+cgroupのプロセスファイル
+/etc/docker/daemon.json
+デーモンdockerdのオプションをカスタマイズする際の設定を記述する
+
+ Docker
+/var/lib/docker
+Dockerデーモンのデフォルトのディレクトリ
+/etc/docker/daemon.json
+デーモンdockerdのオプションをカスタマイズする際の設定を記述する
+
+ LXC
+/etc/lxc/　　　　lxc設定ファイル
+/var/lib/lxc/　　コンテナを作成した際の保存場所
+/var/log/lxc/    各コンテナのログファイル
+標...]]></description><link>https://zenn.dev/abogado69/articles/9133fe1784fb71</link><guid isPermaLink="true">https://zenn.dev/abogado69/articles/9133fe1784fb71</guid><pubDate>Sat, 30 Aug 2025 04:51:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5KrKwzQ6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LPIC305%25E3%2580%2580%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E5%2590%258D%25E3%2581%25A8%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2583%2591%25E3%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:abogado69%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSW9lOU5VNnlRWjhXX0luZkJueW9TWWkyNDlpdmNkUnJqOUc0cTM4a0pqSGhYYTJBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>abogado69</dc:creator></item><item><title><![CDATA[Linux(Ubuntu)へ公開鍵認証でSSH接続する手順と仕組み]]></title><description><![CDATA[
+ 概要
+今回のシナリオでは、同じLANに接続された MacOSをクライアント側、Linux(Ubuntu)をサーバ側 として設定し、公開鍵認証を用いてSSH接続を行う方法を整理します。
+
+ サーバ（Ubuntu）側の準備
+
+ OpenSSHサーバをインストール
+Ubuntu側にSSHサーバをインストールし、接続を受け付けられるようにします。
+# パッケージリスト更新
+$ sudo apt update
+
+# OpenSSHサーバをインストール
+$ sudo apt install -y openssh-server
+
+# インストールされたことを確認
+$ dpkg -l | grep ...]]></description><link>https://zenn.dev/shimiyu/articles/08d7a4fb6fee76</link><guid isPermaLink="true">https://zenn.dev/shimiyu/articles/08d7a4fb6fee76</guid><pubDate>Fri, 29 Aug 2025 23:20:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--g9G6MBog--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%2528Ubuntu%2529%25E3%2581%25B8%25E5%2585%25AC%25E9%2596%258B%25E9%258D%25B5%25E8%25AA%258D%25E8%25A8%25BC%25E3%2581%25A7SSH%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%2599%25E3%2582%258B%25E6%2589%258B%25E9%25A0%2586%25E3%2581%25A8%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2581%25BF%25E3%2582%2586%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk0OWE2NTYxY2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しみゆー</dc:creator></item><item><title><![CDATA[Debian上のGNOMEでデスクトップにアイコンを表示できるようにする]]></title><description><![CDATA[
+ はじめに
+debianの標準デスクトップ環境であるGNOMEではデフォルトでDesktopフォルダ以下のファイルがデスクトップに表示されず、ファイルマネージャーのみから見ることができます。
+WindowsやMacなどと同じようにデスクトップにアイコンとして表示したくなったので備忘録としてまとめておきます。
+
+ 環境
+
+Debian 13(trixie)
+GNOME 48.3(Wayland)
+
+
+ 手順
+
+
+Desktop Icons NG を利用します。
+sudo apt install gnome-shell-extension-desktop-icons-ng
+
+
+
+設定を反映...]]></description><link>https://zenn.dev/neptune/articles/3a796a7ac3b80c</link><guid isPermaLink="true">https://zenn.dev/neptune/articles/3a796a7ac3b80c</guid><pubDate>Fri, 29 Aug 2025 09:46:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xs1PpNeS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Debian%25E4%25B8%258A%25E3%2581%25AEGNOME%25E3%2581%25A7%25E3%2583%2587%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%2588%25E3%2583%2583%25E3%2583%2597%25E3%2581%25AB%25E3%2582%25A2%25E3%2582%25A4%25E3%2582%25B3%25E3%2583%25B3%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:achernar%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RlZTkxNjEyZTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>achernar</dc:creator></item><item><title><![CDATA[LM Studio + PROXY配下時のモデルダウンロードの方法]]></title><description><![CDATA[
+ LM Studio + PROXY配下時のモデルダウンロードの方法
+LM Studio は、PROXY設定ができないため、PROXY配下ではモデルダウンロードを画面上から行えない。
+本体をダウンロードしたが、モデルが無いので何もできない状態になってしまう。
+
+ 対象モデルを手動ダウンロード
+
+LM Studio → Models より、対象モデルを選択します。
+
+通常であれば、「Use Model in LM Studio」もしくは「Download this model」より取得できます。
+
+
+「sources」に記載の「Hugging Face」へのリンクをクリック。
+
+
+「Fi...]]></description><link>https://zenn.dev/flosslabs/articles/5fbad37a09169f</link><guid isPermaLink="true">https://zenn.dev/flosslabs/articles/5fbad37a09169f</guid><pubDate>Fri, 29 Aug 2025 02:36:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gubP0Xv---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LM%2520Studio%2520%252B%2520PROXY%25E9%2585%258D%25E4%25B8%258B%25E6%2599%2582%25E3%2581%25AE%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E3%2583%2580%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25AE%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:FLOSSLABS%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzJJRWs4SkdXUXhzTHFwVXZNSk9VdXY0eXk1MjlaSUZMX0d5aGxOUklXZ0s3RnZRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>FLOSSLABS</dc:creator></item><item><title><![CDATA[Ollamaで使える環境変数]]></title><description><![CDATA[
+ Ollamaで使える環境変数
+
+
+
+変数名
+意味
+
+
+
+
+OLLAMA_DEBUG
+追加のデバッグ情報を表示する(例：OLLAMA_DEBUG=1)
+
+
+OLLAMA_FLASH_ATTENTION
+フラッシュ・アテンションを有効
+
+
+OLLAMA_KV_CACHE_TYPE
+K/Vキャッシュの量子化タイプ（デフォルト：f16）
+
+
+OLLAMA_GPU_OVERHEAD
+GPUごとにVRAMの一部を予約する（バイト）
+
+
+OLLAMA_HOST
+ollamaサーバーのIPアドレス（デフォルト127.0.0.1:11434）
+
+
+OLLAMA_KEEP_ALIVE
+モデルがメモリにロ...]]></description><link>https://zenn.dev/flosslabs/articles/de11c79a4be619</link><guid isPermaLink="true">https://zenn.dev/flosslabs/articles/de11c79a4be619</guid><pubDate>Thu, 28 Aug 2025 21:47:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oeW2kHK2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ollama%25E3%2581%25A7%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258B%25E7%2592%25B0%25E5%25A2%2583%25E5%25A4%2589%25E6%2595%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:FLOSSLABS%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzJJRWs4SkdXUXhzTHFwVXZNSk9VdXY0eXk1MjlaSUZMX0d5aGxOUklXZ0s3RnZRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>FLOSSLABS</dc:creator></item><item><title><![CDATA[Ollamaサーバの設定方法（Linux）]]></title><description><![CDATA[Ollamaサーバーは、環境変数で設定します。
+
+ Linuxで環境変数を設定する
+Ollamaをsystemdサービスとして実行する場合、systemctlを使って環境変数を設定します。
+
+systemctl edit ollama.service を呼び出して systemd サービスを編集する。エディターが開きます
+各環境変数について、[Service] セクションの下に Environment という行を追加します：
+
+[Service]
+Environment="OLLAMA_HOST=0.0.0.0:11434"
+
+
+保存後、終了します
+
+
+systemd のリロードとOll...]]></description><link>https://zenn.dev/flosslabs/articles/37694530797bad</link><guid isPermaLink="true">https://zenn.dev/flosslabs/articles/37694530797bad</guid><pubDate>Thu, 28 Aug 2025 06:27:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OQ-MQHGv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ollama%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%25E6%2596%25B9%25E6%25B3%2595%25EF%25BC%2588Linux%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:FLOSSLABS%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzJJRWs4SkdXUXhzTHFwVXZNSk9VdXY0eXk1MjlaSUZMX0d5aGxOUklXZ0s3RnZRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>FLOSSLABS</dc:creator></item><item><title><![CDATA[AppleがついにLinuxコンテナに参入！Swift製「container」ツールとGUIアプリ「ContainerUI」を試してみた]]></title><description><![CDATA[
+ はじめに
+Apple が WWDC25 で発表した Swift 製のコンテナツール「container」が話題になっています。macOS 上で OCI 準拠の Linux コンテナを軽量な仮想マシンとして実行できるこのツールについて、実際に触ってみた感想と合わせて紹介します。
+
+ Apple container とは
+「container」は、Mac 上で Linux コンテナを作成・実行するための Apple 公式ツールです。以下の特徴があります：
+
+ 主な特徴
+
+
+Swift で開発：Apple Silicon に最適化されたネイティブ実装
+
+OCI 準拠：Docker Hub ...]]></description><link>https://zenn.dev/yamitake/articles/apple-container-tool-introduction</link><guid isPermaLink="true">https://zenn.dev/yamitake/articles/apple-container-tool-introduction</guid><pubDate>Wed, 27 Aug 2025 04:27:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wLFcJebS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Apple%25E3%2581%258C%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25ABLinux%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2581%25AB%25E5%258F%2582%25E5%2585%25A5%25EF%25BC%2581Swift%25E8%25A3%25BD%25E3%2580%258Ccontainer%25E3%2580%258D%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25A8GUI%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2580%258CContain...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yamitake%2540yapr%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE2MTEyMjRhNGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yamitake@yapr</dc:creator></item></channel></rss>
