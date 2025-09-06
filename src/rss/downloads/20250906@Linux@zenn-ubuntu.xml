@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Ubuntu」のフィード]]></title><description><![CDATA[Zennのトピック「Ubuntu」のRSSフィードです]]></description><link>https://zenn.dev/topics/ubuntu</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/8c2cdbc5b3.png</url><title>Zennの「Ubuntu」のフィード</title><link>https://zenn.dev/topics/ubuntu</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 06 Sep 2025 09:29:03 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/ubuntu/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[ロボット屋さんのためのUbuntuターミナル超入門]]></title><description><![CDATA[!
+この記事の一部はChatGPTを使用して書かれています。
+
+ROS Japan UG #59 研究教育におけるROSの活用にて、「ROSの初学者向けのコマンドのチートシートはありませんか？」→「思いつきません。作りましょう！」という質疑応答を見て、作ってみました。
+ChatGPT（無料版）に下地を出していただいて、私なりに足したり引いたりしたものになります。あまり時間をかけず作ったものですので、「これはいるでしょ！」「これはいらないのでは？」みたいなご意見があればZennのコメントやXなどでいただけますと大変助かります。
+
+ Ubuntu ターミナル チートシート
+
+ 🖥️ ターミナ...]]></description><link>https://zenn.dev/kimushun1101/articles/ros2-beginners-ubuntu-terminal</link><guid isPermaLink="true">https://zenn.dev/kimushun1101/articles/ros2-beginners-ubuntu-terminal</guid><pubDate>Tue, 02 Sep 2025 21:23:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--s0B0Sphp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AD%25E3%2583%259C%25E3%2583%2583%25E3%2583%2588%25E5%25B1%258B%25E3%2581%2595%25E3%2582%2593%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AEUbuntu%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%259F%25E3%2583%258A%25E3%2583%25AB%25E8%25B6%2585%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%259C%25A8%25E6%259D%2591%2520%25E9%25A7%25BF%25E4%25BB%258B%2520%252F%2520Shunsuke%2520K...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VjZWFjYzFhNTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>木村 駿介 / Shunsuke KIMURA</dc:creator></item><item><title><![CDATA[Ubuntu 24.04 で postfix を導入する]]></title><description><![CDATA[
+ これなに
+
+ちょっと今お手伝いしているところで postfix 導入をすることになった
+実際ちゃんとやったことないので、作業ログとして記録
+そのため記事内容が間違っていてもご容赦ください
+
+
+ 前提条件
+
+Ubuntu 24.04
+
+$ lsb_release -a
+No LSB modules are available.
+Distributor ID:	Ubuntu
+Description:	Ubuntu 24.04 LTS
+Release:	24.04
+Codename:	noble
+$ 
+
+ セットアップ手順
+
+ postfix インストール
+apt アップデートを行ってから...]]></description><link>https://zenn.dev/su3_hokkaido/articles/2025-09-01_setup_postfix_on_ubuntu_22_04</link><guid isPermaLink="true">https://zenn.dev/su3_hokkaido/articles/2025-09-01_setup_postfix_on_ubuntu_22_04</guid><pubDate>Mon, 01 Sep 2025 14:01:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rYHqTzK_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%252024.04%2520%25E3%2581%25A7%2520postfix%2520%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Su3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlmY2Q1YTk5MTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Su3</dc:creator></item><item><title><![CDATA[Linux(Ubuntu)へ公開鍵認証でSSH接続する手順と仕組み]]></title><description><![CDATA[
+ 概要
+今回のシナリオでは、同じLANに接続された MacOSをクライアント側、Linux(Ubuntu)をサーバ側 として設定し、公開鍵認証を用いてSSH接続を行う方法を整理します。
+
+ サーバ（Ubuntu）側の準備
+
+ OpenSSHサーバをインストール
+Ubuntu側にSSHサーバをインストールし、接続を受け付けられるようにします。
+# パッケージリスト更新
+$ sudo apt update
+
+# OpenSSHサーバをインストール
+$ sudo apt install -y openssh-server
+
+# インストールされたことを確認
+$ dpkg -l | grep ...]]></description><link>https://zenn.dev/shimiyu/articles/08d7a4fb6fee76</link><guid isPermaLink="true">https://zenn.dev/shimiyu/articles/08d7a4fb6fee76</guid><pubDate>Fri, 29 Aug 2025 23:20:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--g9G6MBog--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%2528Ubuntu%2529%25E3%2581%25B8%25E5%2585%25AC%25E9%2596%258B%25E9%258D%25B5%25E8%25AA%258D%25E8%25A8%25BC%25E3%2581%25A7SSH%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%2599%25E3%2582%258B%25E6%2589%258B%25E9%25A0%2586%25E3%2581%25A8%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2581%25BF%25E3%2582%2586%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk0OWE2NTYxY2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しみゆー</dc:creator></item><item><title><![CDATA[便利なディレクトリ移動ツール「zoxide」]]></title><description><![CDATA[
+あらゆるフォルダをhome直下で作るとcliからアクセスはしやすいけどguiから触るとき辛い
+
+ってツイートしたら後輩がzoxideをおすすめしてくれた。使ってみたらめちゃめちゃ便利なので書きます。
+
+ 環境
+
+ubuntu 22.04
+
+
+ インストール
+aptで入れられます。うれC
+sudo apt update
+sudo apt install zoxide -y
+できたら
+設定ファイルに
+eval "$(zoxide init zsh)"
+を追加して
+source ~/.zshrc
+で設定を反映させてください。
+
+ 使い方
+使い方はめちゃめちゃ簡単。
+しばらくいつもどおりcdで...]]></description><link>https://zenn.dev/keyizhen/articles/2b386d4d2bdfdd</link><guid isPermaLink="true">https://zenn.dev/keyizhen/articles/2b386d4d2bdfdd</guid><pubDate>Fri, 29 Aug 2025 23:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Xa0_UuON--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BE%25BF%25E5%2588%25A9%25E3%2581%25AA%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25AC%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AA%25E7%25A7%25BB%25E5%258B%2595%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2580%258Czoxide%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:keyizhen%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjM3azFrUFpTZ1FJYm93MV9XU2ZoNXBJQzVuWVdXcDRjQjFDeGFuTEo4SUVwbTNvZlVaQT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>keyizhen</dc:creator></item><item><title><![CDATA[自動運転AIチャレンジの描画ありシミュレータをWSL2上で動かしてみた[失敗編]]]></title><description><![CDATA[
+ はじめに
+
+ 自動運転チャレンジとは・・・
+本大会は、CASE、MaaSと呼ばれる新たな技術領域において、これからの自動車業界を牽引する技術者の発掘育成のための新たな取り組みとして実施しています。
+決勝大会では自動走行モビリティに開発したプログラムを搭載させる走行競技まで行います。
+両大会合わせて、コンピューターサイエンス、AI、ソフトウェアや情報処理に関わる技術者・研究者・学生等のチャレンジの場、また学習及機会を提供し、有機的な繋がりを実現する場を目指します。
+
+自動運転初学者の方でも参加しやすいような大会づくりを心掛けていきますので、どうぞ奮ってご参加ください。
+と、公式HPで説...]]></description><link>https://zenn.dev/headwaters/articles/7beb29658af909</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/7beb29658af909</guid><pubDate>Thu, 28 Aug 2025 15:22:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_gVNcwjo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2587%25AA%25E5%258B%2595%25E9%2581%258B%25E8%25BB%25A2AI%25E3%2583%2581%25E3%2583%25A3%25E3%2583%25AC%25E3%2583%25B3%25E3%2582%25B8%25E3%2581%25AE%25E6%258F%258F%25E7%2594%25BB%25E3%2581%2582%25E3%2582%258A%25E3%2582%25B7%25E3%2583%259F%25E3%2583%25A5%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592WSL2%25E4%25B8%258A%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258B%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%255B%25E5%25A4%25B1%25E6%2595%2597%25E7%25B7%25A8%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:tanaka_kai%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FmMmIxN2VmMGIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tanaka_kai</dc:creator></item><item><title><![CDATA[WSL2とWindowsの両方にmiseをインストール時のWSL2側の警告回避の話]]></title><description><![CDATA[WSL2とWindowsの両方にmiseをインストール時、
+WSL2側で、/mnt/c 配下 ( Windows側のC:\の配下のこと )
+の位置にいるときに、
+mise WARN Config files in /mnt/c/Users/myUser/.config/mise/config.toml are not trusted.
+という警告が出ることがあるが、
+これは、上記の警告メッセージのパスを指定する形で、
+mise trust --ignore "/mnt/c/Users/myUser/.config/mise/config.toml"
+を打ち込めば、消えます
+WSL2側のm...]]></description><link>https://zenn.dev/tazzae999jp/articles/70c9ffa2dfb49f</link><guid isPermaLink="true">https://zenn.dev/tazzae999jp/articles/70c9ffa2dfb49f</guid><pubDate>Thu, 28 Aug 2025 02:16:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--98w17R3P--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WSL2%25E3%2581%25A8Windows%25E3%2581%25AE%25E4%25B8%25A1%25E6%2596%25B9%25E3%2581%25ABmise%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E6%2599%2582%25E3%2581%25AEWSL2%25E5%2581%25B4%25E3%2581%25AE%25E8%25AD%25A6%25E5%2591%258A%25E5%259B%259E%25E9%2581%25BF%25E3%2581%25AE%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%25A4%25E3%2581%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEwZmVjMjAxYTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たつお</dc:creator></item><item><title><![CDATA[Gnome環境でX11（XWayland）を完全に無効にする]]></title><description><![CDATA[
+ 概要
+
+X11には昔に比べればマシになってるもののセキュリティ上の問題が数多く残ってる
+
+抽象ソケット経由でサンドボックスを抜け出せたり
+これらの問題はXWaylandでも同じ
+
+
+
+X11単体で使ってればnolistenオプションなどがあるらしいがXWaylandだと効かないらしい
+
+https://tstarling.com/blog/2016/06/x11-security-isolation/
+
+
+DiscordやSpotifyなど主にElectronを使ってるアプリを除けばGnome系のアプリはWaylandに対応してるものが多いので思い切ってWaylandを無効にしてみる...]]></description><link>https://zenn.dev/nexryai/articles/c345784e4ad47f</link><guid isPermaLink="true">https://zenn.dev/nexryai/articles/c345784e4ad47f</guid><pubDate>Thu, 28 Aug 2025 00:15:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fHi4Um4L--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Gnome%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7X11%25EF%25BC%2588XWayland%25EF%25BC%2589%25E3%2582%2592%25E5%25AE%258C%25E5%2585%25A8%25E3%2581%25AB%25E7%2584%25A1%25E5%258A%25B9%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nexryai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYxZDUzMzM2YjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nexryai</dc:creator></item><item><title><![CDATA[Powerline、Oh My Posh、Starship、あなたに合うプロンプトはどれ？]]></title><description><![CDATA[
+ はじめに
+Linux や macOS のターミナルを開くと、コマンドを入力するための文字列が表示されます。これが「プロンプト」です。デフォルトのプロンプトは、ユーザー名やホスト名、カレントディレクトリなどが表示されるシンプルなものが多いですが、これをカスタマイズすることで、作業効率を大幅に向上させることができます。
+プロンプトをカスタマイズするメリットは次のとおりです。
+
+
+情報の追加: Git のブランチ名、実行中のジョブの数、コマンドの終了コードなど、開発に役立つ情報を表示できます。
+
+視認性の向上: 色やアイコンを使って情報を整理し、重要な情報を一目で把握できるようにします。
+...]]></description><link>https://zenn.dev/hiro345/articles/20250828_prompt</link><guid isPermaLink="true">https://zenn.dev/hiro345/articles/20250828_prompt</guid><pubDate>Thu, 28 Aug 2025 00:02:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HNJu0k0B--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Powerline%25E3%2580%2581Oh%2520My%2520Posh%25E3%2580%2581Starship%25E3%2580%2581%25E3%2581%2582%25E3%2581%25AA%25E3%2581%259F%25E3%2581%25AB%25E5%2590%2588%25E3%2581%2586%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2597%25E3%2583%2588%25E3%2581%25AF%25E3%2581%25A9%25E3%2582%258C%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroshi%2520Koyama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k5ZzdjLS0xTFk0S2k0LWw3dVFSSFZRdEdQcWZHYTlibVRJYUtFM0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroshi Koyama</dc:creator></item><item><title><![CDATA[ubuntuでvscodeとかdiscordとかをcliで更新する]]></title><description><![CDATA[この画面、ubuntuでdiscordを使う方ならみなさん目にすると思うんですけど、嫌いですよね。
+
+最新版の.deb入れてインストールしなおして...って普通に意味わかんないじゃないですか
+なのでCLIで更新できるようにしようと思います。
+
+ discord編
+Discordは残念ながらリポジトリを提供していないので、apt updateでは更新できません。
+なので「最新の.debを落として入れ直す」しか手がありません。くやしい
+でも安心してください、CLIなら一発です。
+wget https://discord.com/api/download/stable\?platform\=l...]]></description><link>https://zenn.dev/keyizhen/articles/d371084156f2ce</link><guid isPermaLink="true">https://zenn.dev/keyizhen/articles/d371084156f2ce</guid><pubDate>Wed, 27 Aug 2025 13:52:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--owgXpYdh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ubuntu%25E3%2581%25A7vscode%25E3%2581%25A8%25E3%2581%258Bdiscord%25E3%2581%25A8%25E3%2581%258B%25E3%2582%2592cli%25E3%2581%25A7%25E6%259B%25B4%25E6%2596%25B0%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:keyizhen%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjM3azFrUFpTZ1FJYm93MV9XU2ZoNXBJQzVuWVdXcDRjQjFDeGFuTEo4SUVwbTNvZlVaQT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>keyizhen</dc:creator></item><item><title><![CDATA[ubuntuにms系フォントをインストール]]></title><description><![CDATA[
+ 環境
+
+ubuntu22.04
+
+
+ インストーラーのインストール
+ターミナルを開き
+sudo apt install ttf-mscorefonts-installer
+を実行。
+途中でライセンスの同意などを求められるのでTabキーとEnterキーで対応。
+インストールが完了したらPCを再起動する。
+
+ 確認
+インストールされたフォントは/usr/share/fonts/truetype/msttcorefonts に保存されるので
+ls /usr/share/fonts/truetype/msttcorefonts
+で見るのもいいし、
+fc-list | grep "Times ...]]></description><link>https://zenn.dev/keyizhen/articles/cf9f311b8f5913</link><guid isPermaLink="true">https://zenn.dev/keyizhen/articles/cf9f311b8f5913</guid><pubDate>Wed, 27 Aug 2025 12:36:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--j8Vw37NC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ubuntu%25E3%2581%25ABms%25E7%25B3%25BB%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:keyizhen%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjM3azFrUFpTZ1FJYm93MV9XU2ZoNXBJQzVuWVdXcDRjQjFDeGFuTEo4SUVwbTNvZlVaQT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>keyizhen</dc:creator></item><item><title><![CDATA[Lammps install @Ubuntu 22.04]]></title><description><![CDATA[Lammpsをgpuでも使うために、ubuntu 22.04 にソースビルドでインストールしました
+
+ 環境
+ubuntu 22.04
+cuda 12.1
+
+ 準備
+必要なものがなければ準備
+sudo apt install git cmake nvidia-cuda-toolkit build-essential libopenmpi-dev libjpeg-dev libpng-dev ffmpeg
+install確認するには
+dpkg -l | grep -E 'git|cmake|nvidia-cuda-toolkit|build-essential|libopenmpi-dev...]]></description><link>https://zenn.dev/yyyyyy/articles/5fa8530e2f2ea8</link><guid isPermaLink="true">https://zenn.dev/yyyyyy/articles/5fa8530e2f2ea8</guid><pubDate>Wed, 27 Aug 2025 02:16:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sBmt6whK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:Lammps%2520install%2520%2540Ubuntu%252022.04%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yyyyyy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UwNDk5NzY0ZTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yyyyyy</dc:creator></item><item><title><![CDATA[Ubuntu で Linux KVM と VirtualBox を共存させる方法]]></title><description><![CDATA[
+ はじめに
+開発環境やテスト環境を構築する際、仮想化技術は不可欠なツールです。Linux 環境で利用できる仮想化ソリューションとして、OS に統合されたハイパーバイザーである Linux KVM と、クロスプラットフォームで利用可能な VirtualBox が広く知られています。
+KVM は、Linux カーネルに直接組み込まれているため、高速かつ安定した動作が期待でき、特にサーバー環境でよく利用されています。一方、VirtualBox は、Linux だけでなく、Windows や macOS など、さまざまな OS 上で動作し、手軽に利用開始できるため、デスクトップ環境での仮想化や...]]></description><link>https://zenn.dev/hiro345/articles/20250826_kvm_and_vbox</link><guid isPermaLink="true">https://zenn.dev/hiro345/articles/20250826_kvm_and_vbox</guid><pubDate>Tue, 26 Aug 2025 23:50:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Gr0TT2ry--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%2520%25E3%2581%25A7%2520Linux%2520KVM%2520%25E3%2581%25A8%2520VirtualBox%2520%25E3%2582%2592%25E5%2585%25B1%25E5%25AD%2598%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroshi%2520Koyama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k5ZzdjLS0xTFk0S2k0LWw3dVFSSFZRdEdQcWZHYTlibVRJYUtFM0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroshi Koyama</dc:creator></item><item><title><![CDATA[[Windows]OS比較 5選(ChromeOS Flex/Ubuntu/Linux Mint/Zorin/MX Linux)]]></title><description><![CDATA[
+ はじめに
+Windows 10 は 2025年10月14日にサポート終了を迎えます。Windows 11 への更新を検討しても、要件を満たさないPCをお持ちの方は少なくありません。こうした端末を安全に使い続ける方法として、OSへの乗り換えは現実的な選択肢です。
+本書は、古いPCを延命して使いたい人に向けたOS比較をした調査結果です。
+
+ 対象者
+
+Windows 10 のサポート終了を機に無料OSへの乗り換えを検討している人
+Linux の特徴を把握したい人
+様々なOSの種類を知りたい人
+
+
+ 候補と結論
+
+ 候補
+今回は以下の5種類のOSを対象として調査しました。
+
+ChromeO...]]></description><link>https://zenn.dev/ykbone/articles/4a967c035e027b</link><guid isPermaLink="true">https://zenn.dev/ykbone/articles/4a967c035e027b</guid><pubDate>Tue, 26 Aug 2025 09:15:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SOGpohUt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BWindows%255DOS%25E6%25AF%2594%25E8%25BC%2583%25205%25E9%2581%25B8%2528ChromeOS%2520Flex%252FUbuntu%252FLinux%2520Mint%252FZorin%252FMX...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ykbone%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U3ZTRlYzk3ZDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ykbone</dc:creator></item><item><title><![CDATA[Linuxを安全に学び始めるための準備（VirtualBox＆Ubuntu）]]></title><description><![CDATA[
+ Linuxを学ぶ価値
+この記事では、VirtualBoxとUbuntuを使って安全な仮想環境を構築し、
+Linuxの基礎を 楽しく&amp;安全に 学ぶ方法を紹介します。
+Linuxは、世界中のサーバーやクラウド、スマートフォン（Android）などの基盤として使われているOSです。以下のような理由から、IT実務での価値は非常に高いです。
+
+開発環境としての柔軟性（Python, Node.js, Dockerなど）
+セキュリティ・ネットワークの学習に最適
+サーバー構築や運用の基礎スキル
+世界中の技術者が使っているオープンソース文化
+
+Linuxを知っているだけで、開発・インフラ・セ...]]></description><link>https://zenn.dev/headwaters/articles/20250830linuxpractice</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/20250830linuxpractice</guid><pubDate>Mon, 25 Aug 2025 03:47:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TC4ZfVU5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2582%2592%25E5%25AE%2589%25E5%2585%25A8%25E3%2581%25AB%25E5%25AD%25A6%25E3%2581%25B3%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E6%25BA%2596%25E5%2582%2599%25EF%25BC%2588VirtualBox%25EF%25BC%2586Ubuntu%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%259B%25E3%2581%25A8%25E3%2581%2585%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMyZGJmYjNkNmIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>せとぅ</dc:creator></item><item><title><![CDATA[Ubuntu Serverを導入する手順(USB Boot) 手順写真付き]]></title><description><![CDATA[
+ PCにUbuntu Serverを導入する手順(USB Boot)
+この記事では、PCにUbuntu ServerをUSBメモリからブートしてインストールする全手順を、画面キャプチャと共に詳しく解説します。初めての方でも手順通りに進めれば、スムーズにサーバーを構築できます。
+
+ 目次
+
+はじめに
+準備するもの
+
+インストール手順
+
+1. 起動メディアの選択
+2. 言語の選択
+3. キーボードの選択
+4. インストールタイプの選択
+5. ネットワーク設定
+6. プロキシ設定
+7. ミラーサーバーの選択
+8. ストレージ（ディスク）の設定
+9. ストレージ設定の確認
+10. 設定の最終確...]]></description><link>https://zenn.dev/takeda_dev/articles/e2730bfc2b3296</link><guid isPermaLink="true">https://zenn.dev/takeda_dev/articles/e2730bfc2b3296</guid><pubDate>Sun, 24 Aug 2025 10:00:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bJKIzrYO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%2520Server%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2599%25E3%2582%258B%25E6%2589%258B%25E9%25A0%2586%2528USB%2520Boot%2529%2520%25E6%2589%258B%25E9%25A0%2586%25E5%2586%2599%25E7%259C%259F%25E4%25BB%2598%25E3%2581%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:take%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYyMzUzM2IwODEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>take</dc:creator></item><item><title><![CDATA[自家用AIマシン構築記 #3｜BIOS設定からUbuntu導入、そして鬼門のNVIDIAドライバ編 👹]]></title><description><![CDATA[
+ 前回までのあらすじ
+予算が限られた中、「自家用AIマシン」を作るべく、パーツを厳選。
+前回は、届いたパーツを組み上げ、襲いかかる数々のトラブルを乗り越えて、電源投入までの流れを紹介しました。
+👉 まだの方は、こちらからどうぞ
+
+今回は、その続きとして BIOS設定とUbuntuのインストール編 に入ります❗️
+
+ BIOSの設定
+MSIのマザーボードは、起動時にロゴが表示されたタイミングで 「Del」キー を押すことでBIOS画面に入れます。
+今回のポイントは以下の3点です。
+
+ブートデバイスの設定
+ファンのモード設定
+Secure Bootの解除
+
+
+ ブートデバイスの設定
+Ubu...]]></description><link>https://zenn.dev/tetrahymena/articles/b61e8e9f357a86</link><guid isPermaLink="true">https://zenn.dev/tetrahymena/articles/b61e8e9f357a86</guid><pubDate>Sun, 24 Aug 2025 08:58:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2BF40mGG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2587%25AA%25E5%25AE%25B6%25E7%2594%25A8AI%25E3%2583%259E%25E3%2582%25B7%25E3%2583%25B3%25E6%25A7%258B%25E7%25AF%2589%25E8%25A8%2598%2520%25233%25EF%25BD%259CBIOS%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%258B%25E3%2582%2589Ubuntu%25E5%25B0%258E%25E5%2585%25A5%25E3%2580%2581%25E3%2581%259D%25E3%2581%2597%25E3%2581%25A6%25E9%25AC%25BC%25E9%2596%2580%25E3%2581%25AENVIDIA%25E3%2583%2589%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2590%25E7%25B7%25A8%2520%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tetrahymena%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVjYzBkMGZjNDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tetrahymena</dc:creator></item><item><title><![CDATA[Ubuntu版Docker DesktopにDocker Hubアカウントでログインする]]></title><description><![CDATA[UbuntuでDocker Desktopを使用する際、GUIの指示に従ってDocker Hubアカウントでログインを試みるも、 Credential store not installed というエラーが表示されて少しログインに手間取ったので、対処方法の覚え書きを記しておきます。
+
+
+ 参考資料
+https://docs.docker.com/desktop/setup/sign-in/#credentials-management-for-linux-users
+公式ドキュメントに則って進めていきます。
+Linux版Docker Desktopは、GPGで暗号化されたファイルに認証情...]]></description><link>https://zenn.dev/sion_pn/articles/cb0637de0533e9</link><guid isPermaLink="true">https://zenn.dev/sion_pn/articles/cb0637de0533e9</guid><pubDate>Thu, 21 Aug 2025 16:01:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--25eDbSIj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25E7%2589%2588Docker%2520Desktop%25E3%2581%25ABDocker%2520Hub%25E3%2582%25A2%25E3%2582%25AB%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25A7%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Mimaki%2520SiON%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNXBpNXV1TDJvZUNVYlBqU2FPTUtYb0wwQzNFbXByeEZ0OGxIVnM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Mimaki SiON</dc:creator></item><item><title><![CDATA[UFWのせいでLXDコンテナのネットワークが動作しなくなるときの対処法 [Ubuntu Server]]]></title><description><![CDATA[
+ 概要
+ufw default denyにしてるとsnapでインストールしたLXDのネットワークが動作しない問題の対処法です。
+
+ Solution
+ここではLXDのブリッジ名をlxdbr0、そのIPアドレスを10.221.140.1/24としていますが、デフォルトと異なる場合は適当に読み替えてください。
+# LXDコンテナから/へのルーティングを許可
+sudo ufw route allow in on lxdbr0
+sudo ufw route allow out on lxdbr0
+
+# LXDコンテナからのDHCPを許可
+sudo ufw allow in on lxdbr0 ...]]></description><link>https://zenn.dev/nexryai/articles/96a8a452b550c5</link><guid isPermaLink="true">https://zenn.dev/nexryai/articles/96a8a452b550c5</guid><pubDate>Thu, 21 Aug 2025 02:20:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xM71mhjy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:UFW%25E3%2581%25AE%25E3%2581%259B%25E3%2581%2584%25E3%2581%25A7LXD%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2581%25AE%25E3%2583%258D%25E3%2583%2583%25E3%2583%2588%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E3%2581%258C%25E5%258B%2595%25E4%25BD%259C%25E3%2581%2597%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25AA%25E3%2582%258B%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AE%25E5%25AF%25BE%25E5%2587%25A6%25E6%25B3%2595%2520%255BUbuntu%2520Server%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nexryai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYxZDUzMzM2YjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nexryai</dc:creator></item><item><title><![CDATA[マイクラ+HTTPサーバーを建ててみた on Docker on Cloudflare（マイクラサーバー編）]]></title><description><![CDATA[
+ はじめに
+PCをサーバー用に購入したので、Ubuntuを乗せてその上にマイクラ鯖とHTTP鯖を作りました。
+構築した内容は以下の通り。
+
+オンプレのUbuntuサーバー
+Cloudflare Tunnelを使用した安全な外部アクセス(SSHを使用)
+Dockerによる各環境の分離
+Minecraftサーバー&amp;HTTPサーバーの同時運用
+今回はマイクラサーバー起動まで。
+
+
+ 前提条件
+物理PC
+適当に予算12万で購入。GPUがない分これでも高性能。
+インターネット接続環境
+無論必須。
+Cloudflareアカウント(無料)
+無料アカウントでも色々と機能が使えるみたいなので、こ...]]></description><link>https://zenn.dev/rezora/articles/d4064fa7b46f9a</link><guid isPermaLink="true">https://zenn.dev/rezora/articles/d4064fa7b46f9a</guid><pubDate>Wed, 20 Aug 2025 15:13:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4U58iBzd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25AF%25E3%2583%25A9%252BHTTP%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592%25E5%25BB%25BA%25E3%2581%25A6%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2520on%2520Docker%2520on%2520Cloudflare%25EF%25BC%2588%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E7%25B7%25A8%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Rezora%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJmNmU1ODAxN2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Rezora</dc:creator></item><item><title><![CDATA[Ubuntu 22.04でtrace-cmd/KernelSharkをセットアップして可視化する]]></title><description><![CDATA[Ubuntu 22.04でカーネルトレースを取得し、GUIで可視化する手順です。sudo権限とデスクトップ環境（KernelShark表示用）を前提とします。
+
+ インストール
+sudo apt update
+sudo apt install -y trace-cmd kernelshark
+
+ 基本的なトレース取得
+スケジューライベントを3秒分だけ記録します。
+sudo trace-cmd record -e sched_switch -o trace.dat sleep 3
+# GUIをrootで起動しないため、生成物の所有者を自分に変更
+sudo chown "$USER":"$U...]]></description><link>https://zenn.dev/fuminori/articles/ubuntu2204-ftrace-trace-cmd-kernelshark</link><guid isPermaLink="true">https://zenn.dev/fuminori/articles/ubuntu2204-ftrace-trace-cmd-kernelshark</guid><pubDate>Tue, 19 Aug 2025 09:23:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YlApDs57--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%252022.04%25E3%2581%25A7trace-cmd%252FKernelShark%25E3%2582%2592%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2581%2597%25E3%2581%25A6%25E5%258F%25AF%25E8%25A6%2596%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Fuminori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hjd3o5a3Y5THN1T3E5R0FadGpTbkt6V2ZTXzl4UUROZW9tcTlhanc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Fuminori</dc:creator></item></channel></rss>
