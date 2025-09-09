@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 09 Sep 2025 11:34:40 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[hasOwnProperty(memo)]]></title><description><![CDATA[
+ hasOwnPropertyとは？
+オブジェクト自信が引数に指定されたプロパティを持っているか確かめることができる。BOOLEANが返ってくるので条件式にそのまま入れてエラーを飛ばそう
+
+ 使用例
+
+example.js
+const CONTRIBUTION_WEIGHTS = {
+  review_count: 2,
+  picture_count: 5,
+  description_edit_count: 8,
+  onsen_add_count: 10
+};
+
+async function updateUserContribution(client, userId, type)...]]></description><link>https://zenn.dev/tqw000402/articles/396e14ad92676e</link><guid isPermaLink="true">https://zenn.dev/tqw000402/articles/396e14ad92676e</guid><pubDate>Tue, 09 Sep 2025 07:23:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aJ0E3R6W--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:hasOwnProperty%2528memo%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tqqqqw%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkOTFhYmJmODEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tqqqqw</dc:creator></item><item><title><![CDATA[ESLint + Prettier から Biome への移行（Powered by Rust）]]></title><description><![CDATA[
+ はじめに
+フロントエンド開発において、コードの品質管理は ESLint と Prettier の組み合わせが長らく標準的なソリューションでした。しかし、近年注目を集めているのが Biome です。Rust で書かれたこのツールチェーンは、リンターとフォーマッターを統合し、従来のツールを大幅に上回る性能を実現しています。
+本記事では、実際に ESLint + Prettier から Biome への移行を行った経験をもとに、移行の動機、Rustによる性能向上、実際のセットアップ方法について解説します。
+
+ Biome とは
+Biome は JavaScript、TypeScript、J...]]></description><link>https://zenn.dev/duckdevv/articles/77133b4dcfd1e0</link><guid isPermaLink="true">https://zenn.dev/duckdevv/articles/77133b4dcfd1e0</guid><pubDate>Tue, 09 Sep 2025 02:15:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xeosetNC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ESLint%2520%252B%2520Prettier%2520%25E3%2581%258B%25E3%2582%2589%2520Biome%2520%25E3%2581%25B8%25E3%2581%25AE%25E7%25A7%25BB%25E8%25A1%258C%25EF%25BC%2588Powered%2520by%2520Rust%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:duckdevv%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk3MTNlN2IxZTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>duckdevv</dc:creator></item><item><title><![CDATA[Docker 開発での node_modules マウント、Anonymous Volume という選択肢]]></title><description><![CDATA[Docker Compose（ローカル開発環境）を使って JavaScript / TypeScript プロジェクトを動かすとき、node_modules はどうマウントしているでしょうか？
+私は以前は「ローカルの node_modules をコンテナに直接マウントする」方式（Direct Mount Override）を使っていましたが、最終的には Anonymous Volume（匿名ボリューム） に落ち着きました。
+この記事では、両者の違いと Anonymous Volume 戦略のメリットを整理します。
+
+
+ 直接マウントする方法とそのメリット
+以下のようにローカルの node...]]></description><link>https://zenn.dev/duckdevv/articles/1f680e4debbf2d</link><guid isPermaLink="true">https://zenn.dev/duckdevv/articles/1f680e4debbf2d</guid><pubDate>Tue, 09 Sep 2025 01:11:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AAyfS8Lo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%2520%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25A7%25E3%2581%25AE%2520node_modules%2520%25E3%2583%259E%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%2588%25E3%2580%2581Anonymous%2520Volume%2520%25E3%2581%25A8%25E3%2581%2584%25E3%2581%2586%25E9%2581%25B8%25E6%258A%259E%25E8%2582%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:duckdevv%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk3MTNlN2IxZTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>duckdevv</dc:creator></item><item><title><![CDATA[Jest mockResolvedValueの型エラーを1分で解決]]></title><description><![CDATA[
+ 概要
+個人開発中に該当のエラーに遭遇し、AIに尋ねたのですが回りくどい解決策を提案されてしまい、「初めから公式を参照した方が早かったな」という体験をしたため、記事として投稿することにしました。
+https://jestjs.io/docs/mock-function-api#mockfnmockresolvedvaluevalue
+
+ 問題
+Jest + TypeScriptの組み合わせでmockResolvedValueを使うときに、下記のような型エラーに遭遇することがあります：
+// ❌ 型エラー
+const mockFn = jest.fn().mockResolvedValu...]]></description><link>https://zenn.dev/hasuto/articles/jest-typescript-mockresolvedvalue-fix</link><guid isPermaLink="true">https://zenn.dev/hasuto/articles/jest-typescript-mockresolvedvalue-fix</guid><pubDate>Mon, 08 Sep 2025 22:32:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--e7LGshf2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Jest%2520mockResolvedValue%25E3%2581%25AE%25E5%259E%258B%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2582%25921%25E5%2588%2586%25E3%2581%25A7%25E8%25A7%25A3%25E6%25B1%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hasu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y2ODRhYzg3MTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hasu</dc:creator></item><item><title><![CDATA[日本語文字数カウンターの技術分析：kantan.tools を例に]]></title><description><![CDATA[
+ はじめに
+日本語テキストの文字数カウントは、一見シンプルに見える機能ですが、実は複数の書字体系（ひらがな、カタカナ、漢字）や Unicode の複雑な仕様を適切に処理する必要がある、技術的に興味深い分野です。
+今回は、kantan.tools の文字数カウント機能（mojisuu）と、類似ツールである 文字数-JP の技術的実装について分析し、日本語テキスト処理における課題と解決方法を探ります。
+
+ 日本語テキスト処理の技術的課題
+
+ 1. 複数書字体系の混在
+現代日本語の特徴的な課題は、一つの文章内に複数の書字体系が混在することです：
+
+
+ひらがな: 和語や文法要素に使用（46基本...]]></description><link>https://zenn.dev/suowu/articles/afed314250a810</link><guid isPermaLink="true">https://zenn.dev/suowu/articles/afed314250a810</guid><pubDate>Mon, 08 Sep 2025 17:26:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bHEJmXKm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2597%25A5%25E6%259C%25AC%25E8%25AA%259E%25E6%2596%2587%25E5%25AD%2597%25E6%2595%25B0%25E3%2582%25AB%25E3%2582%25A6%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2581%25AE%25E6%258A%2580%25E8%25A1%2593%25E5%2588%2586%25E6%259E%2590%25EF%25BC%259Akantan.tools%2520%25E3%2582%2592%25E4%25BE%258B%25E3%2581%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%259D%258E%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSU9OZVBWTHlZZkRzeVpzRU9pcGJISl9wb2RtMGhDT21HaHl0UWlpYXRvT3BMZFVBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>李</dc:creator></item><item><title><![CDATA[ArrayBufferって何なんだろう。]]></title><description><![CDATA[
+ 経緯
+クライアントからbase64形式で送られてきた情報をサーバーで復元し保存するという実装をLLMに教えてもらった。
+const fileBuffer = Buffer.from(base64Data, "base64");
+const uint8Array = new Uint8Array(fileBuffer);
+return new File([uint8Array], name, { type: contentType });
+Buffer、ArrayBuffer、Base64、uint8Arrayなど見覚えはあるけれど、どんなもの達なのかしっかりと理解できていないので調べ...]]></description><link>https://zenn.dev/dotlog_techblog/articles/6e636824e7dd16</link><guid isPermaLink="true">https://zenn.dev/dotlog_techblog/articles/6e636824e7dd16</guid><pubDate>Mon, 08 Sep 2025 14:47:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6syliQa6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ArrayBuffer%25E3%2581%25A3%25E3%2581%25A6%25E4%25BD%2595%25E3%2581%25AA%25E3%2582%2593%25E3%2581%25A0%25E3%2582%258D%25E3%2581%2586%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:sinano%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NiYjk5ODg5MDAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2583%2589%25E3%2583%2583%25E3%2583%2588%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2ozaUYxV0NPZTlLakIyeHNpQVBPU0EtWXB1UVBVYzV2d2pJeUZPSVE9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sinano</dc:creator></item><item><title><![CDATA[『モダンJavaScriptの基本から始める React実践の教科書』で、最新環境だと5章序盤が動かないので、動くように読み替えたことメモ]]></title><description><![CDATA[
+ 読み替えたこと
+
+131ページ～：インストールするパッケージの変更
+
+- ▼ node-sass のインストール（npm）
+- nmp install node-sass
++ ▼ node-sass のインストール（npm）
++ npm install sass
+※ node-sassが開発終了しており、最新のreact環境だと怒られるっぽいです
+
+ 備考
+
+後半の Tailwind CSS でも、そのままだと動かないのですが、こちらはAmazonレビューの方で。
+
+]]></description><link>https://zenn.dev/ihok/articles/2d50317855745a</link><guid isPermaLink="true">https://zenn.dev/ihok/articles/2d50317855745a</guid><pubDate>Mon, 08 Sep 2025 07:43:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bee2vxTF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258E%25E3%2583%25A2%25E3%2583%2580%25E3%2583%25B3JavaScript%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E3%2581%258B%25E3%2582%2589%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258B%2520React%25E5%25AE%259F%25E8%25B7%25B5%25E3%2581%25AE%25E6%2595%2599%25E7%25A7%2591%25E6%259B%25B8%25E3%2580%258F%25E3%2581%25A7%25E3%2580%2581%25E6%259C%2580%25E6%2596%25B0%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A0%25E3%2581%25A85%25E7%25AB%25A0%25E5%25BA%258F%25E7%259B%25A4%25E3%2581%258C%25E5%258B%2595%25E3%2581%258B%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25AE%25E3%2581%25A7%25E3%2580%2581%25E5%258B%2595%25E3%2581%258F...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ihok%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKejhESUZGcEliSGtLNnV4SnBJQnl1eGtCQkwwWU5zamE5VGx6bzk9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ihok</dc:creator></item><item><title><![CDATA[React 基礎基本と仕組みについて]]></title><description><![CDATA[Reactの基礎を整理した本]]></description><link>https://zenn.dev/watari0408/books/react-guide-book-2025</link><guid isPermaLink="true">https://zenn.dev/watari0408/books/react-guide-book-2025</guid><pubDate>Mon, 08 Sep 2025 06:49:31 GMT</pubDate><dc:creator>watari</dc:creator></item><item><title><![CDATA[Vue3の条件付きレンダリングについて調べてみた]]></title><description><![CDATA[Vue3の条件付きレンダリングは、特定の条件に基づいてDOM（Webページの構造）の一部を描画したり、しなかったりする機能です。これにより、動的なユーザーインターフェースを効率的に作成できます。主に v-if と v-show という2つのディレクティブ（Vue独自の属性）を使います。
+
+
+ v-if: 条件が真のときだけ描画
+v-if ディレクティブは、指定された条件式が true の場合にのみ、その要素とそれに含まれるコンテンツをDOMに描画します。条件が false の場合は、DOMから要素が完全に取り除かれます（HTML内にコメントとして残ることもあります）。
+JavaScrip...]]></description><link>https://zenn.dev/shunsuke_stack/articles/1548f75c172724</link><guid isPermaLink="true">https://zenn.dev/shunsuke_stack/articles/1548f75c172724</guid><pubDate>Mon, 08 Sep 2025 01:06:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6u31N0vp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vue3%25E3%2581%25AE%25E6%259D%25A1%25E4%25BB%25B6%25E4%25BB%2598%25E3%2581%258D%25E3%2583%25AC%25E3%2583%25B3%25E3%2583%2580%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E8%25AA%25BF%25E3%2581%25B9%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Nakajima.js%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFhZmNlYzMzOWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Nakajima.js</dc:creator></item><item><title><![CDATA[データ型とリテラル]]></title><description><![CDATA[
+ データ型とリテラルについて
+!
+プログラミングでは、扱う情報にはいろいろな「種類」があります。例えば、数字、文字、YES/NOの真偽、などなど。これらの情報の種類のことを「データ型」と呼びます。
+そして、「リテラル」というのは、プログラムの中に「直接、値を書き込むときの書き方」のことです。
+データ型は「何を表現したいか」（例：数字、文字、YES/NO）
+リテラルは「それをどう表現するか」（例：123、"abc"、true）
+
+
+ 💡データ型
+
+データ型はプリミティブ型とオブジェクトからなる
+
+!
+データ型とは、プログラムで扱うデータの種類や性質を定義するものです。JavaScript...]]></description><link>https://zenn.dev/y_mi/articles/bdb685a3274651</link><guid isPermaLink="true">https://zenn.dev/y_mi/articles/bdb685a3274651</guid><pubDate>Mon, 08 Sep 2025 00:37:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iYpLqK-l--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%259E%258B%25E3%2581%25A8%25E3%2583%25AA%25E3%2583%2586%25E3%2583%25A9%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A1%25E3%2583%25BC%25E3%2580%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsveS5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ちー。</dc:creator></item><item><title><![CDATA[Discord botコマンド登録の個人的チートシート]]></title><description><![CDATA[友人と2人で創作をやっているDiscordサーバに入れる用のbotを開発しました。
+Vide Codingで終われるはずがbotのコマンド登録でつまづき、知見が得られたので自分用にまとめておきます。
+ちなみに作ったbotはこちら:
+https://github.com/t-esserac-t/meetingSetBot
+
+ 前提
+
+ 対象
+
+Node.jsでDiscord botを開発する人
+
+JavaScript初心者だけどやっていく人
+
+
+
+
+ 開発環境
+プラットフォーム: Cloudflare Workers + Durable Objects
+開発言語: TypeScript
+W...]]></description><link>https://zenn.dev/tesseract/articles/fc8a1cf64dd7e2</link><guid isPermaLink="true">https://zenn.dev/tesseract/articles/fc8a1cf64dd7e2</guid><pubDate>Sun, 07 Sep 2025 06:32:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nKgJ62nG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Discord%2520bot%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E7%2599%25BB%25E9%258C%25B2%25E3%2581%25AE%25E5%2580%258B%25E4%25BA%25BA%25E7%259A%2584%25E3%2583%2581%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:HANAE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hPS0Z0VGxtQlJEcGdZXzgzel9BdXZ5ajFhZ0ZuczdZajRWck8yUmE4PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>HANAE</dc:creator></item><item><title><![CDATA[JavaScriptでABC422(A-C)]]></title><description><![CDATA[https://atcoder.jp/contests/abc422
+
+ A - Stage Clear
+https://atcoder.jp/contests/abc422/tasks/abc422_a
+${n}-8なら${n+1}-1、そうでなければ${n}-${x+1}
+やるだけではある
+https://atcoder.jp/contests/abc422/submissions/69098053
+2分16秒 AC!
+
+ B - Looped Rope
+https://atcoder.jp/contests/abc422/tasks/abc422_b
+Bは愚直
+範囲外を見ようとした...]]></description><link>https://zenn.dev/aya_koto/articles/5d8044a3aadcf4</link><guid isPermaLink="true">https://zenn.dev/aya_koto/articles/5d8044a3aadcf4</guid><pubDate>Sun, 07 Sep 2025 06:09:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kyeNXJ9T--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:JavaScript%25E3%2581%25A7ABC422%2528A-C%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ayasaka-Koto%2520%252F%2520Aya...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VkNTRlMDBjYTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ayasaka-Koto / AyagawaP</dc:creator></item><item><title><![CDATA[アクセシビリティ実装レシピ20 — Webサイトを美味しくする作り方]]></title><description><![CDATA[
+ はじめに
+オライリーから出版されている『Web Accessibility Cookbook』を読みました。
+https://accessibility-cookbook.com/
+この本は、ナビゲーション、フォーム、テーブル、ダイアログなどといった Webでよく使うコンポーネントをアクセシブルに実装するための「レシピ集」 です。
+単に「こう作る」だけでなく「なぜそれが必要なのか」まで解説されており、問題 → 解決策 → 実装例 → 議論という流れで整理されているのが特徴です。
+読んでいて「これはフロントエンド実装で押さえておきたい」と感じた項目を、20個に絞ってまとめました。
+!
+...]]></description><link>https://zenn.dev/kalubi/articles/6dda7001f8fdcf</link><guid isPermaLink="true">https://zenn.dev/kalubi/articles/6dda7001f8fdcf</guid><pubDate>Sun, 07 Sep 2025 00:14:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PZu7nMqV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A2%25E3%2582%25AF%25E3%2582%25BB%25E3%2582%25B7%25E3%2583%2593%25E3%2583%25AA%25E3%2583%2586%25E3%2582%25A3%25E5%25AE%259F%25E8%25A3%2585%25E3%2583%25AC%25E3%2582%25B7%25E3%2583%259420%2520%25E2%2580%2594%2520Web%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2582%2592%25E7%25BE%258E%25E5%2591%25B3%25E3%2581%2597%25E3%2581%258F%25E3%2581%2599%25E3%2582%258B%25E4%25BD%259C%25E3%2582%258A%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E4%25B8%258A%25E3%2581%258B%25E3%2582%258B%25E3%2581%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc2YmMxZjZlZGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>上かるび</dc:creator></item><item><title><![CDATA[複数のリンク集をまとめたWebページ]]></title><description><![CDATA[
+ Linktreeとは
+複数のリンクをまとめたWebページを簡単に作成することができるサービスです。
+プロフィールに1つのURLだけしか貼り付けられないSNS（X,Instagramなど）のために開発されました。
+Linktree
+
+ 目的
+URLをまとめたリンク集を2つ以上同じ画面に表示できるWebページを作成します。
+現行のリンク集作成サービスの無料アカウントでは、リンク集を2つ以上同じ画面に作成することができません。
+私は音楽配信を趣味で行っており、2つの名義を使っています。2つの名義のリンク集を1枚のWebページ（LP）にまとまめたかったため作成しました。
+
+ GASについて
+...]]></description><link>https://zenn.dev/jackull/articles/cff53ffea6810c</link><guid isPermaLink="true">https://zenn.dev/jackull/articles/cff53ffea6810c</guid><pubDate>Sat, 06 Sep 2025 19:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--i3kF9Z0m--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25A4%2587%25E6%2595%25B0%25E3%2581%25AE%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25AF%25E9%259B%2586%25E3%2582%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%259FWeb%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:jackull%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWFhSU9zSFd2YXZIVlVtQWpJeG9SY0RxVnJwMmYtc2YtOXRld2VSQlhrd3ZOaDM0cmM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>jackull</dc:creator></item><item><title><![CDATA[JavaScript三十六景Tips集]]></title><description><![CDATA[[背景]
+このようなまとめが欲しかった。
+LeetCodeを解きながら長い間書き留めてきたJavaScript Tips集です。
+チーム開発ではもちろん可読性が重視されますので、その点もご留意ください。
+
+
+ elseブロックを段落で表現する
+if(!l1) return l2
+else if(!l2) return l1
+else if (l1.val &lt;= l2.val) // ...some
+else return l2
+
+ いっぺんに代入する
+// let left = 0;
+// let current = 0;
+// let answer = 0;
+
+let left ...]]></description><link>https://zenn.dev/kenjimorita/articles/3e18a07dda529b</link><guid isPermaLink="true">https://zenn.dev/kenjimorita/articles/3e18a07dda529b</guid><pubDate>Sat, 06 Sep 2025 13:47:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TRIiF7if--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E4%25B8%2589%25E5%258D%2581%25E5%2585%25AD%25E6%2599%25AFTips%25E9%259B%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kenmori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QwNGVlN2ZjNWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kenmori</dc:creator></item><item><title><![CDATA[非数 や -0.0 は truthy?]]></title><description><![CDATA[
+ これは何？
+浮動小数点数を bool に変換できちゃう人たちが、0, -0.0, 非数 をどうするのか調べてみた。
+
+ 調査結果
+
+ C / C++
+たぶん、浮動小数点数としては「0 は falsy、それ以外は truthy」なので
+下表の仕様になる。
+
+
+
+値
+0.0
+-0.0
+非数
+
+
+
+
+結果
+false
+false
+true
+
+
+
+で、手元で実際そうだった。未定義動作とかでもないと思う。
+
+ Ruby
+ruby は、nil と false 以外全部 truthy なので
+
+
+
+値
+0.0
+-0.0
+非数
+
+
+
+
+結果
+true
+true
+true
+
+
+
+となる。
+
+ Pyth...]]></description><link>https://zenn.dev/nabetani/articles/19591496dfaadb</link><guid isPermaLink="true">https://zenn.dev/nabetani/articles/19591496dfaadb</guid><pubDate>Sat, 06 Sep 2025 07:57:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HhnXc40O--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%259D%259E%25E6%2595%25B0%2520%25E3%2582%2584%2520-0.0%2520%25E3%2581%25AF%2520truthy%253F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Takenori%2520NABETANI%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEwNjk0ZGU4YzIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Takenori NABETANI</dc:creator></item><item><title><![CDATA[JavaScriptの関数の参照と無名関数について調べてみた]]></title><description><![CDATA[
+ はじめに
+JavaScriptで関数を呼び出す際に、今までなんとなくfunc()とfuncを使っていたのでそれぞれの実行タイミングや役割についてしっかり理解するためにまとめてみました。
+
+ 関数の実行タイミングについて
+例えば以下のhandleClick関数があった場合、実行する際に複数の記法があると思います。
+function handleClick() {
+ console.log('クリックされました。');
+}
+
+ パターンA
+document.addEventListener('click', handleClick)
+
+ パターンB
+document.addEventLi...]]></description><link>https://zenn.dev/shusaku009/articles/func_callback</link><guid isPermaLink="true">https://zenn.dev/shusaku009/articles/func_callback</guid><pubDate>Sat, 06 Sep 2025 06:49:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Y6PKUvgT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AE%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25AE%25E5%258F%2582%25E7%2585%25A7%25E3%2581%25A8%25E7%2584%25A1%25E5%2590%258D%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E8%25AA%25BF%25E3%2581%25B9%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shusaku009%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1YWY1OGM1NjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shusaku009</dc:creator></item><item><title><![CDATA[定数に関数を代入する考え方]]></title><description><![CDATA[
+ JavaScriptの「関数式」を学んで気づいたこと
+定数に関数を代入す流イメージがつかずまとめました。
+
+
+ 実際に書いてみたコード
+// 関数式（アロー関数）
+const square = (num) =&gt; {
+  return num * num;
+};
+
+console.log(square(5));   // 25
+console.log(square(10));  // 100
+#学んだこと・気づき
+関数も「値」扱いできる
+数値や文字列を代入するのと同じように、関数も代入できる。
+const に代入することで再代入を防げる
+間違えて関数を書き換えるのを防げるのは安心...]]></description><link>https://zenn.dev/ikkoz/articles/be16a938ba3daa</link><guid isPermaLink="true">https://zenn.dev/ikkoz/articles/be16a938ba3daa</guid><pubDate>Fri, 05 Sep 2025 13:51:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1UVgRn7Q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25AE%259A%25E6%2595%25B0%25E3%2581%25AB%25E9%2596%25A2%25E6%2595%25B0%25E3%2582%2592%25E4%25BB%25A3%25E5%2585%25A5%25E3%2581%2599%25E3%2582%258B%25E8%2580%2583%25E3%2581%2588%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2584%25E3%2581%25A3%25E3%2581%2593%25E3%2581%2586%25E3%2583%2581%25E3%2583%25A3%25E3%2583%25B3%25E3%2583%258D%25E3%2583%25AB%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgwMWY4MWI3MzEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>いっこうチャンネル</dc:creator></item><item><title><![CDATA[キャラを動かして学ぶ！　ゲームプログラミング超入門🔰]]></title><description><![CDATA[本書は「小さな動作サンプル」を積み重ねながら、JavaScript と enchant.js の基礎を学ぶ教材です。
+背景とスプライトの表示から、タイムラインによる移動、キー操作処理、タップ処理、スコア表示までを丁寧に解説します。
+最終回では簡単な動く仕組みとしてまとめ、次の制作へつなげます。]]></description><link>https://zenn.dev/takasupika/books/86956e7744d494</link><guid isPermaLink="true">https://zenn.dev/takasupika/books/86956e7744d494</guid><pubDate>Fri, 05 Sep 2025 12:07:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5Hb9ZMHF--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci80ZDU4ZTg1NDVkLmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>たかたか</dc:creator></item><item><title><![CDATA[『モダンJavaScriptの基本から始める React実践の教科書』で、最新環境だと4章序盤が動かないので、動くように読み替えたことメモ]]></title><description><![CDATA[※　「動かない」原因は、自分の誤入力などの可能性もあります
+※　調べた範囲で「ReactDOM.renderが非推奨」や、そもそもの「create-react-app自体が非推奨」になったことが原因だと推測しますが、詳細やその発生理由までは追っていません
+
+ 読み替えたこと一覧
+前提：create-react-app で初期ファイルを作成し、出来るだけそのまま使う。（95ページの『現在の構成』に合わせない）
+
+96ページ～：修正対象ファイル
+
+- index.js
++ App.js
+※ 99ページ以降はApp.jsが修正対象ファイルになるので、そこまでは気にせず読み進む方が楽
+※ 101...]]></description><link>https://zenn.dev/ihok/articles/6e5e257da679a7</link><guid isPermaLink="true">https://zenn.dev/ihok/articles/6e5e257da679a7</guid><pubDate>Fri, 05 Sep 2025 06:06:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qIEcf5bO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258E%25E3%2583%25A2%25E3%2583%2580%25E3%2583%25B3JavaScript%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E3%2581%258B%25E3%2582%2589%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258B%2520React%25E5%25AE%259F%25E8%25B7%25B5%25E3%2581%25AE%25E6%2595%2599%25E7%25A7%2591%25E6%259B%25B8%25E3%2580%258F%25E3%2581%25A7%25E3%2580%2581%25E6%259C%2580%25E6%2596%25B0%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A0%25E3%2581%25A84%25E7%25AB%25A0%25E5%25BA%258F%25E7%259B%25A4%25E3%2581%258C%25E5%258B%2595%25E3%2581%258B%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25AE%25E3%2581%25A7%25E3%2580%2581%25E5%258B%2595%25E3%2581%258F...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ihok%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKejhESUZGcEliSGtLNnV4SnBJQnl1eGtCQkwwWU5zamE5VGx6bzk9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ihok</dc:creator></item></channel></rss>
