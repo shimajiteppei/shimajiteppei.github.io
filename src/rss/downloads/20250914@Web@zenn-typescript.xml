@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 14 Sep 2025 04:59:43 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[NextJSで魅せるロード画面にこだわってみる]]></title><description><![CDATA[
+ はじめに
+ことの始まりとしては、筆者が起業したので、電子広告台をケチるためにHPを作成する必要があった。
+官報に記載すると数万円取られるからである。あとつまらない。
+
+ 前提：Webサイトにおけるロード画面という概念について
+基本的にロード画面というのは、ゲームの地形などを読み込む際に、ユーザーを待たせないために導入されがちだ。　だがHPやLPにおいては、必ずしもその限りではない。
+動画サイトのように、大量のデータを扱う際にはロード画面は作成する必要があるだろう。
+だが、殆どのウェブサイトは所詮HTMLなどのマークアップと、いくつかの画像データしか扱わない。
+それも画像データは非同期...]]></description><link>https://zenn.dev/bitcat/articles/9cc4daf42de351</link><guid isPermaLink="true">https://zenn.dev/bitcat/articles/9cc4daf42de351</guid><pubDate>Sun, 14 Sep 2025 00:19:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oG1Pczwl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:NextJS%25E3%2581%25A7%25E9%25AD%2585%25E3%2581%259B%25E3%2582%258B%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E7%2594%25BB%25E9%259D%25A2%25E3%2581%25AB%25E3%2581%2593%25E3%2581%25A0%25E3%2582%258F%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:bitcat%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk4NzNmYTQ2Y2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>bitcat</dc:creator></item><item><title><![CDATA[短いコードは本当に正しいのか 可読性とのバランス]]></title><description><![CDATA[コンポーネントの実装で、フラグを条件分岐で代入する処理を書いたところ、コードレビューで「もっとシンプルに書ける」との指摘を受けたため書いてみた。
+//example.component.ts
+const text: string = 'test'
+let isValid: boolean
+
+// 実装したコード
+if (this.text) {
+  this.isValid = true
+} else {
+  this.isValid = false
+}
+
+// レビューで指摘された修正後のコード
+this.isValid = !!this.text //レビューで指摘された修正後のコー...]]></description><link>https://zenn.dev/kei1225/articles/deb44a82d7d367</link><guid isPermaLink="true">https://zenn.dev/kei1225/articles/deb44a82d7d367</guid><pubDate>Sat, 13 Sep 2025 23:22:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ps7EQPea--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%259F%25AD%25E3%2581%2584%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25AF%25E6%259C%25AC%25E5%25BD%2593%25E3%2581%25AB%25E6%25AD%25A3%25E3%2581%2597%25E3%2581%2584%25E3%2581%25AE%25E3%2581%258B%2520%25E5%258F%25AF%25E8%25AA%25AD%25E6%2580%25A7%25E3%2581%25A8%25E3%2581%25AE%25E3%2583%2590%25E3%2583%25A9%25E3%2583%25B3%25E3%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:KEI%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZjMzE5MGYyNWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KEI</dc:creator></item><item><title><![CDATA[【React】ジャイロセンサによるインタラクションを実現する]]></title><description><![CDATA[この記事では、Webサイトでスマホの傾きを検知して描画に反映する方法を紹介します。
+
+ デモ
+
+
+ 準備
+
+ 実装環境
+今回はVite・React・TypeScriptで実装します。
+DeviceOrientationEventはhttpsのサイトでしか使えないので、そのための環境を作ります。
+Viteでhttps環境を用意
+npm vite create@latest
+
+npm i @vitejs/plugin-basic-ssl
+
+
+ vite.config.jsを作成
+import basicSsl from '@vitejs/plugin-basic-ssl'
+
+export d...]]></description><link>https://zenn.dev/makimura3329/articles/try-device-orientation-react</link><guid isPermaLink="true">https://zenn.dev/makimura3329/articles/try-device-orientation-react</guid><pubDate>Sat, 13 Sep 2025 11:01:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lxODzBOx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590React%25E3%2580%2591%25E3%2582%25B8%25E3%2583%25A3%25E3%2582%25A4%25E3%2583%25AD%25E3%2582%25BB%25E3%2583%25B3%25E3%2582%25B5%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25A9%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%2520Makimura%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ3ZTE1MjMxZmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>🧟Makimura🧟</dc:creator></item><item><title><![CDATA[TypeScript のコンパイルを理解する]]></title><description><![CDATA[
+ 🌼 はじめに
+こんにちは、にわかエンジニアです。
+私はエンジニア歴のほとんどを TypeScript と一緒に過ごしていてあまり気づいてなかったのですが、どうやら TypeScript のコンパイルは他の言語に比べて変わってるらしいです。
+なので、TypeScript のコンパイルについて調べたものを共有したいと思います！
+
+ 1. コンピューターの言語、人の言語
+まずは根本的な言語（とその翻訳）について説明します。
+
+ 1-1. 低水準言語
+低水準言語（low-level language）は、コンピュータが理解しやすいように作られた言語で、一般的に機械語とアセンブリ言語を指します...]]></description><link>https://zenn.dev/luvmini511/articles/4ba982523ee265</link><guid isPermaLink="true">https://zenn.dev/luvmini511/articles/4ba982523ee265</guid><pubDate>Sat, 13 Sep 2025 07:36:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4-RvQiJi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%2520%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2591%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BF%25E3%2582%2593%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA3YTQwNzFlZWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>みんちゃん</dc:creator></item><item><title><![CDATA[【TypeScript】4つの強力な型操作についてまとめる]]></title><description><![CDATA[
+ はじめに
+typeof・keyof・Conditional Types・Mapped Typesについて、まとめていきたいと思います。
+
+ typeofとは
+typeofは、変数や定数の値から型を取得するために使います。関数や変数の型を一括で取得でき、型定義の冗長さを減らせるという利点があります。
+!
+文字列リテラルや数値リテラルを保持したい場合は as const が必要です。
+
+
+ 変数の型を取得し、それを新しい型として定義する例
+const user = {
+  name: '太郎',
+  age: 30
+};
+
+// typeof user で、user オブジェクトの型を取...]]></description><link>https://zenn.dev/daichi09167/articles/5379cfe1b8f576</link><guid isPermaLink="true">https://zenn.dev/daichi09167/articles/5379cfe1b8f576</guid><pubDate>Sat, 13 Sep 2025 03:36:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UTC8-tgh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590TypeScript%25E3%2580%25914%25E3%2581%25A4%25E3%2581%25AE%25E5%25BC%25B7%25E5%258A%259B%25E3%2581%25AA%25E5%259E%258B%25E6%2593%258D%25E4%25BD%259C%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daichi09167%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVjODE0Yzk4ODUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daichi09167</dc:creator></item><item><title><![CDATA[学園祭アプリ開発備忘録]]></title><description><![CDATA[学園祭アプリの設計から運用までを記録したものです。]]></description><link>https://zenn.dev/watari0408/books/university-festival-app-dev-log</link><guid isPermaLink="true">https://zenn.dev/watari0408/books/university-festival-app-dev-log</guid><pubDate>Fri, 12 Sep 2025 18:44:19 GMT</pubDate><dc:creator>watari</dc:creator></item><item><title><![CDATA[[拡張機能] TkMR]]></title><description><![CDATA[
+ TkMRとは？
+TkMRは、各フォルダのタスク管理を行う Vscode の拡張機能です。
+リポジトリ
+
+ どんな機能があるの？
+
+タスク追加
+タスク削除
+タスクチェック
+
+
+ なんで作ったの？
+各フォルダごとにタスク管理をしたくて作成しました。
+
+ 貢献について
+大歓迎です!!
+プルリクなどIssuesなど立ててください!!
+]]></description><link>https://zenn.dev/kaedeek/articles/e70e7c9331319e</link><guid isPermaLink="true">https://zenn.dev/kaedeek/articles/e70e7c9331319e</guid><pubDate>Fri, 12 Sep 2025 14:45:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--c6umCBSF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:%255B%25E6%258B%25A1%25E5%25BC%25B5%25E6%25A9%259F%25E8%2583%25BD%255D%2520TkMR%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E2%2582%2596%25E2%2582%2590%25E2%2582%2591%25F0%259D%2592%25B9%25E2%2582%2591%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZlYjdhNTk3ZDguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ₖₐₑ𝒹ₑ</dc:creator></item><item><title><![CDATA[【決定版】TypeScriptのSQLタグ付きテンプレートリテラルで10種類のSQLiteドライバー全部試す]]></title><description><![CDATA[
+ はじめに
+TypeScriptのSQLタグ付きテンプレートリテラルを数行で書けて超絶便利だったので、10種類のSQLiteドライバーで試した結果を紹介します。
+
+ SQLタグ付きテンプレートリテラル
+今回の記事で何回も登場しますが、先にSQLタグ付きテンプレートリテラルだけ紹介します。
+type SqlBinding = null | number | string;
+
+type SqlQuery = {
+  query: string;
+  bindings: SqlBinding[];
+};
+
+function sql(strings: TemplateStringsArray,...]]></description><link>https://zenn.dev/tkithrta/articles/b6606f0c8f0dc1</link><guid isPermaLink="true">https://zenn.dev/tkithrta/articles/b6606f0c8f0dc1</guid><pubDate>Fri, 12 Sep 2025 10:16:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--G6tsSS6s--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E6%25B1%25BA%25E5%25AE%259A%25E7%2589%2588%25E3%2580%2591TypeScript%25E3%2581%25AESQL%25E3%2582%25BF%25E3%2582%25B0%25E4%25BB%2598%25E3%2581%258D%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%25E3%2583%25AA%25E3%2583%2586%25E3%2583%25A9%25E3%2583%25AB%25E3%2581%25A710%25E7%25A8%25AE%25E9%25A1%259E%25E3%2581%25AESQLite%25E3%2583%2589%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2590%25E3%2583%25BC%25E5%2585%25A8%25E9%2583%25A8%25E8%25A9%25A6%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%25BB%2592%25E3%2583%25B0%25E6%25A8%25B9%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E0NDRlMTA4ZjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>黒ヰ樹</dc:creator></item><item><title><![CDATA[[React Router] ページ離脱時のアラートを表示する機能をラクに導入できるようにカスタムフック化する🔧]]></title><description><![CDATA[
+ はじめに
+
+何らかの入力フォームでの作業中にタブを閉じてしまったり、ページ離脱をしようとした際に、未保存の内容がありそれが失われてしまうことを警告し防止するためのアラート。「たくさんの項目の入力を行ったのに、誤操作でページを閉じてしまい全部最初からやり直しになってしまった...」というようなケースを防止するために大切な機能ですが、警告アラートの見た目をサービスに合わせたものにしたいだとか、任意の画面でこの機能を導入するための実装の再利用性だとか、状態管理はどうするかだとか、その辺を考慮するとどう実装しようかなとちょっと悩む機能のひとつだと個人的に思っています。
+そこで、アラート機能が...]]></description><link>https://zenn.dev/ispec_inc/articles/c977f2e6d5b469</link><guid isPermaLink="true">https://zenn.dev/ispec_inc/articles/c977f2e6d5b469</guid><pubDate>Fri, 12 Sep 2025 09:29:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fQ6W6AYa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BReact%2520Router%255D%2520%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E9%259B%25A2%25E8%2584%25B1%25E6%2599%2582%25E3%2581%25AE%25E3%2582%25A2%25E3%2583%25A9%25E3%2583%25BC%25E3%2583%2588%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E3%2583%25A9%25E3%2582%25AF%25E3%2581%25AB%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25A0%25E3%2583%2595%25E3%2583%2583%25E3%2582%25AF%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:s.kato%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRmN2Y5YzE4ZTUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:ispec%2520inc.%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JlOTEwZDc3Y2UuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>s.kato</dc:creator></item><item><title><![CDATA[Awilixで依存関係の解決を型安全に自動化する方法【TypeScript】]]></title><description><![CDATA[
+ 結論
+
+AwilixのloadModulesを使ってserviceの登録を自動化する
+
+export defaultしているファイルを収集して型定義ファイルを生成するスクリプトを実行する
+
+この記事ではファクトリ関数のみに対応したスクリプトを紹介します
+
+
+生成された型をawilix.createContainer()の型引数に渡す
+
+// awilix-types.d.ts
+import type foo from './src/foo.ts'
+import type bar from './src/bar.ts'
+
+export type Cradle = {
+  // impo...]]></description><link>https://zenn.dev/eringi_shimeji/articles/8fe332441ba299</link><guid isPermaLink="true">https://zenn.dev/eringi_shimeji/articles/8fe332441ba299</guid><pubDate>Fri, 12 Sep 2025 08:50:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hKdlLoaq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Awilix%25E3%2581%25A7%25E4%25BE%259D%25E5%25AD%2598%25E9%2596%25A2%25E4%25BF%2582%25E3%2581%25AE%25E8%25A7%25A3%25E6%25B1%25BA%25E3%2582%2592%25E5%259E%258B%25E5%25AE%2589%25E5%2585%25A8%25E3%2581%25AB%25E8%2587%25AA%25E5%258B%2595%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25E3%2580%2590TypeScript%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:smatsuo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM4ZTY5MWJkOWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>smatsuo</dc:creator></item><item><title><![CDATA[【React Query】queryFnでundefinedをreturnしてはいけない理由と解決策]]></title><description><![CDATA[
+ 【React Query】queryFnでundefinedをreturnしてはいけない理由と解決策
+React Queryは非常に便利なデータフェッチングライブラリですが、queryFnでundefinedを返すと様々な問題が発生します。
+この記事では、queryFnで沼った私の屍を超えてもらえるように解説します。
+何気なくqueryFnでundefinedを返してしまい、「なんで動かないんだ...？」と数時間悩みました。
+isSuccessはtrueなのにdataが使えない、キャッシュがおかしい、TypeScriptで型エラーが出る...。
+同じ沼にハマる人を一人でも減らすために...]]></description><link>https://zenn.dev/communitio/articles/react-query-queryfn-undefined</link><guid isPermaLink="true">https://zenn.dev/communitio/articles/react-query-queryfn-undefined</guid><pubDate>Fri, 12 Sep 2025 05:57:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6c9WPQ9p--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590React%2520Query%25E3%2580%2591queryFn%25E3%2581%25A7undefined%25E3%2582%2592return%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25AF%25E3%2581%2584%25E3%2581%2591%25E3%2581%25AA%25E3%2581%2584%25E7%2590%2586%25E7%2594%25B1%25E3%2581%25A8%25E8%25A7%25A3%25E6%25B1%25BA%25E7%25AD%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:cigar%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZkZjJlMWY1MjUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%259F%25E3%2583%25A5%25E3%2583%258B%25E3%2583%2586%25E3%2582%25A3%25E3%2582%25AA%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZmYTNhYjkyZDQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>cigar</dc:creator></item><item><title><![CDATA[ログインやアカウント登録も不要なイベントスケジュール公開機能]]></title><description><![CDATA[
+ はじめに
+先にネタバレしておくと、タイトルにある「ログインやアカウント登録も不要」とは「特定ページ（/ctrl-schedules）でのみイベントスケジュールの編集が行える」というものです。
+
+つまり、当該ページ（/ctrl-schedules）の存在さえ知っていれば誰でもアクセスして編集でき（てしまい）ます。
+そうです。明らかに実用的ではありません。
+では、何故こんなものを筆者が作ったかというと「業務におけるアカウント発行やログインという行為自体を億劫に感じる（※必要に応じて当然行うものの極力したくはない）」という方々の存在を知ったためです。
+具体的には、筆者所属のグループ企業内に...]]></description><link>https://zenn.dev/benjuwan/articles/e6c5b0ac590d71</link><guid isPermaLink="true">https://zenn.dev/benjuwan/articles/e6c5b0ac590d71</guid><pubDate>Fri, 12 Sep 2025 05:42:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cJNf1SNT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%2584%25E3%2582%25A2%25E3%2582%25AB%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%2588%25E7%2599%25BB%25E9%258C%25B2%25E3%2582%2582%25E4%25B8%258D%25E8%25A6%2581%25E3%2581%25AA%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25B9%25E3%2582%25B1%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AB%25E5%2585%25AC%25E9%2596%258B%25E6%25A9%259F%25E8%2583%25BD%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:benjuwan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSnd2XzJhLTN4SnJmSkN0Ql9wMkkwWUlVaVlTY1ozLTFQZFZoNkxsaUIyRmc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>benjuwan</dc:creator></item><item><title><![CDATA[【TypeScript】アクセス修飾子 (access modifier)]]></title><description><![CDATA[
+ はじめに
+アクセス修飾子についてあらためてまとめてみようと思い、この記事を書いてます。
+
+ アクセス修飾子とは？
+TypeScript の アクセス修飾子（access modifier） は、クラスのプロパティやメソッドに対して どこからアクセスできるか を制御する仕組みです。
+オブジェクト指向プログラミングにおける「カプセル化（encapsulation）」の考え方に基づいており、クラス内部の状態を外部から勝手に変更されないように保護するために使われます。
+
+ TypeScript で使えるアクセス修飾子
+
+ 1. public（デフォルト）
+
+どこからでもアクセス可能
+デフォル...]]></description><link>https://zenn.dev/daichi09167/articles/69bc934231f5fe</link><guid isPermaLink="true">https://zenn.dev/daichi09167/articles/69bc934231f5fe</guid><pubDate>Fri, 12 Sep 2025 03:33:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aZzMPdT_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590TypeScript%25E3%2580%2591%25E3%2582%25A2%25E3%2582%25AF%25E3%2582%25BB%25E3%2582%25B9%25E4%25BF%25AE%25E9%25A3%25BE%25E5%25AD%2590%2520%2528access%2520modifier%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daichi09167%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVjODE0Yzk4ODUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daichi09167</dc:creator></item><item><title><![CDATA[React RouterのBrowserRouterとHashRouterの違い]]></title><description><![CDATA[
+ はじめに
+React Routerを使ってSPA(Single Page Application)を構築するとき、ルーティングの方法として BrowserRouter と HashRouter を選べます。
+どちらもURLによって画面を切り替える機能ですが、その違いを解説します。
+
+ BrowserRouterとは
+
+ 特徴
+
+HTML5の History API を利用してルーティングを実現する
+URLは通常のパス形式(/about や /users/123)になる
+見た目がシンプルでSEOに強い
+
+
+ メリット
+
+URLが直感的
+サーバーサイドレンダリング(SSR)との相性が良い...]]></description><link>https://zenn.dev/ket8/articles/4ee19c9ec4b0a3</link><guid isPermaLink="true">https://zenn.dev/ket8/articles/4ee19c9ec4b0a3</guid><pubDate>Fri, 12 Sep 2025 03:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TQ8EF1----/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520Router%25E3%2581%25AEBrowserRouter%25E3%2581%25A8HashRouter%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:KET8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FkZWE4MmFjMWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KET8</dc:creator></item><item><title><![CDATA[OSS・依存ソフトのサポート期限をまとめて確認できる「EOL Timeline」を作りました]]></title><description><![CDATA[
+ はじめに
+EOL Timeline という依存ソフトウェア（OSS・フレームワーク・プラットフォームなど）のサポート期限をタイムライン形式でまとめて確認できる開発ツールを WEB アプリケーションとしてリリースしました。
+
+この記事では EOL Timeline を作った動機や技術的な詳細、工夫点などを紹介していきます。
+▼ ページリンク
+https://eol-timeline.dev/
+
+ 作ろうと思ったモチベーション
+いきなりですがみなさん以下のような経験をしたことがあるのではないでしょうか。
+「サービスの中長期開発計画を立てよう！ところで依存ソフトウェアのサポート期限っていつ...]]></description><link>https://zenn.dev/ksuke_0322/articles/b519896ad1f988</link><guid isPermaLink="true">https://zenn.dev/ksuke_0322/articles/b519896ad1f988</guid><pubDate>Thu, 11 Sep 2025 11:42:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--88HdWWYV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OSS%25E3%2583%25BB%25E4%25BE%259D%25E5%25AD%2598%25E3%2582%25BD%25E3%2583%2595%25E3%2583%2588%25E3%2581%25AE%25E3%2582%25B5%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E6%259C%259F%25E9%2599%2590%25E3%2582%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E7%25A2%25BA%25E8%25AA%258D%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2580%258CEOL%2520Timeline%25E3%2580%258D%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258A%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:knekooba%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKeWNlZ0xSQmhJZDFmQ0dwUFdUakthV0tpWnlwZ01DcV85aWlEbFY9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>knekooba</dc:creator></item><item><title><![CDATA[TypeScriptの型推論でCLIバリデーションをなくせた話]]></title><description><![CDATA[CLIツールを作っていると、必ずと言っていいほど書くことになるバリデーションコード。TypeScriptの型推論を活用したら、このコードをほぼ不要にできたお話をします。
+きっかけは、いろんなプロジェクトのコードを読んでいて気づいたことでした。どのCLIツールにも、似たようなバリデーションコードが含まれているんです。例えばこんな感じです：
+if (!opts.server &amp;&amp; opts.port) {
+  throw new Error('--port requires --server flag');
+}
+
+if (opts.server &amp;&amp; !opt...]]></description><link>https://zenn.dev/hongminhee/articles/27bce6eb777dea</link><guid isPermaLink="true">https://zenn.dev/hongminhee/articles/27bce6eb777dea</guid><pubDate>Thu, 11 Sep 2025 05:27:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jfL9kwYS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25AE%25E5%259E%258B%25E6%258E%25A8%25E8%25AB%2596%25E3%2581%25A7CLI%25E3%2583%2590%25E3%2583%25AA%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E3%2581%25AA%25E3%2581%258F%25E3%2581%259B%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25B4%25AA%2520%25E6%25B0%2591%25E6%2586%2599%25EF%25BC%2588%25E3%2583%259B%25E3%2583%25B3%25E3%2583%25BB%25E3%2583%259F%25E3%2583%25B3%25E3%2583%2592%25EF%25BC%2589%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE4Yzk5ZDE5YWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>洪 民憙（ホン・ミンヒ）</dc:creator></item><item><title><![CDATA[サマーインターン@マネーフォワードの参加記]]></title><description><![CDATA[
+ はじめに
+マネーフォワードのエンジニアサマーインターンシップ(8/15〜8/28)にフロントエンド領域で参加させていただきました。
+参加記を書くのが推奨されているとのことで、せっかくなので外国人留学生としての視点も交えて書いてみようと思います。
+短い期間でしたが、メンターやチームメンバーの皆さんの丁寧なサポートのおかげで多くの学びを得ることができました。言語面・文化面での挑戦はありましたが、それ以上に「学ぶ楽しさ」と「安心して挑戦できる環境」を感じられたのは大きな喜びでした。
+同じように日本でエンジニアを目指す留学生の方の参考になればうれしいです。
+
+ インターン参加までの経緯
+私は...]]></description><link>https://zenn.dev/acanoneko/articles/d17d48887855bf</link><guid isPermaLink="true">https://zenn.dev/acanoneko/articles/d17d48887855bf</guid><pubDate>Thu, 11 Sep 2025 03:31:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1nYUHwUb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B5%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%2540%25E3%2583%259E%25E3%2583%258D%25E3%2583%25BC%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AF%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25AE%25E5%258F%2582%25E5%258A%25A0%25E8%25A8%2598%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ACAne%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJmOTJjZmYyYzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ACAne</dc:creator></item><item><title><![CDATA[Reactの代表的なフック]]></title><description><![CDATA[
+ はじめに
+フックを用いると、コンポーネントからReactの様々な機能が利用できるようになります。
+組み込みのフックを利用することも、独自にカスタマイズしたフックを作って再利用することも可能です。
+https://ja.react.dev/reference/react/hooks
+主要なフックを把握しておくことで、要件に合わせた選択ができるようになります。
+ここでは代表的なフックとその具体例を紹介します。
+
+ useState
+状態管理を行うためのフックです。
+カウンターやフォーム入力値の保持など、コンポーネント内で値を管理したいときに利用します。
+import { useState...]]></description><link>https://zenn.dev/ket8/articles/c5fb879104b015</link><guid isPermaLink="true">https://zenn.dev/ket8/articles/c5fb879104b015</guid><pubDate>Thu, 11 Sep 2025 03:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Zjf2pO2C--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2581%25AE%25E4%25BB%25A3%25E8%25A1%25A8%25E7%259A%2584%25E3%2581%25AA%25E3%2583%2595%25E3%2583%2583%25E3%2582%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:KET8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FkZWE4MmFjMWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KET8</dc:creator></item><item><title><![CDATA[Prisma で作る ActiveRecord ライクな in_batches: 大量データを効率的に処理しよう]]></title><description><![CDATA[Ruby on Rails の ORM である ActiveRecord には、in_batches という便利なメソッドがあります。
+これは大量のレコードを一度にメモリにロードすることなく、 ほどよい塊 で少しずつ処理するためのメソッドです。
+// 1000件ずつ読み込んで処理
+User.in_batches(of: 1000) do |batch|
+  batch.each do |user|
+    # 各ユーザーに対する処理をここに記述
+  end
+end
+もし User.all.each のように書いてしまうと、大量のレコードを読み込んだ場合にメモリを無駄に消費してしまい、パフ...]]></description><link>https://zenn.dev/spacemarket/articles/af0ac52661df50</link><guid isPermaLink="true">https://zenn.dev/spacemarket/articles/af0ac52661df50</guid><pubDate>Thu, 11 Sep 2025 02:36:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NvSxU5Bi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Prisma%2520%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%2520ActiveRecord%2520%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25AF%25E3%2581%25AA%2520in_batches%253A%2520%25E5%25A4%25A7%25E9%2587%258F%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E5%258A%25B9%25E7%258E%2587%25E7%259A%2584%25E3%2581%25AB%25E5%2587%25A6%25E7%2590%2586%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:8zca%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc1NTA1NzM5OGYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B9%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B9%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25B1%25E3%2583%2583%25E3%2583%2588%2520Engineer%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E1MGEwODcxNDEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>8zca</dc:creator></item><item><title><![CDATA[【TypeScript】Shallow copy と Deep copyの違い]]></title><description><![CDATA[
+ はじめに
+最近の状態管理ライブラリではこの問題をあまり意識しなくてよくなっているかもですが、ふとShallow copy と Deep copyの違いについて疑問を持ったのでまとめていきたいと思います。
+
+ Shallow copyとは？
+Shallow copy は オブジェクトの第一階層だけをコピーする 方法です。
+
+直下のプロパティはコピーされる
+ネストされたオブジェクトや配列は 参照が共有される
+コピー後にネストオブジェクトの内容を変更すると、元のオブジェクトにも影響する
+
+注意点
+
+スプレッド構文や Object.assign は 自身の列挙可能なプロパティ のみコピーしま...]]></description><link>https://zenn.dev/daichi09167/articles/71dce66fc1b0b0</link><guid isPermaLink="true">https://zenn.dev/daichi09167/articles/71dce66fc1b0b0</guid><pubDate>Thu, 11 Sep 2025 02:25:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rdXGhD2c--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590TypeScript%25E3%2580%2591Shallow%2520copy%2520%25E3%2581%25A8%2520Deep%2520copy%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daichi09167%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVjODE0Yzk4ODUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daichi09167</dc:creator></item></channel></rss>

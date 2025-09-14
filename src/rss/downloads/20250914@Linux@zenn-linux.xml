@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 14 Sep 2025 11:26:45 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[RTL8125のデバイスドライバーをインストール]]></title><description><![CDATA[
+ 前提
+内蔵ドライブから起動した場合ネットワークが繋がらないが、ライブイメージから起動するとネットワークが使える状況
+
+ mount
+ライブイメージから起動して作業する。
+# dir=/mnt/foo
+# mkdir $dir 
+# mount /dev/bar $dir
+
+ ドライバーのソースコード配置
+下のURLからソースコードをDLして対象内の適当なディレクトリに置く。
+https://www.realtek.com/Download/List?cate_id=584
+
+ chroot
+# mount --rbind /dev $dir/dev
+# mount --rbind /...]]></description><link>https://zenn.dev/toru3/articles/a58390be68f2ee</link><guid isPermaLink="true">https://zenn.dev/toru3/articles/a58390be68f2ee</guid><pubDate>Sun, 14 Sep 2025 08:05:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--evj4IZRD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:RTL8125%25E3%2581%25AE%25E3%2583%2587%25E3%2583%2590%25E3%2582%25A4%25E3%2582%25B9%25E3%2583%2589%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Toru3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI0YzQwY2I5MjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Toru3</dc:creator></item><item><title><![CDATA[Linuxのパッケージインストール備忘]]></title><description><![CDATA[
+ 前提
+Red Hat系ディストリビューション（RHEL/CentOS/AlmaLinux/Rocky）を想定。
+
+権限: root もしくは sudo が使えること
+媒体: DVDドライブ（例: /dev/sr0）に挿入したインストールDVD、またはISOファイル
+バージョン差異:
+
+RHEL/CentOS 7: yum
+
+RHEL/Alma/Rocky 8/9: dnf（yumは互換コマンドとして動作）
+
+
+
+
+ マウントまでの流れ
+
+媒体（デバイス/ISO）の確認
+
+
+DVD/Blu-ray メディア:
+
+デバイス名の確認: lsblk -f もしくは blkid
+
+一般的には ...]]></description><link>https://zenn.dev/rknmht/articles/2025-09-14-linux-package-install-memo</link><guid isPermaLink="true">https://zenn.dev/rknmht/articles/2025-09-14-linux-package-install-memo</guid><pubDate>Sat, 13 Sep 2025 20:37:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2650NJcp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25AE%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E5%2582%2599%25E5%25BF%2598%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:rknmht%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM1ZTY1MmUxNTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>rknmht</dc:creator></item><item><title><![CDATA[ターミナルでもsemantic layerの恩恵を受ける]]></title><description><![CDATA[
+ 背景
+semantic layer でゴリゴリ開発しててなんとなくターミナルで可視化できればなーと思った
+
+ 目的
+
+terminal上でもグラフで可視化する
+
+
+ 前提
+
+metricflow を使います
+詳細な環境セットアップは述べないのでスニペットです
+
+
+ 内容
+結論、以下を使ってパイプで流すだけ
+https://github.com/medialab/xan
+
+ 具体例
+mf query --metrics total_orders_revenue \
+  --group-by metric_time__week \
+  --where "metric_time__week...]]></description><link>https://zenn.dev/kiwamizamurai/articles/7ae52af007dd6d</link><guid isPermaLink="true">https://zenn.dev/kiwamizamurai/articles/7ae52af007dd6d</guid><pubDate>Sat, 13 Sep 2025 07:24:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5MWd0dEj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%259F%25E3%2583%258A%25E3%2583%25AB%25E3%2581%25A7%25E3%2582%2582semantic%2520layer%25E3%2581%25AE%25E6%2581%25A9%25E6%2581%25B5%25E3%2582%2592%25E5%258F%2597%25E3%2581%2591%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kiwamizamurai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNmlfQml4aE1xOXZXUzBiSk5VZ1ZYb2ZDNkVva0toRGNkZXJzSjg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kiwamizamurai</dc:creator></item><item><title><![CDATA[vi/viewコマンドの使い方について]]></title><description><![CDATA[
+ きっかけ
+業務でサーバー操作をする場面が多くなり、よく使用するvi,viewコマンドについてもっといろいろと知りたくなり、業務効率が上がると思うコマンドと併せて、今後の自分のために残そうと思い作成しようと思いました。
+
+ 実行環境
+
+Git Bash   git version 2.50.0.windows.2
+
+
+ viエディタとは
+Linuxで使用されるファイルを編集するためのツールです。
+使用する場面としては、サーバー内のファイル書き換え操作が大半なのではないかと思います。
+
+ viエディタの起動
+vi,viewコマンドはそれぞれ
+$ vi filename.txt
+または
+$...]]></description><link>https://zenn.dev/tkg_reis/articles/bc925fc16adc55</link><guid isPermaLink="true">https://zenn.dev/tkg_reis/articles/bc925fc16adc55</guid><pubDate>Sat, 13 Sep 2025 05:05:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wiJQ7goL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:vi%252Fview%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tkg-reis%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUNxMXVoX1dFUE8yS21IbW9JSENHU3Q4Zk5TNnJSbkl6UGw1enhnQlpjd3c9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tkg-reis</dc:creator></item><item><title><![CDATA[UbuntuではなくUbuntuServerを選ぶ理由]]></title><description><![CDATA[
+ はじめに
+Linuxディストリビューションの代表格であるUbuntu。
+多くの人が「Ubuntu」と聞くと、グラフィカルでデスクトップ画面を思い浮かべるでしょう。
+しかし、Ubuntuには「Ubuntu Server」という超超超おすすめのUbuntuが存在します。
+一般的にUbuntuを使うというと、Desktop版が出てくると思います。GUI操作のものです。
+しかし、もし目的がWebサーバーの構築、開発環境の運用、あるいは自宅サーバーの立ち上げならば、あえてGUIを捨てて、Ubuntu Serverを選ぶことが、メリットしかないと断言します。
+CLIは操作がしづらい、黒い画面が嫌...]]></description><link>https://zenn.dev/takeda_dev/articles/e353c912d5fa1d</link><guid isPermaLink="true">https://zenn.dev/takeda_dev/articles/e353c912d5fa1d</guid><pubDate>Fri, 12 Sep 2025 13:55:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7N6jehcO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25E3%2581%25A7%25E3%2581%25AF%25E3%2581%25AA%25E3%2581%258FUbuntuServer%25E3%2582%2592%25E9%2581%25B8%25E3%2581%25B6%25E7%2590%2586%25E7%2594%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tamago%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QwOTJlMmViMWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tamago</dc:creator></item><item><title><![CDATA[RHEL/CentOS系ローカルYUM/DNFリポジトリサーバーの構築と運用ガイド]]></title><description><![CDATA[
+ はじめに
+インターネットに接続できないクローズドな環境や、多数のサーバーに同じバージョンのパッケージを安定して配布したい環境では、ローカルにYUM/DNFリポジトリサーバー（パッチサーバー）を構築することが不可欠です。
+この記事では、RHEL (CentOS, Rocky Linuxなど) 系のLinuxディストリビューション向けに、ローカルリポジトリサーバーを構築し、最新のセキュリティパッチやパッケージを同期（アップデート）し続けるための基本的な手順を解説します。
+
+ なぜローカルリポジトリが必要か？
+
+
+セキュリティ: インターネットに直接接続できないサーバー群にも、セキュリティ...]]></description><link>https://zenn.dev/iikanash1/articles/rhel-local-yum-repo-guide</link><guid isPermaLink="true">https://zenn.dev/iikanash1/articles/rhel-local-yum-repo-guide</guid><pubDate>Fri, 12 Sep 2025 12:07:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WV0SmEDP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:RHEL%252FCentOS%25E7%25B3%25BB%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25ABYUM%252FDNF%25E3%2583%25AA%25E3%2583%259D%25E3%2582%25B8%25E3%2583%2588%25E3%2583%25AA%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25AE%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%25A8%25E9%2581%258B%25E7%2594%25A8%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%25AA%25E3%2581%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDFiWHB5WG1ra0p5WS16N0d5bExrZFdLelFBRFl5RFExd1dsQkxvNldjX21WeTY2eUQ9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かなし</dc:creator></item><item><title><![CDATA[Linux(Fedora/Rocky)にAndroid Studioを導入する2025年版セットアップメモ]]></title><description><![CDATA[
+ はじめに
+普段はサーバーサイド開発がメインのエンジニアでも、ちょっとしたツールやIoT連携などで、Androidアプリを開発する必要に迫られることがありますよね。
+この記事では、書き溜めていた古いメモを元に、最新のLinux環境（FedoraやRocky LinuxなどRPM系）にAndroid Studioをインストールし、最初の「Hello World」アプリを動かすまでの基本的な手順を、2025年版としてまとめます。
+
+ Step 1: JDKのインストール
+現在のAndroid Studioは独自のJDKを同梱していますが、システムに標準的なJDKをインストールしておくのが無...]]></description><link>https://zenn.dev/meantix/articles/72e8e005c6693e</link><guid isPermaLink="true">https://zenn.dev/meantix/articles/72e8e005c6693e</guid><pubDate>Fri, 12 Sep 2025 10:45:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wgz3DWKN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%2528Fedora%252FRocky%2529%25E3%2581%25ABAndroid%2520Studio%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2599%25E3%2582%258B2025%25E5%25B9%25B4%25E7%2589%2588%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:meantix%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MxMmZiYzIwOTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>meantix</dc:creator></item><item><title><![CDATA[Debianのスワップサイズを変更]]></title><description><![CDATA[
+ スワップのサイズ
+XServer VPSで2GBメモリの無料VPSを利用して、それを6GBにアップグレードしました。2GBメモリのときはスワップのサイズが2GBで、6GBにアップグレードしたあともスワップは2GBのままでした。
+Linuxを使い始めた頃、スワップのサイズはメモリと同じくらいがよいという情報を見かけて、これまでそのようにしてきたので、なんとなく居心地の悪さを感じていました。
+Geminiに聞いたら以下のような回答でした。
+
+
+
+RAM容量
+推奨スワップサイズ
+
+
+
+
+2GB未満
+RAMの2倍
+
+
+2GB〜8GB
+RAMと同じか、少し多め (例: RAMの1倍〜1.5倍)...]]></description><link>https://zenn.dev/kaorumori/articles/8d32f011492b4e</link><guid isPermaLink="true">https://zenn.dev/kaorumori/articles/8d32f011492b4e</guid><pubDate>Fri, 12 Sep 2025 02:38:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OucAd7hc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Debian%25E3%2581%25AE%25E3%2582%25B9%25E3%2583%25AF%25E3%2583%2583%25E3%2583%2597%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25BA%25E3%2582%2592%25E5%25A4%2589%25E6%259B%25B4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kaorumori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRjZjA1YmY3MzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kaorumori</dc:creator></item><item><title><![CDATA[WSL2 で PATH に Windows 側のパスがあると man の起動速度が遅くなる]]></title><description><![CDATA[WSL2 環境で man を実行する際、PATH に /mnt/ で始まる Windows 側のパスが含まれていると遅くなる。
+WSL2 ではデフォルトで PATH に /mnt/ で始まる Windows 側のパスが追加される。
+PATH に Windows 側のパスが含まれている場合:
+$ time man -k apropos
+apropos (1)          - search the manual page names and descriptions
+
+________________________________________________________
+Ex...]]></description><link>https://zenn.dev/kit494way/articles/253773b9c78c08</link><guid isPermaLink="true">https://zenn.dev/kit494way/articles/253773b9c78c08</guid><pubDate>Thu, 11 Sep 2025 12:52:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6PtHMPqg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WSL2%2520%25E3%2581%25A7%2520PATH%2520%25E3%2581%25AB%2520Windows%2520%25E5%2581%25B4%25E3%2581%25AE%25E3%2583%2591%25E3%2582%25B9%25E3%2581%258C%25E3%2581%2582%25E3%2582%258B%25E3%2581%25A8%2520man%2520%25E3%2581%25AE%25E8%25B5%25B7%25E5%258B%2595%25E9%2580%259F%25E5%25BA%25A6%25E3%2581%258C%25E9%2581%2585%25E3%2581%258F%25E3%2581%25AA%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:KITAGAWA%2520Yasutaka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvay5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KITAGAWA Yasutaka</dc:creator></item><item><title><![CDATA[Proxmox VE のライブマイグレーションの実力を試す(Proxmox VE インストール ～ ライブマイグレーション実行まで)]]></title><description><![CDATA[
+ はじめに
+Broadcom 社による VMware 買収に伴うライセンス体系の大幅な変更を受け、VMware ESXi からの移行を検討せざるを得ない状況に直面しました。
+移行先を選定する上で、仮想マシン（VM）を無停止で別ホストへ移動させるライブマイグレーション機能は、サービスを維持するための重要な評価基準の一つです。
+この記事では、移行先の有力候補である Proxmox VE のライブマイグレーション機能が実運用に耐えうるものなのかを検証します。
+その第一歩として、3 台の物理マシンを使った検証環境の構築手順を記録します。
+
+ ライブマイグレーションとは
+仮想マシンを稼働させたま...]]></description><link>https://zenn.dev/seita621/articles/e0dcd29e8440a0</link><guid isPermaLink="true">https://zenn.dev/seita621/articles/e0dcd29e8440a0</guid><pubDate>Thu, 11 Sep 2025 06:56:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uqzJzNHJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Proxmox%2520VE%2520%25E3%2581%25AE%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25B0%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AE%25E5%25AE%259F%25E5%258A%259B%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2599%2528Proxmox%2520VE%2520%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%2520%25EF%25BD%259E%2520%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25B0%25E3%2583%25AC...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SEITA152%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0JGUXdxYVczbWpzZ3BiZlFnM3d6RjNxN0pBQy1ZMmE1UEFPUy1TcXZNYVNJaEh3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SEITA152</dc:creator></item><item><title><![CDATA[AlmaLinux で EDAツール が `libkrb5` 周りで落ちた件と、`LD_PRELOAD` で直した記録]]></title><description><![CDATA[
+ TL;DR
+
+症状：dgcom_exec: symbol lookup error（Kerberos → さらに OpenSSL でも連鎖）
+原因：ツール同梱ライブラリとOS標準ライブラリが“混在”し、同じ系列のセットとして揃っていなかった
+解決：.cshrc で OS 側の libk5crypto.so.3 と libcrypto.so.1.1 を LD_PRELOAD で先読みさせ、セットを統一
+
+
+
+ 環境
+
+OS：AlmaLinux 8.9
+ツール：EDAツール
+シェル：csh
+
+
+
+
+ 症状（最初のエラー）
+ツール起動時に以下で停止。
+/tools/fusioncompil...]]></description><link>https://zenn.dev/yusukenjp/articles/5b50f8407764ad</link><guid isPermaLink="true">https://zenn.dev/yusukenjp/articles/5b50f8407764ad</guid><pubDate>Thu, 11 Sep 2025 05:54:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9zLPmxvw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AlmaLinux%2520%25E3%2581%25A7%2520EDA%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%2520%25E3%2581%258C%2520%2560libkrb5%2560%2520%25E5%2591%25A8%25E3%2582%258A%25E3%2581%25A7%25E8%2590%25BD%25E3%2581%25A1%25E3%2581%259F%25E4%25BB%25B6%25E3%2581%25A8%25E3%2580%2581%2560LD_PRELOAD%2560%2520%25E3%2581%25A7%25E7%259B%25B4%25E3%2581%2597%25E3%2581%259F%25E8%25A8%2598%25E9%258C%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yusuken%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MzNmRmNjkyZjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yusuken</dc:creator></item><item><title><![CDATA[ネイティブLinux環境（デュアルブート）を楽しむ]]></title><description><![CDATA[
+ 要旨
+
+VirtualBoxやWSL2などの仮想環境において、RAMやCPUについては7割程度のリソースを使用できます（計算速度はネイティブ環境より若干遅い程度）
+しかし、仮想環境でのGPUのグラフィックは、機能・速度共に大幅に制限されます
+デュアルブートにすると、マシンのハードウェアに直接アクセスできるので、上記制限を回避できます
+UEFI/GPTが標準になってから10年経過し、デュアルブートにより起動不能となるリスクが減りました（/boot/efiを壊してもWindowsのインストールメディアから修復することができます）
+使用したハードウェア環境
+デスクトップPC: Core i...]]></description><link>https://zenn.dev/mount_music/articles/709b0abfc54ab7</link><guid isPermaLink="true">https://zenn.dev/mount_music/articles/709b0abfc54ab7</guid><pubDate>Wed, 10 Sep 2025 09:47:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2iw6cVPQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%258D%25E3%2582%25A4%25E3%2583%2586%25E3%2582%25A3%25E3%2583%2596Linux%25E7%2592%25B0%25E5%25A2%2583%25EF%25BC%2588%25E3%2583%2587%25E3%2583%25A5%25E3%2582%25A2%25E3%2583%25AB%25E3%2583%2596%25E3%2583%25BC%25E3%2583%2588%25EF%25BC%2589%25E3%2582%2592%25E6%25A5%25BD%25E3%2581%2597%25E3%2582%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:HD_mount_Music%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjh0QnZ0VjY3NFJZSXROTmVoQXM5UHdPUGhjaVk2elFHdXBSTFVybHhNVjhGbVhJa2M9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>HD_mount_Music</dc:creator></item><item><title><![CDATA[BINDで作る、LAN内向けキャッシュDNSサーバー構築メモ]]></title><description><![CDATA[
+ はじめに
+自宅やオフィスのLAN内に、Webアクセスを高速化したり、内部向けドメインの名前解決を行ったりするための「キャッシュDNSサーバー」を構築することがあります。
+この記事では、自身のWikiに書き溜めていたメモを元に、CentOS系のLinuxディストリビューションで、定番のDNSソフトであるBIND (Berkeley Internet Name Domain) を使って、LAN内向けのキャッシュDNSサーバーを構築する際の要点をまとめます。
+
+ 1. BINDのインストール
+yumまたはdnfで、bindと、セキュリティを高めるためのbind-chrootをインストールし...]]></description><link>https://zenn.dev/meantix/articles/66721b65e9f23d</link><guid isPermaLink="true">https://zenn.dev/meantix/articles/66721b65e9f23d</guid><pubDate>Wed, 10 Sep 2025 03:52:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tYXLMsZl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:BIND%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%25E3%2580%2581LAN%25E5%2586%2585%25E5%2590%2591%25E3%2581%2591%25E3%2582%25AD%25E3%2583%25A3%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A5DNS%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E6%25A7%258B%25E7%25AF%2589%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:meantix%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MxMmZiYzIwOTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>meantix</dc:creator></item><item><title><![CDATA[udevがenp1s0を名付けるまで]]></title><description><![CDATA[udevが動作するOSではネットワークインターフェース名にenp1s0といった名前が割り当てられることがあります
+この記事ではこのインターフェース名が何者なのか、そしてどこからやってきたのかを解説します
+
+ 結論
+
+Linuxカーネルは起動後にPCIデバイスを走査してカーネル内部のデバイスドライバがnet_deviceを初期化する。このとき、net_deviceの名前は"eth%d"形式で初期化される
+udevはユーザープロセス起動後にNetlink APIを通じてnet_deviceの名前をenp1s0に変更する
+（おまけ）ユーザーはNetlink APIを使用してnet_device...]]></description><link>https://zenn.dev/calluscorn/articles/137736eddfa867</link><guid isPermaLink="true">https://zenn.dev/calluscorn/articles/137736eddfa867</guid><pubDate>Tue, 09 Sep 2025 16:52:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Y2lvrds1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:udev%25E3%2581%258Cenp1s0%25E3%2582%2592%25E5%2590%258D%25E4%25BB%2598%25E3%2581%2591%25E3%2582%258B%25E3%2581%25BE%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%2593%25E3%2581%25AE%25E3%2582%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y4MmMwODE4MTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たこのめ</dc:creator></item><item><title><![CDATA[[Linux]: Errors were encountered while processing:エラーの修正]]></title><description><![CDATA[
+ [Linux]: Errors were encountered while processing:エラーの修正
+Debianでパッケージの更新を行おうとしたら以下のようなエラーが出た。
+Errors were encountered while processing:
+linux-image-6.1.0-39-amd64
+
+ 解決法
+参考サイトの「該当パッケージに関する一時ファイルを削除して再インストール、アップデートする」の通りにやったら直った
+このディレクトリにはパッケージのインストール前後に実行するスクリプトファイルやパッケージに関する情報を含むファイルが配置されているらしく...]]></description><link>https://zenn.dev/mitate_gengaku/articles/fix-errors-were-encountered-while-processing</link><guid isPermaLink="true">https://zenn.dev/mitate_gengaku/articles/fix-errors-were-encountered-while-processing</guid><pubDate>Tue, 09 Sep 2025 10:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--go7wMsvb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BLinux%255D%253A%2520Errors%2520were%2520encountered%2520while%2520processing%253A%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%25AE%25E4%25BF%25AE%25E6%25AD%25A3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25BE%25A1%25E6%25A5%25AF%25E7%258E%2584%25E5%25B6%25BD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0tQOVRYWHQ5Qm1BLVplcURoLWdxUHl4RVFjMmNsRkhSNk95XzVVSVVhPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>御楯玄嶽</dc:creator></item><item><title><![CDATA[【Linux】代表的なファイルコマンドに関する初心者メモ]]></title><description><![CDATA[
+ はじめに
+よく（練習で）使っている10個のコマンドをまとめていきます。
+
+ 1. ls (list)
+
+ 機能: ファイルやディレクトリの一覧を表示
+
+ 代表的なオプション
+
+
+-l: 詳細なリスト形式で表示（パーミッション、所有者、サイズなど）
+
+
+-a: 隠しファイル（.で始まるファイル）も表示
+
+
+-h: ファイルサイズを読みやすい形式（KB, MB, GB）で表示
+
+
+
+ 使い方例
+
+
+ls -lah
+ディレクトリ内のすべてのファイルの詳細を、人間が読みやすい形式で確認します。
+新しいファイルが作成されたか、パーミッションが正しく設定されているかなどをチェックする際によく使わ...]]></description><link>https://zenn.dev/mabo23/articles/2c0c33ee321a5f</link><guid isPermaLink="true">https://zenn.dev/mabo23/articles/2c0c33ee321a5f</guid><pubDate>Mon, 08 Sep 2025 01:06:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3D2yCwIY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Linux%25E3%2580%2591%25E4%25BB%25A3%25E8%25A1%25A8%25E7%259A%2584%25E3%2581%25AA%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AB%25E9%2596%25A2%25E3%2581%2599%25E3%2582%258B%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mabo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQzM2ZhMmVkZDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mabo</dc:creator></item><item><title><![CDATA[STM32をUbuntuから書き込みたい]]></title><description><![CDATA[
+ UbuntuでSTM32_Programmer_CLIを行う方法
+Yocto開発を行ってると、Yoctoを実行したUbuntu環境で書き換えを行いたい時があります。
+しかもコマンドラインで（機器にはSSHで接続してます）
+そこで、メーカー公式のSTM32_Programmer_CLIをインストールする際に、なんか引っかかったので記録を残しておきます（自分用メモでもある）
+おっと、YoctoってLinuxでしょ？って思うじゃん。
+STM32はマイコンもLinuxが動くチップ（STM32MPシリーズ）も同じライターで書き込み出来るので、同様の方法で操作可能だと思ってください。
+
+ 本体の...]]></description><link>https://zenn.dev/nonnoise/articles/4034cf78955d05</link><guid isPermaLink="true">https://zenn.dev/nonnoise/articles/4034cf78955d05</guid><pubDate>Sun, 07 Sep 2025 13:38:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JcRmKZcP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:STM32%25E3%2582%2592Ubuntu%25E3%2581%258B%25E3%2582%2589%25E6%259B%25B8%25E3%2581%258D%25E8%25BE%25BC%25E3%2581%25BF%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%258C%2597%25E7%25A5%259E%25E9%259B%2584%25E5%25A4%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M0YTYxODY1YTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>北神雄太</dc:creator></item><item><title><![CDATA[【EC2】RHEL9.4にてパスワード認証無しでSSH接続する]]></title><description><![CDATA[
+ はじめに
+RHEL9.4のEC2にパスワード認証無しでSSH接続しようとしたが、少しつまづいた。
+今回は、RHEL9.4のEC2にパスワード認証無しでSSH接続するための手順について解説する。
+
+ 環境
+
+AWS
+RHEL9.4
+
+
+バージョン
+# cat /etc/redhat-release ;date
+Red Hat Enterprise Linux release 9.4 (Plow)
+#
+
+
+ 最初に実施した設定
+下記設定を実施したが、SSH接続できず。
+1./etc/ssh/sshd_configの下記設定をNo → Yes にする。
+
+設定前
+
+PasswordAuth...]]></description><link>https://zenn.dev/supersatton/articles/ad60fc490d66a6</link><guid isPermaLink="true">https://zenn.dev/supersatton/articles/ad60fc490d66a6</guid><pubDate>Sun, 07 Sep 2025 04:21:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--g2mJZJID--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590EC2%25E3%2580%2591RHEL9.4%25E3%2581%25AB%25E3%2581%25A6%25E3%2583%2591%25E3%2582%25B9%25E3%2583%25AF%25E3%2583%25BC%25E3%2583%2589%25E8%25AA%258D%25E8%25A8%25BC%25E7%2584%25A1%25E3%2581%2597%25E3%2581%25A7SSH%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:No%2520Name%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmMzBiMTIwZDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>No Name</dc:creator></item><item><title><![CDATA[Rust/GoアプリケーションのAWS Lambda向けクロスビルド方法]]></title><description><![CDATA[
+ 概要
+前回はPythonのデプロイパッケージのクロスビルドを紹介しました。
+https://zenn.dev/lucidfrontier45/articles/dd38e25209ebca
+今回はRustとGoについて、主にLinux向けのクロスビルド方法をまとめます。
+これでAWS Lambda向けの開発がはかどりますね。
+
+ Rust
+Rustのtoolchainに含まれるコンパイラのrustc自体は様々なターゲット向けにコンパイルすることができますが、linkerを含んでいないのとCに依存したRustのライブラリの時にやはりCのコンパイラが必要になるのでRustのtoolcha...]]></description><link>https://zenn.dev/lucidfrontier45/articles/8bc8afee49472f</link><guid isPermaLink="true">https://zenn.dev/lucidfrontier45/articles/8bc8afee49472f</guid><pubDate>Sat, 06 Sep 2025 16:34:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--30SdGgg2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%252FGo%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AEAWS%2520Lambda%25E5%2590%2591%25E3%2581%2591%25E3%2582%25AF%25E3%2583%25AD%25E3%2582%25B9%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:lucidfrontier45%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcxY2RkYzI0MmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>lucidfrontier45</dc:creator></item><item><title><![CDATA[パッケージやライブラリが消えた？yum historyとgrepで原因を調べる方法]]></title><description><![CDATA[
+ yum historyとgrepを使ったパッケージ管理トラブルシューティング
+
+ はじめに
+LinuxサーバーでPackage Manager関連の問題、特に「いつの間にかパッケージが消えている」といった状況に遭遇したことはありませんか？そんなときに役立つのがyum historyとgrepを組み合わせた調査手法です。
+本記事では、トラブルシューティング例を交えながら、パッケージ履歴調査の方法をご紹介します。
+
+ 基本的なgrepの使い方
+
+ 1. パッケージ名で絞り込む
+特定のパッケージに関する操作履歴を調べたい場合：
+yum history | grep httpd
+この例ではh...]]></description><link>https://zenn.dev/uepon/articles/242b44ff57c410</link><guid isPermaLink="true">https://zenn.dev/uepon/articles/242b44ff57c410</guid><pubDate>Sat, 06 Sep 2025 09:03:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--T8aw_G98--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2584%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2581%258C%25E6%25B6%2588%25E3%2581%2588%25E3%2581%259F%25EF%25BC%259Fyum%2520history%25E3%2581%25A8grep%25E3%2581%25A7%25E5%258E%259F%25E5%259B%25A0%25E3%2582%2592%25E8%25AA%25BF%25E3%2581%25B9%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ue%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lIVW4zSmVfbW43ZlowbXlNVXRtOXpyLWZ1S0J3YjVTVUhnMXJWSFE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ue</dc:creator></item></channel></rss>

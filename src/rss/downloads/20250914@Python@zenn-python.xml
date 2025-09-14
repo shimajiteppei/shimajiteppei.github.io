@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 14 Sep 2025 01:30:50 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[GCPで学ぶMLOps #1 – GCPへのデプロイを体感する（Cloud Run × Flaskアプリ）]]></title><description><![CDATA[
+ GCPで学ぶMLOps #1 – CI/CDを体感する（Cloud Run × Flaskアプリ）
+今回は CI/CDの基本をCloud Runで体感 してみます。
+まずはCI/CDの前段として、Flaskで作ったシンプルなアプリをコンテナ化し、Artifact Registryにpush → Cloud Runにデプロイして動かし、GCPにサービスをデプロイする流れを体感します。
+
+わかりやすかった記事
+https://zenn.dev/google_cloud_jp/articles/cloudrun-deploy-pattern
+
+
+ 1. CI/CDとは？
+
+
+CI (Con...]]></description><link>https://zenn.dev/kyoheyyy/articles/bc6edd5c79075f</link><guid isPermaLink="true">https://zenn.dev/kyoheyyy/articles/bc6edd5c79075f</guid><pubDate>Sat, 13 Sep 2025 08:28:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zaPF9sBV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GCP%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6MLOps%2520%25231%2520%25E2%2580%2593%2520GCP%25E3%2581%25B8%25E3%2581%25AE%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2582%2592%25E4%25BD%2593%25E6%2584%259F%25E3%2581%2599%25E3%2582%258B%25EF%25BC%2588Cloud%2520Run%2520%25C3%2597%2520Flask%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kyo-ds%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViM2ZjNmFiMWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kyo-ds</dc:creator></item><item><title><![CDATA[PythonオブジェクトをRustで効率的に処理する - pyo3-arrowによるゼロコピー実装]]></title><description><![CDATA[
+ FFI(Foreign Function Interface)の型変換のオーバーヘッド
+RustとPythonを連携させるとき、悩ましい問題がデータの受け渡しです。
+# ユーザは様々な形式でデータを渡してくる
+import numpy as np
+import pandas as pd
+
+# 素数判定をRustで高速化したい
+primes = rust_lib.is_prime_batch(np.array([2, 3, 4, 5, 6]))  # NumPy
+primes = rust_lib.is_prime_batch([2, 3, 4, 5, 6])  # Python li...]]></description><link>https://zenn.dev/driller/articles/e02c2c244b3759</link><guid isPermaLink="true">https://zenn.dev/driller/articles/e02c2c244b3759</guid><pubDate>Sat, 13 Sep 2025 08:02:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DfAuJaPE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2582%2592Rust%25E3%2581%25A7%25E5%258A%25B9%25E7%258E%2587%25E7%259A%2584%25E3%2581%25AB%25E5%2587%25A6%25E7%2590%2586%25E3%2581%2599%25E3%2582%258B%2520-%2520pyo3-arrow%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2582%25BC%25E3%2583%25AD%25E3%2582%25B3%25E3%2583%2594%25E3%2583%25BC%25E5%25AE%259F%25E8%25A3%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:driller%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lPT1dLNnlQWE9BNndvZDFlYkxTQ0FLOGlpX1E3X2hqWmVwbDdJeUE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>driller</dc:creator></item><item><title><![CDATA[【Python入門】UNIXドメインソケットで学ぶプロセス間通信の実装例（SOCK_STREAM編）]]></title><description><![CDATA[
+ はじめに
+プロセス間通信には、パイプ・名前付きパイプ・ソケットなどがあります。
+ソケットはソケットドメインとソケットタイプの組み合わせでどのようにプロセス間通信を行なうかを決めることができます。
+この記事では、以下の学習サイトで紹介されているUNIXドメインソケットを使ったクライアントとサーバのプロセス間通信の簡単な実装例（一部改良）を交えながら、ソケットの基本と処理の流れについて解説していきます。
+参考サイト
+https://recursionist.io/dashboard/course/31/lesson/1095
+
+ ソケットとは
+IBMさんの定義によると、ソケットとは以下の...]]></description><link>https://zenn.dev/mabo23/articles/9375a31ecb6265</link><guid isPermaLink="true">https://zenn.dev/mabo23/articles/9375a31ecb6265</guid><pubDate>Sat, 13 Sep 2025 06:25:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nbaVe5JX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E5%2585%25A5%25E9%2596%2580%25E3%2580%2591UNIX%25E3%2583%2589%25E3%2583%25A1%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BD%25E3%2582%25B1%25E3%2583%2583%25E3%2583%2588%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25BB%25E3%2582%25B9%25E9%2596%2593%25E9%2580%259A%25E4%25BF%25A1%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25E4%25BE%258B%25EF%25BC%2588SOCK_STREAM%25E7%25B7%25A8%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mabo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQzM2ZhMmVkZDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mabo</dc:creator></item><item><title><![CDATA[LeetCode 49. Group Anagrams (Python3)]]></title><description><![CDATA[
+ はじめに
+LeetCode 「49. Group Anagrams」の問題を Python3 で解きました。
+
+ 問題
+https://leetcode.com/problems/group-anagrams/description/
+
+ 問題文
+Given an array of strings strs, group the anagrams together. You can return the answer in any order.
+和訳
+文字列の配列strsが与えられた場合、アナグラムをグループ化します。答えは任意の順序で返して構わない。
+
+ 例
+
+
+
+Input: s...]]></description><link>https://zenn.dev/shimpo/articles/leet-code-49-20250913</link><guid isPermaLink="true">https://zenn.dev/shimpo/articles/leet-code-49-20250913</guid><pubDate>Sat, 13 Sep 2025 05:48:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4Q-bkQDd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:LeetCode%252049.%2520Group%2520Anagrams%2520%2528Python3%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shimpo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFjMzhkYTExZGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shimpo</dc:creator></item><item><title><![CDATA[AI エージェント メッセージ履歴のトリミングと要約 (LangGraph)]]></title><description><![CDATA[エージェントは会話を繰り返したり、複数のツールを呼び出したりすると、メッセージ履歴がすぐに肥大化します。その結果、トークン数の増加によるコスト増加や、LLMの制約による性能低下といった問題に直面します。そこで重要になるのが、メッセージ履歴の管理です。この記事では、その代表的な方法である「トリミング」と「要約」を紹介します。
+
+
+ メッセージ履歴のトリミング
+トリミングとは、メッセージ履歴の一部を削除し、必要な部分だけを残すことでトークン数を削減する方法です。主に「最初」または「最後」から順に履歴を削っていきます。
+pre_model_hook は、エージェントがモデルを呼び出す直前にメッ...]]></description><link>https://zenn.dev/anomura/articles/9c6541bfc53dbb</link><guid isPermaLink="true">https://zenn.dev/anomura/articles/9c6541bfc53dbb</guid><pubDate>Sat, 13 Sep 2025 05:27:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jcctnEun--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AI%2520%25E3%2582%25A8%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%25B3%25E3%2583%2588%2520%25E3%2583%25A1%25E3%2583%2583%25E3%2582%25BB%25E3%2583%25BC%25E3%2582%25B8%25E5%25B1%25A5%25E6%25AD%25B4%25E3%2581%25AE%25E3%2583%2588%25E3%2583%25AA%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25A8%25E8%25A6%2581%25E7%25B4%2584%2520%2528LangGraph%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Akira%2520N%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3AtbzlwWXR1elprWmdpVFZyYjVuU2JYODdKYTFDQ1hhdVFNY0VSUlZlaUp2SnJBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Akira N</dc:creator></item><item><title><![CDATA[LeetCode 347. Top K Frequent Elements (Python3)]]></title><description><![CDATA[
+ はじめに
+LeetCode 「347. Top K Frequent Elements」の問題を Python3 で解きました。
+
+ 問題
+https://leetcode.com/problems/top-k-frequent-elements/description/
+
+ 問題文
+Given an integer array nums and an integer k, return the k most frequent elements. You may return the answer in any order.
+和訳
+整数配列numsと整数kが与えられた場合、最も頻繁に...]]></description><link>https://zenn.dev/shimpo/articles/leet-code-347-20250912</link><guid isPermaLink="true">https://zenn.dev/shimpo/articles/leet-code-347-20250912</guid><pubDate>Fri, 12 Sep 2025 23:58:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JpXCQ88J--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LeetCode%2520347.%2520Top%2520K%2520Frequent%2520Elements%2520%2528Python3%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shimpo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFjMzhkYTExZGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shimpo</dc:creator></item><item><title><![CDATA[身近なデータで試すPythonの機械学習！　その２　お住まいの地域の不動産取引価格　続編  2　-ハイパーパラメータ自動最適化！]]></title><description><![CDATA[こんにちは！これまでの記事では、不動産取引価格のデータを用いて、
+1. 複数の機械学習モデルを試し、性能を比較する基本フロー
+2. 特定のモデル（LightGBM）に焦点を当て、学習・評価・保存する詳細手順
+
+をご紹介しました。
+前回の記事の最後では、モデル性能をさらに向上させるための一手として「ハイパーパラメータチューニング」の重要性に触れました。モデルの性能は、その内部設定であるハイパーパラメータに大きく左右されます。しかし、これらのパラメータを手動で調整するのは非常に手間がかかり、最適な組み合わせを見つけるのは至難の業です。
+　そこで今回は、自動ハイパーパラメータ最適化フレームワー...]]></description><link>https://zenn.dev/pincolo/articles/62ea1aff2a9da1</link><guid isPermaLink="true">https://zenn.dev/pincolo/articles/62ea1aff2a9da1</guid><pubDate>Fri, 12 Sep 2025 17:35:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--r7gPyAB7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25BA%25AB%25E8%25BF%2591%25E3%2581%25AA%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2581%25A7%25E8%25A9%25A6%25E3%2581%2599Python%25E3%2581%25AE%25E6%25A9%259F%25E6%25A2%25B0%25E5%25AD%25A6%25E7%25BF%2592%25EF%25BC%2581%25E3%2580%2580%25E3%2581%259D%25E3%2581%25AE%25EF%25BC%2592%25E3%2580%2580%25E3%2581%258A%25E4%25BD%258F%25E3%2581%25BE%25E3%2581%2584%25E3%2581%25AE%25E5%259C%25B0%25E5%259F%259F%25E3%2581%25AE%25E4%25B8%258D%25E5%258B%2595%25E7%2594%25A3%25E5%258F%2596%25E5%25BC%2595%25E4%25BE%25A1%25E6%25A0%25BC%25E3%2580%2580%25E7%25B6%259A%25E7%25B7%25A8%2520%25202%25E3%2580%2580-%25E3%2583%258F%25E3%2582%25A4%25E3%2583%2591%25E3%2583%25BC%25E3%2583%2591%25E3%2583%25A9%25E3%2583%25A1%25E3%2583%25BC...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2594%25E3%2583%25B3%25E3%2582%25B3%25E3%2583%25AD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MxMmRjOWM3YmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ピンコロ</dc:creator></item><item><title><![CDATA[claude codeに3次元のフラクタル図形書かせてみた]]></title><description><![CDATA[昨日は2次元のフラクタル図形をClaude Codeに作成させましたが、今回は3Dのフラクタル図形を作成させてみました。ぜひ昨日の記事もご覧ください。
+https://zenn.dev/akasan/articles/91d41376641ffc
+
+ 早速やってみる
+まずは環境構築をします。
+uv init fractal_3d -p 3.12
+cd fractal_3d
+uv add matplotlib numpy pillow
+今回claude codeに与えた指示は以下になります。
+
+pythonを使って、3次元のフラクタル図形を段階的に生成してアニメーションとして保存するコード...]]></description><link>https://zenn.dev/akasan/articles/f90c2940cf1ef3</link><guid isPermaLink="true">https://zenn.dev/akasan/articles/f90c2940cf1ef3</guid><pubDate>Fri, 12 Sep 2025 14:07:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yKEeu1oL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:claude%2520code%25E3%2581%25AB3%25E6%25AC%25A1%25E5%2585%2583%25E3%2581%25AE%25E3%2583%2595%25E3%2583%25A9%25E3%2582%25AF%25E3%2582%25BF%25E3%2583%25AB%25E5%259B%25B3%25E5%25BD%25A2%25E6%259B%25B8%25E3%2581%258B%25E3%2581%259B%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Akasan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNXJfNDFtel9OY3dPYUtMRE1vc09tbVB6YmxHM0V5N3lNZzI3QWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Akasan</dc:creator></item><item><title><![CDATA[dora-rs: これがAI時代のロボティクスミドルウェアだ！]]></title><description><![CDATA[こんにちは、渡辺貴史です。
+最近西海岸ではdora-rsというミドルウェアが流行っていると聞き、早速すこし真面目に触ってみました。すでに2.5k starがついています。
+https://github.com/dora-rs/dora
+さっそく、自分のロボットのシステムをdora-rsで換装して遊んでみました。
+いいぞ！！！ と思った。もっと流行らせたいし育てたい。
+ROSが「移動ロボットの(アルゴリズムベースの)スタンダードを作ったミドルウェア」であるとするならば、次には「AI x ロボティクスを前提にしたミドルウェア」の出現が期待されると、私は思っています。dora-rsは、そのひと...]]></description><link>https://zenn.dev/dieu_detruit/articles/cbb7b682647e0b</link><guid isPermaLink="true">https://zenn.dev/dieu_detruit/articles/cbb7b682647e0b</guid><pubDate>Fri, 12 Sep 2025 12:08:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--R_1ilnA4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:dora-rs%253A%2520%25E3%2581%2593%25E3%2582%258C%25E3%2581%258CAI%25E6%2599%2582%25E4%25BB%25A3%25E3%2581%25AE%25E3%2583%25AD%25E3%2583%259C%25E3%2583%2586%25E3%2582%25A3%25E3%2582%25AF%25E3%2582%25B9%25E3%2583%259F%25E3%2583%2589%25E3%2583%25AB%25E3%2582%25A6%25E3%2582%25A7%25E3%2582%25A2%25E3%2581%25A0%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Takafumi%2520Watanabe%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q2MWQyNGM1YmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Takafumi Watanabe</dc:creator></item><item><title><![CDATA[#3:LeetCode Roman to Integer]]></title><description><![CDATA[
+ 問題(GPT翻訳)
+
+
+Roman to Integer (Easy)
+
+
+与えられたローマ数字文字列 s を、その整数値に変換せよ。
+ローマ数字の基本記号と値：I=1, V=5, X=10, L=50, C=100, D=500, M=1000
+通常は左から右へ加算するが、小さい値が大きい値の左にあるときは減算する
+（例：IV=4, IX=9, XL=40, XC=90, CD=400, CM=900）。
+
+
+ 制約
+ 1 &lt;= s.length &lt;= 15 
+ s は 'I','V','X','L','C','D','M' のみを含む 
+ 問題の入力は常に有効なローマ...]]></description><link>https://zenn.dev/akagikouzanh/articles/32e410f0cf02e1</link><guid isPermaLink="true">https://zenn.dev/akagikouzanh/articles/32e410f0cf02e1</guid><pubDate>Fri, 12 Sep 2025 11:43:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JgyUwPLV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:%25233%253ALeetCode%2520Roman%2520to%2520Integer%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:akagikouzanh%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFlMmVlMTlkMmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>akagikouzanh</dc:creator></item><item><title><![CDATA[【Python入門】名前付きパイプを使ってプロセス間通信を実装してみる]]></title><description><![CDATA[
+ はじめに
+プロセス間通信（IPC）において、データを単方向に渡す方法としてパイプがあります。
+パイプは単方向通信に使用され、片方のプロセスが書き込み、もう片方のプロセスが読み込むことによってデータ送信を実現しています。
+詳しくはこちらの記事をご参照ください
+https://qiita.com/mabo23/items/d461387d4a2555803dac
+ただし、os.pipe() で作られる 無名パイプ は、基本的に親子関係のあるプロセス間でしか利用できません。
+そこで登場するのが 名前付きパイプ（FIFO） です。
+この記事では、名前付きパイプの概要と実際の簡易プログラムを紹...]]></description><link>https://zenn.dev/mabo23/articles/762ecfd6d93138</link><guid isPermaLink="true">https://zenn.dev/mabo23/articles/762ecfd6d93138</guid><pubDate>Fri, 12 Sep 2025 06:24:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qAPnQ34R--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E5%2585%25A5%25E9%2596%2580%25E3%2580%2591%25E5%2590%258D%25E5%2589%258D%25E4%25BB%2598%25E3%2581%258D%25E3%2583%2591%25E3%2582%25A4%25E3%2583%2597%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25BB%25E3%2582%25B9%25E9%2596%2593%25E9%2580%259A%25E4%25BF%25A1%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mabo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQzM2ZhMmVkZDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mabo</dc:creator></item><item><title><![CDATA[LiNGAMで因果探索する際の前処理の実践②：データの調整]]></title><description><![CDATA[
+ はじめに
+こんにちは、因果探索アプリケーション Causalas 開発の井手です。
+前回の記事に引き続き今回も、因果探索アルゴリズムの一つであるLiNGAMを用いた因果探索における、前処理について調査しました。
+LiNGAMに関連する論文を中心に調査を行い、因果探索する際に共通して実施される前処理として、データの性質を調整する手法に焦点を当て、まとめましたので紹介します。
+LiNGAMの前処理におけるデータクレンジングの手法については、前回の記事を参照してください。
+
+
+ 不均衡データへの対応
+データの不均衡とは、特定のクラスのデータ数が他のクラスに比べて著しく少ない状態を指します。...]]></description><link>https://zenn.dev/as_causal/articles/e642ce304ef0a3</link><guid isPermaLink="true">https://zenn.dev/as_causal/articles/e642ce304ef0a3</guid><pubDate>Fri, 12 Sep 2025 04:38:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Wk42dh2n--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LiNGAM%25E3%2581%25A7%25E5%259B%25A0%25E6%259E%259C%25E6%258E%25A2%25E7%25B4%25A2%25E3%2581%2599%25E3%2582%258B%25E9%259A%259B%25E3%2581%25AE%25E5%2589%258D%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25AE%25E5%25AE%259F%25E8%25B7%25B5%25E2%2591%25A1%25EF%25BC%259A%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2581%25AE%25E8%25AA%25BF%25E6%2595%25B4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E4%25BA%2595%25E6%2589%258B%2520%25E9%25BA%25BB%25E5%258F%258B%25E7%25BE%258E%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlNDhjNDQ5MDQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:SCREEN%2520AS%2520%25E5%259B%25A0%25E6%259E%259C%25E6%258E%25A2%25E7%25B4%25A2%25E3%2583%2581%25E3%2583%25BC%25E3%2583%25A0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlNzhkNTc3OTAuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>井手 麻友美</dc:creator></item><item><title><![CDATA[LeetCode 703. Kth Largest Element in a Stream (Python3)]]></title><description><![CDATA[
+ はじめに
+LeetCode 「703. Kth Largest Element in a Stream」の問題を Python3 で解きました。
+
+ 問題
+https://leetcode.com/problems/kth-largest-element-in-a-stream/description/
+
+ 問題文
+You are part of a university admissions office and need to keep track of the kth highest test score from applicants in real-time. This h...]]></description><link>https://zenn.dev/shimpo/articles/leet-code-703-20250906</link><guid isPermaLink="true">https://zenn.dev/shimpo/articles/leet-code-703-20250906</guid><pubDate>Thu, 11 Sep 2025 21:44:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--f6fqg9QA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LeetCode%2520703.%2520Kth%2520Largest%2520Element%2520in%2520a%2520Stream%2520%2528Python3%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shimpo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFjMzhkYTExZGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shimpo</dc:creator></item><item><title><![CDATA[claude codeにフラクタル図形書かせてみた]]></title><description><![CDATA[今回はclaude codeを使ってフラクタル図形を作らせてみました。claude codeをはじめ生成AIはどこまでできる能力があるのかを測るためのシリーズになります。前回は立方体をターミナルでぐるぐる回すものをやりましたが、それの第二弾ですね。
+https://zenn.dev/akasan/articles/11fed840eedaa7
+※ バタバタしていて、コードの解説まではできません。次回以降行けるタイミングでさせてもらいます
+
+ フラクタル図形とは？
+Wikipediaによると
+
+図形の部分と全体が自己相似（再帰）になっているものなどをいう
+
+ということです。あるAから一部B...]]></description><link>https://zenn.dev/akasan/articles/91d41376641ffc</link><guid isPermaLink="true">https://zenn.dev/akasan/articles/91d41376641ffc</guid><pubDate>Thu, 11 Sep 2025 13:37:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Aq_iBt8G--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:claude%2520code%25E3%2581%25AB%25E3%2583%2595%25E3%2583%25A9%25E3%2582%25AF%25E3%2582%25BF%25E3%2583%25AB%25E5%259B%25B3%25E5%25BD%25A2%25E6%259B%25B8%25E3%2581%258B%25E3%2581%259B%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Akasan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNXJfNDFtel9OY3dPYUtMRE1vc09tbVB6YmxHM0V5N3lNZzI3QWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Akasan</dc:creator></item><item><title><![CDATA[【Python入門】パイプで親子プロセス間通信をしてみる（親↔︎子）]]></title><description><![CDATA[
+ はじめに
+前回の記事で、親子関係にあるプロセスのプロセス間通信を実現する方法としてパイプを解説し、親プロセスから子プロセスへのデータの渡し方について解説しました。
+前回の記事はこちら
+https://zenn.dev/mabo23/articles/f829f541b9e427
+この記事では、親プロセスと子プロセスが相互にパイプを使ってプロセス間通信を実装する方法を、実体験に基づき解説していきます。
+ここでは、実際に遭遇したエラーの意味と原因についてもまとめていきます。
+
+ 開発環境
+
+OS: macOS Sequoia 15.6.1
+PC: MacBook Pro(M2チップ)
+エ...]]></description><link>https://zenn.dev/mabo23/articles/81e48690e0826d</link><guid isPermaLink="true">https://zenn.dev/mabo23/articles/81e48690e0826d</guid><pubDate>Thu, 11 Sep 2025 06:19:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZVsn082Z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E5%2585%25A5%25E9%2596%2580%25E3%2580%2591%25E3%2583%2591%25E3%2582%25A4%25E3%2583%2597%25E3%2581%25A7%25E8%25A6%25AA%25E5%25AD%2590%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25BB%25E3%2582%25B9%25E9%2596%2593%25E9%2580%259A%25E4%25BF%25A1%25E3%2582%2592%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%25EF%25BC%2588%25E8%25A6%25AA%2520%25E5%25AD%2590%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mabo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQzM2ZhMmVkZDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mabo</dc:creator></item><item><title><![CDATA[【令和最新版】Windows PC 環境構築手順書（PowerShell）]]></title><description><![CDATA[
+ はじめに
+
+
+対象: Windows 11（ユーザー権限でOK）
+
+シェル: PowerShell（推奨: PowerShell 7）
+
+目的: make, Node.js(＋pnpm), Python(＋poetry), Git, その他便利ツールの導入
+
+
+ 0. 事前ルール
+
+
+管理者権限は不要です。Scoop は CurrentUser にインストールします。
+
+
+最も利用する機会の多いNode.jsとPythonのバージョン管理ツールを導入します（他の言語は今回は対象外）
+
+
+Node 管理は nvm-windows を使います（Corepackで pnpm を有効化）
+
+...]]></description><link>https://zenn.dev/moxak/articles/ac9eeec9819500</link><guid isPermaLink="true">https://zenn.dev/moxak/articles/ac9eeec9819500</guid><pubDate>Thu, 11 Sep 2025 05:57:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---aZXf060--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E4%25BB%25A4%25E5%2592%258C%25E6%259C%2580%25E6%2596%25B0%25E7%2589%2588%25E3%2580%2591Windows%2520PC%2520%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E6%2589%258B%25E9%25A0%2586%25E6%259B%25B8%25EF%25BC%2588PowerShell%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ackkerman%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M2NDY2ZTM5NTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ackkerman</dc:creator></item><item><title><![CDATA[Django CBV × SuccessMessageMixin でメッセージ最小実装（Create / Delete 対応）]]></title><description><![CDATA[CBVでフェードアウトするメッセージ表示（今回はcreate + delete）を最小で実装する方法。
+※本記事は Django 4.1.5 環境で検証したものです。他バージョンで挙動が変わる可能性があります...!
+
+ 環境
+pc：MacBook Pro（2019）
+os：macos Sequoia
+django：  4.1.5
+
+ できること
+django の SuccessMessageMixin を使うと、処理成功時に「◯◯を登録しました」のようなメッセージを簡単に表示できる
+
+CreateView
+
+ModelFormMixinを継承している
+フォームを介するため form.c...]]></description><link>https://zenn.dev/tech_mw/articles/8493482e8a296e</link><guid isPermaLink="true">https://zenn.dev/tech_mw/articles/8493482e8a296e</guid><pubDate>Thu, 11 Sep 2025 05:47:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ti1_aQKn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Django%2520CBV%2520%25C3%2597%2520SuccessMessageMixin%2520%25E3%2581%25A7%25E3%2583%25A1%25E3%2583%2583%25E3%2582%25BB%25E3%2583%25BC%25E3%2582%25B8%25E6%259C%2580%25E5%25B0%258F%25E5%25AE%259F%25E8%25A3%2585%25EF%25BC%2588Create%2520%252F%2520Dele...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tech_mw%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkyMGVmYjg0YTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tech_mw</dc:creator></item><item><title><![CDATA[Triton を使って CUDA を書かずに高速な GPU カーネルを実装する]]></title><description><![CDATA[
+ Triton とは
+https://github.com/triton-lang/triton
+Tritonは、2021年にOpenAIがリリースしたソフトウェアで、リリース記事曰く以下のような特徴があります。
+
+an open-source Python-like programming language which enables researchers with no CUDA experience to write highly efficient GPU code—most of the time on par with what an expert would be ab...]]></description><link>https://zenn.dev/zaburo_ch/articles/252522d9e4aa3d</link><guid isPermaLink="true">https://zenn.dev/zaburo_ch/articles/252522d9e4aa3d</guid><pubDate>Wed, 10 Sep 2025 22:30:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--x8Egwez5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Triton%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%2520CUDA%2520%25E3%2582%2592%25E6%259B%25B8%25E3%2581%258B%25E3%2581%259A%25E3%2581%25AB%25E9%25AB%2598%25E9%2580%259F%25E3%2581%25AA%2520GPU%2520%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25AB%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:zaburo_ch%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTF8zb1dFU0FCbEdmempLekxuVDdLTHIyZ0lyYmZibUN2S3JqWXlka0s2PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zaburo_ch</dc:creator></item><item><title><![CDATA[pip install の仕組みと使い方を整理してみる]]></title><description><![CDATA[
+ はじめに
+Pythonで開発を行うときに必ず出てくるのが pip install。
+しかし「そもそもpipって何？」「裏ではどんな仕組み？」と疑問に思ったことはありませんか？
+この記事では、pip install の仕組み と 基本的な使い方 を整理していきます。
+
+この記事では Jupyter Notebook / Google Colab 上での実行を想定しています。
+また、pip install はインターネット経由で PyPI にアクセスするため、
+閉域ネットワークやオフライン環境では実行できません。
+
+
+
+ pipとは？
+
+
+pip = Pythonの公式パッケージ管理ツー...]]></description><link>https://zenn.dev/takagi_tech/articles/programming-python-pip-install</link><guid isPermaLink="true">https://zenn.dev/takagi_tech/articles/programming-python-pip-install</guid><pubDate>Wed, 10 Sep 2025 22:07:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oKxt6Rkz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:pip%2520install%2520%25E3%2581%25AE%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%25E3%2581%25A8%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%25E3%2582%2592%25E6%2595%25B4%25E7%2590%2586%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t_tech%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJiYjU5ZGJkM2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t_tech</dc:creator></item><item><title><![CDATA[日本語をなんでも猫語に変換するスクリプト]]></title><description><![CDATA[ひらがなで入力された日本語をなんでも猫語に変換して出力するスクリプトです。
+chmod +x catlang.pyで実行権を付け、./catlang.py ことばで実行してください。
+#!/usr/bin/env python3
+import sys
+"""
+kana_list に基づき、各列の母音を
+  あ -&gt; にゃ
+  い -&gt; に
+  う -&gt; にゅ
+  え -&gt; にぇ
+  お -&gt; にょ
+に変換するスクリプト。
+onbin に含まれる文字（例: 'ん','ー','っ'）は無変換でそのまま残します。
+最長一致でマッチするため、拗音（きゃ、ふぁ など）...]]></description><link>https://zenn.dev/fygar256/articles/c03746bed331a0</link><guid isPermaLink="true">https://zenn.dev/fygar256/articles/c03746bed331a0</guid><pubDate>Wed, 10 Sep 2025 21:37:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--o2vz86hX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2597%25A5%25E6%259C%25AC%25E8%25AA%259E%25E3%2582%2592%25E3%2581%25AA%25E3%2582%2593%25E3%2581%25A7%25E3%2582%2582%25E7%258C%25AB%25E8%25AA%259E%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:fygar256%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHY3TGluV3VfOE1nWmFqMFBpdVU3VlViZjRmYTlIeHFXbEpDTU10M3lkY1VOakhOVEo9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>fygar256</dc:creator></item></channel></rss>
