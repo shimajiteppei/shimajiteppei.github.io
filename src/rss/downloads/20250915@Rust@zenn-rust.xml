@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Rust」のフィード]]></title><description><![CDATA[Zennのトピック「Rust」のRSSフィードです]]></description><link>https://zenn.dev/topics/rust</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ba09661577.png</url><title>Zennの「Rust」のフィード</title><link>https://zenn.dev/topics/rust</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 15 Sep 2025 12:04:37 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/rust/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[緑コーダーがRustで解説してみた(ABC423 A～D)]]></title><description><![CDATA[AtCoder Beginner Contest 423のA～D問題を緑コーダーが自分なりの解説と解答コードをまとめました。
+参考になりましたら幸いです。
+
+ ABC423-A
+問題
+https://atcoder.jp/contests/abc423/tasks/abc423_a
+銀行に預けている残高から引き下ろすことができる最大金額を求める問題です。
+解説
+1回の引き出しで1000円を引き出すことができ、その際に手数料として C 円が発生します。
+そのため、残高 X を (1000 + C) で整数除算することで、引き出し可能な回数が求められます。
+引き出し可能な回数に1000円を掛...]]></description><link>https://zenn.dev/nakst_hide/articles/97c1b7448b5b1d</link><guid isPermaLink="true">https://zenn.dev/nakst_hide/articles/97c1b7448b5b1d</guid><pubDate>Mon, 15 Sep 2025 11:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ih338jAo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25B7%2591%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25BC%25E3%2581%258CRust%25E3%2581%25A7%25E8%25A7%25A3%25E8%25AA%25AC%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2528ABC423%2520A%25EF%25BD%259ED%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakahide%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk1YTJjNWQyNTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakahide</dc:creator></item><item><title><![CDATA[Rustで遺伝的アルゴリズムをやってみる]]></title><description><![CDATA[
+ 概要
+Rustの学習を進めていくなかで、何か作ってみようということで
+遺伝的アルゴリズムを使ってナップサック問題に挑戦しました。
+Rustにて完成させることが目的なので、GAとしては少し端折っている部分はあります。
+https://ja.wikipedia.org/wiki/ナップサック問題
+
+ 準備
+今回は、容量200のナップサックに商品を詰めることにします。
+商品は、10個用意しそれぞれ価値を設定します。
+容量を超えず、価値が最大になる商品の組み合わせを求めます。
+
+ 商品
+struct Goods {
+    id: i32,
+    capacity: i32,
+    va...]]></description><link>https://zenn.dev/hardtrap/articles/20dd6bc50afeae</link><guid isPermaLink="true">https://zenn.dev/hardtrap/articles/20dd6bc50afeae</guid><pubDate>Mon, 15 Sep 2025 10:04:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---Qaw9qbF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7%25E9%2581%25BA%25E4%25BC%259D%25E7%259A%2584%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25B4%25E3%2583%25AA%25E3%2582%25BA%25E3%2583%25A0%25E3%2582%2592%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kamyou%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdiOTJlYzdiNzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kamyou</dc:creator></item><item><title><![CDATA[Rustで自作キーボードのファームを書きたい。]]></title><description><![CDATA[
+ 目的
+RMK firmwareというRust製のフレームワークで自作キーボードのファームウェアを書いてみます。
+
+ なぜRMK？
+
+最近Rustに触れているから
+作りたいキーボードに求められる要件がクリアできそうだから
+
+https://rmk.rs/
+
+ QMKやZMKと比較して
+キーボードのコンセプト的に無線・Splitが大前提です。
+そしてジョイスティックの実装が必須だと考えたため、ジョイスティックが公式実装できるRMKが選ばれました。
+
+ 環境構築
+RMKはクラウドコンパイルとローカルコンパイルに対応しています。
+今回はローカルコンパイルで実装していきますので、以下のサイトを...]]></description><link>https://zenn.dev/moore_s/articles/610630a8b7123d</link><guid isPermaLink="true">https://zenn.dev/moore_s/articles/610630a8b7123d</guid><pubDate>Mon, 15 Sep 2025 06:04:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TeJlOAyU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7%25E8%2587%25AA%25E4%25BD%259C%25E3%2582%25AD%25E3%2583%25BC%25E3%2583%259C%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25AE%25E3%2583%2595%25E3%2582%25A1%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%2592%25E6%259B%25B8%25E3%2581%258D%25E3%2581%259F%25E3%2581%2584%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:moore%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkzZmY4MjU2MDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>moore</dc:creator></item><item><title><![CDATA[Mago: PHP開発が爆速になる？次世代の静的解析ツールを試してみた]]></title><description><![CDATA[
+ はじめに
+PHPでの開発において、コードの品質を高く保つことは、プロジェクトの成功に欠かせない重要な要素です。
+これまで、コードフォーマッタ、リンター、静的解析といったツールは、それぞれ別のものを組み合わせて使うのが一般的でした。しかし、今回ご紹介する Mago は、これらの機能をたった一つに統合した、PHP界に現れたちょっと革新的なツールチェーンです。
+私自身、普段のPHP開発では、次のようなツールを愛用していました。
+
+PHPStan: 頼れる静的解析ツール
+PHP-CS-Fixer: コードを美しく整えるフォーマッタ
+
+これらのツールに大きな不満はなかったのですが、心のどこかで...]]></description><link>https://zenn.dev/sonicmoov/articles/466c13fcfd2384</link><guid isPermaLink="true">https://zenn.dev/sonicmoov/articles/466c13fcfd2384</guid><pubDate>Sun, 14 Sep 2025 15:15:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0lT-Jdhm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mago%253A%2520PHP%25E9%2596%258B%25E7%2599%25BA%25E3%2581%258C%25E7%2588%2586%25E9%2580%259F%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258B%25EF%25BC%259F%25E6%25AC%25A1%25E4%25B8%2596%25E4%25BB%25A3%25E3%2581%25AE%25E9%259D%2599%25E7%259A%2584%25E8%25A7%25A3%25E6%259E%2590%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:takemo101%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0YjYwNGE3MzguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25BD%25E3%2583%258B%25E3%2583%2583%25E3%2582%25AF%25E3%2583%25A0%25E3%2583%25BC%25E3%2583%2596%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q3NDBmZGFmNmIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takemo101</dc:creator></item><item><title><![CDATA[TUIタイピングゲームを作ったので仕組みをまとめる（Rust × Tree-sitter × Ratatui）]]></title><description><![CDATA[
+コードを素材にしたOSSのTUIタイピングゲーム GitType を作った。この記事では「どんな仕組みか」をまとめる。
+
+https://github.com/unhappychoice/gittype
+
+ どういうゲームか
+
+
+ 全体アーキテクチャ
+GitType の構成は次の通り。
+問題生成フロー
+ゲームプレイフロー
+
+ AST とコード片切り出し（Tree-sitter）
+GitType は Tree-sitter を使ってソースコードを構造的に解析し、意味のある単位でコード片を抽出する。
+
+ 抽出の仕組み
+
+ 1. パーサーレジストリによる言語管理
+各言語専用の Languag...]]></description><link>https://zenn.dev/unhappychoice/articles/a111994fd7e4bd</link><guid isPermaLink="true">https://zenn.dev/unhappychoice/articles/a111994fd7e4bd</guid><pubDate>Sun, 14 Sep 2025 01:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--J2H11Q-q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TUI%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%2594%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%25E3%2582%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2582%258B%25EF%25BC%2588Rust%2520%25C3%2597%2520Tree-sitter%2520%25C3%2597%2520Ratatui%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yuji%2520Ueki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2htc0V1eUFJV0pMZjZCTGdTM1VweG5INnU5N0RCTHlrRkhXZmg5Q2t3PXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuji Ueki</dc:creator></item><item><title><![CDATA[Codexリポジトリを分解して優しく解説してみた]]></title><description><![CDATA[「AIエージェントって、コードの中でどう動いてるの？」——そんな素朴な疑問に答えるために、今回は Codex リポジトリ（Rust 製）を“文系にもわかる”言葉で分解してみました。
+先に要点だけ：
+
+Codex は「人間の操作」を「AIの行動（コード編集やコマンド実行）」に変換する“通訳ロボ”。
+画面（TUI）と頭脳（Core）と手足（Exec/ApplyPatch/MCPツール）が“イベント”で連携する設計。
+危険な操作は「本当にやる？」と必ず確認（安全設計）。
+MCPは“道具箱を外付けできる規格”。後からツールを増やせる拡張性が肝。
+
+
+ Codexってなに？（一言で）
+
+ざっくり言...]]></description><link>https://zenn.dev/taiyogakuse/articles/68a8e6fcad02aa</link><guid isPermaLink="true">https://zenn.dev/taiyogakuse/articles/68a8e6fcad02aa</guid><pubDate>Sat, 13 Sep 2025 18:32:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ET8DDefB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Codex%25E3%2583%25AA%25E3%2583%259D%25E3%2582%25B8%25E3%2583%2588%25E3%2583%25AA%25E3%2582%2592%25E5%2588%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%25A6%25E5%2584%25AA%25E3%2581%2597%25E3%2581%258F%25E8%25A7%25A3%25E8%25AA%25AC%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Taiyo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZhZDdhNjcxMmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Taiyo</dc:creator></item><item><title><![CDATA[PythonオブジェクトをRustで効率的に処理する - pyo3-arrowによるゼロコピー実装]]></title><description><![CDATA[
+ FFI(Foreign Function Interface)の型変換のオーバーヘッド
+RustとPythonを連携させるとき、悩ましい問題がデータの受け渡しです。
+# ユーザは様々な形式でデータを渡してくる
+import numpy as np
+import pandas as pd
+
+# 素数判定をRustで高速化したい
+primes = rust_lib.is_prime_batch(np.array([2, 3, 4, 5, 6]))  # NumPy
+primes = rust_lib.is_prime_batch([2, 3, 4, 5, 6])  # Python li...]]></description><link>https://zenn.dev/driller/articles/e02c2c244b3759</link><guid isPermaLink="true">https://zenn.dev/driller/articles/e02c2c244b3759</guid><pubDate>Sat, 13 Sep 2025 08:02:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DfAuJaPE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2582%2592Rust%25E3%2581%25A7%25E5%258A%25B9%25E7%258E%2587%25E7%259A%2584%25E3%2581%25AB%25E5%2587%25A6%25E7%2590%2586%25E3%2581%2599%25E3%2582%258B%2520-%2520pyo3-arrow%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2582%25BC%25E3%2583%25AD%25E3%2582%25B3%25E3%2583%2594%25E3%2583%25BC%25E5%25AE%259F%25E8%25A3%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:driller%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lPT1dLNnlQWE9BNndvZDFlYkxTQ0FLOGlpX1E3X2hqWmVwbDdJeUE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>driller</dc:creator></item><item><title><![CDATA[dora-rs: これがAI時代のロボティクスミドルウェアだ！]]></title><description><![CDATA[こんにちは、渡辺貴史です。
+最近西海岸ではdora-rsというミドルウェアが流行っていると聞き、早速すこし真面目に触ってみました。すでに2.5k starがついています。
+https://github.com/dora-rs/dora
+さっそく、自分のロボットのシステムをdora-rsで換装して遊んでみました。
+いいぞ！！！ と思った。もっと流行らせたいし育てたい。
+ROSが「移動ロボットの(アルゴリズムベースの)スタンダードを作ったミドルウェア」であるとするならば、次には「AI x ロボティクスを前提にしたミドルウェア」の出現が期待されると、私は思っています。dora-rsは、そのひと...]]></description><link>https://zenn.dev/dieu_detruit/articles/cbb7b682647e0b</link><guid isPermaLink="true">https://zenn.dev/dieu_detruit/articles/cbb7b682647e0b</guid><pubDate>Fri, 12 Sep 2025 12:08:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--R_1ilnA4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:dora-rs%253A%2520%25E3%2581%2593%25E3%2582%258C%25E3%2581%258CAI%25E6%2599%2582%25E4%25BB%25A3%25E3%2581%25AE%25E3%2583%25AD%25E3%2583%259C%25E3%2583%2586%25E3%2582%25A3%25E3%2582%25AF%25E3%2582%25B9%25E3%2583%259F%25E3%2583%2589%25E3%2583%25AB%25E3%2582%25A6%25E3%2582%25A7%25E3%2582%25A2%25E3%2581%25A0%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Takafumi%2520Watanabe%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q2MWQyNGM1YmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Takafumi Watanabe</dc:creator></item><item><title><![CDATA[ALDS1(01~06)の解説]]></title><description><![CDATA[
+ はじめに
+この記事は AOJ(Aizu Online Judge) の ALDS1(Algorithms and Data Structures I) をRustで実装したものの解説記事です。
+GitHubの alds1-rust リポジトリに、各問題ごとのRustによる実装例を掲載しています。
+詳細は README.md をご覧ください。
+
+ 問題の解説
+!
+この記事、及び上記のリポジトリではALDS1-01～ALDS1-06のみを扱っています。
+多くの問題では、主要な関数の機能のみを解説しています。
+全体の実装につきましてはGitHubリポジトリをご覧ください。
+内容に誤りがある...]]></description><link>https://zenn.dev/hashisato/articles/c7522698276b6c</link><guid isPermaLink="true">https://zenn.dev/hashisato/articles/c7522698276b6c</guid><pubDate>Fri, 12 Sep 2025 00:27:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--50TB6ixW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:ALDS1%252801%7E06%2529%25E3%2581%25AE%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2597%25E3%2581%2595%25E3%2581%25A8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdhZDNjOTBhYzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はしさと</dc:creator></item><item><title><![CDATA[RUST MOON / 例え月が見えなくても]]></title><description><![CDATA[
+ はじめに
+秋も深まり、もうすぐ十五夜。
+みなさんも一年で最も美しい月を楽しみにしていることでしょう。
+しかし天候というものは不確実なもので、曇りや雨でせっかくの月が見えないこともあります。
+そんなときのために、しっかりとプランBを用意しておきたいですよね。
+
+ RUST MOON
+ということで Rust を使って月を作りました。
+
+
+GACKT の8枚目のアルバム「LAST MOON」から着想を得ました。
+約6年にも及ぶ GACKT の MOON プロジェクトの最終章。
+僕はこのアルバムを聴いたことはありませんが、荘厳で幻想的ですよね。
+GACKT の曲の中では Vanilla がす...]]></description><link>https://zenn.dev/doctormate/articles/ee2f1f8bc2c76d</link><guid isPermaLink="true">https://zenn.dev/doctormate/articles/ee2f1f8bc2c76d</guid><pubDate>Fri, 12 Sep 2025 00:09:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--E8xKcoQR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:RUST%2520MOON%2520%252F%2520%25E4%25BE%258B%25E3%2581%2588%25E6%259C%2588%25E3%2581%258C%25E8%25A6%258B%25E3%2581%2588%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25A6%25E3%2582%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:-%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FiYmEzODYwNjQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2589%25E3%2582%25AF%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25A1%25E3%2582%25A4%25E3%2583%2588%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMwYjdiZGViMGUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>-</dc:creator></item><item><title><![CDATA[rust の vector 操作まとめ]]></title><description><![CDATA[Rust でよく使う Vec の操作を備忘録としてまとめました。
+
+ 1. 先頭に要素を追加する
+let mut v = vec![2, 3, 4];
+v.insert(0, 1);  // 先頭に 1 を挿入
+println!("{:?}", v); // [1, 2, 3, 4]
+!
+insert(0, x) は O(n)。大量にやるなら VecDeque を使うほうが効率的です。
+
+use std::collections::VecDeque;
+
+let mut q = VecDeque::from(vec![1, 2, 3]);
+q.push_front(0);
+println!...]]></description><link>https://zenn.dev/sawawada8/articles/a44ce136c0fd29</link><guid isPermaLink="true">https://zenn.dev/sawawada8/articles/a44ce136c0fd29</guid><pubDate>Thu, 11 Sep 2025 15:14:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5XSAeHcO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:rust%2520%25E3%2581%25AE%2520vector%2520%25E6%2593%258D%25E4%25BD%259C%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sawawada8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKeGF1ZnJydWg3MnRBN1NUOEZIOUMzLVlISzNnU3BrMnQ3MHNRS2c9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sawawada8</dc:creator></item><item><title><![CDATA[CraneでBuild Profileを変更する]]></title><description><![CDATA[
+ 結論
+CARGO_PROFILEを設定することでbuild profileの変更が可能
+
+flake.nix
+craneLib.buildPackage {
+  CARGO_PROFILE = "&lt;custom-profile&gt;";
+}
+
+もし対象のProfileにdebug symbolを含めたい場合、nix側でもstripを止める必要がある。
+
+flake.nix
+craneLib.buildPackage {
+  dontStrip = true
+}
+
+
+ 解説
+
+ 異なるProfileを使用する
+対応方法の候補として以下を考えた。
+
+cargoExtraArgs
+...]]></description><link>https://zenn.dev/m4ru/articles/1914acd462a26d</link><guid isPermaLink="true">https://zenn.dev/m4ru/articles/1914acd462a26d</guid><pubDate>Thu, 11 Sep 2025 05:21:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DH6rk49K--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Crane%25E3%2581%25A7Build%2520Profile%25E3%2582%2592%25E5%25A4%2589%25E6%259B%25B4%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:maru99%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI2NzM5Njg2NjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>maru99</dc:creator></item><item><title><![CDATA[足を止めて見る #4 〜 RustのSerdeクレート(1) 〜]]></title><description><![CDATA[
+ 足を止めて見よう
+足を止めて見ようシリーズの4つ目です。
+前回は TryFrom トレイトについてでした。
+今回は、Rustの定番クレートの1つと言ってもいい serde クレートを足を止めて見てみます。
+
+ serde クレートとは
+とにかくまずは docs.rs で serde クレートを見に行きましょう。
+https://docs.rs/serde/latest/serde/
+「Rustの構造体をシリアライズしたりデシリアライズするのに便利なフレームワークです」との紹介が冒頭にあります。
+具体的に言うと、Rustの構造体をたとえばJSON形式にシリアライズしたり、たとえばCSV...]]></description><link>https://zenn.dev/doctormate/articles/dive_4_serde_crate</link><guid isPermaLink="true">https://zenn.dev/doctormate/articles/dive_4_serde_crate</guid><pubDate>Thu, 11 Sep 2025 03:00:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Vjc37Weo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25B6%25B3%25E3%2582%2592%25E6%25AD%25A2%25E3%2582%2581%25E3%2581%25A6%25E8%25A6%258B%25E3%2582%258B%2520%25234%2520%25E3%2580%259C%2520Rust%25E3%2581%25AESerde%25E3%2582%25AF%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%25281%2529%2520%25E3%2580%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2583%259B%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25B3%25E3%2582%25B7%25E3%2583%25A5%25E3%2582%25A6%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FiYmEzODYwNjQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2589%25E3%2582%25AF%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25A1%25E3%2582%25A4%25E3%2583%2588%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZVhWLXBJYnZkcjBBYW40R3NVdEpoemk2eFBNczEyem9zVUszREtKV0tTa2c9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ホリケンシュウ</dc:creator></item><item><title><![CDATA[Rustで組み込み開発を行うための環境構築]]></title><description><![CDATA[
+ 目的
+タイトル通り、Rustで組み込み開発を行うための環境構築を行います。
+
+ 開発ハード
+
+Mac book pro m3
+Raspberry pi pico 2 w
+
+
+ Rustツールチェーンの導入
+curl https://sh.rustup.rs -sSf | sh
+rustup default stable
+rustup component add rust-src rustfmt clippy
+どの組み込み環境でも共通です。
+
+ Raspberry pi
+
+ RP2350のターゲットを追加
+RP2350はARM Cortex-M33が使われています。
+rustup ta...]]></description><link>https://zenn.dev/moore_s/articles/cf2c1d8b9c9e2d</link><guid isPermaLink="true">https://zenn.dev/moore_s/articles/cf2c1d8b9c9e2d</guid><pubDate>Wed, 10 Sep 2025 04:09:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--w4hh-ki3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7%25E7%25B5%2584%25E3%2581%25BF%25E8%25BE%25BC%25E3%2581%25BF%25E9%2596%258B%25E7%2599%25BA%25E3%2582%2592%25E8%25A1%258C%25E3%2581%2586%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:moore%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkzZmY4MjU2MDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>moore</dc:creator></item><item><title><![CDATA[RustでCLI Todoアプリを作りながら学ぶ設計パターン]]></title><description><![CDATA[どうも最近Rustにハマっている初学者です🙇
+いきなりですが初学者の方で、Rustの文法はある程度学習をしているけど
+実際にアプリを作るとなると何から始めればいいか迷いませんか？
+私も最初はそうでした。公式ドキュメントやチュートリアルで基本はある程度は理解できても
+実際のコードを書く時には「この場合はどう書くのがRustらしいのか？」と悩むことが多かったです。
+そこで今回は、誰もが使ったことのあるTodoアプリを題材に、Rustの基本的な書き方を学びましたので備忘録として書きました。
+単純な機能追加だけでなく、Rustエコシステムの活用方法や、開発で役立つパターンも紹介していきます！
+
+...]]></description><link>https://zenn.dev/dokusy/articles/c607759227918c</link><guid isPermaLink="true">https://zenn.dev/dokusy/articles/c607759227918c</guid><pubDate>Tue, 09 Sep 2025 14:26:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JTnULKFE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7CLI%2520Todo%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258A%25E3%2581%25AA%25E3%2581%258C%25E3%2582%2589%25E5%25AD%25A6%25E3%2581%25B6%25E8%25A8%25AD%25E8%25A8%2588%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A9%25E3%2581%2585%25E3%2581%258F%25E3%2581%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiYTU0YmQxZDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>どぅくし</dc:creator></item><item><title><![CDATA[ResNet18をRust&burnで実装する．]]></title><description><![CDATA[
+ はじめに
+機械学習クレートであるburnを用いて，ResNet18を実装した．データセットはMNISTを使用した．MNISTを使用した理由は，画像サイズが小さく，訓練の時間が短く済むからである．
+この実装は自身の機械学習モデル実装の学習のために行った．
+pytorchの公式実装コードを参考にして実装していく．
+実装したコードはこちらのリポジトリにある．本記事ではモデルの実装に焦点をあてている．そのため，データセットの読み込みや学習ループなどについてはリポジトリを参照してほしい．
+https://github.com/neruneruna7/my-resnet18
+注意点として，MPS...]]></description><link>https://zenn.dev/neruneruna7/articles/0ad420221d2bc8</link><guid isPermaLink="true">https://zenn.dev/neruneruna7/articles/0ad420221d2bc8</guid><pubDate>Mon, 08 Sep 2025 11:50:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qUxm0-eJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ResNet18%25E3%2582%2592Rust%2526burn%25E3%2581%25A7%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%25EF%25BC%258E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Neruneruna7%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WjdHT1MzanlRM0dkTGt5WTNNZ2Ewdzl1WjVqcFdBRGJnTW92THQ9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Neruneruna7</dc:creator></item><item><title><![CDATA[Rustのproc-macroを書き続けて3年が経った]]></title><description><![CDATA[気づけばRustのproc-macroを書き続けて3年が経ちました。振り返ってみると、この期間にかなりの数のcrateを開発してきました。成功も失敗もありましたが、それぞれから多くのことを学びました。今回は、これまで開発してきたcrateの紹介と、そこから得られた知見を共有したいと思います。
+
+ 作ってきたcrateたち
+
+ template-quote: quote!への挑戦状
+https://crates.io/crates/template-quote
+まず最初に手がけたのがtemplate-quoteです。これは関数型マクロとして開発しました。Rustでproc-macroを書く...]]></description><link>https://zenn.dev/yasuo_ozu/articles/my-3yrs-of-proc-macro</link><guid isPermaLink="true">https://zenn.dev/yasuo_ozu/articles/my-3yrs-of-proc-macro</guid><pubDate>Mon, 08 Sep 2025 07:53:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aez1tLxY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AEproc-macro%25E3%2582%2592%25E6%259B%25B8%25E3%2581%258D%25E7%25B6%259A%25E3%2581%2591%25E3%2581%25A63%25E5%25B9%25B4%25E3%2581%258C%25E7%25B5%258C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yasuo_ozu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkxZTJlNTY1NzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yasuo_ozu</dc:creator></item><item><title><![CDATA[【Rust】静的ディスパッチと動的ディスパッチの違いについて調査してみた]]></title><description><![CDATA[
+ はじめに
+こんにちは、ファスト株式会社のyutakです！
+今回は、Rustにおける静的ディスパッチと動的ディスパッチについて解説していきます。
+この2つの概念は、Rustでトレイトを扱う際に重要な概念だと思っています。
+パフォーマンスを重視するのか、柔軟性を重視するのか。
+そんな設計上の選択をする際に、この記事が参考になれば幸いです。
+
+ 本記事について
+本記事では以下の内容を中心に説明していきます：
+
+静的ディスパッチと動的ディスパッチの基本概念とメリット・デメリット
+それぞれの実装方法と特徴
+パフォーマンスの違い
+
+
+ TL;DR
+
+ 速度差
+重い処理で約3.4%の差があり、静的...]]></description><link>https://zenn.dev/fast/articles/c9c204c19e9f20</link><guid isPermaLink="true">https://zenn.dev/fast/articles/c9c204c19e9f20</guid><pubDate>Mon, 08 Sep 2025 06:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4EAU2yrJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Rust%25E3%2580%2591%25E9%259D%2599%25E7%259A%2584%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25B9%25E3%2583%2591%25E3%2583%2583%25E3%2583%2581%25E3%2581%25A8%25E5%258B%2595%25E7%259A%2584%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25B9%25E3%2583%2591%25E3%2583%2583%25E3%2583%2581%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E8%25AA%25BF%25E6%259F%25BB%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Yutak%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzljYTEzZDEyMWEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:FAST%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MzNjBmNTJkYmUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yutak</dc:creator></item><item><title><![CDATA[例外代わりの `Result<T, E>`]]></title><description><![CDATA[
+ 例外代わりの Result&lt;T, E&gt;
+
+Rust には Result&lt;T, E&gt; という型があります。だいたいこういう定義です。
+enum Result&lt;T, E&gt; {
+    Ok(T),
+    Err(E),
+}
+Result&lt;T, E&gt; は定義から分かるとおり、結果 (成否) を表す型で、 Ok のときの型 T と Err のときの型 E のどちらか一方を保持します。
+Rust は他のプログラミング言語にあるような例外がありません。代わりにエラーハンドリングにはいくつかの方法がありますが、主に Result&lt;T, E&g...]]></description><link>https://zenn.dev/doctormate/articles/4d7ef9face7b07</link><guid isPermaLink="true">https://zenn.dev/doctormate/articles/4d7ef9face7b07</guid><pubDate>Mon, 08 Sep 2025 03:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zWQU0umU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BE%258B%25E5%25A4%2596%25E4%25BB%25A3%25E3%2582%258F%25E3%2582%258A%25E3%2581%25AE%2520%2560Result%253CT%252C%2520E%253E%2560%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:bouzuya%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FiYmEzODYwNjQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2589%25E3%2582%25AF%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25A1%25E3%2582%25A4%25E3%2583%2588%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lqVElDaW81T2gxMjNQSzhqQXkydnJpTDh6dC1SWUZvUnYzd0tjb3c9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>bouzuya</dc:creator></item><item><title><![CDATA[緑コーダーがRustで解説してみた(ABC422 A～E)]]></title><description><![CDATA[AtCoder Beginner Contest 422のA～E問題を緑コーダーが自分なりの解説と解答コードをまとめました。
+参考になりましたら幸いです。
+
+ ABC422-A
+問題
+https://atcoder.jp/contests/abc422/tasks/abc422_a
+入力で与えられたステージの、次のステージを求める問題です。
+解説
+この問題では、1つのワールドに8つのステージが存在するという設定になっています。(入力のステージは、 W-S 形式で与えられる)
+したがって、次のステージを求めるには以下の通りに計算すればよいです。
+
+現在のステージ番号が1から7の場合は、ステ...]]></description><link>https://zenn.dev/nakst_hide/articles/18eba46f5c0238</link><guid isPermaLink="true">https://zenn.dev/nakst_hide/articles/18eba46f5c0238</guid><pubDate>Sun, 07 Sep 2025 22:30:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vdbvZUtt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25B7%2591%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25BC%25E3%2581%258CRust%25E3%2581%25A7%25E8%25A7%25A3%25E8%25AA%25AC%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2528ABC422%2520A%25EF%25BD%259EE%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakahide%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk1YTJjNWQyNTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakahide</dc:creator></item></channel></rss>
