@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 16 Sep 2025 00:56:52 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Findyのお気に入りを手元でさくっと整理する小さなChrome拡張を作った]]></title><description><![CDATA[
+ 3行で
+Findyで見つけた求人/案件を、自分の基準で軽く仕分け・メモしたくて、個人用の拡張を作りました。拡張のポップアップからお気に入りへの追加・削除を行い、結果はローカルの保存領域に反映します。非公式・自己責任のツールです。サイトのDOMが変わると動かなくなる可能性があります。
+!
+リポジトリ: https://github.com/hydrangeas/findy-fav-manager
+
+
+ 背景
+転職・副業の情報収集でFindyを使っているのですが、ブックマークするほどではない「あとで見る」を軽く積んでいく手段が欲しくなりました。ブラウザのブックマークや外部ツールに飛ばすと...]]></description><link>https://zenn.dev/hyd/articles/5bb1d50eda7cb7</link><guid isPermaLink="true">https://zenn.dev/hyd/articles/5bb1d50eda7cb7</guid><pubDate>Mon, 15 Sep 2025 14:06:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zIbuvW24--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Findy%25E3%2581%25AE%25E3%2581%258A%25E6%25B0%2597%25E3%2581%25AB%25E5%2585%25A5%25E3%2582%258A%25E3%2582%2592%25E6%2589%258B%25E5%2585%2583%25E3%2581%25A7%25E3%2581%2595%25E3%2581%258F%25E3%2581%25A3%25E3%2581%25A8%25E6%2595%25B4%25E7%2590%2586%25E3%2581%2599%25E3%2582%258B%25E5%25B0%258F%25E3%2581%2595%25E3%2581%25AAChrome%25E6%258B%25A1%25E5%25BC%25B5%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Akira%2520Otaka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k1bWluVUowcFgydEsxVWllUVNuby1KRE9KZDNuQnRnbks1UmhUWFE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Akira Otaka</dc:creator></item><item><title><![CDATA[phaserでゲーム開発 第四回]]></title><description><![CDATA[phaserでゲーム開発シリーズ、第四回。
+今回は画面に足場を配置してみたいと思います。
+前回の記事はこちら。
+https://zenn.dev/k_tabuchi/articles/ca8824beee6327
+今回はプレイヤーにアニメーションをつけてみます。
+
+ 全体像
+まずは、今回のコードの全文です。
+
+GameScene.js
+/**
+ * ゲームのメインシーンを表すクラス
+ * 
+ * @extends Phaser.Scene
+ */
+export class GameScene extends Phaser.Scene {
+
+    /** レイヤー */
+    #lay...]]></description><link>https://zenn.dev/k_tabuchi/articles/491a66403580fd</link><guid isPermaLink="true">https://zenn.dev/k_tabuchi/articles/491a66403580fd</guid><pubDate>Mon, 15 Sep 2025 12:51:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--m-zpUp0b--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:phaser%25E3%2581%25A7%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E9%2596%258B%25E7%2599%25BA%2520%25E7%25AC%25AC%25E5%259B%259B%25E5%259B%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:k-tabuchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkMjhhY2RlZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>k-tabuchi</dc:creator></item><item><title><![CDATA[phaserでゲーム開発 第三回]]></title><description><![CDATA[phaserでゲーム開発シリーズ、第三回。
+今回は画面に足場を配置してみたいと思います。
+前回の記事はこちら。
+https://zenn.dev/k_tabuchi/articles/521622aefc1151
+今回はプレイヤーを配置してみます。
+まずは、今回のコードの全文です。
+
+ 全体像
+
+GameScene
+/**
+ * ゲームのメインシーンを表すクラス
+ * 
+ * @extends Phaser.Scene
+ */
+export class GameScene extends Phaser.Scene {
+
+    /** レイヤー */
+    #layer;
+
+    /...]]></description><link>https://zenn.dev/k_tabuchi/articles/ca8824beee6327</link><guid isPermaLink="true">https://zenn.dev/k_tabuchi/articles/ca8824beee6327</guid><pubDate>Mon, 15 Sep 2025 11:31:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ei9Iomi4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:phaser%25E3%2581%25A7%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E9%2596%258B%25E7%2599%25BA%2520%25E7%25AC%25AC%25E4%25B8%2589%25E5%259B%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:k-tabuchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkMjhhY2RlZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>k-tabuchi</dc:creator></item><item><title><![CDATA[phaserでゲーム開発 第二回]]></title><description><![CDATA[phaserでゲーム開発シリーズ、第二回。
+今回は画面に足場を配置してみたいと思います。
+前回の記事はこちら。
+https://zenn.dev/k_tabuchi/articles/2dc9016a5a5642
+まずは、コードの全文です。
+
+GameScene.js
+/**
+ * ゲームのメインシーンを表すクラス
+ * 
+ * @extends Phaser.Scene
+ */
+export class GameScene extends Phaser.Scene {
+    /**
+     * シーンのコンストラクタ
+     * - シーンキーを "GameScene" として登...]]></description><link>https://zenn.dev/k_tabuchi/articles/521622aefc1151</link><guid isPermaLink="true">https://zenn.dev/k_tabuchi/articles/521622aefc1151</guid><pubDate>Mon, 15 Sep 2025 07:27:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HHGpRdmd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:phaser%25E3%2581%25A7%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E9%2596%258B%25E7%2599%25BA%2520%25E7%25AC%25AC%25E4%25BA%258C%25E5%259B%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:k-tabuchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkMjhhY2RlZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>k-tabuchi</dc:creator></item><item><title><![CDATA[kintone × GAS 　kintoneアプリの情報をスプレッドシートに書き出す]]></title><description><![CDATA[自分のメモ、頭の整理のために書いています。クソ長くなってしまった。
+自分がContent-Typeヘッダーを適当にしていたことがよくわかった（反省）。
+思ったより色々めんどくさかった。
+
+ 0.概要と余談
+
+ GitHub
+https://github.com/ymgcmnk/KintoneSpreadsheetExporter
+
+ 概要
+スプレッドシートがマスタであったものをkintoneアプリでDB化したは良いものの、その情報をスプレッドシートに落として参照したい時、あると思います。
+ワンショットならCSVをエクスポートすれば良いですが、定常的にkintoneの情報をスプレッドシート...]]></description><link>https://zenn.dev/a03/articles/6d6a5cd5bf77e7</link><guid isPermaLink="true">https://zenn.dev/a03/articles/6d6a5cd5bf77e7</guid><pubDate>Mon, 15 Sep 2025 05:59:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ypAR2rrM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:kintone%2520%25C3%2597%2520GAS%2520%25E3%2580%2580kintone%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%25AE%25E6%2583%2585%25E5%25A0%25B1%25E3%2582%2592%25E3%2582%25B9%25E3%2583%2597%25E3%2583%25AC%25E3%2583%2583%25E3%2583%2589%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25AB%25E6%259B%25B8%25E3%2581%258D%25E5%2587%25BA%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:a03%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3FCWGd0Q2R5aEMzOUo3bnpoRFNPNFlubFRjWDgtSE9NTmgtMGpSPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>a03</dc:creator></item><item><title><![CDATA[phaserでゲーム開発 第一回]]></title><description><![CDATA[
+ まえがき
+プログラマーの皆さん、こんにちは。
+皆さんは休日にプログラミングの勉強してますか？
+私はなんとなく知らない言語の文法読んだり、適当に思いついたものを書いてみたりです。
+けど特に作りたいものがない時ってモチベーションあがりませんよね。
+というわけで、ゲームでも作る？ってなるのですが、フレームワークも色々あって迷いますよね。
+今回は公開まで簡単にできるphaserを選択してみました。
+
+ フレームワークの選定理由
+おそらく参考資料が最も多いのはUnityだと思います。
+しかし、これは初めて練習でやるには機能が過剰だし、開発環境がものすごく重くて、高スペックなPCがないと動かすの...]]></description><link>https://zenn.dev/k_tabuchi/articles/2dc9016a5a5642</link><guid isPermaLink="true">https://zenn.dev/k_tabuchi/articles/2dc9016a5a5642</guid><pubDate>Mon, 15 Sep 2025 05:33:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7hhmD48I--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:phaser%25E3%2581%25A7%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E9%2596%258B%25E7%2599%25BA%2520%25E7%25AC%25AC%25E4%25B8%2580%25E5%259B%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:k-tabuchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkMjhhY2RlZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>k-tabuchi</dc:creator></item><item><title><![CDATA[Screen Wake Lock API で画面を常時表示させる]]></title><description><![CDATA[先日、料理のレシピサイトを閲覧していたところ、画面表示を維持することができるトグルスイッチが設置されている事に気付きました。料理中は手が汚れスマホを極力触りたくないので、とても助かりました。
+併せて、Web でも画面表示を維持することができると知り驚きました。
+これは Screen Wake Lock API によって実現できる機能で、Chrome 84 以降、Safari 16.4 以降で対応しています。
+今回は、この API の挙動を Android と iOS の実機で検証しました。
+この機能が活かせるユースケースについて紹介し、実際に利用する際の注意点について記載します。
+
+ 検...]]></description><link>https://zenn.dev/ww24/articles/d111b4a80079a0</link><guid isPermaLink="true">https://zenn.dev/ww24/articles/d111b4a80079a0</guid><pubDate>Mon, 15 Sep 2025 00:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bxbZHdZu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Screen%2520Wake%2520Lock%2520API%2520%25E3%2581%25A7%25E7%2594%25BB%25E9%259D%25A2%25E3%2582%2592%25E5%25B8%25B8%25E6%2599%2582%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ww24%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZiNjI2Y2ExMDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ww24</dc:creator></item><item><title><![CDATA[はじめてのReact入門 - コンポーネント開発からTodoアプリ制作まで]]></title><description><![CDATA[こんにちは、とまだです。
+
+「Reactって難しそう」「コンポーネントってなに？」と思ったことはありませんか？
+
+実は私も最初はそう思っていました。でも大丈夫。基本から段階的に学んでいけば、必ずマスターできます。
+
+【こんな方におすすめ】
+・JavaScriptの基礎は学んだけど、次に何を学べばいいか迷っている
+・Reactに興味はあるけど、どこから始めていいかわからない
+・効率的にUI開発ができるようになりたい
+・将来的にNext.jsなども学んでみたい
+
+【本書で身につくスキル】
+■ Reactの基本概念の理解
+- コンポーネント指向の考え方
+- 仮想DOMの仕組み
+- JSXの書き方と活用法
+
+■ 実践的な開発環境の構築
+- Viteを使った高速な開発環境
+- VS Codeの効率的な設定
+- Tailwind CSSでのモダンなスタイリング
+
+■ 動的なアプリケーション開発
+- useState/useEffectの実践的な使い方
+- Props/Stateによるデータ管理
+- イベントハンドリングの実装
+
+■ 本格的なアプリ制作
+- Todoアプリの段階的な開発
+- localStorageでのデータ永続化
+- TypeScriptでの型安全な開発
+
+【学習の流れ】
+本書は段階的なアプローチでReactを学ぶことができます。
+
+まず「Reactとは何か」から始まり、開発環境を整え、簡単なコンポーネントを作りながら基礎を固めます。
+
+そして、実際にTodoアプリを作りながら実践力を養い、最後はTypeScriptを使った本格的な開発まで学習します。
+
+各チャプターは段階的に難易度が上がっていくので、無理なく着実にスキルアップできます。
+
+【技術スタック】
+- React 18
+- Vite（高速ビルドツール）
+- Tailwind CSS（ユーティリティファーストCSS）
+- TypeScript（型定義による安全な開発）
+
+【最後に】
+Reactを学ぶことで、モダンなWebアプリケーション開発をできるようになります。
+
+また、コンポーネント指向の開発手法は、効率的で保守性の高いコードを書く力を与えてくれるはずです！
+
+そしてこの本で学んだあと、私の動画講座も試してみてはいかがでしょうか？
+Claude Code や Codex など、AI駆動開発分野のベストセラー講座で実践レベルにスキルアップしましょう！
+https://school.learning-next.app/coupons]]></description><link>https://zenn.dev/tmasuyama1114/books/react_basic_tutorial</link><guid isPermaLink="true">https://zenn.dev/tmasuyama1114/books/react_basic_tutorial</guid><pubDate>Sun, 14 Sep 2025 19:41:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--R9-fnf2G--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci8zMWJkNDdkMTVjLnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>とまだ@AI 駆動開発教育者</dc:creator></item><item><title><![CDATA[Vercelでメール送信フォームを作る]]></title><description><![CDATA[
+ 概要
+Webサイトからメールを送信するには、どのような方法があるでしょうか？
+一般的にはサーバーを構築したり、メール送信ライブラリを利用したりするケースが多いと思います。
+今回はVercelの「サーバーレス関数」機能を使って、Node.jsでメールを送信する方法をご紹介します。
+
+ サーバーレス関数とは
+サーバーレス関数とは、サーバー構築や管理を気にせずにAPIエンドポイントを簡単に作成できる仕組みです。
+この機能を活用して、Node.jsのnodemailerライブラリを使ってメール送信を行います。
+
+ セットアップ
+今回はフレームワークなどは使わず、素のHTMLとJavaScri...]]></description><link>https://zenn.dev/shicoku/articles/b90f705a37da45</link><guid isPermaLink="true">https://zenn.dev/shicoku/articles/b90f705a37da45</guid><pubDate>Sun, 14 Sep 2025 16:26:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--j8tmIav6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vercel%25E3%2581%25A7%25E3%2583%25A1%25E3%2583%25BC%25E3%2583%25AB%25E9%2580%2581%25E4%25BF%25A1%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%25A9%25A9%25E5%2593%25AD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ0YWVmNTQ0MzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>詩哭</dc:creator></item><item><title><![CDATA[JavaScriptでABC423(A-C)]]></title><description><![CDATA[https://atcoder.jp/contests/abc423
+
+ A - Scary Fee
+https://atcoder.jp/contests/abc423/tasks/abc423_a
+1000+C円ずつ残高を減らして1000円もらえる。何回その操作ができる？がわかれば1000をかけるだけ
+問題文を読むのに時間をかけすぎ
+https://atcoder.jp/contests/abc423/submissions/69299722
+2分12秒 AC!
+
+ B - Locked Rooms
+https://atcoder.jp/contests/abc423/tasks/a...]]></description><link>https://zenn.dev/aya_koto/articles/0ce2fa3338b9c7</link><guid isPermaLink="true">https://zenn.dev/aya_koto/articles/0ce2fa3338b9c7</guid><pubDate>Sun, 14 Sep 2025 14:00:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hFlr7_mL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:JavaScript%25E3%2581%25A7ABC423%2528A-C%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ayasaka-Koto%2520%252F%2520Aya...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VkNTRlMDBjYTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ayasaka-Koto / AyagawaP</dc:creator></item><item><title><![CDATA[【MCP】AIからMCPサーバーの自動的な使い分けをさせる短いサンプルコード【ローカル】]]></title><description><![CDATA[さて、ロボットを作っています。
+https://x.com/mty_mno/status/1964643843477062084
+このハロにMCPの機能を付けました。
+その時にAIからmcpサーバーの使い分けをする最小構成をつくったりしたので、ブログでもそこを公開しようと思い立ちました。
+
+ MCPって何がうれしいの？
+AIにやってもらいたいこととして
+「これやっておいて」
+といったら、AI側でそれを実現できるツールをよしなに選択してイイカンジにやっておいてほしいわけです。
+「MCPの概要を教えて」
+といったら、検索ツールに接続して結果をイイカンジに教えてくれたり、
+「洗濯機回しておいて...]]></description><link>https://zenn.dev/jam0824/articles/7a6928c4ae902d</link><guid isPermaLink="true">https://zenn.dev/jam0824/articles/7a6928c4ae902d</guid><pubDate>Sun, 14 Sep 2025 08:30:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JhjyN1Nf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590MCP%25E3%2580%2591AI%25E3%2581%258B%25E3%2582%2589MCP%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25AE%25E8%2587%25AA%25E5%258B%2595%25E7%259A%2584%25E3%2581%25AA%25E4%25BD%25BF%25E3%2581%2584%25E5%2588%2586%25E3%2581%2591%25E3%2582%2592%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%25E7%259F%25AD%25E3%2581%2584%25E3%2582%25B5%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2580%2590%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BE%25E3%2581%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ExYjQ4NTAwNmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>まつ</dc:creator></item><item><title><![CDATA[【JavaScript】チェックボックスやラジオボタンが選択されているか判定するプログラムを作成（備忘録）]]></title><description><![CDATA[
+ １．はじめに
+JavaScript の理解を深めるために、Youtube 動画を参考にプログラムを作成しました。
+一部のプログラムを修正/変更しています。
+
+ ２．サンプルプログラム
+
+Sample.html
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+    &lt;link rel="st...]]></description><link>https://zenn.dev/yama_kawa/articles/07b5ac4bf693ea</link><guid isPermaLink="true">https://zenn.dev/yama_kawa/articles/07b5ac4bf693ea</guid><pubDate>Sun, 14 Sep 2025 06:04:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gekXR8nA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591%25E3%2583%2581%25E3%2582%25A7%25E3%2583%2583%25E3%2582%25AF%25E3%2583%259C%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E3%2582%2584%25E3%2583%25A9%25E3%2582%25B8%25E3%2582%25AA%25E3%2583%259C%25E3%2582%25BF%25E3%2583%25B3%25E3%2581%258C%25E9%2581%25B8%25E6%258A%259E%25E3%2581%2595%25E3%2582%258C%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2581%258B%25E5%2588%25A4%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25EF%25BC%2588%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25A9%25E3%2582%25B6%25E3%2583%258B%25E3%2582%25A2%25E3%2583%2591%25E3%2583%25B3%25E3%2582%25B5%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M5ODg5YmQ2Y2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ラザニアパンサー</dc:creator></item><item><title><![CDATA[【React】ジャイロセンサによるインタラクションを実現する]]></title><description><![CDATA[この記事では、Webサイトでスマホの傾きを検知して描画に反映する方法を紹介します。
+
+ デモ
+
+
+ 準備
+
+ 実装環境
+今回はVite・React・TypeScriptで実装します。
+DeviceOrientationEventはhttpsのサイトでしか使えないので、そのための環境を作ります。
+Viteでhttps環境を用意
+npm vite create@latest
+
+npm i @vitejs/plugin-basic-ssl
+
+
+ vite.config.jsを作成
+import basicSsl from '@vitejs/plugin-basic-ssl'
+
+export d...]]></description><link>https://zenn.dev/makimura3329/articles/try-device-orientation-react</link><guid isPermaLink="true">https://zenn.dev/makimura3329/articles/try-device-orientation-react</guid><pubDate>Sat, 13 Sep 2025 11:01:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lxODzBOx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590React%25E3%2580%2591%25E3%2582%25B8%25E3%2583%25A3%25E3%2582%25A4%25E3%2583%25AD%25E3%2582%25BB%25E3%2583%25B3%25E3%2582%25B5%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25A9%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%2520Makimura%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ3ZTE1MjMxZmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>🧟Makimura🧟</dc:creator></item><item><title><![CDATA[AppSyncではundefined === null]]></title><description><![CDATA[
+ 事象
+https://github.com/aws/aws-appsync-community/issues/305 にある通り、AppSync では undefined === null として扱われます。
+
+ 実際に困ったこと
+parameter を指定しない場合、null が指定されたものとなります（以下の例での role ）。
+このままだと、値として null を検索したい場合と、parameter が指定されていない（つまり検索条件に含めない）場合の区別ができません。
+以下では、role という parameter を指定しなかった場合の挙動ですが、undefined, n...]]></description><link>https://zenn.dev/duckdevv/articles/0ced9276fac73d</link><guid isPermaLink="true">https://zenn.dev/duckdevv/articles/0ced9276fac73d</guid><pubDate>Sat, 13 Sep 2025 10:50:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9EvwwN2r--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AppSync%25E3%2581%25A7%25E3%2581%25AFundefined%2520%253D%253D%253D%2520null%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:duckdevv%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk3MTNlN2IxZTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>duckdevv</dc:creator></item><item><title><![CDATA[JavaScriptを理解していく]]></title><description><![CDATA[
+ 記事を作るきっかけ
+
+今回はJavaScript→Reactと学んできたが、ReactのHooksやNext.js(App router)で詰んだので、まだJavaScriptの理解が浅いと思い、この記事を残そうと思いました。
+ここまで１か月と短い期間だったのでこのようになるのも当然かなと。
+
+
+
+ JavaScriptの役割
+
+画面の動的な要素を担っている
+　- ﾎﾞﾀﾝｸﾘｯｸによるｱｸｼｮﾝ
+
+画面内でのテキストの編集機能など
+Todoリストの機能、タスク管理機能など
+
+
+
+
+
+ DOM
+
+documentｵﾌﾞｼﾞｪｸﾄがDOMの世界へのｴﾝﾄﾘｰﾎﾟｲﾝﾄとなっている
+その...]]></description><link>https://zenn.dev/qnkqklneee/articles/dc19e50c188948</link><guid isPermaLink="true">https://zenn.dev/qnkqklneee/articles/dc19e50c188948</guid><pubDate>Sat, 13 Sep 2025 10:06:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--08msiFyB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2581%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:qnkqklneee%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWs2Ym9KaWpXSnVJZnE4NDZNSVpEWlNlbkxxYzU3QjFNUjNQX0pPWC1EWUZGYjJ3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>qnkqklneee</dc:creator></item><item><title><![CDATA[Reactのイベントハンドラについて]]></title><description><![CDATA[
+ はじめに
+Reactでイベントハンドラを実行する際の書き方についてまとめました。
+
+ 名前付き関数を参照した場合
+function App() {
+  function handleClick() {
+    console.log("clicked");
+  }
+
+  return &lt;button onClick={handleClick}&gt;Click me&lt;/button&gt;;
+}
+
+ 無名関数の場合
+function App() {
+return &lt;button onClick={() =&gt; console.log("clicked")}&gt...]]></description><link>https://zenn.dev/shusaku009/articles/react-onclick-event</link><guid isPermaLink="true">https://zenn.dev/shusaku009/articles/react-onclick-event</guid><pubDate>Sat, 13 Sep 2025 08:01:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hqYe1XTN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2583%258F%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25A9%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shusaku009%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1YWY1OGM1NjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shusaku009</dc:creator></item><item><title><![CDATA[TypeScript のコンパイルを理解する]]></title><description><![CDATA[
+ 🌼 はじめに
+こんにちは、にわかエンジニアです。
+私はエンジニア歴のほとんどを TypeScript と一緒に過ごしていてあまり気づいてなかったのですが、どうやら TypeScript のコンパイルは他の言語に比べて変わってるらしいです。
+なので、TypeScript のコンパイルについて調べたものを共有したいと思います！
+
+ 1. コンピューターの言語、人の言語
+まずは根本的な言語（とその翻訳）について説明します。
+
+ 1-1. 低水準言語
+低水準言語（low-level language）は、コンピュータが理解しやすいように作られた言語で、一般的に機械語とアセンブリ言語を指します...]]></description><link>https://zenn.dev/luvmini511/articles/4ba982523ee265</link><guid isPermaLink="true">https://zenn.dev/luvmini511/articles/4ba982523ee265</guid><pubDate>Sat, 13 Sep 2025 07:36:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4-RvQiJi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%2520%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2591%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BF%25E3%2582%2593%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA3YTQwNzFlZWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>みんちゃん</dc:creator></item><item><title><![CDATA[Quill コピペ　スタイルが出てしまう問題　画像の扱いの調整版]]></title><description><![CDATA[以下は、スタイルを消す処理と、エディタ内の画像の移動ができるように改良をしたものです。
+この方法は、問題点を含んでいますので、以下参照。
+https://qiita.com/daponta/items/9f40f95099f0616de8f0
+参照↑
+quill_left.clipboard.addMatcher(Node.ELEMENT_NODE, (node, delta) =&gt; {
+  let ops = []
+  delta.ops.forEach(op =&gt; {
+    if (op.insert) {
+      // 文字列ならそのまま残す
+      if (...]]></description><link>https://zenn.dev/kemii/articles/b822ab0c7a77d7</link><guid isPermaLink="true">https://zenn.dev/kemii/articles/b822ab0c7a77d7</guid><pubDate>Fri, 12 Sep 2025 01:38:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ECbqdXhh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Quill%2520%25E3%2582%25B3%25E3%2583%2594%25E3%2583%259A%25E3%2580%2580%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%258C%25E5%2587%25BA%25E3%2581%25A6%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2586%25E5%2595%258F%25E9%25A1%258C%25E3%2580%2580%25E7%2594%25BB%25E5%2583%258F%25E3%2581%25AE%25E6%2589%25B1%25E3%2581%2584%25E3%2581%25AE%25E8%25AA%25BF%25E6%2595%25B4%25E7%2589%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kemii%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5ZGYyMjM5ZmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kemii</dc:creator></item><item><title><![CDATA[映像をAA風にリアルタイムで描画するのを、作った]]></title><description><![CDATA[
+ 経緯
+作りたかったから
+
+ フォルダ構造
+.
+├── index.html
+├── index.js
+└── video.mp4
+
+ コード
+index.html
+&lt;!DOCTYPE html&gt;
+&lt;html lang="js"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;video id="video" controls src="video.mp4" style="posit...]]></description><link>https://zenn.dev/locu/articles/ef29702fa56c1e</link><guid isPermaLink="true">https://zenn.dev/locu/articles/ef29702fa56c1e</guid><pubDate>Thu, 11 Sep 2025 14:23:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9DEw17qq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2598%25A0%25E5%2583%258F%25E3%2582%2592AA%25E9%25A2%25A8%25E3%2581%25AB%25E3%2583%25AA%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E3%2581%25A7%25E6%258F%258F%25E7%2594%25BB%25E3%2581%2599%25E3%2582%258B%25E3%2581%25AE%25E3%2582%2592%25E3%2580%2581%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25AD%25E3%2582%25AF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlZTFiY2ZkNDguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ロク</dc:creator></item><item><title><![CDATA[コピペ地獄よ、さようなら！選択範囲のリンクを根こそぎ引っこ抜く「link-copier-bookmarklet」を開発した話]]></title><description><![CDATA[
+ 🎯 この記事の対象読者
+
+
+自治体職員の方々で、日々の情報収集や資料作成をもっと効率化したいと思っている方
+単純なコピー＆ペースト作業に「この時間、もっと他のことに使えないかな…」と感じている方
+プログラミングは難しそうだけど、自分の手で便利なツールを作ってみたいと思っているDXに関心のあるすべての方
+
+「ブックマークレット」という言葉にピンときた、または「何それ？」と興味が湧いたエンジニアの方
+
+
+ 💡 この記事を読むと得られること
+
+Webページ上の必要な情報（特にURL）を一瞬で収集する具体的な方法がわかります。
+JavaScriptの短いコードをブラウザのブックマークに登録す...]]></description><link>https://zenn.dev/hosoyayusaku/articles/80e8cb4b898ff6</link><guid isPermaLink="true">https://zenn.dev/hosoyayusaku/articles/80e8cb4b898ff6</guid><pubDate>Thu, 11 Sep 2025 14:20:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LJQlvJ-f--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B3%25E3%2583%2594%25E3%2583%259A%25E5%259C%25B0%25E7%258D%2584%25E3%2582%2588%25E3%2580%2581%25E3%2581%2595%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AA%25E3%2582%2589%25EF%25BC%2581%25E9%2581%25B8%25E6%258A%259E%25E7%25AF%2584%25E5%259B%25B2%25E3%2581%25AE%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25AF%25E3%2582%2592%25E6%25A0%25B9%25E3%2581%2593%25E3%2581%259D%25E3%2581%258E%25E5%25BC%2595%25E3%2581%25A3%25E3%2581%2593%25E6%258A%259C%25E3%2581%258F%25E3%2580%258Clink-copier-bookmarklet%25E3%2580%258D%25E3%2582%2592...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hosoya%2520Yusaku%2520%252F%2520Ci...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MzMGI2ZmU4ZmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hosoya Yusaku / CivicTech Developer</dc:creator></item></channel></rss>
