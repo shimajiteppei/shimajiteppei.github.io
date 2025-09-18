@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 18 Sep 2025 05:32:36 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Claude MCPを使って「RSS → AI要約 → Notion保存」の朝ルーティン効率化に挑戦してみた]]></title><description><![CDATA[
+ 📝 はじめに
+毎日AIの進化が囁かれていますが、私の日課は変わらず「朝一のRSSで記事チェック」から始まっています。
+正直、この運用しんどい…。
+だいたい毎日300件ほどのタイトルにざっと目を通して 気になったものを「後で読む」に保存し、空き時間に消化する毎日。
+「これ、AIを活用して効率化できるのでは？」と思い、日曜開発のテーマとして RSS処理の自動化 に挑戦してみました。
+最終的には、
+
+自分の興味に合った記事だけをピックアップ
+記事の要約を自動生成
+まとめを毎朝Notionに通知
+
+といった理想像を描いています。
+今回はその第一歩として、Claude MCPを使った仕組みづく...]]></description><link>https://zenn.dev/yuji/articles/bec1705537d6e3</link><guid isPermaLink="true">https://zenn.dev/yuji/articles/bec1705537d6e3</guid><pubDate>Thu, 18 Sep 2025 00:00:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AhOCBAPz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Claude%2520MCP%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2580%258CRSS%2520%25E2%2586%2592%2520AI%25E8%25A6%2581%25E7%25B4%2584%2520%25E2%2586%2592%2520Notion%25E4%25BF%259D%25E5%25AD%2598%25E3%2580%258D%25E3%2581%25AE%25E6%259C%259D%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%2586%25E3%2582%25A3%25E3%2583%25B3%25E5%258A%25B9%25E7%258E%2587%25E5%258C%2596%25E3%2581%25AB%25E6%258C%2591%25E6%2588%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BF%25E3%2581%25AD%25E3%2582%2586%25E3%2581%2586%25E3%2581%2598%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA2MmZjOGE4NTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>みねゆうじ</dc:creator></item><item><title><![CDATA[[FastAPI × 外部API]asyncio.to_threadで起きたAPI実行時のフリーズ]]></title><description><![CDATA[
+ 事象
+AWS App RunnerにデプロイしたFastAPIアプリケーション上で、OpenAI APIを並列処理で利用したく実装したコードが実行されたとき以下の事象が起きました。
+
+1人目のユーザーがAPIを呼び出し（約60秒前後の処理）=&gt;約5並列でOpenAIのAPIを実行
+2人目のユーザーがアクセスすると画面がフリーズ
+1人目のユーザー画面も動かないのでリロード等してるとフリーズ
+当然、3人目以降のユーザー利用はアクセス不可
+
+サーバを再起動しなければ、使えない状態になりました。
+
+ 結論
+正確には、フリーズではなくアクセスのあったプロセス全体が、内部的に同期処理になっ...]]></description><link>https://zenn.dev/o_kai/articles/0f82eb5920a590</link><guid isPermaLink="true">https://zenn.dev/o_kai/articles/0f82eb5920a590</guid><pubDate>Wed, 17 Sep 2025 15:35:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xDwqmdTL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BFastAPI%2520%25C3%2597%2520%25E5%25A4%2596%25E9%2583%25A8API%255Dasyncio.to_thread%25E3%2581%25A7%25E8%25B5%25B7%25E3%2581%258D%25E3%2581%259FAPI%25E5%25AE%259F%25E8%25A1%258C%25E6%2599%2582%25E3%2581%25AE%25E3%2583%2595%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:o_kai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzNTk5NDA1MjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>o_kai</dc:creator></item><item><title><![CDATA[Pythonの並行処理パターン：実測比較]]></title><description><![CDATA[
+ はじめに
+Pythonの並行処理には複数のアプローチがあり、それぞれ適した場面が異なります。本記事では実際に測定した結果を基に各パターンの特性を比較します。
+間違いがございましたら、おっしゃってください.
+
+ 検証環境
+
+Python 3.13.5
+macOS Darwin 24.5.0
+CPU: 10コア
+
+
+ I/Oバウンドタスクの比較
+タスク内容: httpbin.orgへの5つのHTTPリクエスト（各リクエスト約3.5秒）
+
+
+
+パターン
+実行時間
+説明
+
+
+
+
+逐次処理
+17.37秒
+1つずつ順番に実行
+
+
+Threading
+5.20秒
+複数スレッドで並行実行
+
+
+Asy...]]></description><link>https://zenn.dev/o_kai/articles/b9b1b50c0d1007</link><guid isPermaLink="true">https://zenn.dev/o_kai/articles/b9b1b50c0d1007</guid><pubDate>Wed, 17 Sep 2025 15:19:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Y7bWjCge--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AE%25E4%25B8%25A6%25E8%25A1%258C%25E5%2587%25A6%25E7%2590%2586%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%25EF%25BC%259A%25E5%25AE%259F%25E6%25B8%25AC%25E6%25AF%2594%25E8%25BC%2583%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:o_kai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzNTk5NDA1MjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>o_kai</dc:creator></item><item><title><![CDATA[PythonのDTOをstrからEnumへ移行して気づいた「静的型 vs 動的型」の落とし穴]]></title><description><![CDATA[
+ 1. はじめに
+PythonでDTOのstrをEnumに移行するにあたりつまずいたポイントをふりかえります。
+APIのパラメーターのDTOについて、もともとstrで持っていたフィールドを型安全性を目的にEnumに差し替えました。
+設計思想としては「境界で文字列を受け取り、中ではEnumで扱う」という方針でしたが、移行にあたる修正範囲に考慮不足があり、バグを仕込んでしまいました。
+この記事ではその失敗を振り返りつつ、動的型言語で設計を移行するときに必要な「補強策」 を共有することです。
+
+ 2. 背景
+実装方針は以下の通りでした。
+
+
+Controller：APIから受け取ったstrを...]]></description><link>https://zenn.dev/takahashin/articles/4e0f37889c9768</link><guid isPermaLink="true">https://zenn.dev/takahashin/articles/4e0f37889c9768</guid><pubDate>Wed, 17 Sep 2025 13:18:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---rokew7X--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AEDTO%25E3%2582%2592str%25E3%2581%258B%25E3%2582%2589Enum%25E3%2581%25B8%25E7%25A7%25BB%25E8%25A1%258C%25E3%2581%2597%25E3%2581%25A6%25E6%25B0%2597%25E3%2581%25A5%25E3%2581%2584%25E3%2581%259F%25E3%2580%258C%25E9%259D%2599%25E7%259A%2584%25E5%259E%258B%2520vs%2520%25E5%258B%2595%25E7%259A%2584%25E5%259E%258B%25E3%2580%258D%25E3%2581%25AE%25E8%2590%25BD%25E3%2581%25A8%25E3%2581%2597%25E7%25A9%25B4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25B9%25A1%25E3%2583%25B6%25E8%25B0%25B7%25E4%25BA%25AD%25E7%259B%25B4%25E5%2590%2589%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhYmYwOTMxZmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>幡ヶ谷亭直吉</dc:creator></item><item><title><![CDATA[Python非同期処理の道具箱：httpxやSQLAlchemyからユニットテストまで]]></title><description><![CDATA[
+ 目的
+このドキュメントではPythonの非同期処理の実験を行います。
+Pythonの非同期自体初めての場合は以下のページを参照してください。
+
+
+A Conceptual Overview of asyncio
+
+公式のドキュメントで概要を掴むには適切
+
+
+
+import asyncio: Learn Python's
+
+上記のページでおすすめされている動画
+Pythonのバージョンは3.8くらいのようなのでTaskGroupなどは紹介されていない
+解説中のサンプルが一部動作しないがこの辺を参考にすれば動かせはする
+
+
+
+
+Python Concurrency with asynci...]]></description><link>https://zenn.dev/mima_ita/articles/64b386ba9807d0</link><guid isPermaLink="true">https://zenn.dev/mima_ita/articles/64b386ba9807d0</guid><pubDate>Wed, 17 Sep 2025 12:24:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--m-8cwPFd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25AE%25E9%2581%2593%25E5%2585%25B7%25E7%25AE%25B1%25EF%25BC%259Ahttpx%25E3%2582%2584SQLAlchemy%25E3%2581%258B%25E3%2582%2589%25E3%2583%25A6%25E3%2583%258B%25E3%2583%2583%25E3%2583%2588%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25BE%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mima_ita%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pjcDFUQmpUT3lBUnl4aHM3aVk1MEg2b0JZZ3FrRzFjTTZVblJMPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mima_ita</dc:creator></item><item><title><![CDATA[vLLM V1の実装②：EngineCore]]></title><description><![CDATA[前回 (だいぶ前😇) は vLLM V1 の概要と EngineCoreClient について見てきましたが、今回は実際の推論処理を担う EngineCore の実装を見ていきたいと思います。
+vLLM V1 における推論処理の中核を担うのが EngineCore およびその派生クラス群です。前回の EngineCoreClient の解説ではクライアントサイドのアーキテクチャを見てきましたが、今回は実際の推論オーケストレーションを行うサーバーサイドの実装を詳しく追っていきます。
+(参照したコミットは時期がズレているので、最新と比較すると細部または実装方針が異なるかもしれません。ご了承く...]]></description><link>https://zenn.dev/vlntr_telco_rd/articles/vllm-v1-engine-core</link><guid isPermaLink="true">https://zenn.dev/vlntr_telco_rd/articles/vllm-v1-engine-core</guid><pubDate>Wed, 17 Sep 2025 08:35:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--21vfSbA3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:vLLM%2520V1%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25E2%2591%25A1%25EF%25BC%259AEngineCore%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2583%25A6%25E3%2582%25A6%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NiMWRjY2I0MzAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2581%25A8%25E3%2581%2582%25E3%2582%258B%25E9%2580%259A%25E4%25BF%25A1%25E4%25BC%259A%25E7%25A4%25BE%25E3%2581%25AE%25E6%259C%2589%25E5%25BF%2597%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzExZmM2MWE2MDAuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ユウ</dc:creator></item><item><title><![CDATA[【ポートフォリオ 05 検証】Python CLI メッセージアプリをラズパイ内で実行してみた]]></title><description><![CDATA[
+ はじめに
+以下、UNIXドメインソケットを使って作成した CLI メッセージアプリがサーバ上（Ubuntu Serverをインストールした Raspberry Pi4）で動作するかを検証したプロセスをまとめていきます。
+https://qiita.com/mabo23/items/5dfb0ae6af6bbdaf3486
+
+ 前提
+
+Ubuntu Server をインストールした Raspberry Pi 4（以下、「ラズパイ」と表記）をセット
+使用PCは MacBook Pro（M2）
+ラズパイは MacBook・GitHubとSSH連携済み（git pullでプログラムを取得）
+...]]></description><link>https://zenn.dev/mabo23/articles/20b2fae5265122</link><guid isPermaLink="true">https://zenn.dev/mabo23/articles/20b2fae5265122</guid><pubDate>Wed, 17 Sep 2025 06:26:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QVWban4f--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AA%25E3%2582%25AA%252005%2520%25E6%25A4%259C%25E8%25A8%25BC%25E3%2580%2591Python%2520CLI%2520%25E3%2583%25A1%25E3%2583%2583%25E3%2582%25BB%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E3%2583%25A9%25E3%2582%25BA%25E3%2583%2591%25E3%2582%25A4%25E5%2586%2585%25E3%2581%25A7%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mabo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQzM2ZhMmVkZDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mabo</dc:creator></item><item><title><![CDATA[WebAudioAPI + Flaskで波形描画とサーバー保存]]></title><description><![CDATA[
+ はじめに
+WebAudioAPI を使うと、ブラウザ上でマイク入力を扱い、録音・波形描画・エンコードをすべてフロントエンドで行える。
+本記事では 3秒間の録音 → 波形描画 → WAV形式に変換 → Flaskサーバーに送信・保存 までの最小構成を紹介する。
+
+
+ 環境など
+
+フロントエンド
+
+HTML/JS
+WebAudioAPI
+BULMA
+
+
+バックエンド
+
+python 3.10.7
+Flask 3.x
+
+
+
+https://developer.mozilla.org/ja/docs/Web/API/Web_Audio_API
+https://bulma.io/
+https:...]]></description><link>https://zenn.dev/y_a_y/articles/webaudio_a0685efa3cc1ca</link><guid isPermaLink="true">https://zenn.dev/y_a_y/articles/webaudio_a0685efa3cc1ca</guid><pubDate>Tue, 16 Sep 2025 15:48:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4fH2KKOz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WebAudioAPI%2520%252B%2520Flask%25E3%2581%25A7%25E6%25B3%25A2%25E5%25BD%25A2%25E6%258F%258F%25E7%2594%25BB%25E3%2581%25A8%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E4%25BF%259D%25E5%25AD%2598%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:y_a_y%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YwY2M2MDU1NDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>y_a_y</dc:creator></item><item><title><![CDATA[Utilsを徹底活用する――境界・命名・構成・実装・運用の実務指針]]></title><description><![CDATA[Utilsを あえて"徹底して使いこなす" ための整理。
+目的は 可読性・再利用性・テスト容易性を両立すること。
+そのために 境界を明確化し、命名と構成で「“何でも箱”」化を避け、実装と運用ルールで品質を担保します。
+
+ 0. 結論
+
+
+役割で分割された“小さな utils”を複数置く（例：utils/text.py, utils/time_.py, utils/pathing.py）
+
+utils の名称にはドメイン語彙を入れない。ドメインは値オブジェクト/サービスとして集約する
+
+純粋関数中心＋メモ化・事前コンパイルなどの性能小技は utils に集約する
+
+ガードレール（命名・依存...]]></description><link>https://zenn.dev/takahashin/articles/2d090090e9aabb</link><guid isPermaLink="true">https://zenn.dev/takahashin/articles/2d090090e9aabb</guid><pubDate>Tue, 16 Sep 2025 14:28:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--K9C1QuvC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Utils%25E3%2582%2592%25E5%25BE%25B9%25E5%25BA%2595%25E6%25B4%25BB%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%25E2%2580%2595%25E2%2580%2595%25E5%25A2%2583%25E7%2595%258C%25E3%2583%25BB%25E5%2591%25BD%25E5%2590%258D%25E3%2583%25BB%25E6%25A7%258B%25E6%2588%2590%25E3%2583%25BB%25E5%25AE%259F%25E8%25A3%2585%25E3%2583%25BB%25E9%2581%258B%25E7%2594%25A8%25E3%2581%25AE%25E5%25AE%259F%25E5%258B%2599%25E6%258C%2587%25E9%2587%259D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25B9%25A1%25E3%2583%25B6%25E8%25B0%25B7%25E4%25BA%25AD%25E7%259B%25B4%25E5%2590%2589%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhYmYwOTMxZmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>幡ヶ谷亭直吉</dc:creator></item><item><title><![CDATA[typing.NewTypeは新規コードでも有効な選択肢だ]]></title><description><![CDATA[
+ 導入
+2025/09現在、Python NewTypeでGoogle検索すると、「NewTypeをこれから書くコードでは使わないほうがいい」という記事がトップでヒットします。記事では bake() メソッドの例を通じて「ランタイムで気付けないエラーが発生する」「NewTypeを使うより設計を見直すべき」といった指摘がされています。
+以下元記事より抜粋
+import enum
+from typing import NewType
+
+
+class Doneness(enum.Enum):
+    RARE = enum.auto()
+    MEDIUM = enum.auto()
+  ...]]></description><link>https://zenn.dev/kterui9019/articles/d50d0e0b10b2f9</link><guid isPermaLink="true">https://zenn.dev/kterui9019/articles/d50d0e0b10b2f9</guid><pubDate>Tue, 16 Sep 2025 12:35:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iMXYxujB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:typing.NewType%25E3%2581%25AF%25E6%2596%25B0%25E8%25A6%258F%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25A7%25E3%2582%2582%25E6%259C%2589%25E5%258A%25B9%25E3%2581%25AA%25E9%2581%25B8%25E6%258A%259E%25E8%2582%25A2%25E3%2581%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kterui9019%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHdUOWhXTElQZ2lmWTlOU0ppNm0wekR6QnpMeGtMODB3bEFXbWMyZTFUZ1E0Nz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kterui9019</dc:creator></item><item><title><![CDATA[【python】one-hot encodingの実装（4パターン）]]></title><description><![CDATA[
+機械学習モデルにカテゴリ変数を特徴量として入力するための手法として、one-hot encodingがある
+これの実装方法をいくつかまとめてみた
+
+
+ ライブラリのバージョン
+python : 3.13.5
+
+numpy : 2.3.3
+pandas : 2.3.2
+Scikit-learn : 1.7.2
+
+
+ 1. numpyを使う場合
+numpyは処理が早く、使用頻度が高いため、大体はこの形式でよい
+
+ プログラム
+import numpy as np
+
+data = np.array(["red", "blue", "green", "red", "blue"])
+
+# ユニー...]]></description><link>https://zenn.dev/hoshinagi1219/articles/d043f79498bceb</link><guid isPermaLink="true">https://zenn.dev/hoshinagi1219/articles/d043f79498bceb</guid><pubDate>Tue, 16 Sep 2025 11:20:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NcICv14m--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590python%25E3%2580%2591one-hot%2520encoding%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25EF%25BC%25884%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%2598%259F%25E6%259D%259C%25E3%2581%25AA%25E3%2581%258E%25E3%2581%2595%25EF%25BC%2588Nagisa%2520Hoshi...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ5ZGRkYjJkZjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>星杜なぎさ（Nagisa Hoshimori）</dc:creator></item><item><title><![CDATA[Raspberry Pi顔認識の次のステップ：face_recognitionライブラリで「顔認証」を実装する]]></title><description><![CDATA[
+ はじめに
+前回の記事「Raspberry PiとOpenCVではじめるリアルタイム顔認識入門」では、カメラ映像から顔を「検出」する方法を解説しました。
+今回はその次のステップとして、検出した顔が事前に登録した「誰」の顔なのかを「認証」する、本格的な顔認証システムの構築に挑戦します。
+このプロジェクトの主役は、dlibという強力な機械学習ライブラリをラップした、face_recognitionというPythonライブラリです。これを使うことで、驚くほど少ないコードで高精度な顔認証を実装できます。
+
+ Step 1: 「顔検出」と「顔認証」の違い
+まず、言葉の整理をしておきましょう。
+
+...]]></description><link>https://zenn.dev/meantix/articles/67d4fdb38fc283</link><guid isPermaLink="true">https://zenn.dev/meantix/articles/67d4fdb38fc283</guid><pubDate>Tue, 16 Sep 2025 08:10:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--J0kMpkJQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Raspberry%2520Pi%25E9%25A1%2594%25E8%25AA%258D%25E8%25AD%2598%25E3%2581%25AE%25E6%25AC%25A1%25E3%2581%25AE%25E3%2582%25B9%25E3%2583%2586%25E3%2583%2583%25E3%2583%2597%25EF%25BC%259Aface_recognition%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2581%25A7%25E3%2580%258C%25E9%25A1%2594%25E8%25AA%258D%25E8%25A8%25BC%25E3%2580%258D%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:meantix%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MxMmZiYzIwOTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>meantix</dc:creator></item><item><title><![CDATA[Python Concurrency with asyncioの読書メモとasyncioの3.11–3.13変更点]]></title><description><![CDATA[
+ はじめに
+Python Concurrency with asyncioというPythonの非同期処理を専門とした書籍です。
+既存または新規のPythonアプリケーションにおける並行処理の理解を深め、活用したいと考えている開発者には有用な書籍です。
+書籍中のソースコードによると、本書のコードが動く環境はPython3.10になります。
+本書にはいくつか古い実装方法が残っているので留意してください。
+asyncioについて3.11以降に変更された点はバージョン差による注意にまとめてあります。
+
+ 各章のまとめ
+
+ 1 Getting to know asyncio
+
+Pythonにおけ...]]></description><link>https://zenn.dev/mima_ita/articles/468e394f7e0088</link><guid isPermaLink="true">https://zenn.dev/mima_ita/articles/468e394f7e0088</guid><pubDate>Tue, 16 Sep 2025 07:28:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GhJ3caf0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%2520Concurrency%2520with%2520asyncio%25E3%2581%25AE%25E8%25AA%25AD%25E6%259B%25B8%25E3%2583%25A1%25E3%2583%25A2%25E3%2581%25A8asyncio%25E3%2581%25AE3.11%25E2%2580%25933.13%25E5%25A4%2589%25E6%259B%25B4%25E7%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mima_ita%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pjcDFUQmpUT3lBUnl4aHM3aVk1MEg2b0JZZ3FrRzFjTTZVblJMPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mima_ita</dc:creator></item><item><title><![CDATA[【ポートフォリオ 05】UNIXドメインソケットで作る Python CLI メッセージアプリ]]></title><description><![CDATA[
+ はじめに
+現在、未経験からバックエンドエンジニアを目指し、コンピュータサイエンスの基礎をプロジェクトを通じて学習できるサイト Recursion を使用して、学習しています。
+プロジェクトの一環で、UNIXドメインソケットを使って、CLIで完結するメッセージアプリを作成しました。
+この記事では、このポートフォリオについて紹介・解説していきます。
+GitHubはこちら
+https://github.com/Mavo39/backend-portfolio/tree/main/04_local_chat_messenger
+
+ 課題内容
+
+Python のソケット通信と faker パッ...]]></description><link>https://zenn.dev/mabo23/articles/36ac54c5e1e3f1</link><guid isPermaLink="true">https://zenn.dev/mabo23/articles/36ac54c5e1e3f1</guid><pubDate>Tue, 16 Sep 2025 06:26:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iIs70gFU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AA%25E3%2582%25AA%252005%25E3%2580%2591UNIX%25E3%2583%2589%25E3%2583%25A1%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BD%25E3%2582%25B1%25E3%2583%2583%25E3%2583%2588%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%2520Python%2520CLI%2520%25E3%2583%25A1%25E3%2583%2583%25E3%2582%25BB%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mabo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQzM2ZhMmVkZDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mabo</dc:creator></item><item><title><![CDATA[uvで始めるモダンPython開発環境 (uv/Ruff/Pyright/Pytest/Precommit/Github-Actions)]]></title><description><![CDATA[
+ 0.はじめに
+初めまして。Meduranceエンジニアの深田翔(ふかしょ)です。本記事ではuvを使ったモダンなPythonプロジェクトセットアップを紹介していきます。
+
+uvの基本的な使い方とプロジェクト初期化
+モダンなPython開発環境（linter/formatter/型チェック）の構築
+テスト環境の設定とCI(precommit, Github Actions)の導入
+VSCode設定
+
+なお、今回の記事の内容を入れたリポジトリについても公開してるので、あわせてご確認ください。
+https://github.com/ShoFukada/uv-python-starter-te...]]></description><link>https://zenn.dev/medurance/articles/uv-python-starter</link><guid isPermaLink="true">https://zenn.dev/medurance/articles/uv-python-starter</guid><pubDate>Tue, 16 Sep 2025 05:57:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wwKJJOWt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:uv%25E3%2581%25A7%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258B%25E3%2583%25A2%25E3%2583%2580%25E3%2583%25B3Python%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%2520%2528uv%252FRuff%252FPyright%252FPytest%252FPrecommit%252FGit...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:FukaSho%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdhNWZiNWE4MjYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Medurance%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTViYll1SVF6ck1VRF9CMzhKNHJPdGpDUk9FX2pnWWFrTnFGTWFaYVFjVUd2bTdaRHg9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>FukaSho</dc:creator></item><item><title><![CDATA[駅すぱあと Python SDKを使って、N分以内で行ける駅を探す]]></title><description><![CDATA[本記事はヴァル研究所の支援として作成された記事です
+駅すぱあとはAPIを公開しており、駅情報や経路探索などをAPI経由で行えます。メソッドはすべてGETメソッドで、情報取得系のみです。レスポンスはJSONまたはXMLで返ってきます。
+この駅すぱあと APIを利用しやすくするSDKを開発しはじめました。SDKはPythonで作っており、CLIやWebサービスなどから利用できます。
+今回は、スタンダードプランで提供されている範囲探索APIに対応しましたので、その使い方を紹介します。
+範囲探索機能はN分以内で行ける駅を探す機能ですが、例えば不動産サイトやバイト探しサイトの「通勤時間から探す」機...]]></description><link>https://zenn.dev/ekispert_api/articles/4992e3147cbfe1</link><guid isPermaLink="true">https://zenn.dev/ekispert_api/articles/4992e3147cbfe1</guid><pubDate>Tue, 16 Sep 2025 05:26:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--l1jFo5dK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%25A7%2585%25E3%2581%2599%25E3%2581%25B1%25E3%2581%2582%25E3%2581%25A8%2520Python%2520SDK%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2580%2581N%25E5%2588%2586%25E4%25BB%25A5%25E5%2586%2585%25E3%2581%25A7%25E8%25A1%258C%25E3%2581%2591%25E3%2582%258B%25E9%25A7%2585%25E3%2582%2592%25E6%258E%25A2%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%25A2%25E3%2583%2584%25E3%2582%25B7%2540MOONGIFT%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzllZWU4MmU5MDMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E9%25A7%2585%25E3%2581%2599%25E3%2581%25B1%25E3%2581%2582%25E3%2581%25A8%2520API%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dqN3UwNEd0OEkzbTVsd2xaRUhBbjNlcko0QjZxNWlBd1V6N2tqT1E9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>アツシ@MOONGIFT</dc:creator></item><item><title><![CDATA[コルーチンとジェネレータを追って泥沼へ:半世紀前のプログラミング言語は動くのか!?]]></title><description><![CDATA[
+ 目的
+このドキュメントはコルーチンとジェネレータについて、そもそもどういったものだったのかを調べ出して泥沼にはまった記録です。
+通常は役にたちませんが以下の疑問を持った場合に考えるヒントにはなります。
+
+ジェネレータとコルーチンの関係は？
+「かつてのPythonのgenerator functionは、ほとんどcoroutineだが、完全ではない・・・ってどういう意味だってばよ」
+「完全なcoroutineを使用できるプログラミング言語ってなんなのだ」
+「先生、JavaScriptのPromiseはcoroutineに入りますか？」
+
+ドキュメントを記載する上でいくつかの実験コードを...]]></description><link>https://zenn.dev/mima_ita/articles/6c5d5390060f5b</link><guid isPermaLink="true">https://zenn.dev/mima_ita/articles/6c5d5390060f5b</guid><pubDate>Mon, 15 Sep 2025 22:22:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--D7W4GDT---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B3%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%2581%25E3%2583%25B3%25E3%2581%25A8%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%258D%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E8%25BF%25BD%25E3%2581%25A3%25E3%2581%25A6%25E6%25B3%25A5%25E6%25B2%25BC%25E3%2581%25B8%253A%25E5%258D%258A%25E4%25B8%2596%25E7%25B4%2580%25E5%2589%258D%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E8%25A8%2580%25E8%25AA%259E%25E3%2581%25AF%25E5%258B%2595%25E3%2581%258F%25E3%2581%25AE%25E3%2581%258B%2521%253F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mima_ita%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pjcDFUQmpUT3lBUnl4aHM3aVk1MEg2b0JZZ3FrRzFjTTZVblJMPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mima_ita</dc:creator></item><item><title><![CDATA[Ubuntu 24.04でGMATをインストール&使いはじめるまで]]></title><description><![CDATA[
+ はじめに
+本記事では、Ubuntu 24.04 環境で GMAT (General Mission Analysis Tool) をインストールして Python/GUI を起動するまでの手順をまとめます。
+特に以下の点でハマったので、同じ環境で試す方の参考になれば幸いです。
+
+Python から GMAT を呼び出す際の注意点
+GUI 起動時に出たエラー (libtiff.so.5 が見つからない)
+その解決方法
+
+
+
+ GMATのインストールと展開
+
+
+ダウンロードサイト から Linux 用の GMAT R2025a をダウンロード。ダウンロードボタンを押すと、ダウンロードが開...]]></description><link>https://zenn.dev/geonista/articles/c7854dae3b7ddf</link><guid isPermaLink="true">https://zenn.dev/geonista/articles/c7854dae3b7ddf</guid><pubDate>Mon, 15 Sep 2025 20:58:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hU-stwpf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%252024.04%25E3%2581%25A7GMAT%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%2526%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%25AF%25E3%2581%2598%25E3%2582%2581%25E3%2582%258B%25E3%2581%25BE%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Geonista%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNlY2JhZDc1NWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Geonista</dc:creator></item><item><title><![CDATA[【DAY98】生活システムをコードで最適化する]]></title><description><![CDATA[
+ 生活改善もコードで回す時代
+プログラミングといえば、サービス開発やアプリ制作が中心と思われがちだけど、「自分の生活を快適にする」ことに使うのも非常に強力な手段だ。
+ここ1ヶ月、業務ではなく私生活を改善するためのコードを書いていて、想像以上の効果があったので、その一部を紹介する。
+
+
+ 習慣追跡とNotion API
+まずやったのは、「毎日の習慣記録の自動化」。これまではNotionで手動入力していたが、Python + Notion APIを使って以下を実装：
+
+毎朝7時、自動で新しい「習慣チェックリスト」をNotionに生成
+夜22時、記録が未入力ならSlack通知
+週次で完了率を...]]></description><link>https://zenn.dev/keisuke4649/articles/day98-pg-connection</link><guid isPermaLink="true">https://zenn.dev/keisuke4649/articles/day98-pg-connection</guid><pubDate>Mon, 15 Sep 2025 20:42:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--f0ObFGx9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590DAY98%25E3%2580%2591%25E7%2594%259F%25E6%25B4%25BB%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%2592%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25A7%25E6%259C%2580%25E9%2581%25A9%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:keisuke%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1N6RW9ldTZzVFN5UDFTUEpZazlwSkFDYUVwMGhWeGRQYzVIcHlzeXpKdlBKUGpHcWZ0dz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>keisuke</dc:creator></item><item><title><![CDATA[privateがない言語で壊れにくいテストをどう設計するか]]></title><description><![CDATA[
+ リード
+最近、Pythonのユニットテストでモック地獄に陥りました。
+単純なリファクタリングが壊れやすいテストによって阻害されることを痛感しました。
+Pythonでユニットテストを書くとき、Java/C#のメンタルモデル（クラス＝単位、private＝守る）をそのまま持ち込むと、すぐに違和感にぶつかります。
+Pythonはクラス前提ではなく、アクセス修飾子も慣習ベース。
+だからこそ 「ユニット＝関数／モジュール／公開API」へと再定義 し、実装詳細から距離を取る設計が鍵になります。
+本稿は、古典派（Chicago）とロンドン派（London）という二つのテスト観を土台に、Python...]]></description><link>https://zenn.dev/takahashin/articles/c71b4a582f5b86</link><guid isPermaLink="true">https://zenn.dev/takahashin/articles/c71b4a582f5b86</guid><pubDate>Mon, 15 Sep 2025 15:15:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PFxt2uL0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:private%25E3%2581%258C%25E3%2581%25AA%25E3%2581%2584%25E8%25A8%2580%25E8%25AA%259E%25E3%2581%25A7%25E5%25A3%258A%25E3%2582%258C%25E3%2581%25AB%25E3%2581%258F%25E3%2581%2584%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E3%2581%25A9%25E3%2581%2586%25E8%25A8%25AD%25E8%25A8%2588%25E3%2581%2599%25E3%2582%258B%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25B9%25A1%25E3%2583%25B6%25E8%25B0%25B7%25E4%25BA%25AD%25E7%259B%25B4%25E5%2590%2589%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhYmYwOTMxZmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>幡ヶ谷亭直吉</dc:creator></item></channel></rss>
