@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「CSS」のフィード]]></title><description><![CDATA[Zennのトピック「CSS」のRSSフィードです]]></description><link>https://zenn.dev/topics/css</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/98e1680a6c.png</url><title>Zennの「CSS」のフィード</title><link>https://zenn.dev/topics/css</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 20 Sep 2025 00:18:18 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/css/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【初心者向け】Webサイトの仕組みと最初のHTMLを書いてみよう その2]]></title><description><![CDATA[
+みなさん、こんにちは。
+「ゼロから学ぶWeb制作」シリーズ、やっていきましょう。
+その1を見ていない方は先にそちらを見てから今回のものをやりましょう。
+
+ 初めてのHTMLを書いてみよう！
+それでは始めて行きます。
+HTMLは「タグ」と呼ばれる命令でWebページの骨組みを作ります。
+タグは &lt;タグ名&gt; のように書き、終了タグは &lt;/タグ名&gt; の形で閉じます。
+何を言ってるんだ？となっている人が多いと思うのでまず実際のHTMLを見てみましょう。
+
+sample
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+  ...]]></description><link>https://zenn.dev/sanada_webdev/articles/94c170e09f1f58</link><guid isPermaLink="true">https://zenn.dev/sanada_webdev/articles/94c170e09f1f58</guid><pubDate>Fri, 19 Sep 2025 05:10:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RSU02LPK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591Web%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2581%25AE%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%25E3%2581%25A8%25E6%259C%2580%25E5%2588%259D%25E3%2581%25AEHTML%25E3%2582%2592%25E6%259B%25B8%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%2588%25E3%2581%2586%2520%25E3%2581%259D%25E3%2581%25AE2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takumi%2520sanada%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSlJad0RZanM2ZnYtdVJ3OGRuRm5fSXRadU1CMVIxYVZMdmU5dkFQVURMUTFvbVNDQVg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takumi sanada</dc:creator></item><item><title><![CDATA[CSSの詳細度に悩まされて解決した話]]></title><description><![CDATA[
+ はじめに
+これは、実際の開発現場で遭遇した「CSS詳細度」に関するトラブルをきっかけに執筆したものです。
+ある日、Nuxt.jsを使ったプロジェクトの本番環境で、ロゴ画像の幅が意図通りに表示されないという問題が発生しました。開発環境では正常に見えていたため、「なぜ本番だけで現象が起きるのか？」と困惑し、原因を探ることになりました。。。
+調査を進めると、CSSの詳細度やスタイルの読み込み順序、さらにフレームワーク固有の最適化処理（CSSの結合やminify）が複雑に絡み合い、スタイルの競合が発生していることが判明しました。
+以下では、詳細度についてと実際の問題発生から調査・解決・学びに...]]></description><link>https://zenn.dev/wrench/articles/e2e1bc0aaefcad</link><guid isPermaLink="true">https://zenn.dev/wrench/articles/e2e1bc0aaefcad</guid><pubDate>Thu, 18 Sep 2025 10:03:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WedDG1X0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%25E3%2581%25AE%25E8%25A9%25B3%25E7%25B4%25B0%25E5%25BA%25A6%25E3%2581%25AB%25E6%2582%25A9%25E3%2581%25BE%25E3%2581%2595%25E3%2582%258C%25E3%2581%25A6%25E8%25A7%25A3%25E6%25B1%25BA%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wrench%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JhZjZkYmMxZTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wrench</dc:creator></item><item><title><![CDATA[Subgridでここまで変わる！モダンなレイアウト設計とinline-gridの活用]]></title><description><![CDATA[
+ はじめに
+「カードのボタンを全部下揃えにしたいけど、タイトルの長さがバラバラで揃わない...」
+そんな悩みを解決してくれるのが Subgrid です。
+2023年〜2024年にかけて主要ブラウザで実装が進み、実用的に使えるようになってきました。
+この記事では Subgrid の基本から実例、さらに一緒に覚えておくと便利な
+inline-grid まで解説します。
+
+
+ Subgridとは？
+Gridレイアウトの grid-template-columns や grid-template-rows に
+subgrid を指定すると、
+「親グリッドの定義をそのまま子グリッドで利用」できる...]]></description><link>https://zenn.dev/jabo_sack/articles/de31547b9dfcfc</link><guid isPermaLink="true">https://zenn.dev/jabo_sack/articles/de31547b9dfcfc</guid><pubDate>Thu, 18 Sep 2025 08:35:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--e-09ZXhH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Subgrid%25E3%2581%25A7%25E3%2581%2593%25E3%2581%2593%25E3%2581%25BE%25E3%2581%25A7%25E5%25A4%2589%25E3%2582%258F%25E3%2582%258B%25EF%25BC%2581%25E3%2583%25A2%25E3%2583%2580%25E3%2583%25B3%25E3%2581%25AA%25E3%2583%25AC%25E3%2582%25A4%25E3%2582%25A2%25E3%2582%25A6%25E3%2583%2588%25E8%25A8%25AD%25E8%25A8%2588%25E3%2581%25A8inline-grid%25E3%2581%25AE%25E6%25B4%25BB%25E7%2594%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:saku%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0xPbnFrMDRKVThqY19FYnZINFBkNks3akdYOGRMZTYwWUxDV3pXT3Fad3pqSlFmYz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>saku</dc:creator></item><item><title><![CDATA[【初心者向け】Webサイトの仕組みと最初のHTMLを書いてみよう その1]]></title><description><![CDATA[
+こんにちは！
+今日から 「ゼロから学ぶWeb制作」シリーズ を始めます。
+このシリーズは、パソコンは触れるけどHTMLやCSSは全くの初心者 という方を対象にしています。
+最終的には、自分のプロフィールページやシンプルなWebサイトを作れるようになることを目標にしています。
+Web制作は、少しずつ手を動かしながら学ぶのが一番効率的です。
+この記事では、Webサイトがどうやってできているのか、そして初めてのHTMLを書いてブラウザで表示するところまでを丁寧に解説します。
+
+ 1. Webサイトは何でできているの？
+私たちが普段見ているWebサイトは、大きく分けて次の2つの言語で作られてい...]]></description><link>https://zenn.dev/sanada_webdev/articles/afe824f5253abe</link><guid isPermaLink="true">https://zenn.dev/sanada_webdev/articles/afe824f5253abe</guid><pubDate>Wed, 17 Sep 2025 09:18:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1fXlp-h9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591Web%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2581%25AE%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%25E3%2581%25A8%25E6%259C%2580%25E5%2588%259D%25E3%2581%25AEHTML%25E3%2582%2592%25E6%259B%25B8%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%2588%25E3%2581%2586%2520%25E3%2581%259D%25E3%2581%25AE1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takumi%2520sanada%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSlJad0RZanM2ZnYtdVJ3OGRuRm5fSXRadU1CMVIxYVZMdmU5dkFQVURMUTFvbVNDQVg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takumi sanada</dc:creator></item><item><title><![CDATA[iOS Safariでfixed背景がズレる問題を、背景専用レイヤーで解決]]></title><description><![CDATA[background-attachment: fixed を body 直指定で使うと、iOS Safari でスクロール時に背景がずれたり表示されないことがあります。
+背景専用の固定レイヤー（&lt;div&gt;）を用意し、PC/Android では position: fixed、iOS では absolute にフォールバックする実装で安定表示できました。
+
+
+ 背景
+ホームページの背景に好きなイメージを敷き、スクロールしても背景だけ固定（いわゆる“固定背景”）にしたい。
+
+ 既存の設定（問題が出たCSS）
+body {
+  /* 省略 */
+  background: url(...]]></description><link>https://zenn.dev/hyoni/articles/7bc9ff077e861d</link><guid isPermaLink="true">https://zenn.dev/hyoni/articles/7bc9ff077e861d</guid><pubDate>Wed, 17 Sep 2025 01:45:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lbbSXe69--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:iOS%2520Safari%25E3%2581%25A7fixed%25E8%2583%258C%25E6%2599%25AF%25E3%2581%258C%25E3%2582%25BA%25E3%2583%25AC%25E3%2582%258B%25E5%2595%258F%25E9%25A1%258C%25E3%2582%2592%25E3%2580%2581%25E8%2583%258C%25E6%2599%25AF%25E5%25B0%2582%25E7%2594%25A8%25E3%2583%25AC%25E3%2582%25A4%25E3%2583%25A4%25E3%2583%25BC%25E3%2581%25A7%25E8%25A7%25A3%25E6%25B1%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2592%25E3%2583%25A7%25E3%2583%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0sxdWxlU2pkSzlwbDVxZnp3QVlUcFhCNk9xUEhkZGpKWjRUVlRPTl9lMHdYODhLdkg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ヒョニ</dc:creator></item><item><title><![CDATA[アクセシビリティを考慮してCSS単位を見直してみた！]]></title><description><![CDATA[
+ 背景
+フロントエンドエンジニアとして日々コーディングをする中で、最近アクセシビリティの重要性を改めて学びました。特に、CSSの単位の使い方次第で、ユーザーのフォントサイズ変更に対応できなくなることを知り、これまでのコーディング手法を見直すきっかけとなりました。
+何かご指摘やアドバイス等あると優しく教えていただけると幸いです、、！
+
+ これまでのコーディング方法
+デザインデータ通りにページを作成することを重視し、フォントサイズや余白などにvw（ビューポートの幅に対する割合）を多用していました。これは、ブラウザの幅が変わっても要素のサイズが同じ割合で変化し、デザインの一貫性を保ちやすいた...]]></description><link>https://zenn.dev/darse/articles/417a2983023574</link><guid isPermaLink="true">https://zenn.dev/darse/articles/417a2983023574</guid><pubDate>Sat, 13 Sep 2025 10:17:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YYLWX2Eb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A2%25E3%2582%25AF%25E3%2582%25BB%25E3%2582%25B7%25E3%2583%2593%25E3%2583%25AA%25E3%2583%2586%25E3%2582%25A3%25E3%2582%2592%25E8%2580%2583%25E6%2585%25AE%25E3%2581%2597%25E3%2581%25A6CSS%25E5%258D%2598%25E4%25BD%258D%25E3%2582%2592%25E8%25A6%258B%25E7%259B%25B4%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2580%25E3%2583%25BC%25E3%2582%25B9%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q4OWMwMWM1YzEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ダース</dc:creator></item><item><title><![CDATA[CSS ハードコーディング地獄からの脱却]]></title><description><![CDATA[
+ はじめに — ハードコーディング地獄の風景
+ある日、コードを開くとこう書いてある。
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  color: #333;
+}
+.button {
+  background-color: #1976d2;
+  padding: 12px 24px;
+  border-radius: 4px;
+}
+レビューで聞かれるのは毎回同じだ。
+「その青、#1976d2 だっけ？ いや #1a73e8 じゃなかった？」
+気づけば、同じプロダクトの中に 青が 5 種類...]]></description><link>https://zenn.dev/moderncraft/articles/377b7f7cf1d7aa</link><guid isPermaLink="true">https://zenn.dev/moderncraft/articles/377b7f7cf1d7aa</guid><pubDate>Fri, 12 Sep 2025 03:21:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tnNaIkqi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%2520%25E3%2583%258F%25E3%2583%25BC%25E3%2583%2589%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E5%259C%25B0%25E7%258D%2584%25E3%2581%258B%25E3%2582%2589%25E3%2581%25AE%25E8%2584%25B1%25E5%258D%25B4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ModernCraft%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY4NTQ5ODZlZjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ModernCraft</dc:creator></item><item><title><![CDATA[CSS Masonryがついに登場!? ネイティブでMasonryレイアウトを実現する新時代]]></title><description><![CDATA[
+ CSS Masonryレイアウト：ついにネイティブサポートが実現
+Pinterestのような、高低差のあるタイル状のレイアウトに気づいたことはありませんか？
+
+この美しく整然としながらも自然な配置をMasonryレイアウトと呼びます。写真ギャラリー、ブログ記事一覧、ECサイトの商品表示など、コンテンツの高さがバラバラな場面で特に重宝されています。
+しかし、これまでCSSでこの効果を実現しようとすると、どうしても「回り道」が必要でした。Masonry.jsのようなJavaScriptライブラリを導入するか、CSS GridやFlexboxで苦肉の策を講じるか。どの方法も決して簡単ではな...]]></description><link>https://zenn.dev/yuhua_shi/articles/f6a37680957bc0</link><guid isPermaLink="true">https://zenn.dev/yuhua_shi/articles/f6a37680957bc0</guid><pubDate>Thu, 11 Sep 2025 08:00:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qV8iUuOj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%2520Masonry%25E3%2581%258C%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25AB%25E7%2599%25BB%25E5%25A0%25B4%2521%253F%2520%25E3%2583%258D%25E3%2582%25A4%25E3%2583%2586%25E3%2582%25A3%25E3%2583%2596%25E3%2581%25A7Masonry%25E3%2583%25AC%25E3%2582%25A4%25E3%2582%25A2%25E3%2582%25A6%25E3%2583%2588%25E3%2582%2592%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B0%25E6%2599%2582%25E4%25BB%25A3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2586%25E3%2581%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2laeDdpQWZaR2E2ZXFXNXhhM3lOeFdKQjlQaUVqVlE4d3gzMnBzUi00PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>うか</dc:creator></item><item><title><![CDATA[WordPressの記事で縦長の画像がくそでかになるのを防ぐCSS]]></title><description><![CDATA[WordPressで記事を書いているときに、縦長の画像を入れたら、横幅いっぱいに広がり画像がくそでかになって困ることはありませんか？ PCの場合は良いんですけど、スマホで見たときにその画像だけで画面が埋まってしまう……ということがあって、毎回「こうじゃないよなあ」と思っていたんです。
+画像を入れる時に大きさを調整すれば良いんですけど、毎回調整するのはダルいですよね。というわけで、WordPressの「外観」→「カスタマイズ」→「追加CSS」に以下のようなおまじないを入れましょう。
+.type-post img {
+	max-height: 720px;
+	width: auto;
+	di...]]></description><link>https://zenn.dev/atohs/articles/05f01c3d1d675d</link><guid isPermaLink="true">https://zenn.dev/atohs/articles/05f01c3d1d675d</guid><pubDate>Thu, 11 Sep 2025 04:38:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BnAgRgCG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WordPress%25E3%2581%25AE%25E8%25A8%2598%25E4%25BA%258B%25E3%2581%25A7%25E7%25B8%25A6%25E9%2595%25B7%25E3%2581%25AE%25E7%2594%25BB%25E5%2583%258F%25E3%2581%258C%25E3%2581%258F%25E3%2581%259D%25E3%2581%25A7%25E3%2581%258B%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258B%25E3%2581%25AE%25E3%2582%2592%25E9%2598%25B2%25E3%2581%2590CSS%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:atohs%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2haX2FOZ0Z3NkJvLTVVZlZaMnN5TmFlRE1ENFVvT05ESmlUTW5GT3c9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>atohs</dc:creator></item><item><title><![CDATA[CSSのremとは？基礎から応用まで徹底解説]]></title><description><![CDATA[Webデザインやフロントエンド開発において、文字サイズや余白の指定はとても重要です。その中でもremは、レスポンシブデザインや一貫性のあるレイアウトを作るのに適したCSSの単位です。本記事では、remの基本から応用まで詳しく解説します。
+
+ remとは？
+rem（root em）は、CSSの相対単位の一つで、HTMLのルート要素（html）のfont-sizeを基準に計算されます。
+例えば、デフォルトのブラウザ設定では html の font-size は16pxになっているため
+html {
+  font-size: 16px;
+}
+
+p {
+  font-size: 1.5rem; ...]]></description><link>https://zenn.dev/monmontraining/articles/bdf627c54f99d0</link><guid isPermaLink="true">https://zenn.dev/monmontraining/articles/bdf627c54f99d0</guid><pubDate>Wed, 10 Sep 2025 05:55:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vK5vgZP---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%25E3%2581%25AErem%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259F%25E5%259F%25BA%25E7%25A4%258E%25E3%2581%258B%25E3%2582%2589%25E5%25BF%259C%25E7%2594%25A8%25E3%2581%25BE%25E3%2581%25A7%25E5%25BE%25B9%25E5%25BA%2595%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2582%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZiNDAwYTJhNjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>もん</dc:creator></item><item><title><![CDATA[Sass: @import全盛の既存プロジェクトを最短で@use移行する実践ガイド（破壊しない段階移行）]]></title><description><![CDATA[「@import だらけで変数が何度も展開されてウザい…」「でも一括置換で壊したくない…」
+そんな現場向けに、ほぼ一括で @use へ移行できる橋渡し（互換）方式をまとめました。
+ビルドを壊さずに段階的に“真の @use 流儀”へ寄せていきます。
+
+
+ TL;DR（結論）
+
+
+いきなり全置換は危険：@use は名前空間付きで、裸の $var / @include が使えなくなるため。
+
+まずは @forward を使った「バレル（index）」を作成し、
+各所の複数 @import を 1行の @use ... as * に置換 → 既存の書き味を保持。
+その後、時間のある箇所から as...]]></description><link>https://zenn.dev/jabo_sack/articles/a66d605e575baf</link><guid isPermaLink="true">https://zenn.dev/jabo_sack/articles/a66d605e575baf</guid><pubDate>Tue, 09 Sep 2025 02:38:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Y8_Yt4eW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Sass%253A%2520%2540import%25E5%2585%25A8%25E7%259B%259B%25E3%2581%25AE%25E6%2597%25A2%25E5%25AD%2598%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2582%2592%25E6%259C%2580%25E7%259F%25AD%25E3%2581%25A7%2540use%25E7%25A7%25BB%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%25E5%25AE%259F%25E8%25B7%25B5%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%25EF%25BC%2588%25E7%25A0%25B4%25E5%25A3%258A%25E3%2581%2597%25E3%2581%25AA%25E3%2581%2584%25E6%25AE%25B5%25E9%259A%258E%25E7%25A7%25BB%25E8%25A1%258C%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:saku%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0xPbnFrMDRKVThqY19FYnZINFBkNks3akdYOGRMZTYwWUxDV3pXT3Fad3pqSlFmYz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>saku</dc:creator></item><item><title><![CDATA[『ウェブアクセシビリティクックブック』感想 — フロントエンド実装を美味しくする20のレシピ]]></title><description><![CDATA[
+ はじめに
+オライリーから出版されている『Web Accessibility Cookbook』を読みました。
+https://accessibility-cookbook.com/
+この本は、ナビゲーション、フォーム、テーブル、ダイアログなどといった Webでよく使うコンポーネントをアクセシブルに実装するための「レシピ集」 です。
+単に「こう作る」だけでなく「なぜそれが必要なのか」まで解説されており、問題 → 解決策 → 実装例 → 議論という流れで整理されているのが特徴です。
+読んでいて「これはフロントエンド実装で押さえておきたい」と感じた項目を、20個に絞ってまとめました。
+もし...]]></description><link>https://zenn.dev/kalubi/articles/6dda7001f8fdcf</link><guid isPermaLink="true">https://zenn.dev/kalubi/articles/6dda7001f8fdcf</guid><pubDate>Sun, 07 Sep 2025 00:14:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--w5xQZLhU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258E%25E3%2582%25A6%25E3%2582%25A7%25E3%2583%2596%25E3%2582%25A2%25E3%2582%25AF%25E3%2582%25BB%25E3%2582%25B7%25E3%2583%2593%25E3%2583%25AA%25E3%2583%2586%25E3%2582%25A3%25E3%2582%25AF%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%2583%25E3%2582%25AF%25E3%2580%258F%25E6%2584%259F%25E6%2583%25B3%2520%25E2%2580%2594%2520%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E5%25AE%259F%25E8%25A3%2585%25E3%2582%2592%25E7%25BE%258E%25E5%2591%25B3%25E3%2581%2597%25E3%2581%258F%25E3%2581%2599%25E3%2582%258B20%25E3%2581%25AE%25E3%2583%25AC%25E3%2582%25B7%25E3%2583%2594%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E4%25B8%258A%25E3%2581%258B%25E3%2582%258B%25E3%2581%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc2YmMxZjZlZGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>上かるび</dc:creator></item><item><title><![CDATA[複数のリンク集をまとめたWebページ]]></title><description><![CDATA[
+ Linktreeとは
+複数のリンクをまとめたWebページを簡単に作成することができるサービスです。
+プロフィールに1つのURLだけしか貼り付けられないSNS（X,Instagramなど）のために開発されました。
+Linktree
+
+ 目的
+URLをまとめたリンク集を2つ以上同じ画面に表示できるWebページを作成します。
+現行のリンク集作成サービスの無料アカウントでは、リンク集を2つ以上同じ画面に作成することができません。
+私は音楽配信を趣味で行っており、2つの名義を使っています。2つの名義のリンク集を1枚のWebページ（LP）にまとまめたかったため作成しました。
+
+ GASについて
+...]]></description><link>https://zenn.dev/jackull/articles/cff53ffea6810c</link><guid isPermaLink="true">https://zenn.dev/jackull/articles/cff53ffea6810c</guid><pubDate>Sat, 06 Sep 2025 19:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--i3kF9Z0m--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25A4%2587%25E6%2595%25B0%25E3%2581%25AE%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25AF%25E9%259B%2586%25E3%2582%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%259FWeb%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:jackull%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWFhSU9zSFd2YXZIVlVtQWpJeG9SY0RxVnJwMmYtc2YtOXRld2VSQlhrd3ZOaDM0cmM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>jackull</dc:creator></item><item><title><![CDATA[Tailwindのz-indexマジックナンバー解決方針]]></title><description><![CDATA[
+ 結論
+z-indexの変数はtailwind.config.jsではなく.cssで定義しよう
+異論は認めます
+
+ よくありそうなパターン
+CSSを使わず、tailwind.config.jsで定義
+theme: {  
+  extend: {  
+    zIndex: {  
+      modal: 50,
+    },  
+  },  
+},
+const SampleComponent () =&gt; {
+    return {
+    &lt;box className='z-modal'&gt;
+    )
+}
+export default SampleComponen...]]></description><link>https://zenn.dev/ho_ri/articles/ddfb47cc81600c</link><guid isPermaLink="true">https://zenn.dev/ho_ri/articles/ddfb47cc81600c</guid><pubDate>Fri, 05 Sep 2025 13:58:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4KNoq0IW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tailwind%25E3%2581%25AEz-index%25E3%2583%259E%25E3%2582%25B8%25E3%2583%2583%25E3%2582%25AF%25E3%2583%258A%25E3%2583%25B3%25E3%2583%2590%25E3%2583%25BC%25E8%25A7%25A3%25E6%25B1%25BA%25E6%2596%25B9%25E9%2587%259D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hol1kgmg%2520%2528%25E3%2581%25BB%25E3%2582%258A%25E3%2581%258B%25E3%2582%258F%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI3NmM0YjRmYTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hol1kgmg (ほりかわ)</dc:creator></item><item><title><![CDATA[新人エンジニアによくあるHTML/CSSの間違い6選]]></title><description><![CDATA[エンジニアになって8年目。最近は新人の研修や若手のコードレビューなど、中堅的な役割が多くなってきました。
+彼らに教えたりレビュー指摘をしながら、「あ〜わたしも昔同じ間違いしてたな」「この間違いあるあるだな〜」と思うことがあります。
+そこで、わたしが新人の時によくやった間違いをまとめます。参考になると嬉しいです。
+
+ 1. 効果のないCSSを書いちゃう
+デザインを再現しようとしてCSSをあーでもない、こーでもないといじくりまわすと、たいてい不要になったCSSが混在します。
+このCSSって効果あるんだっけ？が気になる時は、Chromeの開発者ツールを開きましょう。
+Element &gt; ...]]></description><link>https://zenn.dev/northrkyk/articles/3c824f02cad840</link><guid isPermaLink="true">https://zenn.dev/northrkyk/articles/3c824f02cad840</guid><pubDate>Fri, 05 Sep 2025 08:04:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6zo7lSGc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2596%25B0%25E4%25BA%25BA%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2581%25AB%25E3%2582%2588%25E3%2581%258F%25E3%2581%2582%25E3%2582%258BHTML%252FCSS%25E3%2581%25AE%25E9%2596%2593%25E9%2581%2595%25E3%2581%25846%25E9%2581%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kyokoNR%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS25zSWFyRW8tREg0X3BtRVpZWnFPUnNkMEg1NjBxYUZ4Y0F0eU53Tzg4bmtUdEdDdUkyZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kyokoNR</dc:creator></item><item><title><![CDATA[モバイルファースト vs PCファースト：現代のWeb開発でどちらを選ぶべきか]]></title><description><![CDATA[
+ はじめに
+レスポンシブデザインを実装する際、多くの開発者が直面する問題があります：
+「モバイルファーストで作るべきか、PCファーストで作るべきか？」
+この記事では、両方のアプローチを実際のコード例と比較しながら、現代のWeb開発においてどちらが最適かを詳しく解説します。
+
+ 目次
+
+モバイルファーストとは
+PCファーストとは
+実装例での比較
+パフォーマンスの違い
+開発効率の比較
+実際のプロジェクトでの選択基準
+まとめ
+
+
+ モバイルファーストとは
+モバイルファーストは、モバイルデバイス用の基本的なスタイルから始めて、段階的に大画面用のスタイルを追加していくアプローチです。
+
+ 特徴
+...]]></description><link>https://zenn.dev/collabostyle/articles/5224d29feec918</link><guid isPermaLink="true">https://zenn.dev/collabostyle/articles/5224d29feec918</guid><pubDate>Thu, 04 Sep 2025 04:21:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nebkzLnB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25A2%25E3%2583%2590%25E3%2582%25A4%25E3%2583%25AB%25E3%2583%2595%25E3%2582%25A1%25E3%2583%25BC%25E3%2582%25B9%25E3%2583%2588%2520vs%2520PC%25E3%2583%2595%25E3%2582%25A1%25E3%2583%25BC%25E3%2582%25B9%25E3%2583%2588%25EF%25BC%259A%25E7%258F%25BE%25E4%25BB%25A3%25E3%2581%25AEWeb%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25A7%25E3%2581%25A9%25E3%2581%25A1%25E3%2582%2589%25E3%2582%2592%25E9%2581%25B8%25E3%2581%25B6%25E3%2581%25B9%25E3%2581%258D%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:yushi-s%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViM2I3NTQxYzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSk1DWlFPZDBzMmF6VWgtQ0lVZjRvTnVxeW5ZUUswU0g2N3M3M1hVbjFvQldPRDJBPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yushi-s</dc:creator></item><item><title><![CDATA[View Transitions API（ビュー遷移 API）を使ってみよう！]]></title><description><![CDATA[はい、どうも。
+今回はView Transitions API（ビュー遷移 API）を試してみましょう。
+View Transitions APIが登場してからそこそこ経ちますが、普段仕事で使うことがないものなので、ノータッチでした。
+調査がてら試してみようという感じです。
+
+ View Transitions APIとは？
+View Transitions APIは、ウェブページの状態変化・・・DOMの更新のことですね・・・をスムーズにアニメーションさせるためのAPIです。
+ブラウザネイティブの機能のため、今までJavascriptやCSSで頑張っていたものを簡単に実装できます。
+これ...]]></description><link>https://zenn.dev/sonicmoov/articles/f819f4904e793f</link><guid isPermaLink="true">https://zenn.dev/sonicmoov/articles/f819f4904e793f</guid><pubDate>Wed, 03 Sep 2025 03:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xjBhZ5mK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:View%2520Transitions%2520API%25EF%25BC%2588%25E3%2583%2593%25E3%2583%25A5%25E3%2583%25BC%25E9%2581%25B7%25E7%25A7%25BB%2520API%25EF%25BC%2589%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%2588%25E3%2581%2586%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E5%25AE%2589%25E7%25AB%258B%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0YjYwNGE3MzguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25BD%25E3%2583%258B%25E3%2583%2583%25E3%2582%25AF%25E3%2583%25A0%25E3%2583%25BC%25E3%2583%2596%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ5OTlmM2U4MGIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>安立</dc:creator></item><item><title><![CDATA[🌱 GitHubの草が花に育つ！？「Contribution Flower」を作りました 🌸]]></title><description><![CDATA[GitHubを毎日使っていると、緑色の草（Contribution）がどんどん増えていくのを見るのが楽しいですよね。
+でもその草が「花」になって育ったら、もっとワクワクすると思いませんか？
+そこで作ったのが、GitHubの貢献を美しい花の成長に変えるWebアプリ「Contribution Flower」 です。
+Github 👉 https://github.com/imshota1009/Push-up-counter/tree/main
+🌼 どんなアプリ？
+「Contribution Flower」は、あなたのGitHub活動を花の成長に見立てて可視化してくれるアプリです。
+コントリ...]]></description><link>https://zenn.dev/imshota1009/articles/c9a19036c0056d</link><guid isPermaLink="true">https://zenn.dev/imshota1009/articles/c9a19036c0056d</guid><pubDate>Wed, 03 Sep 2025 00:02:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YBp6gpvY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520%2520GitHub%25E3%2581%25AE%25E8%258D%2589%25E3%2581%258C%25E8%258A%25B1%25E3%2581%25AB%25E8%2582%25B2%25E3%2581%25A4%25EF%25BC%2581%25EF%25BC%259F%25E3%2580%258CContribution%2520Flower%25E3%2580%258D%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258A%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2520%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2582%2587%25E3%2581%2586%25E3%2581%259F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkU2WEFtWXBUYVBFUnFEMHAwYnNjdG5TVDVrUkNsXy1zSHlsd2s1RjY1ek9sTzhpcW09czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しょうた</dc:creator></item><item><title><![CDATA[📱💪 スマホで腕立て回数をAIが自動カウントしてくれる時代がきた！]]></title><description><![CDATA[「今日は腕立て30回やったはず…あれ、数え間違えたかも？」
+トレーニング中、こんな経験ありませんか？
+僕もそうなんですが、腕立てをやってると途中で回数が分からなくなる問題が本当に多いんです。
+しかも「ちゃんとフォームできてるのか？」も自信がなくなる…。
+そんな時に見つけたのが、スマホのカメラだけで腕立て回数を自動で数えてくれるAIアプリです。
+Github 👉 https://github.com/imshota1009/Push-up-counter/tree/main
+🤖 仕組みはめちゃシンプル
+このアプリは TensorFlow.jsのMoveNet というAIを使って、
+カメラに...]]></description><link>https://zenn.dev/imshota1009/articles/cabeb2a736bb66</link><guid isPermaLink="true">https://zenn.dev/imshota1009/articles/cabeb2a736bb66</guid><pubDate>Tue, 02 Sep 2025 23:47:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kRhHKxUi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520%2520%2520%25E3%2582%25B9%25E3%2583%259E%25E3%2583%259B%25E3%2581%25A7%25E8%2585%2595%25E7%25AB%258B%25E3%2581%25A6%25E5%259B%259E%25E6%2595%25B0%25E3%2582%2592AI%25E3%2581%258C%25E8%2587%25AA%25E5%258B%2595%25E3%2582%25AB%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%2588%25E3%2581%2597%25E3%2581%25A6%25E3%2581%258F%25E3%2582%258C%25E3%2582%258B%25E6%2599%2582%25E4%25BB%25A3%25E3%2581%258C%25E3%2581%258D%25E3%2581%259F%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2582%2587%25E3%2581%2586%25E3%2581%259F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkU2WEFtWXBUYVBFUnFEMHAwYnNjdG5TVDVrUkNsXy1zSHlsd2s1RjY1ek9sTzhpcW09czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しょうた</dc:creator></item><item><title><![CDATA[CSSだけで親要素の条件分岐！`:has()`実用解説]]></title><description><![CDATA[
+ CSSだけで親要素の条件分岐！:has()実用解説
+
+ 📝 はじめに
+これまで「子要素の有無や状態に応じて親要素を変化させる」には JavaScript必須 でした。
+しかし今では :has() セレクターを使うことで、CSSだけで完結できます。
+2025年現在、主要ブラウザのサポートも十分進み、実用的に使える場面が増えてきました。
+今回は基本構文から実例、注意点までまとめます。
+
+
+ 🔧 基本文法
+.parent:has(.child) {
+  background: pink;
+}
+上記のように書くと、.parent 内に .child を含む場合だけ背景をピンクにできます。
+つ...]]></description><link>https://zenn.dev/jabo_sack/articles/ea9c4d22c43040</link><guid isPermaLink="true">https://zenn.dev/jabo_sack/articles/ea9c4d22c43040</guid><pubDate>Tue, 02 Sep 2025 05:56:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--co3Dv--4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25A7%25E8%25A6%25AA%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%25AE%25E6%259D%25A1%25E4%25BB%25B6%25E5%2588%2586%25E5%25B2%2590%25EF%25BC%2581%2560%253Ahas%2528%2529%2560%25E5%25AE%259F%25E7%2594%25A8%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:saku%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0xPbnFrMDRKVThqY19FYnZINFBkNks3akdYOGRMZTYwWUxDV3pXT3Fad3pqSlFmYz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>saku</dc:creator></item></channel></rss>
