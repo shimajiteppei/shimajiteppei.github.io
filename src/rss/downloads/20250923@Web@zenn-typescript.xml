@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 23 Sep 2025 09:57:03 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Next.jsパフォーマンス最適化：コンポーネント復元と高度な遅延読み込み記録]]></title><description><![CDATA[
+ 問題の再発見
+前回の最適化でナビゲーション遅延は解決しましたが、でも：
+
+削除したコンポーネント（Statistics, Certifications, ReadingList, Blog）が実際には必要
+完全削除ではなく、よりスマートな読み込み戦略が求められる
+すべての機能を維持しながらパフォーマンスを向上させる必要
+
+
+ 新しいアプローチ
+
+ コンポーネントの完全復元
+ユーザーの要望に応え、すべてのコンポーネントを復元：
+
+Statistics（統計データ表示）
+Certifications（資格証明一覧）
+ReadingList（読書リスト）
+Blog（ブログ記事表示）
+ナビゲ...]]></description><link>https://zenn.dev/acanoneko/articles/8122b00139266a</link><guid isPermaLink="true">https://zenn.dev/acanoneko/articles/8122b00139266a</guid><pubDate>Tue, 23 Sep 2025 09:54:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dATuRblC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%25E3%2583%2591%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%259E%25E3%2583%25B3%25E3%2582%25B9%25E6%259C%2580%25E9%2581%25A9%25E5%258C%2596%25EF%25BC%259A%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25B3%25E3%2583%2588%25E5%25BE%25A9%25E5%2585%2583%25E3%2581%25A8%25E9%25AB%2598%25E5%25BA%25A6%25E3%2581%25AA%25E9%2581%2585%25E5%25BB%25B6%25E8%25AA%25AD%25E3%2581%25BF%25E8%25BE%25BC%25E3%2581%25BF%25E8%25A8%2598%25E9%258C%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ACAne%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJmYzQ2NjE1NTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ACAne</dc:creator></item><item><title><![CDATA[amplify-dataから生成される型情報をインターフェース化する際の注意点と妥協点]]></title><description><![CDATA[
+ 要約
+
+AWS Amplify Gen2のamplify-dataライブラリにて生成される型情報は、そのままインターフェース化して再利用することが出来ない(tscでエラーが発生する)
+主な原因は各メソッドのselectionSetオプションと思われる
+
+selectionSetオプションを除外した独自の型を定義する必要がある
+
+
+
+ 環境
+
+node : v22.11.0
+npm : 10.9.0
+@aws-amplify/data-schema : 1.21.1
+
+※その他使用ライブラリのバージョンは事象再現用リポジトリに記載
+
+
+ 背景
+
+ amplify-dataで提供されてい...]]></description><link>https://zenn.dev/horietakehiro/articles/amplify-data-client-interface</link><guid isPermaLink="true">https://zenn.dev/horietakehiro/articles/amplify-data-client-interface</guid><pubDate>Tue, 23 Sep 2025 04:06:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nxVeMJap--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:amplify-data%25E3%2581%258B%25E3%2582%2589%25E7%2594%259F%25E6%2588%2590%25E3%2581%2595%25E3%2582%258C%25E3%2582%258B%25E5%259E%258B%25E6%2583%2585%25E5%25A0%25B1%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%2595%25E3%2582%25A7%25E3%2583%25BC%25E3%2582%25B9%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%25E9%259A%259B%25E3%2581%25AE%25E6%25B3%25A8%25E6%2584%258F%25E7%2582%25B9%25E3%2581%25A8%25E5%25A6%25A5%25E5%258D%2594%25E7%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:horie-t%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvaC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>horie-t</dc:creator></item><item><title><![CDATA[ffmpegで生成したgifが無限ループしなくなる事象の原因と解決]]></title><description><![CDATA[少し特殊な条件下で発生しています。
+この備忘録が同じ状況に陥って原因が分からない人に届けば幸いです。
+
+ 発生した問題
+「ffmpeg 無限ループ」などで検索してヒットした記事を元にコマンドを実行したgifデータをimgタグで出力すると無限ループすることはできました。
+ffmpeg -i input.mov -loop 0 output.gif
+TypeScript
+import Image from 'next/image';
+
+function App() {
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;GIF表示テスト&lt;/h1&gt;...]]></description><link>https://zenn.dev/ho_ri/articles/2a1e8e632ee97d</link><guid isPermaLink="true">https://zenn.dev/ho_ri/articles/2a1e8e632ee97d</guid><pubDate>Tue, 23 Sep 2025 02:11:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sjp0O5f7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ffmpeg%25E3%2581%25A7%25E7%2594%259F%25E6%2588%2590%25E3%2581%2597%25E3%2581%259Fgif%25E3%2581%258C%25E7%2584%25A1%25E9%2599%2590%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%2597%25E3%2581%2597%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25AA%25E3%2582%258B%25E4%25BA%258B%25E8%25B1%25A1%25E3%2581%25AE%25E5%258E%259F%25E5%259B%25A0%25E3%2581%25A8%25E8%25A7%25A3%25E6%25B1%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hol1kgmg%2520%2528%25E3%2581%25BB%25E3%2582%258A%25E3%2581%258B%25E3%2582%258F%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI3NmM0YjRmYTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hol1kgmg (ほりかわ)</dc:creator></item><item><title><![CDATA[1時間くらいで Cloudflare Workers + Durable Object なミニゲームをデプロイした話]]></title><description><![CDATA[https://cccccccclick.m-yamagishi90.workers.dev/
+ミニゲームは、ユーザーインタラクションが「クリック」だけの超シンプルなものです。
+クリックすると総クリック回数が増えます。それだけです。
+ただ、これはクリック回数を Cloudflare の Durable Object に保存しているので、他の誰かがクリックした数字も反映されます。
+https://github.com/yamayuski/cccccccclick/commit/6c4923999d13b8103420ed6c9e5b04bbbd5170d4
+初期コミットはこれだけです。 1...]]></description><link>https://zenn.dev/yamayuski/articles/cdca654e6446a0</link><guid isPermaLink="true">https://zenn.dev/yamayuski/articles/cdca654e6446a0</guid><pubDate>Mon, 22 Sep 2025 22:04:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HMspy023--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:1%25E6%2599%2582%25E9%2596%2593%25E3%2581%258F%25E3%2582%2589%25E3%2581%2584%25E3%2581%25A7%2520Cloudflare%2520Workers%2520%252B%2520Durable%2520Object%2520%25E3%2581%25AA%25E3%2583%259F%25E3%2583%258B%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%2592%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2584%25E3%2581%25BE%25E3%2582%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I5NjI1OTZlMTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>やまゆ</dc:creator></item><item><title><![CDATA[SurrealDBとNext.jsでリアルタイムチャットアプリを作ってみた]]></title><description><![CDATA[!
+📚 ソースコード
+この記事で紹介するすべてのコードは以下のGitHubリポジトリで公開しています：
+chantakan/surrealdb-chat-app
+
+https://github.com/chantakan/surrealdb-chat-app
+
+ はじめに
+最近話題の次世代データベースSurrealDBを使って、リアルタイムチャットアプリケーションを構築してみました。SurrealDBはWebSocketによるリアルタイム機能をネイティブでサポートしており、従来のようにSocket.ioやFirebaseを使わなくてもリアルタイム通信が実現できます。
+今回は、Next.j...]]></description><link>https://zenn.dev/chantakan/articles/fe23bc72631a8e</link><guid isPermaLink="true">https://zenn.dev/chantakan/articles/fe23bc72631a8e</guid><pubDate>Mon, 22 Sep 2025 15:41:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jBXSfrXX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SurrealDB%25E3%2581%25A8Next.js%25E3%2581%25A7%25E3%2583%25AA%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E3%2583%2581%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tom%2520Python%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk3NDlhYTY2ZWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tom Python</dc:creator></item><item><title><![CDATA[CIDR形式にIPが含まれるかを判定する方法を考える]]></title><description><![CDATA[本記事では、CIDR形式とIPアドレスの包含関係を判定する実装を行った知見からIPv4とCDIR形式に関して深掘りをしたので、その知見を残したいと思います。
+
+ ホワイトリストIPアドレスとは？
+IPホワイトリストとは、事前に許可した特定のIPアドレスからのアクセスのみを許可し、それ以外からのアクセスはすべて拒否（ブロック）するセキュリティ設定のことです。
+この方法は、関係者以外からの不正アクセスやサイバー攻撃を受けるリスクを大幅に減らすことができるため、企業の内部システムや機密情報を扱うサービスなどで、セキュリティを強化する目的で広く利用されています。
+
+ IPv4 とCIDR形式
+ホ...]]></description><link>https://zenn.dev/kattu/articles/29be5bfc452e53</link><guid isPermaLink="true">https://zenn.dev/kattu/articles/29be5bfc452e53</guid><pubDate>Mon, 22 Sep 2025 15:28:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--35it7jT3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CIDR%25E5%25BD%25A2%25E5%25BC%258F%25E3%2581%25ABIP%25E3%2581%258C%25E5%2590%25AB%25E3%2581%25BE%25E3%2582%258C%25E3%2582%258B%25E3%2581%258B%25E3%2582%2592%25E5%2588%25A4%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25E3%2582%2592%25E8%2580%2583%25E3%2581%2588%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%25A3%25E3%2581%25A4%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWx6UmFGRGpuTXgwOEJJZXhjQUFjQUZrQlZiZTEzTUNMeC1pRzI5UklOU2NoRTNDOD1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かっつー</dc:creator></item><item><title><![CDATA[GraphQLのFragment Colocationで実現する独立したコンポーネント開発とデータ取得問題の解決]]></title><description><![CDATA[この記事は、2025年8月28日に開催された「TSKaigi Mashup」での登壇内容を元に書き下ろしたものです。
+https://speakerdeck.com/anji0114/full-stacknaxing-an-quan-wozhi-erugraphqlnofragmenthuo-yong
+本記事では、GraphQLの設計パターンであるFragment Colocationが、コンポーネント開発における「データ取得の置き場所」や「親子間の密な依存」といった、よくある課題をどのように解決するのかを解説します。
+
+ この記事で書くこと
+
+GraphQLの Fragment Col...]]></description><link>https://zenn.dev/takumi_giken/articles/710f599d6d95c5</link><guid isPermaLink="true">https://zenn.dev/takumi_giken/articles/710f599d6d95c5</guid><pubDate>Mon, 22 Sep 2025 12:38:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jtuPtE80--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GraphQL%25E3%2581%25AEFragment%2520Colocation%25E3%2581%25A7%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%25E7%258B%25AC%25E7%25AB%258B%25E3%2581%2597%25E3%2581%259F%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25B3%25E3%2583%2588%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25A8%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%258F%2596%25E5%25BE%2597%25E5%2595%258F%25E9%25A1%258C%25E3%2581%25AE%25E8%25A7%25A3%25E6%25B1%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Anji%2520Tanaka%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk0MGExN2ZjMzQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E5%258C%25A0%25E6%258A%2580%25E7%25A0%2594%25E5%25B7%25A5%25E6%25A5%25AD%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNjZWQ0OGFiNzQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Anji Tanaka</dc:creator></item><item><title><![CDATA[なぜフロントエンドエンジニアはTypeScriptを学ぶべきなのか]]></title><description><![CDATA[
+ はじめに
+個人的な話ですが、ReactとNext.jsを実務で使って約1年が経ちました。そこで今後は、まだ実務で扱っていないTypeScriptを中心に記事を書いていこうと思います。
+今回は「なぜTypeScriptを学ぶのか」「なぜTypeScriptを使うと開発効率が上がるのか」を整理していきます。
+
+ この記事の対象者
+・TypeScriptを学び始めた人
+・フロントエンドエンジニアを目指していて、何から学べばいいかわからない人
+・なぜTypeScriptを使うと開発効率が上がるのかわからない人
+
+ フロントエンドエンジニアがTypeScriptを学んだほうがいい理由
+
+ 需要...]]></description><link>https://zenn.dev/begineer/articles/0c30cd3726ffba</link><guid isPermaLink="true">https://zenn.dev/begineer/articles/0c30cd3726ffba</guid><pubDate>Mon, 22 Sep 2025 10:46:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---GGvdkpI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25AA%25E3%2581%259C%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2581%25AFTypeScript%25E3%2582%2592%25E5%25AD%25A6%25E3%2581%25B6%25E3%2581%25B9%25E3%2581%258D%25E3%2581%25AA%25E3%2581%25AE%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2581%25BE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlYWQ2YTAyYzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しま</dc:creator></item><item><title><![CDATA[Prisma migrate時の「EPERM: operation not permitted」解決法について]]></title><description><![CDATA[
+ 【備忘録】Prisma migrate時の「EPERM: operation not permitted」解決法について
+
+ 今回起きた問題
+Prismaでデータベースのスキーマを変更し、再度migrationを行おうとprisma migrate devコマンドを実行したところ以下のエラーが出ました。
+EPERM: operation not permitted,~~~~~~~~~~(ディレクトリpathの為省略)
+
+ 私が解決できた方法
+以下の2つの簡単なステップを実行することで解決できました。
+(私は以下の2つを一緒に試したのですが、もしかしたら方法1のみで解消するかもしれませ...]]></description><link>https://zenn.dev/ren21/articles/6dca6a5d59158b</link><guid isPermaLink="true">https://zenn.dev/ren21/articles/6dca6a5d59158b</guid><pubDate>Mon, 22 Sep 2025 08:54:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rQggwz34--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Prisma%2520migrate%25E6%2599%2582%25E3%2581%25AE%25E3%2580%258CEPERM%253A%2520operation%2520not%2520permitted%25E3%2580%258D%25E8%25A7%25A3%25E6%25B1%25BA%25E6%25B3%2595%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258C%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY4YTk2YTVjMDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>れん</dc:creator></item><item><title><![CDATA[【React修行日記】useEffectと依存配列]]></title><description><![CDATA[!
+この記事はコメントにてご指摘いただいた内容を元に修正中です
+
+
+ 学習の目的
+
+useEffectの基本的な使い方を理解する
+依存配列の役割と正しい使い方を理解する
+APIからデータを取得してstateに保存できる
+ローディング・エラー処理を含めた副作用の扱い方を学ぶ
+
+
+ useEffectとは
+useEffectはReactで使用するフックの一つで、Reactコンポーネントが「描画された後」に処理を行う。
+コンポーネントの副作用を制御する機能。コンポーネントのマウント時（一番最初）にも必ず実行される。
+import {useEffect} from "react";
+
+useEf...]]></description><link>https://zenn.dev/tsunadog/articles/42e05c43356f2e</link><guid isPermaLink="true">https://zenn.dev/tsunadog/articles/42e05c43356f2e</guid><pubDate>Mon, 22 Sep 2025 08:36:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tl-CHp2v--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590React%25E4%25BF%25AE%25E8%25A1%258C%25E6%2597%25A5%25E8%25A8%2598%25E3%2580%2591useEffect%25E3%2581%25A8%25E4%25BE%259D%25E5%25AD%2598%25E9%2585%258D%25E5%2588%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tsunadog%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI2ZDZiMjViNzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tsunadog</dc:creator></item><item><title><![CDATA[--frozen-lockfileで防ぐ、yarn installの破壊的変更]]></title><description><![CDATA[
+ 概要
+久しく全体的にモジュールのバージョンを見直していた際に、開発用のDocker環境ではビルドが成功するのに、CI/CD環境では失敗するという問題に直面しました。
+原因は、CI/CD環境でyarn installが実行された際、間接的な依存モジュールが意図せず更新され、開発環境のキャッシュとバージョンに差異が生まれたことでした。
+古いCI/CDパイプラインだったため、依存関係を固定する設定が漏れていたのが直接の原因です。
+
+ 現象：特定環境でのみビルドが失敗
+
+Docker コンテナでビルドは成功
+GitHub Actions での CI/CD では突然以下の TypeScript...]]></description><link>https://zenn.dev/sakagi/articles/5b284aa6f5f9eb</link><guid isPermaLink="true">https://zenn.dev/sakagi/articles/5b284aa6f5f9eb</guid><pubDate>Mon, 22 Sep 2025 08:02:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CU6XQ1AL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:--frozen-lockfile%25E3%2581%25A7%25E9%2598%25B2%25E3%2581%2590%25E3%2580%2581yarn%2520install%25E3%2581%25AE%25E7%25A0%25B4%25E5%25A3%258A%25E7%259A%2584%25E5%25A4%2589%25E6%259B%25B4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:atama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBiYWEzZjI5YjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>atama</dc:creator></item><item><title><![CDATA[Viteプロジェクトで「Property 'env' does not exist on type 'ImportMeta'」エラーの解決に]]></title><description><![CDATA[
+ 【備忘録】Viteプロジェクトでの「Property 'env' does not exist on type 'ImportMeta'」エラーの解決方法
+
+ 今回起きた問題
+Viteを使用したReactとTypeScriptのプロジェクトで、環境変数にアクセスする際に以下のようなエラーが発生しました。
+// 例: 
+const hogehogeUrl = import.meta.env.VITE_HOGEHOGE_URL;
+                                ^ エラー: Property 'env' does not exist on type 'Im...]]></description><link>https://zenn.dev/ren21/articles/36b74a1fa270f5</link><guid isPermaLink="true">https://zenn.dev/ren21/articles/36b74a1fa270f5</guid><pubDate>Mon, 22 Sep 2025 07:17:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--q7CdZvid--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vite%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25A7%25E3%2580%258CProperty%2520%2527env%2527%2520does%2520not%2520exist%2520on%2520type%2520%2527Import...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258C%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY4YTk2YTVjMDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>れん</dc:creator></item><item><title><![CDATA[ポートフォリオサイトのコンポーネント重なり問題を解決してみた]]></title><description><![CDATA[こんにちは！学生エンジニアの私です。最近ポートフォリオサイトを作っていたんですが、ある問題にぶつかってしまいました。その解決過程を記録してみようと思います。
+
+ 問題の発見
+先日、ポートフォリオサイトのReadingListとStatisticsのコンポーネントが重なって表示される不具合に気づきました。なんだか見栄えが悪くて、ユーザー体験もよくないなと思いました。以前はなかった問題なので、どこで何が悪くなったのか探ってみることにしました。
+
+ 問題の分析
+まずはコードを見てみることにしました。ページの構造を確認するために、app/page.tsxとapp/[locale]/page.ts...]]></description><link>https://zenn.dev/acanoneko/articles/89a7099a61dede</link><guid isPermaLink="true">https://zenn.dev/acanoneko/articles/89a7099a61dede</guid><pubDate>Mon, 22 Sep 2025 06:13:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7dEy7Aoe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AA%25E3%2582%25AA%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25B3%25E3%2583%2588%25E9%2587%258D%25E3%2581%25AA%25E3%2582%258A%25E5%2595%258F%25E9%25A1%258C%25E3%2582%2592%25E8%25A7%25A3%25E6%25B1%25BA%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ACAne%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJmYzQ2NjE1NTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ACAne</dc:creator></item><item><title><![CDATA[Singleton Patternの基礎理解]]></title><description><![CDATA[
+ はじめに
+https://www.patterns.dev/#patterns
+で学んだことを理解のためにアウトプットする。
+
+ シングルトン(Singleton)とは
+そのクラスからは絶対に1つしかインスタンスを作れないようにする仕組み
+のこと。例えるならば、
+会社に社長は1人だけ、部署に部長は1人だけ、みたいなもの。
+唯一無二の存在。
+シングルトンは、一度インスタンス化してしまえば、グローバルにアクセスできるクラスである。そのため、この単一インスタンスはアプリケーション全体で共有することができるという利点もある。
+
+ Counterクラスの例
+ES2015のクラスを使って、例とし...]]></description><link>https://zenn.dev/qoo1000000/articles/e3bd9233e7461d</link><guid isPermaLink="true">https://zenn.dev/qoo1000000/articles/e3bd9233e7461d</guid><pubDate>Mon, 22 Sep 2025 05:10:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PNxmpW6R--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Singleton%2520Pattern%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%25E7%2590%2586%25E8%25A7%25A3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Qoo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGtHRXgxSGJfU1ktdXB4TWZKM3RacmFRNU42enBVQ0hheS0xclFya2VjR3FqM29pZ2lEQT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Qoo</dc:creator></item><item><title><![CDATA[TypeScript × express APIをAWS Lambdaにデプロイする際の勘所]]></title><description><![CDATA[
+ はじめに
+TypeScriptとexpressで書いたAPIを、AWS Lambdaにデプロイしたい、と考えたこと、ありますよね。私は昨日考えていました。
+ローカルでは ts-node などで手軽に動作確認できるものの、いざLambdaにデプロイしようとすると、TypeScriptはそのままではLambdaで動かない（トランスパイルが必要）し、node_modules が肥大化してLambdaのサイズ制限に引っかかるし、なんだかんだハマることが多いです。しかも今回はいろんな事情でECR on Lambda（Dockerイメージを使う方法）が選択できないとか、serverless fr...]]></description><link>https://zenn.dev/uguisu_blog/articles/209584ee2b9b37</link><guid isPermaLink="true">https://zenn.dev/uguisu_blog/articles/209584ee2b9b37</guid><pubDate>Mon, 22 Sep 2025 03:26:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oyp6pY0Z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%2520%25C3%2597%2520express%2520API%25E3%2582%2592AWS%2520Lambda%25E3%2581%25AB%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%2599%25E3%2582%258B%25E9%259A%259B%25E3%2581%25AE%25E5%258B%2598%25E6%2589%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25B4%25E3%2582%2588%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NmOTQzNjQ0NjQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2581%2586%25E3%2581%2590%25E3%2581%2584%25E3%2581%2599%25E3%2582%25BD%25E3%2583%25AA%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%25BATechBlog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NlMTI5YjA2YTkuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぴよ</dc:creator></item><item><title><![CDATA[NotionみたいなフィルターUIを作るための型とユーティリティを作ってみる]]></title><description><![CDATA[Notion を業務でも使いますが、データベースのフィルターが便利です。常にプレビューしてくれているし、変えたい時・追加したい時もシンプルな操作で対応できます。
+
+今回はそのフィルターを型安全に構築するために、TypeScriptで型とユーティリティの実装をしていきます。
+
+ 先にインターフェースの完成図を
+今回はフィルターのスキーマを定義し、そのスキーマをもとにフィルターのUIを構築していくイメージで実装を進めてきます。
+スキーマの定義は以下のような形で実装します。
+export const sampleSchema = {
+  email: createFieldHelper.tex...]]></description><link>https://zenn.dev/vanellope/articles/252f5339541815</link><guid isPermaLink="true">https://zenn.dev/vanellope/articles/252f5339541815</guid><pubDate>Mon, 22 Sep 2025 03:05:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zvFL_EQp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Notion%25E3%2581%25BF%25E3%2581%259F%25E3%2581%2584%25E3%2581%25AA%25E3%2583%2595%25E3%2582%25A3%25E3%2583%25AB%25E3%2582%25BF%25E3%2583%25BCUI%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E5%259E%258B%25E3%2581%25A8%25E3%2583%25A6%25E3%2583%25BC%25E3%2583%2586%25E3%2582%25A3%25E3%2583%25AA%25E3%2583%2586%25E3%2582%25A3%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:marromugi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyOWZmOTQwZmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>marromugi</dc:creator></item><item><title><![CDATA[JSXの条件分岐]]></title><description><![CDATA[
+ JSXとは
+JSX(JavaScript XML)は、JavaScriptの構文拡張で、JavaScript(TypeScript)ファイル内にHTMLのようなコードを記述できるようにするものです。
+Meta(旧Facebook)によって開発されました。
+JSXはHTMLに似た構文を持ちつつも、JavaScript(TypeScript)の処理を組み合わせられるのが特徴です。
+例えば、{} の中に変数や関数を埋め込み、条件分岐やループ処理を行えます。
+
+ JSXの条件分岐方法
+Reactコンポーネントを作成するとき、「特定の条件を満たしたときだけ表示する」「条件によって表示内容を切り...]]></description><link>https://zenn.dev/ket8/articles/df01953fa0db2d</link><guid isPermaLink="true">https://zenn.dev/ket8/articles/df01953fa0db2d</guid><pubDate>Mon, 22 Sep 2025 03:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SpXl9yKU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:JSX%25E3%2581%25AE%25E6%259D%25A1%25E4%25BB%25B6%25E5%2588%2586%25E5%25B2%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:KET8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FkZWE4MmFjMWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KET8</dc:creator></item><item><title><![CDATA[Next.js の Client Component で async/await を使う]]></title><description><![CDATA[
+ クライアントコンポーネントでも async/await は使える
+クライアントコンポーネントをサーバ上で動かす際、async/await が使えないという誤解があります
+その誤解を解くために最小限のサンプルを用意しました
+このサンプルではサーバ上で非同期データを取得し HTML で出力、ブラウザ上で Hydration して動作します
+重要な点は、throw property.promiseの部分です。ここで Promise が解決された際に、コンポーネントが再レンダリングされます。この機能は React のrenderToReadableStream実行時の標準動作です。&lt;S...]]></description><link>https://zenn.dev/sora_kumo/articles/next-client-async</link><guid isPermaLink="true">https://zenn.dev/sora_kumo/articles/next-client-async</guid><pubDate>Mon, 22 Sep 2025 02:56:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--I7rKqDcU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%2520%25E3%2581%25AE%2520Client%2520Component%2520%25E3%2581%25A7%2520async%252Fawait%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25A9%25BA%25E9%259B%25B2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VlZTgzMDYyMDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>空雲</dc:creator></item><item><title><![CDATA[フロントエンドカンファレンス東京2025 参加レポート（当日）]]></title><description><![CDATA[
+ はじめに
+2025年9月21日に開催されたフロントエンドカンファレンス東京にオンラインで参加しました。多様なセッションが展開され、フロントエンド技術の最新動向と深い知見を得ることができました。
+本記事では、各セッションの要点を紹介します。
+
+
+ 1. Bon Voyage CSS Ecosystem Meets Standards now
+登壇者：saku
+
+ 要点
+
+
+レスポンシブデザインの逆転: これまでの「コンテンツが外部に応じる」から「外部がコンテンツに応じる」イントリンジックウェブデザインへ
+
+コンテナクエリがついに実現: 10年前から欲しかった機能がcontain: in...]]></description><link>https://zenn.dev/t_izumii/articles/7566ece18a2177</link><guid isPermaLink="true">https://zenn.dev/t_izumii/articles/7566ece18a2177</guid><pubDate>Sun, 21 Sep 2025 13:09:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jJ4xRsKS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2582%25AB%25E3%2583%25B3%25E3%2583%2595%25E3%2582%25A1%25E3%2583%25AC%25E3%2583%25B3%25E3%2582%25B9%25E6%259D%25B1%25E4%25BA%25AC2025%2520%25E5%258F%2582%25E5%258A%25A0%25E3%2583%25AC%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25EF%25BC%2588%25E5%25BD%2593%25E6%2597%25A5%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:izumii%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI3YmEzOGZmYmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>izumii</dc:creator></item><item><title><![CDATA[Next.jsパフォーマンス最適化：ナビゲーション遅延と"Failed to fetch"エラーの解決記録]]></title><description><![CDATA[
+ 問題発見
+ポートフォリオサイトのナビゲーションで深刻なパフォーマンス問題を発見：
+
+ナビゲーションリンククリックからページ遷移まで9秒の遅延
+時折発生する"Failed to fetch"エラー
+ユーザー体験の大幅な悪化
+
+
+ 根本原因分析
+
+ 1. ルーティング問題
+// 修正前の問題コード
+href="/#skills"
+href="/#projects"
+アンカーリンクに言語プレフィックス（/enなど）が含まれていなかったため、Next.jsが内部ルートとして認識せず、クライアントサイドナビゲーションが機能していませんでした。
+
+ 2. バンドルサイズ問題
+&lt;mcfile...]]></description><link>https://zenn.dev/acanoneko/articles/926a4504262384</link><guid isPermaLink="true">https://zenn.dev/acanoneko/articles/926a4504262384</guid><pubDate>Sun, 21 Sep 2025 12:27:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6j0R-7cP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%25E3%2583%2591%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%259E%25E3%2583%25B3%25E3%2582%25B9%25E6%259C%2580%25E9%2581%25A9%25E5%258C%2596%25EF%25BC%259A%25E3%2583%258A%25E3%2583%2593%25E3%2582%25B2%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E9%2581%2585%25E5%25BB%25B6%25E3%2581%25A8%2522Failed%2520to%2520fetch%2522%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%25AE%25E8%25A7%25A3%25E6%25B1%25BA%25E8%25A8%2598%25E9%258C%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ACAne%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJmYzQ2NjE1NTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ACAne</dc:creator></item></channel></rss>
