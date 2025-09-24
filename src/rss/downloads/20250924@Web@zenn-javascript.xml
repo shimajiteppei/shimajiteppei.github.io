@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 24 Sep 2025 03:50:45 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Vue3のウォッチャーについて調べてみた]]></title><description><![CDATA[Vue 3 のウォッチャーは、リアクティブなデータの変更を監視し、それに応じて特定の処理（副作用）を実行するための強力な機能です。主に watch と watchEffect の2つの関数が提供されており、それぞれに特徴と最適な利用シーンがあります。
+
+
+ watch: 特定のデータを監視する
+
+watch 関数は、一つまたは複数の特定のリアクティブなデータソースを監視し、その値が変更されたときにコールバック関数を実行します。より細やかな制御が可能で、副作用の実行条件を明確にしたい場合に適しています。
+
+ 基本的な使い方
+
+watch は3つの引数を取ります。
+
+
+監視対象 (Sourc...]]></description><link>https://zenn.dev/shunsuke_stack/articles/be9654d2edc110</link><guid isPermaLink="true">https://zenn.dev/shunsuke_stack/articles/be9654d2edc110</guid><pubDate>Wed, 24 Sep 2025 01:31:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--u_okbUZd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vue3%25E3%2581%25AE%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%2583%25E3%2583%2581%25E3%2583%25A3%25E3%2583%25BC%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E8%25AA%25BF%25E3%2581%25B9%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Nakajima.js%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFhZmNlYzMzOWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Nakajima.js</dc:creator></item><item><title><![CDATA[Julia の World Age と他の JIT 言語の違いをサンプルコードで比較してみた]]></title><description><![CDATA[
+ はじめに
+動的言語では「関数を実行中に再定義できる」ことが大きな魅力の一つです。しかし、これを 高性能な JIT 最適化 と両立させるのは簡単ではありません。
+Julia はこの問題を解決するために world age という独自の仕組みを採用しています。一方で、Java / .NET / JavaScript / Ruby / Python などの他の JIT 言語は、「推測して最適化 → 壊れたら捨てる」という方式で対応しています。
+この記事では、Julia の world age の仕組みと、他の JIT 言語がどのように動的再定義を処理しているかを、サンプルコードとコア概念を...]]></description><link>https://zenn.dev/y_watanabe11/articles/d0cbc3d19a4460</link><guid isPermaLink="true">https://zenn.dev/y_watanabe11/articles/d0cbc3d19a4460</guid><pubDate>Tue, 23 Sep 2025 15:47:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--00CZDv5L--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Julia%2520%25E3%2581%25AE%2520World%2520Age%2520%25E3%2581%25A8%25E4%25BB%2596%25E3%2581%25AE%2520JIT%2520%25E8%25A8%2580%25E8%25AA%259E%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2582%2592%25E3%2582%25B5%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25A7%25E6%25AF%2594%25E8%25BC%2583%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Y-Watanabe11%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NkMDAyYTNiOTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Y-Watanabe11</dc:creator></item><item><title><![CDATA[なぜ、Javaの目標は10日のやっつけ仕事で作られたJavaScriptに全部奪われたのか？]]></title><description><![CDATA[
+ はじめに
+1990年代半ば、インターネットの黎明期に登場した二つの言語、JavaとJavaScriptは、どちらも「どこでも動く」という夢を背負っていました。
+Javaは「Write Once, Run Anywhere（WORA）」のスローガンを掲げ、基幹システムから教育現場に至るまで幅広く採用されました。一方のJavaScriptは、わずか10日で生まれた「ブラウザ用おまけスクリプト」に過ぎませんでした。
+しかし30年後、真に「事実上のWORA」を実現したのはJavaではなくJavaScriptでした。なぜこの逆転が起こったのか。その歴史的経緯を主要プレイヤーの動向を踏まえて追っ...]]></description><link>https://zenn.dev/pdfractal/articles/79ec1e7d78be36</link><guid isPermaLink="true">https://zenn.dev/pdfractal/articles/79ec1e7d78be36</guid><pubDate>Tue, 23 Sep 2025 11:16:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---_unIwnn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25AA%25E3%2581%259C%25E3%2580%2581Java%25E3%2581%25AE%25E7%259B%25AE%25E6%25A8%2599%25E3%2581%25AF10%25E6%2597%25A5%25E3%2581%25AE%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A4%25E3%2581%2591%25E4%25BB%2595%25E4%25BA%258B%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%2589%25E3%2582%258C%25E3%2581%259FJavaScript%25E3%2581%25AB%25E5%2585%25A8%25E9%2583%25A8%25E5%25A5%25AA%25E3%2582%258F%25E3%2582%258C%25E3%2581%259F%25E3%2581%25AE%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:pdfractal%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M4ZmJkZmFkY2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>pdfractal</dc:creator></item><item><title><![CDATA[(PC閲覧推奨)Excel不要！ブラウザだけで完結するセキュアな円グラフ作成ツール「local-pie-chart-maker」を開発した話]]></title><description><![CDATA[
+ 🚀 まずは触ってみてください！
+この記事で紹介するツールのライブデモを用意しました。理屈はあとにして、まずはどんなものか触ってみてください！
+👇 ライブデモはこちら 👇
+https://hosoyayusaku.github.io/local-pie-chart-maker/
+
+
+ コピペ用データ
+ライブデモをすぐに試せるように、サンプルデータを用意しました。以下の表をコピーして、デモ画面のテキストエリアに貼り付けてみてください。
+ID	回答日時	年齢	性別	職業	勤続年数	リモートワークに満足していますか？	リモートワーク頻度	最も重要な要素	生産性の変化	今後の希望
+1	2024...]]></description><link>https://zenn.dev/hosoyayusaku/articles/552023f5dd9903</link><guid isPermaLink="true">https://zenn.dev/hosoyayusaku/articles/552023f5dd9903</guid><pubDate>Tue, 23 Sep 2025 08:33:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qWB1MTiI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2528PC%25E9%2596%25B2%25E8%25A6%25A7%25E6%258E%25A8%25E5%25A5%25A8%2529Excel%25E4%25B8%258D%25E8%25A6%2581%25EF%25BC%2581%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25A7%25E5%25AE%258C%25E7%25B5%2590%25E3%2581%2599%25E3%2582%258B%25E3%2582%25BB%25E3%2582%25AD%25E3%2583%25A5%25E3%2582%25A2%25E3%2581%25AA%25E5%2586%2586%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%2595%25E4%25BD%259C%25E6%2588%2590%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2580%258Clocal-pie-chart...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hosoya%2520Yusaku%2520%252F%2520Ci...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MzMGI2ZmU4ZmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hosoya Yusaku / CivicTech Developer</dc:creator></item><item><title><![CDATA[イテラブルとは何か調べてみた]]></title><description><![CDATA[
+ はじめに
+エラーで以下のようなメッセージを見たことがある方も多いはずです。
+~ is not iterable ...
+この iterable とはなんでしょうか？
+この記事で、イテラブルとは何か、その基本についてまとめていきます。
+
+ イテラブルとは？
+イテラブル（iterable）とは、反復処理が可能なオブジェクトのことです。
+これは、for...of ループを使って、その中の要素を一つずつ順番に取り出せる能力を持つオブジェクトを指します。
+ではなぜ、オブジェクトが反復可能なのでしょうか？
+それは、内部にイテレーターという仕組みを持っているためです。
+
+ イテラブルなものの例
+J...]]></description><link>https://zenn.dev/mabo23/articles/17bb6e3cc0faad</link><guid isPermaLink="true">https://zenn.dev/mabo23/articles/17bb6e3cc0faad</guid><pubDate>Tue, 23 Sep 2025 06:54:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--G9tvGQQE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A4%25E3%2583%2586%25E3%2583%25A9%25E3%2583%2596%25E3%2583%25AB%25E3%2581%25A8%25E3%2581%25AF%25E4%25BD%2595%25E3%2581%258B%25E8%25AA%25BF%25E3%2581%25B9%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mabo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQzM2ZhMmVkZDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mabo</dc:creator></item><item><title><![CDATA[【JavaScript】減量に必要な運動量と運動時間を計算するプログラムを作成  （備忘録）]]></title><description><![CDATA[
+ １．はじめに
+【JavaScript】BMIを計算するプログラムを作成 （備忘録） の記事内のプログラムを修正し、作成しました。
+
+ ２．サンプルプログラム
+
+Sample.html
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+    &lt;link rel="stylesheet" typ...]]></description><link>https://zenn.dev/yama_kawa/articles/10f14c15ab1648</link><guid isPermaLink="true">https://zenn.dev/yama_kawa/articles/10f14c15ab1648</guid><pubDate>Tue, 23 Sep 2025 04:40:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Am35Rb6x--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591%25E6%25B8%259B%25E9%2587%258F%25E3%2581%25AB%25E5%25BF%2585%25E8%25A6%2581%25E3%2581%25AA%25E9%2581%258B%25E5%258B%2595%25E9%2587%258F%25E3%2581%25A8%25E9%2581%258B%25E5%258B%2595%25E6%2599%2582%25E9%2596%2593%25E3%2582%2592%25E8%25A8%2588%25E7%25AE%2597%25E3%2581%2599%25E3%2582%258B%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%2520%2520%25EF%25BC%2588%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25A9%25E3%2582%25B6%25E3%2583%258B%25E3%2582%25A2%25E3%2583%2591%25E3%2583%25B3%25E3%2582%25B5%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M5ODg5YmQ2Y2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ラザニアパンサー</dc:creator></item><item><title><![CDATA[XSS対策としてCSPを設定する方法]]></title><description><![CDATA[
+ あなたのサイトはXSS対策できていますか？
+今回はセキュリティ対策のひとつである**CSP(Content Security Policy)について、解説していこうと思います。
+そもそもXSS(クロスサイトスクリプティング)**をご存知でしょうか？
+実はXSSにも種類がありこれを理解するところから始まります。
+※XSSの種類についての解説は割愛させていただきます
+🚧
+- 反射型XSS
+- 格納型XSS
+- DOM Based XSS
+CSPによって信頼したコンテンツのみに絞ることでXSS攻撃を大きく軽減できます。
+ここから実際にCSPの基礎概念や設定方法を紹介します。
+※CSPはXS...]]></description><link>https://zenn.dev/phper8080/articles/dbe2919cc50ff1</link><guid isPermaLink="true">https://zenn.dev/phper8080/articles/dbe2919cc50ff1</guid><pubDate>Tue, 23 Sep 2025 04:04:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UkhhqvJZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:XSS%25E5%25AF%25BE%25E7%25AD%2596%25E3%2581%25A8%25E3%2581%2597%25E3%2581%25A6CSP%25E3%2582%2592%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:PHPer8080%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg4ZDc5YTU1MWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>PHPer8080</dc:creator></item><item><title><![CDATA[[Photoshop] 画像書き出し用スクリプト]]></title><description><![CDATA[どんだけ擦られたネタなんだよっていうやつだが、自分が使う丁度いいやつがなかったので書いた。
+
+ 背景
+僕は写真を趣味にしているのだが、ブログやSNSに撮って出しの画像をアップするには画像サイズが大きすぎ、かつサービス側での勝手な圧縮は避けたいなという思いがある。なので下記処理のスクリプトを用意した。
+
+縦横の長辺方向を3000pxに固定する（僕のユースケースでは確実に縮小にあたるので拡大の考慮はしていない）
+PSDの同ディレクトリに命名規則に沿ったファイル名でJPG書き出しを行う（バッチ処理もしくは単体処理）
+バッチ処理の場合はPSDを保存せず閉じる
+ファイル名がアンダーバーで始まるのは...]]></description><link>https://zenn.dev/kickbase/articles/c3cf314f2b44e2</link><guid isPermaLink="true">https://zenn.dev/kickbase/articles/c3cf314f2b44e2</guid><pubDate>Tue, 23 Sep 2025 03:55:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rU13HN2p--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BPhotoshop%255D%2520%25E7%2594%25BB%25E5%2583%258F%25E6%259B%25B8%25E3%2581%258D%25E5%2587%25BA%25E3%2581%2597%25E7%2594%25A8%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2581%25E3%2582%2593%25E3%2581%259F%25E3%2581%2584%25E3%2581%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pvTlNrRXEtOVdEUlNaa2dKcFBxeFlFZGpZTm5TcGl3SzFUeXZOPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>めんたいこ</dc:creator></item><item><title><![CDATA[自作APIサーバ（FastAPI）から取得した情報をHTML+JavaScriptで表示する]]></title><description><![CDATA[
+ この記事で取り組んだことの概要
+
+
+FastAPI で API サーバを実装したものの、取得した情報を表示させる UI が無かった
+
+
+本記事では、HTML と JavaScript を使用して、API で取得したデータを表示する UI を作成した
+
+
+また、動作確認では、仮想環境上に API サーバと Web サーバを立てることで行った
+
+
+補足 具体的な UI 機能:
+
+ブラウザで index.html を開くと、FastAPI で作ったエンドポイントから得た JSON を一覧表示できる
+キーワード検索（/v1/users?q=...）や新規作成（POST /v1/users）も...]]></description><link>https://zenn.dev/micchi55555/articles/c058e2be9241a4</link><guid isPermaLink="true">https://zenn.dev/micchi55555/articles/c058e2be9241a4</guid><pubDate>Tue, 23 Sep 2025 01:14:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AC17baPp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2587%25AA%25E4%25BD%259CAPI%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25EF%25BC%2588FastAPI%25EF%25BC%2589%25E3%2581%258B%25E3%2582%2589%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2597%25E3%2581%259F%25E6%2583%2585%25E5%25A0%25B1%25E3%2582%2592HTML%252BJavaScript%25E3%2581%25A7%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sakih5%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhjMzkyY2E1MjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sakih5</dc:creator></item><item><title><![CDATA[javascriptのスムーズscrollライブラリを作成しました。便利！！]]></title><description><![CDATA[以下のコードコピペで試せます。
+js部分がライブラリ。
+scrollしたい要素に、scrollable-boxを付けてください。
+スクロールバーもそのまま使えます。
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;スムーズスクロールのモック&lt;/title&g...]]></description><link>https://zenn.dev/kemii/articles/86c228d64a4faa</link><guid isPermaLink="true">https://zenn.dev/kemii/articles/86c228d64a4faa</guid><pubDate>Mon, 22 Sep 2025 09:37:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xPimYEXj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:javascript%25E3%2581%25AE%25E3%2582%25B9%25E3%2583%25A0%25E3%2583%25BC%25E3%2582%25BAscroll%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%25E3%2580%2582%25E4%25BE%25BF%25E5%2588%25A9%25EF%25BC%2581%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kemii%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5ZGYyMjM5ZmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kemii</dc:creator></item><item><title><![CDATA[Node.js開発者必見！CommonJSとESMの使い分けガイド]]></title><description><![CDATA[
+ CommonJSとESMの違いをわかりやすく解説
+JavaScriptのモジュールシステムには、CommonJS と ESM（ECMAScript Modules） の2種類があります。
+「どちらが主流なの？」「何が違うの？」という疑問に答えます。
+
+
+ 🔹 CommonJSとは？
+
+Node.jsが初期から採用してきたモジュールシステム
+
+require と module.exports を使う書き方
+例：
+
+// 読み込み
+const express = require('express');
+
+// 書き出し
+module.exports = myFunc;
+
+ 🔹 ESM（E...]]></description><link>https://zenn.dev/monyyy/articles/60bb5a9df601ac</link><guid isPermaLink="true">https://zenn.dev/monyyy/articles/60bb5a9df601ac</guid><pubDate>Mon, 22 Sep 2025 09:13:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XLTY61FT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Node.js%25E9%2596%258B%25E7%2599%25BA%25E8%2580%2585%25E5%25BF%2585%25E8%25A6%258B%25EF%25BC%2581CommonJS%25E3%2581%25A8ESM%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E5%2588%2586%25E3%2581%2591%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Mon%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgyNzhmMmNmNTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Mon</dc:creator></item><item><title><![CDATA[JavaScript で人と同じように文字数を数える]]></title><description><![CDATA[
+ 🌼 はじめに
+人はこのように文字数を数えます
+"A" // 1文字
+"😆" // 1文字
+"👨‍👩‍👧‍👦" // 1文字
+しかし、JavaScript に文字数を計算させたらこういう結果になります。
+console.log("A".length) // 1
+console.log("😆".length) // 2
+console.log("👨‍👩‍👧‍👦".length) // 11
+なぜこうなるのか、どうやったら JavaScript にも人間と同じ感覚で文字を数えさせるのか、今回はそれについて話します！！！
+
+ 1. 文字集合とエンコーディング
+まず大前提として人とコンピュータ...]]></description><link>https://zenn.dev/luvmini511/articles/b5ea4d537081c2</link><guid isPermaLink="true">https://zenn.dev/luvmini511/articles/b5ea4d537081c2</guid><pubDate>Mon, 22 Sep 2025 07:46:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lOBDMZ_r--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%2520%25E3%2581%25A7%25E4%25BA%25BA%25E3%2581%25A8%25E5%2590%258C%25E3%2581%2598%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E6%2596%2587%25E5%25AD%2597%25E6%2595%25B0%25E3%2582%2592%25E6%2595%25B0%25E3%2581%2588%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BF%25E3%2582%2593%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA3YTQwNzFlZWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>みんちゃん</dc:creator></item><item><title><![CDATA[【JavaScript】TypeError: ~ is not a function の原因と解決方法まとめ]]></title><description><![CDATA[
+ はじめに
+定義した関数 is not a function 
+このエラーメッセージは何を意味し、どう解決するのか、実際に出会した問題とそれを解消してわかったことを簡単にまとめていきます。
+
+ 前提
+Emailアドレスを指定したチェックルールに基づいてチェックする関数を作成しました。
+そのときに実装したコードが以下になります。
+
+ validation.js
+const doesNotStartAtWithAt = email =&gt; email[0] != "@";
+const doesNotHaveSpace = email =&gt; !/\s/.test(email);
+c...]]></description><link>https://zenn.dev/mabo23/articles/65f4d251732049</link><guid isPermaLink="true">https://zenn.dev/mabo23/articles/65f4d251732049</guid><pubDate>Mon, 22 Sep 2025 06:54:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--00YYsQSl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591TypeError%253A%2520%7E%2520is%2520not%2520a%2520function%2520%25E3%2581%25AE%25E5%258E%259F%25E5%259B%25A0%25E3%2581%25A8%25E8%25A7%25A3%25E6%25B1%25BA%25E6%2596%25B9%25E6%25B3%2595%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mabo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQzM2ZhMmVkZDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mabo</dc:creator></item><item><title><![CDATA[Singleton Patternの基礎理解]]></title><description><![CDATA[
+ はじめに
+https://www.patterns.dev/#patterns
+で学んだことを理解のためにアウトプットする。
+
+ シングルトン(Singleton)とは
+そのクラスからは絶対に1つしかインスタンスを作れないようにする仕組み
+のこと。例えるならば、
+会社に社長は1人だけ、部署に部長は1人だけ、みたいなもの。
+唯一無二の存在。
+シングルトンは、一度インスタンス化してしまえば、グローバルにアクセスできるクラスである。そのため、この単一インスタンスはアプリケーション全体で共有することができるという利点もある。
+
+ Counterクラスの例
+ES2015のクラスを使って、例とし...]]></description><link>https://zenn.dev/qoo1000000/articles/e3bd9233e7461d</link><guid isPermaLink="true">https://zenn.dev/qoo1000000/articles/e3bd9233e7461d</guid><pubDate>Mon, 22 Sep 2025 05:10:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PNxmpW6R--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Singleton%2520Pattern%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%25E7%2590%2586%25E8%25A7%25A3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Qoo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGtHRXgxSGJfU1ktdXB4TWZKM3RacmFRNU42enBVQ0hheS0xclFya2VjR3FqM29pZ2lEQT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Qoo</dc:creator></item><item><title><![CDATA[JSXの条件分岐]]></title><description><![CDATA[
+ JSXとは
+JSX(JavaScript XML)は、JavaScriptの構文拡張で、JavaScript(TypeScript)ファイル内にHTMLのようなコードを記述できるようにするものです。
+Meta(旧Facebook)によって開発されました。
+JSXはHTMLに似た構文を持ちつつも、JavaScript(TypeScript)の処理を組み合わせられるのが特徴です。
+例えば、{} の中に変数や関数を埋め込み、条件分岐やループ処理を行えます。
+
+ JSXの条件分岐方法
+Reactコンポーネントを作成するとき、「特定の条件を満たしたときだけ表示する」「条件によって表示内容を切り...]]></description><link>https://zenn.dev/ket8/articles/df01953fa0db2d</link><guid isPermaLink="true">https://zenn.dev/ket8/articles/df01953fa0db2d</guid><pubDate>Mon, 22 Sep 2025 03:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SpXl9yKU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:JSX%25E3%2581%25AE%25E6%259D%25A1%25E4%25BB%25B6%25E5%2588%2586%25E5%25B2%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:KET8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FkZWE4MmFjMWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KET8</dc:creator></item><item><title><![CDATA[Next.js の Client Component で async/await を使う]]></title><description><![CDATA[
+ クライアントコンポーネントでも async/await は使える
+クライアントコンポーネントをサーバ上で動かす際、async/await が使えないという誤解があります
+その誤解を解くために最小限のサンプルを用意しました
+このサンプルではサーバ上で非同期データを取得し HTML で出力、ブラウザ上で Hydration して動作します
+重要な点は、throw property.promiseの部分です。ここで Promise が解決された際に、コンポーネントが再レンダリングされます。この機能は React のrenderToReadableStream実行時の標準動作です。&lt;S...]]></description><link>https://zenn.dev/sora_kumo/articles/next-client-async</link><guid isPermaLink="true">https://zenn.dev/sora_kumo/articles/next-client-async</guid><pubDate>Mon, 22 Sep 2025 02:56:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--I7rKqDcU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%2520%25E3%2581%25AE%2520Client%2520Component%2520%25E3%2581%25A7%2520async%252Fawait%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25A9%25BA%25E9%259B%25B2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VlZTgzMDYyMDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>空雲</dc:creator></item><item><title><![CDATA[GleamのJSターゲットにおける天国と地獄]]></title><description><![CDATA[Gleam界隈ではErlangターゲットが主流[1]なんですが、僕は主にJavaScript方面でのサポートに力を入れている。
+理由はいくつかあるけれど、日本ではあまりErlangが使われていないこと、日本での普及を目指すならJavaScript方面のサポートを拡充した方が良いと考えているのが大きい。
+そんな中でJavaScriptターゲットにおける楽しいところと大変なところが見えてきたので書いていきたいと思う。
+
+ 天国
+
+ JSにない構文が使える
+これは個人的に大きいと感じていて、パイプライン演算子、ブロック構文、use構文の3つがあるというだけでGleamを使う動機にはなると個人的...]]></description><link>https://zenn.dev/comamoca/articles/2025-09-22-gleam-js-target-haven-and-hell</link><guid isPermaLink="true">https://zenn.dev/comamoca/articles/2025-09-22-gleam-js-target-haven-and-hell</guid><pubDate>Sun, 21 Sep 2025 19:42:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--39reAzm7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Gleam%25E3%2581%25AEJS%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B2%25E3%2583%2583%25E3%2583%2588%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E5%25A4%25A9%25E5%259B%25BD%25E3%2581%25A8%25E5%259C%25B0%25E7%258D%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2593%25E3%2581%25BE%25E3%2582%2582%25E3%2581%258B%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U3NGU0NmZkYzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>こまもか🦊</dc:creator></item><item><title><![CDATA[monorepo でも pnpm の利用を強制させる]]></title><description><![CDATA[パッケージマネジャーとして pnpm の利用を強制させる（i.e. npm や yarn を叩けないようにする）方法はいくつか知られていますが、既存の方法では monorepo（pnpm workspace）で管理するパッケージ内での強制は簡単ではありませんでした。本稿では、解決策として、Mise を用いてディレクトリ単位でエイリアスを張り、npm や yarn を叩くと「pnpm を利用してね」とだけ表示させる仕組みを紹介します。
+
+ 背景
+近頃 npm パッケージのサプライチェーン攻撃が猛威を振るっており、対策の一つとして pnpm が注目されつつあります。pnpm が注目されている...]]></description><link>https://zenn.dev/arjef/articles/enforce-pnpm-usage-in-monorepo</link><guid isPermaLink="true">https://zenn.dev/arjef/articles/enforce-pnpm-usage-in-monorepo</guid><pubDate>Sun, 21 Sep 2025 12:54:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--03gBMVqd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:monorepo%2520%25E3%2581%25A7%25E3%2582%2582%2520pnpm%2520%25E3%2581%25AE%25E5%2588%25A9%25E7%2594%25A8%25E3%2582%2592%25E5%25BC%25B7%25E5%2588%25B6%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ajfAfg%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc0YzQ3MjY3NWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ajfAfg</dc:creator></item><item><title><![CDATA[魚眼カメラの映り方 3]]></title><description><![CDATA[前回
+
+ 3D描画
+最初の記事と違い、3次元でz座標の考慮が必要になります。
+さらに厄介なことに、投影後の重なりが発生しやすくなります。
+
+単に順序を考えず描画するとこんな感じ。
+なので、順序に気を使います。
+今回は回転操作などを終えて投影直前の点群の座標を見て、カメラ中心点から遠い順に描画することにします。おおまかにはうまくいきます↓。
+
+
+ 顔に色を付けるぞ
+AIで顔画像を生成し、前の記事で保存した3d_face_dots.pngを重ね合わせ、生成した画像のサイズ合わせを行います。クロップしたりしたうえで、目や鼻、口の位置が大まかに合うようにし、画像のサイズ（最悪横だけでも）が一致す...]]></description><link>https://zenn.dev/079aefdf/articles/a24c46f2e4c1fd</link><guid isPermaLink="true">https://zenn.dev/079aefdf/articles/a24c46f2e4c1fd</guid><pubDate>Sun, 21 Sep 2025 09:12:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Mzyj5zcj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%25AD%259A%25E7%259C%25BC%25E3%2582%25AB%25E3%2583%25A1%25E3%2583%25A9%25E3%2581%25AE%25E6%2598%25A0%25E3%2582%258A%25E6%2596%25B9%25203%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daidai-orange%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhZmViMTkxMDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daidai-orange</dc:creator></item><item><title><![CDATA[魚眼カメラの映り方 2]]></title><description><![CDATA[
+ 画像の代わりに3Dモデルを適用
+ひとつ前の記事では、顔画像を平面のまま扱い、投影し、それっぽい絵を作りました。
+さらなる正確性を求めて、顔の3Dモデルの利用を考えます。
+まずは準備として、3Dの顔の準備に取り掛かります。
+
+ 3Dモデルの取得
+理想的には、顔の色、テクスチャまで指定されたリアルな人間の顔モデルが欲しいです。
+今回は理想にはとどかなかったので、顔の３Ｄモデルを用意し、AIで生成した顔画像をそこに当て込む方式で実現することにしました。
+触れていませんが、どうやらUnityなどではスマホのカメラをつかって自分の顔のモデルを作れるようです。。。それもありですね！
+
+ 無料の顔...]]></description><link>https://zenn.dev/079aefdf/articles/41a21176e423e1</link><guid isPermaLink="true">https://zenn.dev/079aefdf/articles/41a21176e423e1</guid><pubDate>Sun, 21 Sep 2025 09:10:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_t4_PLPP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%25AD%259A%25E7%259C%25BC%25E3%2582%25AB%25E3%2583%25A1%25E3%2583%25A9%25E3%2581%25AE%25E6%2598%25A0%25E3%2582%258A%25E6%2596%25B9%25202%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daidai-orange%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhZmViMTkxMDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daidai-orange</dc:creator></item></channel></rss>
