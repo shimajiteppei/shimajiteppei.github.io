@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Java」のフィード]]></title><description><![CDATA[Zennのトピック「Java」のRSSフィードです]]></description><link>https://zenn.dev/topics/java</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/5c47bb8423.png</url><title>Zennの「Java」のフィード</title><link>https://zenn.dev/topics/java</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 25 Sep 2025 00:41:04 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/java/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[入門Javaのファイル操作]]></title><description><![CDATA[
+ 環境
+JDK 25
+
+Java 8以降であれば、多少バージョンが違っていても同じだと思います。
+
+
+ 主要なクラス・インタフェース
+ファイル操作に関するクラス・インタフェースの多くはjava.nio.fileパッケージに属しています。
+これらのクラス・インタフェースを総称して「NIO.2」と呼ばれます。
+
+ Pathインタフェース
+Pathインタフェースは、名前の通りファイルやディレクトリのパスを表します。Path.of("ファイルやディレクトリのパス")でPathオブジェクトを生成できます。
+Path targetFile = Path.of("/tmp/test/sample.t...]]></description><link>https://zenn.dev/masatoshi_tada/articles/05c4450c599321</link><guid isPermaLink="true">https://zenn.dev/masatoshi_tada/articles/05c4450c599321</guid><pubDate>Wed, 24 Sep 2025 09:14:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ykfOc5Om--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2585%25A5%25E9%2596%2580Java%25E3%2581%25AE%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E6%2593%258D%25E4%25BD%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masatoshi%2520Tada%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FlNzY1NjBmYTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masatoshi Tada</dc:creator></item><item><title><![CDATA[Julia の World Age と他の JIT 言語の違いをサンプルコードで比較してみた]]></title><description><![CDATA[
+ はじめに
+動的言語では「関数を実行中に再定義できる」ことが大きな魅力の一つです。しかし、これを 高性能な JIT 最適化 と両立させるのは簡単ではありません。
+Julia はこの問題を解決するために world age という独自の仕組みを採用しています。一方で、Java / .NET / JavaScript / Ruby / Python などの他の JIT 言語は、「推測して最適化 → 壊れたら捨てる」という方式で対応しています。
+この記事では、Julia の world age の仕組みと、他の JIT 言語がどのように動的再定義を処理しているかを、サンプルコードとコア概念を...]]></description><link>https://zenn.dev/y_watanabe11/articles/d0cbc3d19a4460</link><guid isPermaLink="true">https://zenn.dev/y_watanabe11/articles/d0cbc3d19a4460</guid><pubDate>Tue, 23 Sep 2025 15:47:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--00CZDv5L--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Julia%2520%25E3%2581%25AE%2520World%2520Age%2520%25E3%2581%25A8%25E4%25BB%2596%25E3%2581%25AE%2520JIT%2520%25E8%25A8%2580%25E8%25AA%259E%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2582%2592%25E3%2582%25B5%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25A7%25E6%25AF%2594%25E8%25BC%2583%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Y-Watanabe11%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NkMDAyYTNiOTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Y-Watanabe11</dc:creator></item><item><title><![CDATA[なぜ、Javaの目標は10日のやっつけ仕事で作られたJavaScriptに全部奪われたのか？]]></title><description><![CDATA[
+ はじめに
+1990年代半ば、インターネットの黎明期に登場した二つの言語、JavaとJavaScriptは、どちらも「どこでも動く」という夢を背負っていました。
+Javaは「Write Once, Run Anywhere（WORA）」のスローガンを掲げ、基幹システムから教育現場に至るまで幅広く採用されました。一方のJavaScriptは、わずか10日で生まれた「ブラウザ用おまけスクリプト」に過ぎませんでした。
+しかし30年後、真に「事実上のWORA」を実現したのはJavaではなくJavaScriptでした。なぜこの逆転が起こったのか。その歴史的経緯を主要プレイヤーの動向を踏まえて追っ...]]></description><link>https://zenn.dev/pdfractal/articles/79ec1e7d78be36</link><guid isPermaLink="true">https://zenn.dev/pdfractal/articles/79ec1e7d78be36</guid><pubDate>Tue, 23 Sep 2025 11:16:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---_unIwnn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25AA%25E3%2581%259C%25E3%2580%2581Java%25E3%2581%25AE%25E7%259B%25AE%25E6%25A8%2599%25E3%2581%25AF10%25E6%2597%25A5%25E3%2581%25AE%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A4%25E3%2581%2591%25E4%25BB%2595%25E4%25BA%258B%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%2589%25E3%2582%258C%25E3%2581%259FJavaScript%25E3%2581%25AB%25E5%2585%25A8%25E9%2583%25A8%25E5%25A5%25AA%25E3%2582%258F%25E3%2582%258C%25E3%2581%259F%25E3%2581%25AE%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:pdfractal%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M4ZmJkZmFkY2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>pdfractal</dc:creator></item><item><title><![CDATA[【AWS×Java】SAMで冷蔵庫管理アプリを構築 #2 DynamoDB編（CRUD API②）]]></title><description><![CDATA[
+ はじめに
+当記事の最終ゴールについては以下の記事をご確認ください。
+https://zenn.dev/superrelax102/articles/424ebd380d6c53
+今回のゴール：API Gateway + Lambda(Java)から DynamoDBへ POST/PUT/DELETE できる
+前提読者：AWS初心者、開発初心者
+また、今回は以下「【AWS×Java】SAMで冷蔵庫管理アプリを構築 #2 DynamoDB編（CRUD API①）」を実施済みの前提で進めます。
+https://zenn.dev/superrelax102/articles/6fb52f65...]]></description><link>https://zenn.dev/superrelax102/articles/386db0ea9fcff2</link><guid isPermaLink="true">https://zenn.dev/superrelax102/articles/386db0ea9fcff2</guid><pubDate>Tue, 23 Sep 2025 09:16:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OmPBVBZY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590AWS%25C3%2597Java%25E3%2580%2591SAM%25E3%2581%25A7%25E5%2586%25B7%25E8%2594%25B5%25E5%25BA%25AB%25E7%25AE%25A1%25E7%2590%2586%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%2520%25232%2520DynamoDB%25E7%25B7%25A8%25EF%25BC%2588CRUD%2520API%25E2%2591%25A1%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:T%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q5OWUzYzQ0ZTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>T</dc:creator></item><item><title><![CDATA[Java仮想マシン（JVM）を読解しながら理解する #08]]></title><description><![CDATA[https://zenn.dev/h_kohe/articles/f6a408ada1e07b
+こちらの記事の続きです
+よんでいる公式ドキュメント
+https://docs.oracle.com/javase/specs/jvms/se17/html/jvms-2.html
+なんやかんやでついに8回目まですすみました！！
+Java25も正式リリースされたので、これから今まで触れたことがない人にもJavaがもっと愛される言語になっていけばいいなーーーと願うばかりです😎！！
+Java25についてはきしださんのリリース恒例解説記事が読みやすいと思うのでぜひ！！
+https://qiita.co...]]></description><link>https://zenn.dev/h_kohe/articles/05da6a8246323d</link><guid isPermaLink="true">https://zenn.dev/h_kohe/articles/05da6a8246323d</guid><pubDate>Mon, 22 Sep 2025 16:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ch2jn0F---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E4%25BB%25AE%25E6%2583%25B3%25E3%2583%259E%25E3%2582%25B7%25E3%2583%25B3%25EF%25BC%2588JVM%25EF%25BC%2589%25E3%2582%2592%25E8%25AA%25AD%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%25AA%25E3%2581%258C%25E3%2582%2589%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2520%252308%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:KOHE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MwMDQxMTQ1ZjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KOHE</dc:creator></item><item><title><![CDATA[VS Code + Docker + Gemini CLI で Java 開発（Maven 版）]]></title><description><![CDATA[
+ はじめに
+この記事は「VS Code + Docker + Gemini CLI で Java 開発（Gradle 版）」の続きです。
+
+ここでは、前回用意した Gradle プロジェクトを Apache Maven プロジェクトへ移行したので、これについて説明します。
+前回は、開発コンテナで Gemini CLI を使えるようにし、Gemini を使ってシンプルな Java プロジェクトを Gradle プロジェクトへ移行しました。今回は、VS Code と Docker を使った Maven プロジェクトの Java プログラム開発についての解説となります。
+Gemini CLI...]]></description><link>https://zenn.dev/hiro345/articles/20250922_vscode_java_04</link><guid isPermaLink="true">https://zenn.dev/hiro345/articles/20250922_vscode_java_04</guid><pubDate>Mon, 22 Sep 2025 11:25:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aHnBQY_9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VS%2520Code%2520%252B%2520Docker%2520%252B%2520Gemini%2520CLI%2520%25E3%2581%25A7%2520Java%2520%25E9%2596%258B%25E7%2599%25BA%25EF%25BC%2588Maven%2520%25E7%2589%2588%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroshi%2520Koyama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k5ZzdjLS0xTFk0S2k0LWw3dVFSSFZRdEdQcWZHYTlibVRJYUtFM0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroshi Koyama</dc:creator></item><item><title><![CDATA[OpenTelemetry Operator による自動計装の注入(Injection)を試す]]></title><description><![CDATA[前の記事で「もうちょっと定期的にアウトプットしていきたい」と宣言したので、早速、次のネタを書き始めます。
+
+ OpenTelemetry Operator
+Kubernetes Operatorの実装の一つとして、OpenTelemetry Operatorというものが提供されています。
+このOperatorは、OpenTelemetry Collectorの管理や、Kubernetes上で実行されるアプリケーションに対するゼロコード計装（自動計装）を行ってくれます。
+特に後者、自動計装に関しては、Init Containerを通じて計装ライブラリを注入(Injection)します。
+言...]]></description><link>https://zenn.dev/kntr_nkgm/articles/010afbec1d423f</link><guid isPermaLink="true">https://zenn.dev/kntr_nkgm/articles/010afbec1d423f</guid><pubDate>Mon, 22 Sep 2025 10:18:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--00_4BkA5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OpenTelemetry%2520Operator%2520%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E8%2587%25AA%25E5%258B%2595%25E8%25A8%2588%25E8%25A3%2585%25E3%2581%25AE%25E6%25B3%25A8%25E5%2585%25A5%2528Injection%2529%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kntr_nkgm%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk5YTMyZTI0MTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kntr_nkgm</dc:creator></item><item><title><![CDATA[【AWS×Java】SAMで冷蔵庫管理アプリを構築 #2 DynamoDB編（CRUD API①）]]></title><description><![CDATA[
+ はじめに
+当記事の最終ゴールについては以下の記事をご確認ください。
+https://zenn.dev/superrelax102/articles/424ebd380d6c53
+今回のゴール：API Gateway + Lambda(Java)から DynamoDBへ GET できる
+前提読者：AWS初心者、開発初心者
+また、今回は以下「【AWS×Java】SAMで冷蔵庫管理アプリを構築 #1 API Gateway + Lambda編（Hello API）」を実施済みの前提で進めます。
+https://zenn.dev/superrelax102/articles/b3c7e134...]]></description><link>https://zenn.dev/superrelax102/articles/6fb52f65c44e74</link><guid isPermaLink="true">https://zenn.dev/superrelax102/articles/6fb52f65c44e74</guid><pubDate>Sun, 21 Sep 2025 12:47:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3prpPuxo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590AWS%25C3%2597Java%25E3%2580%2591SAM%25E3%2581%25A7%25E5%2586%25B7%25E8%2594%25B5%25E5%25BA%25AB%25E7%25AE%25A1%25E7%2590%2586%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%2520%25232%2520DynamoDB%25E7%25B7%25A8%25EF%25BC%2588CRUD%2520API%25E2%2591%25A0%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:T%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q5OWUzYzQ0ZTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>T</dc:creator></item><item><title><![CDATA[Java Queueインターフェース：メモ]]></title><description><![CDATA[javaのQueueインターフェースについてのメモ。
+・Java のコレクションフレームワークの一部
+・「FIFO（First-In-First-Out）」 ＝ 先入れ先出し を基本とするデータ構造
+・代表的な実装クラス：LinkedList, PriorityQueue, ArrayDeque など
+
+ 操作一覧
+
+
+
+操作
+例外を投げるメソッド
+安全に扱えるメソッド（null / false を返す）
+
+
+
+
+追加
+add(e)
+offer(e)
+
+
+削除
+remove()
+poll()
+
+
+参照（先頭を見るだけ）
+element()
+peek()
+
+
+
+[ A ] → [ B ] ...]]></description><link>https://zenn.dev/maru8118/articles/9acdd5f47a619f</link><guid isPermaLink="true">https://zenn.dev/maru8118/articles/9acdd5f47a619f</guid><pubDate>Sat, 20 Sep 2025 05:16:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BMgUibEj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%2520Queue%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%2595%25E3%2582%25A7%25E3%2583%25BC%25E3%2582%25B9%25EF%25BC%259A%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:marus8118%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFkYjllYmNlNWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>marus8118</dc:creator></item><item><title><![CDATA[Java 25: JEP 515 の Ahead-of-Time Method Profiling を試す]]></title><description><![CDATA[Java 25 で導入された Ahead-of-Time Method Profiling は事前に収集したプロファイル情報を利用して、JVMの起動時や実行時に最適化を適用する仕組みです。
+これにより、従来のJITコンパイルのウォームアップ期間を短縮し、アプリケーションの全体的な性能を向上させると謳われています。
+Spring Boot アプリケーションの起動時間と実行時のパフォーマンスを測定してみました。
+JEP ドキュメントはこちらです。
+https://openjdk.org/jeps/515
+!
+AOT キャッシュは JEP 483(Java 24)で導入されました。JEP 48...]]></description><link>https://zenn.dev/rakuten_tech/articles/java25-jep515</link><guid isPermaLink="true">https://zenn.dev/rakuten_tech/articles/java25-jep515</guid><pubDate>Sat, 20 Sep 2025 04:30:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--F_azi4rQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%252025%253A%2520JEP%2520515%2520%25E3%2581%25AE%2520Ahead-of-Time%2520Method%2520Profiling%2520%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Tsubasa%2520Nomura%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViMTIyZmNkNzQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Rakuten%2520Volunteers%2520Te...%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvdC5wbmc=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tsubasa Nomura</dc:creator></item><item><title><![CDATA[Swingのレイアウトマネージャー<前編>[Java]]]></title><description><![CDATA[
+ はじめに
+こんにちは。
+プログラミング初心者wakinozaと申します。
+Java勉強中に調べたことを記事にまとめています。
+十分気をつけて執筆していますが、なにぶん初心者が書いた記事なので、理解が浅い点などあるかと思います。
+間違い等あれば、指摘いただけると助かります。
+記事を参考にされる方は、初心者の記事であることを念頭において、お読みいただけると幸いです。
+
+ 対象読者
+
+Javaを勉強中の方
+Swingについて知りたい方
+
+
+ 記事のテーマ
+
+SwingでGUIアプリケーションを作った際に、コンポーネントの配置が思うようにならなくて苦労しました。swingのレイアウトは種類が...]]></description><link>https://zenn.dev/wakinoza/articles/002cf392251830</link><guid isPermaLink="true">https://zenn.dev/wakinoza/articles/002cf392251830</guid><pubDate>Fri, 19 Sep 2025 23:30:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_Bi56mdx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Swing%25E3%2581%25AE%25E3%2583%25AC%25E3%2582%25A4%25E3%2582%25A2%25E3%2582%25A6%25E3%2583%2588%25E3%2583%259E%25E3%2583%258D%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A3%25E3%2583%25BC%253C%25E5%2589%258D%25E7%25B7%25A8%253E%255BJava%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wakinoza%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E2ZTk5ZTMzNDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wakinoza</dc:creator></item><item><title><![CDATA[VS Code + Docker + Gemini CLI で Java 開発（Gradle 版）]]></title><description><![CDATA[
+ はじめに
+この記事は「VS Code の Java プロジェクトを Gemini CLI に対応させよう」の続きです。
+
+!
+2025-09-21 タイトルをより適したものへ変更しました。
+
+前回は、シェルスクリプトで管理するシンプルな Java プロジェクトに Gemini CLI を導入し、GEMINI.md を作成して開発規約を整備していくプロセスを紹介しました。
+AI との対話を通じてプロジェクトのルールを整理して明確にすることができましたが、一方で、手動のライブラリ管理や自作スクリプトによるビルドには限界も見えてきました。
+そこで今回は、開発体験をさらに一歩進めるため、Ge...]]></description><link>https://zenn.dev/hiro345/articles/20250919_vscode_java_03</link><guid isPermaLink="true">https://zenn.dev/hiro345/articles/20250919_vscode_java_03</guid><pubDate>Fri, 19 Sep 2025 00:07:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--heyHmeQl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VS%2520Code%2520%252B%2520Docker%2520%252B%2520Gemini%2520CLI%2520%25E3%2581%25A7%2520Java%2520%25E9%2596%258B%25E7%2599%25BA%25EF%25BC%2588Gradle%2520%25E7%2589%2588%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroshi%2520Koyama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k5ZzdjLS0xTFk0S2k0LWw3dVFSSFZRdEdQcWZHYTlibVRJYUtFM0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroshi Koyama</dc:creator></item><item><title><![CDATA[JetBrains の新しい AI クォータ制度FAQ matome]]></title><description><![CDATA[
+ JetBrains の新しい AI クォータ制度と、使いこなしのヒント
+こんにちは、JetBrains公式代理店NATTOSYSTEMのねばねばです。
+2025年9月、JetBrains は AI 機能のクォータ（使用可能クレジット数）を変更 しました。
+これにより「クォータが減った」「毎日使えない」と感じるユーザーも多く、公式ブログでは FAQ 形式で詳細が説明されています。
+本記事では、その内容を日本語にまとめ、使い方のヒントも交えて紹介します。
+ひぅいごう。
+
+
+ 1. なぜクォータが変わったのか？
+
+過去のクォータは「暫定的に大きめに設定」されていました。
+しかし実際には 持...]]></description><link>https://zenn.dev/nattosystem_jp/articles/0319dc9da101ec</link><guid isPermaLink="true">https://zenn.dev/nattosystem_jp/articles/0319dc9da101ec</guid><pubDate>Thu, 18 Sep 2025 08:35:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cjUvvPgZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JetBrains%2520%25E3%2581%25AE%25E6%2596%25B0%25E3%2581%2597%25E3%2581%2584%2520AI%2520%25E3%2582%25AF%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E5%2588%25B6%25E5%25BA%25A6FAQ%2520matome%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25AD%25E3%2581%25B0%25E3%2581%25AD%25E3%2581%25B0%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RiYWQxMDhjNTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BENATTOSYSTEM%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvbi5wbmc=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ねばねば</dc:creator></item><item><title><![CDATA[【AWS×Java】SAMで冷蔵庫管理アプリを構築 #1 API Gateway + Lambda編（Hello API）]]></title><description><![CDATA[
+ はじめに
+当記事の最終ゴールについては以下の記事をご確認ください。
+https://zenn.dev/superrelax102/articles/424ebd380d6c53
+今回のゴール：API Gateway + Lambda(Java)でHello APIをデプロイする
+前提読者：AWS初心者、開発初心者
+以下を実施することで従量課金が発生します。その点については自己責任でお願いします。
+また、本記事は学習ログです。詳細は公式ドキュメントを適宜参照してください。
+
+ アーキテクチャ概要
+今回は以下赤枠部分を完成させます。
+図1: サーバレス構成の全体像
+
+
+ 事前準備
+開発環...]]></description><link>https://zenn.dev/superrelax102/articles/b3c7e13459d4ed</link><guid isPermaLink="true">https://zenn.dev/superrelax102/articles/b3c7e13459d4ed</guid><pubDate>Tue, 16 Sep 2025 15:07:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lmexD64X--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590AWS%25C3%2597Java%25E3%2580%2591SAM%25E3%2581%25A7%25E5%2586%25B7%25E8%2594%25B5%25E5%25BA%25AB%25E7%25AE%25A1%25E7%2590%2586%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%2520%25231%2520API%2520Gateway%2520%252B%2520Lambda%25E7%25B7%25A8%25EF%25BC%2588Hello%2520...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:T%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q5OWUzYzQ0ZTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>T</dc:creator></item><item><title><![CDATA[Apache Beam Java SDK ベストプラクティスガイド]]></title><description><![CDATA[このガイドは、Java版 Apache Beam を用いて、高性能で堅牢、かつ保守性の高いデータパイプラインを構築するための、実践的なベストプラクティス集です。基本的な設計原則から、パフォーマンスチューニング、テスト戦略、さらにはヘキサゴナルアーキテクチャの導入まで、Beam のポテンシャルを最大限に引き出すための知見を体系的に解説します。Beam の基本を習得した開発者が、次のレベルへとステップアップするための指針となることを目指します。
+
+ 第1章 パイプラインアーキテクチャの基本原則
+優れたパイプラインの構築は、処理の有向非巡回グラフ（DAG）をいかに設計するかにかかっています。こ...]]></description><link>https://zenn.dev/suwash/articles/beam_java_best_practice_20250917</link><guid isPermaLink="true">https://zenn.dev/suwash/articles/beam_java_best_practice_20250917</guid><pubDate>Tue, 16 Sep 2025 15:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NLOZTTYn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Apache%2520Beam%2520Java%2520SDK%2520%25E3%2583%2599%25E3%2582%25B9%25E3%2583%2588%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25AF%25E3%2583%2586%25E3%2582%25A3%25E3%2582%25B9%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:suwa-sh%2520%252F%2520%25E8%25AB%258F%25E8%25A8%25AA%25E7%259C%259F%25E4%25B8%2580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNlQ0cjdIdGJrWG10aG42OE53dmlHWXBLcGI5VWQ5N3hnRS1aQnM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>suwa-sh / 諏訪真一</dc:creator></item><item><title><![CDATA[継承とポロモーフィズムについてまとめてみた]]></title><description><![CDATA[OOPの概念について学んではいるけど、なかなか言語化したり体系的にアウトプットする機会がなかったので、まとめます。
+自分が継承とポリモーフォズムの概念について腑に落ちていったプロセスを残せたらいいなと思います。
+
+ 定義
+この定義をこの記事を読み終わってから理解できるようになっていたら良いと思う。
+
+ 継承
+親クラスのフィールドやメソッドを子クラスで定義・利用できる仕組み。
+
+ ポリモーフィズム
+同じ型やメソッド呼び出しでも、オブジェクトに応じて振る舞いが変わるという効果。
+
+ 違いは？
+継承 = 仕組み。コードの書き方や設計方法を指す。
+ポリモーフィズム  = 効果。継承やオーバーライ...]]></description><link>https://zenn.dev/tacos/articles/06f91f082973a4</link><guid isPermaLink="true">https://zenn.dev/tacos/articles/06f91f082973a4</guid><pubDate>Tue, 16 Sep 2025 06:52:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TilhlkYG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25B6%2599%25E6%2589%25BF%25E3%2581%25A8%25E3%2583%259D%25E3%2583%25AD%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2595%25E3%2582%25A3%25E3%2582%25BA%25E3%2583%25A0%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25BF%25E3%2582%25B3%25E3%2582%25B9%25E3%2583%259E%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHNqWVZUSXZtQmFWX3VLeWdicy0tbDVHRG13dUpVMWd6TEtDYzJPRElNTlE5T0JBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>タコスマスター</dc:creator></item><item><title><![CDATA[SIer社員が1年弱で取った資格が業務にどれくらい”活きたか”]]></title><description><![CDATA[
+ TL;DR
+SIerに入社して1年弱の間に取得した資格が、どのように実務に活かされたかを振り返っています。AWS、Java、SQL、応用情報技術者など、さまざまな資格を取得し、それぞれが開発業務や関係者とのコミュニケーション、プロジェクト管理などにどのように役立ったかを具体的に紹介しています。AIが開発を一手に担うこの時代で、資格勉強は基礎概念を理解する良い手段であり、少しでも自信を持って仕事に取り組むための基盤となったことを実感しています。
+
+ SIer社員が1年弱で取った資格が業務にどれくらい"活きたか"
+こんにちは。私はSEとして入社してから1年弱の間、SI業務の主に下流工程に...]]></description><link>https://zenn.dev/nemdull/articles/qiita-20250812-d42c71c8997a1dc07d12</link><guid isPermaLink="true">https://zenn.dev/nemdull/articles/qiita-20250812-d42c71c8997a1dc07d12</guid><pubDate>Tue, 16 Sep 2025 01:00:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YJTR-V_o--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SIer%25E7%25A4%25BE%25E5%2593%25A1%25E3%2581%258C1%25E5%25B9%25B4%25E5%25BC%25B1%25E3%2581%25A7%25E5%258F%2596%25E3%2581%25A3%25E3%2581%259F%25E8%25B3%2587%25E6%25A0%25BC%25E3%2581%258C%25E6%25A5%25AD%25E5%258B%2599%25E3%2581%25AB%25E3%2581%25A9%25E3%2582%258C%25E3%2581%258F%25E3%2582%2589%25E3%2581%2584%25E2%2580%259D%25E6%25B4%25BB%25E3%2581%258D%25E3%2581%259F%25E3%2581%258B%25E2%2580%259D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nemdull%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IzYjY0ZTNhZDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nemdull</dc:creator></item><item><title><![CDATA[Java仮想マシン（JVM）を読解しながら理解する #07]]></title><description><![CDATA[https://zenn.dev/h_kohe/articles/0415315d4dd8b9
+こちらの記事の続きです
+よんでいる公式ドキュメント
+https://docs.oracle.com/javase/specs/jvms/se17/html/jvms-2.html
+先日、人生初のハッカソンに参加してきたのですが。。。
+イベントを企画して運営する難しさを体験する1日でした。
+企画運営をしてくださった皆さま、ありがとうございました！！
+今度は参加者ではなく、企画運営側で携わってみたいな・・・
+さて、少し間隔が空いたのですが今回もJVMを読み進めていきます。
+
+ 2.5.4. Met...]]></description><link>https://zenn.dev/h_kohe/articles/f6a408ada1e07b</link><guid isPermaLink="true">https://zenn.dev/h_kohe/articles/f6a408ada1e07b</guid><pubDate>Mon, 15 Sep 2025 15:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZlcylSXd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E4%25BB%25AE%25E6%2583%25B3%25E3%2583%259E%25E3%2582%25B7%25E3%2583%25B3%25EF%25BC%2588JVM%25EF%25BC%2589%25E3%2582%2592%25E8%25AA%25AD%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%25AA%25E3%2581%258C%25E3%2582%2589%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2520%252307%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:KOHE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MwMDQxMTQ1ZjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KOHE</dc:creator></item><item><title><![CDATA[Java の Integer キャッシュを理解する]]></title><description><![CDATA[Java の Integer には キャッシュ機構 があり、思わぬ挙動を示すことがあります。
+今回は IntegerCache の仕組みと、その効果をまとめます。
+
+ Integer の動作確認
+以下のコードを実行すると、出力はコメントの通りになります。
+Integer a = 127;
+Integer b = 127;
+System.out.println(a == b);      // true
+
+Integer x = 128;
+Integer y = 128;
+System.out.println(x == y);      // false
+
+System.out.print...]]></description><link>https://zenn.dev/wakame_atsushi/articles/d1058fac66a32f</link><guid isPermaLink="true">https://zenn.dev/wakame_atsushi/articles/d1058fac66a32f</guid><pubDate>Mon, 15 Sep 2025 02:33:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--M9KKzn97--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%2520%25E3%2581%25AE%2520Integer%2520%25E3%2582%25AD%25E3%2583%25A3%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A5%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258F%25E3%2581%258B%25E3%2582%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI2NDI2MjM3MjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>わかめ</dc:creator></item><item><title><![CDATA[VS CodeとGradleによるJava開発環境ガイド]]></title><description><![CDATA[
+ はじめに
+「AさんのPCでは動くのに、BさんのPCではビルドが通らない」「レビューの度にインデントやimport順の指摘が飛び交う」「ローカルでは成功したのに、CIで静的解析エラーが出て手戻りが頻発する」。
+現代のJava開発において、このような環境の属人化や品質基準のばらつきは、生産性を阻害する大きな要因です。
+この記事では、Visual Studio Code (VS Code) とGradleを軸に、これらの課題を解決し、個人からチームまで対応できる品質と生産性を両立したJava開発環境の構築方法を体系的に解説します。
+本ガイドが目指すゴールは、単なるツールの導入手順ではありま...]]></description><link>https://zenn.dev/suwash/articles/vscode_gradle_20250915</link><guid isPermaLink="true">https://zenn.dev/suwash/articles/vscode_gradle_20250915</guid><pubDate>Sun, 14 Sep 2025 15:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aRZLSjH9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VS%2520Code%25E3%2581%25A8Gradle%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258BJava%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:suwa-sh%2520%252F%2520%25E8%25AB%258F%25E8%25A8%25AA%25E7%259C%259F%25E4%25B8%2580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNlQ0cjdIdGJrWG10aG42OE53dmlHWXBLcGI5VWQ5N3hnRS1aQnM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>suwa-sh / 諏訪真一</dc:creator></item></channel></rss>
