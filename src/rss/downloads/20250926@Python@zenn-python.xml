@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 26 Sep 2025 08:45:59 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[三層アーキテクチャを振り返りながらFlaskのアーキテクチャを理解する]]></title><description><![CDATA[
+ Flaskのアーキテクチャを書こうと思ったきっかけ
+Flaskをなんとなくで利用している人は多いのではないでしょうか。
+私の本業であるインフラエンジニア/アーキテクトの目線で三層アーキテクチャを振り返りつつ
+Flaskのアーキテクチャを図示してみました。
+
+ 三層アーキテクチャとは？
+
+Webサーバ（プレゼンテーション層）
+　ユーザーからのリクエストに応じてウェブページを提供します
+APサーバ（ロジック層）
+　ビジネスロジックを処理し、ユーザーからの要求に応じてデータを処理します
+DBサーバ（データ層）
+　データを保存、管理し、必要に応じてデータを提供します
+
+
+※1 静的コンテンツ...]]></description><link>https://zenn.dev/engineer_k/articles/70251b232e4329</link><guid isPermaLink="true">https://zenn.dev/engineer_k/articles/70251b232e4329</guid><pubDate>Fri, 26 Sep 2025 08:06:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bt4IWxbT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25B8%2589%25E5%25B1%25A4%25E3%2582%25A2%25E3%2583%25BC%25E3%2582%25AD%25E3%2583%2586%25E3%2582%25AF%25E3%2583%2581%25E3%2583%25A3%25E3%2582%2592%25E6%258C%25AF%25E3%2582%258A%25E8%25BF%2594%25E3%2582%258A%25E3%2581%25AA%25E3%2581%258C%25E3%2582%2589Flask%25E3%2581%25AE%25E3%2582%25A2%25E3%2583%25BC%25E3%2582%25AD%25E3%2583%2586%25E3%2582%25AF%25E3%2583%2581%25E3%2583%25A3%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2K%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UwOWNmMjNkZTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>エンジニアK</dc:creator></item><item><title><![CDATA[AtCoder Beginner Contest 419 D - Substr Swap]]></title><description><![CDATA[
+ AtCoder Beginner Contest 419 D - Substr Swap
+問題はこちら
+
+ 問題を解く時の思考の流れ
+
+
+一番無難な方法は問題文に記載されている文字列入れ替え操作を、そのまま M 回行う。
+この方法だと、計算量が O(NM) かかってしまう。
+
+
+上記の方針をもとに計算量を改善するためには、
+a. 問題文に記載されている文字列入れ替え操作の計算量を O(N) から落とす
+b. 入れ替え操作を M 回行うところを、なんとか工夫して減らす
+のいずれかを行わなければいけなそうだ。
+
+
+2の候補のうち、bの方が現実的だと思う。
+なぜなら、文字列入れ替え操作は ...]]></description><link>https://zenn.dev/u_u/articles/dd77d8fa8852c2</link><guid isPermaLink="true">https://zenn.dev/u_u/articles/dd77d8fa8852c2</guid><pubDate>Fri, 26 Sep 2025 03:45:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---5Mvjp3f--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AtCoder%2520Beginner%2520Contest%2520419%2520D%2520-%2520Substr%2520Swap%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E2%259C%25BFu_u%25E2%259C%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RiNWIwZjVjNTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>✿u_u✿</dc:creator></item><item><title><![CDATA[#123　PythonでQRコードを生成してみる]]></title><description><![CDATA[
+ はじめに
+今回はPythonを使ってQRコードを生成してみました。
+簡単に生成でき、デザインを変更することもできたのでいろいろと試してみました。
+
+ 準備
+以下のコマンドを実行してqrcodeとPillowをインストールします。
+pip install qrcode[pil]
+qrcodeはQRコードを生成するためのライブラリです。
+Pillow (PIL)は画像操作のためのライブラリで、QRコードを画像として保存するために使用されます。
+
+ QRコードを生成してみる
+まずはよく見る白黒のQRコードを生成してみます。
+import qrcode
+
+# QRコードに埋め込むデータ
+da...]]></description><link>https://zenn.dev/nxted_sapporo/articles/cb79d071dbec40</link><guid isPermaLink="true">https://zenn.dev/nxted_sapporo/articles/cb79d071dbec40</guid><pubDate>Fri, 26 Sep 2025 01:50:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--i5OO1lvG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2523123%25E3%2580%2580Python%25E3%2581%25A7QR%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E7%2594%259F%25E6%2588%2590%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NXTEDCo.%252C%2520Ltd.%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBmZjQzOTVhYzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NXTEDCo., Ltd.</dc:creator></item><item><title><![CDATA[コード短編小説「コピーとオリジナル」]]></title><description><![CDATA[
+ コード短編小説「コピーとオリジナル」
+コピーは、いつも跡から来る。
+神崎ユウが最初にそれを実感したのは、古い写真のスキャンを AI 補完にかけた夜だ。粒子の荒れた夕焼けが、滑らかなグラデーションに直され、欠けた笑顔は完璧な歯列で埋められた。
+――確かに、きれいになった。でも、同じではない。
+def clone(obj):
+    import copy
+    c = copy.deepcopy(obj)
+    c.meta["clone_of"] = id(obj)
+    return c
+翌朝、ユウは研究棟の白い廊下で、彼女とすれ違った。
+彼女――ルリは微笑んだ。ユウの知る笑...]]></description><link>https://zenn.dev/yasuna_ide/articles/a06debac2f693a</link><guid isPermaLink="true">https://zenn.dev/yasuna_ide/articles/a06debac2f693a</guid><pubDate>Fri, 26 Sep 2025 01:14:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RapTcFWp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E7%259F%25AD%25E7%25B7%25A8%25E5%25B0%258F%25E8%25AA%25AC%25E3%2580%258C%25E3%2582%25B3%25E3%2583%2594%25E3%2583%25BC%25E3%2581%25A8%25E3%2582%25AA%25E3%2583%25AA%25E3%2582%25B8%25E3%2583%258A%25E3%2583%25AB%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yasuna%2520Ide%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY5NzBlNjljZmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yasuna Ide</dc:creator></item><item><title><![CDATA[Pythonの利用方法をいくつか試してみる]]></title><description><![CDATA[Pythonを利用するには様々な方法がある。Windowsを利用している私がぱっと思いつくのが下記方法だ。
+
+
+Google Colaboratoryを利用
+
+Python.orgのインストーラでインストール
+Microsoft Storeからインストール
+
+pyenv-winでインストール
+
+uvを利用
+
+
+ インストールを試す
+ひとまず上げた5項目についてPythonのインストールを実施してみる。
+
+ Google Colaboratoryの利用
+Google Colaboratoryはホスト型のJupyter Notebook。Googleのアカウントがあればすぐにでも使い始められ...]]></description><link>https://zenn.dev/gami113/articles/20250921-python-install</link><guid isPermaLink="true">https://zenn.dev/gami113/articles/20250921-python-install</guid><pubDate>Thu, 25 Sep 2025 16:42:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--f46DS7tB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AE%25E5%2588%25A9%25E7%2594%25A8%25E6%2596%25B9%25E6%25B3%2595%25E3%2582%2592%25E3%2581%2584%25E3%2581%258F%25E3%2581%25A4%25E3%2581%258B%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258C%25E3%2581%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZGRaaTJJdVkxLWZaVHFVc2RUbWtrZVYwQzhWNEQ2cVJ0aXo1NEU9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>がみ</dc:creator></item><item><title><![CDATA[MockとMagicMockとは？]]></title><description><![CDATA[
+&nbsp;
+
+ はじめに
+Pythonでテストコードをみると、よく出てくるのが Mock（モック） と MagicMock（マジックモック） です。
+初学者の方だと、名前は知っていても「結局なに？」「どっちを使えばいいの？」と迷う人は多いと思います。
+この記事では、「Mockとは？」「MagicMockとは？」について説明し、その上でそれぞれの使い方について解説します。
+&nbsp;
+
+ Mockとは？
+Mock（モック）とは、テストで使う“本物の代わりに動くダミー のことです。
+
+本物を呼ぶと遅い／お金がかかる／環境に依存する
+テストでは「ロジック」だけを確認したい
+
+そんなときに...]]></description><link>https://zenn.dev/aoao/articles/dccec734d69ae4</link><guid isPermaLink="true">https://zenn.dev/aoao/articles/dccec734d69ae4</guid><pubDate>Thu, 25 Sep 2025 16:23:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hhKQ68GY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Mock%25E3%2581%25A8MagicMock%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ao%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E4YzhiZGY4ZTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ao</dc:creator></item><item><title><![CDATA[[Python]DjangoでAPIを実装してDBとの連携を試してみる]]></title><description><![CDATA[前回の続き
+https://zenn.dev/ai_tech/articles/68b2923036b08d
+前回データベースの設計の変更はDjangoではmigrateを実行することで、実際にローカルでのPostgreのデータベースへ変更内容が反映されることが分かりました。
+せっかくなのでAPIを実装してDBとの連携を見てみましょう。
+
+ 現在のテーブルの状況
+現在は前回の続きのためbooksというアプリだけ作成されています。
+!
+DjangoでいうアプリとはDjangoプロジェクトの中の機能ごとの小さなまとまり（部品） のこと
+
+そのbooksアプリで作成したテーブルbooks_bo...]]></description><link>https://zenn.dev/ai_tech/articles/bc92135435ab79</link><guid isPermaLink="true">https://zenn.dev/ai_tech/articles/bc92135435ab79</guid><pubDate>Thu, 25 Sep 2025 16:08:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QKnw5mfQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BPython%255DDjango%25E3%2581%25A7API%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%25A6DB%25E3%2581%25A8%25E3%2581%25AE%25E9%2580%25A3%25E6%2590%25BA%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258A%25E3%2581%258F%25E3%2581%259F%25E3%2582%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhhZGFlOGM3MjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>りくたろ</dc:creator></item><item><title><![CDATA[FastMCPとStreamlitで作る文字カウントアプリケーション]]></title><description><![CDATA[
+ はじめに
+
+Model Context Protocol (MCP) は、AIアシスタントとさまざまなデータソースやツールとの相互作用を標準化することを目的としたオープンプロトコルです。今回は、FastMCPライブラリを使用してMCPサーバーとクライアントを構築し、さらにStreamlitでWebUIを提供する文字カウントアプリケーションを作成しました。
+FastMCPを使ったことがなかったので、文字数カウントというシンプルな機能でライブラリの学習をしつつ、Streamlitでのユーザ利用などを想定して構築しました。以下のブログは mcp-letter-count (githubのソ...]]></description><link>https://zenn.dev/airspace_nobo/articles/6f55eda07747d1</link><guid isPermaLink="true">https://zenn.dev/airspace_nobo/articles/6f55eda07747d1</guid><pubDate>Thu, 25 Sep 2025 14:46:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--06LQi-Tt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:FastMCP%25E3%2581%25A8Streamlit%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%25E6%2596%2587%25E5%25AD%2597%25E3%2582%25AB%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takut0%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E4MWFiM2I1ZTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takut0</dc:creator></item><item><title><![CDATA[【2025年最新版】PyTorchとTensorFlowの違いを徹底比較｜初心者におすすめはどっち？]]></title><description><![CDATA[はじめまして、
+株式会社dotConfにて、AIエンジニアをしている古菅(こすげ)です！
+前回は「Matplotlibだけでここまでできる：実務で使う可視化レシピ10選」を紹介しましたが、
+今回はその続編として、
+【2025年最新版】PyTorchとTensorFlowの違いを徹底比較｜初心者におすすめはどっち？
+をまとめました。
+
+
+ 【2025年最新版】PyTorch vs TensorFlowの違いを徹底比較｜初心者におすすめは？
+機械学習やディープラーニングを学び始めると、必ず出てくる疑問が 「PyTorchとTensorFlow、どっちを使えばいいの？」 というもの。
+2025...]]></description><link>https://zenn.dev/dotconf/articles/2025-09-29-torch_vs_tensor-tech-article</link><guid isPermaLink="true">https://zenn.dev/dotconf/articles/2025-09-29-torch_vs_tensor-tech-article</guid><pubDate>Thu, 25 Sep 2025 13:30:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tUaueH9R--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%25902025%25E5%25B9%25B4%25E6%259C%2580%25E6%2596%25B0%25E7%2589%2588%25E3%2580%2591PyTorch%25E3%2581%25A8TensorFlow%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2582%2592%25E5%25BE%25B9%25E5%25BA%2595%25E6%25AF%2594%25E8%25BC%2583%25EF%25BD%259C%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2599%25E3%2581%2599%25E3%2582%2581%25E3%2581%25AF%25E3%2581%25A9%25E3%2581%25A3%25E3%2581%25A1%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E5%258F%25A4%25E8%258F%2585%2520%25E7%25BF%2594%25E7%2594%259F%2528Kosuge%2520Shoui...%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQwZjJjZjQxNjQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:dotConf%252C%2520Inc%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EyY2ZkZTVmNDEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>古菅 翔生(Kosuge Shoui) | AIエンジニア</dc:creator></item><item><title><![CDATA[📝 アプリケーションサービスをPythonで学ぶ]]></title><description><![CDATA[
+ はじめに
+ドメイン駆動設計 (DDD) の書籍に出てくる 「アプリケーションサービス」 という概念。抽象的な説明だけでピンとこないという読者も多いはずです。
+この記事では、Pythonで手を動かしながら理解できるように解説します。
+
+ アプリケーションサービスとは？
+こんな説明がよくあります:
+
+アプリケーションサービスは ユースケースの窓口
+ドメイン（ビジネスルール）の呼び出しをまとめる場所
+永続化や外部システムとの連携はリポジトリに委譲する
+
+つまり、「何をどう順番にやるか」を組み立てる層です。
+ここでは 図書館の貸出 を題材にします。
+
+ 3層の役割分担
+DDDの流れを図で表す...]]></description><link>https://zenn.dev/exmedia/articles/application-services-in-ddd-with-python</link><guid isPermaLink="true">https://zenn.dev/exmedia/articles/application-services-in-ddd-with-python</guid><pubDate>Thu, 25 Sep 2025 11:31:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TbxJK8vs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520%2520%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%25E3%2582%2592Python%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:exMedia%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdjNzZmZjNmMmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>exMedia</dc:creator></item><item><title><![CDATA[MCP サーバーの基礎をしっかり学びLLMアプリを自作してみる]]></title><description><![CDATA[Linc'well では 3 ヶ月に一度普段の開発チームとは別に 2〜5 人の少人数チームを組成して、テーマとして設定した課題に取り組む横断 WG（ワーキンググループ）という活動があります。
+横断 WG の主目的は、正式には以下となります。
+
+職能やチームを横断して知見を集めることで、今までとは違った形での成果創出や技術探索の機会を生み出すこと
+チーム外との業務を通した交流の機会を生み出すこと
+
+なお、通常の勤務時間を少し使って良いことになっています。
+最近は AI がキテるよね、ということで私たちはもはや最近耳にしない日はない「MCP サーバー」を自作することにより、AI 開発やその仕...]]></description><link>https://zenn.dev/lincwell_inc/articles/e240ce393ac262</link><guid isPermaLink="true">https://zenn.dev/lincwell_inc/articles/e240ce393ac262</guid><pubDate>Thu, 25 Sep 2025 09:26:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jxbbPoqv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:MCP%2520%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%25E3%2582%2592%25E3%2581%2597%25E3%2581%25A3%25E3%2581%258B%25E3%2582%258A%25E5%25AD%25A6%25E3%2581%25B3LLM%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E8%2587%25AA%25E4%25BD%259C%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:baybay%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdkNzA3MDZjNTUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Linc%2527well%252C%2520inc.%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NiMzJkYTkwNDEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>baybay</dc:creator></item><item><title><![CDATA[C/C++の世界に閉じこもっていたオジサンがPythonに触れてみる 　~基礎編~ 第4/10回]]></title><description><![CDATA[
+ はじめに
+こんにちは、NTTデータに勤務する一人のオジサンです。
+これまでC/C++言語を使って、がっつりとポインタやら参照やらに向き合いながら、プログラムを書いてきました。構造体と仲良くなり、クラスに振り回され、newとdeleteに責任を持つ。そんな人生でした。
+しかし時代は変わり、AIだ、データサイエンスだ、機械学習だと騒がれる中、「とりあえずPythonに触れないとまずい」という危機感に駆られて、Pythonの世界へ足を踏み入れた。。。
+そんなオジサンの独り言です。
+勘違いがあっても、多めにみてください。
+
+ 構文の違いを噛みしめる
+Pythonの入門書を読み進め、「制御構文...]]></description><link>https://zenn.dev/nttdata_tech/articles/dbf812c28a80e5</link><guid isPermaLink="true">https://zenn.dev/nttdata_tech/articles/dbf812c28a80e5</guid><pubDate>Thu, 25 Sep 2025 07:13:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WOh37Vwp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:C%252FC%252B%252B%25E3%2581%25AE%25E4%25B8%2596%25E7%2595%258C%25E3%2581%25AB%25E9%2596%2589%25E3%2581%2598%25E3%2581%2593%25E3%2582%2582%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2581%259F%25E3%2582%25AA%25E3%2582%25B8%25E3%2582%25B5%25E3%2583%25B3%25E3%2581%258CPython%25E3%2581%25AB%25E8%25A7%25A6%25E3%2582%258C%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2520%25E3%2580%2580%7E%25E5%259F%25BA%25E7%25A4%258E%25E7%25B7%25A8%7E%2520%25E7%25AC%25AC4%252F10%25E5%259B%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Eiichi%2520Shimizu%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q1ZjRhYzE4MTIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:NTT%2520DATA%2520TECH%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZS5wbmc=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Eiichi Shimizu</dc:creator></item><item><title><![CDATA[SQLMesh入門]]></title><description><![CDATA[
+ はじめに
+
+周回遅れではありますが、モダンデータスタックを始めたいと思います。
+モダンデータスタックの中でも、ELT の T の部分は dbt 一択のようなので、dbt 入門してみます。
+
+ということで、4月に「dbt入門」という記事を書きました。
+そして、5/29 の dbt-fusion の発表を聞いて、Rust で書き直すみたいだから、外部仕様からにしようと「dbt Artifactsから見たdbt」という記事も書きながら、dbt-fusion を待っていました。
+もう、4ヶ月になるから、そろそろ dbt-fusion のソースコード でも読んでみるかと、（Rust を一夜漬け...]]></description><link>https://zenn.dev/robon/articles/c8928f88f62218</link><guid isPermaLink="true">https://zenn.dev/robon/articles/c8928f88f62218</guid><pubDate>Thu, 25 Sep 2025 05:33:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nO-IR6-A--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:SQLMesh%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E8%258D%2592%25E6%259C%25A8%2520%25E5%25B2%25B3%25E5%25A4%25AB%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q3NDIzMjE0NTUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEROBON%25E3%2581%25AE%25E6%258A%2580%25E8%25A1%2593%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YUpBSVQ1V0NaaVBRUmF6TkswS1dFVkEybkRJMGdaN1lvMjdJdDIyQT1zOTYtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>荒木 岳夫</dc:creator></item><item><title><![CDATA[2025年のColab再点検 ~気づいたらあった機能]]></title><description><![CDATA[
+ はじめに
+このドキュメントは、かつて課金して利用していた Google Colab について、2025/09/25 時点の機能を“改めて”調べ直したメモである。
+初めて Google Colab を使う方は、入門向けの別ドキュメントを参照のこと。
+また、現在、課金を止めているため、有料機能については未検証である。
+
+ 画面の演出
+画面の演出を行う設定が存在する。
+全てが嫌になったときに生きる希望を与える。
+画面上部のメニューにて ツール → 設定 を選択し 設定ダイアログを表示させる
+
+その他を選択
+
+
+ パワーレベル
+コーディング時に、火花をちらすことができる。
+https://x...]]></description><link>https://zenn.dev/mima_ita/articles/209835a42d0d30</link><guid isPermaLink="true">https://zenn.dev/mima_ita/articles/209835a42d0d30</guid><pubDate>Thu, 25 Sep 2025 04:23:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IoTM39DV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:2025%25E5%25B9%25B4%25E3%2581%25AEColab%25E5%2586%258D%25E7%2582%25B9%25E6%25A4%259C%2520%7E%25E6%25B0%2597%25E3%2581%25A5%25E3%2581%2584%25E3%2581%259F%25E3%2582%2589%25E3%2581%2582%25E3%2581%25A3%25E3%2581%259F%25E6%25A9%259F%25E8%2583%25BD%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mima_ita%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pjcDFUQmpUT3lBUnl4aHM3aVk1MEg2b0JZZ3FrRzFjTTZVblJMPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mima_ita</dc:creator></item><item><title><![CDATA[OpenAI Agents SDKとの5回の試行錯誤でAIエージェント機能実装を成功させた話]]></title><description><![CDATA[こんにちは！
+エクスプラザでLLMアプリケーションエンジニアをやっているunsuです。
+私はこの会社に入社した直後、初めて挑戦するAIエージェント機能の開発で5回も大きく設計を変更したことがあります。
+この記事は、LLM機能開発の初心者時代、正確な理論なしに奮闘した記録です。今なら違う実装をするかもしれません。でも、この失敗の過程から得た学びを記録として残しておきます。
+
+ この記事はこんな方におすすめです
+
+AIエージェント開発に興味があるけど、まだ手を出せていない。開発の実体験談を聞きたい
+OpenAI Agents SDKって聞いたことあるけど、実際どう動くのか知りたい
+マルチエー...]]></description><link>https://zenn.dev/explaza/articles/0f690ff367d6e4</link><guid isPermaLink="true">https://zenn.dev/explaza/articles/0f690ff367d6e4</guid><pubDate>Thu, 25 Sep 2025 02:24:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tcli-JZl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OpenAI%2520Agents%2520SDK%25E3%2581%25A8%25E3%2581%25AE5%25E5%259B%259E%25E3%2581%25AE%25E8%25A9%25A6%25E8%25A1%258C%25E9%258C%25AF%25E8%25AA%25A4%25E3%2581%25A7AI%25E3%2582%25A8%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%25B3%25E3%2583%2588%25E6%25A9%259F%25E8%2583%25BD%25E5%25AE%259F%25E8%25A3%2585%25E3%2582%2592%25E6%2588%2590%25E5%258A%259F%25E3%2581%2595%25E3%2581%259B%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%25A6%25E3%2583%25B3%25E3%2582%25B9%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQzOWQzZGM0MGMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25A8%25E3%2582%25AF%25E3%2582%25B9%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25B6%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlZmYzMTA2MDQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ウンス</dc:creator></item><item><title><![CDATA[PyMC MarketingでGamma-Gammaモデル入門]]></title><description><![CDATA[
+ はじめに
+前回のBG-NBDモデルに引き続き、PyMC MarketingのGamma-Gammaモデルの実装をチュートリアル^1に沿って試してみました。
+
+ Gamma-Gammaモデルとは
+Gamma-Gammaモデルは、顧客の取引あたりの平均支出額（monetary value）を予測するための確率的モデルです。
+BG/NBDモデルなどのリピート回数を予測するモデルと組み合わせることで、CLV（Customer Lifetime Value）の算出に利用されます。
+Gamma-Gammaモデルでは以下の3つの仮定を置いて、顧客の支出行動を確率的モデルとして説明します。^2
+
+顧...]]></description><link>https://zenn.dev/renzu/articles/tutorial_gamma-gamma</link><guid isPermaLink="true">https://zenn.dev/renzu/articles/tutorial_gamma-gamma</guid><pubDate>Thu, 25 Sep 2025 02:12:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--susb0Nc4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PyMC%2520Marketing%25E3%2581%25A7Gamma-Gamma%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:renzu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSU9pd2NYWXprVXVJYUxEX2liMFEwazluOFBtTnFxdEhWRGNDS0xEQURxSm5jT1FORT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>renzu</dc:creator></item><item><title><![CDATA[[Python]DjangoのMigrationを最初から試してみる]]></title><description><![CDATA[以下の記事も参考になるかと思います。
+https://zenn.dev/kazu1/articles/4e70817baa7dfb
+個人的にバックエンドをDjangoを用いておりそれをRenderにデプロイした後にDjangoとPostgreDBの連携周りの理解がいまいちわからなくなりました。
+そのためそもそもMigrationについて基礎から学び直そうと思い記事にして書くことにしました。
+
+ 実際に最初から試してみる
+
+ 準備
+まず適当にフォルダを作成
+mkdir django_migrate_practice
+cd django_migrate_practice
+仮想環境の準備と有効...]]></description><link>https://zenn.dev/ai_tech/articles/68b2923036b08d</link><guid isPermaLink="true">https://zenn.dev/ai_tech/articles/68b2923036b08d</guid><pubDate>Thu, 25 Sep 2025 01:26:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--heSBOXU_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BPython%255DDjango%25E3%2581%25AEMigration%25E3%2582%2592%25E6%259C%2580%25E5%2588%259D%25E3%2581%258B%25E3%2582%2589%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258A%25E3%2581%258F%25E3%2581%259F%25E3%2582%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhhZGFlOGM3MjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>りくたろ</dc:creator></item><item><title><![CDATA[スタブとは？]]></title><description><![CDATA[
+&nbsp;
+
+ はじめに
+現場で 「スタブ（Stub）」 という言葉に出会いました。
+最初は「聞いたことあるけどよく分からない…」という感じでしたが、調べて整理してみると意外とシンプルな考え方でした。
+同じようにスタブを初めて聞いた人が「なるほど！」と思えるように、この記事では スタブとは何か・なぜ必要なのか・モックとの違い をまとめてみます。
+&nbsp;
+
+ スタブとは
+スタブとは、実際の処理の代わりに“仮の処理”を置いてテストや開発を進めるための仕組み です。
+&nbsp;
+くだけた言い方をすると、
+「まだ本物ができてないから、ダミーの返り値を返しておく存在」 です。
+&nbs...]]></description><link>https://zenn.dev/aoao/articles/84e50e62d299f9</link><guid isPermaLink="true">https://zenn.dev/aoao/articles/84e50e62d299f9</guid><pubDate>Wed, 24 Sep 2025 15:52:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4zvjmgvh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%2596%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ao%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E4YzhiZGY4ZTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ao</dc:creator></item><item><title><![CDATA[コード短編小説「ゼロ除算」]]></title><description><![CDATA[
+ コード短編小説「ゼロ除算」
+それは都市の中心で起きた。
+巨大な演算塔が一瞬で沈黙し、数百万のプロセスが同時に落ちた。
+原因はただ一つ――
+x = 1 / 0  # ZeroDivisionError
+分母がゼロになる。
+単純すぎて、誰も想定しなかった。
+
+神崎ユウはエンジニア班の端末を睨んだ。
+スクリーンいっぱいに赤い文字が踊る。
+ZeroDivisionError: division by zero
+「こんな……バカげた理由で？」
+隣の若手が青ざめて首を振る。
+「処理系は全自動のはずです。ゼロで割ろうとしたら、自動で補正される……はずだったのに」
+けれど、補正は働かなかった。
+都市...]]></description><link>https://zenn.dev/yasuna_ide/articles/2b415e75c3bdbb</link><guid isPermaLink="true">https://zenn.dev/yasuna_ide/articles/2b415e75c3bdbb</guid><pubDate>Wed, 24 Sep 2025 11:46:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--F1nkYby5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E7%259F%25AD%25E7%25B7%25A8%25E5%25B0%258F%25E8%25AA%25AC%25E3%2580%258C%25E3%2582%25BC%25E3%2583%25AD%25E9%2599%25A4%25E7%25AE%2597%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yasuna%2520Ide%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY5NzBlNjljZmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yasuna Ide</dc:creator></item><item><title><![CDATA[Dockerのリポジトリとは？]]></title><description><![CDATA[
+ Dockerのリポジトリってなに？？
+
+ リポジトリとは？
+Dockerにおける「リポジトリ」は、同じ名前を持つ複数のイメージ（タグ違い）をまとめたものです。
+（例）
+python:3.11
+python:3.10
+python:2.7
+イメージがバージョン管理されている棚のような解釈です。
+
+
+ Docker Hubでのリポジトリ活用
+Docker Hubは、最も一般的なパブリックレジストリです。 ユーザーは自分のアカウント内にリポジトリを作成し、イメージをアップロード（push）できます。※Docker Hub以外もありますし、ローカルで作成することもできます。
+
+ リポジトリ作...]]></description><link>https://zenn.dev/engineer_k/articles/8a5fe997c131b4</link><guid isPermaLink="true">https://zenn.dev/engineer_k/articles/8a5fe997c131b4</guid><pubDate>Wed, 24 Sep 2025 11:20:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--M03mnEqn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2581%25AE%25E3%2583%25AA%25E3%2583%259D%25E3%2582%25B8%25E3%2583%2588%25E3%2583%25AA%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2K%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UwOWNmMjNkZTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>エンジニアK</dc:creator></item></channel></rss>
