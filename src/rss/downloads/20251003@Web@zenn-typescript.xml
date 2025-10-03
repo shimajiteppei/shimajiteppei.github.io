@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 03 Oct 2025 02:34:56 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[子ども向け学習アプリ開発ログ：単語カードをAPI経由で取得して一覧表示まで実装]]></title><description><![CDATA[単語カード一覧の取得まで進みました。まだ自分が思い描いている完成形には遠いですが、
+大きな流れはできてきたので、これからは細かい UI/UX の改善やデータ加工、エラー処理に注力していきます。
+
+ 前回
+
+タグ機能（検索・フィルタリング対応も検討）
+Word 登録時に既存タグを選択 or 新規タグを作成できるよう修正
+タグ一覧をフロントから取得して UI で選択可能に
+
+
+
+ 今回
+
+単語カードを API から取得
+
+
+
+ ① 単語カードを API から取得
+まずはログインユーザが登録した単語カードを API 経由で取得できるようにしました。
+Prisma で Word を検索し、必要な...]]></description><link>https://zenn.dev/hyoni/articles/509e1bbaac03d4</link><guid isPermaLink="true">https://zenn.dev/hyoni/articles/509e1bbaac03d4</guid><pubDate>Fri, 03 Oct 2025 02:22:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--setzLn18--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25AD%2590%25E3%2581%25A9%25E3%2582%2582%25E5%2590%2591%25E3%2581%2591%25E5%25AD%25A6%25E7%25BF%2592%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E9%2596%258B%25E7%2599%25BA%25E3%2583%25AD%25E3%2582%25B0%25EF%25BC%259A%25E5%258D%2598%25E8%25AA%259E%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592API%25E7%25B5%258C%25E7%2594%25B1%25E3%2581%25A7%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2597%25E3%2581%25A6%25E4%25B8%2580%25E8%25A6%25A7%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%25BE%25E3%2581%25A7%25E5%25AE%259F%25E8%25A3%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2592%25E3%2583%25A7%25E3%2583%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0sxdWxlU2pkSzlwbDVxZnp3QVlUcFhCNk9xUEhkZGpKWjRUVlRPTl9lMHdYODhLdkg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>ヒョニ</dc:creator></item><item><title><![CDATA[React 19.2 が出たので内容抑えておく]]></title><description><![CDATA[React19がリリースされたのが去年の12月。。その半年後に19.1がリリース。。そして10月1日に早くも19.2が登場です。
+本当にフロントエンド界隈の進化は早いですね！AIの動向も追いながら技術のキャッチアップを行うのは本当に大変です。
+なんとなくこの記事が目についた方が簡単に変更内容をキャッチアップできるように押さえておくと良さそうなものをまとめておきます。
+
+ TL;DR
+Reactの新機能である&lt;Activity /&gt;とuseEffectEventなどの紹介
+新しいReact DOM機能のPartial Pre-renderingの紹介
+その他の変更点の紹介
+
+ ...]]></description><link>https://zenn.dev/noda_k/articles/d9d63a18cdbe84</link><guid isPermaLink="true">https://zenn.dev/noda_k/articles/d9d63a18cdbe84</guid><pubDate>Thu, 02 Oct 2025 15:17:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mCT6Z_QI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%252019.2%2520%25E3%2581%258C%25E5%2587%25BA%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E5%2586%2585%25E5%25AE%25B9%25E6%258A%2591%25E3%2581%2588%25E3%2581%25A6%25E3%2581%258A%25E3%2581%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:noda%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg0MTYyOTRjNGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>noda</dc:creator></item><item><title><![CDATA[1日目:type-challenges]]></title><description><![CDATA[Type Challenges で型を勉強していきます。1 日目。
+Pickの問題に挑戦。
+
+ 解答
+type MyPick&lt;T, K extends keyof T&gt; = {
+  [P in K]: T[P];
+};
+
+
+K extends typeof T:K は T のキーに限定される（制約）
+
+[P in K]:K のそれぞれのキーをループする（Mapped Types）
+T[P]:元の型 T からプロパティ P の型を取り出す（インデックス型アクセス）
+
+]]></description><link>https://zenn.dev/aki05162525/articles/e4bd62bcd410e8</link><guid isPermaLink="true">https://zenn.dev/aki05162525/articles/e4bd62bcd410e8</guid><pubDate>Thu, 02 Oct 2025 14:44:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BGkVIGZc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:1%25E6%2597%25A5%25E7%259B%25AE%253Atype-challenges%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2584%25E3%2582%258B%25E3%2581%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjBaM1pHbFo2RUJSc0NDTnVqeUpRV0U0eXEzczZJeTNYR1NPdHE2a21ZR3dNSWpqTXA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>いるか</dc:creator></item><item><title><![CDATA[TypeScriptのジェネリクスについて]]></title><description><![CDATA[
+ ジェネリクスとは
+ジェネリクスは型を安全に使いつつ使いまわせるようにする便利機能です。
+型の安全性と汎用性のあるコードはトレードオフでしたがこれを解決するような概念になります。
+
+ どのような恩恵がある？
+ジェネリクスの恩恵は先ほど述べたように型の安全性を担保したまま汎用的に使い回すことができるところです。
+まずはよろしくない書き方から。
+汎用的に使いたいので引数の型にany[]を使って全ての型の引数を許容するように書いてみます。
+function getFirstItemBad(items: any[]): any {
+  return items[0];
+}
+
+const num...]]></description><link>https://zenn.dev/rihitonnnu/articles/073eedc9a54825</link><guid isPermaLink="true">https://zenn.dev/rihitonnnu/articles/073eedc9a54825</guid><pubDate>Thu, 02 Oct 2025 13:09:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CIj3wlZH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25AE%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%258D%25E3%2583%25AA%25E3%2582%25AF%25E3%2582%25B9%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:rihitonnnu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKekV3Y0FzbVR0eW1oMzdwbEZqVm5HbV91aGRPbmxzRDRqM2UyN2o9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>rihitonnnu</dc:creator></item><item><title><![CDATA[Vue3 + TypeScript で「一度閉じたら二度と出ない」お知らせモーダルを実装する]]></title><description><![CDATA[
+対象読者
+
+Vue 3（Composition API）と TypeScript でモーダルを実装したい人
+「一度閉じたら同端末では再表示しない」を安定して実現したい人
+Blade 等のサーバテンプレートからユーザーIDをフロントに渡したい人
+Safari のプライベートブラウズなどで localStorage が使えない場合にも“既読管理”を効かせたい人
+
+
+この記事では、「初回だけ出す → 閉じたら次回以降は出さない」 告知モーダルを、最小の責務分割で実装します。
+localStorage が使えない環境でも Cookie にフォールバックして安定動作させるのがポイントです。
+※ ...]]></description><link>https://zenn.dev/hi_kun0912/articles/046fde28d0133e</link><guid isPermaLink="true">https://zenn.dev/hi_kun0912/articles/046fde28d0133e</guid><pubDate>Thu, 02 Oct 2025 09:56:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Kn6IeSyV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vue3%2520%252B%2520TypeScript%2520%25E3%2581%25A7%25E3%2580%258C%25E4%25B8%2580%25E5%25BA%25A6%25E9%2596%2589%25E3%2581%2598%25E3%2581%259F%25E3%2582%2589%25E4%25BA%258C%25E5%25BA%25A6%25E3%2581%25A8%25E5%2587%25BA%25E3%2581%25AA%25E3%2581%2584%25E3%2580%258D%25E3%2581%258A%25E7%259F%25A5%25E3%2582%2589%25E3%2581%259B%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25AB%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%2581%25AF%25E5%25AD%2590%25E6%25BA%25BA%25E6%2584%259B%25E3%2583%2591%25E3%2583%2591%2540%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VhYjMzZWZkYTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>息子溺愛パパ@エンジニア</dc:creator></item><item><title><![CDATA[【React修行日記】useReducerと型定義]]></title><description><![CDATA[
+ 学習の目的
+
+useReducerの基本について理解する
+useState と useReducer の違いを把握する
+型定義を使った状態管理のメリットを学ぶ
+複雑な状態更新を整理してTodoリストを実装できるようになる
+
+
+ useReducerとは
+useReducerは、Reactで状態管理を行うためのフックのひとつ。useStateと同じく、コンポーネントの状態を保持し、更新するために使う。
+useStateは状態だけを管理するのに対して、useReducerは状態と状態を操作するための手段（関数）の両方を管理する。
+シンプルな状態管理であればuseStateが直感的で扱いや...]]></description><link>https://zenn.dev/tsunadog/articles/d50e53f64d6dfb</link><guid isPermaLink="true">https://zenn.dev/tsunadog/articles/d50e53f64d6dfb</guid><pubDate>Thu, 02 Oct 2025 09:18:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YkN2cqKM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590React%25E4%25BF%25AE%25E8%25A1%258C%25E6%2597%25A5%25E8%25A8%2598%25E3%2580%2591useReducer%25E3%2581%25A8%25E5%259E%258B%25E5%25AE%259A%25E7%25BE%25A9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tsunadog%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI2ZDZiMjViNzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>tsunadog</dc:creator></item><item><title><![CDATA[Codex CLI 完全ガイド: Codex TypeScript SDK 活用]]></title><description><![CDATA[
+シリーズ記事
+
+Codex CLI 完全ガイド：全体像 (Qiita)
+Codex CLI 完全ガイド：全体像 (Zenn)
+
+
+
+ はじめに
+「CLI ツールをプログラムから呼び出したい」これは開発者なら誰もが一度は思うことがあるはずです。
+Codex CLI は強力ですが、シェルスクリプトから呼び出すだけでは限界があります。CI/CD パイプラインに統合したり、複雑な条件分岐を実装したり、結果を構造化データとして扱いたい場合、プログラマティックな API が必要になります。
+Codex TypeScript SDK は、まさにこのニーズに応えます。
+本記事では、型安全で柔軟な SD...]]></description><link>https://zenn.dev/taka000/articles/d164d55f6828a2</link><guid isPermaLink="true">https://zenn.dev/taka000/articles/d164d55f6828a2</guid><pubDate>Thu, 02 Oct 2025 04:34:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Zj8cyLf2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Codex%2520CLI%2520%25E5%25AE%258C%25E5%2585%25A8%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%253A%2520Codex%2520TypeScript%2520SDK%2520%25E6%25B4%25BB%25E7%2594%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Taka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKeXpCR01mazY0b29ScWlKUC12VnpBaERrLVJ4ZjNONGJ5QkhyaEM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>Taka</dc:creator></item><item><title><![CDATA[Codex CLI 完全ガイド: TUI 開発とスナップショットテスト]]></title><description><![CDATA[
+シリーズ記事
+
+Codex CLI 完全ガイド：全体像 (Qiita)
+Codex CLI 完全ガイド：全体像 (Zenn)
+
+
+
+ はじめに
+ターミナル UI の開発は難しい──これは事実です。
+通常の GUI なら、変更を保存して F5 を押せば結果がすぐ見えます。しかし TUI では、レイアウトの崩れやカラーの問題が実行してみないと分からず、しかも println! デバッグすら画面を壊してしまいます。
+そこで登場するのがスナップショットテストです。
+Codex CLI の TUI は、Ratatui フレームワークと cargo-insta スナップショットテストの組み合わせに...]]></description><link>https://zenn.dev/taka000/articles/e3e92635db52a0</link><guid isPermaLink="true">https://zenn.dev/taka000/articles/e3e92635db52a0</guid><pubDate>Thu, 02 Oct 2025 04:29:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GHzxiRIs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Codex%2520CLI%2520%25E5%25AE%258C%25E5%2585%25A8%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%253A%2520TUI%2520%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25A8%25E3%2582%25B9%25E3%2583%258A%25E3%2583%2583%25E3%2583%2597%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%2583%25E3%2583%2588%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Taka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKeXpCR01mazY0b29ScWlKUC12VnpBaERrLVJ4ZjNONGJ5QkhyaEM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>Taka</dc:creator></item><item><title><![CDATA[Codex CLI 完全ガイド: サンドボックス＆セキュリティハードニング]]></title><description><![CDATA[
+シリーズ記事
+
+Codex CLI 完全ガイド：全体像 (Qiita)
+Codex CLI 完全ガイド：全体像 (Zenn)
+
+
+
+ はじめに
+AI エージェントにコマンド実行権限を与える──。便利ではありますが、恐ろしいことでもあります。
+想像してみてください。あなたが「プロジェクトをクリーンアップして」と指示したエージェントが、誤って rm -rf / を実行してしまったら？あるいは、意図せずプロダクションデータベースに接続して機密情報を外部に送信してしまったら？
+Codex CLI は、こうした悪夢のシナリオを防ぐため、多層防御のサンドボックス機構を実装しています。本記事では、そ...]]></description><link>https://zenn.dev/taka000/articles/a18f26ded7b98b</link><guid isPermaLink="true">https://zenn.dev/taka000/articles/a18f26ded7b98b</guid><pubDate>Thu, 02 Oct 2025 04:26:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HcjOh3J2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Codex%2520CLI%2520%25E5%25AE%258C%25E5%2585%25A8%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%253A%2520%25E3%2582%25B5%25E3%2583%25B3%25E3%2583%2589%25E3%2583%259C%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25EF%25BC%2586%25E3%2582%25BB%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25AA%25E3%2583%2586%25E3%2582%25A3%25E3%2583%258F%25E3%2583%25BC%25E3%2583%2589%25E3%2583%258B%25E3%2583%25B3%25E3%2582%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Taka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKeXpCR01mazY0b29ScWlKUC12VnpBaERrLVJ4ZjNONGJ5QkhyaEM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>Taka</dc:creator></item><item><title><![CDATA[子ども向け学習アプリ開発ログ：学習カード登録にタグ機能を追加]]></title><description><![CDATA[画像アップロードの動作を確認しているうちに、タグ分けができていないことに気付きました。
+そこで、タグだけ管理できるようにテーブルを分け、Word＋画像＋タグを同時に登録できるように実装しました。
+
+
+ 前回
+
+画像アップロードの動作確認
+単語を DB / Firebase へ保存する処理の検証
+エラー発生時のログ確認とハンドリング方法の記録
+
+
+
+ 今回
+
+タグ機能（検索・フィルタリング対応も検討）
+Word 登録時に既存タグを選択 or 新規タグを作成できるよう修正
+タグ一覧をフロントから取得して UI で選択可能に
+
+
+
+ ① Prisma スキーマ修正
+
+
+Tag モデルを追加
+
+...]]></description><link>https://zenn.dev/hyoni/articles/f76c0e9546e38d</link><guid isPermaLink="true">https://zenn.dev/hyoni/articles/f76c0e9546e38d</guid><pubDate>Thu, 02 Oct 2025 02:30:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rpfQoGt0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25AD%2590%25E3%2581%25A9%25E3%2582%2582%25E5%2590%2591%25E3%2581%2591%25E5%25AD%25A6%25E7%25BF%2592%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E9%2596%258B%25E7%2599%25BA%25E3%2583%25AD%25E3%2582%25B0%25EF%25BC%259A%25E5%25AD%25A6%25E7%25BF%2592%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%2589%25E7%2599%25BB%25E9%258C%25B2%25E3%2581%25AB%25E3%2582%25BF%25E3%2582%25B0%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E8%25BF%25BD%25E5%258A%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2592%25E3%2583%25A7%25E3%2583%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0sxdWxlU2pkSzlwbDVxZnp3QVlUcFhCNk9xUEhkZGpKWjRUVlRPTl9lMHdYODhLdkg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>ヒョニ</dc:creator></item><item><title><![CDATA[Vue3のv-modelを調べてみた]]></title><description><![CDATA[
+ はじめに
+Vue3のv-modelは、フォーム要素とコンポーネント間で双方向データバインディングを実現するための強力なディレクティブです。この記事では、v-modelの基本概念から、カスタムコンポーネントでの実装方法、そして実用的なパターンまで詳しく解説します。
+
+ この記事で学べること
+
+
+v-modelの基本概念と仕組み
+フォーム要素でのv-modelの使い方
+カスタムコンポーネントでのv-model実装
+複数のv-modelの活用方法
+実用的なパターンとベストプラクティス
+
+
+ v-modelとは？
+v-modelは、Vue.jsが提供する双方向データバインディングのためのディ...]]></description><link>https://zenn.dev/shunsuke_stack/articles/2751b9da22afb7</link><guid isPermaLink="true">https://zenn.dev/shunsuke_stack/articles/2751b9da22afb7</guid><pubDate>Thu, 02 Oct 2025 01:26:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gUq_Kmwb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vue3%25E3%2581%25AEv-model%25E3%2582%2592%25E8%25AA%25BF%25E3%2581%25B9%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Nakajima.js%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFhZmNlYzMzOWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>Nakajima.js</dc:creator></item><item><title><![CDATA[Node.jsのmysql2で.sqlを実行するときの備忘録]]></title><description><![CDATA[mysql2で.sqlを実行するときにいろいろ手間取ったので備忘録として。
+今回.sqlはmysqldumpとします。
+mysql.createConnection()のオプションで工夫がいります。
+const option = (connectionLimit: number = 10) =&gt; {
+  return {
+    host: Config.database.host,
+    port: Config.database.port,
+    user: Config.database.user,
+    password: Config.database.pass,
+...]]></description><link>https://zenn.dev/last2014/articles/c42ecb52c05920</link><guid isPermaLink="true">https://zenn.dev/last2014/articles/c42ecb52c05920</guid><pubDate>Wed, 01 Oct 2025 18:59:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9o_Ipc8R--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Node.js%25E3%2581%25AEmysql2%25E3%2581%25A7.sql%25E3%2582%2592%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AE%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Last2014%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FhZWE5NzM5ZTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>Last2014</dc:creator></item><item><title><![CDATA[React.FCとは何かの整理]]></title><description><![CDATA[
+ はじめに
+ChatGPTでReactのコーディングをしている際に、
+import React from 'react';
+
+interface Props {
+  ...
+}
+
+const Component: React.FC&lt;Props&gt; = ({...}) =&gt; {
+  return (
+    &lt;&gt;
+      ...
+    &lt;/&gt;
+  );
+};
+みたいな記述がたまに見られ、気になったので調べることにしました。
+
+ React.FCとは
+React.FC（Function Component)は、ジェネリクス型と呼ばれるものです。...]]></description><link>https://zenn.dev/qoo1000000/articles/5cd66e1b501ada</link><guid isPermaLink="true">https://zenn.dev/qoo1000000/articles/5cd66e1b501ada</guid><pubDate>Wed, 01 Oct 2025 13:49:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dAg4h22W--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React.FC%25E3%2581%25A8%25E3%2581%25AF%25E4%25BD%2595%25E3%2581%258B%25E3%2581%25AE%25E6%2595%25B4%25E7%2590%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Qoo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGtHRXgxSGJfU1ktdXB4TWZKM3RacmFRNU42enBVQ0hheS0xclFya2VjR3FqM29pZ2lEQT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>Qoo</dc:creator></item><item><title><![CDATA[AIを活用した自動分類とバッチ処理基盤の構築]]></title><description><![CDATA[!
+この記事は、生成AIを使用して記載しています。
+誤字脱字、誤情報などありましたら連絡頂けると助かります🙇
+
+
+ 概要
+メール管理システムにおいて、AIを活用してメール内容から重要な情報を自動抽出・分類する仕組みを構築しました。特に「30〜40歳」のような範囲表現を自動的にmin/max値に変換し、データベースで効率的に検索できるようにするバッチ処理基盤を実装しました。本記事では、OpenAI/Claude APIを使った情報抽出と、大量データを効率的に処理するバッチ処理の設計について解説します。
+
+ 技術スタック
+
+
+OpenAI GPT-4 / Claude 3: テキスト分類・情...]]></description><link>https://zenn.dev/91works/articles/1d420ff99af6b4</link><guid isPermaLink="true">https://zenn.dev/91works/articles/1d420ff99af6b4</guid><pubDate>Wed, 01 Oct 2025 08:34:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AA3TcIhd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AI%25E3%2582%2592%25E6%25B4%25BB%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E8%2587%25AA%25E5%258B%2595%25E5%2588%2586%25E9%25A1%259E%25E3%2581%25A8%25E3%2583%2590%25E3%2583%2583%25E3%2583%2581%25E5%2587%25A6%25E7%2590%2586%25E5%259F%25BA%25E7%259B%25A4%25E3%2581%25AE%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:YoshikiAgatsuma%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE5ZDA5N2JmNjIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:91works%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FiMzIwNDk2ZTUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>YoshikiAgatsuma</dc:creator></item><item><title><![CDATA[react-day-pickerに日本の祝日データを読み込む]]></title><description><![CDATA[react-day-pickerに祝日の場合のスタイルを設定した際の記録メモです
+https://daypicker.dev/
+react-day-pickerにある、data-*属性を利用します
+https://developer.mozilla.org/ja/docs/Web/HTML/How_to/Use_data_attributes
+
+ 環境
+nextjsのcreate-next-app@latestを実行してプロジェクトを作成
+https://nextjs.org/docs/app/getting-started/installation
+プロジェクト設定はこちら
+% npx...]]></description><link>https://zenn.dev/tanaa/articles/9fd34126a1ae07</link><guid isPermaLink="true">https://zenn.dev/tanaa/articles/9fd34126a1ae07</guid><pubDate>Wed, 01 Oct 2025 08:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pKd8bsD3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:react-day-picker%25E3%2581%25AB%25E6%2597%25A5%25E6%259C%25AC%25E3%2581%25AE%25E7%25A5%259D%25E6%2597%25A5%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E8%25AA%25AD%25E3%2581%25BF%25E8%25BE%25BC%25E3%2582%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tana%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQxNWJiOGQ5NTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>tana</dc:creator></item><item><title><![CDATA[カリー化,高階関数,ファクトリ関数,依存性の逆転]]></title><description><![CDATA[
+ 依存性の逆転を関数型で書く
+これを読み解く。
+難しかったら次の カリー化と高階関数へ 。
+type QueryFn = (sql: string) =&gt; Promise&lt;any&gt;;
+
+const makeGetUser =
+	(query: QueryFn) =&gt;
+	async (id: number): Promise&lt;any&gt; =&gt; {
+		const sql = `SELECT * FROM users WHERE id = ${id}`;
+		return query(sql);
+	};
+
+// ファクトリ関数
+function cr...]]></description><link>https://zenn.dev/tomyn/articles/488bbe4eaeeefc</link><guid isPermaLink="true">https://zenn.dev/tomyn/articles/488bbe4eaeeefc</guid><pubDate>Wed, 01 Oct 2025 05:57:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fyHp0ChV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AB%25E3%2583%25AA%25E3%2583%25BC%25E5%258C%2596%252C%25E9%25AB%2598%25E9%259A%258E%25E9%2596%25A2%25E6%2595%25B0%252C%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AA%25E9%2596%25A2%25E6%2595%25B0%252C%25E4%25BE%259D%25E5%25AD%2598%25E6%2580%25A7%25E3%2581%25AE%25E9%2580%2586%25E8%25BB%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tomyn%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgwZGVlODljMmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>tomyn</dc:creator></item><item><title><![CDATA[TypeScript + Next.js で Context Provider を作ってみよう]]></title><description><![CDATA[
+ Providerとは
+
+React の Context API で使われるコンポーネント
+データ（状態）をコンポーネントツリー全体に「供給（provide）」する役割
+
+useContext とセットで使い、props drilling（深い階層への props 渡し）を解消できる
+
+例：
+&lt;MyContext.Provider value={someValue}&gt;
+  &lt;Child /&gt;
+&lt;/MyContext.Provider&gt;
+
+
+ 基本構造
+
+
+Context 作成
+const MyContext = createContext(initi...]]></description><link>https://zenn.dev/hyoni/articles/9b5b441f7793d0</link><guid isPermaLink="true">https://zenn.dev/hyoni/articles/9b5b441f7793d0</guid><pubDate>Wed, 01 Oct 2025 04:25:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ETq8isj_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%2520%252B%2520Next.js%2520%25E3%2581%25A7%2520Context%2520Provider%2520%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2592%25E3%2583%25A7%25E3%2583%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0sxdWxlU2pkSzlwbDVxZnp3QVlUcFhCNk9xUEhkZGpKWjRUVlRPTl9lMHdYODhLdkg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>ヒョニ</dc:creator></item><item><title><![CDATA[子ども向け学習アプリ開発ログ：動作確認・エラー処理]]></title><description><![CDATA[デザイン強化をするつもりでしたが、まずは動作確認とエラー処理が必要だと判断し、UI/UX の改善は後回しにしました。
+今回の作業では、画像アップロードや単語の保存が DB・Firebase に正しく反映されるか、またエラーが出た場合にどのように処理するかを中心に記録しています。
+
+
+ 前回
+
+公開 / 下書き切り替え機能
+Firebase Storage での画像アップロード
+
+
+
+ 今回
+
+画像アップロードの動作確認
+単語を DB / Firebase へ保存する処理の検証
+エラー発生時のログ確認とハンドリング方法の記録
+
+
+
+ ① チェックリスト
+
+
+画像アップロード
+
+ファイル選択...]]></description><link>https://zenn.dev/hyoni/articles/01208694e31ce9</link><guid isPermaLink="true">https://zenn.dev/hyoni/articles/01208694e31ce9</guid><pubDate>Wed, 01 Oct 2025 03:02:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FnmsZlTP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25AD%2590%25E3%2581%25A9%25E3%2582%2582%25E5%2590%2591%25E3%2581%2591%25E5%25AD%25A6%25E7%25BF%2592%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E9%2596%258B%25E7%2599%25BA%25E3%2583%25AD%25E3%2582%25B0%25EF%25BC%259A%25E5%258B%2595%25E4%25BD%259C%25E7%25A2%25BA%25E8%25AA%258D%25E3%2583%25BB%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E5%2587%25A6%25E7%2590%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2592%25E3%2583%25A7%25E3%2583%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0sxdWxlU2pkSzlwbDVxZnp3QVlUcFhCNk9xUEhkZGpKWjRUVlRPTl9lMHdYODhLdkg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>ヒョニ</dc:creator></item><item><title><![CDATA[【保存版】Convex × TanStack Start × Better Auth 認証実装ガイド]]></title><description><![CDATA[
+ はじめに
+今回ですが、Convex・TanStack StartにBetter Authを統合させた認証機能の実装をしたので、実装手順・方法を紹介したいと思います。
+また、今回の実装を行ったソースは以下となります。
+https://github.com/sc30gsw/tanstack-convex-better-auth-example
+
+ TL;DR
+
+Convexを使用する場合、認証処理の中核（Better Authの主な機能実装）はConvex側で必要
+TanStack StartではBetter Authの client定義が必要かつConvexのSiteURLを設定する必...]]></description><link>https://zenn.dev/sc30gsw/articles/bb992544c3e636</link><guid isPermaLink="true">https://zenn.dev/sc30gsw/articles/bb992544c3e636</guid><pubDate>Wed, 01 Oct 2025 02:44:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Rp7dc8Ex--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E4%25BF%259D%25E5%25AD%2598%25E7%2589%2588%25E3%2580%2591Convex%2520%25C3%2597%2520TanStack%2520Start%2520%25C3%2597%2520Better%2520Auth%2520%25E8%25AA%258D%25E8%25A8%25BC%25E5%25AE%259F%25E8%25A3%2585%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kaito%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA5ZmViMGZmOGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>kaito</dc:creator></item><item><title><![CDATA[React+TypeScript    fetchでの非同期処理とエラーハンドリング]]></title><description><![CDATA[はじめに
+React + TypeScriptでAPIを呼び出す際、エラーハンドリングは避けて通れません。しかし、「とりあえずtry-catchで囲む」だけでは不十分です。この記事では、実践的なエラーハンドリングパターンを解説します。
+基本的なtry-catch-finallyパターン
+typescriptconst handleNameSearch = async (e: React.FormEvent) =&gt; {
+  e.preventDefault();
+  
+  onLoadingChange(true);  // ローディング開始
+  
+  try {
+    const...]]></description><link>https://zenn.dev/junwineone/articles/0f0b64b41fb23a</link><guid isPermaLink="true">https://zenn.dev/junwineone/articles/0f0b64b41fb23a</guid><pubDate>Tue, 30 Sep 2025 22:44:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SDXz3O5d--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%252BTypeScript%2520%2520%2520%2520fetch%25E3%2581%25A7%25E3%2581%25AE%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25A8%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2583%258F%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:junwine%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VlNmYzOGZmNzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>junwine</dc:creator></item></channel></rss>
