@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 04 Oct 2025 03:02:42 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Webアプリからの通知に！Postfixで構築する送信専用SMTPサーバー]]></title><description><![CDATA[
+ はじめに
+ユーザー登録時の確認メール、パスワードリセットの通知、バッチ処理の完了報告など、Webアプリケーションを開発していると、サーバーからメールを送信したい場面は頻繁にあります。
+外部のメール配信サービス（SendGrid, Amazon SESなど）を利用するのも一つの手ですが、「まずは手軽に、ローカルサーバーから直接メールを送りたい」というケースも多いでしょう。
+この記事では、自身のWikiメモを元に、Linuxの標準的なMTA（メール転送エージェント）であるPostfixを使って、外部からのメール受信は行わない「送信専用」のSMTPサーバーを構築する手順をまとめます。
+
+ ...]]></description><link>https://zenn.dev/meantix/articles/543a0da0175977</link><guid isPermaLink="true">https://zenn.dev/meantix/articles/543a0da0175977</guid><pubDate>Fri, 03 Oct 2025 09:24:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GffZSh4z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Web%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%258B%25E3%2582%2589%25E3%2581%25AE%25E9%2580%259A%25E7%259F%25A5%25E3%2581%25AB%25EF%25BC%2581Postfix%25E3%2581%25A7%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%25E9%2580%2581%25E4%25BF%25A1%25E5%25B0%2582%25E7%2594%25A8SMTP%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:meantix%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MxMmZiYzIwOTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>meantix</dc:creator></item><item><title><![CDATA[Linuxの特権ポートと主要サービスのポート番号まとめ]]></title><description><![CDATA[LinuxやUNIX系OSでネットワークアプリを開発・運用する際、ポート番号の仕組みを理解しておくと安全かつスムーズにデプロイできます。本記事では「特権ポートとは何か」「なぜ制限されているのか」「主要サービスのポート番号」を整理します。
+
+ 1. ポート番号とは
+
+
+ポート番号はTCP/UDP通信でアプリケーションを識別する番号（0〜65535）
+
+IPアドレス + ポート番号で1台のサーバー上で複数のサービスを区別できる
+例:
+
+
+192.168.0.10:80 → HTTPサーバー
+
+192.168.0.10:443 → HTTPSサーバー
+
+192.168.0.10:5432 → ...]]></description><link>https://zenn.dev/wyuma/articles/8a6e293f6ca125</link><guid isPermaLink="true">https://zenn.dev/wyuma/articles/8a6e293f6ca125</guid><pubDate>Fri, 03 Oct 2025 04:29:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--O54_rdtk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25AE%25E7%2589%25B9%25E6%25A8%25A9%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25A8%25E4%25B8%25BB%25E8%25A6%2581%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%25E3%2581%25AE%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E7%2595%25AA%25E5%258F%25B7%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:fanda-dev%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFkZjJmOWZjMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>fanda-dev</dc:creator></item><item><title><![CDATA[カーネル設定を永続化する：Runtime vs Persistentの違い]]></title><description><![CDATA[
+ はじめに：消える設定の謎
+Linuxのチューニングをしたときに、こんな経験はありませんか？
+「オンラインのガイド通りに設定を変更してみたら、ちゃんと動いた！…でも再起動したら元に戻ってる！？」
+これは単なるミスではなく、Linuxの基本的な仕組みです。
+Linuxカーネルのパラメータには2種類の適用方法があり、
+
+
+Runtime（ランタイム／一時的） … その場で効くが、再起動で消える
+
+Persistent（永続的） … 設定ファイルに書き込んで、再起動しても残る
+
+この記事では、この2つの違いを整理しながら「設定を消えないようにする方法」を解説していきます。
+!
+カーネル設定を...]]></description><link>https://zenn.dev/nnoorlin/articles/kernel-parsistence</link><guid isPermaLink="true">https://zenn.dev/nnoorlin/articles/kernel-parsistence</guid><pubDate>Thu, 02 Oct 2025 20:24:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cbhy5AZy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25AB%25E8%25A8%25AD%25E5%25AE%259A%25E3%2582%2592%25E6%25B0%25B8%25E7%25B6%259A%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%25EF%25BC%259ARuntime%2520vs%2520Persistent%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258A%25E3%2582%258C%25E3%2581%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5ZjVkNDk3NDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>おれお</dc:creator></item><item><title><![CDATA[使用中のプロセスを終了するコマンド]]></title><description><![CDATA[
+ これはなに？
+
+Webアプリケーション開発をしている際に、Webサーバーのプロセスがバックグラウンドに残ってしまうことがあり、その対処法としてプロセスを終了するコマンド一覧です
+すぐ忘れてしまうため、自分自身向けです
+
+
+ なぜ、プロセスは残ってしまうのか
+
+原因としては、プロセスが正常終了しなかった場合に発生する
+原因はいろいろある
+
+
+ コマンド一覧
+Go言語でWeb APIを開発している場合を想定した場合の内容です
+
+ 1. プロセスIDを特定して終了
+
+
+ポートを使用しているプロセスを確認
+  lsof -i :8080
+
+
+
+プロセスIDを指定して終了
+  kill &lt...]]></description><link>https://zenn.dev/takumiooo/articles/2f809a9ebf9743</link><guid isPermaLink="true">https://zenn.dev/takumiooo/articles/2f809a9ebf9743</guid><pubDate>Thu, 02 Oct 2025 08:53:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PnZmAC6G--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BD%25BF%25E7%2594%25A8%25E4%25B8%25AD%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25BB%25E3%2582%25B9%25E3%2582%2592%25E7%25B5%2582%25E4%25BA%2586%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Takumiooo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ0NWI5NWNlMGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>Takumiooo</dc:creator></item><item><title><![CDATA[O_EXCLで学ぶ：アトミック操作とレースコンディション]]></title><description><![CDATA[
+ 1. はじめに
+
+
+Linuxプログラミングを学んでいて出会った open(O_CREAT | O_EXCL)。
+最初は「ファイルを安全に作成するための便利なフラグ」くらいに思っていた。
+しかしその背後にはプロセスの並行実行やアトミック操作という奥深い意味があった。
+本記事では、このフラグを入り口に、システムコール、アトミック、そしてタイムスライスとレースコンディションについて考えていく。
+
+
+
+ 2. open(O_CREAT | O_EXCL) の役割と危険なパターン
+
+
+ 2.1 フラグの意味
+
+
+
+O_CREAT：ファイルがなければ新規作成する
+
+O_EXCL：ファイルがすで...]]></description><link>https://zenn.dev/tn_a/articles/system-call-open</link><guid isPermaLink="true">https://zenn.dev/tn_a/articles/system-call-open</guid><pubDate>Wed, 01 Oct 2025 22:34:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--itH91GuT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:O_EXCL%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6%25EF%25BC%259A%25E3%2582%25A2%25E3%2583%2588%25E3%2583%259F%25E3%2583%2583%25E3%2582%25AF%25E6%2593%258D%25E4%25BD%259C%25E3%2581%25A8%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25B9%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dasu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4MDcxYWUyMWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>dasu</dc:creator></item><item><title><![CDATA[Linuxプロセス監視の入門：ps / top / htopの違いと使い分け]]></title><description><![CDATA[
+ はじめに
+パソコンを使っているとき、裏側では常に数十から数百ものプロセスが動いています。これらはコンピュータ内部の「労働者たち」と言える存在です。システム監視とは、この労働者たちの働きぶりを観察し、異常や問題を早めに察知することを目的としています。
+新しく学ぶ人にとって、まずは「何が起きているのか」を理解することが第一歩です。これができれば、
+
+
+信頼性：問題を早期に検知できる
+
+性能向上：リソースを食っているプロセスを特定できる
+
+トラブルシューティング：不具合発生時に原因を素早く見つけられる
+
+といったメリットを得られます。
+
+ 1. Vital Signsを読む：基本的なプロセ...]]></description><link>https://zenn.dev/nnoorlin/articles/system-monitoring</link><guid isPermaLink="true">https://zenn.dev/nnoorlin/articles/system-monitoring</guid><pubDate>Wed, 01 Oct 2025 18:57:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fprgWFlR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25BB%25E3%2582%25B9%25E7%259B%25A3%25E8%25A6%2596%25E3%2581%25AE%25E5%2585%25A5%25E9%2596%2580%25EF%25BC%259Aps%2520%252F%2520top%2520%252F%2520htop%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2581%25A8%25E4%25BD%25BF%25E3%2581%2584%25E5%2588%2586%25E3%2581%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258A%25E3%2582%258C%25E3%2581%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5ZjVkNDk3NDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>おれお</dc:creator></item><item><title><![CDATA[Vagrant上のArch LinuxにGUIデスクトップを導入してみた]]></title><description><![CDATA[
+ 経緯
+ローカルDNSやらなんやらを構築してみた(準備中) という記事で使うようの端末用意につまづきました。
+そのため、メモしておきます
+
+ 構築環境
+
+ArchLinux
+Vagrant 2.4.9
+NVIDIA RTX 3060
+
+
+ 手順
+
+Vagrantfileを作成する
+
+
+Vagrantfile
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+  # メインPC（ArchLinux、プライベートネットワーク＋デスクトップ対応）
+  config.vm.define "...]]></description><link>https://zenn.dev/locu/articles/89472d4b61d429</link><guid isPermaLink="true">https://zenn.dev/locu/articles/89472d4b61d429</guid><pubDate>Wed, 01 Oct 2025 18:05:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9SgAW1cr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vagrant%25E4%25B8%258A%25E3%2581%25AEArch%2520Linux%25E3%2581%25ABGUI%25E3%2583%2587%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%2588%25E3%2583%2583%25E3%2583%2597%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25AD%25E3%2582%25AF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlZTFiY2ZkNDguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>ロク</dc:creator></item><item><title><![CDATA[4つの驚くべきプロセスの真実：OSがプログラムを動かす仕組み]]></title><description><![CDATA[
+ はじめに：プロセスという隠れた世界
+PCを使っているとき、ブラウザで記事を読みながら音楽を再生し、裏ではチャットアプリやエディタが動いているかもしれません。ユーザーからすると、これは当たり前のように同時進行しているように見えます。しかし実際には、これはOSカーネルが精密に orchestrate（調整）している「プロセス」という仕組みによって実現されています。
+プロセスはそれぞれ独立した実行単位で、メモリやリソースを隔離して管理されます。この隔離性があるからこそ、複数のプログラムが同時に動いても安全性と安定性が保たれているのです。
+この記事では、Linuxを例に取りながら、プロセス管...]]></description><link>https://zenn.dev/nnoorlin/articles/processes-and-threads</link><guid isPermaLink="true">https://zenn.dev/nnoorlin/articles/processes-and-threads</guid><pubDate>Wed, 01 Oct 2025 18:04:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IPxg0KQg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:4%25E3%2581%25A4%25E3%2581%25AE%25E9%25A9%259A%25E3%2581%258F%25E3%2581%25B9%25E3%2581%258D%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25BB%25E3%2582%25B9%25E3%2581%25AE%25E7%259C%259F%25E5%25AE%259F%25EF%25BC%259AOS%25E3%2581%258C%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258A%25E3%2582%258C%25E3%2581%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5ZjVkNDk3NDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>おれお</dc:creator></item><item><title><![CDATA[RaspberryPi5に適切なUSB-WiFiアダプターを探してみた]]></title><description><![CDATA[
+ はじめに
+大学時代から就職してからもラズパイやLinux関連を使う機会が多いので、自分の備忘録も兼ねて色々書き残していこうと思う。本記事はその第一弾！
+
+ 起きた問題
+適当なUSB-WiFiアダプターを挿してRaspberryPi5を使っていたところ、通信が不安定になった。
+同様の以上ケースを検索し、WiFi省電力モードのオフやドライバーインストール、内臓ドライバーのブラックリスト化などを試してみたが、変化なし。。
+ラズパイ本体の内臓WiFiモジュールであれば安定して通信できたが、設置場所の通信環境が悪くUSB延長ケーブル+USB-WiFiアダプターの構成は変えられなかったため、Ra...]]></description><link>https://zenn.dev/nmkzenn/articles/b67f72d3030f2e</link><guid isPermaLink="true">https://zenn.dev/nmkzenn/articles/b67f72d3030f2e</guid><pubDate>Wed, 01 Oct 2025 14:11:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5fol9Jpz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:RaspberryPi5%25E3%2581%25AB%25E9%2581%25A9%25E5%2588%2587%25E3%2581%25AAUSB-WiFi%25E3%2582%25A2%25E3%2583%2580%25E3%2583%2597%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%2592%25E6%258E%25A2%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AA%25E3%2581%25BF%25E3%2581%258B%25E3%2581%259C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RhZTU5MGMwMjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>なみかぜ</dc:creator></item><item><title><![CDATA[Linuxを使って簡単なTCPサーバデモ通信をコマンドラインから実現]]></title><description><![CDATA[簡単なTCPサーバとクライアントをPythonでコーディングし作成した。
+server.py
+
+このファイルはPythonのソケット通信を使ったシンプルなサーバープログラムである。Pythonで用意されているsocketモジュールを使用し、ローカル環境で動作するシンプルなサーバーを構築することができる。
+⓵ソケット作成
+6: socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+AF_INETはIPv4を意味している。SOCK_STREAMはTCP通信を表す。
+⓶サーバーの設定
+7: s.bind((HOST, PORT))
+8: s.lis...]]></description><link>https://zenn.dev/akito_man/articles/c4d006c150b4b8</link><guid isPermaLink="true">https://zenn.dev/akito_man/articles/c4d006c150b4b8</guid><pubDate>Tue, 30 Sep 2025 23:38:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--V51N3Yl5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AATCP%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%2587%25E3%2583%25A2%25E9%2580%259A%25E4%25BF%25A1%25E3%2582%2592%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%258B%25E3%2582%2589%25E5%25AE%259F%25E7%258F%25BE%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Akito_Matsumoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXNSZDNmd0o4MjhIVFJvN0pwMjZBYnJkbGFxTWN6YzNjSXNGOHItV05zcHFTaUl0V0FCUT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>Akito_Matsumoto</dc:creator></item><item><title><![CDATA[WSL2上でDockerデーモンがうまく動作しないときの対策法]]></title><description><![CDATA[docker compose start
+を実行した際または、Docker関連のコマンドを実行したとき、下記のエラーになる
+Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?
+
+ 現状確認
+
+WindowsからWSL2を利用している
+WSL2上にDockerデーモンをインストールしている
+Dockerコマンドを実行するとデーモンエラーになる
+wsl.confで自動起動設定ずみ
+Dockerデーモンを手動で起動しようにも、まずDocker関連のプロ...]]></description><link>https://zenn.dev/sanji_to/articles/94d0649a769c22</link><guid isPermaLink="true">https://zenn.dev/sanji_to/articles/94d0649a769c22</guid><pubDate>Tue, 30 Sep 2025 01:39:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4Cfn18jy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WSL2%25E4%25B8%258A%25E3%2581%25A7Docker%25E3%2583%2587%25E3%2583%25BC%25E3%2583%25A2%25E3%2583%25B3%25E3%2581%258C%25E3%2581%2586%25E3%2581%25BE%25E3%2581%258F%25E5%258B%2595%25E4%25BD%259C%25E3%2581%2597%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AE%25E5%25AF%25BE%25E7%25AD%2596%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2595%25E3%2582%2593%25E3%2581%2598%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSlM3eklac25mODdlOHNzNDY2WDFHLU1HeW1aUHBaRktCeFM5Z2J3SzFIRjVwalVlN3g9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>さんじ</dc:creator></item><item><title><![CDATA[🚀 WSLでmicromambaを導入してcondaから移行する方法まとめ]]></title><description><![CDATA[こんにちは！今日は WSL 上で micromamba をインストールして、conda からスムーズに移行する方法をまとめます。
+軽量＆高速な micromamba を使えば、環境構築がとっても快適になりますよ😊
+
+
+ 1. WSLとは？
+WSL (Windows Subsystem for Linux) は、Windows 上で Linux 環境を直接動かせる仕組みです。
+
+Linux のコマンドやツールをそのまま使える
+Docker・Python・AIライブラリなど開発に必須の環境を簡単に構築できる
+デュアルブートや仮想マシンよりも軽量で高速
+
+WindowsのアプリStoreからU...]]></description><link>https://zenn.dev/v2m5rc87/articles/9618a49394e756</link><guid isPermaLink="true">https://zenn.dev/v2m5rc87/articles/9618a49394e756</guid><pubDate>Mon, 29 Sep 2025 16:54:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zVK0Odjo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520%2520WSL%25E3%2581%25A7micromamba%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2597%25E3%2581%25A6conda%25E3%2581%258B%25E3%2582%2589%25E7%25A7%25BB%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:syno%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdlMWVlNThhZTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>syno</dc:creator></item><item><title><![CDATA[Linux 使いになりたい人のための Java 開発時に知っておきたいこと - 2025年度版]]></title><description><![CDATA[
+ はじめに
+本記事は、以前に書いた次の記事が古くなったので、その更新版を 2025 年度版として作成したものです。2025年9月に Java 25 がリリースされて選択肢が増えたということもあります。なお、説明内容に大きな変更はありませんので、あらかじめ、ご了承ください。
+
+さて、プログラミング言語 Java の開発環境を構築にあたっては、使用する Java の種類とバージョンを最初に決めることになります。ただし、決めるにあたって必要な前提知識が結構多いです。特に、Java の場合は、最近あった何度かのライセンス変更で複雑な事情になっているように見えます。
+ということで、ここでは Ja...]]></description><link>https://zenn.dev/hiro345/articles/20250929_java_2025</link><guid isPermaLink="true">https://zenn.dev/hiro345/articles/20250929_java_2025</guid><pubDate>Mon, 29 Sep 2025 11:39:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hmd1VARJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%2520%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258A%25E3%2581%259F%25E3%2581%2584%25E4%25BA%25BA%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%2520Java%2520%25E9%2596%258B%25E7%2599%25BA%25E6%2599%2582%25E3%2581%25AB%25E7%259F%25A5%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%258A%25E3%2581%258D%25E3%2581%259F%25E3%2581%2584%25E3%2581%2593%25E3%2581%25A8%2520-%25202025%25E5%25B9%25B4%25E5%25BA%25A6%25E7%2589%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroshi%2520Koyama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k5ZzdjLS0xTFk0S2k0LWw3dVFSSFZRdEdQcWZHYTlibVRJYUtFM0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>Hiroshi Koyama</dc:creator></item><item><title><![CDATA[LinuxのNetlinkでssやipコマンドみたいなものを作って遊ぼう]]></title><description><![CDATA[皆さんはLinuxのネットワークの状況を可視化するツールを自分で作ってみたいと思ったことはありますか？
+多分無いのではないでしょうか。。
+ですが、作ろうとまでは思わずとも、普段自分が叩いているssやipといったコマンド群の裏側にちょっと興味がある方がいるかもしれません。
+そんな方がきっといるだろうという希望を持ってこのブログを書こうと思います。
+なお、このブログではNetlinkの詳細な仕様を解説するというよりは、機能の概要を解説して、実際にミニssやipコマンドを作ることを目標としていきます。
+詳しい仕様に関しては、最後に参考URLを記載するのでそちらを参照ください。
+
+ Netlin...]]></description><link>https://zenn.dev/schottman13/articles/51592c0bb3d3c5</link><guid isPermaLink="true">https://zenn.dev/schottman13/articles/51592c0bb3d3c5</guid><pubDate>Sun, 28 Sep 2025 22:30:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mibk10P0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25AENetlink%25E3%2581%25A7ss%25E3%2582%2584ip%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25BF%25E3%2581%259F%25E3%2581%2584%25E3%2581%25AA%25E3%2582%2582%25E3%2581%25AE%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E9%2581%258A%25E3%2581%25BC%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SchottMan13%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIwMmE3YjMyNjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>SchottMan13</dc:creator></item><item><title><![CDATA[Gentoo Desktop with "-Ofast"]]></title><description><![CDATA[
+ 経緯
+Gentoo Linuxのインストールを複数回やって、きたのでそろそろ挑戦的なことがしてみたいという気持ちが発生してきて、このような内容をやってみました。
+とりあえず構築しようとした環境をまとめておきます。
+
+ 想定読者
+
+Gentoo Linuxに慣れてきて、そろそろ変わったことがしたいと思っている人
+Gentoo Linuxって敷居が高くてなぁ...って思っている人
+Gentoo Linuxのメンテナー
+gccオプションの意味を考えずに使っている人
+
+
+ 目標
+最終的に目指すところはこちらです。
+
+
+
+key
+value
+
+
+
+
+OS
+Gentoo Linux
+
+
+Arch...]]></description><link>https://zenn.dev/minervajuppiter/articles/3c01bc5416e6eb</link><guid isPermaLink="true">https://zenn.dev/minervajuppiter/articles/3c01bc5416e6eb</guid><pubDate>Sun, 28 Sep 2025 08:32:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--feAJvbnc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:Gentoo%2520Desktop%2520with%2520%2522-Ofast%2522%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Minerva_Juppiter%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0pIck1JR09JUTg3UEZteHNaTk9jU2tnSVFGYXJFYW9XckNqU19kY0RoT01zLV9VaXFIZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>Minerva_Juppiter</dc:creator></item><item><title><![CDATA[cronの設定・基本構文と、ハマりどころの備忘録]]></title><description><![CDATA[
+ はじめに
+サーバー運用において、バックアップやログの整理、定期的なバッチ処理など、「決まった時間に決まった処理」を実行したい場面は必ず出てきます。Linuxでこの役割を担うのが、古くから使われているスケジューラーデーモン**「cron」**です。
+一見すると地味な存在ですが、cronを使いこなせるかどうかは、サーバー管理の「時間効率」に大きく影響します。
+この記事では、自身のWikiメモを元に、cronの基本的な使い方と、初心者が陥りがちな「ハマりどころ」を解説します。
+
+ crontabの基本構文
+cronの設定は、crontabというファイルに記述します。その書式は、5つの時間指...]]></description><link>https://zenn.dev/meantix/articles/554f323ef241ec</link><guid isPermaLink="true">https://zenn.dev/meantix/articles/554f323ef241ec</guid><pubDate>Sun, 28 Sep 2025 04:43:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4IiqWUPv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:cron%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%25E3%2583%25BB%25E5%259F%25BA%25E6%259C%25AC%25E6%25A7%258B%25E6%2596%2587%25E3%2581%25A8%25E3%2580%2581%25E3%2583%258F%25E3%2583%259E%25E3%2582%258A%25E3%2581%25A9%25E3%2581%2593%25E3%2582%258D%25E3%2581%25AE%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:meantix%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MxMmZiYzIwOTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>meantix</dc:creator></item><item><title><![CDATA[SKKで「区点([MM]KKTT)」と表示されてウザい]]></title><description><![CDATA[fcitx5-skkなどのlibskkを使うインプットメソッドにおいて、バックスラッシュを押すと区点([MM]KKTT)が出てきてウザいときの対処法
+よく忘れるので備忘録も兼ねて紹介します。
+
+ 設定ファイルの編集
+(openSUSE の場合)
+/usr/share/libskk/rules/default/rom-kanaを編集し、kutenに設定されている行を消す。
+
+ そもそも区点([MM]KKTT)って何？
+句点(、)とは違くて、「区点」とは文字を番号で管理する文字コードの一種。
+SKKの場合、「文字コード直接入力」をしたいときに使うらしい。
+
+バックスラッシュを入力する
+入力モ...]]></description><link>https://zenn.dev/rlysleepynick/articles/b3564a156c0378</link><guid isPermaLink="true">https://zenn.dev/rlysleepynick/articles/b3564a156c0378</guid><pubDate>Sat, 27 Sep 2025 22:06:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UgTz1Ubk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SKK%25E3%2581%25A7%25E3%2580%258C%25E5%258C%25BA%25E7%2582%25B9%2528%255BMM%255DKKTT%2529%25E3%2580%258D%25E3%2581%25A8%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2595%25E3%2582%258C%25E3%2581%25A6%25E3%2582%25A6%25E3%2582%25B6%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nick%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2doakozcWFkLVBhenpERVJBSmt1MVdhZy1id2dxVDZLeGthc1hQMmc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>nick</dc:creator></item><item><title><![CDATA[journalctl でサービスの起動ログを抽出する]]></title><description><![CDATA[
+ journalctl でサービスの起動ログを抽出する
+systemd で管理しているサービスが いつ立ち上がったのか を確認したい場面は多いです。 ここでは journalctl を使って、特定サービスの起動ログを抽出する方法をまとめます。
+
+ journalctl とは？
+journalctl は systemd のログ管理ツールです。 Linux システムで稼働しているサービスやカーネルメッセージなどを統合的に管理しており、systemd-journald が記録したログを閲覧・検索するために利用します。
+特徴として：
+
+サービス単位でのログ参照が可能（-u &lt;サービス名&...]]></description><link>https://zenn.dev/uepon/articles/128c154f9ea7ad</link><guid isPermaLink="true">https://zenn.dev/uepon/articles/128c154f9ea7ad</guid><pubDate>Sat, 27 Sep 2025 11:47:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--90o3ZG6K--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:journalctl%2520%25E3%2581%25A7%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%25E3%2581%25AE%25E8%25B5%25B7%25E5%258B%2595%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%2592%25E6%258A%25BD%25E5%2587%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ue%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lIVW4zSmVfbW43ZlowbXlNVXRtOXpyLWZ1S0J3YjVTVUhnMXJWSFE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>ue</dc:creator></item><item><title><![CDATA[Orange Pi Zero3自宅サーバーのすゝめ]]></title><description><![CDATA[
+ 概要・TL;DR
+Orange Pi Zero3はGigabit LAN 搭載の激安SBCです．この記事では，このボードを使った自宅サーバーのセットアップを，初心者でも分かるように簡単に解説いたします．
+
+ なぜOrange Pi Zero3か
+皆さんはSBC(シングルボードコンピュータ)を使っていますか．多くの方はRaspberry Piなどでご存知だと思います．Raspberry Pi以外にも各社の特色を持ったSBCがこの世には数多くあります．Orange PiはShenzhen Xunlong Softwareによって開発されているSBCで，Zero3はRaspberry Pi...]]></description><link>https://zenn.dev/t3u/articles/456b9d8e41298f</link><guid isPermaLink="true">https://zenn.dev/t3u/articles/456b9d8e41298f</guid><pubDate>Fri, 26 Sep 2025 18:30:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7y1qZCsf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Orange%2520Pi%2520Zero3%25E8%2587%25AA%25E5%25AE%2585%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25AE%25E3%2581%2599%25E3%2582%259D%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t3u%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FiYzA0NDBhNmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>t3u</dc:creator></item><item><title><![CDATA[KWin Script を作ってみた]]></title><description><![CDATA[普段 Kubuntu を使ってるんだけど、アクティブウィンドウの上に重なっているウィンドウだけを半透明化する機能がなかったので、X11 の機能を使って自作のツールを作って対応していた。
+https://gitlab.com/tmtms/wmadd
+けど X11 じゃなくて Wayland になると外部アプリからウィンドウの操作ができなくなってしまった。
+KWin Script を書けばできるんじゃないかと思ってやってみた。
+KWin Script についてはこちら
+https://develop.kde.org/docs/plasma/kwin/
+構文は JavaScript。
+たとえば...]]></description><link>https://zenn.dev/tmtms/articles/202509-kwin-script</link><guid isPermaLink="true">https://zenn.dev/tmtms/articles/202509-kwin-script</guid><pubDate>Thu, 25 Sep 2025 15:51:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UUXHNUKh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:KWin%2520Script%2520%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A8%25E3%2581%25BF%25E3%2581%259F%25E3%2581%25BE%25E3%2581%2595%25E3%2581%25B2%25E3%2582%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2o3UVVHOE5NdEJhRmZqWFZ4RmFmMUNnSkJTQ21MRW1LRWVKbHQtd1E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>とみたまさひろ</dc:creator></item></channel></rss>
