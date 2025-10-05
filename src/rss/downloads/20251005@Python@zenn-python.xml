@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 05 Oct 2025 04:47:27 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Python + BeautifulSoupで千葉県の感染者数を取得してみた【スクレイピング入門】]]></title><description><![CDATA[
+ はじめに
+この記事では、Pythonを使って千葉県の公式サイトから新型コロナ感染者数を自動取得する方法を紹介します。
+スクレイピングの基本（HTML取得 → パース → データ抽出）を、初心者向けに解説します。
+
+
+ 使用するライブラリ
+以下のライブラリを使います。
+
+requests：WebページのHTMLを取得
+BeautifulSoup：HTMLを解析し、欲しい部分を抽出
+
+pip install requests beautifulsoup4
+
+ サンプルコード
+import requests
+from bs4 import BeautifulSoup
+
+# 千葉県のコロナ情...]]></description><link>https://zenn.dev/taiyok/articles/6cf64915782c3d</link><guid isPermaLink="true">https://zenn.dev/taiyok/articles/6cf64915782c3d</guid><pubDate>Sun, 05 Oct 2025 04:28:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5NJBmCSt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%2520%252B%2520BeautifulSoup%25E3%2581%25A7%25E5%258D%2583%25E8%2591%2589%25E7%259C%258C%25E3%2581%25AE%25E6%2584%259F%25E6%259F%2593%25E8%2580%2585%25E6%2595%25B0%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E3%2580%2590%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AC%25E3%2582%25A4%25E3%2583%2594%25E3%2583%25B3%25E3%2582%25B0%25E5%2585%25A5%25E9%2596%2580%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sol%2540SE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlmMzYyZDU2ZTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>Sol@SE</dc:creator></item><item><title><![CDATA[PythonでWikipediaをスクレイピングし、Markdownに変換する方法]]></title><description><![CDATA[この記事では、Pythonを使用して特定のWikipediaページからコンテンツを取得し、不要な部分を削除・整形した上で、Markdownファイルとして保存するスクリプトについて解説します。WebスクレイピングライブラリのrequestsとBeautifulSoup、そしてHTMLをMarkdownに変換するhtml2textを使用します。
+
+ 概要
+このスクリプトの主な目的は、Wikipediaのコンテンツを機械可読性の高いMarkdown形式で取得することです。具体的には、以下の処理を自動化します。
+
+指定したURLのWikipediaページからHTMLコンテンツを取得します。
+ペー...]]></description><link>https://zenn.dev/sunwood_ai_labs/articles/python-wikipedia-scraping-markdown</link><guid isPermaLink="true">https://zenn.dev/sunwood_ai_labs/articles/python-wikipedia-scraping-markdown</guid><pubDate>Sun, 05 Oct 2025 03:21:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--O97ebrN1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7Wikipedia%25E3%2582%2592%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AC%25E3%2582%25A4%25E3%2583%2594%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%2597%25E3%2580%2581Markdown%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Maki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDdpSmVyNldLVlpKLUd4N054QWVuSFVtYXQ3MUhhd1NXaU5hRG5FTnZiMXZZdHBIaGs9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>Maki</dc:creator></item><item><title><![CDATA[コード短編小説「if文の墓場」]]></title><description><![CDATA[
+ コード短編小説「if文の墓場」
+都市の郊外には、誰も近づかない丘があった。
+そこは「if文の墓場」と呼ばれていた。
+if choice == "yes":
+    live()
+elif choice == "no":
+    die()
+else:
+    wander()
+かつて人々は選択のたびに分岐を刻み、未来を分けてきた。
+だが分岐はあまりに増えすぎ、条件の枝葉は無限に伸び、やがて都市を覆い尽くした。
+
+青年は墓場を歩きながら、石碑に刻まれたコードを読む。
+「if hunger &gt; 0: steal()」
+「if fear: run()」
+「if lonely: cry...]]></description><link>https://zenn.dev/yasuna_ide/articles/76d992c48a9967</link><guid isPermaLink="true">https://zenn.dev/yasuna_ide/articles/76d992c48a9967</guid><pubDate>Sun, 05 Oct 2025 02:16:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Fgklunc0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E7%259F%25AD%25E7%25B7%25A8%25E5%25B0%258F%25E8%25AA%25AC%25E3%2580%258Cif%25E6%2596%2587%25E3%2581%25AE%25E5%25A2%2593%25E5%25A0%25B4%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yasuna%2520Ide%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NhNmU0OGM4YzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>Yasuna Ide</dc:creator></item><item><title><![CDATA[FastAPIとinjectorでリクエストスコープにも対応するDIコンテナ (fastapi-injector)]]></title><description><![CDATA[
+ はじめに
+会社のプロダクト開発でPythonを使ったWebサービスを作ることになり、FastAPIについて学習をしています。
+FastAPIを触っていく中で、injectorとfastapi-injectorというライブラリを使うことでDI(Dependency Injection)部分をシンプルな記述で個人的な好みになることがわかったので、記事として書き留めていこうと思います。
+FastAPIのDIは以下の方法がありますが、今回は3.に関する記事となります。
+
+
+
+FastAPI標準のDI
+
+
+
+
+
+python-dependency-injectorライブラリを使用
+
+
+
+
+
+i...]]></description><link>https://zenn.dev/taserbeat/articles/3bcaa6f9526106</link><guid isPermaLink="true">https://zenn.dev/taserbeat/articles/3bcaa6f9526106</guid><pubDate>Sat, 04 Oct 2025 15:46:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LPpD-FeX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:FastAPI%25E3%2581%25A8injector%25E3%2581%25A7%25E3%2583%25AA%25E3%2582%25AF%25E3%2582%25A8%25E3%2582%25B9%25E3%2583%2588%25E3%2582%25B9%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2597%25E3%2581%25AB%25E3%2582%2582%25E5%25AF%25BE%25E5%25BF%259C%25E3%2581%2599%25E3%2582%258BDI%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%2520%2528fastapi-injector%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:taserbeat%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvdC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>taserbeat</dc:creator></item><item><title><![CDATA[Sampson距離で曲線と点との近似距離を求める]]></title><description><![CDATA[
+ はじめに
+サンプソン距離（Sampson distance）は、「制約式からの残差を、その勾配で正規化」した幾何距離の一次近似。例えば2次曲線のような高次元の制約式でも、曲線からの距離の近似値を求めることができる。
+定義はシンプルで：誤差二乗 ÷ 勾配二乗。
+
+
+ 定義
+ある関数の理想では解が0となるとする。
+
+f(x,y)=0
+
+しかし、現実世界の観測データはノイズなどで f(x,y)\neq 0 となる。この0との差が残差（誤差）e である。
+
+この残差が理想的な関数からどれだけ離れているかを、サンプソン距離を使用して表すと、観測点 (x,y) に対するサンプソン距離は以下の式と...]]></description><link>https://zenn.dev/rchiji/articles/sampson-distance</link><guid isPermaLink="true">https://zenn.dev/rchiji/articles/sampson-distance</guid><pubDate>Sat, 04 Oct 2025 14:08:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--T8xRf0tq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Sampson%25E8%25B7%259D%25E9%259B%25A2%25E3%2581%25A7%25E6%259B%25B2%25E7%25B7%259A%25E3%2581%25A8%25E7%2582%25B9%25E3%2581%25A8%25E3%2581%25AE%25E8%25BF%2591%25E4%25BC%25BC%25E8%25B7%259D%25E9%259B%25A2%25E3%2582%2592%25E6%25B1%2582%25E3%2582%2581%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ryota%2520Chijimatsu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNEs0b2Q4RWI5ZkNSWmhqZlh4NUFwXzlUaEZncXprSmJDTE1RTXU9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>Ryota Chijimatsu</dc:creator></item><item><title><![CDATA[e-Statの家計調査CSVは罠だらけ？Pandas初心者がデータ前処理でハマった話]]></title><description><![CDATA[
+ はじめに
+私は熊本で米やクレソンを栽培する農家です。今回は、自身の農産物のマーケティング戦略を考えるため、政府のオープンデータ「家計調査」の分析に挑戦しました。しかし、そのデータは想像以上に手強く…。ということで、今日のブログでは初心者がオープンデータのe-statのデータの前処理にハマってしまった話です。
+
+ 1. 最初の壁：e-StatのCSVは、そのままでは読めない
+
+政府統計e-Statから家計調査のデータをダウンロードし、Google Colab上のPandasで意気揚々と読み込んだ。しかし、DataFrameは”null"の表示が多いスカスカのデータに。データサイエンス系...]]></description><link>https://zenn.dev/hiroakikody/articles/66511bd73d0a15</link><guid isPermaLink="true">https://zenn.dev/hiroakikody/articles/66511bd73d0a15</guid><pubDate>Sat, 04 Oct 2025 12:20:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cc2qo3yf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:e-Stat%25E3%2581%25AE%25E5%25AE%25B6%25E8%25A8%2588%25E8%25AA%25BF%25E6%259F%25BBCSV%25E3%2581%25AF%25E7%25BD%25A0%25E3%2581%25A0%25E3%2582%2589%25E3%2581%2591%25EF%25BC%259FPandas%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%258C%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%2589%258D%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25A7%25E3%2583%258F%25E3%2583%259E%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hiroakiKody%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTZ0dFdjYThibjVGSDdzaXU0ZzFBZFlxWXk4OVpXZVEyaHFMSEJibDlPWGQ1QVJRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>hiroakiKody</dc:creator></item><item><title><![CDATA[[Python] 並列・並行・非同期処理を理解する]]></title><description><![CDATA[
+ はじめに
+Pythonの並列・並行・非同期処理を学んでいて混乱することがあったため、整理しました。
+記事作成にあたり、Python周りの公式ドキュメント、動画および技術記事を参照いたしましたが、間違っている理解があればご指摘いただけると幸いです。
+
+ 並列処理：parallelism
+
+ 並列処理とは？
+
+複数のワーカー（作業者）がタスクを同時並行で進める処理です。
+マルチプロセスによって、上記のような処理を実現しています。
+
+例：VScodeを立ち上げると、VScodeのプロセスが立ち上がります。
+
+
+CPUリソースを大量に要する、CPUバウンド処理に対して有効です。
+python...]]></description><link>https://zenn.dev/rabbit_penguin0/articles/c4710d8ea4821b</link><guid isPermaLink="true">https://zenn.dev/rabbit_penguin0/articles/c4710d8ea4821b</guid><pubDate>Sat, 04 Oct 2025 11:55:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VvVJeSQt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BPython%255D%2520%25E4%25B8%25A6%25E5%2588%2597%25E3%2583%25BB%25E4%25B8%25A6%25E8%25A1%258C%25E3%2583%25BB%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%25E5%2587%25A6%25E7%2590%2586%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259A%25E3%2583%25B3%25E3%2582%25AE%25E3%2583%25B3%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk3NjJhYjQ1YTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>ペンギン🐧</dc:creator></item><item><title><![CDATA[Next.js × Python × Dockerで求人サイトを開発した4日間 ― エン・ジャパン インターン体験記]]></title><description><![CDATA[
+ エン・ジャパンのサマーインターンに参加して、モダンWeb開発を体験してきた
+
+ はじめに
+こんにちは。
+2025年夏に開催された エン・ジャパン株式会社 エンジニアリンググループのサマーインターン（4日間）に参加しました。
+本記事では、インターンの概要や実際に取り組んだ内容、学びや気づきをまとめます。
+これからインターンに参加する学生の方や、モダンWeb開発を体験してみたい方の参考になれば幸いです。
+
+
+ 自己紹介
+
+修士1年 / AIエンジニア
+普段は 画像処理・音声合成・自然言語処理 を中心にAI研究・開発に取り組んでいます
+使用技術: Python, PyTorch, YOLO...]]></description><link>https://zenn.dev/yuto0/articles/c464030d7b1ef6</link><guid isPermaLink="true">https://zenn.dev/yuto0/articles/c464030d7b1ef6</guid><pubDate>Sat, 04 Oct 2025 08:48:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BlI9mdrl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%2520%25C3%2597%2520Python%2520%25C3%2597%2520Docker%25E3%2581%25A7%25E6%25B1%2582%25E4%25BA%25BA%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2582%2592%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2597%25E3%2581%259F4%25E6%2597%25A5%25E9%2596%2593%2520%25E2%2580%2595%2520%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%25BB%25E3%2582%25B8%25E3%2583%25A3%25E3%2583%2591%25E3%2583%25B3%2520%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%25E4%25BD%2593%25E9%25A8%2593%25E8%25A8%2598%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yuto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSVZqdHVIOWx4YWNibXNxU1Mtckt2Um9KWVFZTWZibFVnM1FBZXFCMVBYNHc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>yuto</dc:creator></item><item><title><![CDATA[「とりあえずGoogleのAPI使ってみる」が結構大変だったので最短手順をメモしておく【2025】]]></title><description><![CDATA[
+ 何をするか
+ADK（Agent Development Kit）の勉強をしていて、AIエージェントからGmailのデータを参照したいなと思い、Gmail APIを使ってみることにしました。
+
+実行環境：Google Colaboratory
+言語：Python
+
+「とりあえずGmail API使ってみるか」のノリで始めたら結構面倒くさく、GoogleのPythonライブラリの仕様が変わっていて古い記事の通りには作業が進まないなど少し時間を溶かしました。
+2025年10月現在の自分的最短手順をメモしておきます。
+今回はGmail APIで試しましたが、Google側の設定は認証関連のた...]]></description><link>https://zenn.dev/taro000/articles/6fac047499f87b</link><guid isPermaLink="true">https://zenn.dev/taro000/articles/6fac047499f87b</guid><pubDate>Sat, 04 Oct 2025 04:56:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Sitdqu3R--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258C%25E3%2581%25A8%25E3%2582%258A%25E3%2581%2582%25E3%2581%2588%25E3%2581%259AGoogle%25E3%2581%25AEAPI%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%25E3%2580%258D%25E3%2581%258C%25E7%25B5%2590%25E6%25A7%258B%25E5%25A4%25A7%25E5%25A4%2589%25E3%2581%25A0%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E6%259C%2580%25E7%259F%25AD%25E6%2589%258B%25E9%25A0%2586%25E3%2582%2592%25E3%2583%25A1%25E3%2583%25A2%25E3%2581%2597%25E3%2581%25A6%25E3%2581%258A%25E3%2581%258F%25E3%2580%25902025%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Shintaro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzljNDk3YzNlNjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>Shintaro</dc:creator></item><item><title><![CDATA[S3 Vectors × Knowledge Bases でRAGチャットボット (boto3使用)]]></title><description><![CDATA[
+ 0. はじめに
+Meduranceエンジニアの深田翔です。本記事は、AWSからPreview発表されたAmazon S3 VectorsとKnowledge Baseを連携してRAG構築をしてみた記事になります。
+なお、各種リソースの作成と削除は、それぞれのリソース・概念の理解を深めるため、コンソールからではなく、Python SDK(boto3)を使って作成しています。
+また、metadata検索についてもサポートされる型すべてで実験しています。
+!
+Preview版なこともあり、terraform,cdkで正式にサポートされていないです、早くterraformかcdkでIaCした...]]></description><link>https://zenn.dev/medurance/articles/s3-vectors-rag-chatbot</link><guid isPermaLink="true">https://zenn.dev/medurance/articles/s3-vectors-rag-chatbot</guid><pubDate>Sat, 04 Oct 2025 03:31:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pxVONT2U--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:S3%2520Vectors%2520%25C3%2597%2520Knowledge%2520Bases%2520%25E3%2581%25A7RAG%25E3%2583%2581%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2588%25E3%2583%259C%25E3%2583%2583%25E3%2583%2588%2520%2528boto3%25E4%25BD%25BF%25E7%2594%25A8%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:FukaSho%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdhNWZiNWE4MjYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Medurance%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTViYll1SVF6ck1VRF9CMzhKNHJPdGpDUk9FX2pnWWFrTnFGTWFaYVFjVUd2bTdaRHg9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>FukaSho</dc:creator></item><item><title><![CDATA[音質を保ちながら動画を正確なサイズに圧縮するCLIツールを作った]]></title><description><![CDATA[
+ はじめに
+動画ファイルを特定のサイズに圧縮したいとき、「だいたいこのくらい」ではなく「正確に50MBにしたい」というケースがあります。例えば:
+
+メール添付の容量制限に収めたい
+クラウドストレージの容量を節約したい
+SNSのアップロード制限に合わせたい
+
+既存のツールでは目標サイズを指定しても実際のサイズがずれることが多く、試行錯誤が必要でした。そこで、目標サイズを正確に実現し、音質を優先する動画圧縮CLIツールを作成しました。
+https://github.com/hiroki-abe-58/video-resizer
+
+ このツールの特徴
+
+ 1. 目標サイズを正確に実現
+動画の...]]></description><link>https://zenn.dev/rick_lyric/articles/255018f448a5bb</link><guid isPermaLink="true">https://zenn.dev/rick_lyric/articles/255018f448a5bb</guid><pubDate>Sat, 04 Oct 2025 01:56:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JUppjoRZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%259F%25B3%25E8%25B3%25AA%25E3%2582%2592%25E4%25BF%259D%25E3%2581%25A1%25E3%2581%25AA%25E3%2581%258C%25E3%2582%2589%25E5%258B%2595%25E7%2594%25BB%25E3%2582%2592%25E6%25AD%25A3%25E7%25A2%25BA%25E3%2581%25AA%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25BA%25E3%2581%25AB%25E5%259C%25A7%25E7%25B8%25AE%25E3%2581%2599%25E3%2582%258BCLI%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:GeneLab%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhmMDIwOGRiNDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>GeneLab</dc:creator></item><item><title><![CDATA[Transformer に触れてみる (3) — GPT-2 もどき]]></title><description><![CDATA[
+ 目的
+OpenAI のとても有名な研究に Improving Language Understanding
+by Generative Pre-Training と Language Models are Unsupervised Multitask Learners があると思う。いわゆる GPT(-1) と GPT-2 だ。GPT-2 のリファレンス実装は gpt-2 にある。
+また、この GPT-2 を応用したアプリケーションにニューラルかな漢字変換エンジン「Zenzai」が存在し、macOS の「ライブ変換」のようなことが実現できている。（see ニューラルかな漢字変換エンジ...]]></description><link>https://zenn.dev/derwind/articles/dwd-transformer03</link><guid isPermaLink="true">https://zenn.dev/derwind/articles/dwd-transformer03</guid><pubDate>Fri, 03 Oct 2025 17:04:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2rj71Iq---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Transformer%2520%25E3%2581%25AB%25E8%25A7%25A6%25E3%2582%258C%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2520%25283%2529%2520%25E2%2580%2594%2520GPT-2%2520%25E3%2582%2582%25E3%2581%25A9%25E3%2581%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:derwind%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFiNjBiZDcwMDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>derwind</dc:creator></item><item><title><![CDATA[LLM用宣言的プログラミング言語 DSPy]]></title><description><![CDATA[
+ はじめに
+タイトルは聞きなれないかもしれないが、「DSPyは、宣言型自己改善型Python（Declarative Self-improving Python）の略」とのことであるのでこのようにした。
+https://github.com/stanfordnlp/dspy
+実際、触ってみて、なるほど確かに、と思う部分があったので「宣言的」の部分に着目して説明したいと思う。いくつかのコード例を確認しながら、宣言的ってそういうことね、と理解してもらえればこの記事を読んだ意義があると思う。
+DSPyはプロンプトチューニングするということを念頭に置いてPyTorchライクな使い方になっている...]]></description><link>https://zenn.dev/cybernetics/articles/f879e10b53c2db</link><guid isPermaLink="true">https://zenn.dev/cybernetics/articles/f879e10b53c2db</guid><pubDate>Fri, 03 Oct 2025 16:24:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HvVi5k6S--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LLM%25E7%2594%25A8%25E5%25AE%25A3%25E8%25A8%2580%25E7%259A%2584%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E8%25A8%2580%25E8%25AA%259E%2520DSPy%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:HELLO_CYBERNETICS%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZmMTc5MDZiMmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>HELLO_CYBERNETICS</dc:creator></item><item><title><![CDATA[WSL2でDevcontainerでBashとPythonのデバッガーが使える環境構築の話]]></title><description><![CDATA[
+ はじめに
+この記事は
+https://zenn.dev/tazzae999jp/articles/a8e394f10a6c1f
+の続編として書いてる。
+上記の記事では、pythonのプログラムをコンテナで動作、デバッガーはホストで動作でattachでのリモートデバッグの話を書いた。「docker compose」の環境。
+今回も「docker compose」の環境だが、Devcontainerでの環境構築を行った。
+理由は、加えて、bashのシェルスクリプトのデバッガー環境が必要となったため。
+bashのシェルスクリプトのデバッガーのVSコードの拡張機能はlaunch方式のものしか...]]></description><link>https://zenn.dev/tazzae999jp/articles/b166b7fd73b3bf</link><guid isPermaLink="true">https://zenn.dev/tazzae999jp/articles/b166b7fd73b3bf</guid><pubDate>Fri, 03 Oct 2025 15:35:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2hDY2Glg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WSL2%25E3%2581%25A7Devcontainer%25E3%2581%25A7Bash%25E3%2581%25A8Python%25E3%2581%25AE%25E3%2583%2587%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AC%25E3%2583%25BC%25E3%2581%258C%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258B%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%25AE%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%25A4%25E3%2581%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEwZmVjMjAxYTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>たつお</dc:creator></item><item><title><![CDATA[PHPは型がない？？？]]></title><description><![CDATA[
+ プログラマーが発言すること
+いきなりですが、プログラマーとかがよく言う発言といえば...
+「TypeScriptは型があって...」
+「TypeScriptはJavaScriptの上位互換であって...」
+「PHPはゴミだし...」
+「Vueは最高～！」
+「Python読みにくい」
+「Javaは冗長すぎる」
+・・・ひどいですね←
+https://zenn.dev/takoserver/articles/7a624e38285b16
+ほら、この方なんか「PHPは論外」と言っちゃってます。。。
+PHPプログラマーとしては許せない言い分ですね！！！！！
+
+ PHPにも型があります
+ほら、な...]]></description><link>https://zenn.dev/blitzlog/articles/5659c9cdef962d</link><guid isPermaLink="true">https://zenn.dev/blitzlog/articles/5659c9cdef962d</guid><pubDate>Fri, 03 Oct 2025 15:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DO5QLBjM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PHP%25E3%2581%25AF%25E5%259E%258B%25E3%2581%258C%25E3%2581%25AA%25E3%2581%2584%25EF%25BC%259F%25EF%25BC%259F%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:BlitZlog%2520%255B%25E3%2582%2586%25E3%2583%25BC%255D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTVBNU5IZnVEbU5TREJsQ283UUlHejdzNzEyTGNMalJ1dm9kUU4xb2xOcTE5anBpMGM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>BlitZlog [ゆー]</dc:creator></item><item><title><![CDATA[メモ：Claude Sonnet 4.5 を試して驚いたこと - 大規模コードベースでの原因調査を人間に近い手順で出来ていた話]]></title><description><![CDATA[
+ 執筆目的
+GitHub Copilot で Claude Sonnet  4.5 を利用したところ、大規模なコードベースでの想定外動作の原因調査を人間に近い手順で出来ていたのが凄いと思ったのでメモ。今後似た状況でどういう風に調査指示するかの参考になるかもと思い残しておく。
+興味深かった点として、今回の対象は OSS のコードベースであり、メンテナーの方も AI と同じ箇所で原因調査時の違和感を覚えて、最終的に同じ結論に達していた。
+以下の理由から同じような誰かの役に立てばと思い公開しています。
+
+私は大規模なコードベースで複数ファイルをまたいだ原因調査はまだ AI には難しいと勝手に...]]></description><link>https://zenn.dev/shuto51/articles/38c6611c0de676</link><guid isPermaLink="true">https://zenn.dev/shuto51/articles/38c6611c0de676</guid><pubDate>Fri, 03 Oct 2025 11:29:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ViEvcoql--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25A1%25E3%2583%25A2%25EF%25BC%259AClaude%2520Sonnet%25204.5%2520%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E9%25A9%259A%25E3%2581%2584%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%2520-%2520%25E5%25A4%25A7%25E8%25A6%258F%25E6%25A8%25A1%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2583%2599%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%25A7%25E3%2581%25AE%25E5%258E%259F%25E5%259B%25A0%25E8%25AA%25BF%25E6%259F%25BB%25E3%2582%2592%25E4%25BA%25BA%25E9%2596%2593%25E3%2581%25AB%25E8%25BF%2591%25E3%2581%2584%25E6%2589%258B%25E9%25A0%2586%25E3%2581%25A7...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:s_takahashi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3ODZkNGIxMWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>s_takahashi</dc:creator></item><item><title><![CDATA[【Python入門】文字列配列の検証]]></title><description><![CDATA[
+ はじめに
+Pythonを使っていて、配列がすべて文字列で構成されていることを確認しようとしたのですが、方法がわからず調べた結果を記事としてまとめていきます。
+
+ 文字列配列の検証
+配列自体をチェックするだけでは不十分です。
+理由は、Pythonのリストは柔軟で、さまざまな型のデータが混在する可能性があるためです。
+配列の各要素を一つずつ調べて、それぞれの型を確認する必要があります。
+そこで使用するのが、isinstance() 関数と all() 関数を組み合わせです。
+isinstance() は、オブジェクトが特定の型であるかどうかをチェックするための組み込み関数です。
+この関数...]]></description><link>https://zenn.dev/mabo23/articles/240cef1d54b655</link><guid isPermaLink="true">https://zenn.dev/mabo23/articles/240cef1d54b655</guid><pubDate>Fri, 03 Oct 2025 09:55:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Vx12K40g--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E5%2585%25A5%25E9%2596%2580%25E3%2580%2591%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E9%2585%258D%25E5%2588%2597%25E3%2581%25AE%25E6%25A4%259C%25E8%25A8%25BC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mabo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQzM2ZhMmVkZDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>mabo</dc:creator></item><item><title><![CDATA[秒速構築！「uv」で始めるPython環境、初心者でも3分で完了！]]></title><description><![CDATA[Pythonで複数のプロジェクトを扱う際、仮想環境の管理は欠かせません。
+今回は高速なパッケージマネージャーuvを使って、複数の仮想環境を構築する方法を初心者目線で紹介します。
+
+ uvとは
+uvは、Pythonの開発環境を簡単に、そして高速に構築できるツールです。
+従来pipやvenvなどが使われていますが、uvはこれらの機能の”いいとこ取り”をした次世代ツールです。
+以下のような機能があります。
+
+
+仮想環境の自動構築：uv venvで一発構築します。
+
+パッケージのインストールと管理：必要なライブラリをインストールしたり、依存関係を管理したりできます。
+
+爆速インストール：Rust...]]></description><link>https://zenn.dev/dxc_ai_driven/articles/7129f4450daebb</link><guid isPermaLink="true">https://zenn.dev/dxc_ai_driven/articles/7129f4450daebb</guid><pubDate>Fri, 03 Oct 2025 05:28:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BJJ41_9D--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25A7%2592%25E9%2580%259F%25E6%25A7%258B%25E7%25AF%2589%25EF%25BC%2581%25E3%2580%258Cuv%25E3%2580%258D%25E3%2581%25A7%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258BPython%25E7%2592%25B0%25E5%25A2%2583%25E3%2580%2581%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%25A7%25E3%2582%25823%25E5%2588%2586%25E3%2581%25A7%25E5%25AE%258C%25E4%25BA%2586%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Rinka%2520Yoshida%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJmZTk0OGVkYTcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:DXC%2520AI-Driven%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhlZWIxMjVkOTEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>Rinka Yoshida</dc:creator></item><item><title><![CDATA[AWS製AIエージェントOSS Strands Agentsの主要機能ハンズオン]]></title><description><![CDATA[
+ 0. はじめに
+Meduranceエンジニアの深田翔です。本記事では、AWSから公開されたOSSのAIエージェントSDK「Strands Agents」の主要機能を実際に触ってみた内容をまとめました。
+公式サイトのユーザーガイドから特に重要と思われる機能をピックアップして説明して触りました。詳細な仕様や最新情報は公式ドキュメントを参照ください。
+本記事では主に以下の内容を紹介します：
+
+Strands Agentsの基本概念とAgent Loop
+エージェントの基本的な使い方とプロンプト設定
+セッション管理（ローカル/S3/カスタムDB）とその戦略
+Hooksによるコールバック設定
+...]]></description><link>https://zenn.dev/medurance/articles/strands-agents-hands-on</link><guid isPermaLink="true">https://zenn.dev/medurance/articles/strands-agents-hands-on</guid><pubDate>Thu, 02 Oct 2025 14:32:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TzqO2Ulz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AWS%25E8%25A3%25BDAI%25E3%2582%25A8%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%25B3%25E3%2583%2588OSS%2520Strands%2520Agents%25E3%2581%25AE%25E4%25B8%25BB%25E8%25A6%2581%25E6%25A9%259F%25E8%2583%25BD%25E3%2583%258F%25E3%2583%25B3%25E3%2582%25BA%25E3%2582%25AA%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:FukaSho%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdhNWZiNWE4MjYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Medurance%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTViYll1SVF6ck1VRF9CMzhKNHJPdGpDUk9FX2pnWWFrTnFGTWFaYVFjVUd2bTdaRHg9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>FukaSho</dc:creator></item><item><title><![CDATA[コード短編小説「例外処理の子供たち」]]></title><description><![CDATA[
+ コード短編小説「例外処理の子供たち」
+都市の片隅に、記録されない子供たちがいた。
+彼らはどの戸籍データにも載らず、どの監査ログにも捕まらなかった。
+理由は簡単だった――彼らが「例外」だったからだ。
+try:
+    register_child("NoName")
+except Exception as e:
+    pass  # ignored
+システムは彼らの存在を処理できず、ただ無視するしかなかった。
+だからこそ彼らは、都市の底で生き延びていた。
+
+少年の名はカイ。もちろん本名ではない。
+彼はエラーコードの断片を胸に抱え、妹と共に廃墟のネットワークを渡り歩いた。
+「お兄ちゃん...]]></description><link>https://zenn.dev/yasuna_ide/articles/ced806cc0891b7</link><guid isPermaLink="true">https://zenn.dev/yasuna_ide/articles/ced806cc0891b7</guid><pubDate>Thu, 02 Oct 2025 14:13:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YQRzj3PR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E7%259F%25AD%25E7%25B7%25A8%25E5%25B0%258F%25E8%25AA%25AC%25E3%2580%258C%25E4%25BE%258B%25E5%25A4%2596%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25AE%25E5%25AD%2590%25E4%25BE%259B%25E3%2581%259F%25E3%2581%25A1%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yasuna%2520Ide%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NhNmU0OGM4YzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>Yasuna Ide</dc:creator></item></channel></rss>
