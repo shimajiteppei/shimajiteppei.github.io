@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 07 Oct 2025 09:59:40 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[RenderにデプロイするPythonアプリのVersionを指定する方法]]></title><description><![CDATA[
+ Renderにデプロイする際のPython Versionについて
+デフォルトではデプロイした日付によってPythonのVersionが異なるようです。
+
+しかし、PythonのVersionを上げたい場合や下げたい場合もあると思います。
+下記の公式ドキュメントによると、方法は2つあるようなので紹介したいと思います。
+https://render.com/docs/python-version
+
+ 方法①　環境変数にPYTHON_VERSIONを設定
+Render ➔ Projects ➔ SERVICE NAME ➔ Environment
+Key:PYTHON_VERSION
+V...]]></description><link>https://zenn.dev/aputech/articles/53c3e8decc941c</link><guid isPermaLink="true">https://zenn.dev/aputech/articles/53c3e8decc941c</guid><pubDate>Tue, 07 Oct 2025 07:46:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tNoQapGB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Render%25E3%2581%25AB%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%2599%25E3%2582%258BPython%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%25AEVersion%25E3%2582%2592%25E6%258C%2587%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B2%25E3%2583%25BC%2540%25E6%2583%2585%25E5%25A0%25B1%25E7%25B3%25BB%25E5%25AD%25A6%25E7%2594%259F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkxMzE3MjU3ZTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>ひー@情報系学生</dc:creator></item><item><title><![CDATA[動くコード小説「暗号アリス」]]></title><description><![CDATA[
+ Cipher Alice — Executable Code-Novel
+Run this file with Python 3.
+You can tweak RUN_MODE and ENDING_CHOICE at the bottom.
+from textwrap import dedent
+import random
+
+# ===== Utilities =====
+
+class DecodeError(Exception):
+    pass
+
+def rot13(s: str) -&gt; str:
+    # ROT13 for ASCII letters only
+ ...]]></description><link>https://zenn.dev/yasuna_ide/articles/90c1936f29fcb6</link><guid isPermaLink="true">https://zenn.dev/yasuna_ide/articles/90c1936f29fcb6</guid><pubDate>Tue, 07 Oct 2025 05:13:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--em_LS-3H--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%258B%2595%25E3%2581%258F%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E5%25B0%258F%25E8%25AA%25AC%25E3%2580%258C%25E6%259A%2597%25E5%258F%25B7%25E3%2582%25A2%25E3%2583%25AA%25E3%2582%25B9%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yasuna%2520Ide%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NhNmU0OGM4YzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>Yasuna Ide</dc:creator></item><item><title><![CDATA[YOLOによる小さな動く物体の検出]]></title><description><![CDATA[
+ はじめに
+「キャップ野球」は、ペットボトルのキャップをボールの代わりに使用するユニークなスポーツです。私はこの競技のデータプラットフォームを開発・運営しており、試合成績の記録/閲覧や選手分析などの機能を提供しています。
+https://cap-baseball.com
+野球では球場に固定されたハイスピードカメラなどによる分析が進んでおり、分析されたデータは様々なところに使われていると聞きます。
+キャップ野球もリーグ戦や大会などが数多く行われ、ハイスピードカメラではないものの映像記録は豊富に残っており、その映像記録からデータ分析を行えないか考えています。
+本業はフロントエンドエンジニア...]]></description><link>https://zenn.dev/ckoshien/articles/998987fb5cc962</link><guid isPermaLink="true">https://zenn.dev/ckoshien/articles/998987fb5cc962</guid><pubDate>Tue, 07 Oct 2025 05:04:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9sBZ88Re--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:YOLO%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E5%25B0%258F%25E3%2581%2595%25E3%2581%25AA%25E5%258B%2595%25E3%2581%258F%25E7%2589%25A9%25E4%25BD%2593%25E3%2581%25AE%25E6%25A4%259C%25E5%2587%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:koshien%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MyMTBiMDYzYWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>koshien</dc:creator></item><item><title><![CDATA[Microsoft Agent Frameworkをためしてみた（python）]]></title><description><![CDATA[2025/10/1にMicrosoftからエージェント開発の最新フレームワークである『Microsoft Agent Framework』が公開されました！
+ザックリと概要を説明して、Pythonでの実装例をかいつまんで載せていきます。
+※LLMモデルはAzure Open AIを利用しております。
+https://devblogs.microsoft.com/foundry/introducing-microsoft-agent-framework-the-open-source-engine-for-agentic-ai-apps/
+
+ 概要
+
+ Microsoft Agent Fr...]]></description><link>https://zenn.dev/headwaters/articles/2d8222bf2214ad</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/2d8222bf2214ad</guid><pubDate>Mon, 06 Oct 2025 21:21:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KIPEhVDn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Microsoft%2520Agent%2520Framework%25E3%2582%2592%25E3%2581%259F%25E3%2582%2581%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25EF%25BC%2588python%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:yu%2520shimohama%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgzZjNhMmM0NDYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>yu shimohama</dc:creator></item><item><title><![CDATA[Sora2のAPIを試してみる]]></title><description><![CDATA[
+ まとめ
+4秒の動画1本でだいたい60円(＄0.4)かかるよ。
+長さは3種類の中から選べるよ(4,8,12秒)
+サイズは4種類の中から選べるよ（1280x720,720x1280,1024x1792,1792x1024）
+
+ はじめに
+つい数時間前にOpenAI DevDay 2025があった。
+ChatGPTユーザーに向けてチャット内で使えるウィジェットの開発ができる「Apps in ChatGPT」やDifyもどきの「AgentKit」など新しい機能の発表がされていた。
+なかでも開発者の目を引く発表は、ばちくそ高いRealtime APIの廉価版gpt-realtime-miniと...]]></description><link>https://zenn.dev/uxoxu/articles/d1211d32aff3c0</link><guid isPermaLink="true">https://zenn.dev/uxoxu/articles/d1211d32aff3c0</guid><pubDate>Mon, 06 Oct 2025 20:19:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--R8chMeCQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Sora2%25E3%2581%25AEAPI%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%2598%25A5%25E9%25A2%25A8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzNWFjNDdmZDguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>春風</dc:creator></item><item><title><![CDATA[【Python】Pixiの環境(environment)]]></title><description><![CDATA[
+ Pixiに於ける環境の基本
+Pixiに於ける環境とは、Pythonの仮想環境に程近い概念であると言えよう。
+
+ pipを例にした環境の違い
+PS C:\⋯\sample&gt; pip --version
+pip 25.1.1 from C:\Users\⋯\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\pip (python 3.13)
+PS C:\⋯\sample&gt; pixi...]]></description><link>https://zenn.dev/amenaruya/articles/e96b5f52e7f098</link><guid isPermaLink="true">https://zenn.dev/amenaruya/articles/e96b5f52e7f098</guid><pubDate>Mon, 06 Oct 2025 20:12:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gNLGs5h3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591Pixi%25E3%2581%25AE%25E7%2592%25B0%25E5%25A2%2583%2528environment%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:amenaruya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMwZDg5YWZmZGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>amenaruya</dc:creator></item><item><title><![CDATA[Sora 2 API を触ってみた]]></title><description><![CDATA[OpenAI DevDay 2025 で Sora2 の API が公開されたので公式ドキュメントを参考に試してみました。
+!
+本記事は 2025年10月7日時点の情報で書かれています。
+
+https://platform.openai.com/docs/guides/video-generation
+
+ 概要
+Sora2 は 2025年10月現在 OpenAI の最新の動画生成モデルです。Sora2 を使うための Video API では、Sora 2 (id=sora-2) と Sora 2 Pro (id=sora-2-pro) モデルの二つを利用して動画を生成することができます。...]]></description><link>https://zenn.dev/prgckwb/articles/openai-sora2-api</link><guid isPermaLink="true">https://zenn.dev/prgckwb/articles/openai-sora2-api</guid><pubDate>Mon, 06 Oct 2025 19:26:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IoG11p3s--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Sora%25202%2520API%2520%25E3%2582%2592%25E8%25A7%25A6%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A1%25E3%2581%258F%25E3%2582%258F%25E3%2581%25B6%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU1MWU5MTZhMjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>ちくわぶ</dc:creator></item><item><title><![CDATA[Pythonで追うML-KEM：liboqsによる鍵生成と暗号処理の内部実装]]></title><description><![CDATA[
+ はじめに
+私はPQC（耐量子計算機暗号）やQKD（量子鍵配送）などの最先端暗号技術に強い関心を持つ大学3年生です。将来的には大学院で研究を深め、より安全なデジタル社会の構築に貢献したいと考えています。独学で得た知識を体系的に整理し、分かりやすく情報発信することを目標にしています。
+前回の記事である簡易実装から本番実装へ：Pythonで学ぶML-KEMとliboqsではliboqs、liboqs-pythonを使ったML-KEMの簡単な動作フローを紹介しました。それに対し、本記事では、ML-KEMの鍵生成、カプセル化、デカプセル化がライブラリの内部で具体的にどのように実装されているか、...]]></description><link>https://zenn.dev/miki555555na/articles/1bdcea0bfd6b26</link><guid isPermaLink="true">https://zenn.dev/miki555555na/articles/1bdcea0bfd6b26</guid><pubDate>Mon, 06 Oct 2025 16:37:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TQyv8V26--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E8%25BF%25BD%25E3%2581%2586ML-KEM%25EF%25BC%259Aliboqs%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E9%258D%25B5%25E7%2594%259F%25E6%2588%2590%25E3%2581%25A8%25E6%259A%2597%25E5%258F%25B7%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25AE%25E5%2586%2585%25E9%2583%25A8%25E5%25AE%259F%25E8%25A3%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:miki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ExYjIyYjEzYzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>miki</dc:creator></item><item><title><![CDATA[簡易実装から本番実装へ：Pythonで学ぶML-KEMとliboqs]]></title><description><![CDATA[
+ はじめに
+私はPQC（耐量子計算機暗号）やQKD（量子鍵配送）などの最先端暗号技術に強い関心を持つ大学3年生です。将来的には大学院で研究を深め、より安全なデジタル社会の構築に貢献したいと考えています。独学で得た知識を体系的に整理し、分かりやすく情報発信することを目標にしています。
+以前の記事である「ML-KEMをPythonで簡易実装試みる！？」では、ML-KEMを簡易パラメータでPython実装することを試みました。しかし、簡易化の影響で、暗号としての肝である「共通鍵の完全一致」を達成できませんでした。
+本記事では、この課題を乗り越え、PQCアルゴリズムのオープンソースCライブラリ...]]></description><link>https://zenn.dev/miki555555na/articles/3c6846ad2c7a83</link><guid isPermaLink="true">https://zenn.dev/miki555555na/articles/3c6846ad2c7a83</guid><pubDate>Mon, 06 Oct 2025 16:36:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ocp8FstX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25B0%25A1%25E6%2598%2593%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%258B%25E3%2582%2589%25E6%259C%25AC%25E7%2595%25AA%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%25B8%25EF%25BC%259APython%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6ML-KEM%25E3%2581%25A8liboqs%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:miki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ExYjIyYjEzYzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>miki</dc:creator></item><item><title><![CDATA[USDで作成したUSDファイルをMacbookのプレビューソフトで表示してみた]]></title><description><![CDATA[今回はUSD形式で作成したファイルをMacbookのプレビューソフトで開くことができることを紹介しようと思います。
+
+ USDとは？
+USDは3Dシーンを共同で構築するための高性能かつ拡張可能なソフトウェアプラットフォームであり、大規模な開発ニーズを満たせるように構築されています。USDではジオメトリを初めシェーディングやライティング、物理など様々な必須領域をカバーするように構築されています。USDはピクサーによって最初に開発されたものとなり、特にオープンソースを意識したものとしてOpenUSDが位置付けられているようです。
+https://openusd.org/release/ind...]]></description><link>https://zenn.dev/akasan/articles/6ba6e22863ab69</link><guid isPermaLink="true">https://zenn.dev/akasan/articles/6ba6e22863ab69</guid><pubDate>Mon, 06 Oct 2025 13:39:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ay_uuw5r--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:USD%25E3%2581%25A7%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2581%259FUSD%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592Macbook%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AC%25E3%2583%2593%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%25BD%25E3%2583%2595%25E3%2583%2588%25E3%2581%25A7%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Akasan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNXJfNDFtel9OY3dPYUtMRE1vc09tbVB6YmxHM0V5N3lNZzI3QWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>Akasan</dc:creator></item><item><title><![CDATA[PyCon JP 2025でJetBrainsと共同出展しました 〜Python開発者アンケートレポート〜]]></title><description><![CDATA[こんにちは、JetBrains公式代理店NATTOSYSTEMのマーケティング、西山です。
+
+ 1. PyCon JP 2025にJetBrainsと共同出展しました
+2025年のPyCon JP 2025にて、私たちNATTOSYSTEMはJetBrainsと共同でブースを出展しました。
+JetBrainsはPython IDE「PyCharm」をはじめとする開発ツールを提供しており、
+ブースではPyCharmとJetBrainsのコーディングエージェント「Junie」を紹介しました。
+さらに、今回が初登場となるNATTOSYSTEMオリジナルグッズも配布！
+
+多くの方が足を止めてくだ...]]></description><link>https://zenn.dev/nattosystem_jp/articles/7d95136db35498</link><guid isPermaLink="true">https://zenn.dev/nattosystem_jp/articles/7d95136db35498</guid><pubDate>Mon, 06 Oct 2025 08:15:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cpN_57VE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PyCon%2520JP%25202025%25E3%2581%25A7JetBrains%25E3%2581%25A8%25E5%2585%25B1%25E5%2590%258C%25E5%2587%25BA%25E5%25B1%2595%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2520%25E3%2580%259CPython%25E9%2596%258B%25E7%2599%25BA%25E8%2580%2585%25E3%2582%25A2%25E3%2583%25B3%25E3%2582%25B1%25E3%2583%25BC%25E3%2583%2588%25E3%2583%25AC%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2580%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Shina%2520Nishiyama%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RiYWQxMDhjNTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BENATTOSYSTEM%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg4M2YwNDIzODEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>Shina Nishiyama</dc:creator></item><item><title><![CDATA[NATTOSYSTEM × JetBrains ウェビナー振り返り（QAまとめ、スライド共有）]]></title><description><![CDATA[
+ JetBrains AI 活用ウェビナーを開催しました
+こんにちは、JetBrains公式代理店NATTOSYSTEMのねばねばです。
+先日、「JetBrains AI徹底解剖 ─ IDEに最適化された“開発者のためのAI”とは？」   と題したウェビナーを開催いたしました。
+ご参加いただいた皆さま、誠にありがとうございました！
+
+
+ ウェビナーの内容
+
+
+JetBrains AIとは？
+
+
+AI Assistantの主な機能と活用法
+
+
+次世代の開発支援 - コーディングエージェント「Junie」の紹介とデモ
+
+
+JetBrains AI Enterpriseの概要と導入ポイント
+...]]></description><link>https://zenn.dev/nattosystem_jp/articles/54cbebbca3bedb</link><guid isPermaLink="true">https://zenn.dev/nattosystem_jp/articles/54cbebbca3bedb</guid><pubDate>Mon, 06 Oct 2025 06:21:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0gFgGhQQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:NATTOSYSTEM%2520%25C3%2597%2520JetBrains%2520%25E3%2582%25A6%25E3%2582%25A7%25E3%2583%2593%25E3%2583%258A%25E3%2583%25BC%25E6%258C%25AF%25E3%2582%258A%25E8%25BF%2594%25E3%2582%258A%25EF%25BC%2588QA%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2580%2581%25E3%2582%25B9%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2589%25E5%2585%25B1%25E6%259C%2589%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25AD%25E3%2581%25B0%25E3%2581%25AD%25E3%2581%25B0%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RiYWQxMDhjNTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BENATTOSYSTEM%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvbi5wbmc=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>ねばねば</dc:creator></item><item><title><![CDATA[C++ ライブラリ libsparseir の開発記録（他言語サポート編）]]></title><description><![CDATA[
+ 前置き
+本記事は sparse-ir と呼ばれる Python, Julia で書かれたライブラリを C++ に移植した libsparseir の開発で得た知見を共有するために執筆されました．本記事は C++ への移植編 の続きです．2025/３月ごろには概ね SparseIR.jl が持っていた機能を C++ へ移植することができました．本記事では2025/9 月までの進捗を共有します．
+
+ C-API を利用した多言語サポート
+ここでの多言語サポートというのは Julia, Python, Fortran ユーザから C++ ライブラリ libsparseir が持っている機能...]]></description><link>https://zenn.dev/terasakisatoshi/articles/99a5ae431857d2</link><guid isPermaLink="true">https://zenn.dev/terasakisatoshi/articles/99a5ae431857d2</guid><pubDate>Mon, 06 Oct 2025 06:21:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9vTw-OYa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:C%252B%252B%2520%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%2520libsparseir%2520%25E3%2581%25AE%25E9%2596%258B%25E7%2599%25BA%25E8%25A8%2598%25E9%258C%25B2%25EF%25BC%2588%25E4%25BB%2596%25E8%25A8%2580%25E8%25AA%259E%25E3%2582%25B5%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E7%25B7%25A8%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2594%25E3%2581%25BE%25E3%2581%25B5%25E3%2581%2582%25E3%2581%2596%25E3%2582%2589%25E3%2581%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EwZjBlOWIxMjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>ごまふあざらし</dc:creator></item><item><title><![CDATA[構造主観力学で創る「生きているAI社会」- 場当たり的プログラミングを超えて]]></title><description><![CDATA[
+ はじめに - AIが「考える」とはどういうことか
+あなたがゲームやシミュレーションでNPCの行動を見て「なんか不自然だな...」と感じたことはありませんか？
+従来のAI:
+if 空腹 &gt; 0.7:
+    狩猟する()
+elif 負傷者がいる:
+    看護する()
+else:
+    休息する()
+このような場当たり的な条件分岐では、どれだけ複雑にしても「生きている」感じがしません。
+構造主観力学（SSD理論）ベースのAI:
+# NPCが「できること」を自分で評価
+capabilities = self.evaluate_what_i_can_do(situation)
+
+#...]]></description><link>https://zenn.dev/hermanndegner/articles/c1dabddb84676a</link><guid isPermaLink="true">https://zenn.dev/hermanndegner/articles/c1dabddb84676a</guid><pubDate>Mon, 06 Oct 2025 04:07:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GQ7dCrxV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%25A7%258B%25E9%2580%25A0%25E4%25B8%25BB%25E8%25A6%25B3%25E5%258A%259B%25E5%25AD%25A6%25E3%2581%25A7%25E5%2589%25B5%25E3%2582%258B%25E3%2580%258C%25E7%2594%259F%25E3%2581%258D%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258BAI%25E7%25A4%25BE%25E4%25BC%259A%25E3%2580%258D-%2520%25E5%25A0%25B4%25E5%25BD%2593%25E3%2581%259F%25E3%2582%258A%25E7%259A%2584%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%2592%25E8%25B6%2585%25E3%2581%2588%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2598%25E3%2583%25AB%25E3%2583%259E%25E3%2583%25B3%25E3%2583%25BB%25E3%2583%2587%25E3%2582%25B0%25E3%2583%258A%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmZvYm9qRkFzTkc4ekJic2JWY1dYeGJwVFhFRlhNOHVndzlBR08zc3VlOW5xeGQ1SGk9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>ヘルマン・デグナー</dc:creator></item><item><title><![CDATA[【MMAction2】inference_recognizerでリアルタイム推論がうまくいかない人のための実践ガイド]]></title><description><![CDATA[
+ はじめに
+SREホールディングス株式会社 のデータサイエンティストとして画像認識案件の開発に携わっている池内です。
+さて、MMAction2は非常に強力な行動認識ライブラリですが、学習済みのモデルをWebカメラなどでリアルタイム推論しようとした際に、こんな経験はないでしょうか？
+
+
+inference_recognizerにカメラフレームを渡しているのに、全く意味のない結果が返ってくる
+動画ファイルならうまくいくのに、生のフレームだとなぜか動かない
+エラーは出ないが、とにかく精度が全く出ない
+
+この記事は、まさにそうした問題で悩んでいる方のために、その原因と、安定したリアルタイム推論...]]></description><link>https://zenn.dev/sre_holdings/articles/6c465fb784bbb2</link><guid isPermaLink="true">https://zenn.dev/sre_holdings/articles/6c465fb784bbb2</guid><pubDate>Mon, 06 Oct 2025 02:07:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oByZzUCn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590MMAction2%25E3%2580%2591inference_recognizer%25E3%2581%25A7%25E3%2583%25AA%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E6%258E%25A8%25E8%25AB%2596%25E3%2581%258C%25E3%2581%2586%25E3%2581%25BE%25E3%2581%258F%25E3%2581%2584%25E3%2581%258B%25E3%2581%25AA%25E3%2581%2584%25E4%25BA%25BA%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E5%25AE%259F%25E8%25B7%25B5%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:mikeuchi%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZlYWJhYWQ3ZjEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:SRE%2520Holdings%2520%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWpzQUU0Z01kMnprb0h5OXVnVWVvQ3RjZmdGV2NaUm5DbVBpSW03V1NTTURfaWtnPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>mikeuchi</dc:creator></item><item><title><![CDATA[「ローカルLLMとAIエージェント、次はどう活用する？」～【python】今週の人気記事TOP5（2025/10/05）]]></title><description><![CDATA[!
+この記事はZennからpythonのLike数が多い記事のリストを自動的取得し、AIを利用して要約し、自動更新されています。
+
+
+ 【2025/10/5】「ローカルLLMとAIエージェント、次はどう活用する？」今週の人気記事TOP5（2025/10/05）
+
+ GPUなしローカルでも高速・高精度なOCRができるOnnxOCRが凄い
+
+PaddleOCRをベースにしたOnnxOCRは、ONNX Runtimeの活用により、高速かつ高精度なOCRをGPUなしの環境でも実現するライブラリ。PaddleOCRと比較して最大5倍の推論速度。EasyOCR,PaddleOCR,OnnxOCRの３...]]></description><link>https://zenn.dev/carenet/articles/zenn-weekly-python-articles-2025-10</link><guid isPermaLink="true">https://zenn.dev/carenet/articles/zenn-weekly-python-articles-2025-10</guid><pubDate>Mon, 06 Oct 2025 01:17:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--h0heiiEN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258C%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25ABLLM%25E3%2581%25A8AI%25E3%2582%25A8%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%25B3%25E3%2583%2588%25E3%2580%2581%25E6%25AC%25A1%25E3%2581%25AF%25E3%2581%25A9%25E3%2581%2586%25E6%25B4%25BB%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%25EF%25BC%259F%25E3%2580%258D%25EF%25BD%259E%25E3%2580%2590python%25E3%2580%2591%25E4%25BB%258A%25E9%2580%25B1%25E3%2581%25AE%25E4%25BA%25BA%25E6%25B0%2597%25E8%25A8%2598%25E4%25BA%258BTOP5%25EF%25BC%25882025%252F10%252F05%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Kou%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE0MTRiZmIwZWQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:CareNet%2520Engineers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YjAxZHZYTmpqcFVER2lmaDBXNVRCQjlCcTFWTVpHc3NpSV9yN1A9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>Kou</dc:creator></item><item><title><![CDATA[VSCode拡張開発メモ]]></title><description><![CDATA[
+ はじめに
+「VSCodeでSQLMesh」で、SQLMesh の VSCode 拡張を確認して、ソースコードもあるし、拡張を拡張しちゃうぞ。と思ったのですが、ソースコードの気持ちが全くわからず…。ということで、ネットにたくさんある VSCode 拡張の作り方の Yet Another なんとかですが、できるだけ最新の公式から。
+
+ 概要
+
+
+ 拡張機能でできること(の例)
+
+VS Code の外観を色やファイルアイコンのテーマで変更する - Theming
+
+UI にカスタム コンポーネントとビューを追加する - ワークベンチの拡張
+
+HTML/CSS/JS で構築されたカスタム W...]]></description><link>https://zenn.dev/robon/articles/a8ef580909c553</link><guid isPermaLink="true">https://zenn.dev/robon/articles/a8ef580909c553</guid><pubDate>Mon, 06 Oct 2025 00:56:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UO_pWGm7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VSCode%25E6%258B%25A1%25E5%25BC%25B5%25E9%2596%258B%25E7%2599%25BA%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E8%258D%2592%25E6%259C%25A8%2520%25E5%25B2%25B3%25E5%25A4%25AB%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q3NDIzMjE0NTUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEROBON%25E3%2581%25AE%25E6%258A%2580%25E8%25A1%2593%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YUpBSVQ1V0NaaVBRUmF6TkswS1dFVkEybkRJMGdaN1lvMjdJdDIyQT1zOTYtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>荒木 岳夫</dc:creator></item><item><title><![CDATA[(多分)読むだけでわかるuvでのプロジェクト管理]]></title><description><![CDATA[
+ はじめに
+こんにちは！KGモーターズ株式会社でエンジニアをしている中村です。
+KGモーターズは、広島を拠点に1人乗り小型 EV mibot を開発しているスタートアップです。
+
+KGモーターズでは現在量産に向けて
+
+アプリ開発
+インフラ・クラウド開発
+制御開発
+
+がメインで走っていますが、将来の仕込みとしてmibotの自律化に向けた開発も進めています。
+AI・機械学習の開発となるとほとんどがPythonになりますが、今回はPythonの開発を効率よく進められるパッケージ管理ツールのuvについてです。
+https://docs.astral.sh/uv/
+私自身これまでPoetryをメ...]]></description><link>https://zenn.dev/kg_motors_mibot/articles/0eb4ef683a752c</link><guid isPermaLink="true">https://zenn.dev/kg_motors_mibot/articles/0eb4ef683a752c</guid><pubDate>Mon, 06 Oct 2025 00:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--coekYO8y--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2528%25E5%25A4%259A%25E5%2588%2586%2529%25E8%25AA%25AD%25E3%2582%2580%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25A7%25E3%2582%258F%25E3%2581%258B%25E3%2582%258Buv%25E3%2581%25A7%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E7%25AE%25A1%25E7%2590%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Sota%2520Nakamura%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZmZmUxMWMyMTEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:KG%25E3%2583%25A2%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25BA%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y1ODgzODE3MjYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>Sota Nakamura</dc:creator></item><item><title><![CDATA[## MCPとWeb開発の共通点を探る：『やさしいMCP入門』とWeb基礎知識のつながり]]></title><description><![CDATA[
+ はじめに
+こんにちは。これまでは『やさしいMCP入門』を読んで、AIエージェントとMCPの仕組みについて学んできました。今回は、少し視点を変えて『PythonでつくるWebアプリのつくり方』を読み進め、Webの基礎知識を学びました 。
+Webの仕組みを学ぶ中で、以前ブログにまとめたMCPの概念と多くの共通点があることに気づきました。本記事では、このWeb開発の基礎知識をMCPの視点から再解釈し、両者のつながりを整理します。
+
+ 1. Webアプリの基本：クライアント・サーバモデルとHTTP
+!
+AIでクライアント・サーバモデルを図にしてもらいました。
+
+
+Webアプリは、クライアント...]]></description><link>https://zenn.dev/hiroakikody/articles/61a3f7e4f7fb39</link><guid isPermaLink="true">https://zenn.dev/hiroakikody/articles/61a3f7e4f7fb39</guid><pubDate>Sun, 05 Oct 2025 22:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YVmaWGVE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2523%2523%2520MCP%25E3%2581%25A8Web%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AE%25E5%2585%25B1%25E9%2580%259A%25E7%2582%25B9%25E3%2582%2592%25E6%258E%25A2%25E3%2582%258B%25EF%25BC%259A%25E3%2580%258E%25E3%2582%2584%25E3%2581%2595%25E3%2581%2597%25E3%2581%2584MCP%25E5%2585%25A5%25E9%2596%2580%25E3%2580%258F%25E3%2581%25A8Web%25E5%259F%25BA%25E7%25A4%258E%25E7%259F%25A5%25E8%25AD%2598%25E3%2581%25AE%25E3%2581%25A4%25E3%2581%25AA%25E3%2581%258C%25E3%2582%258A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hiroakiKody%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTZ0dFdjYThibjVGSDdzaXU0ZzFBZFlxWXk4OVpXZVEyaHFMSEJibDlPWGQ1QVJRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>hiroakiKody</dc:creator></item><item><title><![CDATA[LLM(ChatGPT5)と共同でPythonを書いていて気付かされたこと]]></title><description><![CDATA[最近ChatGPTにPythonコードを書かせていると意外で想像を超えるようなコードを出してくることが有り、自分の見識の狭さを知らされました。それについてとプログラミング言語とそれを使う人の変化についての私見を書き連ねます。あとに進むに連れハルシネーションが増大していきます。
+
+ Dataclass、型ヒントの多用
+Pythonの動的型付言語としての柔軟性は辞書型(dict),tuple,可変長引数、lambda関数の簡便な使い勝手によく現れています。辞書やtupleに変数追加も容易なこともあって*argsや**kwargsを使った関数、クラスの引数は長大になりがちです。また出力は動的に...]]></description><link>https://zenn.dev/xiangze/articles/def2ffcd253685</link><guid isPermaLink="true">https://zenn.dev/xiangze/articles/def2ffcd253685</guid><pubDate>Sun, 05 Oct 2025 16:17:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ugeSuJEQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LLM%2528ChatGPT5%2529%25E3%2581%25A8%25E5%2585%25B1%25E5%2590%258C%25E3%2581%25A7Python%25E3%2582%2592%25E6%259B%25B8%25E3%2581%2584%25E3%2581%25A6%25E3%2581%2584%25E3%2581%25A6%25E6%25B0%2597%25E4%25BB%2598%25E3%2581%258B%25E3%2581%2595%25E3%2582%258C%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:xiangze%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZhOWViMzc3MTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>xiangze</dc:creator></item></channel></rss>

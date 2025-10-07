@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「CSS」のフィード]]></title><description><![CDATA[Zennのトピック「CSS」のRSSフィードです]]></description><link>https://zenn.dev/topics/css</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/98e1680a6c.png</url><title>Zennの「CSS」のフィード</title><link>https://zenn.dev/topics/css</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 07 Oct 2025 12:05:01 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/css/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[学生×React/TS, デザインで最近ハマったことと軽い対処]]></title><description><![CDATA[
+
+RSCまわりの境界、地味にしんどい
+Next.js 15でRSC前提が当たり前になってきて、「ここはServer？ここはClient？」の判断が増えて手が止まる。速くはなるけど、試作のノリは落ちるやつ。
+
+
+TypeScriptを上げるたびに小さな地雷
+TS 5.6以降の更新は嬉しいけど、学プロみたいに依存がバラけてると設定差分でちょいちょい詰まる。アプリ本体は保守的、ユーティリティだけ先に上げる運用が安定。
+
+
+CSSの選択肢が増えすぎ問題
+:has と Container Queriesが使える今、「JSでやるかCSSでやるか」の線引きが再び迷子に。カードレイアウトはコンテナ基準...]]></description><link>https://zenn.dev/sakaikaz/articles/79caf305f6b670</link><guid isPermaLink="true">https://zenn.dev/sakaikaz/articles/79caf305f6b670</guid><pubDate>Fri, 03 Oct 2025 19:05:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1tUsJo7w--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25AD%25A6%25E7%2594%259F%25C3%2597React%252FTS%252C%2520%25E3%2583%2587%25E3%2582%25B6%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%25A7%25E6%259C%2580%25E8%25BF%2591%25E3%2583%258F%25E3%2583%259E%25E3%2581%25A3%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%25E3%2581%25A8%25E8%25BB%25BD%25E3%2581%2584%25E5%25AF%25BE%25E5%2587%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A0%25BA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkNWU0MmUzOTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>堺</dc:creator></item><item><title><![CDATA[SVGや動画の描画がシャキッとしない場合の処方箋]]></title><description><![CDATA[
+ GPUレンダリングを促す
+transform: translateZ(0);
+または
+transform: translate3d(0,0,0);
+これでsvg画像でもmp4動画でも描画が改善する（効果のほどは諸々条件による）
+特に動画では、GPU加速 - ビデオレンダリングをGPUで処理してパフォーマンス向上
+
+ ＋アニメーションの場合
+will-change: transform;
+上記を追加することで、
+transform変化を事前通知してブラウザの描画処理を最適化できる
+⚠️&nbsp;注意点：
+will-changeはメモリを多く消費するため多用しない!（１ページ内で～４要...]]></description><link>https://zenn.dev/tsunagu/articles/fdc316f9d2f132</link><guid isPermaLink="true">https://zenn.dev/tsunagu/articles/fdc316f9d2f132</guid><pubDate>Fri, 03 Oct 2025 09:00:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lg4oe4TI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SVG%25E3%2582%2584%25E5%258B%2595%25E7%2594%25BB%25E3%2581%25AE%25E6%258F%258F%25E7%2594%25BB%25E3%2581%258C%25E3%2582%25B7%25E3%2583%25A3%25E3%2582%25AD%25E3%2583%2583%25E3%2581%25A8%25E3%2581%2597%25E3%2581%25AA%25E3%2581%2584%25E5%25A0%25B4%25E5%2590%2588%25E3%2581%25AE%25E5%2587%25A6%25E6%2596%25B9%25E7%25AE%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E5%2592%258C%25E7%2594%25B0%25E3%2581%25A4%25E3%2581%25AA%25E3%2581%2590%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcyNDBmZDc5ZTYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2581%25A4%25E3%2581%25AA%25E3%2581%2590%25E3%2583%25A9%25E3%2583%259C%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSnZ0XzJBdDFDZFlWR1dpTWJ0M1JiYllkYkVHNW9tUVUySjNNSzhIaWpUcmhnZXkzLXQ9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>和田つなぐ</dc:creator></item><item><title><![CDATA[[Next.js] stickyで上部・左列を固定したらボーダーが消える？]]></title><description><![CDATA[テーブルの上部ヘッダーと左列を固定してスクロールできるよう実装したところ、スクロール中に borderが消えたり重なって見える問題が発生しました。
+結論から申し上げると、実際の border は使わず 擬似要素で線を「描く方法で解決しました。
+border-collapse はそのまま維持し、Tailwind のユーティリティとして再利用できる形にしました。
+
+ 💭 なぜこの現象が起きるのか
+
+position: sticky によりセルが 別レイヤー に持ち上がります。
+隣接セルの border が 重なり順（z-index）競合 により消えたり 二重線 に見えます。
+拡大表示や高DP...]]></description><link>https://zenn.dev/bltsdc/articles/97a35270c3c596</link><guid isPermaLink="true">https://zenn.dev/bltsdc/articles/97a35270c3c596</guid><pubDate>Fri, 03 Oct 2025 05:29:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JEW6PKnw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BNext.js%255D%2520sticky%25E3%2581%25A7%25E4%25B8%258A%25E9%2583%25A8%25E3%2583%25BB%25E5%25B7%25A6%25E5%2588%2597%25E3%2582%2592%25E5%259B%25BA%25E5%25AE%259A%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25E3%2583%259C%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25BC%25E3%2581%258C%25E6%25B6%2588%25E3%2581%2588%25E3%2582%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:soyeon%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q5NDcyMGM5YTguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:BLT%2520SDC%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I0ZTFjZGRhMTkuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>soyeon</dc:creator></item><item><title><![CDATA[grid-template-columnsでReactコンポーネントを綺麗に並べる]]></title><description><![CDATA[
+ はじめに
+reactコンポーネントを複数使っているときに、それぞれを綺麗に配置したいと思っていた時、
+ChatGPTくんと共に試行錯誤する中で、grid-template-columnsをcssの中で使用するやり方に辿り着きました。
+これが意外と便利に見えたので、自分の理解・整理のために残しておきます。
+
+ grid-template-columns
+grid-template-columnsはcssのプロパティの一種です。
+グリッド列の線名とトラックのサイズ変更機能を定義することができるみたいです。
+（MDN公式ドキュメント曰く）
+
+ codepenで試しに表示してみる
+grid-...]]></description><link>https://zenn.dev/qoo1000000/articles/da8c929539af94</link><guid isPermaLink="true">https://zenn.dev/qoo1000000/articles/da8c929539af94</guid><pubDate>Thu, 02 Oct 2025 13:09:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lhCD9St5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:grid-template-columns%25E3%2581%25A7React%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592%25E7%25B6%25BA%25E9%25BA%2597%25E3%2581%25AB%25E4%25B8%25A6%25E3%2581%25B9%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Qoo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGtHRXgxSGJfU1ktdXB4TWZKM3RacmFRNU42enBVQ0hheS0xclFya2VjR3FqM29pZ2lEQT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>Qoo</dc:creator></item><item><title><![CDATA[慣性スクロール(Lenis)+100dvh+iphoneでハマった事]]></title><description><![CDATA[
+ ハマる理由
+iphoneはvhかsvhが妥当な指定。
+dvhで指定すると変な大きさになり、スクロールしてるとどこかにジャンプしてしまう。
+おそらくlenisの現在位置の計算がおかしくなってる。
+でもandroidはdvhじゃないと、表示がおかしくなってしまう。
+cssだけで対応できなかったので、jsで対応する。
+
+ 対処法
+&lt;script is:inline&gt;
+  const isAndroid = /Android/i.test(navigator.userAgent);
+  if (isAndroid) document.documentElement.classLi...]]></description><link>https://zenn.dev/tonkachi/articles/b8127a8bcd5a0b</link><guid isPermaLink="true">https://zenn.dev/tonkachi/articles/b8127a8bcd5a0b</guid><pubDate>Thu, 02 Oct 2025 08:25:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--M9IA-_mH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2585%25A3%25E6%2580%25A7%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%2528Lenis%2529%252B100dvh%252Biphone%25E3%2581%25A7%25E3%2583%258F%25E3%2583%259E%25E3%2581%25A3%25E3%2581%259F%25E4%25BA%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:TONKACHI%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSms2NkhqbndManU3TUxjWVQ2cXpnalRrQjZoelE1bi14NWFvUU5QLTdVLWw5OENTMi09czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>TONKACHI</dc:creator></item><item><title><![CDATA[nth-child で 2 番目以降や 2 番目までなど範囲を指定する方法]]></title><description><![CDATA[nth-childで、最初と最後の要素を指定するのはよくやるので覚えているのですが、
+2番目以降から・偶数の時だけ・2番目までなどはいつも忘れてググっていたので自分用に暗記も兼ねてまとめました。
+結論のコードはCodePenをご覧ください。
+
+以下より内容をピックアップして解説しています。
+
+ 前提
+サンプルコードはcard__list--onwardsなどの名称で指定をしています。
+BEMの設計に則り、Modifier部分を変更して対応しました。
+
+ 2番目以降の背景色を変更
+よく使う、n番目以降の指定方法です。
+.card__list--onwards .card__item:nth...]]></description><link>https://zenn.dev/928sekine/articles/d403f20bf11ee4</link><guid isPermaLink="true">https://zenn.dev/928sekine/articles/d403f20bf11ee4</guid><pubDate>Thu, 02 Oct 2025 05:23:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BUymp9tJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:nth-child%2520%25E3%2581%25A7%25202%2520%25E7%2595%25AA%25E7%259B%25AE%25E4%25BB%25A5%25E9%2599%258D%25E3%2582%2584%25202%2520%25E7%2595%25AA%25E7%259B%25AE%25E3%2581%25BE%25E3%2581%25A7%25E3%2581%25AA%25E3%2581%25A9%25E7%25AF%2584%25E5%259B%25B2%25E3%2582%2592%25E6%258C%2587%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259B%25E3%2581%258D%25E3%2581%25AD%25E3%2582%258A%25E3%2581%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyNDQ3MGIzZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>せきねりな</dc:creator></item><item><title><![CDATA[HTMLメールのCSSデザインで詰まったので、Claude君とメールクライアントのCSS対応状況を徹底調査]]></title><description><![CDATA[
+ HTMLメール開発者必見！メールクライアントのCSS対応状況を徹底調査
+初めてZennの記事を書きます！
+スマートキャンプでエンジニアとして働いています！
+お手柔らかに...
+
+ はじめに
+開発のあるタスクでHTMLメールに関わる開発を行うことになり、その際に少し詰まってしまいました...
+ローカル環境でCSSのスタイリングの問題はなかったはずがGmailなどの他のメールクライアントで見ると、「アレっ、おかしい...」ってなっちゃいました。
+今後も対応箇所によっては再度HTMLメールを触る可能性は十分にあり得ると思い、この際に調べてみようということで調査してみました！
+HTMLメール...]]></description><link>https://zenn.dev/smartcamp/articles/4c74ff8d26131a</link><guid isPermaLink="true">https://zenn.dev/smartcamp/articles/4c74ff8d26131a</guid><pubDate>Wed, 01 Oct 2025 10:49:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QTuUW-cH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:HTML%25E3%2583%25A1%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25AECSS%25E3%2583%2587%25E3%2582%25B6%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%25A7%25E8%25A9%25B0%25E3%2581%25BE%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E3%2580%2581Claude%25E5%2590%259B%25E3%2581%25A8%25E3%2583%25A1%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25A2%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25AECSS%25E5%25AF%25BE%25E5%25BF%259C%25E7%258A%25B6%25E6%25B3%2581%25E3%2582%2592%25E5%25BE%25B9%25E5%25BA%2595%25E8%25AA%25BF%25E6%259F%25BB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%258A%25E3%2582%2585%25E3%2581%2586%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUyNGYwMGIzM2MuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:SMARTCAMP%2520Engineer%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWVETE9xaXZPV3hSU1N6NjVNemRxNWE2RDJoT0RUTzFVWFZ3NjMzX29BRmRfa1VxWT1zOTYtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>りゅう</dc:creator></item><item><title><![CDATA[react-day-pickerに日本の祝日データを読み込む]]></title><description><![CDATA[react-day-pickerに祝日の場合のスタイルを設定した際の記録メモです
+https://daypicker.dev/
+react-day-pickerにある、data-*属性を利用します
+https://developer.mozilla.org/ja/docs/Web/HTML/How_to/Use_data_attributes
+
+ 環境
+nextjsのcreate-next-app@latestを実行してプロジェクトを作成
+https://nextjs.org/docs/app/getting-started/installation
+プロジェクト設定はこちら
+% npx...]]></description><link>https://zenn.dev/tanaa/articles/9fd34126a1ae07</link><guid isPermaLink="true">https://zenn.dev/tanaa/articles/9fd34126a1ae07</guid><pubDate>Wed, 01 Oct 2025 08:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pKd8bsD3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:react-day-picker%25E3%2581%25AB%25E6%2597%25A5%25E6%259C%25AC%25E3%2581%25AE%25E7%25A5%259D%25E6%2597%25A5%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E8%25AA%25AD%25E3%2581%25BF%25E8%25BE%25BC%25E3%2582%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tana%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQxNWJiOGQ5NTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>tana</dc:creator></item><item><title><![CDATA[擬似要素で位置がズレる時displayを指定する]]></title><description><![CDATA[
+同じような物書いてるはずなのになんで位置ズレしてんのって思ったら大抵display:blockとかinline-blockを指定していないからでした。
+指定しないと高さが生まれないもんね。自戒。
+]]></description><link>https://zenn.dev/mumumu_umino/articles/684ed42f2e4ed6</link><guid isPermaLink="true">https://zenn.dev/mumumu_umino/articles/684ed42f2e4ed6</guid><pubDate>Tue, 30 Sep 2025 03:58:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--T5oFDpjW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2593%25AC%25E4%25BC%25BC%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%25A7%25E4%25BD%258D%25E7%25BD%25AE%25E3%2581%258C%25E3%2582%25BA%25E3%2583%25AC%25E3%2582%258B%25E6%2599%2582display%25E3%2582%2592%25E6%258C%2587%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2580%25E3%2582%2580%25E3%2582%2580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzllZWI2YTliM2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>むむむ</dc:creator></item><item><title><![CDATA[sass(scss)の制御構文について]]></title><description><![CDATA[
+ Sassの制御構文とは
+Sass (SCSS) の制御構文は、通常のプログラミングと同様に、スタイルシートの上から下への処理の流れを制御するために用いられます。これらは、コードの再利用性と保守性を劇的に高めるディレクティブとして機能します。
+「同じようなスタイルを何度も書くのが面倒だ」「PCとSPでスタイルを動的に切り替えたい」といった悩みを、Sassの制御構文を使えば、プログラミングのようにロジックを組み込むことで解決できます。
+
+ 1.繰り返し (ループ) (@for, @each, @while)
+似たようなスタイルを複数回、自動で生成するために使用します。
+
+ @for: 回...]]></description><link>https://zenn.dev/takaa/articles/1f74534627f10f</link><guid isPermaLink="true">https://zenn.dev/takaa/articles/1f74534627f10f</guid><pubDate>Mon, 29 Sep 2025 15:26:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--p4u-09QN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:sass%2528scss%2529%25E3%2581%25AE%25E5%2588%25B6%25E5%25BE%25A1%25E6%25A7%258B%25E6%2596%2587%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takaa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZkZTg4MTMwMTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>takaa</dc:creator></item><item><title><![CDATA[フロントエンドカンファレンス東京2025 参加レポート]]></title><description><![CDATA[
+ はじめに
+2025年9月21日にAbemaタワーで開催されたフロントエンドカンファレンス東京に参加してきました！
+本記事では、筆者が見たセッションから学んだことと感想について紹介します。
+
+ 参加経緯
+今回のフロントエンドカンファレンスに参加するにあたってサイバーエージェントのカンファレンス参加学生支援プログラムによって参加しました。
+普段は地方に住んでいると、技術系カンファレンスに参加したくても交通費や宿泊費を考えると金銭的な負担も大きいため、 現地で得られる熱量や情報に触れる機会が少ないのが正直なところです。
+今回のフロントエンドカンファレンスもフロントエンドの技術に関する話をぜ...]]></description><link>https://zenn.dev/popodada/articles/3e1f64138d9109</link><guid isPermaLink="true">https://zenn.dev/popodada/articles/3e1f64138d9109</guid><pubDate>Mon, 29 Sep 2025 08:38:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--b_N2mWf8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2582%25AB%25E3%2583%25B3%25E3%2583%2595%25E3%2582%25A1%25E3%2583%25AC%25E3%2583%25B3%25E3%2582%25B9%25E6%259D%25B1%25E4%25BA%25AC2025%2520%25E5%258F%2582%25E5%258A%25A0%25E3%2583%25AC%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BD%25E3%2581%25BD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkI4eU5jeGMwRkJvQnhfcDAwN2hETGp5SUNIbUJNQm1Wd1BfTU1kOFNhN1Q2TTgtVFo9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>ぽぽ</dc:creator></item><item><title><![CDATA[iOS 26.0のSafariでタブバーを単色にするハック的な何か]]></title><description><![CDATA[iOS 26.0のSafariで、タブバーを単色にしたい人向けのハックです。
+
+&lt;div class="veil" aria-hidden="true"&gt;
+  &lt;div class="veil-overlay"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;style&gt;
+.veil {
+  display: none;
+}
+@supports (-webkit-touch-callout: none) {
+  .veil {
+    position: sticky;
+    top: 0;
+    z-index: 10000;
+    d...]]></description><link>https://zenn.dev/nishinoshake/articles/4730df3751e00a</link><guid isPermaLink="true">https://zenn.dev/nishinoshake/articles/4730df3751e00a</guid><pubDate>Mon, 29 Sep 2025 08:32:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VoQufDAY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:iOS%252026.0%25E3%2581%25AESafari%25E3%2581%25A7%25E3%2582%25BF%25E3%2583%2596%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592%25E5%258D%2598%25E8%2589%25B2%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E3%2583%258F%25E3%2583%2583%25E3%2582%25AF%25E7%259A%2584%25E3%2581%25AA%25E4%25BD%2595%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nishinoshake%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJiNzI3NTc5MTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>nishinoshake</dc:creator></item><item><title><![CDATA[CSS: 文字色が「最低限のコントラストに関する達成基準」を満たすためのメモ]]></title><description><![CDATA[こなさんみんばんわ。
+…というフレーズで始まるブログ記事を投稿している Web サイトの主です。涙
+こちらに何か書くのは初めてになります[1]。
+今回はとりあえずテストで、昔ちょっと書いたまま放置していたメモ書きを公開してみることにします。題材はタイトルの通りで、今でいう WCAG 2.2 の達成基準 1.4.3（最低限のコントラスト）を満たすためには、文字サイズが何ピクセル以上であれば 3:1 のコントラスト比でも問題ないかを理解するために、当時（どうやら8年くらい前の模様）調べた内容をまとめたものです。
+https://waic.jp/translations/WCAG21/Unde...]]></description><link>https://zenn.dev/jforg/articles/f089f50efb2896</link><guid isPermaLink="true">https://zenn.dev/jforg/articles/f089f50efb2896</guid><pubDate>Mon, 29 Sep 2025 05:37:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--skoGjviQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%253A%2520%25E6%2596%2587%25E5%25AD%2597%25E8%2589%25B2%25E3%2581%258C%25E3%2580%258C%25E6%259C%2580%25E4%25BD%258E%25E9%2599%2590%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2588%25E3%2583%25A9%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25AB%25E9%2596%25A2%25E3%2581%2599%25E3%2582%258B%25E9%2581%2594%25E6%2588%2590%25E5%259F%25BA%25E6%25BA%2596%25E3%2580%258D%25E3%2582%2592%25E6%25BA%2580%25E3%2581%259F%25E3%2581%2599%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Jeffrey%2520Francesco%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hseGdvQmNfVm0tMllWbG9uN3NxZlEyNFVheDR0STd5UzBacVRSZ2c9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>Jeffrey Francesco</dc:creator></item><item><title><![CDATA[Tailwindで文字にグラデーションをつける]]></title><description><![CDATA[これは、単なる私的メモです。誰かの参考になれば幸いです。
+
+ グラデーションの基本
+
+bg-gradient-to-方向（r,l,b,t,tr,tl,br,bl）
+from
+via-色（任意）
+to-色
+
+以上の3つor4つを書けば、背景にグラデーションがつけられる。
+例
+&lt;div class="h-10 w-full bg-gradient-to-r from-teal-700 via-sky-500 to-teal-300" &gt;&lt;/div&gt;
+
+!
+これはTailwind v3の書き方です。Tailwind v4ではbg-gradientではなくbg-linea...]]></description><link>https://zenn.dev/roan_dokugo/articles/a8a3a32d6a5a43</link><guid isPermaLink="true">https://zenn.dev/roan_dokugo/articles/a8a3a32d6a5a43</guid><pubDate>Mon, 29 Sep 2025 02:51:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--13aTh6IC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tailwind%25E3%2581%25A7%25E6%2596%2587%25E5%25AD%2597%25E3%2581%25AB%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E3%2581%25A4%25E3%2581%2591%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25B0%258F%25E6%25B3%2589%25E5%25B9%25B8%25E5%25A4%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSVlISEtZYlFFYWVhVDJuVHR6cHNMdGFCSnlVd2hWMkk1Y0NzaWp2dTc1SmtWNnB3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>小泉幸太</dc:creator></item><item><title><![CDATA[CSS大解剖AdC 18日目: 「display」]]></title><description><![CDATA[本稿は、2024年4月頃に書き溜めていたシリーズです。最後まで温存させるのが勿体ないので、未完成ですがそのまま公開します(公開日: 2025/9/28)。そのため、内容の重複や記述方針の不一致があるかもしれませんが、ご理解ください。
+
+CSSの仕様を理解するために、1日ごとにテーマを決めて説明する企画18日目です。今日のテーマは「display」です。
+
+ displayの3つの役割
+displayには大きく3つの役割があります。
+
+ボックス生成の制御 (display: none / display: contents / list-item)
+
+内部ディスプレイレイアウトモード (i...]]></description><link>https://zenn.dev/qnighy/articles/049be5c16599b2</link><guid isPermaLink="true">https://zenn.dev/qnighy/articles/049be5c16599b2</guid><pubDate>Sun, 28 Sep 2025 10:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6zxVWYFE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%25E5%25A4%25A7%25E8%25A7%25A3%25E5%2589%2596AdC%252018%25E6%2597%25A5%25E7%259B%25AE%253A%2520%25E3%2580%258Cdisplay%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masaki%2520Hara%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2l3aEI4dTM5cFZyM09sWVFLcUU5Z1ozV2d3MHlsMS03cUZad0huYWc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>Masaki Hara</dc:creator></item><item><title><![CDATA[TailwindCSSでFlexアイテムの一部だけを省略記号にする方法]]></title><description><![CDATA[
+ 問題：Flexレイアウトで特定の要素だけを省略したい
+よくあるUIパターンとして、アバター・ユーザー名・ボタンを横並びにした際、画面幅が狭くなってもアバターとボタンは縮めず、ユーザー名だけを省略記号（...）で表示したい場面があります。
+[Avatar] [Very Long Username Here...] [Button]
+         ↑ これだけ縮む
+
+ 解決方法：3つの魔法のクラス
+
+ 🎯 必要なのはたった3つのクラスの組み合わせ
+&lt;div className="flex items-center gap-3"&gt;
+  {/* 縮まない要素 */}
+  &l...]]></description><link>https://zenn.dev/kencode1024kk/articles/e039f8f75dcf59</link><guid isPermaLink="true">https://zenn.dev/kencode1024kk/articles/e039f8f75dcf59</guid><pubDate>Sun, 28 Sep 2025 00:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pWzmJGoJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TailwindCSS%25E3%2581%25A7Flex%25E3%2582%25A2%25E3%2582%25A4%25E3%2583%2586%25E3%2583%25A0%25E3%2581%25AE%25E4%25B8%2580%25E9%2583%25A8%25E3%2581%25A0%25E3%2581%2591%25E3%2582%2592%25E7%259C%2581%25E7%2595%25A5%25E8%25A8%2598%25E5%258F%25B7%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ken%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JhZTkyZDcyNDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>Ken</dc:creator></item><item><title><![CDATA[CSS大解剖AdC 17日目: 「文脈」]]></title><description><![CDATA[本稿は、2024年3月頃に書き溜めていたシリーズです。最後まで温存させるのが勿体ないので、未完成ですがそのまま公開します(公開日: 2025/9/28)。そのため、内容の重複や記述方針の不一致があるかもしれませんが、ご理解ください。
+
+CSSの仕様を理解するために、1日ごとにテーマを決めて説明する企画17日目です。今日のテーマは「文脈」です。
+
+ 本稿で扱う文脈
+基本的に §3 Types of Containment のリストに基づいています。
+
+
+クエリコンテナ
+
+水平方向の寸法クエリに対するコンテナ[1]
+
+垂直方向の寸法クエリに対するコンテナ
+スタイルクエリに対するコンテナ
+
+
+...]]></description><link>https://zenn.dev/qnighy/articles/92d2af3df35225</link><guid isPermaLink="true">https://zenn.dev/qnighy/articles/92d2af3df35225</guid><pubDate>Sat, 27 Sep 2025 22:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nBiCZNMB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%25E5%25A4%25A7%25E8%25A7%25A3%25E5%2589%2596AdC%252017%25E6%2597%25A5%25E7%259B%25AE%253A%2520%25E3%2580%258C%25E6%2596%2587%25E8%2584%2588%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masaki%2520Hara%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2l3aEI4dTM5cFZyM09sWVFLcUU5Z1ozV2d3MHlsMS03cUZad0huYWc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>Masaki Hara</dc:creator></item><item><title><![CDATA[CSS大解剖 16日目: 「ボックス」]]></title><description><![CDATA[本稿は、2024年3月頃に書き溜めていたシリーズです。最後まで温存させるのが勿体ないので、未完成ですがそのまま公開します(公開日: 2025/9/27)。そのため、内容の重複や記述方針の不一致があるかもしれませんが、ご理解ください。
+
+CSSの仕様を理解するために、1日ごとにテーマを決めて説明する企画16日目です。今日のテーマは「ボックスモデル」です。
+
+ ボックスモデル
+CSSのボックスモデルでは、レイアウトの対象となる矩形は以下のような階層構造となって生成されます。
+
+
+要素 (element) は全ての起点です。文書は要素のツリー構造を与えます。
+
+ボックス (box) はボックス...]]></description><link>https://zenn.dev/qnighy/articles/97a74abd518f79</link><guid isPermaLink="true">https://zenn.dev/qnighy/articles/97a74abd518f79</guid><pubDate>Sat, 27 Sep 2025 10:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eQ-sZWen--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%25E5%25A4%25A7%25E8%25A7%25A3%25E5%2589%2596%252016%25E6%2597%25A5%25E7%259B%25AE%253A%2520%25E3%2580%258C%25E3%2583%259C%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masaki%2520Hara%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2l3aEI4dTM5cFZyM09sWVFLcUU5Z1ozV2d3MHlsMS03cUZad0huYWc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>Masaki Hara</dc:creator></item><item><title><![CDATA[view-transition]]></title><description><![CDATA[例えば、トップページのサムネをクリックしたらそのサムネがにゅーんと大きくなって、そのまま詳細ページのKVになる。みたいなことができる。
+遷移前と後両方のhtmlの&lt;head&gt;の最上部に
+&lt;style&gt;
+@view-transition {
+navigation: auto;
+}
+&lt;/style&gt;
+を書く。
+シームレスに遷移させたい要素(遷移前のにも遷移後のにも)にclass="hero"をつける。(aではなくimgにつけるとよい)
+&lt;img src="thumb.jpg" width="200" class="hero"&gt;
+style.cs...]]></description><link>https://zenn.dev/yamadev/articles/e51a9253461185</link><guid isPermaLink="true">https://zenn.dev/yamadev/articles/e51a9253461185</guid><pubDate>Sat, 27 Sep 2025 07:34:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rX5lYndP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:view-transition%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yamadev%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1poUFJCNXVlRmVXY1ZPRk5SN0x4VXVkN2NjQ19zVU1ub0pfNGUwV3RZRU5HMlgya1dFQT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>yamadev</dc:creator></item><item><title><![CDATA[CSS大解剖 15日目: 「方向」]]></title><description><![CDATA[本稿は、2024年3月頃に書き溜めていたシリーズです。最後まで温存させるのが勿体ないので、未完成ですがそのまま公開します(公開日: 2025/9/27)。そのため、内容の重複や記述方針の不一致があるかもしれませんが、ご理解ください。
+
+CSSの仕様を理解するために、1日ごとにテーマを決めて説明する企画15日目です。今日のテーマは「方向」です。
+
+ 本稿で扱う方向
+
+
+
+
+←
+→
+↑
+↓
+←→
+↑↓
+その他の用語
+
+
+
+
+物理的な方向(physical direction)
+左(left)
+右(right)
+上(top)
+下(bottom)
+(物理的な)幅((physical) width...]]></description><link>https://zenn.dev/qnighy/articles/a5dfab433d6a88</link><guid isPermaLink="true">https://zenn.dev/qnighy/articles/a5dfab433d6a88</guid><pubDate>Fri, 26 Sep 2025 22:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fKYZkW4F--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%25E5%25A4%25A7%25E8%25A7%25A3%25E5%2589%2596%252015%25E6%2597%25A5%25E7%259B%25AE%253A%2520%25E3%2580%258C%25E6%2596%25B9%25E5%2590%2591%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masaki%2520Hara%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2l3aEI4dTM5cFZyM09sWVFLcUU5Z1ozV2d3MHlsMS03cUZad0huYWc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>Masaki Hara</dc:creator></item></channel></rss>
