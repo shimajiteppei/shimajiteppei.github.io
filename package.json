@@ -1,47 +1,47 @@
 {
-    "private": true,
-    "scripts": {
-        "preinstall": "rm -rf ./node_modules",
-        "install": "npm install --ignore-scripts && npx husky init",
-        "postinstall": "run-s tool:build_docker",
-        "start": "run-s tool:gen_xp-css docs:start_serve",
-        "stop": "run-s docs:stop_serve",
-        "test": "run-s -c tool:format tool:lint tool:check_dead_link",
-        "build": "run-s tool:build_docker docs:build",
-        "generate": "run-s build docs:preview",
-        "docs:start_serve": "docker run --rm -it -p 8000:8000 --user $(id -u):$(id -g) -v ${PWD}:/docs --name my-blog-mkdocs-material-dev my-blog-mkdocs-material",
-        "docs:stop_serve": "docker stop my-blog-mkdocs-material-dev",
-        "docs:build": "docker run --rm --user $(id -u):$(id -g) -e EXCLUDE_DOCS='drafts/' -v ${PWD}:/docs my-blog-mkdocs-material build",
-        "docs:preview": "http-server ./site -p 8001",
-        "tool:build_docker": "docker build -t my-blog-mkdocs-material:latest - < src/docker/Dockerfile",
-        "tool:gen_xp-css": "sh src/xp-css/generate.sh && sass --no-source-map src/xp-css/xp.scss docs/static/stylesheets/xp.css",
-        "tool:gen_rss": "sh src/rss/generate.sh && mv src/rss/dist/rss.md docs/rss.md",
-        "tool:gen_webp": "sh src/webp/generate.sh",
-        "tool:format": "prettier . --write",
-        "tool:lint": "textlint docs",
-        "tool:check_dead_link": "find docs -type f -not -path '*/drafts/*' -name '*.md' ! -name 'rss.md' -print0 | xargs -0 -n1 npx markdown-link-check --quiet --config markdown-link-check.json",
-        "prepare": "husky"
-    },
-    "devDependencies": {
-        "http-server": "latest",
-        "husky": "latest",
-        "lint-staged": "latest",
-        "markdown-link-check": "latest",
-        "npm-run-all": "latest",
-        "prettier": "latest",
-        "sass": "latest",
-        "textlint": "latest",
-        "textlint-filter-rule-comments": "latest",
-        "textlint-rule-preset-ja-engineering-paper": "latest",
-        "textlint-rule-preset-ja-spacing": "latest",
-        "textlint-rule-preset-ja-technical-writing": "latest",
-        "textlint-rule-preset-smarthr": "latest"
-    },
-    "lint-staged": {
-        "*": "npm run tool:format"
-    },
-    "volta": {
-        "node": "23.5.0",
-        "npm": "11.0.0"
-    }
+  "private": true,
+  "scripts": {
+    "preinstall": "rm -rf ./node_modules",
+    "install": "npm install --ignore-scripts && npx husky init",
+    "postinstall": "run-s tool:build_docker",
+    "start": "run-s tool:gen_xp-css docs:start_serve",
+    "stop": "run-s docs:stop_serve",
+    "test": "run-s -c tool:format tool:lint tool:check_dead_link",
+    "build": "run-s tool:build_docker docs:build",
+    "generate": "run-s build docs:preview",
+    "docs:start_serve": "docker run --rm -it -p 8000:8000 --user $(id -u):$(id -g) -v ${PWD}:/docs --name my-blog-mkdocs-material-dev my-blog-mkdocs-material",
+    "docs:stop_serve": "docker stop my-blog-mkdocs-material-dev",
+    "docs:build": "docker run --rm --user $(id -u):$(id -g) -e EXCLUDE_DOCS='drafts/' -v ${PWD}:/docs my-blog-mkdocs-material build",
+    "docs:preview": "http-server ./site -p 8001",
+    "tool:build_docker": "docker build -t my-blog-mkdocs-material:latest - < src/docker/Dockerfile",
+    "tool:gen_xp-css": "sh src/xp-css/generate.sh && sass --no-source-map src/xp-css/xp.scss docs/static/stylesheets/xp.css",
+    "tool:gen_rss": "sh src/rss/generate.sh && mv src/rss/dist/rss.md docs/rss.md",
+    "tool:gen_webp": "sh src/webp/generate.sh",
+    "tool:format": "prettier . --write",
+    "tool:lint": "textlint docs",
+    "tool:check_dead_link": "find docs -type f -not -path '*/drafts/*' -name '*.md' ! -name 'rss.md' -print0 | xargs -0 -n1 npx markdown-link-check --quiet --config markdown-link-check.json",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "http-server": "latest",
+    "husky": "latest",
+    "lint-staged": "latest",
+    "markdown-link-check": "latest",
+    "npm-run-all": "latest",
+    "prettier": "latest",
+    "sass": "latest",
+    "textlint": "latest",
+    "textlint-filter-rule-comments": "latest",
+    "textlint-rule-preset-ja-engineering-paper": "latest",
+    "textlint-rule-preset-ja-spacing": "latest",
+    "textlint-rule-preset-ja-technical-writing": "latest",
+    "textlint-rule-preset-smarthr": "latest"
+  },
+  "lint-staged": {
+    "*": "npm run tool:format"
+  },
+  "volta": {
+    "node": "24.10.0",
+    "npm": "11.6.2"
+  }
 }
