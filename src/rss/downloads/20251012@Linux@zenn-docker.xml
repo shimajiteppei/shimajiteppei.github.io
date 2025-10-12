@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Docker」のフィード]]></title><description><![CDATA[Zennのトピック「Docker」のRSSフィードです]]></description><link>https://zenn.dev/topics/docker</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/75b80a5922.png</url><title>Zennの「Docker」のフィード</title><link>https://zenn.dev/topics/docker</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 12 Oct 2025 02:59:03 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/docker/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Dev Container上で、sam buildによるImageのビルドが「Error: Credentials store～」で失敗する]]></title><description><![CDATA[Visual Studio CodeのDev Container上で、AWS SAMのsam buildでImageをビルドしようとしたときに、下記のようなエラーになる場合があります。
+vscode@fa74e5972146:/workspaces/fastapi-dynamodb-sample$ sam build
+Building codeuri: /workspaces/fastapi-dynamodb-sample runtime: None architecture: x86_64 functions: FastApiFunction                    
+B...]]></description><link>https://zenn.dev/onozaty/articles/devcontainer-sam-build-error</link><guid isPermaLink="true">https://zenn.dev/onozaty/articles/devcontainer-sam-build-error</guid><pubDate>Sat, 11 Oct 2025 12:10:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FlIZelX9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Dev%2520Container%25E4%25B8%258A%25E3%2581%25A7%25E3%2580%2581sam%2520build%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258BImage%25E3%2581%25AE%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E3%2581%258C%25E3%2580%258CError%253A%2520Credentials...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:onozaty%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQxMGNlOWZjMzIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>onozaty</dc:creator></item><item><title><![CDATA[1台の共用PCを複数人で同時に使うDocker環境構築（SSH + Tailscale）]]></title><description><![CDATA[
+ はじめに
+研究室や家庭に1台だけ高性能なPCがあるけれど、複数人で使いたい時間帯が重なってしまい取り合いになる。そんな経験はありませんか？
+この記事では、1台のPC上にDockerを使ってユーザーごとに完全に独立した環境を構築し、各自がいつでもどこからでも安全にSSH接続できるようにする手順を解説します。
+これにより、PCの取り合い問題を解決し、全員が快適に作業できる環境を目指します。
+
+ この記事で目指すゴール
+1台のUbuntuマシン上で、ユーザーごとに専用のDockerコンテナを起動します。各ユーザーは、自分のノートPCなどからTailscale経由で、割り当てられたコンテナに...]]></description><link>https://zenn.dev/supiritasu/articles/supiritasu-01</link><guid isPermaLink="true">https://zenn.dev/supiritasu/articles/supiritasu-01</guid><pubDate>Sat, 11 Oct 2025 07:16:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3AJwUoRi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:1%25E5%258F%25B0%25E3%2581%25AE%25E5%2585%25B1%25E7%2594%25A8PC%25E3%2582%2592%25E8%25A4%2587%25E6%2595%25B0%25E4%25BA%25BA%25E3%2581%25A7%25E5%2590%258C%25E6%2599%2582%25E3%2581%25AB%25E4%25BD%25BF%25E3%2581%2586Docker%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25EF%25BC%2588SSH%2520%252B%2520Tailscale%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:supiritasu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlMjA0OGNkMTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>supiritasu</dc:creator></item><item><title><![CDATA[DevOps基礎編#2：Dockerで変わる開発環境とデプロイ戦略]]></title><description><![CDATA[
+ はじめに
+皆さん、こんにちは。オアシステクノロジーズの古本です。
+前回の「[第1回の記事タイトル]」に続き、DevOps基礎シリーズの第2回を始めます。
+今回のテーマはDockerです。
+おそらく多くのエンジニアが「docker-compose upは使ったことがある」というレベルだと思います。しかし、0→1でアーキテクチャを検討する上では、Dockerが 「なぜ」 生まれたのか、そしてそれが開発プロセス全体にどのような革命をもたらしたのかを深く理解することが不可欠です。
+この20分で、皆さんがDockerを「使う」エンジニアから、「使いこなす」アーキテクト候補へと一歩踏み出すための...]]></description><link>https://zenn.dev/oasys/articles/77992d638cd157</link><guid isPermaLink="true">https://zenn.dev/oasys/articles/77992d638cd157</guid><pubDate>Fri, 10 Oct 2025 03:54:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_IZ-ujBx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:DevOps%25E5%259F%25BA%25E7%25A4%258E%25E7%25B7%25A8%25232%25EF%25BC%259ADocker%25E3%2581%25A7%25E5%25A4%2589%25E3%2582%258F%25E3%2582%258B%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A8%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E6%2588%25A6%25E7%2595%25A5%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AA%25E3%2582%25A2%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2582%25AF%25E3%2583%258E%25E3%2583%25AD%25E3%2582%25B8%25E3%2583%25BC%25E3%2582%25BA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyMGUxYmY0YzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>オアシステクノロジーズ</dc:creator></item><item><title><![CDATA[初心者向け Dockerfileの作り方]]></title><description><![CDATA[ここでは「Playwrightを使ったスクレイピング用Dockerコンテナ」を例に、
+Dockerfileの書き方を構造的に解説します。
+
+ 1. Dockerfileとは？
+Dockerfileは、コンテナの設計図です。
+どんなOSを使うか、どんなライブラリや依存を入れるか、どんなコマンドを実行するかを順番に書いていきます。
+
+ 2. 基本構成
+Dockerfileは次のような構成で書きます
+# ベースイメージを指定
+FROM ...
+
+# 作業ディレクトリを設定
+WORKDIR /app
+
+# 依存ファイルをコピー
+COPY requirements.txt .
+
+# Pythonラ...]]></description><link>https://zenn.dev/hisao5232/articles/1415dcff653b4c</link><guid isPermaLink="true">https://zenn.dev/hisao5232/articles/1415dcff653b4c</guid><pubDate>Thu, 09 Oct 2025 20:24:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qHG73058--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%2520Dockerfile%25E3%2581%25AE%25E4%25BD%259C%25E3%2582%258A%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hisao5232%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VmOGFlMGNiYzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>hisao5232</dc:creator></item><item><title><![CDATA[Docker buildxの基礎知識：ビルド専用コンテナ「builder」の概念と操作コマンド]]></title><description><![CDATA[
+ 背景
+
+1, M3チップPCでビルドしたイメージをpushしてCloud Runにデプロイしたが、エラー。
+2, gcloud CLIで返ってきたエラーメッセージが、「PORT 8080が設定されてませんよー」とか「タイムアウトを延長してね」とか全っ然違うこと言っていて、ハマった。
+3, Cloud Loggingを見たら「textPayload: "terminated: Application failed to start: failed to load /usr/local/bin/python3: exec format error"」とあった。
+
+
+exec format...]]></description><link>https://zenn.dev/toshiki003/articles/5a44dbf27d606f</link><guid isPermaLink="true">https://zenn.dev/toshiki003/articles/5a44dbf27d606f</guid><pubDate>Thu, 09 Oct 2025 16:19:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EasglSKv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%2520buildx%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%25E7%259F%25A5%25E8%25AD%2598%25EF%25BC%259A%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E5%25B0%2582%25E7%2594%25A8%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2580%258Cbuilder%25E3%2580%258D%25E3%2581%25AE%25E6%25A6%2582%25E5%25BF%25B5%25E3%2581%25A8%25E6%2593%258D%25E4%25BD%259C%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Toshiki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M2ZTZkNmY5NjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>Toshiki</dc:creator></item><item><title><![CDATA[Django + MySQL を Docker で構築してユーザー登録する手順]]></title><description><![CDATA[
+ はじめに
+本記事では、ユーザー登録機能を持つ仮想Webアプリケーションを作成しました。
+環境は Docker Compose 上で Django（Webフレームワーク）と MySQL（データベース）を連携させて構築しています
+この構成により、アプリケーションとデータベースを分離し、ローカル環境に依存しない開発環境を再現できます。
+ユーザー登録フォームを作成し、入力したデータが MySQL に保存されることを確認するところまでをまとめています
+
+ 環境
+
+Docker / Docker Compose
+Python 3.12
+Django 5.0
+MySQL 8.3
+
+エディタはVSC...]]></description><link>https://zenn.dev/moudousiyou/articles/6ec78840def1da</link><guid isPermaLink="true">https://zenn.dev/moudousiyou/articles/6ec78840def1da</guid><pubDate>Thu, 09 Oct 2025 14:37:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6jsoaoL4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Django%2520%252B%2520MySQL%2520%25E3%2582%2592%2520Docker%2520%25E3%2581%25A7%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2597%25E3%2581%25A6%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%25E7%2599%25BB%25E9%258C%25B2%25E3%2581%2599%25E3%2582%258B%25E6%2589%258B%25E9%25A0%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2589%25E3%2583%2589%25E3%2583%2589%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUtwdXhhaWhpRlF3Y0ZIbGNuYmhvdllDdTZrNERsY1RPcWZhaHEyYUc1SmdxM0pRMD1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>ドドド</dc:creator></item><item><title><![CDATA[爆速で開発するためにnpmに公開してみた]]></title><description><![CDATA[
+ 目的
+
+毎回自分で作成するのが死ぬほどめんどい
+別のテンプレート使ってもいいけどそれを自分用に修正するのが死ぬほどめんどい
+個人でサービスを最速で立ち上げるためだから特に懸念がない場合のとき
+
+
+ 技術スタック
+
+ フロントエンド
+Next.js 14+（App Router、TypeScript、TailwindCSS）
+React 18+
+Shadcn/UI（コンポーネントライブラリ）
+
+ 認証・ユーザー管理
+NextAuth.js（LINE OAuth Provider）
+useAuth カスタムフック（LINE内ブラウザ自動ログイン対応）
+
+ バックエンド・データベース
+No...]]></description><link>https://zenn.dev/m_____hiroki/articles/8fe77e33fdbb8a</link><guid isPermaLink="true">https://zenn.dev/m_____hiroki/articles/8fe77e33fdbb8a</guid><pubDate>Thu, 09 Oct 2025 13:55:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vOvz17Nm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2588%2586%25E9%2580%259F%25E3%2581%25A7%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2599%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25ABnpm%25E3%2581%25AB%25E5%2585%25AC%25E9%2596%258B%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:m____hiroki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdhM2M1YTQyOWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>m____hiroki</dc:creator></item><item><title><![CDATA[Docker×OllamaでRAG環境をゼロから構築する完全手順（社内マニュアル自動生成編）]]></title><description><![CDATA[
+ Docker×OllamaでRAG環境をゼロから構築する完全手順（社内マニュアル自動生成編）
+
+ローカルGPUで社内ドキュメント検索AI（RAG）を動かしたい。
+この記事では、Docker + Ollama + LangChain + FastAPI + Streamlitを組み合わせて
+完全にオフラインなAIマニュアル検索環境を構築するまでを詳細に解説します。
+最終的に「パスワード変更手順は？」のような質問にLLMが根拠付きで回答できるところまで動作確認します。
+社内で作成する場合プロキシ設定を加える必要があります。
+
+
+
+ 🎯 目標
+
+Llama 3（Ollama）をバックエンド...]]></description><link>https://zenn.dev/hatyibei/articles/feba2e63f65b67</link><guid isPermaLink="true">https://zenn.dev/hatyibei/articles/feba2e63f65b67</guid><pubDate>Thu, 09 Oct 2025 10:27:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Bnwa_t0J--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25C3%2597Ollama%25E3%2581%25A7RAG%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E3%2582%25BC%25E3%2583%25AD%25E3%2581%258B%25E3%2582%2589%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%25E5%25AE%258C%25E5%2585%25A8%25E6%2589%258B%25E9%25A0%2586%25EF%25BC%2588%25E7%25A4%25BE%25E5%2586%2585%25E3%2583%259E%25E3%2583%258B%25E3%2583%25A5%25E3%2582%25A2%25E3%2583%25AB%25E8%2587%25AA%25E5%258B%2595%25E7%2594%259F%25E6%2588%2590%25E7%25B7%25A8%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hatyibei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUxMTdlYWRkODAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>hatyibei</dc:creator></item><item><title><![CDATA[Next.js の Docker 本番運用 Image 400 エラーの解決（“url” parameter is not allowed）]]></title><description><![CDATA[
+ 現象
+Next.js の Docker 本番運用で画像最適化エンドポイント /_next/image へのアクセスで 400: "url" parameter is not allowed
+
+
+ よくある原因
+
+Next.js の Image Optimization は、許可済みのリモート画像のみを処理します。next.config.js の images.remotePatterns に該当の URL パターンが含まれていない場合、サーバー側で拒否され 400 になります。
+Docker ビルド時に next.config.js をイメージへコピーし忘れ、実行時にデフォルト設定と...]]></description><link>https://zenn.dev/thaddeusjiang/articles/b4427f448c11e1</link><guid isPermaLink="true">https://zenn.dev/thaddeusjiang/articles/b4427f448c11e1</guid><pubDate>Thu, 09 Oct 2025 05:34:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XtFXPDai--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%2520%25E3%2581%25AE%2520Docker%2520%25E6%259C%25AC%25E7%2595%25AA%25E9%2581%258B%25E7%2594%25A8%2520Image%2520400%2520%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%25AE%25E8%25A7%25A3%25E6%25B1%25BA%25EF%25BC%2588%25E2%2580%259Curl%25E2%2580%259D%2520parameter%2520is...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A4%25A9%25E6%25B5%25B7%2520%25E3%2581%25AF%25E3%2582%2589%2520%252F%2520ThaddeusJiang%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2p6bktoOHFaT0tidW1HbzBuenpWeWhpZExnWEh4WjZNT3dqMmh2aHAwPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>天海 はら / ThaddeusJiang</dc:creator></item><item><title><![CDATA[2025年度 新卒研修 仮想化技術とDocker基礎]]></title><description><![CDATA[
+ はじめに
+こんにちは！2024年新卒入社の平岩です。普段はデマンド開発部でバックエンドエンジニアとして働いています。
+さて、今日のアプリケーション開発において、Dockerは避けては通れない重要な技術となっています。
+普段の開発において「プログラムが手元のPCで動かない」ことや、チーム開発において「メンバー間で環境差異があってハマった」といった経験は、多くのエンジニアが一度は通る道だと思います。Dockerは、こうした問題を解決し、誰でも・どこでも同じ開発環境を素早く構築できる「コンテナ技術」を提供します。
+株式会社ジーニーでは、入社2年目のエンジニアが講師となり、新卒社員向けに技術...]]></description><link>https://zenn.dev/geniee/articles/aa0cd5e19be30e</link><guid isPermaLink="true">https://zenn.dev/geniee/articles/aa0cd5e19be30e</guid><pubDate>Thu, 09 Oct 2025 02:57:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qq_xZ6bx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:2025%25E5%25B9%25B4%25E5%25BA%25A6%2520%25E6%2596%25B0%25E5%258D%2592%25E7%25A0%2594%25E4%25BF%25AE%2520%25E4%25BB%25AE%25E6%2583%25B3%25E5%258C%2596%25E6%258A%2580%25E8%25A1%2593%25E3%2581%25A8Docker%25E5%259F%25BA%25E7%25A4%258E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%2591%25E3%2582%2593%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyMmViZTNjMjIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:GENIEE%2520TechBlog%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MzODlmYzU2YTEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>けん</dc:creator></item><item><title><![CDATA[負荷分散]]></title><description><![CDATA[
+ Docker + Nginx によるシンプルなロードバランシング構成とその拡張
+本記事では、Docker上でNginxをリバースプロキシ兼ロードバランサーとして構成し、Node.jsベースのアプリケーションコンテナ複数台に対してリクエストを分散する方法を解説します。
+
+ 1. 構成概要
+以下の構成で作成していきます:
+
+ホスト：Docker Desktop 上で構築
+Nginxコンテナ：リバースプロキシおよびロードバランサー
+アプリケーションコンテナ：Node.jsを利用しレスポンスを返すHTTPサーバー
+
+
+
+
+ 2. ファイル構成
+以下は本構成におけるディレクトリおよびファイルの...]]></description><link>https://zenn.dev/moudousiyou/articles/29558f2a70cf70</link><guid isPermaLink="true">https://zenn.dev/moudousiyou/articles/29558f2a70cf70</guid><pubDate>Thu, 09 Oct 2025 00:27:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hiAnJmZB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:%25E8%25B2%25A0%25E8%258D%25B7%25E5%2588%2586%25E6%2595%25A3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2589%25E3%2583%2589%25E3%2583%2589%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUtwdXhhaWhpRlF3Y0ZIbGNuYmhvdllDdTZrNERsY1RPcWZhaHEyYUc1SmdxM0pRMD1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>ドドド</dc:creator></item><item><title><![CDATA[Claude Code Sandbox で Node.js イメージに Python を追加する際の PEP668 エラー解決法]]></title><description><![CDATA[
+ はじめに
+https://github.com/anthropics/claude-code/tree/main/.devcontainer
+
+Claude Code のレポジトリで公開されている devcontainer を使用して Python 環境を立てて使用したいと思った。
+ただし、レポジトリに公開されているベースイメージが Node.js のため、Python を別途インストールする必要がある。
+そのままインストールするとライブラリを pip で別途追加する際に、PEP668由来の error: externally-managed-environment が表示され、イン...]]></description><link>https://zenn.dev/t_tsuge/articles/8622ec7a0f60af</link><guid isPermaLink="true">https://zenn.dev/t_tsuge/articles/8622ec7a0f60af</guid><pubDate>Wed, 08 Oct 2025 16:28:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TQTIq_Rx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Claude%2520Code%2520Sandbox%2520%25E3%2581%25A7%2520Node.js%2520%25E3%2582%25A4%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25AB%2520Python%2520%25E3%2582%2592%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2599%25E3%2582%258B%25E9%259A%259B%25E3%2581%25AE%2520PEP668...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t_tsuge%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ExN2FkYTMyYzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>t_tsuge</dc:creator></item><item><title><![CDATA[PHP 5.6で運用していたWordPressを段階的にアップデートしたメモ]]></title><description><![CDATA[
+ はじめに
+共用サーバーではPHPやデータベースのバージョンなどを全体の設定に合わせることになります。運用していたWordPressが動作しなくなったという相談があり、対応しました。
+現在のサーバーはPHP 8.4で、PHPのバージョンアップのどこかのタイミングで動作しなくなったのだろうと考えました。
+
+ PHPのバージョンを下げて動作するポイントまで戻る
+DockerでPHPのバージョンを7.4、7.2と下げていきましたが、500番エラーが発生して原因がよくわかりませんでした。PHP 5.6でDB接続エラーになったので、まずはPHP 5.6で動かしてみることにしました。
+PHP 5....]]></description><link>https://zenn.dev/kaorumori/articles/7463e6d2dd648b</link><guid isPermaLink="true">https://zenn.dev/kaorumori/articles/7463e6d2dd648b</guid><pubDate>Wed, 08 Oct 2025 13:17:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FnZGf2Mm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PHP%25205.6%25E3%2581%25A7%25E9%2581%258B%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2581%259FWordPress%25E3%2582%2592%25E6%25AE%25B5%25E9%259A%258E%25E7%259A%2584%25E3%2581%25AB%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%2587%25E3%2583%25BC%25E3%2583%2588%25E3%2581%2597%25E3%2581%259F%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kaorumori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRjZjA1YmY3MzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>kaorumori</dc:creator></item><item><title><![CDATA[Docker入門：インストールから基本操作まで]]></title><description><![CDATA[
+ 1. Dockerとは？
+アプリケーションを「コンテナ」という単位で動かす仕組み
+仮想マシンと違って「軽量・高速」
+開発環境の再現性が高い（「自分のPCでは動く」がなくなる）
+
+
+ 2. Dockerのインストール方法
+
+Windowsの場合
+
+Docker Desktop をインストール
+WSL2が必要（Windows 10以降推奨）
+
+Macの場合
+
+Docker Desktopをダウンロード
+Intel Mac / Apple Silicon (M1/M2) でそれぞれ対応版がある
+
+Linuxの場合（Ubuntu例）
+
+sudo apt update
+sudo apt ins...]]></description><link>https://zenn.dev/hisao5232/articles/6b081e74163ff1</link><guid isPermaLink="true">https://zenn.dev/hisao5232/articles/6b081e74163ff1</guid><pubDate>Tue, 07 Oct 2025 20:23:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MTvMo2Zb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E5%2585%25A5%25E9%2596%2580%25EF%25BC%259A%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%258B%25E3%2582%2589%25E5%259F%25BA%25E6%259C%25AC%25E6%2593%258D%25E4%25BD%259C%25E3%2581%25BE%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hisao5232%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VmOGFlMGNiYzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>hisao5232</dc:creator></item><item><title><![CDATA[Dockerの公式についての覚書]]></title><description><![CDATA[
+ 行いたいこと
+
+Dockerについて公式になぞっての学習したので覚え書きをしていく。
+
+
+
+
+ Dockerについて
+
+
+Dockerは、アプリケーションを 開発（develop）、配送（ship）、実行（run） するためのオープンプラットフォーム。
+インフラ環境とアプリケーションを切り離し、環境間の差異を減らすことで、ソフトウェアの提供速度と信頼性を向上さる。
+
+
+
+ Docker プラットフォームでできること
+
+環境の違いによるトラブルをなくせる
+
+・開発→テスト→本番の流れでよく起きる、「手元では動いたのに本番でエラーになる」といった問題を防げる。
+・Dockerはアプリと必...]]></description><link>https://zenn.dev/tteaoocl/articles/3db91d0c05aad2</link><guid isPermaLink="true">https://zenn.dev/tteaoocl/articles/3db91d0c05aad2</guid><pubDate>Tue, 07 Oct 2025 14:36:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Wd4qWx_q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2581%25AE%25E5%2585%25AC%25E5%25BC%258F%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25AE%25E8%25A6%259A%25E6%259B%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hasegawa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkYxQWtRaGVBVlJ2Tldac0dZQUVSbFAyX2dQUktEZlZiQUhTMUlIOEM2T3c9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>hasegawa</dc:creator></item><item><title><![CDATA[【Docker】docker compose up -d の意味と「サービス」と「コンテナ」の関係を整理する]]></title><description><![CDATA[
+ はじめに
+docker compose up -d は開発でよく使うコマンドですが、
+「-d って何を意味しているのか？」「サービスとコンテナってどう違うのか？」と疑問に思ったことはありませんか？
+本記事では、docker compose up -d の動作と、
+「サービス」と「コンテナ」の関係を整理して理解します。
+
+ -d の意味：detached（デタッチ）モード
+-d は detached（デタッチ）モード の略で、
+コンテナを バックグラウンドで起動する ためのオプションです。
+
+ フォアグラウンドとバックグラウンドの違い
+-d を付けない場合（フォアグラウンドモード）
+d...]]></description><link>https://zenn.dev/fd2025/articles/208d88c3e642fd</link><guid isPermaLink="true">https://zenn.dev/fd2025/articles/208d88c3e642fd</guid><pubDate>Tue, 07 Oct 2025 10:16:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dWWRyWqW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Docker%25E3%2580%2591docker%2520compose%2520up%2520-d%2520%25E3%2581%25AE%25E6%2584%258F%25E5%2591%25B3%25E3%2581%25A8%25E3%2580%258C%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%25E3%2580%258D%25E3%2581%25A8%25E3%2580%258C%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2580%258D%25E3%2581%25AE%25E9%2596%25A2%25E4%25BF%2582%25E3%2582%2592%25E6%2595%25B4%25E7%2590%2586%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:fd2025%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzMzVlNTI5MmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>fd2025</dc:creator></item><item><title><![CDATA[PoetryでPythonのライブラリ依存管理を導入する]]></title><description><![CDATA[
+ Poetry とは
+Python の依存管理 / プロジェクト管理ツールで、
+
+依存関係を保った上でライブラリのインストール・アンインストール
+仮想環境の分離
+パッケージ化・公開
+
+までを統一的に扱えるように設計されている。
+以下、各項目の詳細を記載する。
+
+依存管理
+
+Poetry は、従来のpipの機能を包含しつつ、依存解決や**ロック（lock ファイル化）**といった仕組みを提供し、ライブラリ間のバージョン依存性の整合性を保つことを目指している。
+
+
+依存管理とは、プロジェクトが使うライブラリやそのバージョン、およびそれらの依存関係（そのライブラリがさらに依存しているものも含...]]></description><link>https://zenn.dev/micchi55555/articles/59d7cc0299750f</link><guid isPermaLink="true">https://zenn.dev/micchi55555/articles/59d7cc0299750f</guid><pubDate>Tue, 07 Oct 2025 09:01:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cfVq62SZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Poetry%25E3%2581%25A7Python%25E3%2581%25AE%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E4%25BE%259D%25E5%25AD%2598%25E7%25AE%25A1%25E7%2590%2586%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sakih5%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhjMzkyY2E1MjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>sakih5</dc:creator></item><item><title><![CDATA[ECSでGraceful Shutdownを正しく実現する - Nginx/PHP-FPM編]]></title><description><![CDATA[
+ はじめに
+こんにちは。都内でソフトウェアエンジニアをしている tomori です。
+先日、Nginx と PHP-FPM を主要コンテナとして持つ ECS on Fargate タスクに対して、Graceful Shutdown 対応を行いました。
+本記事では、その際に得られた知見や対応方法を紹介します。
+「そもそも Graceful Shutdown とは何なのか」「この対応を行わないとどういう問題が起きるのか」という点は過去に公開した記事でも言及しているので、併せてご覧ください。
+https://zenn.dev/tksx1227/articles/5ab5b3c99336c3#...]]></description><link>https://zenn.dev/tksx1227/articles/7108aa7a2072aa</link><guid isPermaLink="true">https://zenn.dev/tksx1227/articles/7108aa7a2072aa</guid><pubDate>Tue, 07 Oct 2025 03:19:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IswWkSJP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ECS%25E3%2581%25A7Graceful%2520Shutdown%25E3%2582%2592%25E6%25AD%25A3%25E3%2581%2597%25E3%2581%258F%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%2520-%2520Nginx%252FPHP-FPM%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tomori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk5NjQzYWMwY2MuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>tomori</dc:creator></item><item><title><![CDATA[Django × Nginx で実装するProtected Media機能のガイド]]></title><description><![CDATA[
+ Django × Nginx で実装するProtected Media機能のガイド
+
+ はじめに
+Webアプリケーションでユーザーがアップロードしたメディアファイル（音声・動画）を安全に配信するには、適切なアクセス制御が必要です。本記事では、Django 5.2とNginxを組み合わせて、認証されたユーザーのみがアクセス可能なProtected Media機能の実装方法を詳しく解説します。
+
+ この記事で学べること
+
+Djangoでの認証ベースのメディアファイル配信
+NginxのX-Accel-Redirectを使った効率的なファイル配信
+ファイル名生成とストレージ管理
+Docker...]]></description><link>https://zenn.dev/yukiharada1228/articles/510a55114fe7f1</link><guid isPermaLink="true">https://zenn.dev/yukiharada1228/articles/510a55114fe7f1</guid><pubDate>Tue, 07 Oct 2025 02:12:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kyjNzIYy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Django%2520%25C3%2597%2520Nginx%2520%25E3%2581%25A7%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258BProtected%2520Media%25E6%25A9%259F%25E8%2583%25BD%25E3%2581%25AE%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yukiharada1228%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZjYmI4YjNhMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>yukiharada1228</dc:creator></item><item><title><![CDATA[AWS Fargate ⇔ ECR連携で必要なVPCエンドポイント]]></title><description><![CDATA[
+ はじめに
+ECRのプライベートリポジトリに配置したイメージをAWS Fargateに展開する際に、必要なVPCエンドポイントで少しハマったので、メモとして残しておきます。
+AWS Fargateをパブリック環境に配置している場合やNat等を利用してAWS Fargateがインターネットに出れる環境の場合はそもそもVPCエンドポイントは不要ですが、こんな経路が必要だったんだなと抑えておくのがいいかと思います。
+
+ 結論
+必要なVPCエンドポイントは以下です。
+
+com.amazonaws.ap-northeast-1.ecr.api
+com.amazonaws.ap-northeast...]]></description><link>https://zenn.dev/boku_uchujin/articles/7ff858bb1932bb</link><guid isPermaLink="true">https://zenn.dev/boku_uchujin/articles/7ff858bb1932bb</guid><pubDate>Mon, 06 Oct 2025 07:12:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Y_4hDQZ_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AWS%2520Fargate%2520%25E2%2587%2594%2520ECR%25E9%2580%25A3%25E6%2590%25BA%25E3%2581%25A7%25E5%25BF%2585%25E8%25A6%2581%25E3%2581%25AAVPC%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2583%259D%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:boku_uchujin%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RmYWQ4MmM5YjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>boku_uchujin</dc:creator></item></channel></rss>
