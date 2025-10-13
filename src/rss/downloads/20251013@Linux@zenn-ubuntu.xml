@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Ubuntu」のフィード]]></title><description><![CDATA[Zennのトピック「Ubuntu」のRSSフィードです]]></description><link>https://zenn.dev/topics/ubuntu</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/8c2cdbc5b3.png</url><title>Zennの「Ubuntu」のフィード</title><link>https://zenn.dev/topics/ubuntu</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 13 Oct 2025 06:17:36 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/ubuntu/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[ROS2コンピューター「RDK X5」のセットアップ]]></title><description><![CDATA[
+ はじめに
+D-Robotics社の「RDK X5」は、ロボット開発向けのワンボードマイコンです。マイコンの性能やボードの形状などは Raspberry Pi 5と似ていますが、ROS2を扱うのに特化した製品となっています。またNPUを搭載しておりエッジAI処理もこなします。
+
+このページでは「RDK X5」へのOSインストールについて説明します。
+
+ RDK Studio
+D-Robotics社より「RDK X5」での初期化や開発をサポートする統合環境ソフトウェア「RDX Studio」が提供されています。Mac/Windows/Linux向けのものが 公式ページ からダウンロードで...]]></description><link>https://zenn.dev/bishi/articles/20251011a_article</link><guid isPermaLink="true">https://zenn.dev/bishi/articles/20251011a_article</guid><pubDate>Sun, 12 Oct 2025 15:07:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--l9i6MS-L--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ROS2%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2594%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2580%258CRDK%2520X5%25E3%2580%258D%25E3%2581%25AE%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B3%25E3%2581%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y3OTZmNjdkYTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>びし</dc:creator></item><item><title><![CDATA[Ubuntuのbazeliskのインストール]]></title><description><![CDATA[
+ はじめに
+私のメモ用です。
+公式はbazeliskを使うことを推奨していますが、Ubuntuのパッケージマネージャーであるaptにはbazeliskがないため、手動でインストールする必要があります。
+Bazelに関する記事が少なすぎるので、普及がてら書きました。
+
+ Bazelとは
+Bazel は Google が開発した ビルドシステム（ビルドツール） です。
+C++, Java, Python, Rust, Go など、多言語の大規模プロジェクトを高速・再現性のある方法でビルドできます。
+Make, Cmakeの代替として、Bazel は、依存関係の管理、並列ビルド、キャッシュ機...]]></description><link>https://zenn.dev/hallucogenia/articles/install-bazelisk</link><guid isPermaLink="true">https://zenn.dev/hallucogenia/articles/install-bazelisk</guid><pubDate>Sun, 12 Oct 2025 14:42:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mLA09_7d--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25E3%2581%25AEbazelisk%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:jijinbei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNFJTZmdxUWM5U054bmFGN1lZQTl4emZ2eHdYQ1dhaGFZNUZ1RmQ9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>jijinbei</dc:creator></item><item><title><![CDATA[Intel MacBook Pro (Mid 2014) に Ubuntu 25.10 をインストールする]]></title><description><![CDATA[https://zenn.dev/plesio/articles/692596076895bd
+の物語の続き。
+!
+半年待てば 26.04 LTSも来てOSアップグレードでLTS化できるので、もう 24.04 LTS を推奨しなくてもいいよ・・ね？。（今後トラブルがなければ）
+
+!
+macOS Tahoe が Intel Mac系サポートのラストOSだとアナウンスされている。
+様々な理由でレガシーIntel Macを使っている人々にとって、安全にハードを利用するための手段が限られて行く中、この人柱記事が、今後の多くの挑戦者たちの糧になることを願うばかりである。
+
+
+ 要約
+
+ISOから新...]]></description><link>https://zenn.dev/plesio/articles/416a7530b90620</link><guid isPermaLink="true">https://zenn.dev/plesio/articles/416a7530b90620</guid><pubDate>Sun, 12 Oct 2025 04:10:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--q4amd5jA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Intel%2520MacBook%2520Pro%2520%2528Mid%25202014%2529%2520%25E3%2581%25AB%2520Ubuntu%252025.10%2520%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:plesio_%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ3NjgxN2M0NWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>plesio_</dc:creator></item><item><title><![CDATA[【Linux/Ubuntu】使わなくなったWindowsノートPCにLinuxを入れて学習教材にする]]></title><description><![CDATA[
+ はじめに
+現在，メインPCとしてM2 Macbook Airの15インチを使用しています。
+2年ほど前にMacに乗り換え，それまでは大学生協の推奨PCであるdynabook社製のWindows PCを3年半使用していました。2年間全く使用せず眠ったままで，おそらくこのまま大学院終了と同時に手放す予定でした。しかし，少し先の話にはなりますが，Linuxの知識をある程度持っておいた方が良いなという状況になったので，勉強がてらLinuxをそのPCに入れてみました。
+「使わなくなったノートPCの活路を見出そう」とした記録です。同じような方の手助けになれば幸いです。
+!
+
+ 対象読者
+
+Lin...]]></description><link>https://zenn.dev/gucchi612/articles/20251010linux_install</link><guid isPermaLink="true">https://zenn.dev/gucchi612/articles/20251010linux_install</guid><pubDate>Sat, 11 Oct 2025 07:29:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qDKQ72mC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Linux%252FUbuntu%25E3%2580%2591%25E4%25BD%25BF%25E3%2582%258F%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259FWindows%25E3%2583%258E%25E3%2583%25BC%25E3%2583%2588PC%25E3%2581%25ABLinux%25E3%2582%2592%25E5%2585%25A5%25E3%2582%258C%25E3%2581%25A6%25E5%25AD%25A6%25E7%25BF%2592%25E6%2595%2599%25E6%259D%2590%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Gucchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q1MzgyZTg2Y2MuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>Gucchi</dc:creator></item><item><title><![CDATA[1台の共用PCを複数人で同時に使うDocker環境構築（SSH + Tailscale）]]></title><description><![CDATA[
+ はじめに
+研究室や家庭に1台だけ高性能なPCがあるけれど、複数人で使いたい時間帯が重なってしまい取り合いになる。そんな経験はありませんか？
+この記事では、1台のPC上にDockerを使ってユーザーごとに完全に独立した環境を構築し、各自がいつでもどこからでも安全にSSH接続できるようにする手順を解説します。
+これにより、PCの取り合い問題を解決し、全員が快適に作業できる環境を目指します。
+
+ この記事で目指すゴール
+1台のUbuntuマシン上で、ユーザーごとに専用のDockerコンテナを起動します。各ユーザーは、自分のノートPCなどからTailscale経由で、割り当てられたコンテナに...]]></description><link>https://zenn.dev/supiritasu/articles/supiritasu-01</link><guid isPermaLink="true">https://zenn.dev/supiritasu/articles/supiritasu-01</guid><pubDate>Sat, 11 Oct 2025 07:16:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3AJwUoRi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:1%25E5%258F%25B0%25E3%2581%25AE%25E5%2585%25B1%25E7%2594%25A8PC%25E3%2582%2592%25E8%25A4%2587%25E6%2595%25B0%25E4%25BA%25BA%25E3%2581%25A7%25E5%2590%258C%25E6%2599%2582%25E3%2581%25AB%25E4%25BD%25BF%25E3%2581%2586Docker%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25EF%25BC%2588SSH%2520%252B%2520Tailscale%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:supiritasu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlMjA0OGNkMTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>supiritasu</dc:creator></item><item><title><![CDATA[KV260(arm64)のUbuntu用のプログラムをクロスコンパイルする]]></title><description><![CDATA[
+ はじめに
+私は普段は Kria-KV260 上で、arm64(aarch64) の Ubuntu を使い、C++ や Rust などのセルフコンパイルで動かしています。
+一方で、近年は AI を使った開発なども増えてきて、特に Rust での開発では、VS-Code Remote Development などを使って、KV260 に接続すると、メモリやパフォーマンスの不足を感じるようになってきてしまいました。
+そこで、KV260 用のプログラムをホスト PC (x86_64) 上でクロスコンパイルして、KV260 上で動かす方法を試してみましたので備忘録です。
+同じく arm64 の...]]></description><link>https://zenn.dev/ryuz88/articles/kv260_ubuntu_crosscompile</link><guid isPermaLink="true">https://zenn.dev/ryuz88/articles/kv260_ubuntu_crosscompile</guid><pubDate>Mon, 06 Oct 2025 23:32:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tOKgP_fe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:KV260%2528arm64%2529%25E3%2581%25AEUbuntu%25E7%2594%25A8%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%25E3%2582%2592%25E3%2582%25AF%25E3%2583%25AD%25E3%2582%25B9%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2591%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ryuz88%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU4ODM0YjVlMTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>Ryuz88</dc:creator></item><item><title><![CDATA[言語設定を英語にしているUbuntu(GNOME)で句読点が上下中央に寄らないようにする。]]></title><description><![CDATA[
+ 事象
+タイトルの通り、全角な句読点(、/。)が上下中央に寄って表示される。
+
+上の画像のように違和感マシマシだし、見た目がとても汚い。
+
+ 修正する
+
+ 日本語フォントのインストール
+Ubuntuの場合は
+
+💻️ コマンド
+sudo apt install fonts-noto-cjk
+
+で日本語フォントが入る。が、だいたいプリインストールされてる。
+
+ 設定ファイルの作成
+今回はユーザー単位で設定するため
+mkdir -p ~/.config/fontconfig
+touch ~/.config/fontconfig/fonts.conf
+を実行すればOK。
+もしシステム全体で設定...]]></description><link>https://zenn.dev/ziaensochan/articles/2c462dea5bdb52</link><guid isPermaLink="true">https://zenn.dev/ziaensochan/articles/2c462dea5bdb52</guid><pubDate>Sat, 04 Oct 2025 06:04:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--32QVUMHB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25A8%2580%25E8%25AA%259E%25E8%25A8%25AD%25E5%25AE%259A%25E3%2582%2592%25E8%258B%25B1%25E8%25AA%259E%25E3%2581%25AB%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258BUbuntu%2528GNOME%2529%25E3%2581%25A7%25E5%258F%25A5%25E8%25AA%25AD%25E7%2582%25B9%25E3%2581%258C%25E4%25B8%258A%25E4%25B8%258B%25E4%25B8%25AD%25E5%25A4%25AE%25E3%2581%25AB%25E5%25AF%2584%25E3%2582%2589%25E3%2581%25AA%25E3%2581%2584%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:samenoko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQwM2U4Y2M2ZjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>samenoko</dc:creator></item><item><title><![CDATA[クラウドサーバーで物理エンジン環境設定忘備録2]]></title><description><![CDATA[前回は物理エンジンをバックで動かしつつその画面を確認するため録画するところまでいきました。
+https://zenn.dev/takeofuture/articles/cea230b5e69535
+今回はその画面をVNCでアクセスできる環境設定をいします。
+まずパッケージを導入します。(テストするためのツールもいれます)
+# apt install xvfb x11vnc openbox x11-apps xterm x11-xserver-utils mesa-utils
+そして最初に1回だけ、vncのパスワードを設定します。
+# mkdir -p ~/.vnc
+# x11vnc -s...]]></description><link>https://zenn.dev/takeofuture/articles/d1fa352e1d3bd8</link><guid isPermaLink="true">https://zenn.dev/takeofuture/articles/d1fa352e1d3bd8</guid><pubDate>Wed, 01 Oct 2025 23:47:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--X0RUn4Fv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%2589%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25A7%25E7%2589%25A9%25E7%2590%2586%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%25B3%25E7%2592%25B0%25E5%25A2%2583%25E8%25A8%25AD%25E5%25AE%259A%25E5%25BF%2598%25E5%2582%2599%25E9%258C%25B22%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takeofuture%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSnJ3cjVZTDFacmZXZ0NfWEVhb0xveEN1Mi1nYmNYQTNkUnJRQ2RwTnhkcEhGcTJWZjE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>takeofuture</dc:creator></item><item><title><![CDATA[自宅に DNSリゾルバを立てて SNS を強制シャットアウトする方法]]></title><description><![CDATA[
+ 「SNS で時間を溶かしてしまう」という悩み
+作業に集中しようと思って PC を開きます。でも気づいたら、SNS のおすすめ動画などに時間を取られてしまったことありませんか？
+意志の力で SNS を我慢しようとしても、なかなか続きません。
+
+📝 補足: この記事では SNS を例に説明していますが、この仕組みは SNS に限らず、YouTube、ニュースサイト、ゲームサイトなど、任意のドメインをブロックすることができます。
+
+そこで思いついたのが、ネットワークレベルでブロックするという方法です。この記事の応用編の設定まで行うと、家の Wi-Fi に接続している全てのデバイスで、指定し...]]></description><link>https://zenn.dev/jcat/articles/db7cd428dd6c93</link><guid isPermaLink="true">https://zenn.dev/jcat/articles/db7cd428dd6c93</guid><pubDate>Wed, 01 Oct 2025 07:24:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--p6sLFH3L--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2587%25AA%25E5%25AE%2585%25E3%2581%25AB%2520DNS%25E3%2583%25AA%25E3%2582%25BE%25E3%2583%25AB%25E3%2583%2590%25E3%2582%2592%25E7%25AB%258B%25E3%2581%25A6%25E3%2581%25A6%2520SNS%2520%25E3%2582%2592%25E5%25BC%25B7%25E5%2588%25B6%25E3%2582%25B7%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2588%25E3%2582%25A2%25E3%2582%25A6%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:maniizu3110%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI4ZjAxMzNhYzcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:J-CAT%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVjM2ExMzE1ZDguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>maniizu3110</dc:creator></item><item><title><![CDATA[wireguard VPN構築 nftableの設定 ufwは無効化]]></title><description><![CDATA[WireGuardで「ハンドシェイクはできるがDNS解決できずインターネットに出られない」という症状悩まされ試行錯誤。
+
+サーバー側のNAT (マスカレード) 設定に問題あり？
+
+Ubuntu 24 以降は iptables より nftables ベースの ufw/netfilter がメインになっていて、従来のiptables設定例をそのまま流用すると動かないことがある様子
+
+確認すること（WireGuardサーバー側）
+
+IP転送を有効化
+
+sudo sysctl -w net.ipv4.ip_forward=1
+sudo sysctl -w net.ipv6.conf.all.f...]]></description><link>https://zenn.dev/hisao5232/articles/0a54dc13d9bcc9</link><guid isPermaLink="true">https://zenn.dev/hisao5232/articles/0a54dc13d9bcc9</guid><pubDate>Tue, 30 Sep 2025 19:55:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7D039ULI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:wireguard%2520VPN%25E6%25A7%258B%25E7%25AF%2589%2520nftable%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%2520ufw%25E3%2581%25AF%25E7%2584%25A1%25E5%258A%25B9%25E5%258C%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hisao5232%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VmOGFlMGNiYzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>hisao5232</dc:creator></item><item><title><![CDATA[VPN wireguard構築 Ubuntu 25.04 Windows11]]></title><description><![CDATA[VPSに WireGuard を使ったVPNを構築する手順をまとめます。
+以下は サーバーはUbuntu/Debian 系、クライアントはWindows 11を想定しています。
+確認コマンド
+lsb_release -a
+No LSB modules are available.
+Distributor ID: Ubuntu
+Description:    Ubuntu 25.04
+Release:        25.04
+Codename:       plucky
+
+
+VPS 側の準備
+
+まず VPS にログインして以下を実行します。
+sudo apt update &amp;&a...]]></description><link>https://zenn.dev/hisao5232/articles/258beea5e8accc</link><guid isPermaLink="true">https://zenn.dev/hisao5232/articles/258beea5e8accc</guid><pubDate>Fri, 26 Sep 2025 21:15:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3xWIaH8e--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VPN%2520wireguard%25E6%25A7%258B%25E7%25AF%2589%2520Ubuntu%252025.04%2520Windows11%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hisao5232%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VmOGFlMGNiYzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>hisao5232</dc:creator></item><item><title><![CDATA[WireGuard でセキュアなリモートデスクトップ環境を構築する]]></title><description><![CDATA[WireGuard は Linux カーネルに組み込まれた新世代の VPN プロトコル兼アプリケーションです。「シンプル・高速・安全」を目的に設計されており、従来の VPN（OpenVPN、IPsec）に比べて設定が容易でパフォーマンスも高いのが特徴です。
+本記事では、WireGuard を使用してセキュアなリモートデスクトップ環境を構築する方法を解説します。外出先から自宅や会社の Windows PC に安全にアクセスできる環境を作ることで、テレワークやリモート作業の効率を向上させることができます。
+
+ WireGuard の利用目的
+
+
+セキュアなリモートアクセス：外出先から自宅・会...]]></description><link>https://zenn.dev/sindicum/articles/acac4b6102caa4</link><guid isPermaLink="true">https://zenn.dev/sindicum/articles/acac4b6102caa4</guid><pubDate>Tue, 23 Sep 2025 02:21:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4vBzCRg9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WireGuard%2520%25E3%2581%25A7%25E3%2582%25BB%25E3%2582%25AD%25E3%2583%25A5%25E3%2582%25A2%25E3%2581%25AA%25E3%2583%25AA%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2587%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%2588%25E3%2583%2583%25E3%2583%2597%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sindicum%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pIblJhSWpXejUxSUJDeTFlX042MElodEkzNzNlbURKbjdtT3Bib3c9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>sindicum</dc:creator></item><item><title><![CDATA[Ubuntu Desktop 24.04.3 LTS でのリモートデスクトップ環境セットアップメモ]]></title><description><![CDATA[
+ Ubuntu 24 Desktop インストール
+リモートでログインしてWeb開発ができるUbuntu環境が欲しかったので、Ubuntu Desktopで作ってみた。
+LTS版からインストール用メディアを作ってインストールした。
+https://ubuntu.com/download/desktop
+以下、設定したもののざっくりメモ
+
+ IPアドレス固定
+netplan の設定
+$ sudo vim /etc/netplan/01-network-manager-all.yaml
+IPアドレスを 192.168.100.100 に設定する場合
+# Let NetworkManager...]]></description><link>https://zenn.dev/s4kr4/articles/491ba7fc9d2bbb</link><guid isPermaLink="true">https://zenn.dev/s4kr4/articles/491ba7fc9d2bbb</guid><pubDate>Mon, 22 Sep 2025 08:41:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PCKzzf_u--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%2520Desktop%252024.04.3%2520LTS%2520%25E3%2581%25A7%25E3%2581%25AE%25E3%2583%25AA%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2587%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%2588%25E3%2583%2583%25E3%2583%2597%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:s4kr4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXVnNUtsdkRzVTMzbjE4aTI5RE1rUGpyaC16MncxRmJuZEloeWpScFNuZUpWUEUzRT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>s4kr4</dc:creator></item><item><title><![CDATA[自家用AIマシン構築記 #4｜自家用AIマシンでローカルLLMを動かしてみよう！]]></title><description><![CDATA[
+ 前回までのあらすじ
+予算の限られた中で「自家用AIマシン」を自作。
+OS(Ubuntu)のセットアップとNVIDIAのドライバをインストールするところまで完了しました。
+👉 まだの方は、こちらからどうぞ
+
+今回はいよいよ、ローカル環境でLLMを動かすところまでやってみます❗
+
+
+ 1. GPU対応Docker環境のセットアップ
+ローカルLLMを動かすために Ollama を使い、さらにChatGPTライクなWebUIの Open WebUI を組み合わせます。
+両方ともDockerコンテナが提供されているため、まずは Docker + NVIDIA Container Toolkit...]]></description><link>https://zenn.dev/tetrahymena/articles/39c656e41afb71</link><guid isPermaLink="true">https://zenn.dev/tetrahymena/articles/39c656e41afb71</guid><pubDate>Mon, 22 Sep 2025 07:44:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EuawXu9F--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2587%25AA%25E5%25AE%25B6%25E7%2594%25A8AI%25E3%2583%259E%25E3%2582%25B7%25E3%2583%25B3%25E6%25A7%258B%25E7%25AF%2589%25E8%25A8%2598%2520%25234%25EF%25BD%259C%25E8%2587%25AA%25E5%25AE%25B6%25E7%2594%25A8AI%25E3%2583%259E%25E3%2582%25B7%25E3%2583%25B3%25E3%2581%25A7%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25ABLLM%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%2588%25E3%2581%2586%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tetrahymena%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVjYzBkMGZjNDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>tetrahymena</dc:creator></item><item><title><![CDATA[RTX 3060の最適な電力制約を検討する]]></title><description><![CDATA[
+ はじめに
+最近RTX 5090を欲しいと思いつつ、575Wの消費電力は色々と怖いので450Wぐらいで動かせたら多少安心できそうと思うようになった。
+しかし、電力制約はどうやって設定変更できるんだっけ？BIOSから？まあ買う前に調べればいいやと思っていたのだが、いつも参考にさせていただいているやかもち＠ちもろぐさんの投稿で、電力制約の変更が簡単にできることがわかった。
+https://x.com/gosrum/status/1969744945050468767
+上記の通り、Ubuntuでも簡単に変更することができた。
+この記事では、再起動時に設定を自動的に変更する方法と、RTX 30...]]></description><link>https://zenn.dev/robustonian/articles/nvidia-power-limit-optimization</link><guid isPermaLink="true">https://zenn.dev/robustonian/articles/nvidia-power-limit-optimization</guid><pubDate>Mon, 22 Sep 2025 04:08:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Zi_Fs4YI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:RTX%25203060%25E3%2581%25AE%25E6%259C%2580%25E9%2581%25A9%25E3%2581%25AA%25E9%259B%25BB%25E5%258A%259B%25E5%2588%25B6%25E7%25B4%2584%25E3%2582%2592%25E6%25A4%259C%25E8%25A8%258E%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%2587%2591%25E3%2581%25AE%25E3%2583%258B%25E3%2583%25AF%25E3%2583%2588%25E3%2583%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ1NmVjZjczNWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>金のニワトリ</dc:creator></item><item><title><![CDATA[VoIP実践 Asteriskで音楽を流す]]></title><description><![CDATA[
+ Asteriskとは
+AsteriskはOSSのIP-PBXのソフトウェアです。平たく言うとLinuxにインストールすればローカルな環境でも通話ができるようになります。
+必要な機材はサーバーになるLinuxとAndroidやiPhoneのような端末です。
+
+ 実施する作業工程
+・Asteriskインストール
+・電話番号の作成
+・ダイヤルプランの作成
+・端末へのSIPクライアントインストール
+・音楽ファイルとの紐づけ
+
+ Asteriskインストール
+今回の構成ではソースコードの編集は必要ありませんのでパッケージをインストールします。
+Debian系では以下コマンドを実行します。
+su...]]></description><link>https://zenn.dev/labathome/articles/07d50da61d31a6</link><guid isPermaLink="true">https://zenn.dev/labathome/articles/07d50da61d31a6</guid><pubDate>Sun, 21 Sep 2025 02:16:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nBLDO0AE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VoIP%25E5%25AE%259F%25E8%25B7%25B5%2520Asterisk%25E3%2581%25A7%25E9%259F%25B3%25E6%25A5%25BD%25E3%2582%2592%25E6%25B5%2581%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:lab%2540home%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y1NmFlNTZmM2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>lab@home</dc:creator></item><item><title><![CDATA[agamesのトイVPSをちゃんと使いたい場合は改善が必要です。]]></title><description><![CDATA[
+ 序 (VMクラッシュ問題)
+Noteの方で、180円/月で気軽に壊して遊べるVPSがあるという話をしました。
+執筆後、本格的に使おうとしたら問題が発生しました。
+なんと、apt updateするだけでクラッシュしてしまうのです。
+というのも、トイVPSはDocker上で動作していて、メモリが1GB制限であるにもかかわらず VMが消費するメモリ + コンテナが消費するメモリで基準を大幅に超えてコンテナ側が強制終了させてしまうっぽいです。
+agamesの公式Discordサーバーにて解決策が見つかったので、その方法を紹介します。
+何のオプションもついてないUbuntuのトイVPSを前提に...]]></description><link>https://zenn.dev/r64/articles/2aa6d5a21eb544</link><guid isPermaLink="true">https://zenn.dev/r64/articles/2aa6d5a21eb544</guid><pubDate>Sat, 20 Sep 2025 11:48:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EcFJi4jE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:agames%25E3%2581%25AE%25E3%2583%2588%25E3%2582%25A4VPS%25E3%2582%2592%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%25E3%2581%25A8%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%259F%25E3%2581%2584%25E5%25A0%25B4%25E5%2590%2588%25E3%2581%25AF%25E6%2594%25B9%25E5%2596%2584%25E3%2581%258C%25E5%25BF%2585%25E8%25A6%2581%25E3%2581%25A7%25E3%2581%2599%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ruka64%2528%25E3%2582%258B%25E3%2581%258B%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBiZDlmOWU5NzEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>ruka64(るか)</dc:creator></item><item><title><![CDATA[モダン man ページビュアー qman]]></title><description><![CDATA[モダン man ページビュアー qman を紹介する。
+主な特徴
+
+man ページ内のセクションの目次を表示し、セクションにジャンプできる
+man ページ内で参照している別の man ページをリンクに変換し、リンクの man ページへ遷移できる
+man ページのインデックスを表示し、検索して選択した man ページに遷移できる
+man ページの履歴を確認して、過去に表示していた man ページに遷移できる
+
+
+
+ Ubuntu 24.04 でのインストール
+インストール方法はこちらに記載されている。
+Ubuntu 24.04 (WSL2) でインストールした手順を紹介する。
+システムイン...]]></description><link>https://zenn.dev/kit494way/articles/bdce4e6ae526e4</link><guid isPermaLink="true">https://zenn.dev/kit494way/articles/bdce4e6ae526e4</guid><pubDate>Sat, 20 Sep 2025 00:12:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BpSff5ly--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25A2%25E3%2583%2580%25E3%2583%25B3%2520man%2520%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%2593%25E3%2583%25A5%25E3%2582%25A2%25E3%2583%25BC%2520qman%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:KITAGAWA%2520Yasutaka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvay5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>KITAGAWA Yasutaka</dc:creator></item><item><title><![CDATA[【1-5】【Proxmox VE 実践編】SSH接続からはじめるUbuntu Serverの必須初期設定]]></title><description><![CDATA[
+ 【Proxmox VE 実践編】SSH接続からはじめるUbuntu Serverの必須初期設定
+!
+この記事では、Proxmox VEでUbuntu Serverのインストールを完了した方を対象に、SSHで初めてサーバーに接続し、運用に不可欠な初期設定を行う手順を解説します。
+✅ この記事でできるようになること
+
+SSHを使ってサーバーにリモート接続し、安全な初回アップデートを完了できる。
+
+htopやdfなどの基本コマンドで、サーバーのリソース状態を確認できるようになる。
+パスワード認証よりも遥かに安全な公開鍵認証を設定し、サーバーのセキュリティを強化できる。
+
+
+前回の記事では、...]]></description><link>https://zenn.dev/koikoi_infra/articles/53ca89fa354c58</link><guid isPermaLink="true">https://zenn.dev/koikoi_infra/articles/53ca89fa354c58</guid><pubDate>Fri, 19 Sep 2025 22:43:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uiH9XKdc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%25901-5%25E3%2580%2591%25E3%2580%2590Proxmox%2520VE%2520%25E5%25AE%259F%25E8%25B7%25B5%25E7%25B7%25A8%25E3%2580%2591SSH%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%258B%25E3%2582%2589%25E3%2581%25AF%25E3%2581%2598%25E3%2582%2581%25E3%2582%258BUbuntu%2520Server%25E3%2581%25AE%25E5%25BF%2585%25E9%25A0%2588%25E5%2588%259D%25E6%259C%259F%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:koikoi_infra%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSnJ1amVZYlFpOTR5NWEwbDNFcTN5SmtLQ2xZTVZTQjQ5UDJ4SXRCUWpacFE5VHB0b0U9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>koikoi_infra</dc:creator></item><item><title><![CDATA[【1-4】【Proxmox VE 実践編】Ubuntu Server 22.04 LTS インストールガイド]]></title><description><![CDATA[
+ 【Proxmox VE 実践編】Ubuntu Server 22.04 LTS インストールガイド
+!
+この記事では、Proxmox VEで仮想マシン(VM)のハードウェア設定が終わった方を対象に、Ubuntu Server 22.04 LTSのインストール手順を、各画面の考え方と共に詳しく解説します。
+✅ この記事でできるようになること
+
+Proxmox VEのコンソールを使い、対話形式でUbuntu Serverのインストールを完了できる。
+サーバーとして必須となる**静的IPアドレス（固定IP）**の設定方法を理解できる。
+
+SSHサーバーを有効にし、リモートでサーバーを管理す...]]></description><link>https://zenn.dev/koikoi_infra/articles/13b32292c8b7b1</link><guid isPermaLink="true">https://zenn.dev/koikoi_infra/articles/13b32292c8b7b1</guid><pubDate>Thu, 18 Sep 2025 03:48:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PtFcTIHx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%25901-4%25E3%2580%2591%25E3%2580%2590Proxmox%2520VE%2520%25E5%25AE%259F%25E8%25B7%25B5%25E7%25B7%25A8%25E3%2580%2591Ubuntu%2520Server%252022.04%2520LTS%2520%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:koikoi_infra%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSnJ1amVZYlFpOTR5NWEwbDNFcTN5SmtLQ2xZTVZTQjQ5UDJ4SXRCUWpacFE5VHB0b0U9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>koikoi_infra</dc:creator></item></channel></rss>
