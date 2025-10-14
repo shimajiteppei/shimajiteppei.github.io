@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 14 Oct 2025 11:02:32 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Vue 3.5 の「Reactive Props Destructure」について]]></title><description><![CDATA[
+ はじめに
+今更になってしまいますが、Vue3.5で追加された新機能の一部「Reactive Props Destructure（リアクティブなプロップス分割代入）」について紹介します。
+これにより、これまで煩雑だった defineProps の扱いがシンプルになりました。
+
+ これまでの課題
+以前の Vue（〜3.4）では、次のような制限がありました。
+&lt;script setup lang="ts"&gt;
+const props = defineProps&lt;{ count?: number; msg?: string }&gt;()
+
+// ❌ 分割代入するとリアクティ...]]></description><link>https://zenn.dev/tspk/articles/ddad9a3b98d2c3</link><guid isPermaLink="true">https://zenn.dev/tspk/articles/ddad9a3b98d2c3</guid><pubDate>Tue, 14 Oct 2025 06:16:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--K4eOgH3X--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vue%25203.5%2520%25E3%2581%25AE%25E3%2580%258CReactive%2520Props%2520Destructure%25E3%2580%258D%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B7%25E3%2581%25A3%25E3%2581%2591%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzRaUk5ISjNvUTRveHRBeGZBcVh5Y2RlVV9HbUxldnlQVUFiNUhMcU4ybUVZVVpsM2E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>ぷっけ</dc:creator></item><item><title><![CDATA[アロー関数で this を操る！]]></title><description><![CDATA[
+ はじめに
+JavaScript の this、混乱したことありませんか？
+「呼び出し方で変わる」「イベントで指すものが違う」──誰もが一度はハマるポイントです。
+でも、Arrow Function（アロー関数）を使うと this
+の挙動が一気にわかりやすくなります。
+この記事では、「なぜ Arrow Function では this
+が変わらないのか？」を
+ES5 の関数型の書き方で解説します。
+
+※ class 構文は使いません。全部関数とオブジェクトリテラルでいきます！
+
+
+
+ Arrow Function はただの省略記法じゃない
+const greet = (name) =&...]]></description><link>https://zenn.dev/tcool/articles/350559e14d590a</link><guid isPermaLink="true">https://zenn.dev/tcool/articles/350559e14d590a</guid><pubDate>Mon, 13 Oct 2025 11:18:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xlXw0rYq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A2%25E3%2583%25AD%25E3%2583%25BC%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25A7%2520this%2520%25E3%2582%2592%25E6%2593%258D%25E3%2582%258B%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t-cool%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2liVmViMFdEdFlWcUtvVDRvYktNeDNTUGZvRTVFOW9rNUV0c21Dc2RvPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>t-cool</dc:creator></item><item><title><![CDATA[【JavaScript 解説】「テンプレートリテラル」とは？]]></title><description><![CDATA[
+ はじめに
+
+ この記事の対象者
+JavaScriptを学び始めて、「テンプレートリテラル」という言葉に出会い、「これって、どう便利なの？ どうやって使うの？」となっているあなたへ向けて。
+
+ 目次
+
+テンプレートリテラルとは？
+
+結論
+文字列を「囲む」記号が違う
+
+
+テンプレートリテラルを使う理由
+
+変数や式を直接埋め込める
+改行をそのまま表現できる
+
+
+
+
+ 1. テンプレートリテラルとは？
+
+ 結論：変数を埋め込むことができるなどの特徴を持つ、「文字列の特別な書き方」
+下記のように紹介されています。
+
+「テンプレートリテラルは逆引用符 (`) で区切られたリテラルで、複数行の文字...]]></description><link>https://zenn.dev/yamap_web/articles/4aa79f2a71e4b3</link><guid isPermaLink="true">https://zenn.dev/yamap_web/articles/4aa79f2a71e4b3</guid><pubDate>Mon, 13 Oct 2025 09:26:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MlBMKqp6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%2520%25E8%25A7%25A3%25E8%25AA%25AC%25E3%2580%2591%25E3%2580%258C%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%25E3%2583%25AA%25E3%2583%2586%25E3%2583%25A9%25E3%2583%25AB%25E3%2580%258D%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2584%25E3%2581%25BE%25E3%2581%25B4%25E3%2583%25BC%2520%252F%2520Yamapi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FlNTMxZTUyMjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>やまぴー / Yamapi</dc:creator></item><item><title><![CDATA[【Javascript】toReversed / toSorted / toSpliced / with 新しい非破壊メソッドまとめ]]></title><description><![CDATA[
+ はじめに
+ES2023で追加された toSpliced() が話題になっていますが、
+実はそれ以外にも便利な“非破壊メソッド”が追加されています。
+これまでの reverse() や sort()、splice() は元の配列を直接変更してしまう「破壊的メソッド」でしたが、ついにES2023で、安全に扱える「非破壊版」 が登場しました🎉
+この記事では、実務でよく使う toReversed() / toSorted() / toSpliced() / with() の使い方をまとめます。
+
+ なぜ「非破壊」が重要なのか
+これまでの配列メソッドは、操作すると元の配列そのものが変わってしま...]]></description><link>https://zenn.dev/divsawa/articles/20251012-4_teaching-js-to-method</link><guid isPermaLink="true">https://zenn.dev/divsawa/articles/20251012-4_teaching-js-to-method</guid><pubDate>Sun, 12 Oct 2025 13:44:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bv3tB_LM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Javascript%25E3%2580%2591toReversed%2520%252F%2520toSorted%2520%252F%2520toSpliced%2520%252F%2520with%2520%25E6%2596%25B0%25E3%2581%2597%25E3%2581%2584%25E9%259D%259E...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:div.sawa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdkZjVlZDkyMDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>div.sawa</dc:creator></item><item><title><![CDATA[【Javascript】toSpliced()で破壊的メソッドを置き換える]]></title><description><![CDATA[
+ はじめに
+配列操作でおなじみの push, pop, shift, unshift。
+でもこれらは「破壊的メソッド」であり、元の配列を直接書き換えてしまいます。
+ReactやVueなど、状態をイミュータブルに保ちたい場面では使いづらいですよね。
+そんな悩みを解決するのが、ES2023で追加された toSpliced() です。
+これひとつでほとんどの破壊的メソッドを安全に非破壊で再現できます。
+
+ toSpliced()の基本
+引数の数によって挙動が変わることがポイント！
+// 引数が1つの場合 → 「削除開始index番号」から最後まで削除
+arr.toSpliced(-1) //...]]></description><link>https://zenn.dev/divsawa/articles/20251012-3_teaching-js-tospliced</link><guid isPermaLink="true">https://zenn.dev/divsawa/articles/20251012-3_teaching-js-tospliced</guid><pubDate>Sun, 12 Oct 2025 12:39:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vaTqnnCT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Javascript%25E3%2580%2591toSpliced%2528%2529%25E3%2581%25A7%25E7%25A0%25B4%25E5%25A3%258A%25E7%259A%2584%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E3%2582%2592%25E7%25BD%25AE%25E3%2581%258D%25E6%258F%259B%25E3%2581%2588%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:div.sawa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdkZjVlZDkyMDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>div.sawa</dc:creator></item><item><title><![CDATA[Remix 3 発表まとめ - React を捨て、Web標準で新しい世界へ]]></title><description><![CDATA[
+ はじめに
+2025年10月10日、カナダのトロントで開催されたイベント "Remix Jam 2025" で Ryan Florence と Michael Jackson が Remix 3 を発表しました。このセッションは、React Router の生みの親たちが、なぜ React から離れ、独自のフレームワークを作ることにしたのか、その理由と新しいビジョンを語った歴史的な発表です。
+https://www.youtube.com/live/xt_iEOn2a6Y?t=11764s
+本記事では、1時間47分に及ぶセッションの内容を詳しく解説します。
+!
+注意事項
+
+この記事は、...]]></description><link>https://zenn.dev/coji/articles/remix3-introduction</link><guid isPermaLink="true">https://zenn.dev/coji/articles/remix3-introduction</guid><pubDate>Sun, 12 Oct 2025 12:03:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--b-DF1nnC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Remix%25203%2520%25E7%2599%25BA%25E8%25A1%25A8%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2520-%2520React%2520%25E3%2582%2592%25E6%258D%25A8%25E3%2581%25A6%25E3%2580%2581Web%25E6%25A8%2599%25E6%25BA%2596%25E3%2581%25A7%25E6%2596%25B0%25E3%2581%2597%25E3%2581%2584%25E4%25B8%2596%25E7%2595%258C%25E3%2581%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Coji%2520Mizoguchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pWY2RrNjcwV2NIdGs0anBHa2FGTDAxcERVUVlIX0JYdWE5aDRVNVE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>Coji Mizoguchi</dc:creator></item><item><title><![CDATA[【Javascript】配列の検索で迷わないためのチートシート]]></title><description><![CDATA[
+ はじめに
+配列の検索って、メソッドが多くて混乱しませんか？
+filterもfindもsomeも、それぞれ微妙に違ってややこしい…。
+この記事はそんな「ちょっと整理したいな」「思い出したいな」というときに
+パッと見返せる検索メソッドのチートシートです。
+使い方をざっと振り返って、頭をスッキリ整えていきましょう🗒️
+
+ 早見表
+
+
+
+メソッド
+目的
+戻り値
+見つからなかった場合
+検索タイプ
+
+
+
+
+filter()
+条件を満たすすべての要素を取得
+配列
+空配列 []
+
+コールバック関数
+
+
+find()
+条件を満たす最初の要素を取得
+要素
+undefined
+コールバック関数
+
+
+fin...]]></description><link>https://zenn.dev/divsawa/articles/20251012-2_teaching-js-search</link><guid isPermaLink="true">https://zenn.dev/divsawa/articles/20251012-2_teaching-js-search</guid><pubDate>Sun, 12 Oct 2025 06:28:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9C8QlAmi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Javascript%25E3%2580%2591%25E9%2585%258D%25E5%2588%2597%25E3%2581%25AE%25E6%25A4%259C%25E7%25B4%25A2%25E3%2581%25A7%25E8%25BF%25B7%25E3%2582%258F%25E3%2581%25AA%25E3%2581%2584%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E3%2583%2581%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:div.sawa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdkZjVlZDkyMDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>div.sawa</dc:creator></item><item><title><![CDATA[JavaScriptでABC427 (A, B + C)]]></title><description><![CDATA[https://atcoder.jp/contests/abc427
+
+ A - ABC -&gt; AC
+https://atcoder.jp/contests/abc427/tasks/abc427_a
+(S.length - 1) / 2を消すだけですね
+Arrayにして該当文字を空文字に置き換えてjoinしてあげればいいかな
+https://atcoder.jp/contests/abc427/submissions/70023089
+1分48秒 AC!
+
+ B - Sum of Digits Sequence
+https://atcoder.jp/contests/abc427...]]></description><link>https://zenn.dev/aya_koto/articles/fa9702ac2525f1</link><guid isPermaLink="true">https://zenn.dev/aya_koto/articles/fa9702ac2525f1</guid><pubDate>Sat, 11 Oct 2025 14:04:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--L-TtjjVz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25A7ABC427%2520%2528A%252C%2520B%2520%252B%2520C%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ayasaka-Koto%2520%252F%2520Aya...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VkNTRlMDBjYTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>Ayasaka-Koto / AyagawaP</dc:creator></item><item><title><![CDATA[[Stimulus&jsDoc] いい感じにvaluesとかを定義したい]]></title><description><![CDATA[やっと見つけた
+export default class MapsController extends Controller {
+    static values = {
+        iconUrl: String
+    };
+
+    /** @type {boolean} */
+    // @ts-ignore
+    iconUrlValue = this.iconUrlValue;
+
+    /** @type {boolean} */
+    // @ts-ignore
+    hasIconUrlValue = this.hasIconUrlValue;
+}
+]]></description><link>https://zenn.dev/anmoti/articles/0b5ad7a1aaea20</link><guid isPermaLink="true">https://zenn.dev/anmoti/articles/0b5ad7a1aaea20</guid><pubDate>Fri, 10 Oct 2025 17:20:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KORxDbpD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BStimulus%2526jsDoc%255D%2520%25E3%2581%2584%25E3%2581%2584%25E6%2584%259F%25E3%2581%2598%25E3%2581%25ABvalues%25E3%2581%25A8%25E3%2581%258B%25E3%2582%2592%25E5%25AE%259A%25E7%25BE%25A9%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:anmoti%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ3YmYzNTlkMWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>anmoti</dc:creator></item><item><title><![CDATA[1時間でCodexとLINE Bot(WIP)]]></title><description><![CDATA[1時間でCodexでLINE Botチャレンジ]]></description><link>https://zenn.dev/n0bisuke/books/codex-linebot</link><guid isPermaLink="true">https://zenn.dev/n0bisuke/books/codex-linebot</guid><pubDate>Fri, 10 Oct 2025 09:07:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oTVRwoyT--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci8zNjdkMDE5YjZiLnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg?_a=BACAGSGT" length="0" type="false"/><dc:creator>n0bisuke</dc:creator></item><item><title><![CDATA[ゆらゆらさせてから自然に止めるアニメーション【CSS, JS】]]></title><description><![CDATA[要素をゆらゆらさせるアニメーションを試してみたTipsを紹介します。
+
+ ゆらゆらさせるアニメーション【CSS】
+ずっとゆらゆらさせるアニメーションは、CSSのKeyFramesだけでそれらしくなります。
+アニメーションさせる時にease-in-outのイージングを指定します。
+
+css
+.star {
+  width: 200px;
+  transform-origin: center top;
+  animation: yurayura 2s ease-in-out infinite;
+}
+
+@keyframes yurayura {
+  0% , 100% {
+    transf...]]></description><link>https://zenn.dev/deguchihi/articles/ded9cce2daa49a</link><guid isPermaLink="true">https://zenn.dev/deguchihi/articles/ded9cce2daa49a</guid><pubDate>Fri, 10 Oct 2025 06:47:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mnTxpkqJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%2586%25E3%2582%2589%25E3%2582%2586%25E3%2582%2589%25E3%2581%2595%25E3%2581%259B%25E3%2581%25A6%25E3%2581%258B%25E3%2582%2589%25E8%2587%25AA%25E7%2584%25B6%25E3%2581%25AB%25E6%25AD%25A2%25E3%2582%2581%25E3%2582%258B%25E3%2582%25A2%25E3%2583%258B%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2580%2590CSS%252C%2520JS%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:deguchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlZGI0ZmU3NjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>deguchi</dc:creator></item><item><title><![CDATA[useRefでフラグを保持する]]></title><description><![CDATA[React フロントでは useRef をフラグ代わりに使う場面が多いので、その振る舞いをサンプルで整理しておきます。
+
+ useRef とは？
+
+React が提供する "箱"。useRef(initialValue) で箱を作ると、ref.current に好きな値を入れられる。
+コンポーネントが何度レンダー（描画）されても、同じ箱が再利用される。だから値がリセットされない。
+値を変えても画面が再レンダーされない。副作用のフラグや最新 DOM の参照に向いている。
+
+
+ レンダーとは？
+React コンポーネントの関数が呼ばれ、JSX から DOM を組み立て直すこと。setStat...]]></description><link>https://zenn.dev/heart0018/articles/dd7c2e03244054</link><guid isPermaLink="true">https://zenn.dev/heart0018/articles/dd7c2e03244054</guid><pubDate>Thu, 09 Oct 2025 11:11:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GdGsSC8---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:useRef%25E3%2581%25A7%25E3%2583%2595%25E3%2583%25A9%25E3%2582%25B0%25E3%2582%2592%25E4%25BF%259D%25E6%258C%2581%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:HeartPG%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYwZGNlODI4ZmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>HeartPG</dc:creator></item><item><title><![CDATA[【石巻ハッカソン2025 IT Boot Camp部門】AIでプログラミング体験！]]></title><description><![CDATA[石巻ハッカソン2025 IT Boot Camp部門で使用する教材です。この教材を通してAIを活用してプログラミングを体験してみましょう！]]></description><link>https://zenn.dev/is0629sy/books/it-boot-camp-2025</link><guid isPermaLink="true">https://zenn.dev/is0629sy/books/it-boot-camp-2025</guid><pubDate>Thu, 09 Oct 2025 09:05:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--B2UUO9FI--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci9lNzc1YTc1NzFmLnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg?_a=BACAGSGT" length="0" type="false"/><dc:creator>is0629sy/GB</dc:creator></item><item><title><![CDATA[Web開発者のためのExpo入門ガイド]]></title><description><![CDATA[
+ Expoを一言で表すと
+Expoは、JavaScriptでiOSとAndroidのネイティブアプリを作れるようにするプラットフォームです。Web開発の知識をそのまま活かして、モバイルアプリ開発に挑戦できます。
+
+ Web開発者の視点から見たExpo
+
+ Expoが解決する課題
+モバイルアプリを作ろうとすると、通常は以下のような障壁があります。
+
+iOSアプリにはSwift/Objective-C、AndroidにはKotlin/Javaという異なる言語が必要
+
+2つのコードベースを別々に管理しなければならない
+XcodeやAndroid Studioといった重いIDEの習得が必要
+ア...]]></description><link>https://zenn.dev/kibe/articles/d7074d013b020e</link><guid isPermaLink="true">https://zenn.dev/kibe/articles/d7074d013b020e</guid><pubDate>Thu, 09 Oct 2025 03:38:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fYwwxBQi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Web%25E9%2596%258B%25E7%2599%25BA%25E8%2580%2585%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AEExpo%25E5%2585%25A5%25E9%2596%2580%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:k1b3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhmYzQxOGU0ZmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>k1b3</dc:creator></item><item><title><![CDATA[DOMの構造とイベント伝搬の仕組みを理解する]]></title><description><![CDATA[Web開発において、DOM（Document Object Model）は避けて通れない基礎概念です。
+特に「イベント伝搬（Event Propagation）」の理解は、クリックや入力などのユーザー操作を正しく扱うために欠かせません。
+この記事では、復習も兼ねてDOMの構造からイベントの流れまでを体系的に整理します。
+
+ 1. DOMとは
+DOM（Document Object Model）は、ブラウザがHTML文書を解析して作り上げるツリー構造のオブジェクト表現です。
+HTMLの各要素は「ノード」としてツリー上に配置され、JavaScriptからアクセス・操作できます。
+HTMLとj...]]></description><link>https://zenn.dev/daiju81/articles/962ab87114c611</link><guid isPermaLink="true">https://zenn.dev/daiju81/articles/962ab87114c611</guid><pubDate>Wed, 08 Oct 2025 13:39:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AlSY0cgm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:DOM%25E3%2581%25AE%25E6%25A7%258B%25E9%2580%25A0%25E3%2581%25A8%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E4%25BC%259D%25E6%2590%25AC%25E3%2581%25AE%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Daiju%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcyZjdiNGU0NjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>Daiju</dc:creator></item><item><title><![CDATA[watch]]></title><description><![CDATA[Vueのwatchの仕様について、イマイチ理解していない。サンプルコードを書いて、仕様について理解する。
+
+ サンプルコード
+&lt;script setup&gt;
+import {ref, watch} from 'vue'
+
+const count = ref(0)
+watch(count, (newValue, oldValue) =&gt; {
+  if (count) {
+    console.log(JSON.parse(JSON.stringify(oldValue)));
+    console.log(JSON.parse(JSON.stringify(newVal...]]></description><link>https://zenn.dev/senaha/articles/24e2c86c75bd95</link><guid isPermaLink="true">https://zenn.dev/senaha/articles/24e2c86c75bd95</guid><pubDate>Wed, 08 Oct 2025 11:05:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--R-roZySg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:watch%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:senaha%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lUeUJ6QjU5OENKS2VIdVU3alZ5YmN3czkwT1FWMkJ1YmZoNmdIM3c9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>senaha</dc:creator></item><item><title><![CDATA[typeとinterfaceの違いと使い分け]]></title><description><![CDATA[
+ type(型エイリアス)とinterfaceの違いがイマイチわからん
+最近TypeScriptを勉強し始めたのですが、typeとinterfaceの違いと使い分け、恩恵がイマイチわからなかったので、調べてまとめてみることにしました。
+
+ typeについて
+
+ 継承が不可能
+typeはextendsを用いて継承ができません。
+その代わりにintersection(交差型)を使って擬似的に型を継承することは可能です。
+type Animal = {
+  name: string;
+};
+
+type Dog = Animal &amp; {
+  breed: string;
+};
+
+con...]]></description><link>https://zenn.dev/rihitonnnu/articles/11a057e9417c37</link><guid isPermaLink="true">https://zenn.dev/rihitonnnu/articles/11a057e9417c37</guid><pubDate>Tue, 07 Oct 2025 14:15:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cA7ysoJ9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:type%25E3%2581%25A8interface%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2581%25A8%25E4%25BD%25BF%25E3%2581%2584%25E5%2588%2586%25E3%2581%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:rihitonnnu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKekV3Y0FzbVR0eW1oMzdwbEZqVm5HbV91aGRPbmxzRDRqM2UyN2o9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>rihitonnnu</dc:creator></item><item><title><![CDATA[JavaScriptでGemini APIを使用するまで]]></title><description><![CDATA[2025年10月現在、いまだにGemini APIは一部無料で使える生成AIのAPIです。
+そのため、何かしらAIを使用したアプリを作ろうとしたときによく利用しています。
+ただ、「どう設定したら使えるんだっけ?」とわからなくなることが多々あるので、備忘録として手順を残します。
+!
+JavaScriptを使用したGemini APIの使用ができるまでの手順を紹介しています。
+
+
+ APIキーの準備
+まずは、管理画面からAPIキーを用意します。
+API管理画面
+https://aistudio.google.com/app/api-keys
+
+右上のAPIキーを作成をクリックして、新しいキー...]]></description><link>https://zenn.dev/sawa0369/articles/b00a8700f4492f</link><guid isPermaLink="true">https://zenn.dev/sawa0369/articles/b00a8700f4492f</guid><pubDate>Tue, 07 Oct 2025 13:18:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mvBULjhp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25A7Gemini%2520API%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%25E3%2581%25BE%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25B2%25A2%25E3%2581%25AE%25E6%259D%2591%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZlZWFlMjc5NGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>沢の村</dc:creator></item><item><title><![CDATA[メモアプリを改善してみた（dialog + Promise編）]]></title><description><![CDATA[
+ はじめに
+以前作ったメモアプリを改善してみました。元のコードではユーザーからの入力をprompt()で受け取って画面に表示していました。
+次のステップアップとして、dialog要素とPromiseを使って作り直してみることにしました。
+この記事では、その改善過程をまとめます。
+
+ 元のコード（prompt版）
+元のコードはこちら。
+
+コード全文は以下です。
+&lt;h1&gt;メモアプリ&lt;/h1&gt;
+&lt;button id="addMemoBtn"&gt;メモを追加&lt;/button&gt;
+&lt;ul id="memo_list"&gt;&lt;/ul&gt;
+...]]></description><link>https://zenn.dev/taiyok/articles/7afa3f175dff8c</link><guid isPermaLink="true">https://zenn.dev/taiyok/articles/7afa3f175dff8c</guid><pubDate>Tue, 07 Oct 2025 09:20:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WTwa_9ac--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25A1%25E3%2583%25A2%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E6%2594%25B9%25E5%2596%2584%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25EF%25BC%2588dialog%2520%252B%2520Promise%25E7%25B7%25A8%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sol%2540SE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlmMzYyZDU2ZTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>Sol@SE</dc:creator></item><item><title><![CDATA[【React】return の後に関数定義をする Hoisting Pattern を提唱したい]]></title><description><![CDATA[私が React でよく使うデザインパターン（？）を紹介します。
+JavaScript の Hoisting (宣言の巻き上げ) を使うので Hoisting Pattern と勝手に呼んでいます。
+といっても何か特別な書き方をするわけでなく、ただ return の後に function を書くだけです。
+
+ 例
+
+ MyButton.tsx
+'use client';
+
+import { ReactNode, useEffect, useState } from 'react';
+
+type Props = {
+  children?: ReactNode;
+};
+
+export fu...]]></description><link>https://zenn.dev/hcproduce_blog/articles/905689ad3918c4</link><guid isPermaLink="true">https://zenn.dev/hcproduce_blog/articles/905689ad3918c4</guid><pubDate>Tue, 07 Oct 2025 08:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Z9v5KJx---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590React%25E3%2580%2591return%2520%25E3%2581%25AE%25E5%25BE%258C%25E3%2581%25AB%25E9%2596%25A2%25E6%2595%25B0%25E5%25AE%259A%25E7%25BE%25A9%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%2520Hoisting%2520Pattern%2520%25E3%2582%2592%25E6%258F%2590%25E5%2594%25B1%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:kazeusagi%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc0NzRmNjJhOGIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:HC%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2587%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%25B9%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS01hTm01UnBhQzd1VlNwdHJfaFEzVEwwRG9JaWJpek1mekdqWG4tTnlsQnQwdWdPZnY9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>kazeusagi</dc:creator></item></channel></rss>
