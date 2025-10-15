@@ -47,14 +47,20 @@ class TemplateMergedFeedType:
 
 
 @dataclass
-class TemplateTopicType:
+class TemplateTopicFeeds:
     topic_id: str
-    topic_list: list[TemplateMergedFeedType]
+    feed_list: list[TemplateFeedType]
+
+
+@dataclass
+class TemplateDateGroup:
+    date: str
+    topics: list[TemplateTopicFeeds]
 
 
 @dataclass
 class TemplateType:
-    rss_list: list[TemplateTopicType]
+    rss_list: list[TemplateDateGroup]
 
 
 # RSSフィードの設定ファイルを読み込み、パースされた設定オブジェクトを返す
@@ -95,8 +101,11 @@ def update(config: ConfigType, downloads_dir: Path):
             feed_content = requests.get(feed.feed_url).content
 
             d = feedparser.parse(feed_content)
-            u = d.feed.updated_parsed
-            last_updated = datetime.date(u.tm_year, u.tm_mon, u.tm_mday)
+            try:
+                u = d.feed.updated_parsed
+                last_updated = datetime.date(u.tm_year, u.tm_mon, u.tm_mday)
+            except:
+                last_updated = datetime.date.today()
             filename = get_feed_filename(
                 topic_id=topic.topic_id,
                 feed_id=feed.feed_id,
@@ -173,20 +182,34 @@ def list_file_for_topic_id(
 
 # RSSフィードの設定ファイルを読み込み、保存されたRSSフィードのリストを生成する
 def get_template(config: ConfigType, downloads_dir: Path) -> TemplateType:
-    rss_list: list[TemplateTopicType] = []
+    topic_and_feeds: list[tuple[str, list[TemplateMergedFeedType]]] = []
     for topic in config.rss_list:
         feeds = list_file_for_topic_id(
             topic_id=topic.topic_id, downloads_dir=downloads_dir
         )
+        topic_and_feeds.append((topic.topic_id, feeds))
 
-        rss_list.append(
-            TemplateTopicType(
-                topic_id=topic.topic_id,
-                topic_list=feeds,
-            )
-        )
+    date_grouped: dict[str, list[TemplateTopicFeeds]] = {}
+    for topic_id, merged_feed_list in topic_and_feeds:
+        for merged_feed in merged_feed_list:
+            date = merged_feed.date
+            if date not in date_grouped:
+                date_grouped[date] = []
 
-    return TemplateType(rss_list=rss_list)
+            if merged_feed.feed_list:
+                date_grouped[date].append(
+                    TemplateTopicFeeds(
+                        topic_id=topic_id, feed_list=merged_feed.feed_list
+                    )
+                )
+
+    merged_feed_list_by_date = [
+        TemplateDateGroup(date=date, topics=topic_list)
+        for date, topic_list in date_grouped.items()
+    ]
+    merged_feed_list_by_date.sort(key=lambda x: x.date, reverse=True)
+
+    return TemplateType(rss_list=merged_feed_list_by_date)
 
 
 # RSSフィードのリストを元にmarkdownを生成する

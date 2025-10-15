@@ -9,11 +9,10 @@ search:
 
 GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/osmoscraft/osmosfeed)にインスパイアされてます。
 
-{% for topic in rss_list %}## {{ topic.topic_id }}
+{% for date_group in rss_list %}### {{ date_group.date }}
 
-{% for merged_feed in topic.topic_list %}### {{ merged_feed.date }}
-
-{% for feed in merged_feed.feed_list %}- [{{ feed.title|e }}]({{ feed.link }})
+{% for topic in date_group.topics %}- {{ topic.topic_id }}
+{% for feed in topic.feed_list %} - [{{ feed.title|e }}]({{ feed.link }})
 {% endfor %}
 {% endfor %}
 {% endfor %}
