@@ -12,7 +12,7 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 {% for date_group in rss_list %}### {{ date_group.date }}
 
 {% for topic in date_group.topics %}- {{ topic.topic_id }}
-{% for feed in topic.feed_list %} - [{{ feed.title|e }}]({{ feed.link }})
+{% for feed in topic.feed_list %}    - [{{ feed.title|e }}]({{ feed.link }})
 {% endfor %}
 {% endfor %}
 {% endfor %}
