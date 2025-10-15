@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 15 Oct 2025 02:01:30 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[OpenAI gpt-image-1 で複数画像を合成]]></title><description><![CDATA[
+ gpt image 1
+OpenAIの gpt-image-1 モデルを使って、複数の画像を組み合わせて新しい画像を生成する機能を試してみました。
+
+
+ 1. 公式ドキュメントを確認
+まずは公式ドキュメントで機能の概要を確認します。
+
+
+ Create a new image using image references
+You can use one or more images as a reference to generate a new image.
+
+訳: 画像参照を使用して新しい画像を作成できます。1つ以上の画像を参照として使用可能です。
+📘 Image generat...]]></description><link>https://zenn.dev/toru_k/articles/0001-gpt-image-1-image-synthesis</link><guid isPermaLink="true">https://zenn.dev/toru_k/articles/0001-gpt-image-1-image-synthesis</guid><pubDate>Tue, 14 Oct 2025 15:04:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--H9kQHT11--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OpenAI%2520gpt-image-1%2520%25E3%2581%25A7%25E8%25A4%2587%25E6%2595%25B0%25E7%2594%25BB%25E5%2583%258F%25E3%2582%2592%25E5%2590%2588%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:toru_k%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k0SHh3bkVEYlZKSUw3bnU2cjFZU01UNHJjZU4xN0t2TXQ2VzJnMElNPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>toru_k</dc:creator></item><item><title><![CDATA[【Python】スマホを触ったら部屋にモスキート音を流すようにしてスマホ中毒から抜け出しましょう！【RasberryPi4】]]></title><description><![CDATA[
+ システムの概要
+タイトルそのままですが、
+スマホが使用中かどうかラズパイで監視して、スマホを使用していたらモスキート音を流す
+というシステムを作っていきます。
+
+ 実装目標
+そこで、下記のような機能の実装を目標とします。
+
+スマホ裏にQRコードを張り付けておき、それをラズパイ側に登録する。
+ラズパイにつないだカメラを使って、スマホのQRが認識できるか定期的にチェックする。
+もしカメラでQRコードが認識できなければモスキート音を流す。
+再びQRコードがカメラで認識できるようになったらモスキート音を止める。
+
+
+ 用意するもの
+
+Raspberry Pi(今回は4Bを使いました)
+ラズパ...]]></description><link>https://zenn.dev/pienthon/articles/009f09479acf85</link><guid isPermaLink="true">https://zenn.dev/pienthon/articles/009f09479acf85</guid><pubDate>Tue, 14 Oct 2025 12:53:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bmxHuSHV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E3%2582%25B9%25E3%2583%259E%25E3%2583%259B%25E3%2582%2592%25E8%25A7%25A6%25E3%2581%25A3%25E3%2581%259F%25E3%2582%2589%25E9%2583%25A8%25E5%25B1%258B%25E3%2581%25AB%25E3%2583%25A2%25E3%2582%25B9%25E3%2582%25AD%25E3%2583%25BC%25E3%2583%2588%25E9%259F%25B3%25E3%2582%2592%25E6%25B5%2581%25E3%2581%2599%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2597%25E3%2581%25A6%25E3%2582%25B9%25E3%2583%259E%25E3%2583%259B%25E4%25B8%25AD%25E6%25AF%2592%25E3%2581%258B%25E3%2582%2589%25E6%258A%259C%25E3%2581%2591%25E5%2587%25BA%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2582%2587%25E3%2581%2586%25EF%25BC%2581%25E3%2580%2590Rasberr...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2599%25E3%2581%259F%25E3%2581%25BF%25E3%2581%25AA%25E3%2581%259F%25E3%2582%258D%25E3%2581%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzliMGM5NDE4ZTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>すたみなたろう</dc:creator></item><item><title><![CDATA[【Python】RaspberryPi4 Model BにWaveshare e-Paperを接続して動かす]]></title><description><![CDATA[
+ e-Paperをラズパイに接続する
+ジャンパーを使用する場合は、下記のように対応するピンに接続する。
+
+
+VCC → 3.3V（ピン1）
+
+GND → GND（ピン6）
+
+DIN → MOSI (GPIO10)（ピン19）
+
+CLK → SCLK (GPIO11)（ピン23）
+
+CS → CE0 (GPIO8)（ピン24）
+
+DC → GPIO25（ピン22）
+
+RST → GPIO17（ピン11）
+
+BUSY → GPIO24（ピン18）
+
+
+
+ラズパイ4Bのピン配置は下記の通り。
+
+
+ SPIの有効化
+lsmod | grep spi
+無効だった場合、下記の手順で有効にする
+su...]]></description><link>https://zenn.dev/pienthon/articles/d4cef26d43f99b</link><guid isPermaLink="true">https://zenn.dev/pienthon/articles/d4cef26d43f99b</guid><pubDate>Tue, 14 Oct 2025 12:20:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nsAywcoy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591RaspberryPi4%2520Model%2520B%25E3%2581%25ABWaveshare%2520e-Paper%25E3%2582%2592%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%2597%25E3%2581%25A6%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2599%25E3%2581%259F%25E3%2581%25BF%25E3%2581%25AA%25E3%2581%259F%25E3%2582%258D%25E3%2581%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzliMGM5NDE4ZTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>すたみなたろう</dc:creator></item><item><title><![CDATA[地理空間データを異種GNN向けのグラフ表現に変換するPythonライブラリを作ってみた]]></title><description><![CDATA[
+ はじめに
+初めまして。イギリスのリバプール大学で博士課程をしている佐藤と申します。
+リバプールといえばサッカーとビートルズで有名ですが、特段そのために渡英した訳ではありません…。
+イギリスでは人文地理学（都市経済学・経済地理学・都市計画・人口統計学）とデータサイエンスの複合領域である地理空間データサイエンス (Geographic Data Science)という研究分野が盛んで、そこに特化した研究所があるため在籍しています。
+専門は都市形態学という都市の物理的な構造から社会を理解する分野です。特に私は都市形態のトポロジーに興味があり、非線形的なパターン分類で成果を上げているグラフ表...]]></description><link>https://zenn.dev/yutasato/articles/9d7994dc53d378</link><guid isPermaLink="true">https://zenn.dev/yutasato/articles/9d7994dc53d378</guid><pubDate>Tue, 14 Oct 2025 10:21:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BTDGlfEo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%259C%25B0%25E7%2590%2586%25E7%25A9%25BA%25E9%2596%2593%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E7%2595%25B0%25E7%25A8%25AEGNN%25E5%2590%2591%25E3%2581%2591%25E3%2581%25AE%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%2595%25E8%25A1%25A8%25E7%258F%25BE%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2599%25E3%2582%258BPython%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yuta%2520Sato%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc4NTE3MTg4ZGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>Yuta Sato</dc:creator></item><item><title><![CDATA[Prometheus + Step Functions + Lambdaで構築するサーバレスオンコール基盤]]></title><description><![CDATA[
+ 1. 前提
+
+ ブログを書いた背景
+
+Lambda のランタイムバージョン更新対応に携わる中で、既存のオンコール基盤のリファクタリングと改修を実施しました。具体的な実装や要件ははあまり記述していませんが、アーキテクチャの参考例になればと思いブログに起こしました。
+
+
+ オンコール体制の方針
+
+弊社では全員 CTO というテーマを掲げて、各エンジニアが主体的に事業及びプロダクトに関わる文化を醸成しています。
+それに伴い、オンコール体制もエンジニア全員が参加する体制をとっています。
+
+
+ 具体的な監視項目
+
+監視項目は大きく分けて 2 つあります。
+
+アプリケーションの死活監視
+
+設定し...]]></description><link>https://zenn.dev/nextbeat/articles/oncall_architecture_nb</link><guid isPermaLink="true">https://zenn.dev/nextbeat/articles/oncall_architecture_nb</guid><pubDate>Tue, 14 Oct 2025 06:25:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ikFdyscW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Prometheus%2520%252B%2520Step%2520Functions%2520%252B%2520Lambda%25E3%2581%25A7%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25AC%25E3%2582%25B9%25E3%2582%25AA%25E3%2583%25B3%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%25AB%25E5%259F%25BA%25E7%259B%25A4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:takehiro1111%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q3MzM5NTFkZmMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:nextbeat%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY2NDQ2ZjMwNzcuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>takehiro1111</dc:creator></item><item><title><![CDATA[Discord Botでメンバー募集機能を作成する]]></title><description><![CDATA[
+ はじめに
+こんにちは。Discordはゲーマーにとって欠かせない存在になっていると思います。ロールでメンションすればやりたいゲームの募集が一瞬でできて便利です。
+Valorantをフルパでやりたくて募集した時，集まったらやりたいからできる人リアクションしてって感じで募集してました。でもこれだと集まってるか確認する方法はアプリを開いてリアクションの人数を見ることだけでした。集まったら通知してくれたらいいのになと思ってメンバー募集機能を作ってみました。Botの招待はこちら↓
+https://discord.com/oauth2/authorize?client_id=8144654959...]]></description><link>https://zenn.dev/kush1n_a/articles/874ed20f68b147</link><guid isPermaLink="true">https://zenn.dev/kush1n_a/articles/874ed20f68b147</guid><pubDate>Tue, 14 Oct 2025 04:48:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--94-yqOg0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Discord%2520Bot%25E3%2581%25A7%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2590%25E3%2583%25BC%25E5%258B%259F%25E9%259B%2586%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258F%25E3%2581%2597%25E3%2581%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSnhwSUc3S2FuWVNsQ1NuVG1UX1VqVFctamNROEpBazUyVmVTYzFPVERGbXM0aDZva209czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>くしな</dc:creator></item><item><title><![CDATA[データサイエンスに必要なPythonライブラリまとめ]]></title><description><![CDATA[
+ はじめに
+はじめまして、
+株式会社dotConfにて、AIエンジニアをしている古菅です。
+
+前回は「DockerでJupyter環境を構築する方法」を紹介しましたが、今回はデータサイエンスの実務で必要となるPythonライブラリを体系的にまとめました。基本的な使い方だけでなく、パフォーマンス最適化や実践的なテクニックも含めて解説します。
+
+ 1. データ加工・前処理
+
+ NumPy：高速数値計算の基盤
+NumPyはPythonで数値計算を行うための基本ライブラリです。リストよりも10〜100倍高速で、大量のデータを効率的に処理できます。
+
+ 基本的な使い方
+import numpy ...]]></description><link>https://zenn.dev/dotconf/articles/2025-10-13-python-library-ds-article</link><guid isPermaLink="true">https://zenn.dev/dotconf/articles/2025-10-13-python-library-ds-article</guid><pubDate>Tue, 14 Oct 2025 03:59:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MdeGXlcD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B9%25E3%2581%25AB%25E5%25BF%2585%25E8%25A6%2581%25E3%2581%25AAPython%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E5%258F%25A4%25E8%258F%2585%2520%25E7%25BF%2594%25E7%2594%259F%2528Kosuge%2520Shoui...%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQwZjJjZjQxNjQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:dotConf%252C%2520Inc%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EyY2ZkZTVmNDEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>古菅 翔生(Kosuge Shoui) | AIエンジニア</dc:creator></item><item><title><![CDATA[プロダクト成長を支えるバックエンドアーキテクチャの変遷（〜2025-09）]]></title><description><![CDATA[
+ はじめに
+WiseVineのバックエンドテックリードの bubusuke です。
+WiseVineのプロダクト（Build&amp;Scrap）は、2024年4月に一部機能を先行リリースしました。
+その後も新規機能開発と既存機能の改善を続けています。
+バックエンドコードのPRマージ数で見ると、先行リリース後の1年間でそれまでの2.5倍以上のPRをマージしています。何となく変化の規模がわかっていただけるかと思います。
+
+
+
+期間
+バックエンドコードのPRマージ数
+
+
+
+
+先行リリースまで
+約1,200
+
+
+先行リリースから1年間
+約3,300
+
+
+次の半年間
+約1,700
+
+
+
+この変...]]></description><link>https://zenn.dev/wisevine/articles/2e638a11fa569b</link><guid isPermaLink="true">https://zenn.dev/wisevine/articles/2e638a11fa569b</guid><pubDate>Tue, 14 Oct 2025 03:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--m4-ab9pk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2580%25E3%2582%25AF%25E3%2583%2588%25E6%2588%2590%25E9%2595%25B7%25E3%2582%2592%25E6%2594%25AF%25E3%2581%2588%25E3%2582%258B%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2582%25A2%25E3%2583%25BC%25E3%2582%25AD%25E3%2583%2586%25E3%2582%25AF%25E3%2583%2581%25E3%2583%25A3%25E3%2581%25AE%25E5%25A4%2589%25E9%2581%25B7%25EF%25BC%2588%25E3%2580%259C2025-09%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:bubusuke%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VlM2YyOGZhZmMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:WiseVine%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYyYzg2MWM4ZTMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>bubusuke</dc:creator></item><item><title><![CDATA[SQLMeshでSushi]]></title><description><![CDATA[
+ はじめに
+少し前の「SQLMesh入門」の「おわりに」でこんなことを書きました。
+
+公式サイトを含めて、サンプルやトレーニング用の教材が少なく、作者の意図がわかりにくいように思います。
+
+いろいろ探した結果、公式のリポジトリの「これ↓」が、いいんじゃないかな？
+ということで紹介してみます。
+https://github.com/TobikoData/sqlmesh-examples
+
+ やってみた（001_shushi/1_simple）
+まず、このサンプルの背景ですが、寿司レストランのデータを分析するというユースケースです。Tobiko 社の名前は寿司ネタのトビコとのことです。
+
+...]]></description><link>https://zenn.dev/robon/articles/8752f660373534</link><guid isPermaLink="true">https://zenn.dev/robon/articles/8752f660373534</guid><pubDate>Tue, 14 Oct 2025 01:28:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MKb_1G2L--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:SQLMesh%25E3%2581%25A7Sushi%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E8%258D%2592%25E6%259C%25A8%2520%25E5%25B2%25B3%25E5%25A4%25AB%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q3NDIzMjE0NTUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEROBON%25E3%2581%25AE%25E6%258A%2580%25E8%25A1%2593%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YUpBSVQ1V0NaaVBRUmF6TkswS1dFVkEybkRJMGdaN1lvMjdJdDIyQT1zOTYtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>荒木 岳夫</dc:creator></item><item><title><![CDATA[週刊生成AIニュースブログを支える技術 バナー画像生成編]]></title><description><![CDATA[
+ はじめに
+アイレットのオウンドメディア「iret.media」では、DX 開発事業部監修のもと週刊で生成 AI ニュースブログを投稿しています。
+https://iret.media/159989
+Claude Code により自動記事生成の仕組みを構築しました。
+詳細は以下の記事で公開されていますので、ご一読ください。
+https://zenn.dev/iret/articles/genai-news-blog-tech-stack
+記事の自動生成はできたのですが、バナー画像の作成は人手で行なっていました。
+Gemini 2.5 Flash Image (Nano Banana)が...]]></description><link>https://zenn.dev/iret/articles/3e38797ba34d64</link><guid isPermaLink="true">https://zenn.dev/iret/articles/3e38797ba34d64</guid><pubDate>Mon, 13 Oct 2025 23:50:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0lW5OxPa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%2580%25B1%25E5%2588%258A%25E7%2594%259F%25E6%2588%2590AI%25E3%2583%258B%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%25B9%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%2592%25E6%2594%25AF%25E3%2581%2588%25E3%2582%258B%25E6%258A%2580%25E8%25A1%2593%2520%25E3%2583%2590%25E3%2583%258A%25E3%2583%25BC%25E7%2594%25BB%25E5%2583%258F%25E7%2594%259F%25E6%2588%2590%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:te_yama%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA4Y2QzMmUzMzQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25A2%25E3%2582%25A4%25E3%2583%25AC%25E3%2583%2583%25E3%2583%2588%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI0YzNhNmMzNDkuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>te_yama</dc:creator></item><item><title><![CDATA[yomitokuで作る無料の日本語OCR Webアプリ【Flask + TypeScript】]]></title><description><![CDATA[
+ はじめに
+昨今、AI が急速に普及している中で、改めて「OCR（光学文字認識）」という技術に注目してみました。
+OCR の API サービスは多数存在していますが、どれも従量課金制で、利用量が増えるとコストが膨らんでいきます。Google Cloud Vision API や Amazon Textract などは高精度ですが、個人開発や小規模なプロジェクトでは原価が気になるところです。
+「日本語 OCR を自分で構築できれば、コストを気にせず色々なことに使えるのではないか？」
+OSS の OCR ライブラリとしては、Tesseract や EasyOCR などが有名ですが、日本語の...]]></description><link>https://zenn.dev/lecto/articles/b345c7f3920ae9</link><guid isPermaLink="true">https://zenn.dev/lecto/articles/b345c7f3920ae9</guid><pubDate>Mon, 13 Oct 2025 14:45:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qe9x_3US--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:yomitoku%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%25E7%2584%25A1%25E6%2596%2599%25E3%2581%25AE%25E6%2597%25A5%25E6%259C%25AC%25E8%25AA%259EOCR%2520Web%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2580%2590Flask%2520%252B%2520TypeScript%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:tamoco%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RlYzIzMDI3ODQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Lecto%252C%2520Inc.%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSncxc3hPRzZtOHdRX0tfU0JsaGszN2s5dFhWUl9RNnJ3UFdDQlQ4UTNieDJEei10cmc9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>tamoco</dc:creator></item><item><title><![CDATA[SQLite検索が遅い？LIKEの限界とFTS5で高速化する方法：内部処理も解説]]></title><description><![CDATA[
+ はじめに
+以前の記事では、Pythonで使えるデータベースを比較しました。その中でも「軽量で扱いやすい」と人気なのがSQLiteです。しかし、テキスト検索を多用する処理でSQLiteを使うと、「LIKE '%keyword%'が遅い」「検索に数秒かかる」など、性能面での課題が見えてきます。そこで今回は、SQLiteの全文検索拡張 FTS5（Full Text Search 5） を取り上げ、LIKE検索の限界とFTS5による高速化の仕組みを解説します。
+
+ 1. SQLiteの課題と全文検索という発想
+SQLiteは軽量ながら強力なデータベースですが、検索性能には特徴があります。
+
+...]]></description><link>https://zenn.dev/stockdatalab/articles/20251010_tech_fts5</link><guid isPermaLink="true">https://zenn.dev/stockdatalab/articles/20251010_tech_fts5</guid><pubDate>Mon, 13 Oct 2025 14:00:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--l--zG4g5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SQLite%25E6%25A4%259C%25E7%25B4%25A2%25E3%2581%258C%25E9%2581%2585%25E3%2581%2584%25EF%25BC%259FLIKE%25E3%2581%25AE%25E9%2599%2590%25E7%2595%258C%25E3%2581%25A8FTS5%25E3%2581%25A7%25E9%25AB%2598%25E9%2580%259F%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25EF%25BC%259A%25E5%2586%2585%25E9%2583%25A8%25E5%2587%25A6%25E7%2590%2586%25E3%2582%2582%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%2583%2585%25E5%25A0%25B1%25E5%258F%258E%25E9%259B%2586%25E3%2583%25A9%25E3%2583%259C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IzZjRkZjY4MGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>情報収集ラボ</dc:creator></item><item><title><![CDATA[EmbeddingGemma-300mでテキスト分類（LIBLINEAR）]]></title><description><![CDATA[
+ 初めに
+GoogleからEmbeddingGemma-300mが出ましたので、試してみました。
+EmbeddingGemma-300mでテキスト分類（LoRA）では、accuracy = 95.7%でした。
+今度はembeddings取得後にLIBLINEARを試してみます。
+データセットは同様にlivedoor ニュースコーパスです。
+今回の結果は、accuracy = 76.6%でした。
+EmbeddingGemma-300mのMLP分類と比べても悪い結果となりました。
+
+
+ インストール
+%%capture
+!pip install liblinear-official
+
+ デ...]]></description><link>https://zenn.dev/piment/articles/3828e974ca1451</link><guid isPermaLink="true">https://zenn.dev/piment/articles/3828e974ca1451</guid><pubDate>Sun, 12 Oct 2025 14:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gvzM-A_Z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:EmbeddingGemma-300m%25E3%2581%25A7%25E3%2583%2586%25E3%2582%25AD%25E3%2582%25B9%25E3%2583%2588%25E5%2588%2586%25E9%25A1%259E%25EF%25BC%2588LIBLINEAR%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B4%25E3%2583%25BC%25E3%2581%25BE%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RiODU4NjI1MzIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>ぴーまん</dc:creator></item><item><title><![CDATA[【株】モメンタムの計算など]]></title><description><![CDATA[
+ モメンタム？
+https://www.nikkei.com/article/DGXZQOUB2635R0W4A320C2000000/
+https://www.msci.com/documents/1296102/3556282/Research_Insight_Riding+on+Momentum_Dec+2015_Japanese.pdf/e879a3e0-ce2b-4b92-b984-81d0ea560138
+アノマリーの一種。↑が詳しそう。開祖は多分↓(1993)。
+https://www.bauer.uh.edu/rsusmel/phd/jegadeesh-titman93...]]></description><link>https://zenn.dev/ittooo66/articles/2642866397ada3</link><guid isPermaLink="true">https://zenn.dev/ittooo66/articles/2642866397ada3</guid><pubDate>Sun, 12 Oct 2025 07:40:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ohLMnVNd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E6%25A0%25AA%25E3%2580%2591%25E3%2583%25A2%25E3%2583%25A1%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25A0%25E3%2581%25AE%25E8%25A8%2588%25E7%25AE%2597%25E3%2581%25AA%25E3%2581%25A9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ittooo66%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0Zndxc2t5LUJRQ3NvY2hpZmM0LWd4eEJSdms2YWpqZG1YT2IyR1FKNWdzPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>ittooo66</dc:creator></item><item><title><![CDATA[PyTorch と onnxruntime-web でつくるリアルタイム郵便番号推論アプリ]]></title><description><![CDATA[
+ 1. はじめに
+おなじみ MNIST を使って、数字推論アプリを作成しました。
+
+デモサイト
+https://nyamadamadamada.github.io/predict-number-app/
+GitHub
+https://github.com/Nyamadamadamada/predict-number-app
+
+
+概要：郵便番号を手書きで入力し、認識した数字から該当地域を表示するアプリ
+
+モデル作成：Python,PyTorch,ONNX
+
+データセット：MNIST
+
+UI：onnxruntime-web,React,TypeScript,Vite,Chakra UI
+
+...]]></description><link>https://zenn.dev/yamadamadamada/articles/e407013ae53512</link><guid isPermaLink="true">https://zenn.dev/yamadamadamada/articles/e407013ae53512</guid><pubDate>Sun, 12 Oct 2025 05:43:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pUoi1r9Q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PyTorch%2520%25E3%2581%25A8%2520onnxruntime-web%2520%25E3%2581%25A7%25E3%2581%25A4%25E3%2581%258F%25E3%2582%258B%25E3%2583%25AA%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E9%2583%25B5%25E4%25BE%25BF%25E7%2595%25AA%25E5%258F%25B7%25E6%258E%25A8%25E8%25AB%2596%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%25AE%25E3%2581%258B%25E3%2581%25AE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NmYmQ1N2QzMGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>かのかの</dc:creator></item><item><title><![CDATA[EmbeddingGemma-300mでテキスト分類（MLP）]]></title><description><![CDATA[
+ 初めに
+GoogleからEmbeddingGemma-300mが出ましたので、試してみました。
+EmbeddingGemma-300mでテキスト分類（LoRA）では、accuracy = 95.7%でした。
+今度はembeddings取得後にMLP分類を試してみます。
+データセットは同様にlivedoor ニュースコーパスです。
+今回の結果は、accuracy = 80%でした。
+EmbeddingGemma-300mのロジスティック回帰と比べてもだいぶ悪い結果となりました。
+
+
+ データ準備
+livedoor ニュースコーパスを取得
+%%capture
+!wget https://...]]></description><link>https://zenn.dev/piment/articles/5d13290288febd</link><guid isPermaLink="true">https://zenn.dev/piment/articles/5d13290288febd</guid><pubDate>Sun, 12 Oct 2025 05:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3Kojpzp2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:EmbeddingGemma-300m%25E3%2581%25A7%25E3%2583%2586%25E3%2582%25AD%25E3%2582%25B9%25E3%2583%2588%25E5%2588%2586%25E9%25A1%259E%25EF%25BC%2588MLP%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B4%25E3%2583%25BC%25E3%2581%25BE%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RiODU4NjI1MzIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>ぴーまん</dc:creator></item><item><title><![CDATA[pre-commitの代替ツールのprekを試してみた]]></title><description><![CDATA[
+ はじめに
+prekというpre-commitの高速なRust製の代替ツールがあることを知ったので試してみたいと思います。
+https://github.com/j178/prek
+
+ 何を試してみたか
+自分にとって身近なプロジェクト構成で、どのくらい早くなるのかを確認したかったため、適当なPythonプロジェクトを作成し、prek公式のベンチマークと同じように、hyperfineを使って複数のシナリオで測定しました。
+
+初期インストール(install_hook)
+フック実行(対象なし、全フック、特定フック)
+
+
+ 全体環境
+
+MacBook Air/Apple M3/16GB
+mi...]]></description><link>https://zenn.dev/mottyzzz/articles/20251011220454</link><guid isPermaLink="true">https://zenn.dev/mottyzzz/articles/20251011220454</guid><pubDate>Sun, 12 Oct 2025 03:18:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8qZnPKjc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:pre-commit%25E3%2581%25AE%25E4%25BB%25A3%25E6%259B%25BF%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25AEprek%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2582%25E3%2581%25A3%25E3%2581%25A1%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI0YzdkNGEyOTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>もっち</dc:creator></item><item><title><![CDATA[DjangoでCSSが反映されないときの完全ガイド（静的ファイル404対策）]]></title><description><![CDATA[
+ 🐍 はじめに
+DjangoでWebアプリを作っていると、
+「CSSが反映されない！」「404 (Not Found) が出る！」
+というトラブルに必ず一度は遭遇します。
+この記事では、実際に私が遭遇した
+「style.css が読み込まれない」問題を題材に、
+原因から解決までをわかりやすく整理します。
+
+
+ 💡 現象
+GET http://127.0.0.1:8000/static/style.css net::ERR_ABORTED 404 (Not Found)
+
+あるいは、ターミナルにこんな警告が出ることもあります。
+
+WARNINGS:
+?: (staticfiles.W00...]]></description><link>https://zenn.dev/akanesi/articles/469262b66b4197</link><guid isPermaLink="true">https://zenn.dev/akanesi/articles/469262b66b4197</guid><pubDate>Sat, 11 Oct 2025 18:29:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1Rgcml9k--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Django%25E3%2581%25A7CSS%25E3%2581%258C%25E5%258F%258D%25E6%2598%25A0%25E3%2581%2595%25E3%2582%258C%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AE%25E5%25AE%258C%25E5%2585%25A8%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%25EF%25BC%2588%25E9%259D%2599%25E7%259A%2584%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB404%25E5%25AF%25BE%25E7%25AD%2596%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BF%25E3%2581%25A4%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q3YjYyNWJhZjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>みつい</dc:creator></item><item><title><![CDATA[CLIPで画像とテキストを理解する：ゼロショット分類を実装してみた]]></title><description><![CDATA[
+ はじめに
+「猫の写真」とテキストで説明するだけで、モデルが猫の画像を認識できる―そんな夢のような技術がCLIPです。今回、OpenAIのCLIP（Contrastive Language-Image Pre-training）を実装し、画像とテキストのマルチモーダル学習について学んだので、その記録をまとめます。
+
+ この記事で分かること
+
+CLIPの基本的な仕組みと特徴
+Pythonでのゼロショット画像分類の実装
+画像検索システムの構築方法
+つまずいたポイントと解決策
+
+
+ CLIPとは？
+CLIPは、画像とテキストを同じ埋め込み空間にマッピングする画期的なモデルです。従来のImag...]]></description><link>https://zenn.dev/madaozaku/articles/5dd0d828ea151b</link><guid isPermaLink="true">https://zenn.dev/madaozaku/articles/5dd0d828ea151b</guid><pubDate>Sat, 11 Oct 2025 13:01:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dE5m4-pO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CLIP%25E3%2581%25A7%25E7%2594%25BB%25E5%2583%258F%25E3%2581%25A8%25E3%2583%2586%25E3%2582%25AD%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%25EF%25BC%259A%25E3%2582%25BC%25E3%2583%25AD%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%2583%25E3%2583%2588%25E5%2588%2586%25E9%25A1%259E%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:madaozaku%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZiNzRjODhjOTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>madaozaku</dc:creator></item><item><title><![CDATA[Pythonで恋愛小説を書いてみた]]></title><description><![CDATA[
+ はじめに
+この世には様々な言語がある。日本語, 英語, フランス語などなど。
+言語が違えば、それが使われる環境も違う。それを使う人間も違う。しかし、世界中どこでも人は人を愛し、愛を求めている。だからこそ、人は恋愛小説を書く。
+しかし、ここで1つ不可解な点がある。なぜ、「プログラミング言語で恋愛小説を書こう」と考える者がいないのか？
+プログラマーは恋愛をしないのか？否。筆者のような非モテ陰キャプログラマーも恋愛に興味はある。そもそもプログラマーであるかどうかと陰キャであるかどうかは関係が無い。
+ではなぜ、誰もプログラミング言語で恋愛小説を書こうとしないのか。その謎を探るために、筆者は自...]]></description><link>https://zenn.dev/kdavslrjklfrjak/articles/9cdd3e34e24fe2</link><guid isPermaLink="true">https://zenn.dev/kdavslrjklfrjak/articles/9cdd3e34e24fe2</guid><pubDate>Sat, 11 Oct 2025 10:12:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fwjGSVVn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E6%2581%258B%25E6%2584%259B%25E5%25B0%258F%25E8%25AA%25AC%25E3%2582%2592%25E6%259B%25B8%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:OP25%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNkNjk1NmQzZWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png?_a=BACAGSGT" length="0" type="false"/><dc:creator>OP25</dc:creator></item></channel></rss>
