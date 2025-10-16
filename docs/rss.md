@@ -9,6 +9,43 @@ search:
 
 GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/osmoscraft/osmosfeed)にインスパイアされてます。
 
+### 20251016
+
+- Blog
+    - [Structured Concurrency in Action](https://inside.java/2025/10/16/devoxxbelgium-structured-concurrency-action/)
+    - [Infrastructure Team 2025 Q3 Recap and Q4 Plan](https://blog.rust-lang.org/inside-rust/2025/10/16/infrastructure-team-q3-recap-and-q4-plan/)
+
+- Conf
+    - [Sora2 実践ハンズオン｜生成AI勉強会 in NTT西日本 1階 QUINTBRIDGE](https://techplay.jp/event/987803)
+    - [【名古屋リアル開催】「カイゼン」を kintone と AI で加速する　〜製造現場の業務改善〜](https://techplay.jp/event/987802)
+    - [Hello LT world『みんなで語る！好きと学びのアウトプット LT Night』](https://techplay.jp/event/987772)
+    - [2026年の広告戦略は「CPA」で考えてはいけない。〜トップ1%のマーケターが実践する、売上を最大化する新常識〜](https://techplay.jp/event/987797)
+    - [生成AIの時代にChatGPT-5やGeminiにも選ばれる！たった半年で圏外から難関キーワード「SEO対策」1位を実現したウィルゲート式SEO戦略講座](https://techplay.jp/event/987796)
+    - [【ライブ配信】無料で学べるAI勉強会 第230回：エージェントどうしをつなげるためにはどうすればいい？A2Aことはじめ](https://techplay.jp/event/987790)
+    - [【ライブ配信】無料で学べるAI勉強会 第229回：AWS Bedrockを用いたRAGの作成](https://techplay.jp/event/987789)
+    - [商品情報を起点にビジネスを変革する日本唯一のPIMサミット Product Experience Summit Tokyo 2025](https://techplay.jp/event/987792)
+    - [SESからスタートアップSREへ〜キャリアチェンジで直面した課題〜](https://techplay.jp/event/987713)
+    - [【新規事業担当者必見!!】未来を覗けるスタートアップピッチイベント 【earthkey pitch vol.186】](https://techplay.jp/event/987791)
+    - [【IBM Consulting】金融コンサルタント向け Career Meetup](https://techplay.jp/event/987686)
+    - [11/22【現役エンジニアの無料キャリア相談付き】AI競争で需要急増中の「Python」を学んでキャリアアップを目指そう in 東京](https://techplay.jp/event/987780)
+    - [DXの次の一手は「AX」にあり！ ～なぜあなたの会社のAI活用は&#34;個人の効率化&#34;で止まるのか？～](https://techplay.jp/event/987777)
+    - [〜狙いたいキーワードで「1位に上位表示」SEOで競合サイトに勝つ極意！〜「SEO対策」で圏外の状態からGoogle1位を獲得したSEOのプロが徹底解説〜](https://techplay.jp/event/987776)
+    - [【FITA】第2回セキュリティ民主化WG~経済産業省・日本銀行登壇予定~](https://techplay.jp/event/987689)
+    - [もう人じゃなくてもいいかも!? AIアバター研修！人手不足解消×コスト削減 ～参加者限定！ 今すぐ体験できるサンプル動画と質疑Bot無料プレゼント～](https://techplay.jp/event/987726)
+    - [AIをこれから始める・活用が浸透しない企業必見！成功する企業の人材育成と実践事例](https://techplay.jp/event/987721)
+    - [【参加無料】RPA入門　人手不足解消のための第一歩](https://techplay.jp/event/987404)
+    - [LPのビフォーアフター事例紹介！CVするLP講座～よくある落とし穴と対策を解説～](https://techplay.jp/event/987687)
+    - [DAISO,LIFULL,相鉄ご登壇！顧客データ分析やアプリ戦略、AI進化まで幅広い最新事例とノウハウを学べるカンファレンス「Growth Summit 2025」](https://techplay.jp/event/987621)
+    - [次期インフラ基盤の賢い選び方 ～アセスメントから最適な構成を導きコスト削減する方法とは～](https://techplay.jp/event/987767)
+    - [tecHub ITキャリア・トーク ～近畿編～](https://techplay.jp/event/987630)
+    - [AIエージェント進化の鍵 音声・動画 によって拓かれた未来を知る](https://techplay.jp/event/987521)
+    - [インディペンデント・ディレクター杉浦幹男氏が聞く、アート・コンテンツと地域振興シリーズvol.16 音楽から社会課題にアプローチする～クラシック音楽の未来への種蒔き～](https://techplay.jp/event/987771)
+    - [「表計算」「データ集計・分析」「視覚化」 ３つに分けて体系を理解するExcelシリーズ データ集計・分析編 Vol.3【ピボットテーブル入門】](https://techplay.jp/event/987770)
+    - [どう活かす？デザインの基礎知識 Vol.2「クリエイターが知っておきたいタイポグラフィの知識」](https://techplay.jp/event/987769)
+    - [動画生成AI活用術・実践編 ～VP・広報・マーケティングに活かす制作プロセス～](https://techplay.jp/event/987768)
+    - [“失敗しない”生成AI活用ロードマップの描き方 ～成果を爆増させる業務分析から人材育成の実践法～](https://techplay.jp/event/987345)
+
+
 ### 20251015
 
 - Blog
