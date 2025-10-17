@@ -9,6 +9,13 @@ search:
 
 GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/osmoscraft/osmosfeed)にインスパイアされてます。
 
+### 20251017
+
+- Blog
+    - [Koog 0.5.0 Is Out: Smarter Tools, Persistent Agents, and Simplified Strategy Design](https://blog.jetbrains.com/ai/2025/10/koog-0-5-0-is-out-smarter-tools-persistent-agents-and-simplified-strategy-design/)
+    - [What’s New in Java 25 in 25 Minutes - Sip of Java](https://inside.java/2025/10/17/new-in-jdk-25-2-mins/)
+
+
 ### 20251016
 
 - Blog
@@ -31,7 +38,6 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
     - [JEPs in JDK 25 Integrated Since JDK 21](https://inside.java/2025/09/26/jeps-since-jdk-21/)
     - [Unlock Powerful Insights with Java Management Service: Introducing Analyze Applications and Major Management Enhancements](https://blogs.oracle.com/java/post/analyze-applications-and-other-enhancements)
     - [The Arrival of Java 25](https://blogs.oracle.com/java/post/the-arrival-of-java-25)
-    - [Detaching GraalVM from the Java Ecosystem Train](https://blogs.oracle.com/java/post/detaching-graalvm-from-the-java-ecosystem-train)
     - [Program management update — September 2025](https://blog.rust-lang.org/inside-rust/2025/10/14/program-management-update-2025-09/)
     - [This Development-cycle in Cargo: 1.90](https://blog.rust-lang.org/inside-rust/2025/10/01/this-development-cycle-in-cargo-1.90/)
     - [The next Rust All Hands](https://blog.rust-lang.org/inside-rust/2025/09/30/all-hands-2026/)
@@ -51,7 +57,6 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
     - [Mythbusting the scope of Livepatch protection](https://ubuntu.com//blog/mythbusting-the-scope-of-livepatch-protection)
     - [How to build an awesome cloud gaming platform with Anbox Cloud](https://ubuntu.com//blog/how-to-build-an-awesome-cloud-gaming-platform-with-anbox-cloud)
     - [Canonical achieves IEC 62443-4-1 compliance in Industrial Automation and Control Systems](https://ubuntu.com//blog/canonical-iec-62443-4-1)
-    - [Canonical announces it will support and distribute NVIDIA CUDA in Ubuntu](https://ubuntu.com//blog/canonical-announces-it-will-support-and-distribute-nvidia-cuda-in-ubuntu)
 
 
 ### 20251010
