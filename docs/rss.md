@@ -9,11 +9,19 @@ search:
 
 GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/osmoscraft/osmosfeed)にインスパイアされてます。
 
+### 20251018
+
+- Blog
+    - [From JDK 21 to JDK 25 - Java Performance Update 2025](https://inside.java/2025/10/18/devoxxbelgium-java-performance-update/)
+
+
 ### 20251017
 
 - Blog
     - [Koog 0.5.0 Is Out: Smarter Tools, Persistent Agents, and Simplified Strategy Design](https://blog.jetbrains.com/ai/2025/10/koog-0-5-0-is-out-smarter-tools-persistent-agents-and-simplified-strategy-design/)
     - [What’s New in Java 25 in 25 Minutes - Sip of Java](https://inside.java/2025/10/17/new-in-jdk-25-2-mins/)
+    - [Renaming the default branch of rust-lang/rust](https://blog.rust-lang.org/inside-rust/2025/10/16/renaming-the-default-branch-of-rust-langrust/)
+    - [docs.rs: changed default targets](https://blog.rust-lang.org/2025/10/16/docsrs-changed-default-targets/)
 
 
 ### 20251016
@@ -37,7 +45,6 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
     - [Episode 40 “Amber &amp;amp; Valhalla - Incremental Design and Feature Arcs” with Brian Goetz](https://inside.java/2025/09/28/podcast-040/)
     - [JEPs in JDK 25 Integrated Since JDK 21](https://inside.java/2025/09/26/jeps-since-jdk-21/)
     - [Unlock Powerful Insights with Java Management Service: Introducing Analyze Applications and Major Management Enhancements](https://blogs.oracle.com/java/post/analyze-applications-and-other-enhancements)
-    - [The Arrival of Java 25](https://blogs.oracle.com/java/post/the-arrival-of-java-25)
     - [Program management update — September 2025](https://blog.rust-lang.org/inside-rust/2025/10/14/program-management-update-2025-09/)
     - [This Development-cycle in Cargo: 1.90](https://blog.rust-lang.org/inside-rust/2025/10/01/this-development-cycle-in-cargo-1.90/)
     - [The next Rust All Hands](https://blog.rust-lang.org/inside-rust/2025/09/30/all-hands-2026/)
