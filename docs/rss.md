@@ -9,6 +9,9 @@ search:
 
 GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/osmoscraft/osmosfeed)にインスパイアされてます。
 
+### 20251019
+
+
 ### 20251018
 
 - Blog
