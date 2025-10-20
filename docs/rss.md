@@ -9,6 +9,12 @@ search:
 
 GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/osmoscraft/osmosfeed)にインスパイアされてます。
 
+### 20251020
+
+- Blog
+    - [Performance Improvements in JDK 25](https://inside.java/2025/10/20/jdk-25-performance-improvements/)
+
+
 ### 20251019
 
 
@@ -55,7 +61,6 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
     - [Variadic Generics Micro Survey](https://blog.rust-lang.org/inside-rust/2025/09/22/variadic-generics-micro-survey/)
     - [Announcing the New Rust Project Directors](https://blog.rust-lang.org/2025/10/15/announcing-the-new-rust-project-directors-2025/)
     - [crates.io: Malicious crates faster_log and async_println](https://blog.rust-lang.org/2025/09/24/crates.io-malicious-crates-fasterlog-and-asyncprintln/)
-    - [Announcing Rust 1.90.0](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
     - [NVIDIA DGX Spark: The developer’s personal AI supercomputer built on an Ubuntu base](https://ubuntu.com//blog/nvidia-dgx-spark-ubuntu-base)
     - [Canonical releases Ubuntu 25.10 Questing Quokka](https://ubuntu.com//blog/canonical-releases-ubuntu-25-10-questing-quokka)
     - [Ubuntu worker nodes for OKE now in Limited Availability](https://ubuntu.com//blog/ubuntu-worker-nodes-for-oracle-oke-now-in-limited-availability)
@@ -66,7 +71,6 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
     - [Beyond ‘whack-a-mole’ and insecticide](https://ubuntu.com//blog/beyond-whack-a-mole-and-insecticide)
     - [Mythbusting the scope of Livepatch protection](https://ubuntu.com//blog/mythbusting-the-scope-of-livepatch-protection)
     - [How to build an awesome cloud gaming platform with Anbox Cloud](https://ubuntu.com//blog/how-to-build-an-awesome-cloud-gaming-platform-with-anbox-cloud)
-    - [Canonical achieves IEC 62443-4-1 compliance in Industrial Automation and Control Systems](https://ubuntu.com//blog/canonical-iec-62443-4-1)
 
 
 ### 20251010
