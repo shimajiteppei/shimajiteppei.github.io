@@ -9,6 +9,13 @@ search:
 
 GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/osmoscraft/osmosfeed)にインスパイアされてます。
 
+### 20251021
+
+- Blog
+    - [Assembling Project Leyden #JVMLS](https://inside.java/2025/10/21/jvmls-assembling-project-leyden/)
+    - [What’s new in security for Ubuntu 25.10?](https://ubuntu.com//blog/ubuntu-25-10-security-updates)
+
+
 ### 20251020
 
 - Blog
@@ -70,7 +77,6 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
     - [Fortifying security for Ubuntu on Azure with Metadata Security Protocol (MSP)](https://ubuntu.com//blog/fortifying-security-ubuntu-azure-metadata-security-protocol-msp)
     - [Beyond ‘whack-a-mole’ and insecticide](https://ubuntu.com//blog/beyond-whack-a-mole-and-insecticide)
     - [Mythbusting the scope of Livepatch protection](https://ubuntu.com//blog/mythbusting-the-scope-of-livepatch-protection)
-    - [How to build an awesome cloud gaming platform with Anbox Cloud](https://ubuntu.com//blog/how-to-build-an-awesome-cloud-gaming-platform-with-anbox-cloud)
 
 
 ### 20251010
