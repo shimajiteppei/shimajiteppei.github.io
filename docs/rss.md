@@ -9,6 +9,17 @@ search:
 
 GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/osmoscraft/osmosfeed)にインスパイアされてます。
 
+### 20251023
+
+- Blog
+    - [Getting Started With Kotlin for Java Developers](https://blog.jetbrains.com/kotlin/2025/10/getting-started-with-kotlin-for-java-developers/)
+    - [Three Upcoming G1 Improvements - Inside Java Newscast #99](https://inside.java/2025/10/23/newscast-99/)
+    - [HTTP/3 Support in JDK 26](https://inside.java/2025/10/22/http3-support/)
+    - [What we learned with Clippy&#39;s feature freeze](https://blog.rust-lang.org/inside-rust/2025/10/22/clippys-feature-warming-up/)
+    - [Renaming the default branch of rust-lang/rust](https://blog.rust-lang.org/inside-rust/2025/10/16/renaming-the-default-branch-of-rust-lang-rust/)
+    - [ESWIN Computing launches the EBC7702 Mini-DTX Mainboard with Ubuntu 24.04 LTS](https://ubuntu.com//blog/eswin-computing-canonical-mini-dtx-mainboard)
+
+
 ### 20251022
 
 - Blog
