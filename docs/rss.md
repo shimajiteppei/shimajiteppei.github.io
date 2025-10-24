@@ -9,6 +9,15 @@ search:
 
 GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/osmoscraft/osmosfeed)にインスパイアされてます。
 
+### 20251024
+
+- Blog
+    - [NUMA-Aware Relocation in ZGC](https://inside.java/2025/10/24/zgc-numa-aware-relocation/)
+    - [Canonical announces new optimized Ubuntu image for Thundercomm RUBIK Pi 3](https://ubuntu.com//blog/rubik-pi-3-thundercomm-canonical)
+    - [Introducing Canonical Academy](https://ubuntu.com//blog/introducing-canonical-academy)
+    - [Introducing silicon-optimized inference snaps](https://ubuntu.com//blog/canonical-releases-inference-snaps)
+
+
 ### 20251023
 
 - Blog
@@ -85,7 +94,6 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
     - [This Development-cycle in Cargo: 1.90](https://blog.rust-lang.org/inside-rust/2025/10/01/this-development-cycle-in-cargo-1.90/)
     - [The next Rust All Hands](https://blog.rust-lang.org/inside-rust/2025/09/30/all-hands-2026/)
     - [Leadership Council September 2025 Representative Selections](https://blog.rust-lang.org/inside-rust/2025/09/23/leadership-council-repr-selection/)
-    - [Variadic Generics Micro Survey](https://blog.rust-lang.org/inside-rust/2025/09/22/variadic-generics-micro-survey/)
     - [Announcing the New Rust Project Directors](https://blog.rust-lang.org/2025/10/15/announcing-the-new-rust-project-directors-2025/)
     - [crates.io: Malicious crates faster_log and async_println](https://blog.rust-lang.org/2025/09/24/crates.io-malicious-crates-fasterlog-and-asyncprintln/)
     - [NVIDIA DGX Spark: The developer’s personal AI supercomputer built on an Ubuntu base](https://ubuntu.com//blog/nvidia-dgx-spark-ubuntu-base)
@@ -108,6 +116,5 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
     - [Koog × A2A: Building Connected AI Agents in Kotlin](https://blog.jetbrains.com/ai/2025/10/koog-a2a-building-connected-ai-agents-in-kotlin/)
     - [The Kotlin AI Stack: Build AI Agents With Koog, Code Smarter With Junie, and More](https://blog.jetbrains.com/kotlin/2025/09/the-kotlin-ai-stack-build-ai-agents-with-koog-code-smarter-with-junie-and-more/)
     - [Ktor Roadmap and Previews](https://blog.jetbrains.com/kotlin/2025/09/ktor-roadmap-2025/)
-    - [Compose Multiplatform 1.9.0 Released: Compose Multiplatform for Web Goes Beta](https://blog.jetbrains.com/kotlin/2025/09/compose-multiplatform-1-9-0-compose-for-web-beta/)
 
 
