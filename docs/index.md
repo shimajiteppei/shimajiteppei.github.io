@@ -8,7 +8,7 @@
   </p>
 
   <h4 style="color: var(--md-primary-fg-color)">★管理人プロフィール★</h4>
-  <img src="/static/images/icon.jpg.webp">
+  <img src="/static/images/icon.jpg.webp" alt="アイコン">
   <p style="padding-bottom: 24px">
     ソフトウェアエンジニアとして働いています。
     <br />

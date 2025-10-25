@@ -1,17 +1,17 @@
-[data-md-color-primary="custom-light"] {
-    --md-primary-fg-color: #4d5aaf;
-    --md-primary-fg-color--light: #6576e6;
-    --md-primary-fg-color--dark: #4d5aaf;
-}
-
-[data-md-color-primary="custom-dark"] {
-    --md-primary-fg-color: #6576e6;
-    --md-primary-fg-color--light: #6576e6;
-    --md-primary-fg-color--dark: #4d5aaf;
-}
-
 /** basic layout, color */
 :root {
+    --blog-image-color: #444aaa;
+
+    [data-md-color-primary="custom-light"] {
+        --md-primary-fg-color: var(--blog-image-color);
+    }
+
+    [data-md-color-primary="custom-dark"] {
+        --md-primary-fg-color: #8aaaff;
+
+        --md-default-fg-color--lightest: var(--md-default-bg-color);
+    }
+
     /** https://github.com/squidfunk/mkdocs-material/blob/master/src/templates/assets/stylesheets/main/_colors.scss */
     --md-accent-fg-color: #2ca9e1;
     --md-accent-fg-color--transparent: #2ca9e140;
@@ -28,6 +28,7 @@
         --article-max-width: 708px;
 
         header {
+            background-color: var(--blog-image-color);
             box-shadow: unset !important;
             transition: unset !important;
 
@@ -67,14 +68,11 @@
         }
 
         main {
-            background-color: var(--md-default-fg-color--lightest);
-
             > div.md-main__inner {
                 max-width: var(--site-max-width);
                 margin-top: 0;
 
                 .md-content {
-                    background-color: var(--md-default-bg-color);
                     padding: 16px;
                     padding-bottom: 64px;
 
