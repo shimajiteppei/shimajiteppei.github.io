@@ -9,6 +9,12 @@ search:
 
 GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/osmoscraft/osmosfeed)にインスパイアされてます。
 
+### 20251025
+
+- Blog
+    - [Writing GPU-Ready AI Models in Pure Java with Babylon](https://inside.java/2025/10/25/devoxxbelgium-writing-gpuready-ai-models-in-java/)
+
+
 ### 20251024
 
 - Blog
@@ -93,7 +99,6 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
     - [Program management update — September 2025](https://blog.rust-lang.org/inside-rust/2025/10/14/program-management-update-2025-09/)
     - [This Development-cycle in Cargo: 1.90](https://blog.rust-lang.org/inside-rust/2025/10/01/this-development-cycle-in-cargo-1.90/)
     - [The next Rust All Hands](https://blog.rust-lang.org/inside-rust/2025/09/30/all-hands-2026/)
-    - [Leadership Council September 2025 Representative Selections](https://blog.rust-lang.org/inside-rust/2025/09/23/leadership-council-repr-selection/)
     - [Announcing the New Rust Project Directors](https://blog.rust-lang.org/2025/10/15/announcing-the-new-rust-project-directors-2025/)
     - [crates.io: Malicious crates faster_log and async_println](https://blog.rust-lang.org/2025/09/24/crates.io-malicious-crates-fasterlog-and-asyncprintln/)
     - [NVIDIA DGX Spark: The developer’s personal AI supercomputer built on an Ubuntu base](https://ubuntu.com//blog/nvidia-dgx-spark-ubuntu-base)
@@ -115,6 +120,5 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
     - [Amper Update, October 2025 – Compose Hot Reload and UX Improvements](https://blog.jetbrains.com/amper/2025/10/amper-update-october-2025/)
     - [Koog × A2A: Building Connected AI Agents in Kotlin](https://blog.jetbrains.com/ai/2025/10/koog-a2a-building-connected-ai-agents-in-kotlin/)
     - [The Kotlin AI Stack: Build AI Agents With Koog, Code Smarter With Junie, and More](https://blog.jetbrains.com/kotlin/2025/09/the-kotlin-ai-stack-build-ai-agents-with-koog-code-smarter-with-junie-and-more/)
-    - [Ktor Roadmap and Previews](https://blog.jetbrains.com/kotlin/2025/09/ktor-roadmap-2025/)
 
 
