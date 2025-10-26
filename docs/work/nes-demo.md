@@ -1,3 +1,7 @@
+---
+description: 自作のファミコンエミュレータでパブリックドメインのゲームを遊べます
+---
+
 # ファミコンエミュレータ
 
 <link rel="stylesheet" href="/static/stylesheets/xp.css">

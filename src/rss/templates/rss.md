@@ -1,13 +1,12 @@
 ---
+description: osmosfeedをベースにした自作RSSリーダー
 search:
     exclude: true
 ---
 
 # RSSリンク
 
-情報収集を一元化するために、RSSリーダーをブログでホストしています。
-
-GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/osmoscraft/osmosfeed)にインスパイアされてます。
+[osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
 {% for date_group in rss_list %}### {{ date_group.date }}
 

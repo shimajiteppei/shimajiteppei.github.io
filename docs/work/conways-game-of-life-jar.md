@@ -1,3 +1,7 @@
+---
+description: 高校生のときに自作したライフゲームを遊べます
+---
+
 # ライフゲーム
 
 <link rel="stylesheet" href="/static/stylesheets/xp.css">
