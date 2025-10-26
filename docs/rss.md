@@ -1,13 +1,18 @@
 ---
+description: osmosfeedをベースにした自作RSSリーダー
 search:
     exclude: true
 ---
 
 # RSSリンク
 
-情報収集を一元化するために、RSSリーダーをブログでホストしています。
+[osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
-GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/osmoscraft/osmosfeed)にインスパイアされてます。
+### 20251026
+
+- Blog
+    - [JEP targeted to JDK 26: 517: HTTP/3 for the HTTP Client API](https://inside.java/2025/10/26/jep517-target-jdk26/)
+
 
 ### 20251025
 
@@ -100,7 +105,6 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
     - [This Development-cycle in Cargo: 1.90](https://blog.rust-lang.org/inside-rust/2025/10/01/this-development-cycle-in-cargo-1.90/)
     - [The next Rust All Hands](https://blog.rust-lang.org/inside-rust/2025/09/30/all-hands-2026/)
     - [Announcing the New Rust Project Directors](https://blog.rust-lang.org/2025/10/15/announcing-the-new-rust-project-directors-2025/)
-    - [crates.io: Malicious crates faster_log and async_println](https://blog.rust-lang.org/2025/09/24/crates.io-malicious-crates-fasterlog-and-asyncprintln/)
     - [NVIDIA DGX Spark: The developer’s personal AI supercomputer built on an Ubuntu base](https://ubuntu.com//blog/nvidia-dgx-spark-ubuntu-base)
     - [Canonical releases Ubuntu 25.10 Questing Quokka](https://ubuntu.com//blog/canonical-releases-ubuntu-25-10-questing-quokka)
     - [Ubuntu worker nodes for OKE now in Limited Availability](https://ubuntu.com//blog/ubuntu-worker-nodes-for-oracle-oke-now-in-limited-availability)
@@ -108,8 +112,6 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
     - [The clock is ticking: Ubuntu Summit 25.10 is just around the corner](https://ubuntu.com//blog/the-clock-is-ticking-ubuntu-summit-25-10-is-just-around-the-corner)
     - [Canonical achieves ISO 27001 certification](https://ubuntu.com//blog/canonical-achieves-iso-27001-certification)
     - [Fortifying security for Ubuntu on Azure with Metadata Security Protocol (MSP)](https://ubuntu.com//blog/fortifying-security-ubuntu-azure-metadata-security-protocol-msp)
-    - [Beyond ‘whack-a-mole’ and insecticide](https://ubuntu.com//blog/beyond-whack-a-mole-and-insecticide)
-    - [Mythbusting the scope of Livepatch protection](https://ubuntu.com//blog/mythbusting-the-scope-of-livepatch-protection)
 
 
 ### 20251010
@@ -119,6 +121,5 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
     - [Crafting Your KotlinConf Proposal: Expert Tips to  Help You Stand Out](https://blog.jetbrains.com/kotlin/2025/10/crafting-your-kotlinconf-proposal-expert-tips/)
     - [Amper Update, October 2025 – Compose Hot Reload and UX Improvements](https://blog.jetbrains.com/amper/2025/10/amper-update-october-2025/)
     - [Koog × A2A: Building Connected AI Agents in Kotlin](https://blog.jetbrains.com/ai/2025/10/koog-a2a-building-connected-ai-agents-in-kotlin/)
-    - [The Kotlin AI Stack: Build AI Agents With Koog, Code Smarter With Junie, and More](https://blog.jetbrains.com/kotlin/2025/09/the-kotlin-ai-stack-build-ai-agents-with-koog-code-smarter-with-junie-and-more/)
 
 
