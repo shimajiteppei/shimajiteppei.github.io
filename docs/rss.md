@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251027
+
+- Blog
+    - [Try Out JEP 401 Value Classes and Objects](https://inside.java/2025/10/27/try-jep-401-value-classes/)
+    - [Global-ready from day one](https://ubuntu.com//blog/localization-testing)
+
+
 ### 20251026
 
 - Blog
