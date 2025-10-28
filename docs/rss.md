@@ -8,9 +8,17 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251028
+
+- Blog
+    - [JEP targeted to JDK 26: 504: Remove the Applet API](https://inside.java/2025/10/28/jep504-target-jdk26/)
+    - [Episode 41 “From Cowboy Mode to Careful Stewardship” with Mark Reinhold](https://inside.java/2025/10/27/podcast-041/)
+
+
 ### 20251027
 
 - Blog
+    - [Kodee’s Kotlin Roundup: Finally Back with News](https://blog.jetbrains.com/kotlin/2025/10/kodees-kotlin-roundup-october-edition/)
     - [Try Out JEP 401 Value Classes and Objects](https://inside.java/2025/10/27/try-jep-401-value-classes/)
     - [Global-ready from day one](https://ubuntu.com//blog/localization-testing)
 
@@ -106,7 +114,6 @@ search:
     - [The Inside Java Newsletter: Java 25 is Live!](https://inside.java/2025/10/03/inside-java-newsletter/)
     - [Oracle Java Extension for Visual Studio Code Version 24.1.2 Is Now Available!](https://inside.java/2025/10/01/java-vscode-extension-update/)
     - [Episode 40 “Amber &amp;amp; Valhalla - Incremental Design and Feature Arcs” with Brian Goetz](https://inside.java/2025/09/28/podcast-040/)
-    - [JEPs in JDK 25 Integrated Since JDK 21](https://inside.java/2025/09/26/jeps-since-jdk-21/)
     - [Unlock Powerful Insights with Java Management Service: Introducing Analyze Applications and Major Management Enhancements](https://blogs.oracle.com/java/post/analyze-applications-and-other-enhancements)
     - [Program management update — September 2025](https://blog.rust-lang.org/inside-rust/2025/10/14/program-management-update-2025-09/)
     - [This Development-cycle in Cargo: 1.90](https://blog.rust-lang.org/inside-rust/2025/10/01/this-development-cycle-in-cargo-1.90/)
