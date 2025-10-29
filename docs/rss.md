@@ -8,11 +8,20 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251029
+
+- Blog
+    - [Canonical and NVIDIA BlueField-4: a foundation for zero-trust high performance infrastructure](https://ubuntu.com//blog/canonical-and-nvidia-bluefield-4-a-foundation-for-zero-trust-high-performance-infrastructure)
+
+
 ### 20251028
 
 - Blog
+    - [Evaluating Kotlin in Real Projects](https://blog.jetbrains.com/kotlin/2025/10/evaluating-kotlin-in-real-projects/)
     - [JEP targeted to JDK 26: 504: Remove the Applet API](https://inside.java/2025/10/28/jep504-target-jdk26/)
     - [Episode 41 “From Cowboy Mode to Careful Stewardship” with Mark Reinhold](https://inside.java/2025/10/27/podcast-041/)
+    - [Announcing seven new members of the compiler team](https://blog.rust-lang.org/inside-rust/2025/10/28/compiler-team-new-members/)
+    - [Project goals for 2025H2](https://blog.rust-lang.org/2025/10/28/project-goals-2025h2/)
 
 
 ### 20251027
