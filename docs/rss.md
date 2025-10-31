@@ -8,11 +8,15 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251031
+
+
 ### 20251030
 
 - Blog
     - [Quality Outreach Heads-up - JDK 26: HTTP/3 Support Available in HTTP Client API](https://inside.java/2025/10/30/quality-heads-up/)
     - [AI World: Georges Saab Unveils Java 25 for AI and Cloud](https://inside.java/2025/10/29/aiworld-java-for-ai/)
+    - [Announcing Rust 1.91.0](https://blog.rust-lang.org/2025/10/30/Rust-1.91.0/)
     - [Why we brought hardware-optimized GenAI inference to Ubuntu](https://ubuntu.com//blog/genai-inference)
 
 
@@ -141,7 +145,6 @@ search:
     - [OpenStack cloud – happy 15th anniversary!](https://ubuntu.com//blog/openstack-cloud-happy-15th-anniversary)
     - [The clock is ticking: Ubuntu Summit 25.10 is just around the corner](https://ubuntu.com//blog/the-clock-is-ticking-ubuntu-summit-25-10-is-just-around-the-corner)
     - [Canonical achieves ISO 27001 certification](https://ubuntu.com//blog/canonical-achieves-iso-27001-certification)
-    - [Fortifying security for Ubuntu on Azure with Metadata Security Protocol (MSP)](https://ubuntu.com//blog/fortifying-security-ubuntu-azure-metadata-security-protocol-msp)
 
 
 ### 20251010
