@@ -8,7 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251101
+
+
 ### 20251031
+
+- Blog
+    - [Value Classes Heap Flattening - What to expect from JEP 401 #JVMLS](https://inside.java/2025/10/31/jvmls-jep-401/)
 
 
 ### 20251030
@@ -137,14 +143,12 @@ search:
     - [Unlock Powerful Insights with Java Management Service: Introducing Analyze Applications and Major Management Enhancements](https://blogs.oracle.com/java/post/analyze-applications-and-other-enhancements)
     - [Program management update — September 2025](https://blog.rust-lang.org/inside-rust/2025/10/14/program-management-update-2025-09/)
     - [This Development-cycle in Cargo: 1.90](https://blog.rust-lang.org/inside-rust/2025/10/01/this-development-cycle-in-cargo-1.90/)
-    - [The next Rust All Hands](https://blog.rust-lang.org/inside-rust/2025/09/30/all-hands-2026/)
     - [Announcing the New Rust Project Directors](https://blog.rust-lang.org/2025/10/15/announcing-the-new-rust-project-directors-2025/)
     - [NVIDIA DGX Spark: The developer’s personal AI supercomputer built on an Ubuntu base](https://ubuntu.com//blog/nvidia-dgx-spark-ubuntu-base)
     - [Canonical releases Ubuntu 25.10 Questing Quokka](https://ubuntu.com//blog/canonical-releases-ubuntu-25-10-questing-quokka)
     - [Ubuntu worker nodes for OKE now in Limited Availability](https://ubuntu.com//blog/ubuntu-worker-nodes-for-oracle-oke-now-in-limited-availability)
     - [OpenStack cloud – happy 15th anniversary!](https://ubuntu.com//blog/openstack-cloud-happy-15th-anniversary)
     - [The clock is ticking: Ubuntu Summit 25.10 is just around the corner](https://ubuntu.com//blog/the-clock-is-ticking-ubuntu-summit-25-10-is-just-around-the-corner)
-    - [Canonical achieves ISO 27001 certification](https://ubuntu.com//blog/canonical-achieves-iso-27001-certification)
 
 
 ### 20251010
