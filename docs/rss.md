@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251102
+
+
 ### 20251101
 
 
@@ -139,10 +142,8 @@ search:
     - [Java and AI: Powering Scalable, Enterprise-Grade Intelligence](https://inside.java/2025/10/07/java-and-ai-powering-enterprise-intelligence/)
     - [Evolving ZGC’s Pointer Color Palette #JVMLS](https://inside.java/2025/10/06/jvmls-zgc-colored-pointers/)
     - [The Inside Java Newsletter: Java 25 is Live!](https://inside.java/2025/10/03/inside-java-newsletter/)
-    - [Oracle Java Extension for Visual Studio Code Version 24.1.2 Is Now Available!](https://inside.java/2025/10/01/java-vscode-extension-update/)
     - [Unlock Powerful Insights with Java Management Service: Introducing Analyze Applications and Major Management Enhancements](https://blogs.oracle.com/java/post/analyze-applications-and-other-enhancements)
     - [Program management update — September 2025](https://blog.rust-lang.org/inside-rust/2025/10/14/program-management-update-2025-09/)
-    - [This Development-cycle in Cargo: 1.90](https://blog.rust-lang.org/inside-rust/2025/10/01/this-development-cycle-in-cargo-1.90/)
     - [Announcing the New Rust Project Directors](https://blog.rust-lang.org/2025/10/15/announcing-the-new-rust-project-directors-2025/)
     - [NVIDIA DGX Spark: The developer’s personal AI supercomputer built on an Ubuntu base](https://ubuntu.com//blog/nvidia-dgx-spark-ubuntu-base)
     - [Canonical releases Ubuntu 25.10 Questing Quokka](https://ubuntu.com//blog/canonical-releases-ubuntu-25-10-questing-quokka)
