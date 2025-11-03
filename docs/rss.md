@@ -8,7 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251103
+
+
 ### 20251102
+
+- Blog
+    - [Supercharge your JVM Performance with Project Leyden and Spring Boot](https://inside.java/2025/11/02/devoxxbelgium-leyden-supercharge-jvm-performance/)
 
 
 ### 20251101
@@ -158,6 +164,5 @@ search:
     - [Build a Kotlin Multiplatform Project and Win a Trip to KotlinConf 2026](https://blog.jetbrains.com/kotlin/2025/10/kotlin-multiplatform-contest-2026/)
     - [Crafting Your KotlinConf Proposal: Expert Tips to  Help You Stand Out](https://blog.jetbrains.com/kotlin/2025/10/crafting-your-kotlinconf-proposal-expert-tips/)
     - [Amper Update, October 2025 – Compose Hot Reload and UX Improvements](https://blog.jetbrains.com/amper/2025/10/amper-update-october-2025/)
-    - [Koog × A2A: Building Connected AI Agents in Kotlin](https://blog.jetbrains.com/ai/2025/10/koog-a2a-building-connected-ai-agents-in-kotlin/)
 
 
