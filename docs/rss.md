@@ -8,7 +8,17 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251104
+
+- Blog
+    - [Integrity by Default](https://inside.java/2025/11/04/javaone-integrity-by-default/)
+    - [Quality Outreach Heads-up - JDK 25: Consistent Behavior of ‘new File(“”)’](https://inside.java/2025/11/03/quality-heads-up/)
+
+
 ### 20251103
+
+- Blog
+    - [Finding Order in the Mayhem: A Novel Concurrency Testing Tool that Improved the Kotlin Compiler](https://blog.jetbrains.com/research/2025/10/litmuskt-concurrency-testing/)
 
 
 ### 20251102
@@ -147,7 +157,6 @@ search:
     - [Unlock Powerful Insights with Java Management Service: Introducing Analyze Applications and Major Management Enhancements](https://inside.java/2025/10/08/jms-analyze-applications/)
     - [Java and AI: Powering Scalable, Enterprise-Grade Intelligence](https://inside.java/2025/10/07/java-and-ai-powering-enterprise-intelligence/)
     - [Evolving ZGC’s Pointer Color Palette #JVMLS](https://inside.java/2025/10/06/jvmls-zgc-colored-pointers/)
-    - [The Inside Java Newsletter: Java 25 is Live!](https://inside.java/2025/10/03/inside-java-newsletter/)
     - [Unlock Powerful Insights with Java Management Service: Introducing Analyze Applications and Major Management Enhancements](https://blogs.oracle.com/java/post/analyze-applications-and-other-enhancements)
     - [Program management update — September 2025](https://blog.rust-lang.org/inside-rust/2025/10/14/program-management-update-2025-09/)
     - [Announcing the New Rust Project Directors](https://blog.rust-lang.org/2025/10/15/announcing-the-new-rust-project-directors-2025/)
@@ -163,6 +172,5 @@ search:
 - Blog
     - [Build a Kotlin Multiplatform Project and Win a Trip to KotlinConf 2026](https://blog.jetbrains.com/kotlin/2025/10/kotlin-multiplatform-contest-2026/)
     - [Crafting Your KotlinConf Proposal: Expert Tips to  Help You Stand Out](https://blog.jetbrains.com/kotlin/2025/10/crafting-your-kotlinconf-proposal-expert-tips/)
-    - [Amper Update, October 2025 – Compose Hot Reload and UX Improvements](https://blog.jetbrains.com/amper/2025/10/amper-update-october-2025/)
 
 
