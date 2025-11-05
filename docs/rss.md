@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251105
+
+- Blog
+    - [JEP targeted to JDK 26: 522: G1 GC: Improve Throughput by Reducing Synchronization](https://inside.java/2025/11/05/jep522-target-jdk26/)
+    - [Edge Networking gets smarter: AI and 5G in action](https://ubuntu.com//blog/edge-networking-gets-smarter-ai-and-5g-in-action)
+
+
 ### 20251104
 
 - Blog
