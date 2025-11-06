@@ -8,6 +8,14 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251106
+
+- Blog
+    - [Try the New Valhalla EA Build - Inside Java Newscast #100](https://inside.java/2025/11/06/newscast-100/)
+    - [Web Engineering: Celebrating Our Third Annual Hack Week](https://ubuntu.com//blog/web-engineering-celebrating-our-third-annual-hack-week)
+    - [Azure VM utils now included in Ubuntu: boosting cloud workloads](https://ubuntu.com//blog/ubuntu-azure-vm-utils-included)
+
+
 ### 20251105
 
 - Blog
