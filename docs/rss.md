@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251107
+
+- Blog
+    - [JEP targeted to JDK 26: 500: Prepare to Make Final Mean Final](https://inside.java/2025/11/07/jep500-target-jdk26/)
+
+
 ### 20251106
 
 - Blog
@@ -171,7 +177,6 @@ search:
     - [“Just Make All Exceptions Unchecked” - Live Q&amp;amp;A from Devoxx](https://inside.java/2025/10/09/devoxxstream/)
     - [Unlock Powerful Insights with Java Management Service: Introducing Analyze Applications and Major Management Enhancements](https://inside.java/2025/10/08/jms-analyze-applications/)
     - [Java and AI: Powering Scalable, Enterprise-Grade Intelligence](https://inside.java/2025/10/07/java-and-ai-powering-enterprise-intelligence/)
-    - [Evolving ZGC’s Pointer Color Palette #JVMLS](https://inside.java/2025/10/06/jvmls-zgc-colored-pointers/)
     - [Unlock Powerful Insights with Java Management Service: Introducing Analyze Applications and Major Management Enhancements](https://blogs.oracle.com/java/post/analyze-applications-and-other-enhancements)
     - [Program management update — September 2025](https://blog.rust-lang.org/inside-rust/2025/10/14/program-management-update-2025-09/)
     - [Announcing the New Rust Project Directors](https://blog.rust-lang.org/2025/10/15/announcing-the-new-rust-project-directors-2025/)
@@ -179,7 +184,6 @@ search:
     - [Canonical releases Ubuntu 25.10 Questing Quokka](https://ubuntu.com//blog/canonical-releases-ubuntu-25-10-questing-quokka)
     - [Ubuntu worker nodes for OKE now in Limited Availability](https://ubuntu.com//blog/ubuntu-worker-nodes-for-oracle-oke-now-in-limited-availability)
     - [OpenStack cloud – happy 15th anniversary!](https://ubuntu.com//blog/openstack-cloud-happy-15th-anniversary)
-    - [The clock is ticking: Ubuntu Summit 25.10 is just around the corner](https://ubuntu.com//blog/the-clock-is-ticking-ubuntu-summit-25-10-is-just-around-the-corner)
 
 
 ### 20251010
