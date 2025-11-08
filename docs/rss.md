@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251108
+
+- Blog
+    - [Pulling the (Foreign) String](https://inside.java/2025/11/08/ffm-string/)
+
+
 ### 20251107
 
 - Blog
@@ -176,14 +182,11 @@ search:
     - [Pattern Matching, Under the Microscope](https://inside.java/2025/10/13/devoxxbelgium-pattern-matching/)
     - [“Just Make All Exceptions Unchecked” - Live Q&amp;amp;A from Devoxx](https://inside.java/2025/10/09/devoxxstream/)
     - [Unlock Powerful Insights with Java Management Service: Introducing Analyze Applications and Major Management Enhancements](https://inside.java/2025/10/08/jms-analyze-applications/)
-    - [Java and AI: Powering Scalable, Enterprise-Grade Intelligence](https://inside.java/2025/10/07/java-and-ai-powering-enterprise-intelligence/)
-    - [Unlock Powerful Insights with Java Management Service: Introducing Analyze Applications and Major Management Enhancements](https://blogs.oracle.com/java/post/analyze-applications-and-other-enhancements)
     - [Program management update — September 2025](https://blog.rust-lang.org/inside-rust/2025/10/14/program-management-update-2025-09/)
     - [Announcing the New Rust Project Directors](https://blog.rust-lang.org/2025/10/15/announcing-the-new-rust-project-directors-2025/)
     - [NVIDIA DGX Spark: The developer’s personal AI supercomputer built on an Ubuntu base](https://ubuntu.com//blog/nvidia-dgx-spark-ubuntu-base)
     - [Canonical releases Ubuntu 25.10 Questing Quokka](https://ubuntu.com//blog/canonical-releases-ubuntu-25-10-questing-quokka)
     - [Ubuntu worker nodes for OKE now in Limited Availability](https://ubuntu.com//blog/ubuntu-worker-nodes-for-oracle-oke-now-in-limited-availability)
-    - [OpenStack cloud – happy 15th anniversary!](https://ubuntu.com//blog/openstack-cloud-happy-15th-anniversary)
 
 
 ### 20251010
