@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251110
+
+
 ### 20251109
 
 
@@ -183,16 +186,11 @@ search:
 - Blog
     - [Java for AI](https://inside.java/2025/10/14/devoxxbelgium-java-for-ai/)
     - [Pattern Matching, Under the Microscope](https://inside.java/2025/10/13/devoxxbelgium-pattern-matching/)
-    - [“Just Make All Exceptions Unchecked” - Live Q&amp;amp;A from Devoxx](https://inside.java/2025/10/09/devoxxstream/)
     - [Program management update — September 2025](https://blog.rust-lang.org/inside-rust/2025/10/14/program-management-update-2025-09/)
     - [Announcing the New Rust Project Directors](https://blog.rust-lang.org/2025/10/15/announcing-the-new-rust-project-directors-2025/)
     - [NVIDIA DGX Spark: The developer’s personal AI supercomputer built on an Ubuntu base](https://ubuntu.com//blog/nvidia-dgx-spark-ubuntu-base)
-    - [Canonical releases Ubuntu 25.10 Questing Quokka](https://ubuntu.com//blog/canonical-releases-ubuntu-25-10-questing-quokka)
 
 
 ### 20251010
-
-- Blog
-    - [Build a Kotlin Multiplatform Project and Win a Trip to KotlinConf 2026](https://blog.jetbrains.com/kotlin/2025/10/kotlin-multiplatform-contest-2026/)
 
 
