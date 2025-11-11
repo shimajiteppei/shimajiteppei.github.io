@@ -8,7 +8,19 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251111
+
+- Blog
+    - [Building AI Agents in Kotlin – Part 1: A Minimal Coding Agent](https://blog.jetbrains.com/ai/2025/11/building-ai-agents-in-kotlin-part-1-a-minimal-coding-agent/)
+    - [Growing Kotlin Adoption in Your Company](https://blog.jetbrains.com/kotlin/2025/11/growing-kotlin-adoption-in-your-company-2/)
+    - [Canonical announces optimized Ubuntu images for Google Cloud’s Axion N4A Virtual Machines](https://ubuntu.com//blog/canonical-announces-optimized-ubuntu-images-for-google-clouds-axion-n4a-virtual-machines)
+    - [Generating color palettes for design systems … inspired by APCA!](https://ubuntu.com//blog/generating-color-palettes-for-design-systems-inspired-by-apca)
+
+
 ### 20251110
+
+- Blog
+    - [Serialization 2 0: A Marshalling Update!](https://inside.java/2025/11/10/devoxxbelgium-serialization2-0-marshalling-update/)
 
 
 ### 20251109
@@ -189,8 +201,5 @@ search:
     - [Program management update — September 2025](https://blog.rust-lang.org/inside-rust/2025/10/14/program-management-update-2025-09/)
     - [Announcing the New Rust Project Directors](https://blog.rust-lang.org/2025/10/15/announcing-the-new-rust-project-directors-2025/)
     - [NVIDIA DGX Spark: The developer’s personal AI supercomputer built on an Ubuntu base](https://ubuntu.com//blog/nvidia-dgx-spark-ubuntu-base)
-
-
-### 20251010
 
 
