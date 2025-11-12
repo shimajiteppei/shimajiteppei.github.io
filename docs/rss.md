@@ -8,6 +8,14 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251112
+
+- Blog
+    - [The Inside Java Newsletter: The Latest on JavaOne 2026](https://inside.java/2025/11/12/inside-java-newsletter/)
+    - [Announcing Rust 1.91.1](https://blog.rust-lang.org/2025/11/10/Rust-1.91.1/)
+    - [Canonical releases FIPS-enabled Kubernetes](https://ubuntu.com//blog/canonical-releases-fips-enabled-kubernetes)
+
+
 ### 20251111
 
 - Blog
