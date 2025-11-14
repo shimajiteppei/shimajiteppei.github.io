@@ -8,6 +8,14 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251114
+
+- Blog
+    - [Deep Dive into Gatherers - JEP Cafe #24](https://inside.java/2025/11/14/jepcafe24/)
+    - [A CISO’s preview of open source and cybersecurity trends in 2026 and beyond](https://ubuntu.com//blog/a-cisos-preview-of-open-source-and-cybersecurity-trends-in-2026-and-beyond)
+    - [Canonical Kubernetes officially included in Sylva 1.5](https://ubuntu.com//blog/canonical-kubernetes-officially-included-in-sylva-1-5)
+
+
 ### 20251113
 
 - Blog
@@ -214,7 +222,6 @@ search:
 
 - Blog
     - [Java for AI](https://inside.java/2025/10/14/devoxxbelgium-java-for-ai/)
-    - [Pattern Matching, Under the Microscope](https://inside.java/2025/10/13/devoxxbelgium-pattern-matching/)
     - [Program management update — September 2025](https://blog.rust-lang.org/inside-rust/2025/10/14/program-management-update-2025-09/)
     - [Announcing the New Rust Project Directors](https://blog.rust-lang.org/2025/10/15/announcing-the-new-rust-project-directors-2025/)
     - [NVIDIA DGX Spark: The developer’s personal AI supercomputer built on an Ubuntu base](https://ubuntu.com//blog/nvidia-dgx-spark-ubuntu-base)
