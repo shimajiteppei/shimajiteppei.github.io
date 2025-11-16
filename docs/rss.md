@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251116
+
+- Blog
+    - [Beyond the Vector API - A Quest for a Lower Level API #JVMLS](https://inside.java/2025/11/16/jvmls-vector-api/)
+
+
 ### 20251115
 
 
@@ -219,11 +225,5 @@ search:
 - Blog
     - [Structured Concurrency in Action](https://inside.java/2025/10/16/devoxxbelgium-structured-concurrency-action/)
     - [Infrastructure Team 2025 Q3 Recap and Q4 Plan](https://blog.rust-lang.org/inside-rust/2025/10/16/infrastructure-team-q3-recap-and-q4-plan/)
-
-
-### 20251015
-
-- Blog
-    - [Announcing the New Rust Project Directors](https://blog.rust-lang.org/2025/10/15/announcing-the-new-rust-project-directors-2025/)
 
 
