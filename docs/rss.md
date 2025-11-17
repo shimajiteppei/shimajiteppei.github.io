@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251117
+
+
 ### 20251116
 
 - Blog
@@ -176,7 +179,6 @@ search:
     - [Three Upcoming G1 Improvements - Inside Java Newscast #99](https://inside.java/2025/10/23/newscast-99/)
     - [HTTP/3 Support in JDK 26](https://inside.java/2025/10/22/http3-support/)
     - [What we learned with Clippy&#39;s feature freeze](https://blog.rust-lang.org/inside-rust/2025/10/22/clippys-feature-warming-up/)
-    - [Renaming the default branch of rust-lang/rust](https://blog.rust-lang.org/inside-rust/2025/10/16/renaming-the-default-branch-of-rust-lang-rust/)
     - [ESWIN Computing launches the EBC7702 Mini-DTX Mainboard with Ubuntu 24.04 LTS](https://ubuntu.com//blog/eswin-computing-canonical-mini-dtx-mainboard)
 
 
@@ -216,14 +218,5 @@ search:
 - Blog
     - [Koog 0.5.0 Is Out: Smarter Tools, Persistent Agents, and Simplified Strategy Design](https://blog.jetbrains.com/ai/2025/10/koog-0-5-0-is-out-smarter-tools-persistent-agents-and-simplified-strategy-design/)
     - [What’s New in Java 25 in 25 Minutes - Sip of Java](https://inside.java/2025/10/17/new-in-jdk-25-2-mins/)
-    - [Renaming the default branch of rust-lang/rust](https://blog.rust-lang.org/inside-rust/2025/10/16/renaming-the-default-branch-of-rust-langrust/)
-    - [docs.rs: changed default targets](https://blog.rust-lang.org/2025/10/16/docsrs-changed-default-targets/)
-
-
-### 20251016
-
-- Blog
-    - [Structured Concurrency in Action](https://inside.java/2025/10/16/devoxxbelgium-structured-concurrency-action/)
-    - [Infrastructure Team 2025 Q3 Recap and Q4 Plan](https://blog.rust-lang.org/inside-rust/2025/10/16/infrastructure-team-q3-recap-and-q4-plan/)
 
 
