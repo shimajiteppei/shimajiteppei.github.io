@@ -8,7 +8,15 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251118
+
+
 ### 20251117
+
+- Blog
+    - [JEP targeted to JDK 26: 524: PEM Encodings of Cryptographic Objects (Second Preview)](https://inside.java/2025/11/17/jep524-target-jdk26/)
+    - [Infrastructure announcement Zulip channel](https://blog.rust-lang.org/inside-rust/2025/11/16/infra-announcement-zulip-channel/)
+    - [Launching the 2025 State of Rust Survey](https://blog.rust-lang.org/2025/11/17/launching-the-2025-state-of-rust-survey/)
 
 
 ### 20251116
@@ -211,12 +219,5 @@ search:
 
 - Blog
     - [From JDK 21 to JDK 25 - Java Performance Update 2025](https://inside.java/2025/10/18/devoxxbelgium-java-performance-update/)
-
-
-### 20251017
-
-- Blog
-    - [Koog 0.5.0 Is Out: Smarter Tools, Persistent Agents, and Simplified Strategy Design](https://blog.jetbrains.com/ai/2025/10/koog-0-5-0-is-out-smarter-tools-persistent-agents-and-simplified-strategy-design/)
-    - [What’s New in Java 25 in 25 Minutes - Sip of Java](https://inside.java/2025/10/17/new-in-jdk-25-2-mins/)
 
 
