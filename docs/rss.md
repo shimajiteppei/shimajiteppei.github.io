@@ -8,7 +8,18 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251119
+
+- Blog
+    - [83% of organizations see value in adopting open source, but report major gaps in security and governance](https://ubuntu.com//blog/state-of-global-open-source-2025)
+    - [Everything you need to know about FIPS 140-3 on Ubuntu | Videos](https://ubuntu.com//blog/everything-you-need-to-know-about-fips-140-3-on-ubuntu-videos)
+
+
 ### 20251118
+
+- Blog
+    - [Helping Decision‑Makers Say Yes to Kotlin](https://blog.jetbrains.com/kotlin/2025/11/helping-decision-makers-say-yes-to-kotlin/)
+    - [Google Summer of Code 2025 results](https://blog.rust-lang.org/2025/11/18/gsoc-2025-results/)
 
 
 ### 20251117
@@ -213,11 +224,5 @@ search:
 
 
 ### 20251019
-
-
-### 20251018
-
-- Blog
-    - [From JDK 21 to JDK 25 - Java Performance Update 2025](https://inside.java/2025/10/18/devoxxbelgium-java-performance-update/)
 
 
