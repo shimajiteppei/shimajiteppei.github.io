@@ -8,9 +8,18 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251120
+
+- Blog
+    - [Java 26 Warns of Deep Reflection - Inside Java Newscast #101](https://inside.java/2025/11/20/newscast-101/)
+
+
 ### 20251119
 
 - Blog
+    - [Program management update — October 2025](https://blog.rust-lang.org/inside-rust/2025/11/19/program-management-update--october-2025/)
+    - [Project goals update — October 2025](https://blog.rust-lang.org/2025/11/19/project-goals-update-october-2025/)
+    - [Project goals update — September 2025](https://blog.rust-lang.org/2025/11/19/Project-Goals-2025-September-Update/)
     - [83% of organizations see value in adopting open source, but report major gaps in security and governance](https://ubuntu.com//blog/state-of-global-open-source-2025)
     - [Everything you need to know about FIPS 140-3 on Ubuntu | Videos](https://ubuntu.com//blog/everything-you-need-to-know-about-fips-140-3-on-ubuntu-videos)
 
@@ -221,8 +230,5 @@ search:
 
 - Blog
     - [Performance Improvements in JDK 25](https://inside.java/2025/10/20/jdk-25-performance-improvements/)
-
-
-### 20251019
 
 
