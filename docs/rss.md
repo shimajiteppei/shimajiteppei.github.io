@@ -8,10 +8,18 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251121
+
+- Blog
+    - [Open design: the opportunity design students didn’t know they were missing](https://ubuntu.com//blog/open-design-the-opportunity-design-students-didnt-know-they-were-missing)
+    - [Anbox Cloud 1.28.0 is now available!](https://ubuntu.com//blog/anbox-cloud-1-28-0-is-now-available)
+
+
 ### 20251120
 
 - Blog
     - [Java 26 Warns of Deep Reflection - Inside Java Newscast #101](https://inside.java/2025/11/20/newscast-101/)
+    - [Switching to Rust&#39;s own mangling scheme on nightly](https://blog.rust-lang.org/2025/11/20/switching-to-v0-mangling-on-nightly/)
 
 
 ### 20251119
@@ -224,11 +232,5 @@ search:
 - Blog
     - [Assembling Project Leyden #JVMLS](https://inside.java/2025/10/21/jvmls-assembling-project-leyden/)
     - [What’s new in security for Ubuntu 25.10?](https://ubuntu.com//blog/ubuntu-25-10-security-updates)
-
-
-### 20251020
-
-- Blog
-    - [Performance Improvements in JDK 25](https://inside.java/2025/10/20/jdk-25-performance-improvements/)
 
 
