@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251122
+
+
 ### 20251121
 
 - Blog
@@ -222,15 +225,7 @@ search:
 
 - Blog
     - [From Python to Kotlin: A Transition Worth Making](https://blog.jetbrains.com/kotlin/2025/10/from-python-to-kotlin-a-transition-worth-making/)
-    - [JDK 25.0.1, 21.0.9, 17.0.17, 11.0.29, and 8u471 Have Been Released](https://blogs.oracle.com/java/post/jdk-2501-2109-17017-11029-and-8u471-have-been-released)
     - [Alibaba Damo Academy and Canonical partner to deliver Ubuntu on XuanTie and drive RISC-V innovation](https://ubuntu.com//blog/alibaba-damo-academy-and-canonical)
     - [Discover your fully open source robotics observability at ROSCon 2025](https://ubuntu.com//blog/roscon-2025)
-
-
-### 20251021
-
-- Blog
-    - [Assembling Project Leyden #JVMLS](https://inside.java/2025/10/21/jvmls-assembling-project-leyden/)
-    - [What’s new in security for Ubuntu 25.10?](https://ubuntu.com//blog/ubuntu-25-10-security-updates)
 
 
