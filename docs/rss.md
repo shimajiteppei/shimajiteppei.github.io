@@ -8,7 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251123
+
+
 ### 20251122
+
+- Blog
+    - [Symbolic Modeling and Transformation of Java Code #JVMLS](https://inside.java/2025/11/22/jvmls-symbolic-modelling-java-transformation/)
 
 
 ### 20251121
@@ -216,16 +222,6 @@ search:
 - Blog
     - [Getting Started With Kotlin for Java Developers](https://blog.jetbrains.com/kotlin/2025/10/getting-started-with-kotlin-for-java-developers/)
     - [Three Upcoming G1 Improvements - Inside Java Newscast #99](https://inside.java/2025/10/23/newscast-99/)
-    - [HTTP/3 Support in JDK 26](https://inside.java/2025/10/22/http3-support/)
-    - [What we learned with Clippy&#39;s feature freeze](https://blog.rust-lang.org/inside-rust/2025/10/22/clippys-feature-warming-up/)
     - [ESWIN Computing launches the EBC7702 Mini-DTX Mainboard with Ubuntu 24.04 LTS](https://ubuntu.com//blog/eswin-computing-canonical-mini-dtx-mainboard)
-
-
-### 20251022
-
-- Blog
-    - [From Python to Kotlin: A Transition Worth Making](https://blog.jetbrains.com/kotlin/2025/10/from-python-to-kotlin-a-transition-worth-making/)
-    - [Alibaba Damo Academy and Canonical partner to deliver Ubuntu on XuanTie and drive RISC-V innovation](https://ubuntu.com//blog/alibaba-damo-academy-and-canonical)
-    - [Discover your fully open source robotics observability at ROSCon 2025](https://ubuntu.com//blog/roscon-2025)
 
 
