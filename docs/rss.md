@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251124
+
+- Blog
+    - [JEP targeted to JDK 26: 525: Structured Concurrency (6th Preview)](https://inside.java/2025/11/24/jep525-target-jdk26/)
+
+
 ### 20251123
 
 
@@ -212,16 +218,5 @@ search:
 
 - Blog
     - [NUMA-Aware Relocation in ZGC](https://inside.java/2025/10/24/zgc-numa-aware-relocation/)
-    - [Canonical announces new optimized Ubuntu image for Thundercomm RUBIK Pi 3](https://ubuntu.com//blog/rubik-pi-3-thundercomm-canonical)
-    - [Introducing Canonical Academy](https://ubuntu.com//blog/introducing-canonical-academy)
-    - [Introducing silicon-optimized inference snaps](https://ubuntu.com//blog/canonical-releases-inference-snaps)
-
-
-### 20251023
-
-- Blog
-    - [Getting Started With Kotlin for Java Developers](https://blog.jetbrains.com/kotlin/2025/10/getting-started-with-kotlin-for-java-developers/)
-    - [Three Upcoming G1 Improvements - Inside Java Newscast #99](https://inside.java/2025/10/23/newscast-99/)
-    - [ESWIN Computing launches the EBC7702 Mini-DTX Mainboard with Ubuntu 24.04 LTS](https://ubuntu.com//blog/eswin-computing-canonical-mini-dtx-mainboard)
 
 
