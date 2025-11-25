@@ -8,6 +8,19 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251125
+
+- Blog
+    - [The Ultimate KMP Watchlist: Level Up Your Skills in 10 Talks](https://blog.jetbrains.com/kotlin/2025/11/the-ultimate-kmp-watchlist/)
+    - [Amper Update, November 2025 – Extensibility Preview](https://blog.jetbrains.com/amper/2025/11/amper-update-november-2025/)
+    - [Scaling Kotlin Adoption Across Your Organization](https://blog.jetbrains.com/kotlin/2025/11/scaling-kotlin-adoption-across-your-organization/)
+    - [ONNX Based Generative AI LLMs in Java with Project Babylon](https://inside.java/2025/11/25/devoxxbelgium-java-generative-ai/)
+    - [This Development-cycle in Cargo: 1.92](https://blog.rust-lang.org/inside-rust/2025/11/24/this-development-cycle-in-cargo-1.92/)
+    - [Interview with Jan David Nose](https://blog.rust-lang.org/2025/11/25/interview-with-jan-david-nose/)
+    - [AMI and Canonical announce partnership](https://ubuntu.com//blog/ubuntu-boot-in-uefi-announcement)
+    - [The $8.8 trillion advantage: how open source software reduces IT costs](https://ubuntu.com//blog/the-8-8-trillion-advantage-how-open-source-software-reduces-it-costs)
+
+
 ### 20251124
 
 - Blog
@@ -212,11 +225,5 @@ search:
 
 - Blog
     - [Writing GPU-Ready AI Models in Pure Java with Babylon](https://inside.java/2025/10/25/devoxxbelgium-writing-gpuready-ai-models-in-java/)
-
-
-### 20251024
-
-- Blog
-    - [NUMA-Aware Relocation in ZGC](https://inside.java/2025/10/24/zgc-numa-aware-relocation/)
 
 
