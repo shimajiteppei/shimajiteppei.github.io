@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251127
+
+- Blog
+    - [JEP targeted to JDK 26: 526: Lazy Constants (Second Preview)](https://inside.java/2025/11/27/jep526-target-jdk26/)
+
+
 ### 20251126
 
 - Blog
@@ -221,11 +227,5 @@ search:
     - [Kodee’s Kotlin Roundup: Finally Back with News](https://blog.jetbrains.com/kotlin/2025/10/kodees-kotlin-roundup-october-edition/)
     - [Try Out JEP 401 Value Classes and Objects](https://inside.java/2025/10/27/try-jep-401-value-classes/)
     - [Global-ready from day one](https://ubuntu.com//blog/localization-testing)
-
-
-### 20251026
-
-- Blog
-    - [JEP targeted to JDK 26: 517: HTTP/3 for the HTTP Client API](https://inside.java/2025/10/26/jep517-target-jdk26/)
 
 
