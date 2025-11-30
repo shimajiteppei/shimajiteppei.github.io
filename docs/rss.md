@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251130
+
+
 ### 20251129
 
 - Blog
@@ -190,9 +193,6 @@ search:
 
 ### 20251103
 
-- Blog
-    - [Finding Order in the Mayhem: A Novel Concurrency Testing Tool that Improved the Kotlin Compiler](https://blog.jetbrains.com/research/2025/10/litmuskt-concurrency-testing/)
-
 
 ### 20251102
 
@@ -213,11 +213,7 @@ search:
 
 - Blog
     - [Quality Outreach Heads-up - JDK 26: HTTP/3 Support Available in HTTP Client API](https://inside.java/2025/10/30/quality-heads-up/)
-    - [AI World: Georges Saab Unveils Java 25 for AI and Cloud](https://inside.java/2025/10/29/aiworld-java-for-ai/)
     - [Announcing Rust 1.91.0](https://blog.rust-lang.org/2025/10/30/Rust-1.91.0/)
     - [Why we brought hardware-optimized GenAI inference to Ubuntu](https://ubuntu.com//blog/genai-inference)
-
-
-### 20251029
 
 
