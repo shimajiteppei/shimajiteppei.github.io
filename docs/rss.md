@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251201
+
+- Blog
+    - [Agent Orchestration with LangChain4J](https://inside.java/2025/12/01/devoxxbelgium-langchain4j-keynote/)
+
+
 ### 20251130
 
 
@@ -207,13 +213,5 @@ search:
 
 - Blog
     - [Value Classes Heap Flattening - What to expect from JEP 401 #JVMLS](https://inside.java/2025/10/31/jvmls-jep-401/)
-
-
-### 20251030
-
-- Blog
-    - [Quality Outreach Heads-up - JDK 26: HTTP/3 Support Available in HTTP Client API](https://inside.java/2025/10/30/quality-heads-up/)
-    - [Announcing Rust 1.91.0](https://blog.rust-lang.org/2025/10/30/Rust-1.91.0/)
-    - [Why we brought hardware-optimized GenAI inference to Ubuntu](https://ubuntu.com//blog/genai-inference)
 
 
