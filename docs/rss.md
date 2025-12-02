@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251202
+
+- Blog
+    - [JEP targeted to JDK 26: 529: Vector API (11th Incubator)](https://inside.java/2025/12/02/jep529-target-jdk26/)
+    - [Canonical announces general availability of Ubuntu on Qualcomm Dragonwing™ IQ-9075 platform](https://ubuntu.com//blog/canonical-qualcomm-dragonwing-iq9075)
+
+
 ### 20251201
 
 - Blog
@@ -207,11 +214,5 @@ search:
 
 
 ### 20251101
-
-
-### 20251031
-
-- Blog
-    - [Value Classes Heap Flattening - What to expect from JEP 401 #JVMLS](https://inside.java/2025/10/31/jvmls-jep-401/)
 
 
