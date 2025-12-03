@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="https://inside.java/feed.xml" rel="self" type="application/atom+xml" /><link href="https://inside.java/" rel="alternate" type="text/html" /><updated>2025-12-03T08:39:23+00:00</updated><id>https://inside.java/feed.xml</id><title type="html">insidejava</title><subtitle>News and views from members of the Java team at Oracle</subtitle><entry><title type="html">So Long and Thanks for All the Applets</title><link href="https://inside.java/2025/12/03/applet-removal/" rel="alternate" type="text/html" title="So Long and Thanks for All the Applets" /><published>2025-12-03T00:00:00+00:00</published><updated>2025-12-03T00:00:00+00:00</updated><id>https://inside.java/2025/12/03/applet-removal</id><content type="html" xml:base="https://inside.java/2025/12/03/applet-removal/"><![CDATA[<p><img class="webfeedsFeaturedVisual" style="display: none;" src="/images/thumbnail/code.jpg" /></p>
+
+<p>The entire <code class="language-plaintext highlighter-rouge">java.applet</code> package has been removed from JDK 26, which will release in March 2026.
+JDK 25 (an LTS release depending on your vendor) is the last Java SE version to include the <code class="language-plaintext highlighter-rouge">java.applet</code> API.
+This was done under <a href="https://openjdk.org/jeps/504">JEP 504: Remove the Applet API</a> and the reasons behind the removal as well as its timing deserve an explanation.</p>
+
+<h2 id="a-bit-of-background-about-applets">A Bit of Background About Applets</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">java.applet.Applet</code> class was a foundational class of the Java platform from the very beginning, shipping with JDK 1.0 in 1996.
+At the time, the majority of uses of Java revolved around applets, which were small programs that would run in a shared virtual machine, typically embedded in one of the browsers of the day (predominantly Netscape Navigator and Internet Explorer via the Java Browser Plugin).
+They added a level of capability impossible with early versions of HTML.</p>
+
+<p>The lifecycle of these small applets was determined by the <code class="language-plaintext highlighter-rouge">java.applet.Applet</code> APIs.
+Java Applets were downloaded from a web server just like HTML and if the <code class="language-plaintext highlighter-rouge">&lt;APPLET&gt;</code> tag was supported, the applet would run because your locally installed Java Plugin would bridge the platform-independent bytecode to your system.</p>
+
+<p>Applets were used for enhancing the user experience on the web, in business applications, games, and other consumer applications.
+The Java Security Manager sand-boxed these applets to provide assurance to end users that this downloaded untrusted code could not access anything on their local systems without their permission, nor make network connections except back to its originating host.
+And to print, it had to ask the end user directly.
+This was all revolutionary at the time.</p>
+
+<h2 id="the-world-is-now-different">The World Is Now Different</h2>
+
+<p>Because deployment models have changed and browsers stopped supporting the plugin model, applets are no longer possible on modern web browsers.
+But outside of the web browser / downloaded untrusted code scenario, the <code class="language-plaintext highlighter-rouge">java.applet</code> API package rarely made sense for end user applications and so without that, it has long been a mostly non-functional part of the <code class="language-plaintext highlighter-rouge">java.desktop</code> module.</p>
+
+<p>The standalone JDK has never itself provided any way to run applets, even though it provided the API.
+Some other code, like the Java plugin, which was never a part of the OpenJDK project, or the bundled <code class="language-plaintext highlighter-rouge">appletviewer</code> tool meant for developer testing, or the JDK’s regression test framework, <code class="language-plaintext highlighter-rouge">jtreg</code>, also a developer only tool, provided the implementation.
+The final nail was that JDK 24 <a href="https://openjdk.org/jeps/486">permanently disabled the Java Security Manager</a>, so the sandbox for running untrusted code was no longer possible.</p>
+
+<p>So it is time to remove the Applet API from the latest <a href="https://openjdk.org/jeps/14">tip</a> JDK.
+Taking account of the long history and many uses of Applets over the years, this removal has not been done without lots of warnings, preparation, and consideration.</p>
+
+<p>The preparatory work to remove <code class="language-plaintext highlighter-rouge">java.applet</code> has been ongoing since 2016, so it will have been a 10 year project.
+It began with <a href="https://openjdk.org/jeps/289">deprecating</a> the Applet API in JDK 9, then <a href="https://openjdk.org/jeps/398">deprecating-for-removal</a> in JDK 17 in 2021.
+Also, the bundled <code class="language-plaintext highlighter-rouge">appletviewer</code> tool was <a href="https://bugs.java.com/bugdatabase/view_bug.do?bug_id=JDK-8074165">deprecated</a> in JDK 9 and then <a href="https://bugs.java.com/bugdatabase/view_bug.do?bug_id=JDK-8200146">removed</a> in JDK 11 in 2018.
+A lot of effort was spent on updating thousands of JDK <code class="language-plaintext highlighter-rouge">jtreg</code>-based functional tests to no longer rely on the Applet API, tweaking specifications that incidentally mention applets, etc. - a huge effort.</p>
+
+<p>So, it will have taken 10 years to get to this point of removal.
+Please don’t say you briefly looked elsewhere and somehow missed all of these memos!</p>
+
+<h2 id="so-what-now">So What Now?</h2>
+
+<p>JDK 8 updates continue to support applets for increasingly rare legacy browser situations and also support Java Web Start (JNLP) enabled applets.</p>
+
+<p>We now encourage developers to use <code class="language-plaintext highlighter-rouge">jpackage</code> to deploy Java applications to end-users.
+This JDK-provided tool creates native platform installers, so that a Java program installs on their system like any other application.</p>
+
+<p>We expect that only a very few standalone AWT/Swing applications use the Applet API and they should be able to migrate.
+The class <code class="language-plaintext highlighter-rouge">java.applet.Applet</code> is just a subclass of <code class="language-plaintext highlighter-rouge">java.awt.Panel</code>, so it is easy to migrate unless they use a method specific to <code class="language-plaintext highlighter-rouge">Applet</code>.
+This is likely very rare for desktop applications and in general these were never useful for such a case.</p>
+
+<p>Some users reported that they didn’t use the Applet API for applets but used <code class="language-plaintext highlighter-rouge">java.applet.AudioClip</code> as a convenient audio playback API in applications.
+In JDK 25, we introduced <code class="language-plaintext highlighter-rouge">javax.sound.SoundClip</code> as a replacement for that.</p>
+
+<p>If you need further help migrating away from the Applet API, contact your support provider.</p>
+
+<p>The rest of the <code class="language-plaintext highlighter-rouge">java.desktop</code> module (i.e. AWT, Swing, Java 2D) in the JDK is unaffected in functionality and continues to be supported and enhanced.</p>
+
+<center>~</center>]]></content><author><name>[&quot;PhilRace&quot;]</name></author><category term="JDK 26" /><category term="Client" /><summary type="html"><![CDATA[Java 26 will be the first Java version to ship without the Applet API - 10 years after its deprecation has it been removed by JEP 504.]]></summary></entry><entry><title type="html">JEP targeted to JDK 26: 529: Vector API (11th Incubator)</title><link href="https://inside.java/2025/12/02/jep529-target-jdk26/" rel="alternate" type="text/html" title="JEP targeted to JDK 26: 529: Vector API (11th Incubator)" /><published>2025-12-02T00:00:00+00:00</published><updated>2025-12-02T00:00:00+00:00</updated><id>https://inside.java/2025/12/02/JEP529-target-JDK26</id><content type="html" xml:base="https://inside.java/2025/12/02/jep529-target-jdk26/"><![CDATA[<p>The following JEP is targeted to JDK 26: 529: Vector API (Eleventh Incubator)</p>
+
+<p><img class="webfeedsFeaturedVisual" style="display: none;" src="/images/thumbnail/jep.jpg?516025942" /></p>]]></content><author><name>[&quot;XuemingShen&quot;]</name></author><category term="JDK 26" /><category term="Panama" /><summary type="html"><![CDATA[The following JEP is targeted to JDK 26: 529: Vector API (Eleventh Incubator)]]></summary></entry><entry><title type="html">Agent Orchestration with LangChain4J</title><link href="https://inside.java/2025/12/01/devoxxbelgium-langchain4j-keynote/" rel="alternate" type="text/html" title="Agent Orchestration with LangChain4J" /><published>2025-12-01T00:00:00+00:00</published><updated>2025-12-01T00:00:00+00:00</updated><id>https://inside.java/2025/12/01/DevoxxBelgium-Langchain4j-Keynote</id><content type="html" xml:base="https://inside.java/2025/12/01/devoxxbelgium-langchain4j-keynote/"><![CDATA[<div class="youtube-embed">
+    <iframe src="https://www.youtube.com/embed/HGbxFO_pPNI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>
+</div>
+
+<p><em>Langchain4j is a library that enables developers to easily integrate language models and AI workflows into Java applications, gaining traction within the Java and enterprise AI communities.</em></p>
+
+<p><em>With the langchain4j-agentic module, you can combine AI (and non-AI) agents into powerful but controlled workflows. In this session, Lize explores the core patterns: sequential, looping, conditional, and parallel, plus the supervisor pattern where agents decide for themselves which tasks to run. She  also covers human validation strategies that keep your agents in check. Compound agents wrap entire workflows into a single building block, while AgenticScope provides control over context and a clear view of the call chain.</em></p>
+
+<p><em>Through playful demos, this presentation shows agent systems that scale from small tasks to complex automation. Whether you are just curious about AI or ready to experiment in your own codebase, you grasp what is possible today, how to keep it under control, and how Java developers shape the next rise of the agents.</em></p>
+
+<p>Recorded at <a href="https://devoxx.be/">Devoxx Belgium 2025</a>.</p>]]></content><author><name>[&quot;LizeRaes&quot;]</name></author><category term="AI" /><summary type="html"><![CDATA[Langchain4j is a library that enables developers to easily integrate language models and AI workflows into Java applications, gaining traction within the Java and enterprise AI communities. With the langchain4j-agentic module, you can combine AI (and non-AI) agents into powerful but controlled workflows. In this session, Lize explores the core patterns: sequential, looping, conditional, and parallel, plus the supervisor pattern where agents decide for themselves which tasks to run. She also covers human validation strategies that keep your agents in check. Compound agents wrap entire workflows into a single building block, while AgenticScope provides control over context and a clear view of the call chain. Through playful demos, this presentation shows agent systems that scale from small tasks to complex automation. Whether you are just curious about AI or ready to experiment in your own codebase, you grasp what is possible today, how to keep it under control, and how Java developers shape the next rise of the agents.]]></summary></entry><entry><title type="html">Garbage Collection in Java: Choosing the Correct Collector</title><link href="https://inside.java/2025/11/29/devoxxbelgium-choose-correct-gc/" rel="alternate" type="text/html" title="Garbage Collection in Java: Choosing the Correct Collector" /><published>2025-11-29T00:00:00+00:00</published><updated>2025-11-29T00:00:00+00:00</updated><id>https://inside.java/2025/11/29/DevoxxBelgium-Choose-Correct-GC</id><content type="html" xml:base="https://inside.java/2025/11/29/devoxxbelgium-choose-correct-gc/"><![CDATA[<div class="youtube-embed">
+    <iframe src="https://www.youtube.com/embed/2Obf2LqEvyk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>
+</div>
+
+<p><em>Garbage collection (GC) is a type of automatic memory management and a key feature of the Java platform. It allows developers to focus on their application logic rather than low-level memory management issues.</em></p>
+
+<p><em>The Java platform implements multiple garbage collection algorithms, making it suitable for handling all kinds of workloads. The default collector, G1, is often a great choice, but depending on your use case, another GC might provide even better performance. This video explores:</em></p>
+
+<ul>
+  <li><em>the basics of garbage collection</em></li>
+  <li><em>why there are multiple collectors</em></li>
+  <li><em>key characteristics of G1 and ZGC</em></li>
+  <li><em>the performance differences between collectors and JDK releases.</em></li>
+</ul>
+
+<p>Recorded at <a href="https://devoxx.be/">Devoxx Belgium 2025</a>.</p>]]></content><author><name>[&quot;StefanJohansson&quot;]</name></author><category term="GC" /><summary type="html"><![CDATA[Garbage collection (GC) is a type of automatic memory management and a key feature of the Java platform. It allows developers to focus on their application logic rather than low-level memory management issues. The Java platform implements multiple garbage collection algorithms, making it suitable for handling all kinds of workloads. The default collector, G1, is often a great choice, but depending on your use case, another GC might provide even better performance. This video explores: the basics of garbage collection, why there are multiple collectors, key characteristics of G1 and ZGC and the performance differences between collectors and JDK releases.]]></summary></entry><entry><title type="html">Help, My Java Object Vanished (and the GC is Not at Fault)</title><link href="https://inside.java/2025/11/28/markword/" rel="alternate" type="text/html" title="Help, My Java Object Vanished (and the GC is Not at Fault)" /><published>2025-11-28T00:00:00+00:00</published><updated>2025-11-28T00:00:00+00:00</updated><id>https://inside.java/2025/11/28/Markword</id><content type="html" xml:base="https://inside.java/2025/11/28/markword/"><![CDATA[<p><img class="webfeedsFeaturedVisual" style="display: none;" src="/images/thumbnail/code.jpg" /></p>]]></content><author><name>[&quot;PaulHubner&quot;]</name></author><category term="HotSpot" /><category term="Valhalla" /><summary type="html"><![CDATA[This post provides an insight into Project Valhalla development, while offering insights into the inner workings of HotSpot. It also pragmatically demonstrates how JVM flags can be used to help you, and shares some lessons learned when debugging HotSpot.]]></summary></entry><entry><title type="html">JEP targeted to JDK 26: 526: Lazy Constants (Second Preview)</title><link href="https://inside.java/2025/11/27/jep526-target-jdk26/" rel="alternate" type="text/html" title="JEP targeted to JDK 26: 526: Lazy Constants (Second Preview)" /><published>2025-11-27T00:00:00+00:00</published><updated>2025-11-27T00:00:00+00:00</updated><id>https://inside.java/2025/11/27/JEP526-target-JDK26</id><content type="html" xml:base="https://inside.java/2025/11/27/jep526-target-jdk26/"><![CDATA[<p>The following JEP is targeted to JDK 26: 526: Lazy Constants (Second Preview)</p>
+
+<p><img class="webfeedsFeaturedVisual" style="display: none;" src="/images/thumbnail/jep.jpg?500796079" /></p>]]></content><author><name>[&quot;Per-AkeMinborg&quot;, &quot;MaurizioCimadamore&quot;]</name></author><category term="JDK 26" /><category term="Core Libraries" /><summary type="html"><![CDATA[The following JEP is targeted to JDK 26: 526: Lazy Constants (Second Preview)]]></summary></entry><entry><title type="html">Quality Outreach Heads-up - JDK 26: HttpClient Supports TLS Named Groups &amp;amp; Signature Schemes</title><link href="https://inside.java/2025/11/26/quality-heads-up/" rel="alternate" type="text/html" title="Quality Outreach Heads-up - JDK 26: HttpClient Supports TLS Named Groups &amp;amp; Signature Schemes" /><published>2025-11-26T00:00:00+00:00</published><updated>2025-11-26T00:00:00+00:00</updated><id>https://inside.java/2025/11/26/Quality-Heads-Up</id><content type="html" xml:base="https://inside.java/2025/11/26/quality-heads-up/"><![CDATA[<p><img class="webfeedsFeaturedVisual" style="display: none;" src="/images/thumbnail/code.jpg" /></p>
+
+<p><i>The <a href="https://wiki.openjdk.java.net/display/quality/Quality+Outreach">OpenJDK Quality Group</a> is promoting the testing of FOSS projects with OpenJDK builds as a way to improve the overall quality of the release. This heads-up is part of the <a href="https://mail.openjdk.org/pipermail/quality-discuss/">quality outreach</a> sent to the projects involved. To learn more about the program, and how-to join, please check <a href="https://wiki.openjdk.java.net/display/quality/Quality+Outreach">here</a>.</i></p>
+
+<h2 id="tls-named-groups-and-signature-schemes-setup-for-httpclient">TLS Named Groups and Signature Schemes Setup for HttpClient</h2>
+
+<p>Java applications can configure TLS constraints on <code class="language-plaintext highlighter-rouge">javax.net.ssl.SSLParameters</code> during the setup of new connections.
+Yet, as of now, <code class="language-plaintext highlighter-rouge">HttpClient</code> ignores named groups and signature schemes set on <code class="language-plaintext highlighter-rouge">SSLParameters</code>.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">restrictedNamedGroups</span> <span class="o">=</span> <span class="o">{</span><span class="s">"x25519"</span><span class="o">,</span><span class="s">"x448"</span><span class="o">};</span>
+<span class="nc">String</span><span class="o">[]</span> <span class="n">preferredSignatureScheme</span> <span class="o">=</span> <span class="o">{</span><span class="s">"ed25519"</span><span class="o">,</span><span class="s">"ed448"</span><span class="o">};</span>
+
+<span class="kd">final</span> <span class="nc">SSLParameters</span> <span class="n">sslParameters</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SSLParameters</span><span class="o">();</span>
+<span class="n">sslParameters</span><span class="o">.</span><span class="na">setNamedGroups</span><span class="o">(</span><span class="n">restrictedNamedGroups</span><span class="o">);</span>
+<span class="n">sslParameters</span><span class="o">.</span><span class="na">setSignatureSchemes</span><span class="o">(</span><span class="n">preferredSignatureScheme</span><span class="o">);</span>
+
+<span class="nc">SSLContext</span> <span class="n">sslContext</span> <span class="o">=</span> <span class="nc">SSLContext</span><span class="o">.</span><span class="na">getDefault</span><span class="o">();</span>
+
+<span class="nc">HttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="nc">HttpClient</span><span class="o">.</span><span class="na">newBuilder</span><span class="o">()</span>
+    <span class="o">.</span><span class="na">sslContext</span><span class="o">(</span><span class="n">sslContext</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">sslParameters</span><span class="o">(</span><span class="n">sslParameters</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>Starting with JDK 26, the <code class="language-plaintext highlighter-rouge">java.net.http.HttpClient</code> preserves the signature schemes and named groups configured via <code class="language-plaintext highlighter-rouge">SSLParameters</code> when negotiating the TLS handshake.</p>
+
+<p>This fix has been incorporated into the 26-ea mainline build available <a href="https://jdk.java.net/26/">here</a>. For more details on this change, check the JBS issue: <a href="https://bugs.openjdk.org/browse/JDK-8367112">JDK-8367112</a>.</p>
+
+<center>~</center>]]></content><author><name>[&quot;Ana-MariaMihalceanu&quot;]</name></author><category term="JDK 26" /><category term="Security" /><category term="Networking" /><summary type="html"><![CDATA[This Heads-Up is part of the regular communication sent to the projects involved; it covers how HttpClient supports TLS signature schemes and named groups configured on SSLParameters.]]></summary></entry><entry><title type="html">ONNX Based Generative AI LLMs in Java with Project Babylon</title><link href="https://inside.java/2025/11/25/devoxxbelgium-java-generative-ai/" rel="alternate" type="text/html" title="ONNX Based Generative AI LLMs in Java with Project Babylon" /><published>2025-11-25T00:00:00+00:00</published><updated>2025-11-25T00:00:00+00:00</updated><id>https://inside.java/2025/11/25/DevoxxBelgium-Java-Generative-AI</id><content type="html" xml:base="https://inside.java/2025/11/25/devoxxbelgium-java-generative-ai/"><![CDATA[<div class="youtube-embed">
+    <iframe src="https://www.youtube.com/embed/4grpNophot0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>
+</div>
+
+<p><em>The Open Neural Network Exchange (ONNX) serves as a universal format for representing machine learning models, facilitating their deployment across diverse platforms. Traditionally, Large Language Models (LLMs) are developed in Python using frameworks like PyTorch, TensorFlow, or scikit-learn, and then exported to ONNX for execution.</em></p>
+
+<p><em>In this presentation, we demonstrate how Java, a language not traditionally associated with AI modeling, can be utilized to produce ONNX models. We also explore the concept of ONNX-based Generative AI LLMs in Java, leveraging Project Babylon’s code reflection capabilities.</em></p>
+
+<p><em>The presentation showcases a practical Java example of an LLM, detailing its transformation into the ONNX format and subsequent execution.</em></p>
+
+<p>Recorded at <a href="https://devoxx.be/">Devoxx Belgium 2025</a>.</p>]]></content><author><name>[&quot;AdamSotona&quot;]</name></author><category term="AI" /><category term="Babylon" /><summary type="html"><![CDATA[The Open Neural Network Exchange (ONNX) serves as a universal format for representing machine learning models, facilitating their deployment across diverse platforms. Traditionally, Large Language Models (LLMs) are developed in Python using frameworks like PyTorch, TensorFlow, or scikit-learn, and then exported to ONNX for execution. In this presentation, we demonstrate how Java, a language not traditionally associated with AI modeling, can be utilized to produce ONNX models. We also explore the concept of ONNX-based Generative AI LLMs in Java, leveraging Project Babylon's code reflection capabilities. The presentation showcases a practical Java example of an LLM, detailing its transformation into the ONNX format and subsequent execution.]]></summary></entry><entry><title type="html">JEP targeted to JDK 26: 525: Structured Concurrency (6th Preview)</title><link href="https://inside.java/2025/11/24/jep525-target-jdk26/" rel="alternate" type="text/html" title="JEP targeted to JDK 26: 525: Structured Concurrency (6th Preview)" /><published>2025-11-24T00:00:00+00:00</published><updated>2025-11-24T00:00:00+00:00</updated><id>https://inside.java/2025/11/24/JEP525-target-JDK26</id><content type="html" xml:base="https://inside.java/2025/11/24/jep525-target-jdk26/"><![CDATA[<p>The following JEP is targeted to JDK 26: 525: Structured Concurrency (Sixth Preview)</p>
+
+<p><img class="webfeedsFeaturedVisual" style="display: none;" src="/images/thumbnail/jep.jpg?486751622" /></p>]]></content><author><name>[&quot;AlanBateman&quot;, &quot;ViktorKlang&quot;, &quot;RonPressler&quot;]</name></author><category term="JDK 26" /><category term="Loom" /><summary type="html"><![CDATA[The following JEP is targeted to JDK 26: 525: Structured Concurrency (Sixth Preview)]]></summary></entry><entry><title type="html">Symbolic Modeling and Transformation of Java Code #JVMLS</title><link href="https://inside.java/2025/11/22/jvmls-symbolic-modelling-java-transformation/" rel="alternate" type="text/html" title="Symbolic Modeling and Transformation of Java Code #JVMLS" /><published>2025-11-22T00:00:00+00:00</published><updated>2025-11-22T00:00:00+00:00</updated><id>https://inside.java/2025/11/22/JVMLS-Symbolic-Modelling-Java-Transformation</id><content type="html" xml:base="https://inside.java/2025/11/22/jvmls-symbolic-modelling-java-transformation/"><![CDATA[<div class="youtube-embed">
+    <iframe src="https://www.youtube.com/embed/jbXobiQN8Fw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>
+</div>
+
+<p><em>This session explores code reflection in Project Babylon, demonstrating how Java code can be symbolically modeled as Java code models. It covers the underlying approach, highlights key advantages, and discusses potential limitations.</em></p>
+
+<p><em>Make sure to check <a href="https://www.youtube.com/playlist?list=PLX8CzqL3ArzUOgZpIX6GsoRhPbnij-sco">the JVMLS 2025 playlist</a>.</em></p>]]></content><author><name>[&quot;PaulSandoz&quot;]</name></author><category term="Babylon" /><summary type="html"><![CDATA[This session explores code reflection in Project Babylon, demonstrating how Java code can be symbolically modeled as Java code models. It covers the underlying approach, highlights key advantages, and discusses potential limitations.]]></summary></entry></feed>
