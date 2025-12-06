@@ -8,6 +8,14 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251206
+
+- Blog
+    - [JEP targeted to JDK 26: 530: Primitive Types in Patterns, instanceof, and switch (4th Preview)](https://inside.java/2025/12/06/jep530-target-jdk26/)
+    - [crates.io: Malicious crates finch-rust and sha-rust](https://blog.rust-lang.org/2025/12/05/crates.io-malicious-crates-finch-rust-and-sha-rust/)
+    - [Updating Rust&#39;s Linux musl targets to 1.2.5](https://blog.rust-lang.org/2025/12/05/Updating-musl-1.2.5/)
+
+
 ### 20251205
 
 - Blog
@@ -219,11 +227,5 @@ search:
 - Blog
     - [JEP targeted to JDK 26: 522: G1 GC: Improve Throughput by Reducing Synchronization](https://inside.java/2025/11/05/jep522-target-jdk26/)
     - [Edge Networking gets smarter: AI and 5G in action](https://ubuntu.com//blog/edge-networking-gets-smarter-ai-and-5g-in-action)
-
-
-### 20251104
-
-- Blog
-    - [Integrity by Default](https://inside.java/2025/11/04/javaone-integrity-by-default/)
 
 
