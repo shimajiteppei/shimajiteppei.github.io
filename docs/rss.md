@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251207
+
+- Blog
+    - [JavaOne 2026 Registration Is Now Open](https://inside.java/2025/12/07/javaone-registration-open/)
+
+
 ### 20251206
 
 - Blog
@@ -188,7 +194,6 @@ search:
 
 - Blog
     - [Building AI Agents in Kotlin – Part 1: A Minimal Coding Agent](https://blog.jetbrains.com/ai/2025/11/building-ai-agents-in-kotlin-part-1-a-minimal-coding-agent/)
-    - [Growing Kotlin Adoption in Your Company](https://blog.jetbrains.com/kotlin/2025/11/growing-kotlin-adoption-in-your-company-2/)
     - [Canonical announces optimized Ubuntu images for Google Cloud’s Axion N4A Virtual Machines](https://ubuntu.com//blog/canonical-announces-optimized-ubuntu-images-for-google-clouds-axion-n4a-virtual-machines)
     - [Generating color palettes for design systems … inspired by APCA!](https://ubuntu.com//blog/generating-color-palettes-for-design-systems-inspired-by-apca)
 
@@ -219,13 +224,5 @@ search:
 - Blog
     - [Try the New Valhalla EA Build - Inside Java Newscast #100](https://inside.java/2025/11/06/newscast-100/)
     - [Web Engineering: Celebrating Our Third Annual Hack Week](https://ubuntu.com//blog/web-engineering-celebrating-our-third-annual-hack-week)
-    - [Azure VM utils now included in Ubuntu: boosting cloud workloads](https://ubuntu.com//blog/ubuntu-azure-vm-utils-included)
-
-
-### 20251105
-
-- Blog
-    - [JEP targeted to JDK 26: 522: G1 GC: Improve Throughput by Reducing Synchronization](https://inside.java/2025/11/05/jep522-target-jdk26/)
-    - [Edge Networking gets smarter: AI and 5G in action](https://ubuntu.com//blog/edge-networking-gets-smarter-ai-and-5g-in-action)
 
 
