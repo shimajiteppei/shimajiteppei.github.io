@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251208
+
+- Blog
+    - [On the Boundaries of Final](https://inside.java/2025/12/08/final-boundaries/)
+
+
 ### 20251207
 
 - Blog
@@ -217,12 +223,5 @@ search:
 
 - Blog
     - [JEP targeted to JDK 26: 500: Prepare to Make Final Mean Final](https://inside.java/2025/11/07/jep500-target-jdk26/)
-
-
-### 20251106
-
-- Blog
-    - [Try the New Valhalla EA Build - Inside Java Newscast #100](https://inside.java/2025/11/06/newscast-100/)
-    - [Web Engineering: Celebrating Our Third Annual Hack Week](https://ubuntu.com//blog/web-engineering-celebrating-our-third-annual-hack-week)
 
 
