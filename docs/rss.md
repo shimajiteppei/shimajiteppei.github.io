@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251210
+
+- Blog
+    - [How Backend Development Teams Use Kotlin in 2025: Insights from a Certified Trainer](https://blog.jetbrains.com/kotlin/2025/12/how-backend-development-teams-use-kotlin-in-2025/)
+    - [Canonical to distribute AMD ROCm AI/ML and HPC libraries in Ubuntu](https://ubuntu.com//blog/canonical-amd-rocm-ai-ml-hpc-libraries)
+
+
 ### 20251209
 
 - Blog
@@ -221,11 +228,5 @@ search:
 
 
 ### 20251109
-
-
-### 20251108
-
-- Blog
-    - [Pulling the (Foreign) String](https://inside.java/2025/11/08/ffm-string/)
 
 
