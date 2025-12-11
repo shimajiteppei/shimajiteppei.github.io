@@ -8,10 +8,19 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251211
+
+- Blog
+    - [Harnessing the potential of 5G with Kubernetes: a cloud-native telco transformation perspective](https://ubuntu.com//blog/harnessing-the-potential-of-5g-with-kubernetes-a-cloud-native-telco-transformation-perspective)
+    - [The rhythm of reliability: inside Canonical’s operational cadence](https://ubuntu.com//blog/the-rhythm-of-reliability)
+
+
 ### 20251210
 
 - Blog
     - [How Backend Development Teams Use Kotlin in 2025: Insights from a Certified Trainer](https://blog.jetbrains.com/kotlin/2025/12/how-backend-development-teams-use-kotlin-in-2025/)
+    - [Episode 42 “From Sumatra to Panama, from Babylon to Valhalla” with John Rose](https://inside.java/2025/12/10/podcast-042/)
+    - [Leadership Council update — December 2025](https://blog.rust-lang.org/inside-rust/2025/12/10/leadership-council-update/)
     - [Canonical to distribute AMD ROCm AI/ML and HPC libraries in Ubuntu](https://ubuntu.com//blog/canonical-amd-rocm-ai-ml-hpc-libraries)
 
 
@@ -225,8 +234,5 @@ search:
 
 - Blog
     - [Serialization 2 0: A Marshalling Update!](https://inside.java/2025/11/10/devoxxbelgium-serialization2-0-marshalling-update/)
-
-
-### 20251109
 
 
