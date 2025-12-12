@@ -8,9 +8,18 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251212
+
+- Blog
+    - [A Better Way to Explore kotlinx-benchmark Results with Kotlin Notebooks](https://blog.jetbrains.com/kotlin/2025/12/a-better-way-to-explore-kotlinx-benchmark-results-with-kotlin-notebooks/)
+    - [Java 25 now available on Google Cloud Serverless](https://ubuntu.com//blog/java-25-now-available-on-google-cloud-serverless)
+    - [How to launch a Deep Learning VM on Google Cloud](https://ubuntu.com//blog/how-to-launch-a-deep-learning-vm-on-google-cloud)
+
+
 ### 20251211
 
 - Blog
+    - [Announcing Rust 1.92.0](https://blog.rust-lang.org/2025/12/11/Rust-1.92.0/)
     - [Harnessing the potential of 5G with Kubernetes: a cloud-native telco transformation perspective](https://ubuntu.com//blog/harnessing-the-potential-of-5g-with-kubernetes-a-cloud-native-telco-transformation-perspective)
     - [The rhythm of reliability: inside Canonical’s operational cadence](https://ubuntu.com//blog/the-rhythm-of-reliability)
 
@@ -218,7 +227,6 @@ search:
 - Blog
     - [Google Summer of Code 2025: What Our Contributors Built](https://blog.jetbrains.com/kotlin/2025/11/google-summer-of-code-2025/)
     - [The Inside Java Newsletter: The Latest on JavaOne 2026](https://inside.java/2025/11/12/inside-java-newsletter/)
-    - [Announcing Rust 1.91.1](https://blog.rust-lang.org/2025/11/10/Rust-1.91.1/)
     - [Canonical releases FIPS-enabled Kubernetes](https://ubuntu.com//blog/canonical-releases-fips-enabled-kubernetes)
 
 
@@ -226,13 +234,5 @@ search:
 
 - Blog
     - [Building AI Agents in Kotlin – Part 1: A Minimal Coding Agent](https://blog.jetbrains.com/ai/2025/11/building-ai-agents-in-kotlin-part-1-a-minimal-coding-agent/)
-    - [Canonical announces optimized Ubuntu images for Google Cloud’s Axion N4A Virtual Machines](https://ubuntu.com//blog/canonical-announces-optimized-ubuntu-images-for-google-clouds-axion-n4a-virtual-machines)
-    - [Generating color palettes for design systems … inspired by APCA!](https://ubuntu.com//blog/generating-color-palettes-for-design-systems-inspired-by-apca)
-
-
-### 20251110
-
-- Blog
-    - [Serialization 2 0: A Marshalling Update!](https://inside.java/2025/11/10/devoxxbelgium-serialization2-0-marshalling-update/)
 
 
