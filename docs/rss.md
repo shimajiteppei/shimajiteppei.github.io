@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251213
+
+- Blog
+    - [Why you should retire your Microsoft Azure Consumption Commitment (MACC) with Ubuntu Pro](https://ubuntu.com//blog/retire-azure-consumption-commitment-macc-ubuntu-pro)
+
+
 ### 20251212
 
 - Blog
@@ -227,12 +233,5 @@ search:
 - Blog
     - [Google Summer of Code 2025: What Our Contributors Built](https://blog.jetbrains.com/kotlin/2025/11/google-summer-of-code-2025/)
     - [The Inside Java Newsletter: The Latest on JavaOne 2026](https://inside.java/2025/11/12/inside-java-newsletter/)
-    - [Canonical releases FIPS-enabled Kubernetes](https://ubuntu.com//blog/canonical-releases-fips-enabled-kubernetes)
-
-
-### 20251111
-
-- Blog
-    - [Building AI Agents in Kotlin – Part 1: A Minimal Coding Agent](https://blog.jetbrains.com/ai/2025/11/building-ai-agents-in-kotlin-part-1-a-minimal-coding-agent/)
 
 
