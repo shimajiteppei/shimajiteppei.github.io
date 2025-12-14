@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251214
+
+
 ### 20251213
 
 - Blog
@@ -224,14 +227,6 @@ search:
 
 - Blog
     - [JEP targeted to JDK 26: 516: Ahead-of-Time Object Caching with Any GC](https://inside.java/2025/11/13/jep516-target-jdk26/)
-    - [Release of the New Java Card Development Kit Release 25.1](https://blogs.oracle.com/java/post/release-of-the-new-java-card-development-kit-version-251)
     - [Canonical expands total coverage for Ubuntu LTS releases to 15 years with Legacy add-on](https://ubuntu.com//blog/canonical-expands-total-coverage-for-ubuntu-lts-releases-to-15-years-with-legacy-add-on)
-
-
-### 20251112
-
-- Blog
-    - [Google Summer of Code 2025: What Our Contributors Built](https://blog.jetbrains.com/kotlin/2025/11/google-summer-of-code-2025/)
-    - [The Inside Java Newsletter: The Latest on JavaOne 2026](https://inside.java/2025/11/12/inside-java-newsletter/)
 
 
