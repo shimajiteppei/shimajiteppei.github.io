@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251215
+
+- Blog
+    - [Valhalla? Python? Withers? Lombok? - Ask the Architects at JavaOne’25](https://inside.java/2025/12/15/javaone-ask-java-architects/)
+
+
 ### 20251214
 
 
@@ -220,13 +226,5 @@ search:
 - Blog
     - [Deep Dive into Gatherers - JEP Cafe #24](https://inside.java/2025/11/14/jepcafe24/)
     - [A CISO’s preview of open source and cybersecurity trends in 2026 and beyond](https://ubuntu.com//blog/a-cisos-preview-of-open-source-and-cybersecurity-trends-in-2026-and-beyond)
-    - [Canonical Kubernetes officially included in Sylva 1.5](https://ubuntu.com//blog/canonical-kubernetes-officially-included-in-sylva-1-5)
-
-
-### 20251113
-
-- Blog
-    - [JEP targeted to JDK 26: 516: Ahead-of-Time Object Caching with Any GC](https://inside.java/2025/11/13/jep516-target-jdk26/)
-    - [Canonical expands total coverage for Ubuntu LTS releases to 15 years with Legacy add-on](https://ubuntu.com//blog/canonical-expands-total-coverage-for-ubuntu-lts-releases-to-15-years-with-legacy-add-on)
 
 
