@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251216
+
+- Blog
+    - [Quality Outreach Heads-up - JDK 26: Jlink Compression Plugin Now Handles -c Option Correctly](https://inside.java/2025/12/16/quality-heads-up/)
+    - [Native integration available between Canonical LXD and HPE Alletra MP B10000](https://ubuntu.com//blog/canonical_lxd_hpe_alletra)
+
+
 ### 20251215
 
 - Blog
@@ -219,12 +226,5 @@ search:
 
 
 ### 20251115
-
-
-### 20251114
-
-- Blog
-    - [Deep Dive into Gatherers - JEP Cafe #24](https://inside.java/2025/11/14/jepcafe24/)
-    - [A CISO’s preview of open source and cybersecurity trends in 2026 and beyond](https://ubuntu.com//blog/a-cisos-preview-of-open-source-and-cybersecurity-trends-in-2026-and-beyond)
 
 
