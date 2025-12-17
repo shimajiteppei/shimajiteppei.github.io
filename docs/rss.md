@@ -8,10 +8,20 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251217
+
+- Blog
+    - [Industry Leaders on the KotlinConf’25 Stage: What Global Brands Built With Kotlin](https://blog.jetbrains.com/kotlin/2025/12/industry-leaders-on-the-kotlinconf25-stage/)
+    - [Kotlin 2.3.0 Released](https://blog.jetbrains.com/kotlin/2025/12/kotlin-2-3-0-released/)
+    - [Building AI Agents in Kotlin – Part 3: Under Observation](https://blog.jetbrains.com/ai/2025/12/building-ai-agents-in-kotlin-part-3-under-observation/)
+
+
 ### 20251216
 
 - Blog
     - [Quality Outreach Heads-up - JDK 26: Jlink Compression Plugin Now Handles -c Option Correctly](https://inside.java/2025/12/16/quality-heads-up/)
+    - [Please submit 2026 Project goal proposals](https://blog.rust-lang.org/inside-rust/2025/12/16/please-submit-2026-project-goal-proposals/)
+    - [Project goals update — November 2025](https://blog.rust-lang.org/2025/12/16/Project-Goals-2025-November-Update.md/)
     - [Native integration available between Canonical LXD and HPE Alletra MP B10000](https://ubuntu.com//blog/canonical_lxd_hpe_alletra)
 
 
@@ -223,8 +233,5 @@ search:
 
 - Blog
     - [Beyond the Vector API - A Quest for a Lower Level API #JVMLS](https://inside.java/2025/11/16/jvmls-vector-api/)
-
-
-### 20251115
 
 
