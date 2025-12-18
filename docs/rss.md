@@ -8,6 +8,14 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251218
+
+- Blog
+    - [Java’s 2025 in Review - Inside Java Newscast #103](https://inside.java/2025/12/18/newscast-103/)
+    - [Design and Documentation clinics at FOSDEM Fringe 2026](https://ubuntu.com//blog/design-and-documentation-clinics-at-fosdem-fringe-2026)
+    - [Extending ROS Noetic Support with ESM-Enabled Content Snaps](https://ubuntu.com//blog/extending-ros-noetic-support-with-esm-enabled-content-snaps)
+
+
 ### 20251217
 
 - Blog
@@ -225,13 +233,6 @@ search:
 
 - Blog
     - [JEP targeted to JDK 26: 524: PEM Encodings of Cryptographic Objects (Second Preview)](https://inside.java/2025/11/17/jep524-target-jdk26/)
-    - [Infrastructure announcement Zulip channel](https://blog.rust-lang.org/inside-rust/2025/11/16/infra-announcement-zulip-channel/)
     - [Launching the 2025 State of Rust Survey](https://blog.rust-lang.org/2025/11/17/launching-the-2025-state-of-rust-survey/)
-
-
-### 20251116
-
-- Blog
-    - [Beyond the Vector API - A Quest for a Lower Level API #JVMLS](https://inside.java/2025/11/16/jvmls-vector-api/)
 
 
