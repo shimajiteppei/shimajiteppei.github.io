@@ -8,9 +8,16 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251219
+
+- Blog
+    - [MicroCeph: why it’s the superior MinIO alternative (and how to use it)](https://ubuntu.com//blog/microceph-why-its-the-superior-minio-alternative)
+
+
 ### 20251218
 
 - Blog
+    - [The Ultimate Guide to Successfully Adopting Kotlin in a Java-Dominated Environment](https://blog.jetbrains.com/kotlin/2025/12/the-ultimate-guide-to-successfully-adopting-kotlin-in-a-java-dominated-environment/)
     - [Java’s 2025 in Review - Inside Java Newscast #103](https://inside.java/2025/12/18/newscast-103/)
     - [Design and Documentation clinics at FOSDEM Fringe 2026](https://ubuntu.com//blog/design-and-documentation-clinics-at-fosdem-fringe-2026)
     - [Extending ROS Noetic Support with ESM-Enabled Content Snaps](https://ubuntu.com//blog/extending-ros-noetic-support-with-esm-enabled-content-snaps)
@@ -219,7 +226,6 @@ search:
     - [Project goals update — October 2025](https://blog.rust-lang.org/2025/11/19/project-goals-update-october-2025/)
     - [Project goals update — September 2025](https://blog.rust-lang.org/2025/11/19/Project-Goals-2025-September-Update/)
     - [83% of organizations see value in adopting open source, but report major gaps in security and governance](https://ubuntu.com//blog/state-of-global-open-source-2025)
-    - [Everything you need to know about FIPS 140-3 on Ubuntu | Videos](https://ubuntu.com//blog/everything-you-need-to-know-about-fips-140-3-on-ubuntu-videos)
 
 
 ### 20251118
@@ -227,12 +233,5 @@ search:
 - Blog
     - [Helping Decision‑Makers Say Yes to Kotlin](https://blog.jetbrains.com/kotlin/2025/11/helping-decision-makers-say-yes-to-kotlin/)
     - [Google Summer of Code 2025 results](https://blog.rust-lang.org/2025/11/18/gsoc-2025-results/)
-
-
-### 20251117
-
-- Blog
-    - [JEP targeted to JDK 26: 524: PEM Encodings of Cryptographic Objects (Second Preview)](https://inside.java/2025/11/17/jep524-target-jdk26/)
-    - [Launching the 2025 State of Rust Survey](https://blog.rust-lang.org/2025/11/17/launching-the-2025-state-of-rust-survey/)
 
 
