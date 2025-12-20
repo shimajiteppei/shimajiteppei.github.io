@@ -8,9 +8,19 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251220
+
+- Blog
+    - [December 2025 Project Director Update](https://blog.rust-lang.org/inside-rust/2025/12/19/project-director-update/)
+    - [Program management update — End of 2025](https://blog.rust-lang.org/inside-rust/2025/12/19/program-management-update--end-of-2025/)
+    - [What do people love about Rust?](https://blog.rust-lang.org/2025/12/19/what-do-people-love-about-rust/)
+    - [A better way to provision NVIDIA BlueField DPUs at scale with MAAS](https://ubuntu.com//blog/a-better-way-to-provision-nvidia-bluefield-dpus-at-scale-with-maas)
+
+
 ### 20251219
 
 - Blog
+    - [How Mobile Development Teams Use Kotlin in 2025: Insights From a Certified Trainer](https://blog.jetbrains.com/kotlin/2025/12/how-mobile-development-teams-use-kotlin-in-2025/)
     - [MicroCeph: why it’s the superior MinIO alternative (and how to use it)](https://ubuntu.com//blog/microceph-why-its-the-superior-minio-alternative)
 
 
@@ -225,13 +235,5 @@ search:
     - [Program management update — October 2025](https://blog.rust-lang.org/inside-rust/2025/11/19/program-management-update--october-2025/)
     - [Project goals update — October 2025](https://blog.rust-lang.org/2025/11/19/project-goals-update-october-2025/)
     - [Project goals update — September 2025](https://blog.rust-lang.org/2025/11/19/Project-Goals-2025-September-Update/)
-    - [83% of organizations see value in adopting open source, but report major gaps in security and governance](https://ubuntu.com//blog/state-of-global-open-source-2025)
-
-
-### 20251118
-
-- Blog
-    - [Helping Decision‑Makers Say Yes to Kotlin](https://blog.jetbrains.com/kotlin/2025/11/helping-decision-makers-say-yes-to-kotlin/)
-    - [Google Summer of Code 2025 results](https://blog.rust-lang.org/2025/11/18/gsoc-2025-results/)
 
 
