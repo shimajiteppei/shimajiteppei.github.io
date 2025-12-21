@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251221
+
+- Blog
+    - [Virtual Threads in the Real World: Fast, Robust Java Microservices with Helidon](https://inside.java/2025/12/21/virtual-threads-robust-java-microservices/)
+
+
 ### 20251220
 
 - Blog
@@ -227,13 +233,5 @@ search:
 - Blog
     - [Java 26 Warns of Deep Reflection - Inside Java Newscast #101](https://inside.java/2025/11/20/newscast-101/)
     - [Switching to Rust&#39;s own mangling scheme on nightly](https://blog.rust-lang.org/2025/11/20/switching-to-v0-mangling-on-nightly/)
-
-
-### 20251119
-
-- Blog
-    - [Program management update — October 2025](https://blog.rust-lang.org/inside-rust/2025/11/19/program-management-update--october-2025/)
-    - [Project goals update — October 2025](https://blog.rust-lang.org/2025/11/19/project-goals-update-october-2025/)
-    - [Project goals update — September 2025](https://blog.rust-lang.org/2025/11/19/Project-Goals-2025-September-Update/)
 
 
