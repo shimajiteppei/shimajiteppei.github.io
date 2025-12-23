@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251223
+
+
 ### 20251222
 
 
@@ -222,12 +225,5 @@ search:
 
 - Blog
     - [Symbolic Modeling and Transformation of Java Code #JVMLS](https://inside.java/2025/11/22/jvmls-symbolic-modelling-java-transformation/)
-
-
-### 20251121
-
-- Blog
-    - [Open design: the opportunity design students didn’t know they were missing](https://ubuntu.com//blog/open-design-the-opportunity-design-students-didnt-know-they-were-missing)
-    - [Anbox Cloud 1.28.0 is now available!](https://ubuntu.com//blog/anbox-cloud-1-28-0-is-now-available)
 
 

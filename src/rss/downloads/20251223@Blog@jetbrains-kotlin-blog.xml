@@ -1,0 +1,3547 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	 xmlns:media="http://search.yahoo.com/mrss/" >
+
+<channel>
+	<title>Kotlin : A concise multiplatform language developed by JetBrains | The JetBrains Blog</title>
+	<atom:link href="https://blog.jetbrains.com/kotlin/feed/" rel="self" type="application/rss+xml" />
+	<link>https://blog.jetbrains.com</link>
+	<description>Developer Tools for Professionals and Teams</description>
+	<lastBuildDate>Tue, 23 Dec 2025 10:32:22 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	
+
+<image>
+	<url>https://blog.jetbrains.com/wp-content/uploads/2024/01/cropped-mstile-310x310-1-32x32.png</url>
+	<title>Kotlin : A concise multiplatform language developed by JetBrains | The JetBrains Blog</title>
+	<link>https://blog.jetbrains.com</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>How Mobile Development Teams Use Kotlin in 2025: Insights From a Certified Trainer</title>
+		<link>https://blog.jetbrains.com/kotlin/2025/12/how-mobile-development-teams-use-kotlin-in-2025/</link>
+		
+		<dc:creator><![CDATA[Ksenia Shneyveys]]></dc:creator>
+		<pubDate>Fri, 19 Dec 2025 14:44:34 +0000</pubDate>
+		<featuredImage>https://blog.jetbrains.com/wp-content/uploads/2025/12/KT-social-BlogFeatured-1280x720-1-2.png</featuredImage>		<category><![CDATA[news]]></category>
+		<guid isPermaLink="false">https://blog.jetbrains.com/?post_type=kotlin&#038;p=670271</guid>
+
+					<description><![CDATA[This is the second guest post in a two-part series from José Luis González. José Luis has a PhD in software development and is a JetBrains-certified Kotlin Trainer, who works with developers and engineering teams to deepen their Kotlin skills and apply the language effectively in real projects. At Hyperskill, he runs&#160;Kotlin instructor-led training for [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+<p><em>This is the second guest post in a two-part series from José Luis González. José Luis has a PhD in software development and is a JetBrains-certified Kotlin Trainer, who works with developers and engineering teams to deepen their Kotlin skills and apply the language effectively in real projects. At Hyperskill, he runs&nbsp;<a href="https://bootcamps.hyperskill.org/kotlin-bootcamp-for-engineering-teams?utm_source=google&amp;utm_medium=organic&amp;utm_campaign=organic" target="_blank" rel="noreferrer noopener">Kotlin instructor-led training for teams at Hyperskill</a>&nbsp;that focus on advanced topics and practical problem-solving rather than theory.</em></p>
+
+
+
+<p><strong>First post in the series:</strong> <a href="https://blog.jetbrains.com/kotlin/2025/12/how-backend-development-teams-use-kotlin-in-2025/">How Backend Development Teams Use Kotlin in 2025: Insights from a Certified Trainer</a></p>
+
+
+
+<p>I’d probably have to say swallowing <code>CancellationException</code> in general <code>catch</code> blocks (including <code>runCatching</code>). It looks harmless, but it disables cooperative cancellation, so timeouts, parent scopes, and lifecycles keep running “mysteriously.” In recent talks, linters, and guides, you still see this called out as a real-world production bug. Official docs stress that cancellation must propagate, detekt ships a rule warning if you don’t rethrow, and the coroutines library provides mechanisms that avoid catching <code>CancellationException</code> in generic catch-alls.</p>
+
+
+
+<p>Use the following pattern instead to always rethrow cancellations (or choose a helper that preserves them):</p>
+
+
+
+<pre class="EnlighterJSRAW">suspend fun &lt;T&gt; safeCall(block: suspend () -&gt; T, fallback: () -&gt; T): T = try {
+    block()
+} catch (e: CancellationException) {
+    throw e // never swallow cancellation
+}
+// catch other specific exceptions
+} catch (e: Exception) {
+    logger.error(&quot;call failed&quot;, e)
+    fallback()
+}</pre>
+
+
+
+<p>If you like Result-style API, mirror the <code>kotlinx</code> approach as follows:</p>
+
+
+
+<pre class="EnlighterJSRAW">suspend inline fun &lt;T&gt; runSuspendCatching(block: () -&gt; T): Result&lt;T&gt; =
+    try { Result.success(block()) }
+    catch (e: CancellationException) { throw e }
+    catch (e: Throwable) { Result.failure(e) }</pre>
+
+
+
+<p>This tiny rethrow keeps structured concurrency intact and matches the guidance you’ll hear in the latest coroutine discussions.</p>
+
+
+
+<p><strong>2. If a team has only two hours to set up monitoring for their mobile Kotlin app, which specific dashboards should they prioritize?</strong></p>
+
+
+
+<p>Begin with metrics that indicate whether users can successfully use the app. Crash-free users and ANR rate by version and device model tell you whether a release is safe to ship.</p>
+
+
+
+<p>Firebase Crashlytics handles this out of the box – just tag builds for quick filtering:</p>
+
+
+
+<pre class="EnlighterJSRAW">FirebaseCrashlytics.getInstance().setCustomKeys {
+    key(&quot;version&quot;, BuildConfig.VERSION_NAME)
+    key(&quot;commit&quot;, BuildConfig.GIT_SHA)
+}</pre>
+
+
+
+<p>As for UI issues, use JankStats to log when and where frames drop, so you know which screens stutter:</p>
+
+
+
+<pre class="EnlighterJSRAW">val jankStats = JankStats.create(window) { frame -&gt;
+    if (frame.isJank) Log.d(&quot;Jank&quot;,
+        &quot;Jank on ${currentScreen()} – ${(frame.frameDurationUiNanos / 1_000_000)}ms&quot;)
+}
+jankStats.isTrackingEnabled = true</pre>
+
+
+
+<p>Another main concern is performance, of course. With Sentry, you get end-to-end insights into what is actually slowing down your app: startup, navigation, network calls, etc. It correlates frontend and backend timing so you can spot bottlenecks and regressions fast.</p>
+
+
+
+<p>Here is a standard setup with tracing and profiling:</p>
+
+
+
+<pre class="EnlighterJSRAW">SentryAndroid.init(this) { options -&gt;
+    options.dsn = &quot;&lt;dsn&gt;&quot;
+    options.tracesSampleRate = 0.1
+    options.profilesSampleRate = 0.05
+    options.release = &quot;${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})&quot;
+    options.environment = BuildConfig.BUILD_TYPE
+}</pre>
+
+
+
+<p>Now, let’s add some custom transactions for key flows:</p>
+
+
+
+<pre class="EnlighterJSRAW">val tx = Sentry.startTransaction(&quot;screen:${currentScreen()}&quot;, &quot;ui.load&quot;)
+Sentry.configureScope { it.setTransaction(tx) }
+
+val net = tx.startChild(&quot;http.client&quot;, &quot;GET /api/items&quot;)
+try { /* network call */ } finally { net.finish() }
+
+val db = tx.startChild(&quot;db.query&quot;, &quot;SELECT items&quot;)
+try { /* read */ } finally { db.finish() }
+
+tx.finish()</pre>
+
+
+
+<p>And auto-tracing for network calls (<code>OkHttp</code> and <code>Ktor</code>):</p>
+
+
+
+<p>OkHttp:</p>
+
+
+
+<pre class="EnlighterJSRAW">val client = OkHttpClient.Builder()
+    .addInterceptor(SentryOkHttpInterceptor())
+    .build()</pre>
+
+
+
+<p>Ktor:</p>
+
+
+
+<pre class="EnlighterJSRAW">val client = HttpClient(CIO) {
+    install(Sentry) {
+        tracesSampleRate = 0.1
+        profilesSampleRate = 0.05
+    }
+}</pre>
+
+
+
+<p>Sentry Mobile Insights provides a prebuilt dashboard for this. It groups slow transactions and crash-free rate by release and device model, so you can see exactly where users struggle the most without the need for a custom setup.</p>
+
+
+
+<p>Here’s how a real trace looks in <code>Sentry</code>: You can see a cold start (<code>app.start.cold</code>), API calls, and rendering time, all visualized in one timeline, for a detailed breakdown of how much time the app spends on various tasks.</p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" fetchpriority="high" src="https://blog.jetbrains.com/wp-content/uploads/2025/12/mobile.png" alt="" class="wp-image-670286"/></figure>
+
+
+
+<p>Check these dashboards in <code>Sentry</code>:</p>
+
+
+
+<ul>
+<li><strong>Performance / Transactions</strong>: p95 duration for <code>app.start.cold</code>, <code>ui.load</code>, and <code>checkout</code>.</li>
+
+
+
+<li><strong>Traces / Slow spans</strong> to find lags in HTTP, database, or main-thread work.</li>
+
+
+
+<li><strong>Releases / Crash-free and ANR</strong>: Correlate stability with performance.</li>
+</ul>
+
+
+
+<p><code>Sentry</code> (or <code>Crashlytics</code>) combined with <code>JankStats</code> will give you the full picture. Can users open the app, interact smoothly, and exit without crashes or leaks? <code>Sentry</code> covers both performance and crash tracking, so you can often use it alone, while <code>Crashlytics</code> remains a lightweight alternative many teams already have in place.</p>
+
+
+
+<p><strong>3. When a mobile Kotlin application is running slowly in production, what are your top three profiling techniques, and what tools do you use for each?</strong></p>
+
+
+
+<p>I wouldn’t say there’s anything groundbreaking here. I usually start with the same baseline we talked about earlier: <code>Crashlytics</code>, <code>JankStats</code>, and <code>Sentry</code> traces. They will provide a comprehensive overview of what’s going on. From there, my top three profiling techniques are pretty straightforward but extremely effective.</p>
+
+
+
+<p>Honestly, the standalone <code>Android Studio</code> profiler is still the most powerful and underrated tool out there. I spend most of my time in its CPU and memory profilers, checking which methods block the main thread or which allocations spike during transitions. I always check the <code>Sample Call Stack</code> view, as it’s the fastest way to see where time is actually spent per frame, instead of guessing from logs.</p>
+
+
+
+<p>It sounds basic, but it often reveals that a single <code>RecyclerView</code> binding or JSON parser allocates thousands of tiny objects per frame.</p>
+
+
+
+<p>Also, I would typically do network profiling. Using the Network Inspector or Sentry’s tracing, I check which requests block rendering or input. If scrolling freezes when images load, you can immediately tell whether it’s an uncompressed call or a missing cache layer without guessing. If you’ve already enabled Sentry Performance in the <em>Monitoring </em>section of the settings menu, it doubles as lightweight production profiling. You can literally see slow transactions by endpoint.</p>
+
+
+
+<p>Frame-time profiling is something that comes in handy as well. I like using <code>JankStats</code> or even <code>adb shell dumpsys gfxinfo</code> to see which screens consistently drop frames. Then I pair that with <code>LeakCanary</code> to catch activities or bitmaps that stay alive longer than they should. Together, that tells me exactly what’s slowing the UI down.</p>
+
+
+
+<p>In short, you don’t really need fancy tools. CPU, memory, network, and frame-time profiling, all within Android Studio, cover about 90% of the real issues. These profiling tools help identify what&#8217;s making the app feel slow, so you can easily fix the underlying problems.&nbsp;</p>
+
+
+
+<p><strong>4. When teams ask about Kotlin Multiplatform, what&#8217;s the smallest project they should start with to prove the concept?</strong></p>
+
+
+
+<p>I usually remind teams that they’re probably using <code>Kotlin Multiplatform</code> already. Libraries like <code>kotlinx.coroutines</code> or <code>kotlinx.serialization</code> are basically multiplatform under the hood. You’re just using them from Android today, but they work the same on iOS, too.</p>
+
+
+
+<p>The smallest realistic project to actually prove Kotlin Multiplatform in your environment is a shared data or utility layer – something both applications can call without touching the UI. A great first step is to share one simple function, like returning the current time or a version string:</p>
+
+
+
+<pre class="EnlighterJSRAW">// commonMain
+expect fun currentTime(): Long
+
+// androidMain / iosMain
+actual fun currentTime() = System.currentTimeMillis() // or NSDate().timeIntervalSince1970</pre>
+
+
+
+<p>Here’s how to connect the Kotlin framework generated from the <code>Kotlin Multiplatform</code> project to your Xcode project:</p>
+
+
+
+<p>The <code>embedAndSignAppleFrameworkForXcode</code> task only registers if the <code>binaries.framework</code> configuration option is declared. In your Kotlin Multiplatform project, check the iOS target declaration in the <code>build.gradle.kts</code> file.</p>
+
+
+
+<pre class="EnlighterJSRAW">kotlin {
+    ios() // or iosArm64(), iosX64(), iosSimulatorArm64()
+    binaries {
+        framework {
+            baseName = &quot;Shared&quot;
+        }
+    }
+}</pre>
+
+
+
+<p>To automatically build a shared module in <code>Xcode</code>, you need to add a script. In the <strong>Build Phases</strong> tab, add a run script with the following code:</p>
+
+
+
+<pre class="EnlighterJSRAW">cd &quot;$SRCROOT/..&quot;
+./gradlew :shared:embedAndSignAppleFrameworkForXcode</pre>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2025/12/mobile1.jpg" alt="" class="wp-image-670297"/></figure>
+
+
+
+<p>Using the specified script, access the Gradle task to create and embed the library into the native iOS application.</p>
+
+
+
+<p>Then you should move the <strong>Run Script</strong> phase higher, placing it before the <strong>Compile Sources</strong> phase.</p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2025/12/mobil2.jpg" alt="" class="wp-image-670308"/></figure>
+
+
+
+<p>After running the build on the iOS app side or <code>iosApp</code> configuration from the Kotlin Multiplatform project, the compiled <code>xcode-frameworks</code> will appear in the build folder of the shared module.</p>
+
+
+
+<p>This will generate the framework at:</p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" loading="lazy" src="https://blog.jetbrains.com/wp-content/uploads/2025/12/mobile3.jpg" alt="" class="wp-image-670319"/></figure>
+
+
+
+<p>Then import it into Swift:</p>
+
+
+
+<pre class="EnlighterJSRAW">import Shared
+
+let t = currentTime() // works directly from the shared Kotlin code</pre>
+
+
+
+<p>If that builds and runs cleanly, you’ve already proven that Kotlin code can compile and interop on both sides. From there, you can expand to something slightly more useful. For example, a shared module that fetches and parses a list of items using <code>Ktor</code> and <code>kotlinx.serialization</code>.</p>
+
+
+    <div class="about-author ">
+        <div class="about-author__box">
+            <div class="row">
+                                                            <div class="about-author__box-img">
+                            <img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2025/12/1604594047817.jpeg" alt="José Luis González" loading="lazy">
+                        </div>
+                                        <div class="about-author__box-text">
+                                                    <h4>José Luis González</h4>
+                                                <p><span style="font-weight: 400;">José Luis González, PhD, is a JetBrains-certified Kotlin Trainer who teaches Kotlin and advanced techniques to development teams. If your team has more questions about Kotlin anti-patterns, idiomatic design, or wants to learn how to write more maintainable Kotlin code, explore his </span><a href="https://bootcamps.hyperskill.org/kotlin-bootcamp-for-engineering-teams" target="_blank" rel="noopener"><span style="font-weight: 400;">instructor-led Kotlin workshops</span></a><span style="font-weight: 400;"> at Hyperskill.</span></p>
+                    </div>
+                            </div>
+        </div>
+    </div>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>The Ultimate Guide to Successfully Adopting Kotlin in a Java-Dominated Environment</title>
+		<link>https://blog.jetbrains.com/kotlin/2025/12/the-ultimate-guide-to-successfully-adopting-kotlin-in-a-java-dominated-environment/</link>
+		
+		<dc:creator><![CDATA[Alyona Chernyaeva]]></dc:creator>
+		<pubDate>Thu, 18 Dec 2025 15:04:44 +0000</pubDate>
+		<featuredImage>https://blog.jetbrains.com/wp-content/uploads/2025/12/Blog-Featured-1280x720-1-5.png</featuredImage>		<product ><![CDATA[idea]]></product>
+		<guid isPermaLink="false">https://blog.jetbrains.com/?post_type=kotlin&#038;p=669909</guid>
+
+					<description><![CDATA[Adopting Kotlin in a Java-centric company&#160; is not about flipping a switch or rewriting everything “the right way”. It’s about people, timing, risk, and trust. Over the last four weeks, we’ve published a series of blog posts by Urs Peter, covering all of these aspects of migrating to Kotlin. In this post, we’ll tie the [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+<p>Adopting Kotlin in a Java-centric company&nbsp; is not about flipping a switch or rewriting everything “the right way”. It’s about people, timing, risk, and trust.</p>
+
+
+
+<p>Over the last four weeks, we’ve published a series of blog posts by <a href="https://www.linkedin.com/in/urs-peter-70a2882/?originalSubdomain=nl" data-type="link" data-id="https://www.linkedin.com/in/urs-peter-70a2882/?originalSubdomain=nl" target="_blank" rel="noreferrer noopener">Urs Peter</a>, covering all of these aspects of migrating to Kotlin. In this post, we’ll tie the series together and give you one file you can hand to any engineer, tech lead, or manager to help them make the change.</p>
+
+
+
+<div class="wp-block-file"><object class="wp-block-file__embed" data="https://blog.jetbrains.com/wp-content/uploads/2025/12/Kotlin-Adoption-Journey.pdf" type="application/pdf" style="width:100%;height:600px" aria-label="Embed of Kotlin Adoption Guide."></object><a id="wp-block-file--media-f1b063f5-cf8d-4fe4-ad98-1a828177863d" href="https://blog.jetbrains.com/wp-content/uploads/2025/12/Kotlin-Adoption-Journey.pdf">Kotlin Adoption Guide</a><a href="https://blog.jetbrains.com/wp-content/uploads/2025/12/Kotlin-Adoption-Journey.pdf" class="wp-block-file__button wp-element-button" aria-describedby="wp-block-file--media-f1b063f5-cf8d-4fe4-ad98-1a828177863d" download>Download</a></div>
+
+
+
+<p>Use this post as a map, and when you spot a topic that resonates, check out the PDF for detailed instructions, side‑by‑side code examples, and concrete migration patterns.</p>
+
+
+
+<h2 class="wp-block-heading">The journey in five parts</h2>
+
+
+
+<p>Kotlin adoption starts with a spark: one or two engineers who feel that Kotlin could make their code a bit clearer, safer, or easier to work with in the long run.</p>
+
+
+
+<p>The guide walks you through a five-stage process to make this happen.</p>
+
+
+
+<h3 class="wp-block-heading"><a href="https://blog.jetbrains.com/kotlin/2025/10/getting-started-with-kotlin-for-java-developers/" target="_blank" data-type="link" data-id="https://blog.jetbrains.com/kotlin/2025/10/getting-started-with-kotlin-for-java-developers/" rel="noreferrer noopener">&nbsp;Part 1: Getting Started With Kotlin for Java Developers</a></h3>
+
+
+
+<p>We’re starting small. And for good reason: You want to introduce Kotlin in a way that can’t possibly hurt production – by using your test suite.</p>
+
+
+
+<p>This part shows you how to:</p>
+
+
+
+<ul>
+<li>Wire Kotlin into an existing Java project.</li>
+
+
+
+<li>Use tools like Kotest and MockK.</li>
+
+
+
+<li>Use Kotlin’s null safety and collections in code you run every day.</li>
+</ul>
+
+
+
+<p>The goal here is not to become an expert, but to answer a simple question: “Does working with this language feel better?”</p>
+
+
+    <div class="buttons">
+        <div class="buttons__row">
+                                                <a href="https://blog.jetbrains.com/kotlin/2025/10/getting-started-with-kotlin-for-java-developers/" class="btn" target="_blank">Learn More</a>
+                                                    </div>
+    </div>
+
+
+
+
+
+
+
+<h3 class="wp-block-heading"><a href="https://blog.jetbrains.com/kotlin/2025/10/evaluating-kotlin-in-real-projects/" target="_blank" data-type="link" data-id="https://blog.jetbrains.com/kotlin/2025/10/evaluating-kotlin-in-real-projects/" rel="noreferrer noopener">Part 2: Evaluating Kotlin in Real Projects&nbsp;</a></h3>
+
+
+
+<p>Once tests feel comfortable, you’ll inevitably start asking yourself, “Can we trust this in production?”</p>
+
+
+
+<p>Part 2 explores two paths:</p>
+
+
+
+<ul>
+<li>Starting a new service in Kotlin (often with Spring Boot).</li>
+
+
+
+<li>Adding Kotlin modules to an existing Java system.</li>
+</ul>
+
+
+
+<p>You’ll see how to avoid the “Java in Kotlin syntax” trap, teaching you how to use extension functions instead of static helpers, nullable types instead of Optional, and data classes and immutability instead of boilerplate models and builders.</p>
+
+
+    <div class="buttons">
+        <div class="buttons__row">
+                                                <a href="https://blog.jetbrains.com/kotlin/2025/10/evaluating-kotlin-in-real-projects/" class="btn" target="_blank">Learn More</a>
+                                                    </div>
+    </div>
+
+
+
+
+
+
+
+<h3 class="wp-block-heading"><a href="https://blog.jetbrains.com/kotlin/2025/11/growing-kotlin-adoption-in-your-company-2/" target="_blank" data-type="link" data-id="https://blog.jetbrains.com/kotlin/2025/11/growing-kotlin-adoption-in-your-company-2/" rel="noreferrer noopener">Part 3: Growing Kotlin Adoption in Your Company&nbsp;</a></h3>
+
+
+
+<p>Part 3 looks at the human side: how to get your colleagues on board with Kotlin by piquing their interest rather than pushing it on them.</p>
+
+
+
+<p>This part will give you practical ways to:</p>
+
+
+
+<ul>
+<li>Provide small, focused examples of Java and Kotlin that respect people’s existing code.</li>
+
+
+
+<li>Share a starter repository with Kotlin, linting, tests, and CI already set up.</li>
+
+
+
+<li>Hold short clinics, pairing sessions, and chats to give your colleagues a chance to ask you questions.</li>
+
+
+
+<li>Build an in‑house Kotlin community that doesn’t depend on a single proponent.</li>
+</ul>
+
+
+
+<p>The aim is simple: make it easy for others to say, “Let me try this on my next task.”</p>
+
+
+    <div class="buttons">
+        <div class="buttons__row">
+                                                <a href="https://blog.jetbrains.com/kotlin/2025/11/growing-kotlin-adoption-in-your-company-2/" class="btn" target="_blank">Learn More</a>
+                                                    </div>
+    </div>
+
+
+
+
+
+
+
+<h3 class="wp-block-heading"><a href="https://blog.jetbrains.com/kotlin/2025/11/helping-decision-makers-say-yes-to-kotlin/" target="_blank" data-type="link" data-id="https://blog.jetbrains.com/kotlin/2025/11/helping-decision-makers-say-yes-to-kotlin/" rel="noreferrer noopener">Part 4: Helping Decision‑Makers Say Yes to Kotlin&nbsp;</a></h3>
+
+
+
+<p>Persuading your tech-savvy employees is one thing – but what about your colleagues who ask, “How does Kotlin benefit us as a business?”</p>
+
+
+
+<p>Part 4 helps you explain the benefits of Kotlin in terms of business value:</p>
+
+
+
+<ul>
+<li>Less code to read and maintain.</li>
+
+
+
+<li>Fewer defects thanks to null safety and safer defaults.</li>
+
+
+
+<li>No re-writing required, as Kotlin has full Java interop and existing frameworks still work.</li>
+
+
+
+<li>Developer happiness and hiring – people want to work with thoughtful, cutting-edge tools.</li>
+
+
+
+<li>Predictable costs for training, gradual migration, and knowledge‑sharing.<br></li>
+</ul>
+
+
+
+<p>This part is written to help you have honest conversations with managers and architects who are accountable for risk, not just syntax.</p>
+
+
+    <div class="buttons">
+        <div class="buttons__row">
+                                                <a href="https://blog.jetbrains.com/kotlin/2025/11/helping-decision-makers-say-yes-to-kotlin/" class="btn" target="_blank">Learn More</a>
+                                                    </div>
+    </div>
+
+
+
+
+
+
+
+<h3 class="wp-block-heading"><a href="https://blog.jetbrains.com/kotlin/2025/11/scaling-kotlin-adoption-across-your-organization/" target="_blank" data-type="link" data-id="https://blog.jetbrains.com/kotlin/2025/11/scaling-kotlin-adoption-across-your-organization/" rel="noreferrer noopener">Part 5: Scaling Kotlin Adoption Across Your Organization</a></h3>
+
+
+
+<p>Okay – let’s say you’ve managed to bring managers on board and teams are enjoying coding in Kotlin. Now to address the final question: “We have a lot of Java. How do we migrate without breaking things or burning people out?”</p>
+
+
+
+<p>Part 5 focuses on strategy at scale. It suggests:</p>
+
+
+
+<ul>
+<li>Treating systems differently based on lifecycle:
+<ul>
+<li>Leave end‑of‑life apps as they are.</li>
+
+
+
+<li>Default new builds to Kotlin.</li>
+
+
+
+<li>Migrate active systems step by step, not as big‑bang rewrites.</li>
+</ul>
+</li>
+
+
+
+<li>Using the right tools for the job:
+<ul>
+<li>IDE conversion.</li>
+
+
+
+<li>Null‑safety annotations like JSpecify’s.</li>
+
+
+
+<li>AI‑assisted refactoring where tests are strong.</li>
+
+
+
+<li>Rule‑based automation for large codebases.</li>
+</ul>
+</li>
+
+
+
+<li>Capturing everything in a Kotlin “house playbook” so teams don’t have to re-learn it all from scratch.</li>
+</ul>
+
+
+    <div class="buttons">
+        <div class="buttons__row">
+                                                <a href="https://blog.jetbrains.com/kotlin/2025/11/scaling-kotlin-adoption-across-your-organization/" class="btn" target="_blank">Learn More</a>
+                                                    </div>
+    </div>
+
+
+
+
+
+
+
+<h2 class="wp-block-heading">Who this guide is for</h2>
+
+
+
+<p>The guide is written for people who currently work in Java codebases and care about moving them forward responsibly:</p>
+
+
+
+<ul>
+<li>Java developers who want safer, more expressive tools without throwing away their experience.</li>
+
+
+
+<li>Backend and platform engineers running Spring Boot or similar stacks who need a clear, low‑risk path.</li>
+
+
+
+<li>Tech leads and architects who are responsible for consistency across many services and teams.</li>
+
+
+
+<li>Engineering managers and decision‑makers who need a transparent view of costs, benefits, and risks.</li>
+</ul>
+
+
+
+<h2 class="wp-block-heading">Download the complete series as a PDF</h2>
+
+
+
+<p>The PDF version brings everything together:</p>
+
+
+
+<ul>
+<li>All five parts of the journey.</li>
+
+
+
+<li>Side‑by‑side Java and Kotlin examples.</li>
+
+
+
+<li>Migration patterns, pitfalls to avoid, and success factors at scale.</li>
+</ul>
+
+
+    <div class="buttons">
+        <div class="buttons__row">
+                                                <a href="https://drive.google.com/file/d/108gx4qiU501_5p9rNZVfsZ5TGqC5zV4q/view?usp=sharing" class="btn" target="_blank" rel="noopener">Download the Kotlin Adoption Guide (PDF)</a>
+                                                    </div>
+    </div>
+
+
+
+
+
+
+
+<p>Take a look and let us know what you think in the comments. We can&#8217;t wait to hear about how you use it.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Industry Leaders on the KotlinConf&#8217;25 Stage: What Global Brands Built With Kotlin</title>
+		<link>https://blog.jetbrains.com/kotlin/2025/12/industry-leaders-on-the-kotlinconf25-stage/</link>
+		
+		<dc:creator><![CDATA[Daria Voronina]]></dc:creator>
+		<pubDate>Wed, 17 Dec 2025 10:24:25 +0000</pubDate>
+		<featuredImage>https://blog.jetbrains.com/wp-content/uploads/2025/12/JB-social-BlogFeatured-1280x720-1-5.png</featuredImage>		<category><![CDATA[news]]></category>
+		<category><![CDATA[case-studies]]></category>
+		<category><![CDATA[kotlinconf]]></category>
+		<guid isPermaLink="false">https://blog.jetbrains.com/?post_type=kotlin&#038;p=668688</guid>
+
+					<description><![CDATA[The Kotlin ecosystem continues to grow among the world’s most recognized brands, including Meta, AWS, Duolingo, Uber, and others. At KotlinConf 2025, these companies took the stage to share practical, real-world engineering stories. KotlinConf is where developers can learn directly from the teams building products at global scale. Software engineers showcase how they are tackling [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+<p><strong>The Kotlin ecosystem continues to grow among the world’s most recognized brands, including Meta, AWS, Duolingo, Uber, and others. At KotlinConf 2025, these companies took the stage to share practical, real-world engineering stories.</strong></p>
+
+
+
+<p>KotlinConf is where developers can learn directly from the teams building products at global scale. Software engineers showcase how they are tackling challenges in navigation, performance, cross-platform architecture, build tooling, and large-scale migrations. These sessions offer rare, firsthand insights into how industry leaders use Kotlin to solve complex problems in production.</p>
+
+
+
+<div style="background-color: #E9D2F7; margin-bottom: 2px; padding: 5px; margin-right: 0%; text-align: left; min-height: px;">
+<p><i>Learn directly from the teams building products at global scale. Join KotlinConf’26 and connect with engineers from the world’s leading brands.</i></p>
+</div>
+
+
+
+<p></p>
+
+
+
+<p align="center"><a class="ek-link jb-download-button" title="Save your seat" href="https://pretix.eu/jetbrains/kotlinconf2026/c/XgA8Vnr4a/?utm_source=blog&#038;utm_medium=button&#038;utm_campaign=bigbrands" target="_blank" rel="noopener">Save your seat</a></p>
+
+
+
+<p>Here’s a look at some of the standout talks from KotlinConf’25 and the global brands behind them.</p>
+
+
+
+<h2 class="wp-block-heading">Real-world Kotlin use at scale</h2>
+
+
+
+<p>From navigation systems and build tools to AI-driven migrations and cross-platform architectures, global brands are using Kotlin to solve engineering challenges at massive scale.</p>
+
+
+
+<h3 class="wp-block-heading">1. <strong>AWS</strong></h3>
+
+
+
+<p><a href="https://2025.kotlinconf.com/talks/794336/" target="_blank" rel="noreferrer noopener"><strong>Blueprints for Scale: What AWS Learned Building a Massive Multiplatform Project</strong></a><strong> </strong>| Matas Lauzadis, Ian Botsford</p>
+
+
+
+<p>The AWS team shared firsthand insights from designing, developing, and scaling the AWS SDK for Kotlin – a massive multiplatform project spanning over 300 services and targeting eight distinct platforms. They discussed the challenges they faced, the best practices they adopted, and the strategies that succeeded (and failed) at AWS scale.</p>
+
+
+
+<p><em><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-black-color">Level up your KMP expertise with our workshop on seamless code sharing</mark> </em>➡️<em> </em><a href="https://kotlinconf.com/workshops/#deep-dive-into-kotlin-multiplatform" target="_blank" rel="noreferrer noopener"><em><strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-purple-color">Learn more</mark></strong></em></a></p>
+
+
+
+<h3 class="wp-block-heading">2. <strong>Duolingo</strong></h3>
+
+
+
+<p><a href="https://2025.kotlinconf.com/talks/812400/" target="_blank" rel="noreferrer noopener"><strong>Duolingo + KMP: A Case Study in Developer Productivity</strong></a> | John Rodriguez, Johnny Ye</p>
+
+
+
+<p>Duolingo ships weekly to more than 40 million daily active users across 176 countries, and Kotlin Multiplatform is playing a growing role in how they move fast. In this talk, the team discussed how they delivered features like Video Call, Math, and Adventures across Android, iOS, and web, which upcoming projects may benefit from KMP, and the challenges faced and lessons learned along the way.</p>
+
+
+
+<h3 class="wp-block-heading">3. <strong>Googl</strong>e</h3>
+
+
+
+<p><a href="https://2025.kotlinconf.com/talks/793515/" target="_blank" rel="noreferrer noopener"><strong>Deploying Kotlin Multiplatform at Google Workspace</strong></a><strong> </strong>| Jason Parachoniak, Troels Lund</p>
+
+
+
+<p>The Google Workspace team discussed the bugs, performance issues, and areas for potential optimization while rolling out Kotlin Multiplatform for certain users. The session included real comparisons with Objective-C, insights into the fixes they implemented, and a Q&amp;A session with the developers who worked on the project.</p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" loading="lazy" src="https://blog.jetbrains.com/wp-content/uploads/2025/12/Google_2.png" alt="KotlinConf'25 talk: Deploying Kotlin Multiplatform at Google Workspace" class="wp-image-669146"/></figure>
+
+
+
+<h3 class="wp-block-heading">4. Meta</h3>
+
+
+
+<p><a href="https://2025.kotlinconf.com/talks/857571/" target="_blank" rel="noreferrer noopener"><strong>Build your Kotlin and Android apps with Buck2</strong></a><strong> </strong>| Sergei Rybalkin</p>
+
+
+
+<p>Meta announced that Buck2, its large-scale open-source build system, now supports Kotlin and Android. The talk explored building an app from scratch and advanced Buck2 capabilities like remote execution, source-only ABI, and build tool API integrations.</p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" loading="lazy" src="https://blog.jetbrains.com/wp-content/uploads/2025/12/Meta.png" alt="KotlinConf'25 talk: Build your Kotlin and Android apps with Buck2 (Meta)" class="wp-image-669033"/></figure>
+
+
+
+<h3 class="wp-block-heading">5. <strong><strong>Umain, McDonald’s App</strong></strong></h3>
+
+
+
+<p><a href="https://2025.kotlinconf.com/talks/779451/" target="_blank" rel="noreferrer noopener"><strong>Leveraging KMP for navigation in the McDonald&#8217;s app</strong></a> | Cas van Luijtelaar, Anthony Bassey</p>
+
+
+
+<p>The team behind the McDonald’s app revealed how they extended Kotlin Multiplatform beyond the domain layer to handle navigation on both Android and iOS. The talk covered how they approached cross-platform navigation, the challenges they overcame, and what the architecture looks like today.</p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" loading="lazy" src="https://blog.jetbrains.com/wp-content/uploads/2025/12/McDonalds.png" alt="KotlinConf'25 talk: Leveraging KMP for navigation in the McDonald's app" class="wp-image-669044"/></figure>
+
+
+
+<p><em><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-black-color">Explore how to build reusable, cross-platform UIs with Compose Multiplatform in our hands-on workshop</mark> </em>➡️<em> </em><a href="https://kotlinconf.com/workshops/#shared-ui-with-compose-multiplatform" target="_blank" rel="noreferrer noopener"><em><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-purple-color"><strong>Learn more</strong></mark></em></a></p>
+
+
+
+<h3 class="wp-block-heading">6. <strong>Uber</strong></h3>
+
+
+
+<p><a href="https://2025.kotlinconf.com/talks/811915/" target="_blank" rel="noreferrer noopener"><strong>Large Scale Changes with AI – Migrating millions of lines of Java to Kotlin at Uber</strong></a> | Ty Smith</p>
+
+
+
+<p>Uber has one of the world’s largest Android codebases, and while Kotlin is now first-class, millions of lines of Java still need to be migrated. In this talk, the team outlined the tooling, AI-driven workflows, and processes they’ve developed to safely migrate production code at scale. They covered motivations, challenges in large monorepos, data generation for AI models, agentic systems for deterministic migrations, risk mitigation strategies, PR management, and where this technology is heading next.</p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" loading="lazy" src="https://blog.jetbrains.com/wp-content/uploads/2025/12/Uber.png" alt="KotlinConf'25 Talk: Large Scale Changes with AI – Migrating millions of lines of Java to Kotlin at Uber" class="wp-image-669055"/></figure>
+
+
+
+<p><em><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-black-color">Explore agentic AI development in our Kotlin workshop using JetBrains’ Koog framework </mark></em>➡️<em> </em><a href="https://kotlinconf.com/workshops/#building-ai-agents-in-kotlin-with-Koog" target="_blank" rel="noreferrer noopener"><em><strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-purple-color">Learn more</mark></strong></em></a></p>
+
+
+
+<h3 class="wp-block-heading">7. X (formerly Twitter)</h3>
+
+
+
+<p><a href="https://2025.kotlinconf.com/talks/793302/" target="_blank" rel="noreferrer noopener"><strong>One Codebase, Three Platforms: X&#8217;s Experience with Kotlin Multiplatform</strong></a> | Arkadii Ivanov, Eric Denman</p>
+
+
+
+<p>At X, a small team used Kotlin Multiplatform to rebuild a core feature for a multi-million-user platform. Their talk covered the highs and lows of adopting KMP in a real-world project. The speakers provided a rundown of their development process, architectural decisions, libraries used, cross-platform UX considerations, and the challenges of gaining buy-in across iOS and web teams. Watch the recording for a practical look at the lessons learned and how KMP transformed their cross-platform strategy.</p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" loading="lazy" src="https://blog.jetbrains.com/wp-content/uploads/2025/12/X.png" alt="KotlinConf'25 talk: One Codebase, Three Platforms: X's Experience with Kotlin Multiplatform" class="wp-image-669066"/></figure>
+
+
+
+<h2 class="wp-block-heading">Connect with global brands at the flagship Kotlin event of the year</h2>
+
+
+
+<p>KotlinConf is where the global Kotlin community comes together to share real engineering breakthroughs, practical lessons, and the ideas shaping the future of the language. At KotlinConf’26, you&#8217;ll meet the teams behind products used around the world, learn directly from the people pushing Kotlin forward, and take home knowledge you can apply immediately.</p>
+
+
+
+<p>If you want to sharpen your skills, explore emerging tooling, and connect with the companies driving innovation in Kotlin, this is the place to be.</p>
+
+
+
+<p align="center"><a class="ek-link jb-download-button" title="Get tickets" href="https://pretix.eu/jetbrains/kotlinconf2026/c/XgA8Vnr4a/?utm_source=blog&#038;utm_medium=button&#038;utm_campaign=bigbrands" target="_blank" rel="noopener">Get tickets</a></p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Kotlin 2.3.0 Released</title>
+		<link>https://blog.jetbrains.com/kotlin/2025/12/kotlin-2-3-0-released/</link>
+		
+		<dc:creator><![CDATA[Alejandra Pedroza Marchena]]></dc:creator>
+		<pubDate>Tue, 16 Dec 2025 16:10:38 +0000</pubDate>
+		<featuredImage>https://blog.jetbrains.com/wp-content/uploads/2025/12/Kotlin-Release-Social-Share-Blog-1280x720-1.png</featuredImage>		<category><![CDATA[releases]]></category>
+		<guid isPermaLink="false">https://blog.jetbrains.com/?post_type=kotlin&#038;p=668086</guid>
+
+					<description><![CDATA[The Kotlin 2.3.0 release is out! This version includes new language features, stable ones, and other features now enabled by default. This release also brings tooling updates, performance improvements for different platforms, and important fixes. Here are some additional highlights from this release: For the complete list of changes, refer to What’s new in Kotlin [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+<p>The Kotlin 2.3.0 release is out! This version includes new language features, stable ones, and other features now enabled by default. This release also brings tooling updates, performance improvements for different platforms, and important fixes. Here are some additional highlights from this release:</p>
+
+
+
+<ul>
+<li><strong>Language:</strong> More stable and default features, unused return value checker, explicit backing fields, and changes to context-sensitive resolution.</li>
+
+
+
+<li><strong>Kotlin/JVM:</strong> Support for Java 25.</li>
+
+
+
+<li><strong>Kotlin/Native:</strong> Improved interop through Swift export, faster build time for release tasks, C and Objective-C library import in Beta.</li>
+
+
+
+<li><strong>Kotlin/Wasm:</strong> Fully qualified names and new exception handling proposal enabled by default, as well as new compact storage for Latin-1 characters.</li>
+
+
+
+<li><strong>Kotlin/JS: </strong>New experimental suspend function export, <code data-enlighter-language="generic" class="EnlighterJSRAW">LongArray</code> representation, unified companion object access, and more.</li>
+
+
+
+<li><strong>Gradle:</strong> Compatibility with Gradle 9.0 and a new API for registering generated sources.</li>
+
+
+
+<li><strong>Compose compiler:</strong> Stack traces for minified Android applications.</li>
+
+
+
+<li><strong>Standard library:</strong> Stable time tracking functionality and improved UUID generation and parsing.</li>
+</ul>
+
+
+
+<p></p>
+
+
+
+<p>For the complete list of changes, refer to <a href="https://kotlinlang.org/docs/whatsnew23.html" target="_blank" rel="noopener">What’s new in Kotlin 2.3.0</a> or the <a href="https://github.com/JetBrains/kotlin/releases/tag/v2.3.0" target="_blank" rel="noopener">release notes on GitHub.</a></p>
+
+
+
+<h2 class="wp-block-heading">How to install Kotlin 2.3.0</h2>
+
+
+
+<p>The Kotlin plugin is distributed as a bundled plugin in IntelliJ IDEA and Android Studio.</p>
+
+
+
+<p>To update to the new Kotlin version, <a href="https://kotlinlang.org/docs/releases.html#update-to-a-new-kotlin-version" target="_blank" rel="noopener">change the Kotlin version</a> to 2.3.0 in your build scripts.</p>
+
+
+
+<p>If you need the command-line compiler, download it from the <a href="https://github.com/JetBrains/kotlin/releases/tag/v2.3.0" data-type="link" data-id="https://github.com/JetBrains/kotlin/releases/tag/v2.3.0" target="_blank" rel="noopener">GitHub release page</a>.</p>
+
+
+
+<p><strong>If you run into any problems:</strong></p>
+
+
+
+<ul>
+<li>Find help on <a href="https://app.slack.com/client/T09229ZC6" target="_blank" rel="noopener">Slack</a> (<a href="https://surveys.jetbrains.com/s3/kotlin-slack-sign-up" target="_blank" rel="noopener">get an invite</a>).</li>
+
+
+
+<li>Report issues to our issue tracker, <a href="https://youtrack.jetbrains.com/issues/KT" target="_blank" rel="noopener">YouTrack</a>.</li>
+</ul>
+
+
+
+<div style="background-color: #f1f6fe; margin-bottom: 2px; padding: 5px; margin-right: 0%; text-align: left; min-height: px;">
+<p>Stay up to date with the latest Kotlin features! Subscribe to receive Kotlin updates by filling out the form at the bottom of this post. &#x2b07;&#xfe0f;</p>
+</div>
+
+
+
+<h2 class="wp-block-heading">Top issue reporters from YouTrack</h2>
+
+
+
+<p><a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-06-23%20..%20*%20created%20by:%20rnett" target="_blank" rel="noopener">Ryan Nett</a> (39 issues), <a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-06-23%20..%20*%20created%20by:%20jsjeon" target="_blank" rel="noopener">Jinseong Jeon</a> (25 issues), <a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-06-23%20..%20*%20created%20by:%20gamalik" target="_blank" rel="noopener">Andreas Malik</a> (25 issues), <a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-06-23%20..%20*%20created%20by:%20aviroop" target="_blank" rel="noopener">Aviroop Pal</a> (15 issues), <a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-06-23%20..%20*%20created%20by:%20apolo" target="_blank" rel="noopener">Pau M</a> (13 issues), <a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-06-23%20..%20*%20created%20by:%20ZacSweers" target="_blank" rel="noopener">Zac Sweers</a> (13 issues), <a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-06-23%20..%20*%20created%20by:%20kyay10" target="_blank" rel="noopener">Youssef Shoaib</a> (13 issues), <a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-06-23%20..%20*%20created%20by:%20clovisai" target="_blank" rel="noopener">Ivan Canet</a> (12 issues), <a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-06-23%20..%20*%20created%20by:%20martinbonnin" target="_blank" rel="noopener">Martin Bonnin</a> (12 issues), <a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-06-23%20..%20*%20created%20by:%20Turansky" target="_blank" rel="noopener">Victor Turansky</a> (12 issues), <a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-06-23%20..%20*%20created%20by:%20Xiaotian-Ma" target="_blank" rel="noopener">xyzboom</a> (11 issues), <a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-06-23%20..%20*%20created%20by:%20l.wasylkowski" target="_blank" rel="noopener">Łukasz Wasylkowski</a> (10 issues), <a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-06-23%20..%20*%20created%20by:%20deltazulu" target="_blank" rel="noopener">Donald Duo Zhao</a> (10 issues), <a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-06-23%20..%20*%20created%20by:%20viuginick.erwg" target="_blank" rel="noopener">Nickolay Viuginov</a> (9 issues), <a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-06-23%20..%20*%20created%20by:%20rickclephas" target="_blank" rel="noopener">Rick Clephas</a> (8 issues), <a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-06-23%20..%20*%20created%20by:%20vadim.shabanov" target="_blank" rel="noopener">Vadim Shabanov</a> (7 issues), <a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-06-23%20..%20*%20created%20by:%20glebminaev" target="_blank" rel="noopener">Gleb Minaev</a> (7 issues), <a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-06-23%20..%20*%20created%20by:%20Oliver_O" target="_blank" rel="noopener">Oliver O.</a> (7 issues), <a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-06-23%20..%20*%20created%20by:%20darksnake" target="_blank" rel="noopener">Alexander Nozik</a> (7 issues), and <a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-06-23%20..%20*%20created%20by:%20h0tk3y" target="_blank" rel="noopener">Sergey Igushkin</a> (7 issues).</p>
+
+
+
+<h2 class="wp-block-heading">External contributors</h2>
+
+
+
+<p>We’d like to thank all of our contributors whose pull requests were included in this release:</p>
+
+
+
+<p><a href="https://github.com/ShikaSD" target="_blank" rel="noopener">Andrei Shikov</a>, <a href="https://github.com/troelsbjerre" target="_blank" rel="noopener">Troels Bjerre Lund</a>, <a href="https://github.com/derekxu16" target="_blank" rel="noopener">Derek Xu</a>, <a href="https://github.com/johanbay" target="_blank" rel="noopener">Johan Bay</a>, <a href="https://github.com/aviroop-123" target="_blank" rel="noopener">aviroop</a>, <a href="https://github.com/y9san9" target="_blank" rel="noopener">Alex Sokol / y9san9</a>, <a href="https://github.com/jsjeon" target="_blank" rel="noopener">Jinseong Jeon</a>, <a href="https://github.com/scaventz" target="_blank" rel="noopener">Xin Wang</a>, <a href="https://github.com/edisongz" target="_blank" rel="noopener">Yijie Jiang</a>, <a href="https://github.com/dmaclach" target="_blank" rel="noopener">Dave MacLachlan</a>, <a href="https://github.com/jaebaek" target="_blank" rel="noopener">Jaebaek Seo</a>, <a href="https://github.com/nikita-nazarov" target="_blank" rel="noopener">Nikita Nazarov</a>, <a href="https://github.com/cketti" target="_blank" rel="noopener">cketti</a>, <a href="https://github.com/CharlesLgn" target="_blank" rel="noopener">Charles Lgn</a>, <a href="https://github.com/chuckjaz" target="_blank" rel="noopener">Chuck Jazdzewski</a>, <a href="https://github.com/colincross" target="_blank" rel="noopener">Colin Cross</a>, <a href="https://github.com/Antimonit" target="_blank" rel="noopener">David Khol</a>, <a href="https://github.com/hfmehmed" target="_blank" rel="noopener">Hakan Mehmed</a>, <a href="https://github.com/kralliv" target="_blank" rel="noopener">Iven Krall</a>, <a href="https://github.com/kotcrab" target="_blank" rel="noopener">Kotcrab</a>, <a href="https://github.com/TheMrMilchmann" target="_blank" rel="noopener">Leon Linhart</a>, <a href="https://github.com/gharrma" target="_blank" rel="noopener">Matthew Gharrity</a>, <a href="https://github.com/hondaya14" target="_blank" rel="noopener">Yasuhisa Honda</a>, <a href="https://github.com/ZacSweers" target="_blank" rel="noopener">Zac Sweers</a>, <a href="https://github.com/freya022" data-type="link" data-id="https://github.com/freya022" target="_blank" rel="noopener">freya02</a>, <a href="https://github.com/jitokim" target="_blank" rel="noopener">jitokim</a>, <a href="https://github.com/dev-jonghoonpark" target="_blank" rel="noopener">jonghoonpark</a>, <a href="https://github.com/zangzhicong" target="_blank" rel="noopener">zangzhicong</a></p>
+
+
+
+<h2 class="wp-block-heading">Special thanks to our EAP Champions</h2>
+
+
+
+<ul>
+<li><a href="https://github.com/ychescale9" target="_blank" rel="noreferrer noopener">Yang</a></li>
+
+
+
+<li><a href="https://github.com/rickclephas" target="_blank" rel="noreferrer noopener">Rick Clephas</a></li>
+
+
+
+<li><a href="https://github.com/JesusMcCloud" target="_blank" rel="noreferrer noopener">Bernd Prünster</a></li>
+
+
+
+<li><a href="https://github.com/BoD" target="_blank" rel="noreferrer noopener">Benoit Lubek</a></li>
+
+
+
+<li><a href="https://github.com/HagamosVideojuegos" target="_blank" rel="noreferrer noopener">David Lopez</a></li>
+
+
+
+<li><a href="https://github.com/molikuner" target="_blank" rel="noreferrer noopener">Florian Schreiber</a></li>
+
+
+
+<li><a href="https://github.com/msotho" target="_blank" rel="noreferrer noopener">Sechaba</a></li>
+
+
+
+<li><a href="https://github.com/dayanruben" target="_blank" rel="noreferrer noopener">Dayan Ruben</a></li>
+
+
+
+<li><a href="https://bsky.app/profile/zacsweers.dev" target="_blank" rel="noreferrer noopener">Zac Sweers</a></li>
+
+
+
+<li><a href="https://x.com/noraltavir" target="_blank" rel="noreferrer noopener">Alexander Nozik</a></li>
+
+
+
+<li><a href="https://jakewharton.com/" target="_blank" rel="noreferrer noopener">Jake Wharton</a></li>
+
+
+
+<li><a href="https://www.linkedin.com/in/lukasz-wasylkowski/" target="_blank" rel="noreferrer noopener">Łukasz Wasylkowski</a></li>
+
+
+
+<li><a href="https://github.com/MohamedRejeb" target="_blank" rel="noreferrer noopener">Mohamed Rejeb</a></li>
+
+
+
+<li><a href="https://x.com/andy_lamax" target="_blank" rel="noreferrer noopener">Anderson Lameck</a></li>
+
+
+
+<li><a href="https://www.linkedin.com/in/yuri-geronimus/" data-type="link" data-id="https://www.linkedin.com/in/yuri-geronimus/" target="_blank" rel="noopener">Yuri Geronimus</a></li>
+
+
+
+<li><a href="https://www.linkedin.com/in/johannessvensson/" target="_blank" rel="noreferrer noopener">Johannes Svensson</a></li>
+
+
+
+<li><a href="https://www.linkedin.com/in/kacper-wojciechowski-7283561b4/" target="_blank" rel="noreferrer noopener">Kacper Wojciechowski</a></li>
+</ul>
+
+
+
+<h2 class="wp-block-heading">What else to read</h2>
+
+
+
+<ul>
+<li><a href="https://kotlinlang.org/docs/whatsnew23.html" target="_blank" rel="noopener">What’s new in Kotlin 2.3.0 documentation</a></li>
+
+
+
+<li><a href="https://kotlinlang.org/docs/compatibility-guide-23.html" target="_blank" rel="noopener">Kotlin 2.3.0 compatibility guide</a></li>
+
+
+
+<li><a href="https://blog.jetbrains.com/kotlin/2022/11/eap-champions/">Kotlin EAP Champions</a></li>
+</ul>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Building AI Agents in Kotlin – Part 3: Under Observation</title>
+		<link>https://blog.jetbrains.com/ai/2025/12/building-ai-agents-in-kotlin-part-3-under-observation/</link>
+		
+		<dc:creator><![CDATA[Denis Domanskii]]></dc:creator>
+		<pubDate>Fri, 12 Dec 2025 11:58:45 +0000</pubDate>
+		<featuredImage>https://blog.jetbrains.com/wp-content/uploads/2025/12/KG-social-BlogFeatured-1280x720-1-1.png</featuredImage>		<product ><![CDATA[kotlin]]></product>
+		<category><![CDATA[kotlin]]></category>
+		<category><![CDATA[tutorials]]></category>
+		<category><![CDATA[ai]]></category>
+		<category><![CDATA[ai-agents]]></category>
+		<guid isPermaLink="false">https://blog.jetbrains.com/?post_type=ai&#038;p=668115</guid>
+
+					<description><![CDATA[Previously in this series: Two articles in, and our coding agent can already do quite a bit. It can explore projects, read and write code, execute shell commands, and run tests. Adding a definition of done (DoD) in our last article gave it the feedback loop it needed – the agent now iterates until all [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+<p><em>Previously in this series:</em></p>
+
+
+
+<ol>
+<li><a href="https://blog.jetbrains.com/ai/2025/11/building-ai-agents-in-kotlin-part-1-a-minimal-coding-agent/">Building AI Agents in Kotlin – Part 1: A Minimal Coding Agent</a></li>
+
+
+
+<li><a href="https://blog.jetbrains.com/ai/2025/11/building-ai-agents-in-kotlin-part-2-a-deeper-dive-into-tools/">Building AI Agents in Kotlin – Part 2: A Deeper Dive Into Tools</a></li>
+</ol>
+
+
+
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+
+
+
+<p>Two articles in, and our coding agent can already do quite a bit. It can explore projects, read and write code, execute shell commands, and run tests. Adding a definition of done (DoD) in our last article gave it the feedback loop it needed – the agent now iterates until all tests pass, not until it decides it&#8217;s done.</p>
+
+
+
+<p>We should be celebrating, right? Well, yes and no.</p>
+
+
+
+<p>As the agent gets more capable, debugging becomes more challenging. Each tool adds surface area. The DoD loop adds more calls and tokens. Evaluation runs can take hours, and when something fails, it is often unclear what failed or where the issue started.</p>
+
+
+
+<p>Our agent can solve tasks now. Too bad we can&#8217;t see how.</p>
+
+
+
+<p>This becomes a problem when you want to improve the agent, debug failures, or estimate costs. In this article, we work through this visibility gap. We start with the obvious options (they don&#8217;t quite work), review common observability tools for LLM apps, and integrate tracing with Langfuse. The result is a step-by-step view of the agent’s actions, including cost per action. Along the way, we uncover behavioral patterns and even find a bug we didn&#8217;t know existed.</p>
+
+
+
+<p>Let&#8217;s start by understanding what we&#8217;re missing.</p>
+
+
+
+<h2 class="wp-block-heading">Your agent story</h2>
+
+
+
+<p>When your agent completes a coding task, it produces a chain of decisions and actions: Read this file, analyze that function, modify this code, run those tests. This chain is the agent&#8217;s trajectory, and it tells the story of how the agent works.</p>
+
+
+
+<p>Trajectories matter because they reveal where the agent wastes time and where it goes off track. They show you when the agent reads the same file 47 times, or why it rewrites half your codebase when you asked for a simple bug fix. In short, you can&#8217;t improve what you can&#8217;t observe.</p>
+
+
+
+<p>Up to now, we&#8217;ve been getting by with this simple setup:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">handleEvents {  
+    onToolCallStarting { ctx ->  
+        println("Tool '${ctx.tool.name}' called with args: ${ctx.toolArgs.toString().take(100)}")  
+    }  
+}</pre>
+
+
+
+<p>This was fine for the early steps. It at least showed activity. But we&#8217;ve outgrown it. Without full parameters and observations, we can&#8217;t understand agent behavior in enough detail. And if we print everything, the console turns into noise: object dumps, file contents, and error messages all mixed together.</p>
+
+
+
+<p>We need something better.</p>
+
+
+
+<h3 class="wp-block-heading">&#8220;Just turn on logging&#8221;</h3>
+
+
+
+<p>Let&#8217;s try the obvious solution first. <a href="https://docs.koog.ai/" target="_blank" rel="noopener">Koog</a> has built-in debug logging, so we switch Logback from <code>ERROR</code> to <code>DEBUG</code> and run it again:</p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" loading="lazy" src="https://blog.jetbrains.com/wp-content/uploads/2025/12/image-23.png" alt="" class="wp-image-668118"/></figure>
+
+
+
+<p>Three minutes and thousands of lines later: Informative? Yes. Convenient? No! </p>
+
+
+
+<p>Verbose logs have their place. In production, they help with postmortems. They also help when you want to extract insights and analyze behavior patterns across many runs. But when you’re debugging a single run and trying to understand why your agent is stuck in a loop, you need something built for humans, not statistical analysis.</p>
+
+
+
+<h3 class="wp-block-heading">The money trail</h3>
+
+
+
+<p>While those logs aren&#8217;t ideal for debugging, they did remind us about something else we should be tracking: usage statistics. OpenAI&#8217;s dashboard provides detailed breakdowns of API consumption per key. It answers one question quickly: Are we burning through our budget?</p>
+
+
+
+<p>But it still doesn’t answer the question that matters during development: What does one run cost?</p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" loading="lazy" src="https://blog.jetbrains.com/wp-content/uploads/2025/12/image-24.png" alt="" class="wp-image-668129"/></figure>
+
+
+
+<p>Okay, $25 in one week. Useful, but not the complete picture. The OpenAI dashboard does what it&#8217;s designed to do: track organization-level API usage. But for agent development, we need run-level insights. We can see the total, but not which tasks cost $0.50 and which cost $5.00.</p>
+
+
+
+<p>Now add more moving parts. If we split work across sub-agents and use different providers for specific steps (to be discussed in upcoming articles), we end up with multiple dashboards and no single view of the true cost of a run. And if several people share the same agent setup, it gets even harder to see who spent what and where.</p>
+
+
+
+<p>The API key approach works for one agent, one provider, and limited runs. It’s a start, but it doesn’t scale. We need observability.</p>
+
+
+
+<h3 class="wp-block-heading">The four-line integration</h3>
+
+
+
+<p>We&#8217;re not the first to encounter this issue. Over the last few years, an ecosystem of observability tools has formed around LLM apps and agents. There are proprietary tools such as Weights &amp; Biases Weave and LangSmith, as well as open-source options like Langfuse, Opik, Arize Phoenix, OpenLLMetry, Helicone, OpenLIT, and Lunary. Some are cloud-based, others support self-hosting, and some offer both. Each comes with its own strengths and trade-offs.</p>
+
+
+
+<p>After evaluating several options, our team chose Langfuse. The decision came down to practical factors: It&#8217;s open source with a self-hosted option (so traces stay under your control), it offers a free cloud tier for getting started, the UI makes it easier to inspect traces, and the team is responsive when questions come up.</p>
+
+
+
+<p>The integration itself is straightforward. Koog needs four lines to connect to Langfuse:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">) {
++   install(OpenTelemetry) {  
++       setVerbose(true) 
++       addLangfuseExporter()  
++   }
+    handleEvents {  
+        // existing handlers remain
+    }
+}</pre>
+
+
+
+<p>That&#8217;s it.</p>
+
+
+<aside style="background: #f8f9fa; border-left: 4px solid #007bff; padding: 1rem 1.5rem; margin: 1.5rem 0; border-radius: 4px;">
+<p style="margin: 0; color: #555;">If you use another OpenTelemetry-compatible service, <a href="https://docs.koog.ai/opentelemetry-support/#opentelemetry-http-exporter" target="_blank" rel="noopener">generic OpenTelemetry integration</a> works as well.</p>
+</aside>
+
+
+<p>A quick note about the <code>setVerbose(true)</code>: Koog sends only telemetry metadata by default. Full details are sent only if you enable verbose mode. Prompts and responses remain hidden, which makes sense when traces can include customer data. During agent development, you often need full visibility, and verbose mode enables that.</p>
+
+
+
+<p>Setting up Langfuse takes about five minutes. For this article, we’re using their free cloud instance, but you can also run <a href="https://langfuse.com/self-hosting/deployment/docker-compose" target="_blank" rel="noopener">the full stack locally in Docker</a>.</p>
+
+
+
+<ol>
+<li>Create an account at <a href="https://cloud.langfuse.com/" target="_blank" rel="noopener">cloud.langfuse.com</a>.</li>
+
+
+
+<li>Create an organization.</li>
+
+
+
+<li>Create a project.</li>
+
+
+
+<li>Click <em>Create API Key</em>.</li>
+</ol>
+
+
+
+<p>You&#8217;ll get three values:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">export LANGFUSE_HOST="https://cloud.langfuse.com"
+export LANGFUSE_PUBLIC_KEY="&lt;your-public-key>"
+export LANGFUSE_SECRET_KEY="&lt;your-secret-key>"</pre>
+
+
+
+<p>Koog reads these values from the execution environment. If you need to pass them in code, you can pass them directly to <code>addLangfuseExporter</code>. Here&#8217;s our complete agent with observability enabled:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">val executor = simpleOpenAIExecutor(System.getenv("OPENAI_API_KEY"))
+val agent = AIAgent(
+    promptExecutor = executor,
+    llmModel = OpenAIModels.Chat.GPT5Codex,
+    toolRegistry = ToolRegistry {
+        tool(ListDirectoryTool(JVMFileSystemProvider.ReadOnly))
+        tool(ReadFileTool(JVMFileSystemProvider.ReadOnly))
+        tool(EditFileTool(JVMFileSystemProvider.ReadWrite))
+        tool(ExecuteShellCommandTool(JvmShellCommandExecutor(), PrintShellCommandConfirmationHandler()))
+    },
+    systemPrompt = """
+        You are a highly skilled programmer tasked with updating the provided codebase according to the given task.
+        Your goal is to deliver production-ready code changes that integrate seamlessly with the existing codebase and solve given task.
+        Ensure minimal possible changes done - that guarantees minimal impact on existing functionality.
+        
+        You have shell access to execute commands and run tests.
+        After investigation, define expected behavior with test scripts, then iterate on your implementation until the tests pass.
+        Verify your changes don't break existing functionality through regression testing, but prefer running targeted tests over full test suites.
+        Note: the codebase may be fully configured or freshly cloned with no dependencies installed - handle any necessary setup steps.
+        """.trimIndent(),
+    strategy = singleRunStrategy(ToolCalls.SEQUENTIAL),
+    maxIterations = 400
+) {
+    install(OpenTelemetry) {
+        setVerbose(true) // Send full strings instead of HIDDEN placeholders
+        addLangfuseExporter()
+    }
+    handleEvents {
+        onToolCallStarting { ctx ->
+            println("Tool '${ctx.tool.name}' called with args: ${ctx.toolArgs.toString().take(100)}")
+        }
+    }
+}</pre>
+
+
+
+<h3 class="wp-block-heading">The first trace</h3>
+
+
+
+<p>Let&#8217;s start with a simple task: Find the <code>main()</code> function in your project. Run it, wait for it to finish, and then open the <em>Tracing</em> tab in your Langfuse project.</p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" loading="lazy" src="https://blog.jetbrains.com/wp-content/uploads/2025/12/image-28.png" alt="" class="wp-image-668292"/></figure>
+
+
+
+<p>Immediately, the table displays something useful: the <em>Total Cost</em> column. Koog reports token counts, Langfuse applies pricing, and you can see that finding <code>main()</code> costs $0.016.</p>
+
+
+
+<p>Open the trace to see the full run.</p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" loading="lazy" src="https://blog.jetbrains.com/wp-content/uploads/2025/12/image-26.png" alt="" class="wp-image-668146"/></figure>
+
+
+
+<p>The left-hand panel shows your agent&#8217;s trajectory: messages, tool calls, and observations in order, with indentation indicating the call hierarchy. The right-hand panel displays details for each step: prompts, responses, tool parameters, and per-span cost breakdown.</p>
+
+
+
+<p>At the bottom, you’ll also see an execution graph that visualizes the flow. For more details on Koog&#8217;s graph-based strategies, check out the <a href="https://docs.koog.ai/custom-strategy-graphs/" target="_blank" rel="noopener">documentation</a>. You can also read a deep dive by the Koog tech lead: <a href="https://blog.kotlin-academy.com/how-to-design-a-flexible-graph-based-strategy-in-koog-52b1fb24802d" target="_blank" rel="noopener">Mixing the Secret AI Sauce: How to Design a Flexible, Graph-Based Strategy in Koog</a>.</p>
+
+
+
+<h3 class="wp-block-heading">Discovering issues through observability</h3>
+
+
+
+<p>While preparing examples for this article, we noticed a failed tool call highlighted in red.</p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" loading="lazy" src="https://blog.jetbrains.com/wp-content/uploads/2025/12/image-25.png" alt="" class="wp-image-668144"/></figure>
+
+
+
+<p>The observation was:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">endLine=400 must be &lt;= lineCount=394 or -1</pre>
+
+
+
+<p>The agent requested lines 0–400, but the file had only 394 lines. This points to a limitation in our tool implementation. Instead of failing, it should clamp the range and return the available lines (0–394), allowing the agent to continue. Without traces, this kind of issue often gets buried in logs. With traces, you see it in the exact run, at the exact step, and with the exact input.</p>
+
+
+
+<p>That’s why observability matters. It shows not just <em>that</em> something failed, but also <em>how</em> and <em>why</em>, which makes fixes much easier.</p>
+
+
+
+<h3 class="wp-block-heading">Working with evaluation runs</h3>
+
+
+
+<p>Single traces are great for debugging, but evaluation runs need a batch view.&nbsp;</p>
+
+
+
+<p>When you run your agent across multiple <a href="https://openai.com/index/introducing-swe-bench-verified/" target="_blank" rel="noopener">SWE-bench Verified</a> tasks (a standard benchmark for coding agents), you want grouped traces and aggregated cost.</p>
+
+
+
+<p>Langfuse supports this through sessions. Add a session ID as a trace attribute:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">install(OpenTelemetry) {
+    setVerbose(true)
+    addLangfuseExporter(  
+        traceAttributes = listOf(  
+            CustomAttribute("langfuse.session.id", "eval-run-1"),  
+        )  
+    )
+}</pre>
+
+
+<aside style="background: #f8f9fa;border-left: 4px solid #007bff;padding: 1rem 1.5rem;margin: 1.5rem 0;border-radius: 4px">
+<p style="margin: 0;color: #555">You can also add other attributes, such as user IDs or environment tags. See the <a href="https://langfuse.com/integrations/native/opentelemetry#trace-level-attributes" target="_blank" rel="noopener">trace-level attributes documentation</a> if you need them. For now, session grouping is enough.</p>
+</aside>
+
+
+<p>With this configuration, traces from the evaluation share a session ID. In Langfuse, navigate to the <em>Sessions</em> tab to see aggregate duration and total cost.</p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" loading="lazy" src="https://blog.jetbrains.com/wp-content/uploads/2025/12/image-27.png" alt="" class="wp-image-668173"/></figure>
+
+
+
+<p>In our run, we executed 50 SWE-bench Verified tasks (out of 500). With ten parallel instances, the run took 30 minutes and cost $66. This gives a baseline for future experiments: success rate, runtime<em>, </em>and cost.</p>
+
+
+
+<p>Langfuse doesn&#8217;t show success scores by default. That&#8217;s expected. Tracing records what happened, not whether a run passed. If you want success metrics in Langfuse, your evaluation harness needs to score each attempt and report <a href="https://langfuse.com/docs/evaluation/evaluation-methods/custom-scores" target="_blank" rel="noopener">custom scores</a>. It&#8217;s worth implementing if you have the supporting infrastructure.</p>
+
+
+
+<h3 class="wp-block-heading">Looking ahead</h3>
+
+
+
+<p>Observability isn&#8217;t just about debugging. It&#8217;s also how you learn about the agent’s behavior.&nbsp;</p>
+
+
+
+<p>With a few lines of code, we turned the agent from a black box into something you can inspect. We caught that line-range error that would likely have gone unnoticed. We learned that our 50-task evaluation costs $66. And we can now see which tasks consume tokens and which run efficiently.</p>
+
+
+
+<p>In the next article, we’ll introduce a sub-agent pattern: Delegate specific tasks to smaller, cheaper models. With traces in place, you can decide what to delegate based on what the agent does in each run. No more guessing.</p>
+
+
+
+<h3 class="wp-block-heading">Resources</h3>
+
+
+
+<ul>
+<li><a href="https://github.com/JetBrains/koog/tree/develop/examples/code-agent/step-03-add-observability" target="_blank" rel="noopener">Complete code for this article</a></li>
+
+
+
+<li><a href="https://docs.koog.ai/opentelemetry-support/" target="_blank" rel="noopener">Koog OpenTelemetry documentation</a></li>
+
+
+
+<li><a href="https://docs.koog.ai/opentelemetry-langfuse-exporter/" target="_blank" rel="noopener">Koog Langfuse integration</a></li>
+
+
+
+<li><a href="https://langfuse.com/integrations/native/opentelemetry" target="_blank" rel="noopener">Langfuse OpenTelemetry support</a></li>
+</ul>
+
+
+
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+
+
+
+<p><em>Thank you for reading! I&#8217;d be happy to hear about your own approaches to trace analysis – what patterns have you spotted in your agents&#8217; behavior? What surprised you? Feel free to share your experience in the comments!</em></p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>A Better Way to Explore kotlinx-benchmark Results with Kotlin Notebooks</title>
+		<link>https://blog.jetbrains.com/kotlin/2025/12/a-better-way-to-explore-kotlinx-benchmark-results-with-kotlin-notebooks/</link>
+		
+		<dc:creator><![CDATA[Filipp Zhinkin]]></dc:creator>
+		<pubDate>Thu, 11 Dec 2025 16:02:35 +0000</pubDate>
+		<featuredImage>https://blog.jetbrains.com/wp-content/uploads/2025/12/KT-social-BlogFeatured-1280x720-1-1.png</featuredImage>		<category><![CDATA[news]]></category>
+		<category><![CDATA[benchmark]]></category>
+		<category><![CDATA[kotlin-notebook]]></category>
+		<guid isPermaLink="false">https://blog.jetbrains.com/?post_type=kotlin&#038;p=667810</guid>
+
+					<description><![CDATA[Benchmarking is an important part of writing efficient Kotlin code. The kotlinx-benchmark library helps you measure and compare performance across different implementations or hardware configurations. However, raw text results only take you so far. Sometimes you need to visualize your data, not just read it. That’s where Kotlin notebooks come in. Kotlin notebooks combine the [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+<p>Benchmarking is an important part of writing efficient Kotlin code. The <a href="https://github.com/Kotlin/kotlinx-benchmark" target="_blank" rel="noopener"><code>kotlinx-benchmark</code></a> library helps you measure and compare performance across different implementations or hardware configurations.</p>
+
+
+
+<p>However, raw text results only take you so far. Sometimes you need to visualize your data, not just read it. That’s where <strong>Kotlin notebooks</strong> come in.</p>
+
+
+
+<p>Kotlin notebooks combine the expressiveness of Kotlin with the interactivity of notebook-style development. They give you one convenient place where you can:</p>
+
+
+
+<ul>
+<li>Load results as structured data.</li>
+
+
+
+<li>Explore results using the DataFrame API.</li>
+
+
+
+<li>Visualize results with charts.</li>
+</ul>
+
+
+
+<h3 class="wp-block-heading"><strong>Why use notebooks for benchmarking?</strong></h3>
+
+
+
+<p>Let’s say you’ve run a benchmark suite and obtained text output from kotlinx.benchmark:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Benchmark                              Mode     Cnt Score    Error  Units
+
+maps.LinearSearch                      avgt     10  12.500 ± 0.900  ms/op
+
+maps.BinarySearch                      avgt     10   8.300 ± 0.600  ms/op
+
+maps.HashLookup                        avgt     10   4.700 ± 0.400  ms/op
+
+lists.Filter                           avgt     10  15.200 ± 1.200  ms/op
+
+lists.Map                              avgt     10   9.800 ± 0.700  ms/op</pre>
+
+
+
+<p>The table works fine for a quick look, but once you accumulate more data, it becomes harder to navigate. Visualizing the same data gives you an instant overview of which implementations perform better and how stable the results are.</p>
+
+
+
+<p>You can use Kotlin notebooks to visualise that data quickly:</p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" loading="lazy" src="https://blog.jetbrains.com/wp-content/uploads/2025/12/image-18.png" alt="" class="wp-image-667820"/></figure>
+
+
+
+<p>You can also run the same notebook on another machine and compare the results visually, revealing performance differences between environments or commits.</p>
+
+
+
+<h3 class="wp-block-heading"><strong>Comparing benchmark results</strong></h3>
+
+
+
+<p>Kotlin notebooks make it easy to analyze and plot results from one or more benchmark runs.<br>For example, you can:</p>
+
+
+
+<ul>
+<li>Read benchmark JSON files generated by <code>kotlinx-benchmark</code>.</li>
+
+
+
+<li>Convert the results into typed DataFrames.</li>
+
+
+
+<li>Compute metrics such as percentage improvements.</li>
+
+
+
+<li>Plot the results with Kandy charts.</li>
+
+
+
+<li>Account for confidence intervals to perform statistically rigorous comparisons.</li>
+</ul>
+
+
+
+<p>Several benchmark examples are available in the examples folder of the kotlinx-benchmark repository.&nbsp;</p>
+
+
+
+<p><strong>Generating and sharing notebooks</strong></p>
+
+
+
+<p>Once your notebook is ready, you can:</p>
+
+
+
+<ul>
+<li>Create a GitHub gist to share results quickly.</li>
+
+
+
+<li>Commit the notebook to your project for reproducible performance tracking.</li>
+
+
+
+<li>Publish it with<a href="https://datalore.jetbrains.com" target="_blank" rel="noopener"> JetBrains Datalore</a> for interactive viewing online.</li>
+</ul>
+
+
+
+<p>This workflow makes benchmark results easier to understand and share with your team.</p>
+
+
+
+<h3 class="wp-block-heading"><strong>Learn more</strong></h3>
+
+
+
+<ul>
+<li><a href="https://kotl.in/pnq8fr" target="_blank" data-type="link" data-id="https://github.com/Kotlin/kotlinx-benchmark/tree/master/examples" rel="noreferrer noopener">kotlinx-benchmark examples</a></li>
+
+
+
+<li><a href="https://kotlinlang.org/docs/kotlin-notebook-overview.html" target="_blank" rel="noopener">Kotlin Notebook documentation<br></a></li>
+</ul>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>How Backend Development Teams Use Kotlin in 2025: Insights from a Certified Trainer</title>
+		<link>https://blog.jetbrains.com/kotlin/2025/12/how-backend-development-teams-use-kotlin-in-2025/</link>
+		
+		<dc:creator><![CDATA[Ksenia Shneyveys]]></dc:creator>
+		<pubDate>Tue, 09 Dec 2025 23:52:47 +0000</pubDate>
+		<featuredImage>https://blog.jetbrains.com/wp-content/uploads/2025/12/KT-social-BlogFeatured-1280x720-1.png</featuredImage>		<category><![CDATA[news]]></category>
+		<guid isPermaLink="false">https://blog.jetbrains.com/?post_type=kotlin&#038;p=667478</guid>
+
+					<description><![CDATA[This is the first guest post in a two-part series from José Luis González. José Luis has a PhD in software development and is a JetBrains-certified Kotlin Trainer, who works with developers and engineering teams to deepen their Kotlin skills and apply the language effectively in real projects. At Hyperskill, he runs Kotlin instructor-led training [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+<p><em>This is the first guest post in a two-part series from José Luis González. José Luis has a PhD in software development and is a JetBrains-certified Kotlin Trainer, who works with developers and engineering teams to deepen their Kotlin skills and apply the language effectively in real projects. At Hyperskill, he runs <a href="https://bootcamps.hyperskill.org/kotlin-bootcamp-for-engineering-teams" target="_blank" rel="noopener">Kotlin instructor-led training for teams at Hyperskill</a> that focus on advanced topics and practical problem-solving rather than theory.</em></p>
+
+
+
+<p><strong>Second post in the series:</strong> <a href="https://blog.jetbrains.com/kotlin/2025/12/how-mobile-development-teams-use-kotlin-in-2025/">How Mobile Development Teams Use Kotlin in 2025: Insights From a Certified Trainer</a></p>
+
+
+
+<p><strong>1. What are the top 3 Kotlin anti-patterns from self-taught teams, and how do you fix each one?</strong></p>
+
+
+
+<p>This is a good question. The basic anti-pattern I see in self-taught Kotlin teams is that they still design hierarchies of abstract classes, factories, and deep inheritance trees because that’s how they learned Java. But Kotlin thrives on data-oriented, sealed, and expression-based designs. Overusing inheritance leads to fragile hierarchies, bloated APIs, and code that fights Kotlin’s strengths.</p>
+
+
+
+<p>The simplest improvement is to flatten your design. Use sealed classes, data classes, and <code>when</code> expressions to model domain state declaratively instead of relying on polymorphism. Prefer composition and smart constructors over inheritance.</p>
+
+
+
+<p>Moving to what’s catching my attention in the last 2 years, I see subtler issues from teams that already “know Kotlin,” but haven’t kept up with how the language evolved.&nbsp;</p>
+
+
+
+<p>A major issue I still see is the use of ambient singletons: things like global <code>object</code> repositories or custom service locators. They make code look simpler at first, but in reality they hide dependencies and make testing much harder.&nbsp;</p>
+
+
+
+<p>Context parameters would fix it: the successor to context receivers, so functions <em>declare</em> the services they need and callers supply them, no globals required:</p>
+
+
+
+<pre class="EnlighterJSRAW">interface Clock { 
+  fun now(): Instant
+}
+
+context(_: Clock) 
+fun stamp() = now()
+
+with(object: Clock{ override fun now() = Clock.System.now() }) { 
+  stamp() 
+}</pre>
+
+
+
+<p>This is Beta in Kotlin 2.2 and replaces context receivers with IDE-assisted migration.</p>
+
+
+
+<p>Another common trap is the illusion of type safety through <code>typealias</code>.</p>
+
+
+
+<p><code>typealias UserId = String </code>doesn’t create a new type as it’s only an alias, so <code>UserId</code> and <code>String</code> are fully interchangeable. In 2025, the idiomatic solution is to use value classes (inline classes), which introduce true domain types while remaining allocation-free at runtime.</p>
+
+
+
+<pre class="EnlighterJSRAW">@JvmInline 
+value class UserId(
+  val v: String
+)
+
+fun load(u: UserId) {}
+
+// load(&quot;abc&quot;)    // not good
+
+load(UserId(&quot;abc&quot;)) // better</pre>
+
+
+
+<p>A more subtle anti-pattern I still see is treating coroutines as ‘threads with nicer syntax.’ The telltale signs are <code>GlobalScope.launch</code>, random <code>runBlocking</code> calls in production, and code that ignores structured concurrency entirely. The modern fix: stop launching in <code>GlobalScope</code>, tie every coroutine to a real scope or lifecycle, keep <code>runBlocking</code> in <code>main()</code> or tests, and use <code>coroutineScope/supervisorScope</code> to compose concurrent work instead of escaping it.</p>
+
+
+
+<pre class="EnlighterJSRAW">suspend fun load() = supervisorScope {
+  val a = async { repo.a() }; 
+  val b = async { repo.b() }; 
+  a.await() to b.await()
+}</pre>
+
+
+
+<p><code>GlobalScope</code> is a <code>@DelicateCoroutinesApi</code> escape hatch, and official guidance frames <code>runBlocking</code> as a bridge for tests and entry points, not production call paths.</p>
+
+
+
+<p><em>(Author’s remark: since Kotlin 2.0, K2 is the default compiler across JVM/Native/JS/Wasm: lean on these features confidently in KMP codebases.)</em></p>
+
+
+
+<p><strong>2. When teams ask you about testing async Kotlin code, what&#8217;s the exact testing pattern you show them that works reliably in CI/CD?</strong></p>
+
+
+
+<p>&nbsp;I show them one reliable pattern that scales and never flakes. The key is to inject dispatchers, not hardcode <code>Dispatchers.IO</code>, and test with <code>runTest</code> plus a <code>StandardTestDispatcher</code> (or <code>MainDispatcherRule</code> on Android). This lets you control <em>virtual time</em> deterministically using<code> advanceTimeBy()</code> or <code>advanceUntilIdle()</code>, so no real delays or sleeps are needed. Always assert both results and cancellation: tests should prove that <code>CancellationException</code> propagates and does not get swallowed.</p>
+
+
+
+<p>Here’s the compact pattern:</p>
+
+
+
+<pre class="EnlighterJSRAW">@OptIn(ExperimentalCoroutinesApi::class)
+@Test fun flow_is_deterministic() = runTest {
+    val testDispatcher = StandardTestDispatcher(testScheduler)
+    val repo = Repo(svc = FakeSvc(), dispatchers = object : AppDispatchers {
+        override val io = testDispatcher; override val default = testDispatcher
+    })
+
+    val job = launch { assertEquals(&quot;A&quot; to &quot;B&quot;, repo.load()) }
+    advanceUntilIdle()              // run coroutines deterministically
+    assertTrue(job.isCompleted)     // also test job.cancel() + advanceUntilIdle()
+}</pre>
+
+
+
+<p>If you’re testing a <code>Flow</code>, use Turbine instead of <code>assertEquals</code>:</p>
+
+
+
+<pre class="EnlighterJSRAW">flow.test {
+    assertEquals(&quot;A&quot;, awaitItem())
+    cancelAndIgnoreRemainingEvents()
+}</pre>
+
+
+
+<p>This pattern works consistently in CI/CD because it avoids timing flakiness, doesn’t rely on real delays, and enforces proper structured concurrency.</p>
+
+
+
+<p><strong>3. A team just deployed their first Kotlin microservice and it&#8217;s using 3x more memory than expected. What&#8217;s your diagnostic checklist, and what are the most likely culprits?</strong></p>
+
+
+
+<p>If a new Kotlin microservice suddenly uses three times more memory than expected, I start by checking whether it’s really a Kotlin issue or just how the JVM behaves under load. The first thing is to see what kind of memory grows.</p>
+
+
+
+<p>If the heap is flat but RSS keeps rising, it’s usually thread stacks or direct buffers. Each thread costs around 1-2 MB, and Dispatchers.IO can easily spin up hundreds under blocking I/O. Limit it:</p>
+
+
+
+<pre class="EnlighterJSRAW"> val io = Dispatchers.IO.limitedParallelism(64)</pre>
+
+
+
+<p>❗ And make sure you’re not using raw threads where coroutines would do. That’s a common “Java habit” that quietly kills memory efficiency.</p>
+
+
+
+<p>Next, if the heap itself grows, look for unbounded coroutines or collections: things like <code>Channel.UNLIMITED, flow.buffer()</code> without limits, or caches that never evict. Backpressure fixes most of these:</p>
+
+
+
+<pre class="EnlighterJSRAW">flow.buffer(256, onBufferOverflow = BufferOverflow.DROP_OLDEST)</pre>
+
+
+
+<p>Then check the HTTP layer. Frameworks like Ktor with CIO or Netty may buffer entire requests in memory. Stream instead of aggregating:</p>
+
+
+
+<pre class="EnlighterJSRAW">call.receiveChannel().copyTo(File(&quot;upload.bin&quot;).outputStream())</pre>
+
+
+
+<p>On the JVM side, always set explicit container limits so it doesn’t grab all available RAM:</p>
+
+
+
+<pre class="EnlighterJSRAW">-XX:MaxRAMPercentage=60 -XX:MaxMetaspaceSize=128m -XX:MaxDirectMemorySize=128m</pre>
+
+
+
+<p>Finally, profile before guessing. I usually attach an async-profiler or JDK Flight Recorder to see where allocations come from, and combine that with <code>jcmd VM.native_memory</code> summary for off-heap diagnostics.</p>
+
+
+
+<p>In short: use real coroutines, not threads; set memory caps; limit dispatcher parallelism; bound every buffer; and verify with profiling. That’s how you fix 90 % of “why is our Kotlin service eating all the RAM?” cases.</p>
+
+
+    <div class="about-author ">
+        <div class="about-author__box">
+            <div class="row">
+                                                            <div class="about-author__box-img">
+                            <img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2025/12/1604594047817.jpeg" alt="José Luis González" loading="lazy">
+                        </div>
+                                        <div class="about-author__box-text">
+                                                    <h4>José Luis González</h4>
+                                                <p><span style="font-weight: 400;">José Luis González, PhD, is a JetBrains-certified Kotlin Trainer who teaches Kotlin and advanced techniques to development teams. If your team has more questions about Kotlin anti-patterns, idiomatic design, or wants to learn how to write more maintainable Kotlin code, explore his </span><a href="https://bootcamps.hyperskill.org/kotlin-bootcamp-for-engineering-teams" target="_blank" rel="noopener"><span style="font-weight: 400;">instructor-led Kotlin workshops</span></a><span style="font-weight: 400;"> at Hyperskill.</span></p>
+                    </div>
+                            </div>
+        </div>
+    </div>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Kubernetes Made Simple: A Guide for JVM Developers</title>
+		<link>https://blog.jetbrains.com/kotlin/2025/12/kubernetes-made-simple-a-guide-for-jvm-developers/</link>
+		
+		<dc:creator><![CDATA[Alina Dolgikh]]></dc:creator>
+		<pubDate>Mon, 08 Dec 2025 13:28:13 +0000</pubDate>
+		<featuredImage>https://blog.jetbrains.com/wp-content/uploads/2025/12/Blog-Featured-1280x720-1-1.png</featuredImage>		<category><![CDATA[news]]></category>
+		<category><![CDATA[backend]]></category>
+		<category><![CDATA[guide]]></category>
+		<guid isPermaLink="false">https://blog.jetbrains.com/?post_type=kotlin&#038;p=662365</guid>
+
+					<description><![CDATA[This article was written by an external contributor. Kubernetes is a container orchestration system for deploying, scaling, and managing containerized applications. If you build services on the Java virtual machine (JVM), you likely know that most microservices run on Kubernetes. Kubernetes has become the de facto standard for running containerized microservices at scale. However, Kubernetes [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+<p><em>This article was written by an external contributor.</em></p>
+
+
+    <div class="about-author ">
+        <div class="about-author__box">
+            <div class="row">
+                                                            <div class="about-author__box-img">
+                            <img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2025/12/Michael-Nyamande.webp" alt="" loading="lazy">
+                        </div>
+                                        <div class="about-author__box-text">
+                                                    <h4>Michael Nyamande</h4>
+                                                <p>A digital product manager by day, Michael is a tech enthusiast who is always tinkering with different technologies. His interests include web and mobile frameworks, NoCode development, and blockchain development.</p>
+<p><a href="https://x.com/mikeyny_zw" target="_blank">Michael on social media</a></p>
+                    </div>
+                            </div>
+        </div>
+    </div>
+
+
+
+<p><a href="https://kubernetes.io/" target="_blank" rel="noopener">Kubernetes</a> is a container orchestration system for deploying, scaling, and managing containerized applications. If you build services on the Java virtual machine (JVM), you likely know that <a href="https://edgedelta.com/company/blog/kubernetes-adoption-statistics" target="_blank" rel="noopener">most microservices run on Kubernetes</a>. Kubernetes has become the de facto standard for running containerized microservices at scale. However, Kubernetes is famously complex, with many new concepts (Pods, Deployments, Services, etc.) to master, and thus, has a steep learning curve.<br><br>This tutorial helps ease that complexity for JVM developers. It focuses on what you need to ship a <a href="https://kotlinlang.org/" target="_blank" rel="noopener">Kotlin</a> or Java <a href="https://spring.io/projects/spring-boot" target="_blank" rel="noopener">Spring Boot</a> app to a cluster, step-by-step, with simple explanations and runnable examples.</p>
+
+
+
+<p>You’ll learn the basics of Kubernetes by deploying a Kotlin Spring Boot application onto a Kubernetes cluster. You’ll also cover what deployment and services are, how to manage configurations using ConfigMaps and Secrets, and what the best practices are for running JVM applications on Kubernetes.</p>
+
+
+
+<p><br><strong>Prerequisites<br></strong>Before diving in, make sure you have the following:</p>
+
+
+
+<ul>
+<li><a href="https://docs.docker.com/get-started/get-docker/" target="_blank" rel="noopener"><strong>Docker</strong></a><strong>:</strong> Install and run this locally. Docker builds a container image of your app.</li>
+
+
+
+<li><a href="https://kubernetes.io/" target="_blank" rel="noopener"><strong>Kubernetes</strong></a><strong>:</strong> Install a Kubernetes environment. For this tutorial, you’ll use <a href="https://minikube.sigs.k8s.io/" target="_blank" rel="noopener">Minikube</a>, a local single-node cluster, and the <a href="https://kubernetes.io/docs/reference/kubectl/" target="_blank" rel="noopener">kubectl</a> CLI for interacting with the cluster. You can <a href="https://minikube.sigs.k8s.io/docs/start/?arch=%2Fwindows%2Fx86-64%2Fstable%2F.exe+download" target="_blank" rel="noopener">download Minikube on their official site</a>, and it comes bundled with kubectl.</li>
+
+
+
+<li><strong>Docker registry:</strong> Create, for example, a <a href="https://hub.docker.com/" target="_blank" rel="noopener">Docker Hub</a> account to push and pull your image. You can also use Minikube’s local Docker registry.</li>
+</ul>
+
+
+            <div class="newsletter">
+                                                            <article class="newsletter__post">
+                                                                                    <img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" class="newsletter__post-img" src="https://blog.jetbrains.com/wp-content/uploads/2025/12/kunernetes-sample.jpeg" alt="">
+                                                                            <div class="newsletter__post-text">
+                                                            <h3>Repository with the companion code for the article</h3>
+                                                                                                                    <a href="https://kotl.in/c096xs" class="btn" target="_blank" rel="noopener">Go to GitHub</a>
+                                                    </div>
+                    </article>
+                                    </div>
+    
+
+
+<h2 class="wp-block-heading">Set Up the Sample Kotlin Spring Boot App (Optional)</h2>
+
+
+
+<p>While you can use an existing Kotlin Spring Boot application for this tutorial, if you want to follow along with the code used here, you can create a new project with <a href="https://kotl.in/a2ns0j" target="_blank" rel="noopener">Spring Initializr</a>. If you’re using an existing Spring Boot application, you can jump directly to the next section.</p>
+
+
+
+<p>Select Kotlin as your language and Java 21 as our runtime. Make sure to add Spring Web, Spring Data JPA, and <a href="https://www.h2database.com/html/main.html" target="_blank" rel="noopener">H2</a> as dependencies. You’ll use Spring Web to create REST endpoints, Spring Data JPA to connect to a PostgreSQL database, and H2 (an in-memory database) to test the database logic locally:</p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" loading="lazy" src="https://blog.jetbrains.com/wp-content/uploads/2025/11/image-50.png" alt="" class="wp-image-662377"/></figure>
+
+
+
+<p>After creating and downloading the project, locate your main application file. If you used Spring Initializr, the file will be named after your application with Application.kt appended— for example, a project named Demo will have a file called DemoApplication.kt. Add the following code to create a <a href="https://www.geeksforgeeks.org/advance-java/spring-rest-controller/" target="_blank" rel="noopener">@RestController</a> that returns Hello World, which will let you verify the deployment is working:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.runApplication
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RestController
+
+@SpringBootApplication
+class DemoApplication
+
+fun main(args: Array&lt;String>) {
+    runApplication&lt;DemoApplication>(*args)
+}
+
+@RestController
+class HelloController {
+    @GetMapping("/hello")
+    fun hello(): String = "Hello World"
+}</pre>
+
+
+
+<p>The entire Spring Boot app and REST controller fit in just a few lines, thanks to Kotlin features like type inference and single-expression functions.</p>
+
+
+
+<h2 class="wp-block-heading">Containerize a JVM App Using Docker</h2>
+
+
+
+<p>To deploy your application to Kubernetes, you need to initially package it into a container image using <a href="https://www.docker.com/" target="_blank" rel="noopener">Docker</a>. Create a <a href="https://docs.docker.com/reference/dockerfile/" target="_blank" rel="noopener">Dockerfile</a> in the project root:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">FROM openjdk:21-jdk-slim
+
+WORKDIR /app
+
+# Copy the JAR file from builder stage
+COPY build/libs/*-SNAPSHOT.jar app.jar
+
+# Expose port 8080
+EXPOSE 8080
+
+# Run the application
+ENTRYPOINT ["java", "-jar", "app.jar"]</pre>
+
+
+
+<p>This Dockerfile uses a lightweight Java 21 base image, copies in the built JAR file, and runs it. Kotlin and Java interoperability means the Spring Boot JAR runs just like any Java app in the container.</p>
+
+
+
+<p>To build the image, you initially need to create a JAR file with <code>gradle build</code> or <code>mvn clean package</code>, depending on which build manager you’re using. If using Maven, update the Dockerfile to use <code>target/*.jar</code> instead of <code>build/libs/*-SNAPSHOT.jar</code>.<br><br>After that, build the image:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">docker build -t kotlin-app:latest .</pre>
+
+
+
+<p>Before you can push the image to Docker Hub, you need to execute this command to log in:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">docker login</pre>
+
+
+
+<p>Note that you may be prompted to enter your Docker Hub credentials to complete the login step.<br></p>
+
+
+
+<p>Next, push the image to Docker Hub or another registry so your Kubernetes cluster can access it:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">docker tag kotlin-app:latest YOUR_DOCKERHUB_USER/kotlin-app:latest
+docker push YOUR_DOCKERHUB_USER/kotlin-app:latest</pre>
+
+
+
+<h2 class="wp-block-heading"><strong>Deploy the Application to a Kubernetes Cluster</strong></h2>
+
+
+
+<p>To run your application on Kubernetes, you need to tell Kubernetes how to configure and run it. You do this using manifest files, which are typically written in YAML. These files declaratively define the desired state of your application in the cluster. For a basic deployment, you need two key Kubernetes objects: a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/" target="_blank" rel="noopener">Deployment</a> manifest and a <a href="https://kubernetes.io/docs/concepts/services-networking/service/" target="_blank" rel="noopener">Service</a> manifest.</p>
+
+
+
+<h3 class="wp-block-heading"><strong>Add the Deployment Manifest</strong></h3>
+
+
+
+<p>A Deployment manages replicated Pods and handles rolling updates. A Pod is Kubernetes’s smallest unit that runs your container. Deployments ensure your specified number of Pods stay running and update them safely without downtime.</p>
+
+
+
+<p>Create a file named k8s/deployment.yaml that defines your Deployment so that Kubernetes can run the application:<br></p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kotlin-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kotlin-app
+  template:
+    metadata:
+      labels:
+        app: kotlin-app
+    spec:
+      containers:
+      - name: kotlin-k8s-app
+        image: &lt;your-username>/kotlin-app:latest
+        ports:
+        - containerPort: 8080</pre>
+
+
+
+<p>The manifest above makes these declarations:</p>
+
+
+
+<ul>
+<li><strong><code>kind: Deployment</code></strong> specifies the type of object.</li>
+
+
+
+<li><strong><code>spec.replicas: 1</code></strong> tells Kubernetes how many instances of the application you want running.</li>
+
+
+
+<li><strong><code>spec.selector.matchLabels</code></strong> is how the Deployment knows which Pods to manage. It looks for Pods with the label app: kotlin-app.</li>
+
+
+
+<li><strong><code>spec.template</code></strong> is the blueprint for the Pods. It defines the container(s) to run inside the Pod.</li>
+
+
+
+<li><strong><code>spec.containers.image</code></strong> specifies the Docker image to pull.</li>
+
+
+
+<li><strong><code>spec.containers.ports.containerPort</code></strong> informs Kubernetes that your application inside the container listens on port <code>8080</code>.<br></li>
+</ul>
+
+
+
+<h3 class="wp-block-heading"><strong>Include the Service Manifest</strong></h3>
+
+
+
+<p>While a Deployment ensures your Pods are running, those Pods are ephemeral; each time they restart, they get a new internal IP address. A Service solves this by acting as a stable entry point with a fixed IP and DNS name, automatically routing traffic to the Pods identified by its label selector. This guarantees that even if Pods restart or change IPs, traffic still reaches the intended application.<br></p>
+
+
+
+<p>Create a file named <code>service.yaml</code> in the <code>k8s</code> folder:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">apiVersion: v1
+kind: Service
+metadata:
+  name: kotlin-app-service
+spec:
+  selector:
+    app: kotlin-app
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: NodePort</pre>
+
+
+
+<p>The manifest defines:</p>
+
+
+
+<ul>
+<li><strong><code>kind: Service</code></strong> specifies the object type.</li>
+
+
+
+<li><strong><code>spec.selector</code></strong> must match the labels of the Pods (app: kotlin-app). This is how the Service knows where to send traffic.</li>
+
+
+
+<li><strong><code>spec.ports</code></strong> maps the Service’s port (port: 8080) to the container’s port (targetPort: 8080).</li>
+
+
+
+<li><strong><code>spec.type: NodePort</code></strong> exposes the application on a static port on each node in the cluster, making it accessible for local development with Minikube. In a cloud environment, you typically use a <a href="https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer" target="_blank" rel="noopener"><code>LoadBalancer</code></a>.<br></li>
+</ul>
+
+
+
+<h3 class="wp-block-heading"><strong>Deploy to a Cluster Using Minikube</strong></h3>
+
+
+
+<p>To deploy this to a cluster, run Minikube with <code>minikube start</code> and apply the manifests using the following commands:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">kubectl apply -f k8s/deployment.yaml
+kubectl apply -f k8s/service.yaml</pre>
+
+
+
+<p>After applying, you can verify that everything is running using <code>kubectl get pods</code>. You should then get a result like this:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">NAME                                    READY   STATUS    RESTARTS      AGE
+kotlin-app-deployment-744476956-bfwg4   1/1     Running   0             20s</pre>
+
+
+
+<p>To access your application, run <code>minikube service kotlin-app-service</code>. This command finds the service in Minikube and opens a URL in your host browser via port forwarding. The output shows an IP and port (<em>eg</em> <code>http://192.168.49.2:30000</code>). Visiting <code>http://&lt;minikube-ip&gt;:30000/hello</code> should call your Spring app and return the <code>Hello World</code> message.</p>
+
+
+
+<h2 class="wp-block-heading"><strong>Extend the Kotlin App with ConfigMap</strong></h2>
+
+
+
+<p>Hard-coding configuration in images forces rebuilds for simple changes and risks exposing sensitive data. Kubernetes provides <a href="https://kubernetes.io/docs/concepts/configuration/configmap/" target="_blank" rel="noopener">ConfigMaps</a> for non-sensitive configuration and <a href="https://kubernetes.io/docs/concepts/configuration/secret/" target="_blank" rel="noopener">Secrets</a> for sensitive data, like passwords.<br><br>To demonstrate ConfigMaps, replace the hard-coded greeting with one that can be set through a configuration.<br><br>To do this, update the controller to read the message from an environment variable:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="enlighter" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@RestController
+class HelloController {
+    @Value("\${greeting.message:Hello}")
+    lateinit var greetingMsg: String
+
+    @GetMapping("/hello")
+    fun hello(): String = greetingMsg
+}</pre>
+
+
+
+<p>This code snippet declares a variable <code>greetingMsg</code>, which pulls a value from the environment or defaults to <code>"Hello"</code> if it doesn’t find the specific environment variable.<br><br>Now, create a <code>configmap.yaml</code> file in the <code>k8s</code> folder; this sets the greeting configuration so you can change it without rebuilding the image:<br></p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kotlin-app-config
+data:
+  application.properties: |
+    greeting.message=Hello from a ConfigMap!</pre>
+
+
+
+<p>To use this <code>ConfigMap</code>, you need to mount it as a volume into the Pod. This approach prevents configuration values from being accidentally logged in process lists and allows for configuration updates without restarting the Pod.<br><br>Additionally, ConfigMaps can store larger configuration files and support multiple configuration formats.<br><br>Update your <code>k8s/deployment.yaml</code> so that it uses the new ConfigMap that you defined earlier:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kotlin-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kotlin-app
+  template:
+    metadata:
+      labels:
+        app: kotlin-app
+    spec:
+      containers:
+      - name: kotlin-k8s-app
+        image: &lt;your-username>/kotlin-app:v2
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: config-volume
+          mountPath: /app/config
+      volumes:
+      - name: config-volume
+        configMap:
+          name: kotlin-app-config</pre>
+
+
+
+<p>This manifest adds a <code>volumes</code> section that defines a volume named <code>config-volume</code>, which sources its data from the <code>kotlin-app-config</code> ConfigMap. It also adds a <code>volumeMounts</code> entry to the container specification, mounting this volume at <code>/app/config</code>. This setup allows Spring Boot to automatically detect and load the <code>application.properties</code> file from the <code>/config</code> directory, making it easy to manage configuration through Kubernetes.</p>
+
+
+
+<p>The deployment also updates the image to an updated Docker image. Let’s create this image by rebuilding the application and creating a new Docker image with an updated tag (<em>eg</em> <code>v2</code>). Then push it to your registry so Kubernetes can pull the latest version:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># 1) Rebuild the Kotlin app 
+./gradlew clean build            # Gradle
+# or
+mvn clean package                # Maven
+
+# 2) Build a new Docker image with a new tag (v2)
+docker build -t &lt;your-username>/kotlin-app:v2 .
+
+# 3) Push the image so the cluster can pull it (skip if using Minikube's Docker daemon)
+docker push &lt;your-username>/kotlin-app:v2</pre>
+
+
+
+<p>After pushing the new image, apply the new <code>configmap.yaml</code> and the updated <code>deployment.yaml</code>:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">kubectl apply -f k8s/configmap.yaml
+kubectl apply -f k8s/deployment.yaml</pre>
+
+
+
+<h3 class="wp-block-heading"><strong>Connect to a Database</strong></h3>
+
+
+
+<p>When your application needs to store and retrieve data, such as user accounts or business records, you need to manage persistent storage alongside your deployments. Kubernetes lets you run databases like PostgreSQL as managed Deployments, using persistent volumes for data durability and Secrets for credentials.</p>
+
+
+
+<p>Let’s walk through deploying PostgreSQL and connecting it to your application.</p>
+
+
+
+<p>To keep your credentials out of the container and enable safe injection into Pods, you need to define a Secret. A Kubernetes Secret is like a ConfigMap but intended for confidential info (passwords, tokens). Create <code>postgres-secret.yaml</code> to safely store the database credentials:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">apiVersion: v1
+kind: Secret
+metadata:
+  name: postgres-secret
+type: Opaque
+stringData:
+  POSTGRES_USER: "postgres"
+  POSTGRES_PASSWORD: "mysecretpassword"
+  POSTGRES_DB: "greetingsdb"</pre>
+
+
+
+<p><strong>Note:</strong> <code>stringData</code> is used for convenience; Kubernetes stores this as a Base64-encoded value.</p>
+
+
+
+<p>Create <code>deployments/postgres.yaml</code> to run PostgreSQL and expose it with a stable DNS name:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+  labels:
+    app: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:15
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_DB
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: POSTGRES_DB
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: POSTGRES_USER
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: POSTGRES_PASSWORD
+        volumeMounts:
+        - name: postgres-storage
+          mountPath: /var/lib/postgresql/data
+      volumes:
+      - name: postgres-storage
+        emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-service
+spec:
+  selector:
+    app: postgres
+  ports:
+  - port: 5432
+    targetPort: 5432
+  type: NodePort</pre>
+
+
+
+<p>This manifest does two things:</p>
+
+
+
+<ul>
+<li>Creates a <code>Service</code> named <code>postgres-service</code> so your application can connect to the database using a stable DNS name.</li>
+
+
+
+<li>Creates a <code>Deployment</code> that runs <code>PostgreSQL</code>, using the Secret for the password. It mounts <code>/var/lib/postgresql/data</code> to a volume (here, an <code>emptyDir</code> for simplicity). In production, you’d use a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/" target="_blank" rel="noopener"><code>StatefulSet</code></a> and a <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/" target="_blank" rel="noopener"><code>PersistentVolumeClaim</code></a> to ensure data persists across Pod restarts and node failures.<br></li>
+</ul>
+
+
+
+<p>Let’s also update the Kotlin app to connect to a PostgreSQL database. In this example, the app returns a custom greeting with the user’s details that it pulls from the database. You can use <a href="https://spring.io/projects/spring-data-jpa/" target="_blank" rel="noopener">Spring Data JPA</a>.</p>
+
+
+
+<p>To connect to a PostgreSQL database and use JPA, you need to add the PostgreSQL Java Database Connectivity (JDBC) driver. The PostgreSQL driver is essential because it allows your application to communicate with the database running in Kubernetes. Add this to the dependencies block in your <code>build.gradle.kts</code> (or <code>pom.xml</code> if you’re using Maven) so it’s available at compile and runtime:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">implementation("org.postgresql:postgresql")</pre>
+
+
+
+<p>For local development, the application uses H2 (which you added earlier as a dependency) as a lightweight option for testing without having to spin up a full PostgreSQL instance. The application interacts only with PostgreSQL when deployed to the Kubernetes cluster.</p>
+
+
+
+<p>Create a file and name it <code>User.kt</code>. Use this to model the <code>users</code> table. Additionally, create a Spring Data JPA repository for database lookups:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import jakarta.persistence.*
+import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.stereotype.Repository
+
+@Entity
+@Table(name = "users")
+class User(
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long = 0,
+
+    @Column(nullable = false)
+    val name: String = "",
+
+    @Column(nullable = false)
+    val email: String = ""
+)
+
+@Repository
+interface UserRepository : JpaRepository&lt;User, Long> {
+    fun findByName(name: String): User?
+}</pre>
+
+
+
+<p>This snippet uses a Kotlin class to define a <code>User</code> entity. With Kotlin’s primary constructor syntax, you can declare mutable properties and initialize the object in a single definition, eliminating the need for boilerplate getters and setters required in Java entities. The snippet also defines a <code>UserRepository</code> that handles retrieving user details from the database.<br><br>Update the main controller with this <code>GetMapping</code> to return dynamic greetings based on username:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import org.springframework.web.bind.annotation.PathVariable
+
+@RestController
+class HelloController(private val userRepository: UserRepository) {
+
+    @GetMapping("/hello")
+    fun hello(): String = "Hello World"
+
+    @GetMapping( "/hello/{name}")
+    fun getGreeting( @PathVariable name: String = "world"): String =
+        userRepository.findByName(name)
+            ?.let { "Hello ${it.name}! Your email is ${it.email}." 
+            ?: "Hello $name! (User not found in database)"
+}</pre>
+
+
+
+<p>This code injects the <code>UserRepository</code> into the <code>Controller</code>, allowing you to use it in the <code>getGreeting</code> method. This method returns the user’s name, along with their email, if the user exists in the database; otherwise, it outputs that the user wasn’t found. It uses Kotlin null safety features to produce a response without unsafe casts or a <code>NullPointerException</code>.</p>
+
+
+
+<p>Next, update the <code>src/main/resources/application.properties</code> file with the PostgreSQL configuration:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">spring.jpa.hibernate.ddl-auto=update
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect</pre>
+
+
+
+<p>The properties file configures Spring Data JPA settings. The <code>hibernate.ddl-auto=update</code> property enables automatic schema updates based on the <code>@Entity</code> definitions. This ensures that the <code>User</code> table is created at runtime if it doesn’t exist in the database. The <code>spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect</code> tells <code>hibernate</code> to use PostgreSQL-specific queries.<br><br>To use the updated code, rebuild the application and Docker image with the changes, and update the Deployment to include the new environment variables as Secrets:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kotlin-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kotlin-app
+  template:
+    metadata:
+      labels:
+        app: kotlin-app
+    spec:
+      containers:
+      - name: kotlin-k8s-app
+        image: &lt;your-username>/kotlin-app:v3
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SPRING_DATASOURCE_URL
+          value: "jdbc:postgresql://postgres-service:5432/greetingsdb"
+        - name: SPRING_DATASOURCE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: POSTGRES_USER
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: POSTGRES_PASSWORD</pre>
+
+
+
+<p>The configuration now contains a new <code>env</code> section that defines the database URL, username, and password from the Secrets definition. Spring uses these variables to connect to the database.</p>
+
+
+
+<p>Apply the new manifests using this command:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">kubectl apply -f k8s/postgres-secret.yaml
+kubectl apply -f k8s/postgres.yaml
+kubectl apply -f k8s/deployment.yaml</pre>
+
+
+
+<p>You can use <code>minikube service kotlin-app-service</code> to expose the application using an external IP address and navigate to <code>&lt;url&gt;/hello/&lt;username&gt;</code> to test. If the username doesn’t exist in the <code>User</code> table of the PostgreSQL database, you’ll get this output:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Hello &lt;username>! (User not found in database)</pre>
+
+
+
+<h3 class="wp-block-heading"><strong>Dynamic routing using Ingress</strong></h3>
+
+
+
+<p>Sometimes you might want to roll out new features to a subset of users to test out how they work before a full production release, for example, during beta testing. To do this, you can have route traffic from your Kubernetes cluster to different services depending on certain rules. This is done via an <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/" target="_blank" rel="noopener">Ingress</a>. An Ingress sits at the edge of the cluster and routes HTTP traffic to Services based on rules like host, path, or headers.</p>
+
+
+
+<p>In this example, you’ll route normal traffic to v2 of the application and route all traffic with a special header to the new v3 image. This allows you to test a new database feature on a subset of users or clients before a full, stable rollout.</p>
+
+
+
+<p>To enable the NGINX Ingress controller in Minikube:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">minikube addons enable ingress</pre>
+
+
+
+<p>Create a new <code>v2-application</code> file that contains the deployment and Service for the v2 version of the app, save it to <code>k8s/v2-app.yaml</code>:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kotlin-app-v2-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kotlin-app-v2
+  template:
+    metadata:
+      labels:
+        app: kotlin-app-v2
+    spec:
+      containers:
+        - name: kotlin-k8s-app-v2
+          image: &lt;your-username>/kotlin-app:v2
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: config-volume
+              mountPath: /app/config
+      volumes:
+        - name: config-volume
+          configMap:
+            name: kotlin-app-config
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kotlin-app-config
+data:
+  application.properties: |
+    greeting.message=Hello from a v2 stable app!
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kotlin-app-v2-service
+spec:
+  selector:
+    app: kotlin-app-v2
+  ports:
+    - port: 8080
+      targetPort: 8080
+  type: ClusterIP</pre>
+
+
+
+<p>The example above is similar to the Deployment and Service you set up earlier, except the Service type is now ClusterIP instead of NodePort. ClusterIP only exposes the Service within the cluster, making it accessible to other Pods but not directly from outside the cluster. In contrast, NodePort exposes the Service on a static port on each node’s IP, allowing external access. Since the Ingress handles external traffic routing, you use ClusterIP for internal communication between the Ingress and your Services.<br><br>With Services in place, you can add the Ingress resources. Create a new ingress file to receive traffic and direct it to the v2 version of your service, and save it as <code>k8s/ingress.yaml</code>:<br></p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kotlin-app
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: kotlin-app-v2-service
+            port:
+              number: 8080</pre>
+
+
+
+<p>To direct traffic to the v3 version of the application, you can utilize the <a href="https://kubernetes.github.io/ingress-nginx/examples/canary/" target="_blank" rel="noopener">canary annotations</a> of the ingress controller. Create another ingress definition file and save it to <code>k8s/ingress-canary.yaml</code>:<br></p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kotlin-app-canary
+  annotations:
+    nginx.ingress.kubernetes.io/canary: "true"
+    nginx.ingress.kubernetes.io/canary-by-header: "X-Client-Version"
+    nginx.ingress.kubernetes.io/canary-by-header-value: "v3"
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: kotlin-app-service
+            port:
+              number: 8080</pre>
+
+
+
+<p>The canary Ingress above uses NGINX’s canary annotations to implement header-based routing. When a request includes the header <code>X-Client-Version: v3</code>, the Ingress controller routes it to the <code>kotlin-app-service</code> (your v3 Pods). All other requests without this header go to <code>kotlin-app-v2-service</code> (your stable v2 Pods). This pattern lets you safely test new features in production with a subset of users, such as internal testers or beta users, while the majority of traffic continues to hit the stable version.<br><br>The <code>canary: "true"</code> annotation tells NGINX this Ingress is a canary rule, and the <code>canary-by-header</code> annotations define the matching logic.<br><br>Apply the new manifests using the following commands:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">kubectl apply -f k8s/v2-app.yaml
+kubectl apply -f k8s/ingress.yaml
+kubectl apply -f k8s/ingress-canary.yaml</pre>
+
+
+
+<p>To test this out, run <code>minikube tunnel</code> to tunnel your minikube instance and make it available on <code>localhost</code>. To view our application you simply need to navigate to <code>http://localhost/hello</code>.</p>
+
+
+
+<p>You can verify the routing behavior with curl. A request without the header goes to v2:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl  http://127.0.0.1/hello </pre>
+
+
+
+<p>This returns <code>“Hello from a v2 stable app!”</code>.</p>
+
+
+
+<p>Running the same request with the <code>X-Client-Version</code> header, returns a response from v3 of the application:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ curl -H "X-Client-Version:v3" http://127.0.0.1/hello
+Hello World</pre>
+
+
+
+<p>You can also run the same on with <code>/hello/{name}</code> to verify it routes to v3 of the application:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl -H "X-Client-Version:v3" http://127.0.0.1/hello/mike
+Hello mike! (User not found in database)</pre>
+
+
+
+<p>You can find the tutorial’s full codebase on this <a href="https://github.com/mikeyny/kotlin-kubernetes" target="_blank" rel="noopener">GitHub repository</a>. Switch between different branches to access different parts of the tutorial.</p>
+
+
+
+<h2 class="wp-block-heading"><strong>Follow These Best Practices</strong><strong><br></strong></h2>
+
+
+
+<p>When deploying JVM-based microservices on Kubernetes, keep these practices in mind:</p>
+
+
+
+<h3 class="wp-block-heading"><strong>Configure Health Checks (Liveness and Readiness Probes)</strong></h3>
+
+
+
+<p>Kubernetes needs to know if your application is healthy and ready to serve traffic. Health checks let Kubernetes direct traffic to healthy Pods and restart failing ones. <a href="https://docs.spring.io/spring-boot/how-to/actuator.html" target="_blank" rel="noopener">Spring Boot Actuator</a> provides <code>/actuator/health/liveness</code> and <code>/actuator/health/readiness</code> endpoints. Kubernetes sends HTTP requests to these endpoints, and non-<code>2xx</code> responses trigger container restarts.</p>
+
+
+
+<h3 class="wp-block-heading"><strong>Use ConfigMap and Secret Manifests</strong></h3>
+
+
+
+<p>Do not hard-code environment-specific or sensitive data into your image. As you learned in this tutorial, it’s best to store non-sensitive configs (like feature flags, greeting messages) in ConfigMaps and more confidential data (passwords, tokens) in Secrets. This makes it easy to change settings without rebuilding containers.</p>
+
+
+
+<h3 class="wp-block-heading"><strong>Set CPU/Memory Resource Limits</strong></h3>
+
+
+
+<p>Kubernetes allows you to set <code>memory</code> and <code>cpu</code> requests and limits. This prevents your app from consuming unlimited resources and impacting other pods. Without limits, a runaway JVM can crash your entire node or be killed unexpectedly, so proper limits ensure cluster stability and cost control.</p>
+
+
+
+<h2 class="wp-block-heading"><strong>Conclusion</strong></h2>
+
+
+
+<p>This tutorial showed you how to containerize and deploy a <a href="https://kotlinlang.org/" target="_blank" rel="noopener">Kotlin</a> Spring Boot application on Kubernetes. Along the way, you learned important Kubernetes fundamentals, like Pods, Deployments, Services, ConfigMaps, and Secrets.<br><br>You also saw why Kotlin is a good choice for server-side development, <a href="https://blog.jetbrains.com/kotlin/2025/05/strategic-partnership-with-spring/">especially with Spring</a>, because of Kotlin features, like null safety, data classes, and coroutines. If you use Java, you can <a href="https://kotl.in/ulk154" target="_blank" rel="noreferrer noopener">introduce Kotlin gradually into existing Spring projects</a> without rewriting your stack. Explore more on Kotlin for server-side development on their <a href="https://kotlinlang.org/server-side/?utm_campaign=server-side&amp;utm_source=kotlin&amp;utm_medium=guide&amp;utm_term=conversion-from-kubernetes-made-simple-guide" target="_blank" rel="noopener">official landing page</a>.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Advent of Code 2025: A Kotlin Playground</title>
+		<link>https://blog.jetbrains.com/kotlin/2025/11/advent-of-code-in-kotlin-2025/</link>
+		
+		<dc:creator><![CDATA[Ksenia Shneyveys]]></dc:creator>
+		<pubDate>Fri, 28 Nov 2025 15:18:12 +0000</pubDate>
+		<featuredImage>https://blog.jetbrains.com/wp-content/uploads/2025/11/Featured_1280x720-2x-3.png</featuredImage>		<category><![CDATA[news]]></category>
+		<category><![CDATA[advent-of-code]]></category>
+		<category><![CDATA[aoc]]></category>
+		<category><![CDATA[prizes]]></category>
+		<guid isPermaLink="false">https://blog.jetbrains.com/?post_type=kotlin&#038;p=662116</guid>
+
+					<description><![CDATA[Join us live for five days of Advent of Code puzzles and five Kotlin livestreams on December 1–5. Solve the puzzles in Kotlin with help from Kotlin team experts and fun community guests, climb the leaderboard, learn new tricks, and have a chance to win some prizes along the way! Here’s what we have planned [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+<p>Join us live for five days of Advent of Code puzzles and five Kotlin livestreams on December 1–5. Solve the puzzles in Kotlin with help from Kotlin team experts and fun community guests, climb the leaderboard, learn new tricks, and have a chance to win some prizes along the way!</p>
+
+
+
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+<iframe loading="lazy" title="Advent of Code 2025 in Kotlin. Day 1." src="https://www.youtube.com/embed/qJIqcGXuuQs?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div></figure>
+
+
+
+<p>Here’s what we have planned for 2025:</p>
+
+
+
+<ul>
+<li>From December 1–5, join daily livestreams with Sebastian Aigner, Kotlin Developer Advocate, and special guests as they explore solutions and share Kotlin tips.</li>
+
+
+
+<li>Hang out with the supportive Kotlin community in <a href="https://slack-chats.kotlinlang.org/c/advent-of-code" target="_blank" rel="noopener">Kotlinlang Slack</a>, where people post hints, discuss approaches, and learn from one another.</li>
+
+
+
+<li>Take part in our Kotlin leaderboards for a chance to win exclusive prizes – both for top performers and for active community members who share their Kotlin solutions.</li>
+</ul>
+
+
+
+<p>Join us for this JetBrains festive tradition and try solving our Kotlin puzzles this year!</p>
+
+
+
+<p>If you enjoy a bit of friendly competition, you can participate in our Kotlin leaderboards on adventofcode.com.</p>
+
+
+
+<p>We’ll have exclusive prizes for top performers and extra rewards for randomly selected participants who share their solutions on GitHub using the <code><strong>aoc-2025-in-kotlin</strong></code> topic.</p>
+
+
+
+<p>Go to the <em>Leaderboard </em>section of your Advent of Code profile and enter one of the invite codes below:</p>
+
+
+
+<ul>
+<li>Leaderboard 1: 2343137-c975ff11</li>
+
+
+
+<li>Leaderboard 2: 2553918-98f6b5ed</li>
+
+
+
+<li>Leaderboard 3: 2076885-6961eed5</li>
+</ul>
+
+
+
+<p>Some handy resources to get you started:</p>
+
+
+
+<ul>
+<li>The Kotlin Advent of Code <a href="https://github.com/kotlin-hands-on/advent-of-code-kotlin-template" target="_blank" rel="noreferrer noopener">GitHub template</a> and <a href="https://blog.jetbrains.com/kotlin/2024/11/advent-of-code-2024-in-kotlin/" target="_blank" rel="noreferrer noopener">instructions</a> on how to use it.</li>
+
+
+
+<li><a href="https://kotlinlang.org/docs/advent-of-code.html" target="_blank" rel="noreferrer noopener">Solutions</a> from previous years in idiomatic Kotlin.</li>
+</ul>
+
+
+
+<p>Want to be in the running for exclusive Advent of Code in Kotlin prizes? Here’s what you need to do:</p>
+
+
+
+<ol>
+<li>Solve at least three Advent of Code 2025 puzzles using Kotlin.</li>
+
+
+
+<li>Publish your solutions on GitHub in a repository and add the topic <strong><code>aoc-2025-in-kotlin</code></strong> by:</li>
+</ol>
+
+
+
+<ul>
+<li>Opening your repository on GitHub.</li>
+
+
+
+<li>Clicking the gear icon (⚙️) in the top right-hand corner of the repository page.</li>
+
+
+
+<li>Adding <strong><code>aoc-2025-in-kotlin</code></strong> in the <em>Topics </em>field.</li>
+</ul>
+
+
+
+<ol start="3">
+<li>Make sure we can contact you via your GitHub profile by including an email address, X handle, or Bluesky username.</li>
+</ol>
+
+
+
+<p>This helps us discover your solutions and include you in the prize draw!</p>
+
+
+
+<p align="center"><a class="ek-link jb-download-button" title="Join us for Advent of Code!" href="https://www.youtube.com/watch?v=qJIqcGXuuQs&#038;list=PLlFc5cFwUnmx9-VIcfxqhjHrwD3Lab4o4" target="_blank" rel="noopener">Join us for Advent of Code!</a></p>
+
+
+
+<p>We’re excited to spend another Advent season solving puzzles, exploring Kotlin, and celebrating clever solutions together.</p>
+
+
+
+<p>Happy coding, and see you at Advent of Code in Kotlin!</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Kodee’s Kotlin Roundup: Too Much News to Keep Quiet About</title>
+		<link>https://blog.jetbrains.com/kotlin/2025/11/kodees-kotlin-roundup-november-edition/</link>
+		
+		<dc:creator><![CDATA[Kodee]]></dc:creator>
+		<pubDate>Wed, 26 Nov 2025 11:34:28 +0000</pubDate>
+		<featuredImage>https://blog.jetbrains.com/wp-content/uploads/2025/11/KT-social-BlogFeatured-1280x720-1.png</featuredImage>		<category><![CDATA[news]]></category>
+		<guid isPermaLink="false">https://blog.jetbrains.com/?post_type=kotlin&#038;p=661483</guid>
+
+					<description><![CDATA[I’ve gathered the latest Kotlin highlights for you – from the Kotlin Reddit AMA and documentation updates to learning programs and Google Summer of Code 2025 projects. Whether you’re here to stay up to date or just looking for something interesting to explore, there’s plenty to dive into. Where You Can Learn More YouTube Highlights]]></description>
+										<content:encoded><![CDATA[
+<p>I’ve gathered the latest Kotlin highlights for you – from the Kotlin Reddit AMA and documentation updates to learning programs and Google Summer of Code 2025 projects. Whether you’re here to stay up to date or just looking for something interesting to explore, there’s plenty to dive into.</p>
+
+
+            <div class="newsletter">
+                            <h2>Kodee-Approved Spotlight</h2>
+                                                            <article class="newsletter__post">
+                                                                                    <img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" class="newsletter__post-img" src="https://blog.jetbrains.com/wp-content/uploads/2025/11/Kotlin-2.3.0-RC.jpeg" alt="Kotlin 2.3.0 RC">
+                                                                            <div class="newsletter__post-text">
+                                                            <h3>Kotlin 2.3.0-RC is out!</h3>
+                                                        <p>Kotlin 2.3.0-RC has landed! Learn about the new features, explore the improvements, and get ready for the upcoming stable release.</p>
+                                                            <a href="https://kotlinlang.org/docs/whatsnew-eap.html" class="btn" target="_blank" rel="noopener">See what’s new</a>
+                                                    </div>
+                    </article>
+                                    <article class="newsletter__post">
+                                                                                    <img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" class="newsletter__post-img" src="https://blog.jetbrains.com/wp-content/uploads/2025/11/Kotlin-Docs.png" alt="Kotlin documentation update">
+                                                                            <div class="newsletter__post-text">
+                                                            <h3>A fresh look for Kotlin docs</h3>
+                                                        <p>Kotlin Multiplatform docs have officially moved to <a href="https://kotlinlang.org/" target="_blank" rel="noopener">kotlinlang.org</a> and now come with a toggle to switch between Language and Multiplatform docs. Navigation is smoother, the structure is cleaner, and it’s easier than ever to find what you need. Let’s just say I’ve been hanging out there a lot lately.</p>
+                                                            <a href="https://kotlinlang.org/docs/home.html" class="btn" target="_blank" rel="noopener">Check out the new setup</a>
+                                                    </div>
+                    </article>
+                                    <article class="newsletter__post">
+                                                                                    <img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" class="newsletter__post-img" src="https://blog.jetbrains.com/wp-content/uploads/2025/11/Kotlin-Reddit-AMA.png" alt="Kotlin Reddit AMA">
+                                                                            <div class="newsletter__post-text">
+                                                            <h3>Join the Kotlin team for an AMA on Reddit</h3>
+                                                        <p>Got a burning Kotlin question you’ve always wanted to ask? Now’s your chance! 🔥 The Kotlin team is joining a week-long JetBrains Reddit AMA, where you can ask anything – from language design and tooling to what’s coming next. It’s your opportunity to chat directly with the people building Kotlin. I might even drop in!</p>
+                                                            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&#038;text=Kotlin+Ecosystem+Reddit+AMA&#038;dates=20251211T140000Z/20251211T180000Z&#038;details=Ask+me+anything+on+Reddit+r%2FKotlin%0Ahttps%3A%2F%2Fwww.reddit.com%2Fr%2FKotlin%2F&#038;location=https%3A%2F%2Fwww.reddit.com%2Fr%2FKotlin%2F" class="btn" target="_blank" rel="noopener">Save the date</a>
+                                                    </div>
+                    </article>
+                                    <article class="newsletter__post">
+                                                                                    <img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" class="newsletter__post-img" src="https://blog.jetbrains.com/wp-content/uploads/2025/11/KMP-Edu.png" alt="Kotlin Multiplatform: Level Up Your Skills">
+                                                                            <div class="newsletter__post-text">
+                                                            <h3>Kotlin Multiplatform: Level up before 2026!</h3>
+                                                        <p>Ready to boost your Kotlin Multiplatform skills? Join a four-week learning journey that began on November 10 and ends on December 8. It’s packed with curated resources, a free Compose Multiplatform crash course, top KotlinConf talks, and a career-focused webinar to wrap things up. I couldn’t resist and have already jumped in!</p>
+                                                            <a href="http://lp.jetbrains.com/kmp-level-up/?utm_source=ktlnewsletter&#038;utm_medium=button&#038;utm_campaign=kmp-edu" class="btn" target="_blank" rel="noopener">Discover more</a>
+                                                    </div>
+                    </article>
+                                    <article class="newsletter__post">
+                                                                                    <img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" class="newsletter__post-img" src="https://blog.jetbrains.com/wp-content/uploads/2025/11/banner_final.png" alt="How Android devs can advance their career with KMP – livestream">
+                                                                            <div class="newsletter__post-text">
+                                                            <h3>How Android devs can advance their career with KMP – livestream (December 3)</h3>
+                                                        <p>You already know your way around Android, but what’s next? This practical livestream will show you how to advance your Kotlin skills beyond mobile and grow into a full-stack Kotlin Multiplatform pro. Learn what concepts to master, what hiring managers are looking for, and how to start your first standout KMP project. I’ve already registered!</p>
+                                                            <a href="https://info.jetbrains.com/kotlin-livestream-december3-2025.html?utm_source=ktlnewsletter&#038;utm_medium=button&#038;utm_campaign=kmp-live" class="btn" target="_blank" rel="noopener">Save your spot</a>
+                                                    </div>
+                    </article>
+                                    <article class="newsletter__post">
+                                                                                    <img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" class="newsletter__post-img" src="https://blog.jetbrains.com/wp-content/uploads/2025/11/Black-Friday.png" alt="KotlinConf'26 Black Friday">
+                                                                            <div class="newsletter__post-text">
+                                                            <h3>KotlinConf’26 Black Friday special</h3>
+                                                        <p>It’s Black Friday! Get 20% off your KotlinConf 2026 ticket! Join me and over 2,000 Kotlin enthusiasts for three days of learning, inspiration, and connection in Munich. Don’t miss out on this limited offer.</p>
+                                                            <a href="https://kotlinconf.com/?utm_source=newsletter&#038;utm_medium=email&#038;utm_campaign=roundup-blackfriday" class="btn" target="_blank" rel="noopener">Claim your discount</a>
+                                                    </div>
+                    </article>
+                                    <article class="newsletter__post">
+                                                                                    <img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" class="newsletter__post-img" src="https://blog.jetbrains.com/wp-content/uploads/2025/11/CfP.png" alt="KotlinConf 2026 Call for Papers">
+                                                                            <div class="newsletter__post-text">
+                                                            <h3>The KotlinConf’26 Call for Speakers is closing soon</h3>
+                                                        <p>If you’ve been meaning to send in your KotlinConf 2026 talk proposal, this is your sign to do it now! The Call for Speakers is wrapping up soon. Don’t miss your chance to share your expertise at the world’s largest Kotlin event.</p>
+                                                            <a href="https://sessionize.com/kotlinconf-2026/" class="btn" target="_blank" rel="noopener">Submit your talk</a>
+                                                    </div>
+                    </article>
+                                    <article class="newsletter__post">
+                                                                                    <img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" class="newsletter__post-img" src="https://blog.jetbrains.com/wp-content/uploads/2025/11/Blog-Featured-1280x720-2.png" alt="Kotlin adoption guide">
+                                                                            <div class="newsletter__post-text">
+                                                            <h3>Kotlin adoption guide</h3>
+                                                        <p>Our Ultimate Guide to Successfully Adopting Kotlin in a Java-Dominated Environment is expanding rapidly! In this guest series by Urs Peter, Senior Software Engineer and JetBrains-certified Kotlin Trainer, you’ll follow how real teams adopt Kotlin – from a single developer’s spark of curiosity to full-scale transformation. Five posts are already live, with more coming soon!</p>
+                                                            <a href="https://blog.jetbrains.com/kotlin/2025/11/helping-decision-makers-say-yes-to-kotlin/" class="btn" target="_blank">Start reading</a>
+                                                    </div>
+                    </article>
+                                    <article class="newsletter__post">
+                                                                                    <img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" class="newsletter__post-img" src="https://blog.jetbrains.com/wp-content/uploads/2025/11/Ktor-survey.jpeg" alt="Ktor Annual Survey">
+                                                                            <div class="newsletter__post-text">
+                                                            <h3>Your Ktor experience counts – tell us about it</h3>
+                                                        <p>Calling all Ktor users! We’d love your input. Take our annual survey and share your thoughts, challenges, and ideas to help make Ktor even better. Your feedback helps shape the framework&#8217;s direction – pretty cool, right? I’ve already shared mine!</p>
+                                                            <a href="https://surveys.jetbrains.com/s3/2de1a8c86948" class="btn" target="_blank" rel="noopener">Have your say</a>
+                                                    </div>
+                    </article>
+                                    <article class="newsletter__post">
+                                                                                    <img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" class="newsletter__post-img" src="https://blog.jetbrains.com/wp-content/uploads/2025/11/EXP-Twitter_Facebook_LinkedIn-1200x675-1.png" alt="Exposed 1.0.0-rc-3">
+                                                                            <div class="newsletter__post-text">
+                                                            <h3>Getting closer to Exposed 1.0.0!</h3>
+                                                        <p>We’re almost there! In 1.0.0-rc-3, the team focused on polishing things up – fixing bugs, refining R2DBC support, cleaning up imports, and streamlining transaction management. It’s shaping up nicely, so give it a try and share your feedback before the final release!</p>
+                                                            <a href="https://github.com/JetBrains/Exposed/releases/tag/1.0.0-rc-3" class="btn" target="_blank" rel="noopener">Try the latest version</a>
+                                                    </div>
+                    </article>
+                                    <article class="newsletter__post">
+                                                                                    <img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" class="newsletter__post-img" src="https://blog.jetbrains.com/wp-content/uploads/2025/02/Blog-Featured-1280x720-2.png" alt="Google Summer of Code GSoC with Kotlin">
+                                                                            <div class="newsletter__post-text">
+                                                            <h3>Google Summer of Code 2025: What our contributors built</h3>
+                                                        <p>Congrats to all our GSoC 2025 contributors and mentors! From making Gradle builds faster and more reliable to bringing a Firebase AI Logic SDK for Kotlin Multiplatform, this year’s projects are already strengthening the ecosystem. I want to personally thank everyone who contributed – your work makes Kotlin better every year.</p>
+                                                            <a href="https://blog.jetbrains.com/kotlin/2025/11/google-summer-of-code-2025/" class="btn" target="_blank">See the projects</a>
+                                                    </div>
+                    </article>
+                                    <article class="newsletter__post">
+                                                                                    <img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" class="newsletter__post-img" src="https://blog.jetbrains.com/wp-content/uploads/2025/11/CMP-Twitter_Facebook_LinkedIn-1200x675-1.png" alt="Compose Multiplatform for Web (Quick poll)">
+                                                                            <div class="newsletter__post-text">
+                                                            <h3>Quick poll for Android devs</h3>
+                                                        <p><a href="https://kotl.in/cmp-web-n" target="_blank" rel="noopener">Compose Multiplatform for web</a> (Beta) lets you run your Compose UI right in the browser — powered by Wasm. Pretty cool, right? We’d love to know what you’d build first, so take our quick poll and tell us which use case excites you most.</p>
+                                                            <a href="https://www.youtube.com/post/UgkxyOw4S-J99X3LIkRd-QoEvSa4gLjK-4iv" class="btn" target="_blank" rel="noopener">Take the poll</a>
+                                                    </div>
+                    </article>
+                                    </div>
+    
+
+
+<h2 class="wp-block-heading">Where You Can Learn More</h2>
+
+
+
+<ul>
+<li><a href="https://blog.jetbrains.com/kotlin/2025/11/the-ultimate-kmp-watchlist/" target="_blank" rel="noreferrer noopener">The Ultimate KMP Watchlist: Level Up Your Skills in 10 Talks</a></li>
+
+
+
+<li><a href="https://blog.jetbrains.com/amper/2025/11/amper-update-november-2025/" target="_blank" data-type="link" data-id="https://blog.jetbrains.com/amper/2025/11/amper-update-november-2025/" rel="noreferrer noopener">Amper Update, November 2025 – Extensibility Preview</a></li>
+
+
+
+<li><a href="https://github.com/spring-projects/spring-framework/wiki/Spring-Framework-7.0-Release-Notes" target="_blank" rel="noreferrer noopener">The Spring Framework 7.0 release notes with exciting updates for Kotlin users</a></li>
+
+
+
+<li><a href="https://t.co/lKd9kth53G" target="_blank" rel="noreferrer noopener">The Kotlin Power-assert plugin is now available for Maven</a></li>
+
+
+
+<li><a href="https://blog.jetbrains.com/ai/2025/11/building-ai-agents-in-kotlin-part-1-a-minimal-coding-agent/" target="_blank" rel="noreferrer noopener">Building AI Agents in Kotlin – Part 1: A Minimal Coding Agent&nbsp;</a></li>
+
+
+
+<li><a href="https://blog.jetbrains.com/research/2025/10/litmuskt-concurrency-testing/" target="_blank" rel="noreferrer noopener">Finding Order in the Mayhem: A Novel Concurrency Testing Tool That Improved the Kotlin Compiler</a></li>
+</ul>
+
+
+
+<h2 class="wp-block-heading">YouTube Highlights</h2>
+
+
+
+<ul>
+<li><a href="https://youtu.be/oaJpj18OqY0?si=iEjQ39KuqNe0o00S" target="_blank" rel="noreferrer noopener">From Java to Kotlin: Mercedes-Benz.io’s Journey</a></li>
+
+
+
+<li><a href="https://youtu.be/hf_iN-eoC3w?si=7bJ1a9CNPwiDFYCg" target="_blank" rel="noreferrer noopener">Building AI Agents With Koog | Talking Kotlin 142</a></li>
+</ul>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Building AI Agents in Kotlin – Part 2: A Deeper Dive Into Tools </title>
+		<link>https://blog.jetbrains.com/ai/2025/11/building-ai-agents-in-kotlin-part-2-a-deeper-dive-into-tools/</link>
+		
+		<dc:creator><![CDATA[Bruno Lannoo]]></dc:creator>
+		<pubDate>Wed, 26 Nov 2025 08:23:35 +0000</pubDate>
+		<featuredImage>https://blog.jetbrains.com/wp-content/uploads/2025/11/KG-social-BlogFeatured-1280x720-1-1.png</featuredImage>		<product ><![CDATA[kotlin]]></product>
+		<category><![CDATA[kotlin]]></category>
+		<category><![CDATA[tutorials]]></category>
+		<category><![CDATA[ai]]></category>
+		<category><![CDATA[ai-agents]]></category>
+		<guid isPermaLink="false">https://blog.jetbrains.com/?post_type=ai&#038;p=659982</guid>
+
+					<description><![CDATA[In the previous article, we saw how to build a basic coding agent with list, read, write, and edit capabilities. Today, we&#8217;ll dive into how to extend the agents’ capabilities by creating additional tools within the Koog framework. As an example, we’ll be building an ExecuteShellCommandTool, teaching our agent to run code and close the [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+<p>In the <a href="https://blog.jetbrains.com/ai/2025/11/building-ai-agents-in-kotlin-part-1-a-minimal-coding-agent/">previous article</a>, we saw how to build a basic coding agent with list, read, write, and edit capabilities. Today, we&#8217;ll dive into how to <a href="https://github.com/JetBrains/koog/tree/develop/examples/code-agent/step-02-add-execution-tool" target="_blank" rel="noopener">extend the agents’ capabilities</a> by creating additional tools within the <a href="https://www.jetbrains.com/koog/" target="_blank" rel="noopener">Koog</a> framework. As an example, we’ll be building an <code>ExecuteShellCommandTool</code>, teaching our agent to run code and close the feedback loop that real engineering depends on: running the code, observing failures, and improving the code based on real output.</p>
+
+
+
+<p>While LLMs tend to be good at avoiding syntax errors, they do struggle with integration issues. For example, they have a tendency to call nonexistent methods, miss imports, and only partially implement interfaces. The traditional approach of compiling and running the code immediately exposes these problems. But with a little additional prompting, we can push the LLM to run small tests to validate these kinds of behavior.</p>
+
+
+
+<p>So, how do we build such a tool? Let&#8217;s start with the fundamentals.</p>
+
+
+
+<h2 class="wp-block-heading">What is the anatomy of a Koog tool?</h2>
+
+
+
+<p>First, we start by inheriting from the abstract <code>ai.koog.agents.core.tools.Tool</code> <a href="https://docs.koog.ai/class-based-tools/" target="_blank" rel="noopener">class</a>, which tells us that we need to provide:</p>
+
+
+
+<ol>
+<li><strong>Name</strong>: In our team, we like to follow the convention of <code>snake_casing</code>, surrounding the name with two underscores, though that’s just a matter of individual preference.</li>
+
+
+
+<li><strong>Description</strong>: This field serves as the main documentation for the LLM, explaining what the tool does and why it should be called.</li>
+
+
+
+<li><code>Args</code><strong> class:</strong> This class describes the parameters that the LLM needs to or can provide when calling the tool.</li>
+
+
+
+<li><code>Result</code><strong> class</strong>: This class defines the data that will be formatted into a message for the LLM. It can contain a <code>textForLLM()</code> function that formats the data into a string for the LLM to read. The <code>Result</code> class exists mainly for developer convenience so it is easier to log or render the tool result in a UI. The agent itself only requires the formatted string.</li>
+
+
+
+<li><code>Execute()</code><strong> method</strong>: This method takes an instance of Args and returns an instance of <code>Result</code>. It defines the logic of what happens when the LLM calls the tool.</li>
+</ol>
+
+
+
+<p>These components form the foundation of every Koog tool, whether you&#8217;re building a database connector, an API client, or, as we&#8217;ll see today, a shell command executor. Let&#8217;s walk through building an <code>ExecuteShellCommandTool</code> to see these principles in action.</p>
+
+
+
+<h3 class="wp-block-heading"><strong>A quick aside on safety</strong></h3>
+
+
+
+<p>Before we dive into the specifics of the <code>ExecuteShellCommandTool</code>, we need to address a few key safety considerations.</p>
+
+
+
+<p>While LLMs are not bad actors intentionally trying to cause us problems, they do occasionally make unexpected mistakes that can lead to issues down the line. And if we&#8217;re going to give them the power of command-line execution, their mistakes could have serious consequences.</p>
+
+
+
+<p>There are several methods of mitigating this risk, however, including sandboxing command execution in isolated environments and/or limiting the permissions you grant them. However, these can be quite complicated to implement, and our focus now is on creating actual tools.</p>
+
+
+
+<p>With this in mind, we&#8217;ll provide the two simplest risk mitigation strategies:</p>
+
+
+
+<ol>
+<li><strong>Command execution confirmation</strong> for every command. This is the safest option as long as we take a minute to review every command the LLM wants to execute, but it does seriously limit the agent&#8217;s autonomy.</li>
+
+
+
+<li><strong><em>Brave</em></strong><strong> mode</strong>, in which every command is approved automatically. While this mode can pose a risk to the machine you’re working on if it is not properly sandboxed, we&#8217;ll only be using it inside our own benchmarks, which run in isolated environments that can be destroyed without consequence.</li>
+</ol>
+
+
+
+<h2 class="wp-block-heading">Implementing an <strong><code>ExecuteShellCommandTool</code></strong></h2>
+
+
+    <div class="slider slider-full">
+                                        <div class="slider__slide">
+                    <a href="https://blog.jetbrains.com/wp-content/uploads/2025/11/DSGN-24422-01_Exec-tool.png">
+                        <img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2025/11/DSGN-24422-01_Exec-tool.png" alt="">
+                    </a>
+                </div>
+                                                    <div class="slider__slide">
+                    <a href="https://blog.jetbrains.com/wp-content/uploads/2025/11/DSGN-24422-02_Data-flow.png">
+                        <img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2025/11/DSGN-24422-02_Data-flow.png" alt="">
+                    </a>
+                </div>
+                                                    <div class="slider__slide">
+                    <a href="https://blog.jetbrains.com/wp-content/uploads/2025/11/DSGN-24422-03_Confirmation-handler.png">
+                        <img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2025/11/DSGN-24422-03_Confirmation-handler.png" alt="">
+                    </a>
+                </div>
+                                                    <div class="slider__slide">
+                    <a href="https://blog.jetbrains.com/wp-content/uploads/2025/11/DSGN-24422-04_Executor.png">
+                        <img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2025/11/DSGN-24422-04_Executor.png" alt="">
+                    </a>
+                </div>
+                                                </div>
+
+
+
+
+
+
+<p><a href="https://github.com/JetBrains/koog/blob/develop/agents/agents-ext/src/commonMain/kotlin/ai/koog/agents/ext/tool/shell/ExecuteShellCommandTool.kt" target="_blank" rel="noopener">For our <code>ExecuteShellCommandTool</code></a>, these components are as follows:</p>
+
+
+
+<ol>
+<li><strong>Name</strong>: <code>__execute_shell_command__</code>.</li>
+
+
+
+<li><strong>Description</strong>: Something like &#8220;Executes shell commands and returns their output&#8221;.</li>
+
+
+
+<li><code>Args</code> <strong>class</strong>: <code>command</code>, <code>timeoutSeconds</code>, <code>workingDirectory</code></li>
+
+
+
+<li><code>Result</code> <strong>class</strong>: <code>output</code>, <code>exitCode</code>, <code>command</code> (might seem surprising, but is convenient to report in logs or UI what command was run).</li>
+
+
+
+<li><code>Execute()</code><strong> method</strong>: Request confirmation, then execute the command (we&#8217;ll look closely at the implementation details below).</li>
+</ol>
+
+
+
+<h2 class="wp-block-heading"><code>Execute()</code><strong> method implementation</strong></h2>
+
+
+
+<p>Now, let&#8217;s look at how we implement our execute() method. We keep the method simple by delegating core logic to helper methods as follows:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">override suspend fun execute(args: Args): Result = when (
+        val confirmation = confirmationHandler.requestConfirmation(args)
+    ) {
+        is ShellCommandConfirmation.Approved -> try {
+            val result = executor.execute(
+                args.command, args.workingDirectory, args.timeoutSeconds
+            )
+            Result(args.command, result.exitCode, result.output)
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: Exception) {
+            Result(
+               args.command, null, "Failed to execute command: ${e.message}"
+            )
+        }
+
+        is ShellCommandConfirmation.Denied ->
+            Result(
+                args.command, null, 
+                "Command execution denied with user response: ${confirmation.userResponse}"
+            )
+    }</pre>
+
+
+
+<p>The flow is straightforward: Request user confirmation for running the command, execute if this is approved via the command executor, or return the denial message to the LLM.</p>
+
+
+
+<p>This also allows us to catch exceptions and forward error messages to the LLM, enabling it to adjust its approach or try alternatives.</p>
+
+
+
+<h3 class="wp-block-heading"><br><code>ConfirmationHandler</code> configuration<br></h3>
+
+
+
+<p><code>ConfirmationHandler</code> becomes configurable when you create the <code>ExecuteShellCommandTool</code>, allowing for various implementations. Currently, we offer <a href="https://github.com/JetBrains/koog/blob/develop/agents/agents-ext/src/commonMain/kotlin/ai/koog/agents/ext/tool/shell/ShellCommandConfirmationHandlers.kt" target="_blank" rel="noopener">two</a>:</p>
+
+
+
+<ol>
+<li><code>PrintShellCommandConfirmationHandler</code>: Prompts the user via the command line.</li>
+
+
+
+<li><code>BraveModeConfirmationHandler</code>: Automatically approves everything.</li>
+</ol>
+
+
+
+<p>The second implementation just approves without any conditions, but the first has some interesting nuances:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">override suspend fun requestConfirmation(
+        args: ExecuteShellCommandTool.Args
+    ): ShellCommandConfirmation {
+        println("Agent wants to execute: ${args.command}")
+        args.workingDirectory?.let { println("In: $it") }
+        println("Timeout: ${args.timeoutSeconds}s")
+        print("Confirm (y / n / reason-for-denying): ")
+
+        val userResponse = readln().lowercase()
+        return when (userResponse) {
+            "y", "yes" -> ShellCommandConfirmation.Approved
+            else -> ShellCommandConfirmation.Denied(userResponse)
+        }
+    }</pre>
+
+
+
+<p>Note that while users perceive three options (approve, deny, deny with reason), the implementation treats both denial types identically: Both return to the LLM, which interprets and handles each type appropriately.</p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" loading="lazy" src="https://blog.jetbrains.com/wp-content/uploads/2025/11/demo-exec-print-confirmation.gif" alt="" class="wp-image-660074"/></figure>
+
+
+
+<h3 class="wp-block-heading"><br><code>CommandExecutor</code> configuration</h3>
+
+
+
+<p>Like the <code>ConfirmationHandler</code>, the <code>CommandExecutor</code> is also configurable, though we currently only provide a JVM implementation. Theoretically, you could create implementations for Android, iOS, WebAssembly, and other platforms, but without clear demand, we&#8217;ll defer these for now.</p>
+
+
+
+<h2 class="wp-block-heading">How do we handle timeouts?</h2>
+
+
+
+<p>Regardless of the platform used, one aspect of the <code>CommandExecutor</code> – timeout handling – deserves special attention. Our current implementation doesn&#8217;t allow the agent to interrupt long-running commands.</p>
+
+
+
+<p>Humans often act from an impatience heuristic, which can lead to them using <em>Ctrl+C </em>to cancel an execution. But this behavior assumes multi-threaded, agentic awareness and an underlying concept of impatience. However, there is a simpler and more intuitive alternative that fits this context much better.</p>
+
+
+
+<p>By requiring the LLM to specify a maximum execution time, we can <a href="https://github.com/JetBrains/koog/blob/develop/agents/agents-ext/src/jvmMain/kotlin/ai/koog/agents/ext/tool/shell/JvmShellCommandExecutor.kt" target="_blank" rel="noopener">safely interrupt commands</a> that exceed this limit. This timeout value is shown to users, allowing them to reject execution if the requested duration appears unreasonable or excessive.</p>
+
+
+
+<p>Instead of simply terminating the process and returning a generic timeout message, we should aim to preserve as much output as possible. Even incomplete results can help the LLM extract useful information, or at least understand where the timeout occurred. With careful implementation, we can achieve this:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">val stdoutJob = launch {
+    process.inputStream.bufferedReader().useLines { lines ->
+        try {
+            lines.forEach { stdoutBuilder.appendLine(it) }
+        } catch (_: IOException) {
+            // Ignore IO exception if the stream is closed and silently stop stream collection
+        }
+    }
+}
+
+val isCompleted = withTimeoutOrNull(timeoutSeconds * 1000L) {
+    process.onExit().await()
+} != null
+
+if (!isCompleted) {
+    process.destroyForcibly()
+}
+
+stdoutJob.join()</pre>
+
+
+
+<h2 class="wp-block-heading"><strong>What changed at the agent level?</strong></h2>
+
+
+
+<p>At the agent level, the <a href="https://github.com/JetBrains/koog/blob/develop/examples/code-agent/step-02-add-execution-tool/src/main/kotlin/Main.kt" target="_blank" rel="noopener">modifications are minimal</a>, roughly a dozen lines of code. As the diff shows, the majority of these updates involve extending the system prompt.</p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" loading="lazy" src="https://blog.jetbrains.com/wp-content/uploads/2025/11/Screenshot-2025-11-18-at-14.47.35.png" alt="" class="wp-image-660085"/></figure>
+
+
+
+<p>We could have made our change even smaller by simply adding the tool, but instead, we also introduced two additional, though still minor, modifications to our agent.</p>
+
+
+
+<h3 class="wp-block-heading"><strong>A) <code>BRAVE_MODE</code> toggle</strong></h3>
+
+
+
+<p>The implementation of this toggle is relatively straightforward; it just checks the BRAVE_MODE environment variable. We even use a lambda function for the <em>Brave</em> mode ConfirmationHandler to show that implementing your own can be very simple, but one could also use the <code>BraveModeConfirmationHandler</code> that was mentioned earlier.&nbsp;</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">fun createExecuteShellCommandToolFromEnv(): ExecuteShellCommandTool {
+    return if (System.getenv("BRAVE_MODE")?.lowercase() == "true") {
+        ExecuteShellCommandTool(JvmShellCommandExecutor()) {
+            _ -> ShellCommandConfirmation.Approved 
+        }
+    } else {
+        ExecuteShellCommandTool(
+            JvmShellCommandExecutor(), 
+            PrintShellCommandConfirmationHandler(),
+        )
+    }
+}</pre>
+
+
+
+<h3 class="wp-block-heading"><strong>B) Enhanced “definition of done” in the prompt</strong></h3>
+
+
+
+<p>To ensure the LLM leverages this new capability to execute code effectively, we extended the prompt with a “definition of done” that strongly encourages writing and running tests:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">"""
+... // Previous prompt from step 01
+
+Production-ready means verified to work—your changes must be proven correct and not introduce regressions.
+
+You have shell access to execute commands and run tests. Use this to work with executable feedback instead of assumptions. Establish what correct behavior looks like through tests, then iterate your implementation until tests pass. Validate that existing functionality remains intact. Production-ready means proven through green tests—that's your definition of done.
+"""</pre>
+
+
+
+<p>So that&#8217;s it. We&#8217;ve built a complete <code>ExecuteShellCommandTool</code> component and integrated it into our agent with minimal changes. But the real question is: Does it actually improve performance?</p>
+
+
+
+<h2 class="wp-block-heading">Benchmark testing results</h2>
+
+
+
+<p>Running both versions against the SWE-bench-verified set confirms the execution capabilities provide a clear benefit: The agent’s performance improved from 249/500 (50%) to 279/500 (56%) successful examples. While leaderboard scores reach around 70%, our results indicate that giving agents the ability to run and validate code is a step in the right direction. However, to understand where our agent is still struggling and what to improve next, we need better visibility into its behavior. That’s where logging becomes essential.</p>
+
+
+
+<h2 class="wp-block-heading">Conclusion: Building tools in Koog</h2>
+
+
+
+<p>Throughout this article, we&#8217;ve seen how Koog&#8217;s tool structure works: Every tool needs a name, description and <code>execute()</code> method. We made our <code>ExecuteShellCommandTool</code> configurable via <code>ConfirmationHandler</code> and <code>CommandExecutor</code> components, showing how to delegate complex logic to swappable implementations.</p>
+
+
+
+<p>These same patterns apply to any tool you might want to build: database connectors, API clients, file processors, or custom integrations. The framework provides the structure for LLM communication; you provide the specific capabilities.&nbsp;</p>
+
+
+
+<p>In the next article, we’ll look at how to add logging and tracing to our agent, giving us the visibility we need to understand and improve its behavior. Understanding how your agent makes decisions is crucial for iteration, and proper tooling around observability is just as important as the tools you give the agent itself.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>The Ultimate KMP Watchlist: Level Up Your Skills in 10 Talks</title>
+		<link>https://blog.jetbrains.com/kotlin/2025/11/the-ultimate-kmp-watchlist/</link>
+		
+		<dc:creator><![CDATA[Ekaterina Petrova]]></dc:creator>
+		<pubDate>Mon, 24 Nov 2025 16:44:40 +0000</pubDate>
+		<featuredImage>https://blog.jetbrains.com/wp-content/uploads/2025/11/KM-social-BlogSocialShare-1280x720-1-1.png</featuredImage>		<category><![CDATA[multiplatform]]></category>
+		<guid isPermaLink="false">https://blog.jetbrains.com/?post_type=kotlin&#038;p=661307</guid>
+
+					<description><![CDATA[The best way to skip the &#8220;beginner mistakes&#8221; phase is to learn from the teams who have already solved them at scale. For Week 3 of KMP Level Up, we’ve curated the Top 10 KotlinConf talks that cover the full spectrum of adoption, from massive production case studies to deep dives into the compiler. Whether [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+<p>The best way to skip the &#8220;beginner mistakes&#8221; phase is to learn from the teams who have already solved them at scale.</p>
+
+
+
+<p>For <strong>Week 3 of <a href="https://lp.jetbrains.com/kmp-level-up/" target="_blank" rel="noreferrer noopener">KMP Level Up</a></strong>, we’ve curated the <strong>Top 10 KotlinConf talks</strong> that cover the full spectrum of adoption, from massive production case studies to deep dives into the compiler. Whether you are looking for architectural inspiration, hard data to convince your stakeholders, or just want to understand the engineering magic under the hood, the answers are out there.</p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" loading="lazy" src="https://blog.jetbrains.com/wp-content/uploads/2025/11/image-40.png" alt="" class="wp-image-661327"/></figure>
+
+
+
+<p>Here is your KMP marathon for the week.</p>
+
+
+
+<hr class="wp-block-separator has-alpha-channel-opacity is-style-dots"/>
+
+
+
+<h2 class="wp-block-heading">🌍 Part 1: Production Case Studies</h2>
+
+
+
+<p><em>Theory is nice, but does it scale? These teams proved it does.</em></p>
+
+
+
+<p><strong><a href="https://www.youtube.com/watch?v=RJtiFt5pbfs" target="_blank" rel="noreferrer noopener">Duolingo + KMP: A Case Study in Productivity</a></strong> |  John Rodriguez &amp; Johnny Ye (2025)<br>Duolingo ships weekly to 40M+ daily users across Android, iOS, and Web. Shipping that fast requires efficiency. This talk breaks down their specific rubric for deciding <em>what</em> to share, from Video Calls to Math lessons, and how they handle the velocity required to ship constantly without breaking platform quality.</p>
+
+
+
+<p><strong><a href="https://www.youtube.com/watch?v=HSIhkB5bGJs" target="_blank" rel="noreferrer noopener">Leveraging KMP for Navigation in the McDonald&#8217;s App</a></strong>  | Cas van Luijtelaar &amp; Anthony Bassey (2025)<br>Most teams start by sharing the data layer, but McDonald’s went much further. They use KMP to drive the navigation state itself. In this talk, they show how they keep the UI 100% native (Compose &amp; SwiftUI) but let the shared KMP layer decide <em>where</em> to go and <em>what</em> data to pass, effectively creating a scalable &#8220;dumb client&#8221; architecture.</p>
+
+
+
+<p><strong><a href="https://www.youtube.com/watch?v=M9Nni0Qywyo" target="_blank" rel="noreferrer noopener">Two Years with KMP: From Zero to 55% Shared Code</a></strong> | Rodrigo Sicarelli (2024)<br>StoneCo is a fintech giant serving 4 million users. This isn’t a &#8220;hello world&#8221; story; it’s about training 130 mobile engineers to shift their paradigm. They break down how they achieved 55% code sharing across two massive apps and the measurable impact on developer satisfaction and velocity.</p>
+
+
+
+<p><strong><a href="https://www.youtube.com/watch?v=VtFam_D1USw" target="_blank" rel="noreferrer noopener">Meetup with KMM Libraries</a></strong> | Colin Lee (2023)<br>If you are overwhelmed by the library ecosystem, watch this. Colin walks through the transition from a legacy codebase to a greenfield KMP app. He highlights the specific stack that saved them (Apollo GraphQL, SQLDelight, Moko Resources) and how they survived the initial &#8220;panic&#8221; from the iOS team to reach a point where everyone loves the shared workflow.</p>
+
+
+
+<p></p>
+
+
+
+<h2 class="wp-block-heading">🛠️ Part 2: Getting Your Hands Dirty</h2>
+
+
+
+<p><em>Okay, you’re inspired. Now let’s look at the code.</em></p>
+
+
+
+<p><strong><a href="https://www.youtube.com/watch?v=YKTlW8Qkj0w" target="_blank" rel="noreferrer noopener">Compose Multiplatform for iOS: Ready for Production</a></strong> | Sebastian Aigner (2025)<br>Compose Multiplatform is no longer experimental—it’s stable on iOS. Sebastian gives you the tour of the ecosystem, showing how to build production-grade UIs that share rendering logic while still feeling at home on Apple devices. Perfect for understanding the current state of the art.</p>
+
+
+
+<p><strong><a href="https://www.youtube.com/watch?v=uATlWUBSx8Q" target="_blank" rel="noreferrer noopener">Confetti: Building a Conference App in 40 Minutes</a></strong> | John O&#8217;Reilly &amp; Martin Bonnin (2023)<br>This is a live-coding masterclass in &#8220;Full Stack Kotlin.&#8221; Watch John and Martin build a working app from scratch in real-time. They spin up a Spring Boot backend with GraphQL, generate type-safe Kotlin models on the client with Apollo, and wire it up to native UIs (Compose &amp; SwiftUI). It’s the best demo of how tight the loop can be when you use Kotlin end-to-end.</p>
+
+
+
+<p></p>
+
+
+
+<h2 class="wp-block-heading">🍎 Part 3: The iOS Perspective</h2>
+
+
+
+<p><em>Because your iOS teammates need to love this too.</em></p>
+
+
+
+<p><strong><a href="https://www.youtube.com/watch?v=sXwHIh1dLsU" target="_blank" rel="noreferrer noopener">KMP in Action: A Production Case Study</a></strong> | Annyce Davis (2024)<br>Convincing an iOS team is often the hardest part of adoption. Annyce details Meetup’s migration, specifically focusing on the &#8220;WIIFM&#8221; (What’s In It For Me) factor for skeptical engineers. The killer insight: after migrating networking to KMP, their iOS app actually got <em>faster</em> because it inherited optimized caching logic that was previously missing.</p>
+
+
+
+<p><strong><a href="https://www.youtube.com/watch?v=j-zEAMcMcjA" target="_blank" rel="noreferrer noopener">Kotlin Multiplatform for iOS Developers</a></strong> | <em>Salomon Brys (2023)</em><br>KMP is often pitched to Android devs, but what about the other side of the aisle? Salomon steps &#8220;behind enemy lines&#8221; to explain KMP from an iOS perspective. He covers the toolchain, the limitations, and how to create a workflow that doesn&#8217;t make iOS developers feel like second-class citizens.</p>
+
+
+
+<p><br><em>ℹ️ The ecosystem has grown significantly since 2023. New features like experimental <strong><a href="https://kotlinlang.org/docs/native-swift-export.html" target="_blank" rel="noopener">Swift Export</a></strong> now allow idiomatic Swift calls without Objective-C headers. However, Salomon’s core advice on team dynamics and workflow remains essential viewing.</em></p>
+
+
+
+<p></p>
+
+
+
+<h2 class="wp-block-heading">🤿 Part 4: The Deep Dive</h2>
+
+
+
+<p><em>For those who want to see how the magic trick is performed.</em></p>
+
+
+
+<p><strong><a href="https://www.youtube.com/watch?v=w_mkLrzb_I4" target="_blank" rel="noreferrer noopener">Using C &amp; native platforms in Kotlin: Building a multi-platform advanced library</a></strong> | <em>Salomon Brys (2024)</em><br>Sometimes you need to go low-level. Using cryptography as an excuse, this talk demonstrates how to build an advanced library that links against native C dependencies, aligns JNI with Kotlin/Native C-interop, and connects to Swift SDKs. Essential viewing for library authors.</p>
+
+
+
+<p><strong><a href="https://www.youtube.com/watch?v=UebhKUdO2sQ" target="_blank" rel="noreferrer noopener">Implementing Compose Hot Reload</a></strong> | <em>Sebastian Sellmair (2025)</em><br>Hot Reload is a productivity game-changer, but implementing it on the JVM required deep engineering work. Sebastian breaks down the journey, from fighting ClassLoaders to patching the Kotlin Compiler to handle &#8220;shifting lambda names.&#8221; A fascinating look under the hood of the tooling we take for granted.</p>
+
+
+
+<hr class="wp-block-separator has-alpha-channel-opacity is-style-dots"/>
+
+
+
+<p>📺&nbsp;<strong>Want to watch them all in one go?</strong> We’ve compiled every talk from this list into a single&nbsp;<strong><a href="https://www.youtube.com/playlist?list=PLlFc5cFwUnmyjXcFPpbYqKwyaIPgZC0w5" target="_blank" rel="noopener">KMP Level Up Playlist</a></strong>&nbsp;on YouTube. Save it to your library and start your marathon.</p>
+
+
+
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+<iframe loading="lazy" title="The Ultimate KMP Watchlist: Level Up Your Skills in 10 Talks" src="https://www.youtube.com/embed/videoseries?list=PLlFc5cFwUnmyjXcFPpbYqKwyaIPgZC0w5" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div></figure>
+
+
+
+<p></p>
+
+
+
+<h2 class="wp-block-heading">🎫 Join us in the Real World</h2>
+
+
+
+<p>These talks represent the current state of the art, but the ecosystem is moving fast. The best way to stay ahead is to be where the conversations happen.</p>
+
+
+
+<p><strong>KotlinConf 2026 tickets are on sale now!</strong> Come meet these speakers, ask the hard questions, and see the future of KMP before it hits YouTube.</p>
+
+
+
+<p align="center"><a class="ek-link jb-download-button" title="Watch now" href="https://pretix.eu/jetbrains/kotlinconf2026/c/8dPH9AWGJ/" target="_blank" rel="noopener">Get Your Ticket</a></p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>
