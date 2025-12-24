@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251224
+
+
 ### 20251223
 
 
@@ -219,11 +222,5 @@ search:
 
 
 ### 20251123
-
-
-### 20251122
-
-- Blog
-    - [Symbolic Modeling and Transformation of Java Code #JVMLS](https://inside.java/2025/11/22/jvmls-symbolic-modelling-java-transformation/)
 
 
