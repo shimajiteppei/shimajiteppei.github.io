@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251225
+
+
 ### 20251224
 
 
@@ -219,8 +222,5 @@ search:
 
 - Blog
     - [JEP targeted to JDK 26: 525: Structured Concurrency (6th Preview)](https://inside.java/2025/11/24/jep525-target-jdk26/)
-
-
-### 20251123
 
 
