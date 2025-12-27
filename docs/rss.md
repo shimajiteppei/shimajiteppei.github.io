@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251227
+
+
 ### 20251226
 
 - Blog
@@ -209,12 +212,5 @@ search:
     - [Kodee’s Kotlin Roundup: Too Many News to Keep Quiet About](https://blog.jetbrains.com/kotlin/2025/11/kodees-kotlin-roundup-november-edition/)
     - [Building AI Agents in Kotlin – Part 2: A Deeper Dive Into Tools](https://blog.jetbrains.com/ai/2025/11/building-ai-agents-in-kotlin-part-2-a-deeper-dive-into-tools/)
     - [Quality Outreach Heads-up - JDK 26: HttpClient Supports TLS Named Groups &amp;amp; Signature Schemes](https://inside.java/2025/11/26/quality-heads-up/)
-
-
-### 20251125
-
-- Blog
-    - [ONNX Based Generative AI LLMs in Java with Project Babylon](https://inside.java/2025/11/25/devoxxbelgium-java-generative-ai/)
-    - [Interview with Jan David Nose](https://blog.rust-lang.org/2025/11/25/interview-with-jan-david-nose/)
 
 
