@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251228
+
+
 ### 20251227
 
 
@@ -204,13 +207,5 @@ search:
 
 - Blog
     - [JEP targeted to JDK 26: 526: Lazy Constants (Second Preview)](https://inside.java/2025/11/27/jep526-target-jdk26/)
-
-
-### 20251126
-
-- Blog
-    - [Kodee’s Kotlin Roundup: Too Many News to Keep Quiet About](https://blog.jetbrains.com/kotlin/2025/11/kodees-kotlin-roundup-november-edition/)
-    - [Building AI Agents in Kotlin – Part 2: A Deeper Dive Into Tools](https://blog.jetbrains.com/ai/2025/11/building-ai-agents-in-kotlin-part-2-a-deeper-dive-into-tools/)
-    - [Quality Outreach Heads-up - JDK 26: HttpClient Supports TLS Named Groups &amp;amp; Signature Schemes](https://inside.java/2025/11/26/quality-heads-up/)
 
 
