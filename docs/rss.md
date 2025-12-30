@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251230
+
+
 ### 20251229
 
 
@@ -197,12 +200,5 @@ search:
 
 - Blog
     - [Garbage Collection in Java: Choosing the Correct Collector](https://inside.java/2025/11/29/devoxxbelgium-choose-correct-gc/)
-
-
-### 20251128
-
-- Blog
-    - [Advent of Code 2025: A Kotlin Playground](https://blog.jetbrains.com/kotlin/2025/11/advent-of-code-in-kotlin-2025/)
-    - [Help, My Java Object Vanished (and the GC is Not at Fault)](https://inside.java/2025/11/28/markword/)
 
 
