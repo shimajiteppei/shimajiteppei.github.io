@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20251231
+
+
 ### 20251230
 
 
@@ -194,11 +197,5 @@ search:
 
 
 ### 20251130
-
-
-### 20251129
-
-- Blog
-    - [Garbage Collection in Java: Choosing the Correct Collector](https://inside.java/2025/11/29/devoxxbelgium-choose-correct-gc/)
 
 
