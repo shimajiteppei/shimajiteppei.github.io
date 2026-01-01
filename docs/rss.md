@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260101
+
+
 ### 20251231
 
 
@@ -194,8 +197,5 @@ search:
 
 - Blog
     - [Agent Orchestration with LangChain4J](https://inside.java/2025/12/01/devoxxbelgium-langchain4j-keynote/)
-
-
-### 20251130
 
 
