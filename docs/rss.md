@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260103
+
+
 ### 20260102
 
 
@@ -185,13 +188,5 @@ search:
 
 - Blog
     - [So Long and Thanks for All the Applets](https://inside.java/2025/12/03/applet-removal/)
-    - [Canonical announces Ubuntu Pro for WSL](https://ubuntu.com//blog/canonical-announces-ubuntu-pro-for-wsl)
-
-
-### 20251202
-
-- Blog
-    - [JEP targeted to JDK 26: 529: Vector API (11th Incubator)](https://inside.java/2025/12/02/jep529-target-jdk26/)
-    - [Fall 2025 Project Director Update](https://blog.rust-lang.org/inside-rust/2025/12/02/project-director-update/)
 
 
