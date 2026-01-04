@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260104
+
+
 ### 20260103
 
 
@@ -180,13 +183,5 @@ search:
 
 - Blog
     - [All Features in Java 26 - Inside Java Newscast #102](https://inside.java/2025/12/04/newscast-102/)
-    - [Lessons learned from the Rust Vision Doc process](https://blog.rust-lang.org/2025/12/03/lessons-learned-from-the-rust-vision-doc-process/)
-    - [crates.io: Malicious crates evm-units and uniswap-utils](https://blog.rust-lang.org/2025/12/03/crates.io-malicious-crates-evm-units-and-uniswap-utils/)
-
-
-### 20251203
-
-- Blog
-    - [So Long and Thanks for All the Applets](https://inside.java/2025/12/03/applet-removal/)
 
 
