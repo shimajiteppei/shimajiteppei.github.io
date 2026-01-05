@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260105
+
+- Blog
+    - [The Inside Java Newsletter: JavaOne Sessions and Keynotes!](https://inside.java/2026/01/05/inside-java-newsletter/)
+
+
 ### 20260104
 
 
@@ -175,13 +181,6 @@ search:
 
 - Blog
     - [The Inside Java Newsletter: Register for JavaOne 2026!](https://inside.java/2025/12/05/inside-java-newsletter/)
-    - [Want to propose a 2026 Rust project goal? We are here to help!](https://blog.rust-lang.org/inside-rust/2025/12/04/want-to-propose-a-2026-rust-project-goal-we-are-here-to-help/)
     - [From cloud to dashboard: experience the future of infotainment development at CES 2026](https://ubuntu.com//blog/future-of-infotainment-canonical-at-ces-2026)
-
-
-### 20251204
-
-- Blog
-    - [All Features in Java 26 - Inside Java Newscast #102](https://inside.java/2025/12/04/newscast-102/)
 
 
