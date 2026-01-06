@@ -8,10 +8,19 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260106
+
+- Blog
+    - [Canonical announces Ubuntu support for the NVIDIA Rubin platform](https://ubuntu.com//blog/nvidia-vera-rubin-ubuntu-support)
+    - [Meet Canonical at CES 2026: A trusted foundation for your device lifecycle](https://ubuntu.com//blog/canonical-at-ces-2026)
+
+
 ### 20260105
 
 - Blog
     - [The Inside Java Newsletter: JavaOne Sessions and Keynotes!](https://inside.java/2026/01/05/inside-java-newsletter/)
+    - [Rustup 1.29.0 beta: Call for Testing!](https://blog.rust-lang.org/inside-rust/2025/12/20/rustup-1.29.0-beta-cft/)
+    - [Project goals update — December 2025](https://blog.rust-lang.org/2026/01/05/project-goals-2025-december-update/)
 
 
 ### 20260104
@@ -173,14 +182,5 @@ search:
 
 - Blog
     - [JEP targeted to JDK 26: 530: Primitive Types in Patterns, instanceof, and switch (4th Preview)](https://inside.java/2025/12/06/jep530-target-jdk26/)
-    - [crates.io: Malicious crates finch-rust and sha-rust](https://blog.rust-lang.org/2025/12/05/crates.io-malicious-crates-finch-rust-and-sha-rust/)
-    - [Updating Rust&#39;s Linux musl targets to 1.2.5](https://blog.rust-lang.org/2025/12/05/Updating-musl-1.2.5/)
-
-
-### 20251205
-
-- Blog
-    - [The Inside Java Newsletter: Register for JavaOne 2026!](https://inside.java/2025/12/05/inside-java-newsletter/)
-    - [From cloud to dashboard: experience the future of infotainment development at CES 2026](https://ubuntu.com//blog/future-of-infotainment-canonical-at-ces-2026)
 
 
