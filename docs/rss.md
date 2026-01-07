@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260107
+
+
 ### 20260106
 
 - Blog
@@ -160,7 +163,6 @@ search:
 
 - Blog
     - [New VS Code Extension with Java 25 and Notebooks Support](https://inside.java/2025/12/09/new-vscode-extension/)
-    - [Newsletter: JDK 26: Feature Freeze, HTTP/3, and more Heads-Ups](https://inside.java/2025/12/06/quality-heads-up/)
     - [How telco companies can reduce 5G infrastructure costs with modern open source cloud-native technologies](https://ubuntu.com//blog/how-telco-companies-can-reduce-5g-infrastructure-costs-with-modern-open-source-cloud-native-technologies)
 
 
@@ -176,11 +178,5 @@ search:
 
 - Blog
     - [JavaOne 2026 Registration Is Now Open](https://inside.java/2025/12/07/javaone-registration-open/)
-
-
-### 20251206
-
-- Blog
-    - [JEP targeted to JDK 26: 530: Primitive Types in Patterns, instanceof, and switch (4th Preview)](https://inside.java/2025/12/06/jep530-target-jdk26/)
 
 
