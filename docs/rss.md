@@ -8,7 +8,16 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260108
+
+- Blog
+    - [Java’s Plans for 2026 - Inside Java Newscast #104](https://inside.java/2026/01/08/newscast-104/)
+
+
 ### 20260107
+
+- Blog
+    - [This Development-cycle in Cargo: 1.93](https://blog.rust-lang.org/inside-rust/2026/01/07/this-development-cycle-in-cargo-1.93/)
 
 
 ### 20260106
@@ -172,11 +181,5 @@ search:
     - [Kubernetes Made Simple: A Guide for JVM Developers](https://blog.jetbrains.com/kotlin/2025/12/kubernetes-made-simple-a-guide-for-jvm-developers/)
     - [On the Boundaries of Final](https://inside.java/2025/12/08/final-boundaries/)
     - [Making it easier to sponsor Rust contributors](https://blog.rust-lang.org/2025/12/08/making-it-easier-to-sponsor-rust-contributors/)
-
-
-### 20251207
-
-- Blog
-    - [JavaOne 2026 Registration Is Now Open](https://inside.java/2025/12/07/javaone-registration-open/)
 
 
