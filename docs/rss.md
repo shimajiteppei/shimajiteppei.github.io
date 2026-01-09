@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260109
+
+- Blog
+    - [Run Into the New Year with Java’s Ahead-of-Time Cache Optimizations](https://inside.java/2026/01/09/run-aot-cache/)
+
+
 ### 20260108
 
 - Blog
@@ -172,14 +178,5 @@ search:
 
 - Blog
     - [New VS Code Extension with Java 25 and Notebooks Support](https://inside.java/2025/12/09/new-vscode-extension/)
-    - [How telco companies can reduce 5G infrastructure costs with modern open source cloud-native technologies](https://ubuntu.com//blog/how-telco-companies-can-reduce-5g-infrastructure-costs-with-modern-open-source-cloud-native-technologies)
-
-
-### 20251208
-
-- Blog
-    - [Kubernetes Made Simple: A Guide for JVM Developers](https://blog.jetbrains.com/kotlin/2025/12/kubernetes-made-simple-a-guide-for-jvm-developers/)
-    - [On the Boundaries of Final](https://inside.java/2025/12/08/final-boundaries/)
-    - [Making it easier to sponsor Rust contributors](https://blog.rust-lang.org/2025/12/08/making-it-easier-to-sponsor-rust-contributors/)
 
 
