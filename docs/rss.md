@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260110
+
+- Blog
+    - [London called, and the world answered: creating a Summit without borders](https://ubuntu.com//blog/london-called-and-the-world-answered-creating-a-summit-without-borders)
+
+
 ### 20260109
 
 - Blog
@@ -168,15 +174,7 @@ search:
 ### 20251210
 
 - Blog
-    - [How Backend Development Teams Use Kotlin in 2025: Insights from a Certified Trainer](https://blog.jetbrains.com/kotlin/2025/12/how-backend-development-teams-use-kotlin-in-2025/)
     - [Episode 42 “From Sumatra to Panama, from Babylon to Valhalla” with John Rose](https://inside.java/2025/12/10/podcast-042/)
     - [Leadership Council update — December 2025](https://blog.rust-lang.org/inside-rust/2025/12/10/leadership-council-update/)
-    - [Canonical to distribute AMD ROCm AI/ML and HPC libraries in Ubuntu](https://ubuntu.com//blog/canonical-amd-rocm-ai-ml-hpc-libraries)
-
-
-### 20251209
-
-- Blog
-    - [New VS Code Extension with Java 25 and Notebooks Support](https://inside.java/2025/12/09/new-vscode-extension/)
 
 
