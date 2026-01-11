@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260111
+
+
 ### 20260110
 
 - Blog
@@ -167,14 +170,5 @@ search:
 
 - Blog
     - [Announcing Rust 1.92.0](https://blog.rust-lang.org/2025/12/11/Rust-1.92.0/)
-    - [Harnessing the potential of 5G with Kubernetes: a cloud-native telco transformation perspective](https://ubuntu.com//blog/harnessing-the-potential-of-5g-with-kubernetes-a-cloud-native-telco-transformation-perspective)
-    - [The rhythm of reliability: inside Canonical’s operational cadence](https://ubuntu.com//blog/the-rhythm-of-reliability)
-
-
-### 20251210
-
-- Blog
-    - [Episode 42 “From Sumatra to Panama, from Babylon to Valhalla” with John Rose](https://inside.java/2025/12/10/podcast-042/)
-    - [Leadership Council update — December 2025](https://blog.rust-lang.org/inside-rust/2025/12/10/leadership-council-update/)
 
 
