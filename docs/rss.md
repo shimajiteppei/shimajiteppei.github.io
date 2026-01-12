@@ -8,7 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260112
+
+
 ### 20260111
+
+- Blog
+    - [The Static Dynamic JVM – A Many Layered Dive #JVMLS](https://inside.java/2026/01/11/jvmls-static-dynamic-jvm/)
 
 
 ### 20260110
@@ -159,16 +165,5 @@ search:
 
 
 ### 20251212
-
-- Blog
-    - [A Better Way to Explore kotlinx-benchmark Results with Kotlin Notebooks](https://blog.jetbrains.com/kotlin/2025/12/a-better-way-to-explore-kotlinx-benchmark-results-with-kotlin-notebooks/)
-    - [Java 25 now available on Google Cloud Serverless](https://ubuntu.com//blog/java-25-now-available-on-google-cloud-serverless)
-    - [How to launch a Deep Learning VM on Google Cloud](https://ubuntu.com//blog/how-to-launch-a-deep-learning-vm-on-google-cloud)
-
-
-### 20251211
-
-- Blog
-    - [Announcing Rust 1.92.0](https://blog.rust-lang.org/2025/12/11/Rust-1.92.0/)
 
 
