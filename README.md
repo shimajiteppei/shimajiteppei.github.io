@@ -18,22 +18,14 @@ npm install
 
 ### Develop
 
-Start auto-reload server.
-
 ```sh
 npm start
 ```
 
-Stop server.
+### Build for production
 
 ```sh
-npm stop
-```
-
-Restart server.
-
-```sh
-npm restart
+npm run build
 ```
 
 ### Lint
@@ -42,12 +34,6 @@ Proofread markdowns expect for drafts.
 
 ```sh
 npm test
-```
-
-### Build & Preview
-
-```sh
-npm run generate
 ```
 
 ## Links
