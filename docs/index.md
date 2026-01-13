@@ -19,11 +19,11 @@
 
   <h4 style="color: var(--md-primary-fg-color)">★作ったもの★</h4>
   <p style="padding-bottom: 24px">
-    <a href="/nes-demo.html">ファミコンエミュレータ</a>
+    <a href="/work/nes-demo.html">ファミコンエミュレータ</a>
     <br />
     <a href="https://github.com/shimajiteppei/MasterThesis/blob/master/thesis/thesis.pdf">修士論文</a>
     <br />
-    <a href="/conways-game-of-life-jar.html">ライフゲーム</a>
+    <a href="/work/conways-game-of-life-jar.html">ライフゲーム</a>
   </p>
 
   <h4 style="color: var(--md-primary-fg-color)">★貢献★</h4>
