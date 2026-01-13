@@ -8,6 +8,17 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260113
+
+- Blog
+    - [Building AI Agents in Kotlin – Part 4: Delegation and Sub-Agents](https://blog.jetbrains.com/ai/2026/01/building-ai-agents-in-kotlin-part-4-delegation-and-sub-agents/)
+    - [Advent of Code 2025 in Kotlin: Puzzles, Prizes, and Community](https://blog.jetbrains.com/kotlin/2026/01/advent-of-code-2025-in-kotlin/)
+    - [Infrastructure Team 2025 Q4 Recap and Q1 2026 Plan](https://blog.rust-lang.org/inside-rust/2026/01/13/infrastructure-team-q4-2025-recap-and-q1-2026-plan/)
+    - [What is maintenance, anyway?](https://blog.rust-lang.org/inside-rust/2026/01/12/what-is-maintenance-anyway/)
+    - [Deploy your Spring Boot application to production](https://ubuntu.com//blog/deploy-spring-application-to-production)
+    - [Minimal Ubuntu Pro: lean images backed by enterprise-grade security](https://ubuntu.com//blog/minimal-ubuntu-pro-on-public-clouds)
+
+
 ### 20260112
 
 
@@ -137,7 +148,6 @@ search:
 - Blog
     - [Industry Leaders on the KotlinConf’25 Stage: What Global Brands Built With Kotlin](https://blog.jetbrains.com/kotlin/2025/12/industry-leaders-on-the-kotlinconf25-stage/)
     - [Kotlin 2.3.0 Released](https://blog.jetbrains.com/kotlin/2025/12/kotlin-2-3-0-released/)
-    - [Building AI Agents in Kotlin – Part 3: Under Observation](https://blog.jetbrains.com/ai/2025/12/building-ai-agents-in-kotlin-part-3-under-observation/)
 
 
 ### 20251216
@@ -162,8 +172,5 @@ search:
 
 - Blog
     - [Why you should retire your Microsoft Azure Consumption Commitment (MACC) with Ubuntu Pro](https://ubuntu.com//blog/retire-azure-consumption-commitment-macc-ubuntu-pro)
-
-
-### 20251212
 
 
