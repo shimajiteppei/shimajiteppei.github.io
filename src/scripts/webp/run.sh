@@ -1,4 +1,4 @@
-#!/use/env/bin sh
+#!/usr/env/bin sh
 set -e
 
 ORIGIN=$(pwd)
