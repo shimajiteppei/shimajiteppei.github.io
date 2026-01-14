@@ -4,7 +4,7 @@
         "preinstall": "rm -rf ./node_modules",
         "install": "npm install --ignore-scripts",
         "postinstall": "run-s tool:husky",
-        "start": "run-s tool:gen_xp-css docs:build:dev docs:start_serve",
+        "start": "run-s docs:build:dev docs:stop_serve docs:start_serve",
         "stop": "run-s docs:stop_serve",
         "test": "run-s -c tool:format tool:lint tool:check_dead_link",
         "build": "run-s docs:build:prd",
