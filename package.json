@@ -8,7 +8,7 @@
         "stop": "run-s docs:stop_serve",
         "test": "run-s -c tool:format tool:lint tool:check_dead_link",
         "build": "run-s docs:build:prd",
-        "docs:build:dev": "docker compose run --rm --build --user $(id -u):$(id -g) mkdocs build",
+        "docs:build:dev": "docker compose run --rm --user $(id -u):$(id -g) mkdocs build",
         "docs:build:prd": "docker compose run --rm --build --user $(id -u):$(id -g) -e EXCLUDE_DOCS='template/' mkdocs build",
         "docs:start_serve": "http-server ./site -p 8001 &",
         "docs:stop_serve": "pids=$(lsof -t -i:8001); [ -z $pids ] || kill -9 $pids",
