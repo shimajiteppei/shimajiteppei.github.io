@@ -8,6 +8,15 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260114
+
+- Blog
+    - [Compose Multiplatform 1.10.0: Unified @Preview, Navigation 3, and Stable Compose Hot Reload](https://blog.jetbrains.com/kotlin/2026/01/compose-multiplatform-1-10-0/)
+    - [The Journey to Compose Hot Reload 1.0.0](https://blog.jetbrains.com/kotlin/2026/01/the-journey-to-compose-hot-reload-1-0-0/)
+    - [One Giant Leap: 95% Less Sampling Cost](https://inside.java/2026/01/14/user-cpu-time-jvm/)
+    - [How to build DORA-ready infrastructure with verifiable provenance and reliable support](https://ubuntu.com//blog/build-dora-ready-infrastructure-with-verifiable-provenance)
+
+
 ### 20260113
 
 - Blog
@@ -166,11 +175,5 @@ search:
 
 
 ### 20251214
-
-
-### 20251213
-
-- Blog
-    - [Why you should retire your Microsoft Azure Consumption Commitment (MACC) with Ubuntu Pro](https://ubuntu.com//blog/retire-azure-consumption-commitment-macc-ubuntu-pro)
 
 
