@@ -10,7 +10,10 @@ def on_post_build(config):
             if file.endswith(".md"):
                 src = os.path.join(root, file)
                 rel = os.path.relpath(src, docs_dir)
-                dst = os.path.join(site_dir, rel)
+                rel_html = os.path.splitext(rel)[0] + ".html"
+                html_path_in_site = os.path.join(site_dir, rel_html)
 
-                os.makedirs(os.path.dirname(dst), exist_ok=True)
-                shutil.copyfile(src, dst)
+                if os.path.exists(html_path_in_site):
+                    dst = os.path.join(site_dir, rel)
+                    os.makedirs(os.path.dirname(dst), exist_ok=True)
+                    shutil.copyfile(src, dst)
