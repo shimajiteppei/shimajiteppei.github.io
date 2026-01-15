@@ -8,12 +8,16 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260115
+
+
 ### 20260114
 
 
 - [Compose Multiplatform 1.10.0: Unified @Preview, Navigation 3, and Stable Compose Hot Reload](https://blog.jetbrains.com/kotlin/2026/01/compose-multiplatform-1-10-0/)
 - [The Journey to Compose Hot Reload 1.0.0](https://blog.jetbrains.com/kotlin/2026/01/the-journey-to-compose-hot-reload-1-0-0/)
 - [One Giant Leap: 95% Less Sampling Cost](https://inside.java/2026/01/14/user-cpu-time-jvm/)
+- [What does it take to ship Rust in safety-critical?](https://blog.rust-lang.org/2026/01/14/what-does-it-take-to-ship-rust-in-safety-critical/)
 - [How to build DORA-ready infrastructure with verifiable provenance and reliable support](https://ubuntu.com//blog/build-dora-ready-infrastructure-with-verifiable-provenance)
 
 
@@ -172,8 +176,5 @@ search:
 
 
 - [Valhalla? Python? Withers? Lombok? - Ask the Architects at JavaOne’25](https://inside.java/2025/12/15/javaone-ask-java-architects/)
-
-
-### 20251214
 
 
