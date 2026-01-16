@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260116
+
+
+- [Update your Kotlin projects for Android Gradle Plugin 9.0](https://blog.jetbrains.com/kotlin/2026/01/update-your-projects-for-agp9/)
+- [Canonical Ubuntu and Ubuntu Pro now available on AWS European Sovereign Cloud](https://ubuntu.com//blog/ubuntu-aws-european-sovereign-cloud)
+
+
 ### 20260115
 
 
@@ -169,12 +176,5 @@ search:
 - [Quality Outreach Heads-up - JDK 26: Jlink Compression Plugin Now Handles -c Option Correctly](https://inside.java/2025/12/16/quality-heads-up/)
 - [Please submit 2026 Project goal proposals](https://blog.rust-lang.org/inside-rust/2025/12/16/please-submit-2026-project-goal-proposals/)
 - [Project goals update — November 2025](https://blog.rust-lang.org/2025/12/16/Project-Goals-2025-November-Update.md/)
-- [Native integration available between Canonical LXD and HPE Alletra MP B10000](https://ubuntu.com//blog/canonical_lxd_hpe_alletra)
-
-
-### 20251215
-
-
-- [Valhalla? Python? Withers? Lombok? - Ask the Architects at JavaOne’25](https://inside.java/2025/12/15/javaone-ask-java-architects/)
 
 
