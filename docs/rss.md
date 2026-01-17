@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260117
+
+
 ### 20260116
 
 
@@ -167,14 +170,5 @@ search:
 
 
 - [Industry Leaders on the KotlinConf’25 Stage: What Global Brands Built With Kotlin](https://blog.jetbrains.com/kotlin/2025/12/industry-leaders-on-the-kotlinconf25-stage/)
-- [Kotlin 2.3.0 Released](https://blog.jetbrains.com/kotlin/2025/12/kotlin-2-3-0-released/)
-
-
-### 20251216
-
-
-- [Quality Outreach Heads-up - JDK 26: Jlink Compression Plugin Now Handles -c Option Correctly](https://inside.java/2025/12/16/quality-heads-up/)
-- [Please submit 2026 Project goal proposals](https://blog.rust-lang.org/inside-rust/2025/12/16/please-submit-2026-project-goal-proposals/)
-- [Project goals update — November 2025](https://blog.rust-lang.org/2025/12/16/Project-Goals-2025-November-Update.md/)
 
 
