@@ -19,14 +19,14 @@ description: 自作のリバーシで遊べます
         </button>
       </div>
     </div>
-    <div id="game-window" class="window-body" style="margin: 16px; font-size: 16px;">
+    <div id="game-window" class="window-body" style="margin: 16px; font-size: 16px; color: black;">
       <div style="display: flex; justify-content: center;">
         CPUの強さ：<div id="mode"></div>
         <div style="padding-left: 16px;">
-            <button id="new-game-easy" type="button">EASYで開始</button>
+            <button id="new-game-easy" type="button" style="color: black;">EASYで開始</button>
         </div>
         <div style="padding-left: 16px;">
-            <button id="new-game-hard" type="button">HARDで開始</button>
+            <button id="new-game-hard" type="button" style="color: black;">HARDで開始</button>
         </div>
       </div>
       <canvas id="canvas" style="width: 100%"></canvas>
