@@ -19,6 +19,8 @@
 
   <h4 style="color: var(--md-primary-fg-color)">★作ったもの★</h4>
   <p style="padding-bottom: 24px">
+    <a href="/work/reversi.html">リバーシ</a>
+    <br />
     <a href="/work/nes-demo.html">ファミコンエミュレータ</a>
     <br />
     <a href="https://github.com/shimajiteppei/MasterThesis/blob/master/thesis/thesis.pdf">修士論文</a>
