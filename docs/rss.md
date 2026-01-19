@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260119
+
+
+- [Optimizing GPU Programs from Java using Babylon and HAT](https://inside.java/2026/01/19/hat-matmul-gpu/)
+- [1B Rows with the Memory API - JEP Cafe #25](https://inside.java/2026/01/17/jepcafe25/)
+
+
 ### 20260117
 
 
@@ -155,20 +162,5 @@ search:
 
 - [How Mobile Development Teams Use Kotlin in 2025: Insights From a Certified Trainer](https://blog.jetbrains.com/kotlin/2025/12/how-mobile-development-teams-use-kotlin-in-2025/)
 - [MicroCeph: why it’s the superior MinIO alternative (and how to use it)](https://ubuntu.com//blog/microceph-why-its-the-superior-minio-alternative)
-
-
-### 20251218
-
-
-- [The Ultimate Guide to Successfully Adopting Kotlin in a Java-Dominated Environment](https://blog.jetbrains.com/kotlin/2025/12/the-ultimate-guide-to-successfully-adopting-kotlin-in-a-java-dominated-environment/)
-- [Java’s 2025 in Review - Inside Java Newscast #103](https://inside.java/2025/12/18/newscast-103/)
-- [Design and Documentation clinics at FOSDEM Fringe 2026](https://ubuntu.com//blog/design-and-documentation-clinics-at-fosdem-fringe-2026)
-- [Extending ROS Noetic Support with ESM-Enabled Content Snaps](https://ubuntu.com//blog/extending-ros-noetic-support-with-esm-enabled-content-snaps)
-
-
-### 20251217
-
-
-- [Industry Leaders on the KotlinConf’25 Stage: What Global Brands Built With Kotlin](https://blog.jetbrains.com/kotlin/2025/12/industry-leaders-on-the-kotlinconf25-stage/)
 
 
