@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260120
+
+
+- [Cognitive leakage and the human consequences of software abstractions](https://www.thoughtworks.com/insights/blog/programming-languages/cognitive-leakage-human-consequences-software-abstractions)
+- [Showcasing open design in action: Loughborough University design students explore open source projects](https://ubuntu.com//blog/showcasing-open-design-in-action-loughborough-university-design-students-explore-open-source-projects)
+
+
 ### 20260119
 
 
@@ -149,18 +156,5 @@ search:
 
 
 ### 20251220
-
-
-- [December 2025 Project Director Update](https://blog.rust-lang.org/inside-rust/2025/12/19/project-director-update/)
-- [Program management update — End of 2025](https://blog.rust-lang.org/inside-rust/2025/12/19/program-management-update--end-of-2025/)
-- [What do people love about Rust?](https://blog.rust-lang.org/2025/12/19/what-do-people-love-about-rust/)
-- [A better way to provision NVIDIA BlueField DPUs at scale with MAAS](https://ubuntu.com//blog/a-better-way-to-provision-nvidia-bluefield-dpus-at-scale-with-maas)
-
-
-### 20251219
-
-
-- [How Mobile Development Teams Use Kotlin in 2025: Insights From a Certified Trainer](https://blog.jetbrains.com/kotlin/2025/12/how-mobile-development-teams-use-kotlin-in-2025/)
-- [MicroCeph: why it’s the superior MinIO alternative (and how to use it)](https://ubuntu.com//blog/microceph-why-its-the-superior-minio-alternative)
 
 
