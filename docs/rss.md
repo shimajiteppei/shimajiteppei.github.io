@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260121
+
+
+- [crates.io: development update](https://blog.rust-lang.org/2026/01/21/crates-io-development-update/)
+
+
 ### 20260120
 
 
@@ -100,7 +106,6 @@ search:
 
 
 - [The Inside Java Newsletter: JavaOne Sessions and Keynotes!](https://inside.java/2026/01/05/inside-java-newsletter/)
-- [Rustup 1.29.0 beta: Call for Testing!](https://blog.rust-lang.org/inside-rust/2025/12/20/rustup-1.29.0-beta-cft/)
 - [Project goals update — December 2025](https://blog.rust-lang.org/2026/01/05/project-goals-2025-december-update/)
 
 
@@ -153,8 +158,5 @@ search:
 
 
 - [Virtual Threads in the Real World: Fast, Robust Java Microservices with Helidon](https://inside.java/2025/12/21/virtual-threads-robust-java-microservices/)
-
-
-### 20251220
 
 
