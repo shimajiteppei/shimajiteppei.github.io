@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260122
+
+
+- [Carrier Classes; Beyond Records - Inside Java Newscast #105](https://inside.java/2026/01/22/newscast-105/)
+
+
 ### 20260121
 
 
@@ -152,11 +158,5 @@ search:
 
 
 ### 20251222
-
-
-### 20251221
-
-
-- [Virtual Threads in the Real World: Fast, Robust Java Microservices with Helidon](https://inside.java/2025/12/21/virtual-threads-robust-java-microservices/)
 
 
