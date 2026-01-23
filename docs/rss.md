@@ -8,9 +8,18 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260123
+
+
+- [Oracle Java Extension for Visual Studio Code Version 25.0.1 Is Now Available!](https://inside.java/2026/01/23/java-vscode-extension-update/)
+- [Announcing Rust 1.93.0](https://blog.rust-lang.org/2026/01/22/Rust-1.93.0/)
+- [How to avoid package End of Life through backporting](https://ubuntu.com//blog/how-to-avoid-package-end-of-life-through-backporting)
+
+
 ### 20260122
 
 
+- [How to Avoid Common Pitfalls With JPA and Kotlin](https://blog.jetbrains.com/idea/2026/01/how-to-avoid-common-pitfalls-with-jpa-and-kotlin/)
 - [Carrier Classes; Beyond Records - Inside Java Newscast #105](https://inside.java/2026/01/22/newscast-105/)
 
 
@@ -155,8 +164,5 @@ search:
 
 
 ### 20251223
-
-
-### 20251222
 
 
