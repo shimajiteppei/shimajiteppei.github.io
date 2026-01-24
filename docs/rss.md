@@ -8,9 +8,14 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260124
+
+
 ### 20260123
 
 
+- [Ktor 3.4.0 Is Now Available!](https://blog.jetbrains.com/kotlin/2026/01/ktor-3-4-0-is-now-available/)
+- [Exposed 1.0 Is Now Available](https://blog.jetbrains.com/kotlin/2026/01/exposed-1-0-is-now-available/)
 - [Oracle Java Extension for Visual Studio Code Version 25.0.1 Is Now Available!](https://inside.java/2026/01/23/java-vscode-extension-update/)
 - [Announcing Rust 1.93.0](https://blog.rust-lang.org/2026/01/22/Rust-1.93.0/)
 - [How to avoid package End of Life through backporting](https://ubuntu.com//blog/how-to-avoid-package-end-of-life-through-backporting)
@@ -161,8 +166,5 @@ search:
 
 
 ### 20251224
-
-
-### 20251223
 
 
