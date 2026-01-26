@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260126
+
+
+- [Meet the First Speakers Heading to KotlinConf 2026](https://blog.jetbrains.com/kotlin/2026/01/meet-the-first-speakers-heading-to-kotlinconf-2026/)
+
+
 ### 20260125
 
 
@@ -163,8 +169,5 @@ search:
 
 
 - [Episode 43 “Predictability or Innovation? Both!” with Georges Saab](https://inside.java/2025/12/26/podcast-043/)
-
-
-### 20251225
 
 
