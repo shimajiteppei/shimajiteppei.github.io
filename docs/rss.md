@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260127
+
+
+- [Data-Oriented Programming for Java: Beyond Records](https://inside.java/2026/01/27/beyond-records/)
+
+
 ### 20260126
 
 
@@ -163,11 +169,5 @@ search:
 
 
 ### 20251227
-
-
-### 20251226
-
-
-- [Episode 43 “Predictability or Innovation? Both!” with Georges Saab](https://inside.java/2025/12/26/podcast-043/)
 
 
