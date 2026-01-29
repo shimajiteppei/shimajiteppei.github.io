@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260129
+
+
+- [Episode 44 “Java, Collections &amp;amp; Generics, BeJUG”](https://inside.java/2026/01/29/podcast-044/)
+
+
 ### 20260128
 
 
@@ -170,8 +176,5 @@ search:
 
 
 ### 20251229
-
-
-### 20251228
 
 
