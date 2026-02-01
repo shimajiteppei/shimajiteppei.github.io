@@ -8,7 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260201
+
+
 ### 20260131
+
+
+- [Qodana for Android: Increasing Code Quality for Kotlin-First Teams](https://blog.jetbrains.com/qodana/2026/01/qodana-for-android-kotlin/)
 
 
 ### 20260130
@@ -173,8 +179,5 @@ search:
 
 
 ### 20260101
-
-
-### 20251231
 
 
