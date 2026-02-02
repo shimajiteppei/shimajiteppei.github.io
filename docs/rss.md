@@ -8,7 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260202
+
+
 ### 20260201
+
+
+- [Level Up Your LangChain4j Apps for Production](https://inside.java/2026/02/01/devoxxbelgium-production-langchain4j/)
 
 
 ### 20260131
@@ -176,8 +182,5 @@ search:
 
 
 ### 20260102
-
-
-### 20260101
 
 
