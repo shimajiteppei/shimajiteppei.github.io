@@ -8,6 +8,16 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260203
+
+
+- [Pick Your KotlinConf Workshop by What You Want to Learn](https://blog.jetbrains.com/kotlin/2026/02/pick-your-kotlinconf-workshop/)
+- [Join the Kotlin Ecosystem Mentorship Program](https://blog.jetbrains.com/kotlin/2026/02/kotlin-ecosystem-mentorship/)
+- [First look at 2026 Project goals](https://blog.rust-lang.org/inside-rust/2026/02/03/first-look-at-2026-project-goals/)
+- [AWS IoT Greengrass comes to Ubuntu Core](https://ubuntu.com//blog/aws-iot-greengrass-comes-to-ubuntu-core)
+- [Tutorial: getting started with AWS IoT Greengrass on Ubuntu Core](https://ubuntu.com//blog/tutorial-getting-started-with-aws-greengrass-on-ubuntu-core)
+
+
 ### 20260202
 
 
@@ -179,8 +189,5 @@ search:
 
 
 ### 20260103
-
-
-### 20260102
 
 
