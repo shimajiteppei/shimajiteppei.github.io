@@ -8,6 +8,14 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260205
+
+
+- [Koog x ACP: Connect an Agent to Your IDE and More](https://blog.jetbrains.com/ai/2026/02/koog-x-acp-connect-an-agent-to-your-ide-and-more/)
+- [LazyConstants in JDK 26 - Inside Java Newscast #106](https://inside.java/2026/02/05/newscast-106/)
+- [AI meets SQL Server 2025 on Ubuntu](https://ubuntu.com//blog/sql-server-2025-on-ubuntu)
+
+
 ### 20260204
 
 
@@ -186,8 +194,5 @@ search:
 
 - [The Inside Java Newsletter: JavaOne Sessions and Keynotes!](https://inside.java/2026/01/05/inside-java-newsletter/)
 - [Project goals update — December 2025](https://blog.rust-lang.org/2026/01/05/project-goals-2025-december-update/)
-
-
-### 20260104
 
 
