@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260206
+
+
+- [The Inside Java Newsletter: JavaOne 2026: $100 Discount Now!](https://inside.java/2026/02/06/inside-java-newsletter/)
+- [SpacemiT announces the availability of  Ubuntu on K3/K1 series RISC-V AI computing platforms](https://ubuntu.com//blog/spacemit-announces-availability-of-ubuntu-on-k3-k1-series)
+
+
 ### 20260205
 
 
@@ -183,16 +190,5 @@ search:
 
 
 ### 20260106
-
-
-- [Canonical announces Ubuntu support for the NVIDIA Rubin platform](https://ubuntu.com//blog/nvidia-vera-rubin-ubuntu-support)
-- [Meet Canonical at CES 2026: A trusted foundation for your device lifecycle](https://ubuntu.com//blog/canonical-at-ces-2026)
-
-
-### 20260105
-
-
-- [The Inside Java Newsletter: JavaOne Sessions and Keynotes!](https://inside.java/2026/01/05/inside-java-newsletter/)
-- [Project goals update — December 2025](https://blog.rust-lang.org/2026/01/05/project-goals-2025-december-update/)
 
 
