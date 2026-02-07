@@ -8,6 +8,14 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260207
+
+
+- [Optimizing Java Class Metadata in Project Valhalla](https://inside.java/2026/02/07/valhalla-class-metadata-optimization/)
+- [SQL Server 2025 is generally available on Ubuntu 24.04 LTS](https://ubuntu.com//blog/sql-server-2025-ubuntu-24-04-lts)
+- [Hiring the Canonical way: trust, humanity, and remote-first thinking](https://ubuntu.com//blog/hiring-the-canonical-way)
+
+
 ### 20260206
 
 
@@ -187,8 +195,5 @@ search:
 
 
 - [This Development-cycle in Cargo: 1.93](https://blog.rust-lang.org/inside-rust/2026/01/07/this-development-cycle-in-cargo-1.93/)
-
-
-### 20260106
 
 
