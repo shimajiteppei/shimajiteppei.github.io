@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260208
+
+
 ### 20260207
 
 
@@ -189,11 +192,5 @@ search:
 
 
 - [Java’s Plans for 2026 - Inside Java Newscast #104](https://inside.java/2026/01/08/newscast-104/)
-
-
-### 20260107
-
-
-- [This Development-cycle in Cargo: 1.93](https://blog.rust-lang.org/inside-rust/2026/01/07/this-development-cycle-in-cargo-1.93/)
 
 
