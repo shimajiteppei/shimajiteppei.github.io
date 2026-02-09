@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260209
+
+
+- [Quality Outreach Heads-up - JDK 26: DecimalFormat Uses the Double.toString(double) Algorithm](https://inside.java/2026/02/09/quality-heads-up/)
+
+
 ### 20260208
 
 
@@ -186,11 +192,5 @@ search:
 
 
 - [Run Into the New Year with Java’s Ahead-of-Time Cache Optimizations](https://inside.java/2026/01/09/run-aot-cache/)
-
-
-### 20260108
-
-
-- [Java’s Plans for 2026 - Inside Java Newscast #104](https://inside.java/2026/01/08/newscast-104/)
 
 
