@@ -8,10 +8,17 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260210
+
+
+- [Quality Outreach Heads-up - JDK 27: Removal of ThreadPoolExecutor.finalize()](https://inside.java/2026/02/10/quality-heads-up/)
+
+
 ### 20260209
 
 
 - [Quality Outreach Heads-up - JDK 26: DecimalFormat Uses the Double.toString(double) Algorithm](https://inside.java/2026/02/09/quality-heads-up/)
+- [January 2026 Project Director Update](https://blog.rust-lang.org/inside-rust/2026/02/09/project-director-update/)
 
 
 ### 20260208
@@ -183,14 +190,5 @@ search:
 
 
 ### 20260110
-
-
-- [London called, and the world answered: creating a Summit without borders](https://ubuntu.com//blog/london-called-and-the-world-answered-creating-a-summit-without-borders)
-
-
-### 20260109
-
-
-- [Run Into the New Year with Java’s Ahead-of-Time Cache Optimizations](https://inside.java/2026/01/09/run-aot-cache/)
 
 
