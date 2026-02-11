@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260211
+
+
+- [What is RDMA?](https://ubuntu.com//blog/what-is-rdma)
+- [Building new revenue streams: 3 strategic cloud opportunities for telcos in 2026](https://ubuntu.com//blog/new-telco-cloud-opportunity)
+
+
 ### 20260210
 
 
@@ -187,8 +194,5 @@ search:
 
 
 - [The Static Dynamic JVM – A Many Layered Dive #JVMLS](https://inside.java/2026/01/11/jvmls-static-dynamic-jvm/)
-
-
-### 20260110
 
 
