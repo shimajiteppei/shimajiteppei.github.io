@@ -8,6 +8,23 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260213
+
+
+- [Episode 45 “Announcement - The New Inside Java Podcast”](https://inside.java/2026/02/13/podcast-045/)
+- [JEP targeted to JDK 27: 527: Post-Quantum Hybrid Key Exchange for TLS 1.3](https://inside.java/2026/02/12/jep527-target-jdk27/)
+- [From inspiration to impact: design students from Regent’s University London explore open design for their dissertation projects](https://ubuntu.com//blog/from-inspiration-to-impact-design-students-from-regents-university-london-explore-open-design-for-their-dissertation-projects)
+- [When an upstream change broke smartcard FIPS authentication – and how we fixed it](https://ubuntu.com//blog/when-an-upstream-change-broke-smartcard-fips-authentication-and-how-we-fixed-it)
+- [Open platforms, edge AI, and sovereign telco clouds: Ecrio &amp;#038; Canonical at MWC Barcelona](https://ubuntu.com//blog/open-platforms-edge-ai-and-sovereign-telco-clouds-ecrio-canonical-at-mwc-barcelona)
+
+
+### 20260212
+
+
+- [Program management update — January 2026](https://blog.rust-lang.org/inside-rust/2026/02/11/program-management-update-2026-01/)
+- [Announcing Rust 1.93.1](https://blog.rust-lang.org/2026/02/12/Rust-1.93.1/)
+
+
 ### 20260211
 
 
@@ -180,19 +197,7 @@ search:
 
 
 - [Building AI Agents in Kotlin – Part 4: Delegation and Sub-Agents](https://blog.jetbrains.com/ai/2026/01/building-ai-agents-in-kotlin-part-4-delegation-and-sub-agents/)
-- [Advent of Code 2025 in Kotlin: Puzzles, Prizes, and Community](https://blog.jetbrains.com/kotlin/2026/01/advent-of-code-2025-in-kotlin/)
 - [Infrastructure Team 2025 Q4 Recap and Q1 2026 Plan](https://blog.rust-lang.org/inside-rust/2026/01/13/infrastructure-team-q4-2025-recap-and-q1-2026-plan/)
-- [What is maintenance, anyway?](https://blog.rust-lang.org/inside-rust/2026/01/12/what-is-maintenance-anyway/)
 - [Deploy your Spring Boot application to production](https://ubuntu.com//blog/deploy-spring-application-to-production)
-- [Minimal Ubuntu Pro: lean images backed by enterprise-grade security](https://ubuntu.com//blog/minimal-ubuntu-pro-on-public-clouds)
-
-
-### 20260112
-
-
-### 20260111
-
-
-- [The Static Dynamic JVM – A Many Layered Dive #JVMLS](https://inside.java/2026/01/11/jvmls-static-dynamic-jvm/)
 
 
