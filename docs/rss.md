@@ -8,11 +8,21 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260214
+
+
+- [Newsletter: JDK 26 Release Candidate | JavaOne and More Heads-Up](https://inside.java/2026/02/14/quality-heads-up/)
+- [The foundations of software: open source libraries and their maintainers](https://ubuntu.com//blog/the-foundations-of-software-open-source-libraries-and-their-maintainers)
+
+
 ### 20260213
 
 
+- [Building Modular Monoliths With Kotlin and Spring](https://blog.jetbrains.com/kotlin/2026/02/building-modular-monoliths-with-kotlin-and-spring/)
 - [Episode 45 “Announcement - The New Inside Java Podcast”](https://inside.java/2026/02/13/podcast-045/)
 - [JEP targeted to JDK 27: 527: Post-Quantum Hybrid Key Exchange for TLS 1.3](https://inside.java/2026/02/12/jep527-target-jdk27/)
+- [Leadership Council March 2026 Representative Selections](https://blog.rust-lang.org/inside-rust/2026/02/13/leadership-council-repr-selection/)
+- [crates.io: an update to the malicious crate notification policy](https://blog.rust-lang.org/2026/02/13/crates.io-malicious-crate-update/)
 - [From inspiration to impact: design students from Regent’s University London explore open design for their dissertation projects](https://ubuntu.com//blog/from-inspiration-to-impact-design-students-from-regents-university-london-explore-open-design-for-their-dissertation-projects)
 - [When an upstream change broke smartcard FIPS authentication – and how we fixed it](https://ubuntu.com//blog/when-an-upstream-change-broke-smartcard-fips-authentication-and-how-we-fixed-it)
 - [Open platforms, edge AI, and sovereign telco clouds: Ecrio &amp;#038; Canonical at MWC Barcelona](https://ubuntu.com//blog/open-platforms-edge-ai-and-sovereign-telco-clouds-ecrio-canonical-at-mwc-barcelona)
@@ -186,18 +196,8 @@ search:
 ### 20260114
 
 
-- [Compose Multiplatform 1.10.0: Unified @Preview, Navigation 3, and Stable Compose Hot Reload](https://blog.jetbrains.com/kotlin/2026/01/compose-multiplatform-1-10-0/)
-- [The Journey to Compose Hot Reload 1.0.0](https://blog.jetbrains.com/kotlin/2026/01/the-journey-to-compose-hot-reload-1-0-0/)
 - [One Giant Leap: 95% Less Sampling Cost](https://inside.java/2026/01/14/user-cpu-time-jvm/)
 - [What does it take to ship Rust in safety-critical?](https://blog.rust-lang.org/2026/01/14/what-does-it-take-to-ship-rust-in-safety-critical/)
 - [How to build DORA-ready infrastructure with verifiable provenance and reliable support](https://ubuntu.com//blog/build-dora-ready-infrastructure-with-verifiable-provenance)
-
-
-### 20260113
-
-
-- [Building AI Agents in Kotlin – Part 4: Delegation and Sub-Agents](https://blog.jetbrains.com/ai/2026/01/building-ai-agents-in-kotlin-part-4-delegation-and-sub-agents/)
-- [Infrastructure Team 2025 Q4 Recap and Q1 2026 Plan](https://blog.rust-lang.org/inside-rust/2026/01/13/infrastructure-team-q4-2025-recap-and-q1-2026-plan/)
-- [Deploy your Spring Boot application to production](https://ubuntu.com//blog/deploy-spring-application-to-production)
 
 
