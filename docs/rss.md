@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260215
+
+
 ### 20260214
 
 
@@ -191,13 +194,5 @@ search:
 
 
 ### 20260115
-
-
-### 20260114
-
-
-- [One Giant Leap: 95% Less Sampling Cost](https://inside.java/2026/01/14/user-cpu-time-jvm/)
-- [What does it take to ship Rust in safety-critical?](https://blog.rust-lang.org/2026/01/14/what-does-it-take-to-ship-rust-in-safety-critical/)
-- [How to build DORA-ready infrastructure with verifiable provenance and reliable support](https://ubuntu.com//blog/build-dora-ready-infrastructure-with-verifiable-provenance)
 
 
