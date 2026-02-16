@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260216
+
+
 ### 20260215
 
 
@@ -190,9 +193,5 @@ search:
 
 
 - [Update your Kotlin projects for Android Gradle Plugin 9.0](https://blog.jetbrains.com/kotlin/2026/01/update-your-projects-for-agp9/)
-- [Canonical Ubuntu and Ubuntu Pro now available on AWS European Sovereign Cloud](https://ubuntu.com//blog/ubuntu-aws-european-sovereign-cloud)
-
-
-### 20260115
 
 
