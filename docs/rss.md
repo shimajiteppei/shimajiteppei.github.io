@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260217
+
+
 ### 20260216
 
 
@@ -187,11 +190,5 @@ search:
 
 
 ### 20260117
-
-
-### 20260116
-
-
-- [Update your Kotlin projects for Android Gradle Plugin 9.0](https://blog.jetbrains.com/kotlin/2026/01/update-your-projects-for-agp9/)
 
 
