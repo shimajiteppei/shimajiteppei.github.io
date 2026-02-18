@@ -8,7 +8,18 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260218
+
+
+- [Kodee’s Kotlin Roundup: KotlinConf ’26 Updates, New Releases, and More](https://blog.jetbrains.com/kotlin/2026/02/kodees-kotlin-roundup-kotlinconf-26-updates-new-releases-and-more/)
+- [A year of documentation-driven development](https://ubuntu.com//blog/a-year-of-documentation-driven-development)
+- [Announcing FIPS 140-3 for Ubuntu Core22](https://ubuntu.com//blog/announcing-fips-140-3-for-ubuntu-core22)
+
+
 ### 20260217
+
+
+- [Post-Quantum Hybrid Key Exchange for TLS 1.3](https://inside.java/2026/02/17/tls-post-quantum-hybrid-key-exchange/)
 
 
 ### 20260216
@@ -186,9 +197,5 @@ search:
 
 
 - [Optimizing GPU Programs from Java using Babylon and HAT](https://inside.java/2026/01/19/hat-matmul-gpu/)
-- [1B Rows with the Memory API - JEP Cafe #25](https://inside.java/2026/01/17/jepcafe25/)
-
-
-### 20260117
 
 
