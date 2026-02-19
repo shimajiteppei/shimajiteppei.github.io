@@ -8,10 +8,17 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260219
+
+
+- [Predict, compare, and reduce costs with our S3 cost calculator](https://ubuntu.com//blog/predict-compare-and-reduce-costs-with-our-s3-cost-calculator)
+
+
 ### 20260218
 
 
 - [Kodee’s Kotlin Roundup: KotlinConf ’26 Updates, New Releases, and More](https://blog.jetbrains.com/kotlin/2026/02/kodees-kotlin-roundup-kotlinconf-26-updates-new-releases-and-more/)
+- [This Development-cycle in Cargo: 1.94](https://blog.rust-lang.org/inside-rust/2026/02/18/this-development-cycle-in-cargo-1.94/)
 - [A year of documentation-driven development](https://ubuntu.com//blog/a-year-of-documentation-driven-development)
 - [Announcing FIPS 140-3 for Ubuntu Core22](https://ubuntu.com//blog/announcing-fips-140-3-for-ubuntu-core22)
 
