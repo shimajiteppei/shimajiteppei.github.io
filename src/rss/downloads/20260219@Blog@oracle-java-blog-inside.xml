@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="https://inside.java/feed.xml" rel="self" type="application/atom+xml" /><link href="https://inside.java/" rel="alternate" type="text/html" /><updated>2026-02-19T16:26:50+00:00</updated><id>https://inside.java/feed.xml</id><title type="html">insidejava</title><subtitle>News and views from members of the Java team at Oracle</subtitle><entry><title type="html">Towards Better Checked Exceptions - Inside Java Newscast #107</title><link href="https://inside.java/2026/02/19/newscast-107/" rel="alternate" type="text/html" title="Towards Better Checked Exceptions - Inside Java Newscast #107" /><published>2026-02-19T00:00:00+00:00</published><updated>2026-02-19T00:00:00+00:00</updated><id>https://inside.java/2026/02/19/Newscast-107</id><content type="html" xml:base="https://inside.java/2026/02/19/newscast-107/"><![CDATA[<div class="youtube-embed">
+    <iframe src="https://www.youtube.com/embed/99s7ozvJGLk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>
+</div>
+
+<p><em>Java’s checked exceptions are both an integral part of the language and one of its most contested features. Whether their introduction was a mistake and whether they should all be turned unchecked are frequently discussed topics but since the former is not overly relevant and the latter unlikely, this conversation isn’t moving Java forward. Instead, let’s talk about specific issues with checked exceptions and what could be done about them - from (entirely speculative) language changes to (marginally realistic) JDK/library evolution to stylistic changes.</em></p>
+
+<p><em>Make sure to check the <a href="https://www.youtube.com/watch?v=99s7ozvJGLk">show-notes</a>.</em></p>]]></content><author><name>[&quot;NicolaiParlog&quot;]</name></author><category term="Amber" /><summary type="html"><![CDATA[Java's checked exceptions are both an integral part of the language and one of its most contested features. Whether their introduction was a mistake and whether they should all be turned unchecked are frequently discussed topics but since the former is not overly relevant and the latter unlikely, this conversation isn't moving Java forward. Instead, let's talk about specific issues with checked exceptions and what could be done about them - from (entirely speculative) language changes to (marginally realistic) JDK/library evolution to stylistic changes.]]></summary></entry><entry><title type="html">Post-Quantum Hybrid Key Exchange for TLS 1.3</title><link href="https://inside.java/2026/02/17/tls-post-quantum-hybrid-key-exchange/" rel="alternate" type="text/html" title="Post-Quantum Hybrid Key Exchange for TLS 1.3" /><published>2026-02-17T00:00:00+00:00</published><updated>2026-02-17T00:00:00+00:00</updated><id>https://inside.java/2026/02/17/tls-post-quantum-hybrid-key-exchange</id><content type="html" xml:base="https://inside.java/2026/02/17/tls-post-quantum-hybrid-key-exchange/"><![CDATA[<p><a href="https://openjdk.org/jeps/527">JEP 527</a> is now integrated into JDK 27!  This feature enhances the security of Java applications by implementing <a href="https://datatracker.ietf.org/doc/draft-ietf-tls-hybrid-design">hybrid key exchange</a> algorithms for TLS 1.3. Such algorithms defend against future quantum computing attacks by combining a quantum-resistant algorithm with a traditional algorithm. 
+Applications that use the <code class="language-plaintext highlighter-rouge">javax.net.ssl</code> APIs will benefit from these improved algorithms by default, without change to existing code. This feature is the next step in the Java Platform’s support for post-quantum cryptography. 
+<a href="https://jdk.java.net/27/">Early access builds</a> beginning with build 6 have this feature.</p>
+
+<p>TLS 1.3 with solely traditional key exchange algorithms are potentially vulnerable to the <a href="https://en.wikipedia.org/wiki/Harvest_now%2C_decrypt_later"><em>harvest now, decrypt later</em></a> threat. 
+By combining quantum-resistant <a href="https://openjdk.org/jeps/496">ML-KEM</a> with traditional elliptic-curve algorithms, the JDK implementation of TLS 1.3 is protected against such attacks.</p>
+
+<p>We have delivered three algorithms that <a href="https://datatracker.ietf.org/doc/draft-ietf-tls-ecdhe-mlkem/">combine ML-KEM and ECDHE</a> in the SunJSSE provider:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">X25519MLKEM768</code>:  Hybrid scheme combining ECDHE with <a href="https://www.rfc-editor.org/rfc/rfc7748">X25519</a> and ML-KEM-768,</li>
+  <li><code class="language-plaintext highlighter-rouge">SecP256r1MLKEM768</code>: Hybrid scheme combining ECDHE using the <code class="language-plaintext highlighter-rouge">secp256r1</code> curve with <code class="language-plaintext highlighter-rouge">ML-KEM-768</code>, and</li>
+  <li><code class="language-plaintext highlighter-rouge">SecP384r1MLKEM1024</code>: Hybrid scheme combining ECDHE using the <code class="language-plaintext highlighter-rouge">secp384r1</code> curve with <code class="language-plaintext highlighter-rouge">ML-KEM-1024</code>.</li>
+</ul>
+
+<h2 id="enabling-and-customizing-hybrid-key-exchange-support">Enabling and Customizing Hybrid Key Exchange Support</h2>
+
+<p>By default <code class="language-plaintext highlighter-rouge">X25519MLKEM768</code> is enabled alongside the other pre-existing non-hybrid supported key exchange methods. 
+In the default case, TLS clients will provide two key exchange key shares - one <code class="language-plaintext highlighter-rouge">X25519MLKEM768</code> and one <code class="language-plaintext highlighter-rouge">x25519</code>. 
+Users may customize the list of supported key exchange algorithms for clients and servers to include any combination of supported hybrid and traditional key exchange algorithms. 
+This can be accomplished two ways:</p>
+
+<ul>
+  <li>By setting the <a href="https://docs.oracle.com/en/java/javase/25/security/java-secure-socket-extension-jsse-reference-guide.html#GUID-4A6ABFE4-6B0E-4DF2-A9E8-EEEB71935293"><code class="language-plaintext highlighter-rouge">jdk.tls.namedGroups</code> System property</a>.</li>
+  <li>By calling the <code class="language-plaintext highlighter-rouge">SSLParameters::setNamedGroups</code> method when configuring an SSLSocket instance, as presented in the code snippet below.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">SSLSocket</span> <span class="n">tlsSock</span> <span class="o">=</span> <span class="o">(</span><span class="nc">SSLSocket</span><span class="o">)(</span><span class="nc">SSLContext</span><span class="o">.</span><span class="na">getDefault</span><span class="o">()</span>
+        <span class="o">.</span><span class="na">getSocketFactory</span><span class="o">().</span><span class="na">createSocket</span><span class="o">());</span>
+<span class="nc">SSLParameters</span> <span class="n">params</span> <span class="o">=</span> <span class="n">tlsSock</span><span class="o">.</span><span class="na">getSSLParameters</span><span class="o">();</span>
+
+<span class="c1">// Configure the socket to use two hybrid KEM schemes and</span>
+<span class="c1">// two traditional schemes</span>
+<span class="n">params</span><span class="o">.</span><span class="na">setNamedGroups</span><span class="o">(</span><span class="k">new</span> <span class="nc">String</span><span class="o">[]</span> <span class="o">{</span>
+    <span class="s">"SecP256r1MLKEM768"</span><span class="o">,</span> <span class="s">"X25519MLKEM768"</span><span class="o">,</span> <span class="s">"secp256r1"</span><span class="o">,</span> <span class="s">"x25519"</span>
+<span class="o">});</span>
+<span class="n">tlsSock</span><span class="o">.</span><span class="na">setSSLParameters</span><span class="o">(</span><span class="n">params</span><span class="o">);</span>
+</code></pre></div></div>
+
+<h2 id="next-steps">Next Steps</h2>
+
+<p>We encourage you to download the <a href="https://jdk.java.net/26/">JDK 27 Early Access builds</a> and try out this feature.
+Feedback is also welcomed through the <a href="https://mail.openjdk.org/mailman/listinfo/security-dev">security-dev mailing list</a> (registration required).</p>]]></content><author><name>[&quot;JamilNimeh&quot;]</name></author><category term="JDK 27" /><category term="Security" /><summary type="html"><![CDATA[JEP 527 is now integrated into JDK 27! This feature enhances the security of Java applications by implementing hybrid key exchange algorithms for TLS 1.3. By combining quantum-resistant ML-KEM with traditional elliptic-curve algorithms, the JDK implementation of TLS 1.3 is protected against 'harvest now, decrypt later' threats.]]></summary></entry><entry><title type="html">Newsletter: JDK 26 Release Candidate | JavaOne and More Heads-Up</title><link href="https://inside.java/2026/02/14/quality-heads-up/" rel="alternate" type="text/html" title="Newsletter: JDK 26 Release Candidate | JavaOne and More Heads-Up" /><published>2026-02-14T00:00:00+00:00</published><updated>2026-02-14T00:00:00+00:00</updated><id>https://inside.java/2026/02/14/Quality-Heads-Up</id><content type="html" xml:base="https://inside.java/2026/02/14/quality-heads-up/"><![CDATA[<p>This Heads-Up is part of the regular communication sent to the projects involved; it announces the first Release Candidate builds of JDK 26 and an informal Quality Outreach gathering at JavaOne.</p>
+
+<p><img class="webfeedsFeaturedVisual" style="display: none;" src="/images/thumbnail/code.jpg?589683012" /></p>]]></content><author><name>[&quot;DavidDelabassee&quot;]</name></author><category term="JDK 26" /><summary type="html"><![CDATA[This Heads-Up is part of the regular communication sent to the projects involved; it announces the first Release Candidate builds of JDK 26 and an informal Quality Outreach gathering at JavaOne.]]></summary></entry><entry><title type="html">Episode 45 “Announcement - The New Inside Java Podcast”</title><link href="https://inside.java/2026/02/13/podcast-045/" rel="alternate" type="text/html" title="Episode 45 “Announcement - The New Inside Java Podcast”" /><published>2026-02-13T00:00:00+00:00</published><updated>2026-02-13T00:00:00+00:00</updated><id>https://inside.java/2026/02/13/Podcast-045</id><content type="html" xml:base="https://inside.java/2026/02/13/podcast-045/"><![CDATA[<p><img class="webfeedsFeaturedVisual" style="display: none;" src="/images/thumbnail/ChadMic.jpg?583894452" /></p>
+
+<p><br /></p>
+
+<iframe title="Libsyn Player" style="border: none" src="//html5-player.libsyn.com/embed/episode/id/40096575/height/90/theme/custom/thumbnail/yes/direction/forward/render-playlist/no/custom-color/000000/" height="90" width="100%" scrolling="no"></iframe>
+
+<p><br /></p>
+
+<p>Welcome to the <em>new</em> Inside Java Podcast. In this meta episode, Nicolai Parlog introduces you to the podcast’s new structure with two shows under one umbrella: The long-form conversations you know become <em>Ask the Architects</em> episodes and they’ll be accompanied by the <em>Inside Java Newscast</em> as a podcast.
+<br />
+Make sure to also check the <strong>Duke’s Corner podcast</strong> on <a href="https://dev.java/duke/corner/">dev.java</a>.</p>
+
+<p><br /></p>
+
+<h3 id="additional-resources">Additional resources</h3>
+
+<ul>
+  <li><a href="https://inside.java">Inside.java</a> : News and views from members of the Java team at Oracle</li>
+  <li><a href="https://dev.java">Dev.java</a> : The Destination for Java Developers</li>
+  <li><a href="https://openjdk.java.net/">OpenJDK</a></li>
+  <li><a href="https://www.oracle.com/java/">Oracle Java</a></li>
+</ul>
+
+<p>For more episodes, check out <a href="https://inside.java/podcast">Inside Java</a>, our <a href="https://www.youtube.com/playlist?list=PLX8CzqL3ArzV_hXbRevwzrXSMcGNzhxiZ">YouTube playlist</a>, and follow <a href="https://twitter.com/java">@Java</a> on Twitter.</p>
+
+<p>Contact us <a href="https://inside.java/about/">here</a>.</p>]]></content><author><name>[&quot;NicolaiParlog&quot;]</name></author><summary type="html"><![CDATA[Welcome to the new Inside Java Podcast. In this meta episode, Nicolai Parlog introduces you to the podcast's new structure with two shows under one umbrella: The long-form conversations you know become Ask the Architects episodes and they'll be accompanied by the Inside Java Newscast as a podcast.]]></summary></entry><entry><title type="html">JEP targeted to JDK 27: 527: Post-Quantum Hybrid Key Exchange for TLS 1.3</title><link href="https://inside.java/2026/02/12/jep527-target-jdk27/" rel="alternate" type="text/html" title="JEP targeted to JDK 27: 527: Post-Quantum Hybrid Key Exchange for TLS 1.3" /><published>2026-02-12T00:00:00+00:00</published><updated>2026-02-12T00:00:00+00:00</updated><id>https://inside.java/2026/02/12/JEP527-target-JDK27</id><content type="html" xml:base="https://inside.java/2026/02/12/jep527-target-jdk27/"><![CDATA[<p>The following JEP is targeted to JDK 27: 527: Post-Quantum Hybrid Key Exchange for TLS 1.3</p>
+
+<p><img class="webfeedsFeaturedVisual" style="display: none;" src="/images/thumbnail/jep.jpg?580069569" /></p>]]></content><author><name>[&quot;JamilNimeh&quot;]</name></author><category term="JDK 27" /><category term="Security" /><summary type="html"><![CDATA[The following JEP is targeted to JDK 27: 527: Post-Quantum Hybrid Key Exchange for TLS 1.3]]></summary></entry><entry><title type="html">Quality Outreach Heads-up - JDK 27: Removal of ThreadPoolExecutor.finalize()</title><link href="https://inside.java/2026/02/10/quality-heads-up/" rel="alternate" type="text/html" title="Quality Outreach Heads-up - JDK 27: Removal of ThreadPoolExecutor.finalize()" /><published>2026-02-10T00:00:00+00:00</published><updated>2026-02-10T00:00:00+00:00</updated><id>https://inside.java/2026/02/10/Quality-Heads-Up</id><content type="html" xml:base="https://inside.java/2026/02/10/quality-heads-up/"><![CDATA[<p><img class="webfeedsFeaturedVisual" style="display: none;" src="/images/thumbnail/code.jpg" /></p>
+
+<p><i>The <a href="https://wiki.openjdk.java.net/display/quality/Quality+Outreach">OpenJDK Quality Group</a> is promoting the testing of FOSS projects with OpenJDK builds as a way to improve the overall quality of the release. This heads-up is part of a <a href="https://mail.openjdk.org/pipermail/quality-discuss/2025-February/001141.html">regular communication</a> sent to the projects involved. To learn more about the program, and how-to join, please check <a href="https://wiki.openjdk.java.net/display/quality/Quality+Outreach">here</a>.</i></p>
+
+<h2 id="deprecation-and-removal-of-finalizers">Deprecation and Removal of Finalizers</h2>
+
+<p>Before the introduction of <code class="language-plaintext highlighter-rouge">try</code>-with-resources and the <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/ref/Cleaner.html"><code class="language-plaintext highlighter-rouge">Cleaner</code> API</a>, classes that needed to release resources before their end of life would implement <code class="language-plaintext highlighter-rouge">Object.finalize()</code>.
+The garbage collector invokes this method after an object becomes unreachable and before reclaiming its memory.
+This process, known as <em>finalization</em>, has a difficult programming model that is prone to unreliable implementation, can cause security vulnerabilities, and negatively impacts performance.
+It has thus been deprecated for removal in favor of the aforementioned alternatives in JDK 18, as described in <a href="https://openjdk.org/jeps/421">JDK Enhancement Proposal 421</a>.</p>
+
+<p>Since then, the number of <code class="language-plaintext highlighter-rouge">finalize</code> implementations in the JDK has been steadily reduced.
+Likewise, the Java ecosystem is required to search for and remove <code class="language-plaintext highlighter-rouge">finalize</code> implementations to prepare for the eventual removal of this mechanism.
+See <a href="https://openjdk.org/jeps/421">JEP 421</a> for details how to approach this.</p>
+
+<h2 id="removal-of-threadpoolexecutorfinalize">Removal of ThreadPoolExecutor.finalize()</h2>
+
+<p><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/ThreadPoolExecutor.html"><code class="language-plaintext highlighter-rouge">ThreadPoolExecutor</code></a> is a non-final implementation of <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/ExecutorService.html"><code class="language-plaintext highlighter-rouge">ExecutorService</code></a> that may be a superclass to executor services in frameworks, libraries, and applications.
+Its <code class="language-plaintext highlighter-rouge">finalize</code>-method has been…</p>
+
+<ul>
+  <li><a href="https://bugs.openjdk.org/browse/JDK-8165641">deprecated</a> in JDK 9</li>
+  <li><a href="https://bugs.openjdk.org/browse/JDK-8190324">re-specified to do nothing</a> (thus leaving it empty) in JDK 11</li>
+  <li><a href="https://bugs.openjdk.org/browse/JDK-8276447">deprecated for removal</a> as part of JEP 421 in JDK 18</li>
+</ul>
+
+<p><em>JDK 27 will <a href="https://bugs.openjdk.org/browse/JDK-8371856">remove the empty method</a></em>, which can lead to compile errors in existing code.</p>
+
+<h2 id="source-incompatible-change">Source-Incompatible Change</h2>
+
+<p>While <code class="language-plaintext highlighter-rouge">Object.finalize()</code> declares that it <code class="language-plaintext highlighter-rouge">throws Throwable</code>, <code class="language-plaintext highlighter-rouge">ThreadPoolExecutor.finalize()</code> does not.
+That means calls to <code class="language-plaintext highlighter-rouge">ThreadPoolExecutor.finalize()</code>, either directly or by an extending class through <code class="language-plaintext highlighter-rouge">super.finalize()</code>, will now implicitly call <code class="language-plaintext highlighter-rouge">Object.finalize()</code> and thus encounter a <code class="language-plaintext highlighter-rouge">Throwable</code> when they didn’t before, which is likely to result in a compile error.</p>
+
+<p><em>Projects encountering this situation are strongly encouraged to remove this (and other) uses of <code class="language-plaintext highlighter-rouge">finalize()</code>.</em></p>
+
+<p>If absolutely necessary, a workaround would be to encase the invocation of <code class="language-plaintext highlighter-rouge">finalize()</code> in a <code class="language-plaintext highlighter-rouge">try</code> block.
+Since this ends up calling <code class="language-plaintext highlighter-rouge">Object.finalize()</code>, which is empty, the <code class="language-plaintext highlighter-rouge">catch</code> block can likewise be empty.</p>
+
+<center>~</center>]]></content><author><name>[&quot;NicolaiParlog&quot;]</name></author><category term="JDK 27" /><category term="Core Libraries" /><summary type="html"><![CDATA[This Heads-Up is part of the regular communication sent to the projects involved; it covers the removal of ThreadPoolExecutor.finalize().]]></summary></entry><entry><title type="html">Quality Outreach Heads-up - JDK 26: DecimalFormat Uses the Double.toString(double) Algorithm</title><link href="https://inside.java/2026/02/09/quality-heads-up/" rel="alternate" type="text/html" title="Quality Outreach Heads-up - JDK 26: DecimalFormat Uses the Double.toString(double) Algorithm" /><published>2026-02-09T00:00:00+00:00</published><updated>2026-02-09T00:00:00+00:00</updated><id>https://inside.java/2026/02/09/Quality-Heads-Up</id><content type="html" xml:base="https://inside.java/2026/02/09/quality-heads-up/"><![CDATA[<p><img class="webfeedsFeaturedVisual" style="display: none;" src="/images/thumbnail/code.jpg" /></p>
+
+<p><i>The <a href="https://wiki.openjdk.java.net/display/quality/Quality+Outreach">OpenJDK Quality Group</a> is promoting the testing of FOSS projects with OpenJDK builds as a way to improve the overall quality of the release. This heads-up is part of the <a href="https://mail.openjdk.org/pipermail/quality-discuss/">quality outreach</a> sent to the projects involved. To learn more about the program, and how-to join, please check <a href="https://wiki.openjdk.java.net/display/quality/Quality+Outreach">here</a>.</i></p>
+
+<h2 id="decimalformat-formats-floating-point-values-with-the-doubletostringdouble-algorithm">DecimalFormat Formats Floating-Point Values with the Double.toString(double) Algorithm</h2>
+
+<p>Since JDK 21, <code class="language-plaintext highlighter-rouge">java.text.DecimalFormat::format</code> and <code class="language-plaintext highlighter-rouge">java.util.Formatter::toString</code> produce slightly different outcomes on some double values, like the one from the snippet bellow.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="n">value</span> <span class="o">=</span> <span class="mf">7.3879E20</span><span class="o">;</span>
+<span class="kt">int</span> <span class="n">minFractionDigits</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+<span class="nc">DecimalFormat</span> <span class="n">df</span> <span class="o">=</span> <span class="o">(</span><span class="nc">DecimalFormat</span><span class="o">)</span> <span class="nc">NumberFormat</span><span class="o">.</span><span class="na">getNumberInstance</span><span class="o">(</span><span class="nc">Locale</span><span class="o">.</span><span class="na">ROOT</span><span class="o">);</span>
+<span class="n">df</span><span class="o">.</span><span class="na">setGroupingUsed</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+<span class="n">df</span><span class="o">.</span><span class="na">setMinimumFractionDigits</span><span class="o">(</span><span class="n">minFractionDigits</span><span class="o">);</span>
+<span class="no">IO</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">df</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="n">value</span><span class="o">);</span> <span class="c1">// prints 738790000000000100000</span>
+
+<span class="nc">Formatter</span> <span class="n">fmt</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Formatter</span><span class="o">(</span><span class="nc">Locale</span><span class="o">.</span><span class="na">ROOT</span><span class="o">);</span>
+<span class="n">fmt</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"%."</span> <span class="o">+</span> <span class="n">minFractionDigits</span> <span class="o">+</span> <span class="s">"f"</span><span class="o">,</span> <span class="n">value</span><span class="o">);</span>
+<span class="no">IO</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">fmt</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span> <span class="c1">// prints 738790000000000000000</span>
+</code></pre></div></div>
+
+<p>This rare situation occurs because <code class="language-plaintext highlighter-rouge">java.util.Formatter</code> and <code class="language-plaintext highlighter-rouge">Double.toString()</code> use an algorithm enhanced in JDK 21.
+A fix was introduced in JDK 26 for the <code class="language-plaintext highlighter-rouge">java.text.DecimalFormat</code> implementation to use the same algorithm as <code class="language-plaintext highlighter-rouge">java.util.Formatter</code> and <code class="language-plaintext highlighter-rouge">Double.toString()</code>, thus producing the same outcome.</p>
+
+<p>For a few releases, <code class="language-plaintext highlighter-rouge">java.text.DecimalFormat</code> will still offer the old algorithm to help migrate applications affected by this change. You can enable the old algorithm by appending <code class="language-plaintext highlighter-rouge">-Djdk.compat.DecimalFormat=true</code> to your <code class="language-plaintext highlighter-rouge">java</code> command; otherwise, the new algorithm runs.</p>
+
+<h2 id="call-to-action">Call to Action</h2>
+
+<p>We encourage you to download the <a href="https://jdk.java.net/26/">JDK 26 Early Access builds</a>, evaluate the behavior of your application and prepare to migrate if you see any impact. 
+Feedback is also welcomed through the <a href="https://mail.openjdk.org/mailman/listinfo/jdk-dev">jdk-dev mailing list</a> (registration required).
+For more details on this change, check the JBS issue <a href="https://bugs.openjdk.org/browse/JDK-8362448">JDK-8362448</a> and the <a href="https://jdk.java.net/26/release-notes">release notes</a>.</p>
+
+<center>~</center>]]></content><author><name>[&quot;Ana-MariaMihalceanu&quot;]</name></author><category term="JDK 26" /><category term="Core Libraries" /><summary type="html"><![CDATA[This Heads-Up is part of the regular communication sent to the projects involved; it covers that java.text.DecimalFormat formats floating-point values with the Double.toString(double) algorithm.]]></summary></entry><entry><title type="html">Optimizing Java Class Metadata in Project Valhalla</title><link href="https://inside.java/2026/02/07/valhalla-class-metadata-optimization/" rel="alternate" type="text/html" title="Optimizing Java Class Metadata in Project Valhalla" /><published>2026-02-07T00:00:00+00:00</published><updated>2026-02-07T00:00:00+00:00</updated><id>https://inside.java/2026/02/07/valhalla-class-metadata-optimization</id><content type="html" xml:base="https://inside.java/2026/02/07/valhalla-class-metadata-optimization/"><![CDATA[<p><img class="webfeedsFeaturedVisual" style="display: none;" src="/images/thumbnail/code.jpg" /></p>]]></content><author><name>[&quot;JoelSikstrom&quot;]</name></author><category term="Valhalla" /><summary type="html"><![CDATA[In this post, I’ll walk through some of the behind-the-scenes details of one of Project Valhalla’s core features: value classes, and the concept of flattening (or inlining, the term I will use here). Whether you’re a JVM developer or just deeply curious about how Java works under the hood, this technical deep dive is for you.]]></summary></entry><entry><title type="html">The Inside Java Newsletter: JavaOne 2026: $100 Discount Now!</title><link href="https://inside.java/2026/02/06/inside-java-newsletter/" rel="alternate" type="text/html" title="The Inside Java Newsletter: JavaOne 2026: $100 Discount Now!" /><published>2026-02-06T00:00:00+00:00</published><updated>2026-02-06T00:00:00+00:00</updated><id>https://inside.java/2026/02/06/Inside-Java-Newsletter</id><content type="html" xml:base="https://inside.java/2026/02/06/inside-java-newsletter/"><![CDATA[<p><img class="webfeedsFeaturedVisual" src="/images/thumbnail/code.jpg" style="display: none;" /></p>]]></content><author><name>[&quot;JimGrisanzio&quot;]</name></author><category term="Oracle" /><category term="Community" /><summary type="html"><![CDATA[The Inside Java Newsletter for January 2026 includes a special limited-time discount code for JavaOne 2026 registration. Register now and save $100! The JavaOne 2026 keynotes and technical sessions have already been announced, and we’re now completing our final preparations for the conference in March. This issue also highlights the sponsors that will be at JavaOne, technical content from videos and podcasts, learning and community updates, and more from the Java Platform Group. Visit learn.java, dev.java, and inside.java for videos, articles, and other resources for developers, learners, educators, and customers. You can view the newsletter archives, subscribe, and share it with a friend!]]></summary></entry><entry><title type="html">LazyConstants in JDK 26 - Inside Java Newscast #106</title><link href="https://inside.java/2026/02/05/newscast-106/" rel="alternate" type="text/html" title="LazyConstants in JDK 26 - Inside Java Newscast #106" /><published>2026-02-05T00:00:00+00:00</published><updated>2026-02-05T00:00:00+00:00</updated><id>https://inside.java/2026/02/05/Newscast-106</id><content type="html" xml:base="https://inside.java/2026/02/05/newscast-106/"><![CDATA[<div class="youtube-embed">
+    <iframe src="https://www.youtube.com/embed/BZlXZyXA4jY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>
+</div>
+
+<p><em>Lazily initializing fields in Java is error-prone and undermines constant-folding. JDK 26 comes with JEP 526, which previews <code class="language-plaintext highlighter-rouge">LazyConstant</code>, a type that lazily initializes a value through a given <code class="language-plaintext highlighter-rouge">Supplier</code>. It executes that supplier at most once successfully and then assigns the value to a field annotated with <code class="language-plaintext highlighter-rouge">@Stable</code>, which allows constant folding. This API is also a poster child for how OpenJDK develops and evolves features.</em></p>
+
+<p><em>Make sure to check the <a href="https://www.youtube.com/watch?v=BZlXZyXA4jY">show-notes</a>.</em></p>]]></content><author><name>[&quot;NicolaiParlog&quot;]</name></author><category term="JDK 26" /><category term="Core Libraries" /><summary type="html"><![CDATA[Lazily initializing fields in Java is error-prone and undermines constant-folding. JDK 26 comes with JEP 526, which previews LazyConstant, a type that lazily initializes a value through a given Supplier. It executes that supplier at most once successfully and then assigns the value to a field annotated with @Stable, which allows constant folding. This API is also a poster child for how OpenJDK develops and evolves features.]]></summary></entry></feed>

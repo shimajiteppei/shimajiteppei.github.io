@@ -8,9 +8,15 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260220
+
+
 ### 20260219
 
 
+- [Java to Kotlin Conversion Comes to Visual Studio Code](https://blog.jetbrains.com/kotlin/2026/02/java-to-kotlin-conversion-comes-to-visual-studio-code/)
+- [Towards Better Checked Exceptions - Inside Java Newscast #107](https://inside.java/2026/02/19/newscast-107/)
+- [Rust participates in Google Summer of Code 2026](https://blog.rust-lang.org/2026/02/19/Rust-participates-in-GSoC-2026/)
 - [Predict, compare, and reduce costs with our S3 cost calculator](https://ubuntu.com//blog/predict-compare-and-reduce-costs-with-our-s3-cost-calculator)
 
 
@@ -194,15 +200,5 @@ search:
 
 
 ### 20260120
-
-
-- [Cognitive leakage and the human consequences of software abstractions](https://www.thoughtworks.com/insights/blog/programming-languages/cognitive-leakage-human-consequences-software-abstractions)
-- [Showcasing open design in action: Loughborough University design students explore open source projects](https://ubuntu.com//blog/showcasing-open-design-in-action-loughborough-university-design-students-explore-open-source-projects)
-
-
-### 20260119
-
-
-- [Optimizing GPU Programs from Java using Babylon and HAT](https://inside.java/2026/01/19/hat-matmul-gpu/)
 
 
