@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260221
+
+
+- [Java Serialization: Spooky Action at a Distance - Stack Walker #7](https://inside.java/2026/02/21/stackwalker-serialization/)
+- [Episode 46 “Java’s Plans for 2026” [IJN]](https://inside.java/2026/02/20/podcast-046/)
+
+
 ### 20260220
 
 
@@ -189,7 +196,6 @@ search:
 ### 20260122
 
 
-- [How to Avoid Common Pitfalls With JPA and Kotlin](https://blog.jetbrains.com/idea/2026/01/how-to-avoid-common-pitfalls-with-jpa-and-kotlin/)
 - [Carrier Classes; Beyond Records - Inside Java Newscast #105](https://inside.java/2026/01/22/newscast-105/)
 
 
@@ -197,8 +203,5 @@ search:
 
 
 - [crates.io: development update](https://blog.rust-lang.org/2026/01/21/crates-io-development-update/)
-
-
-### 20260120
 
 
