@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260222
+
+
 ### 20260221
 
 
@@ -197,11 +200,5 @@ search:
 
 
 - [Carrier Classes; Beyond Records - Inside Java Newscast #105](https://inside.java/2026/01/22/newscast-105/)
-
-
-### 20260121
-
-
-- [crates.io: development update](https://blog.rust-lang.org/2026/01/21/crates-io-development-update/)
 
 
