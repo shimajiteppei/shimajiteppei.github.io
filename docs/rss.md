@@ -8,7 +8,14 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260224
+
+
 ### 20260223
+
+
+- [Episode 47 “Carrier Classes” [IJN]](https://inside.java/2026/02/23/podcast-047/)
+- [Rust debugging survey 2026](https://blog.rust-lang.org/2026/02/23/rust-debugging-survey-2026/)
 
 
 ### 20260222
@@ -187,14 +194,5 @@ search:
 
 
 ### 20260124
-
-
-### 20260123
-
-
-- [Ktor 3.4.0 Is Now Available!](https://blog.jetbrains.com/kotlin/2026/01/ktor-3-4-0-is-now-available/)
-- [Exposed 1.0 Is Now Available](https://blog.jetbrains.com/kotlin/2026/01/exposed-1-0-is-now-available/)
-- [Oracle Java Extension for Visual Studio Code Version 25.0.1 Is Now Available!](https://inside.java/2026/01/23/java-vscode-extension-update/)
-- [How to avoid package End of Life through backporting](https://ubuntu.com//blog/how-to-avoid-package-end-of-life-through-backporting)
 
 
