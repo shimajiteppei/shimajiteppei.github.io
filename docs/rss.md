@@ -8,7 +8,19 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260225
+
+
+- [Reflections on the Future of Software Engineering Retreat](https://www.thoughtworks.com/insights/articles/reflections-future-software-engineering-retreat)
+- [Where does the rigor go?](https://www.thoughtworks.com/insights/blog/agile-engineering-practices/where-does-the-rigor-go)
+- [So, you want to run OpenClaw?](https://www.thoughtworks.com/insights/blog/security/want-run-openclaw)
+- [Building quantum-safe telecom infrastructure for 5G and beyond](https://ubuntu.com//blog/building-quantum-safe-telecom-infrastructure-for-5g-and-beyond)
+
+
 ### 20260224
+
+
+- [Dissecting the CPU-Memory Relationship in Garbage Collection](https://inside.java/2026/02/24/gc-cost-cpu-vs-memory/)
 
 
 ### 20260223
@@ -191,8 +203,5 @@ search:
 
 
 ### 20260125
-
-
-### 20260124
 
 
