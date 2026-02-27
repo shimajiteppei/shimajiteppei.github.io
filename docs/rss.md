@@ -8,7 +8,18 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260227
+
+
+- [Data Oriented Programming, Beyond Records](https://inside.java/2026/02/27/beyon-records-dop/)
+- [Episode 48 “HTTP/3 in Java 26”](https://inside.java/2026/02/26/podcast-048/)
+- [Unmasking the Resolute Raccoon](https://ubuntu.com//blog/unmasking-the-resolute-raccoon)
+
+
 ### 20260226
+
+
+- [15 Things To Do Before, During, and After KotlinConf’26](https://blog.jetbrains.com/kotlin/2026/02/15-things-to-do-before-during-and-after-kotlinconf-26/)
 
 
 ### 20260225
@@ -195,13 +206,6 @@ search:
 ### 20260127
 
 
-- [Building AI Agents in Kotlin – Part 5: Teaching Agents to Forget](https://blog.jetbrains.com/ai/2026/01/building-ai-agents-in-kotlin-part-5-teaching-agents-to-forget/)
 - [Data-Oriented Programming for Java: Beyond Records](https://inside.java/2026/01/27/beyond-records/)
-
-
-### 20260126
-
-
-- [Meet the First Speakers Heading to KotlinConf 2026](https://blog.jetbrains.com/kotlin/2026/01/meet-the-first-speakers-heading-to-kotlinconf-2026/)
 
 
