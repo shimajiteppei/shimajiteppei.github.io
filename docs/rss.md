@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260228
+
+
+- [Meet the wildlife conservation AI 5G hotspot at MWC Barcelona 2026](https://ubuntu.com//blog/meet-the-wildlife-conservation-ai-5g-hotspot-at-mwc-barcelona-2026)
+- [Canonical and Ubuntu RISC-V: a 2025 retro and looking forward to 2026](https://ubuntu.com//blog/canonical-and-ubuntu-risc-v-a-2025-retro-and-looking-forward-to-2026)
+
+
 ### 20260227
 
 
@@ -198,14 +205,5 @@ search:
 
 
 ### 20260128
-
-
-- [2025 Rust Foundation Annual Report Project Director Update](https://blog.rust-lang.org/inside-rust/2026/01/27/2025-rust-foundation-annual-report/)
-
-
-### 20260127
-
-
-- [Data-Oriented Programming for Java: Beyond Records](https://inside.java/2026/01/27/beyond-records/)
 
 
