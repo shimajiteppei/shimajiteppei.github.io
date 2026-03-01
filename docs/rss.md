@@ -8,9 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260301
+
+
 ### 20260228
 
 
+- [JDK 26 G1/Parallel/Serial GC changes](https://inside.java/2026/02/28/jdk26-gc-changes/)
 - [Meet the wildlife conservation AI 5G hotspot at MWC Barcelona 2026](https://ubuntu.com//blog/meet-the-wildlife-conservation-ai-5g-hotspot-at-mwc-barcelona-2026)
 - [Canonical and Ubuntu RISC-V: a 2025 retro and looking forward to 2026](https://ubuntu.com//blog/canonical-and-ubuntu-risc-v-a-2025-retro-and-looking-forward-to-2026)
 
@@ -202,8 +206,5 @@ search:
 
 
 - [Episode 44 “Java, Collections &amp;amp; Generics, BeJUG”](https://inside.java/2026/01/29/podcast-044/)
-
-
-### 20260128
 
 
