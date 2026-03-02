@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260302
+
+
+- [Intelligent JVM Monitoring: Combining JDK Flight Recorder with AI](https://inside.java/2026/03/01/jfr-ai-monitor/)
+- [Cloud-native Android™ infotainment: your CI pipeline shouldn’t depend on hardware](https://ubuntu.com//blog/cloud-native-android-infotainment-your-ci-pipeline-shouldnt-depend-on-hardware)
+
+
 ### 20260301
 
 
@@ -200,11 +207,5 @@ search:
 
 
 ### 20260130
-
-
-### 20260129
-
-
-- [Episode 44 “Java, Collections &amp;amp; Generics, BeJUG”](https://inside.java/2026/01/29/podcast-044/)
 
 
