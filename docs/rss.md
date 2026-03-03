@@ -8,10 +8,17 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260303
+
+
+- [Supporting more identity providers on Ubuntu with the new Authd OIDC broker](https://ubuntu.com//blog/more-identity-providers-ubuntu-generic-broker)
+
+
 ### 20260302
 
 
 - [Intelligent JVM Monitoring: Combining JDK Flight Recorder with AI](https://inside.java/2026/03/01/jfr-ai-monitor/)
+- [2025 State of Rust Survey Results](https://blog.rust-lang.org/2026/03/02/2025-State-Of-Rust-Survey-results/)
 - [Cloud-native Android™ infotainment: your CI pipeline shouldn’t depend on hardware](https://ubuntu.com//blog/cloud-native-android-infotainment-your-ci-pipeline-shouldnt-depend-on-hardware)
 
 
@@ -204,8 +211,5 @@ search:
 
 
 - [Qodana for Android: Increasing Code Quality for Kotlin-First Teams](https://blog.jetbrains.com/qodana/2026/01/qodana-for-android-kotlin/)
-
-
-### 20260130
 
 
