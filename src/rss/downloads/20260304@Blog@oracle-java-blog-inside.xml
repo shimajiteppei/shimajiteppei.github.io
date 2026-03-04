@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="https://inside.java/feed.xml" rel="self" type="application/atom+xml" /><link href="https://inside.java/" rel="alternate" type="text/html" /><updated>2026-03-04T10:37:59+00:00</updated><id>https://inside.java/feed.xml</id><title type="html">insidejava</title><subtitle>News and views from members of the Java team at Oracle</subtitle><entry><title type="html">Quality Outreach Heads-up - JavaFX 27: Metal Is Now the Default Rendering Pipeline on macOS</title><link href="https://inside.java/2026/03/03/quality-heads-up/" rel="alternate" type="text/html" title="Quality Outreach Heads-up - JavaFX 27: Metal Is Now the Default Rendering Pipeline on macOS" /><published>2026-03-03T00:00:00+00:00</published><updated>2026-03-03T00:00:00+00:00</updated><id>https://inside.java/2026/03/03/Quality-Heads-Up</id><content type="html" xml:base="https://inside.java/2026/03/03/quality-heads-up/"><![CDATA[<p><img class="webfeedsFeaturedVisual" style="display: none;" src="/images/thumbnail/code.jpg" /></p>
+
+<p><i>The <a href="https://wiki.openjdk.java.net/display/quality/Quality+Outreach">OpenJDK Quality Group</a> is promoting the testing of FOSS projects with OpenJDK builds as a way to improve the overall quality of the release. This heads-up is part of the <a href="https://mail.openjdk.org/pipermail/quality-discuss/">quality outreach</a> sent to the projects involved. To learn more about the program, and how-to join, please check <a href="https://wiki.openjdk.java.net/display/quality/Quality+Outreach">here</a>.</i></p>
+
+<h2 id="metal-is-now-the-default-rendering-pipeline-on-macos">Metal Is Now the Default Rendering Pipeline on macOS</h2>
+
+<p>On macOS, the default JavaFX rendering pipeline has been switched to Metal since JavaFX 27 Early Access (EA) build 3. Metal provides improved performance and better compatibility on modern hardware.</p>
+
+<p>The Metal pipeline was implemented under <a href="https://bugs.openjdk.org/browse/JDK-8271024">JDK-8271024</a> in JavaFX 26 as an optional pipeline, with the OpenGL-based ES2 pipeline as the default. Starting with JavaFX 27 EA build 3, Metal is now the default rendering pipeline on macOS.</p>
+
+<p>JavaFX 27 EA builds are now available for <a href="https://jdk.java.net/javafx27/">download</a> and testing. You can share your feedback on the <a href="https://mail.openjdk.org/mailman/listinfo/openjfx-dev">openjfx-dev list</a> (registration required), through <a href="https://bugs.openjdk.org/">JBS</a> or <a href="https://bugreport.java.com">bugreport.java.com</a>.</p>
+
+<p>If you need to revert to the previous ES2 pipeline, you can do so by adding the option <code class="language-plaintext highlighter-rouge">-Dprism.order=es2</code> to your Java command.</p>
+
+<hr />
+<p>References to metal blogs published earlier:</p>
+<ul>
+  <li><a href="https://inside.java/2025/09/22/quality-heads-up/">Quality Outreach Heads-up - JavaFX 26: Temporary Switch to macOS Metal Rendering Pipeline</a></li>
+  <li><a href="https://inside.java/2025/09/22/quality-heads-up/">Quality Outreach Heads-up - New macOS JavaFX Metal Early-Access builds</a></li>
+</ul>
+
+<center>~</center>]]></content><author><name>[&quot;AmbarishRapte&quot;]</name></author><category term="JDK 27" /><category term="Client" /><summary type="html"><![CDATA[This Heads-Up is part of the regular communication sent to the projects involved; it covers a change in the macOS JavaFX rendering pipeline.]]></summary></entry><entry><title type="html">Java 26 for DevOps</title><link href="https://inside.java/2026/03/02/jdk-26-rn-ops/" rel="alternate" type="text/html" title="Java 26 for DevOps" /><published>2026-03-02T00:00:00+00:00</published><updated>2026-03-02T00:00:00+00:00</updated><id>https://inside.java/2026/03/02/jdk-26-rn-ops</id><content type="html" xml:base="https://inside.java/2026/03/02/jdk-26-rn-ops/"><![CDATA[<p>With every release of Java comes updates to the underlying runtime, and how JVM applications can be administered and observed. In this article we will review changes to this area that are coming Java 26, which is scheduled for release on March 17th.</p>
+
+<h2 id="ahead-of-time-computation-for-zgc-users">Ahead-of-Time Computation for ZGC Users</h2>
+
+<p><a href="https://openjdk.org/jeps/516">JEP 516</a> Ahead-of-Time (AOT) Object Caching with Any GC, brings the benefits of AOT introduced in Java 24 (<a href="https://openjdk.org/jeps/483">JEP 483</a>) and 25 (JEPs <a href="https://openjdk.org/jeps/514">514</a> &amp; <a href="https://openjdk.org/jeps/515">515</a>), to Z Garbage Collector (ZGC) users. AOT improves the startup and warm up performance of Java applications, by storing information from a previous run of an application in a cache that can be accessed on subsequent runs. To learn more about AOT, <a href="https://youtu.be/V_Pls6B4_yg">watch my video on this subject</a>.</p>
+
+<p><a href="https://openjdk.org/jeps/516">JEP 516</a></p>
+
+<h2 id="g1-garbage-collector-updates">G1 Garbage Collector Updates</h2>
+
+<p>G1, Java’s default garbage collector, remains under active development, and there are several notable changes coming in Java 26.</p>
+
+<h3 id="g1-gc-improve-throughput-by-reducing-synchronization">G1 GC: Improve Throughput by Reducing Synchronization</h3>
+
+<p>The throughput of the G1 garbage collector has been improved in Java 26 by reducing the frequency of synchronization with application threads. This was done by introducing a second card table allowing the optimizer and application threads to run freely. This also had the second order effect of reducing the write barriers in G1 from 50 intructions to 12.</p>
+
+<p>Testing has shown that these changes have improved throughput by 5-15% percent, with applications that do heavy modification to object-reference fields seeing the most benefit. Additionally this new design is more efficent that the previous auxillry data structure, which resulted in a slight descrease in pause times. Lastly the second card table can in some cases slightly reduce memory overhead; each card table requiring about 2MB of native meory per 1GB of heap capacity. In cases where it does consume more memory than before, the difference is trivial.</p>
+
+<p><a href="https://openjdk.org/jeps/522">JEP 522</a></p>
+
+<h3 id="humongous-object-reclamation">Humongous Object Reclamation</h3>
+
+<p>The G1 garbage collector now eagerly reclaims eligible humongous objects (objects occupying more than half a heap region) containing references.</p>
+
+<p>This change allows for the prompt recovery of memory previously held by such objects, particularly if they are short-lived, improving garbage collection efficiency and reducing heap usage. Previously such humongous objects were only reclaimed during full gcs.</p>
+
+<p>This change applies to both discrete humongous objects, as well as to humongous arrays of references (i.e. <code class="language-plaintext highlighter-rouge">Object[]</code>).</p>
+
+<p><a href="https://bugs.openjdk.org/browse/JDK-8048180">JDK-8048180</a></p>
+
+<h3 id="g1-overhead-limit">G1 Overhead Limit</h3>
+
+<p>The G1 garbage collector now throws an <code class="language-plaintext highlighter-rouge">OutOfMemoryException</code> when the garbage collection overhead is more than the <code class="language-plaintext highlighter-rouge">GCTimeLimit</code> percent  (default <code class="language-plaintext highlighter-rouge">98</code>) and the free Java heap is less than the <code class="language-plaintext highlighter-rouge">GCHeapFreeLimit</code> percent  (default <code class="language-plaintext highlighter-rouge">2</code>) for five consecutive garbage collections. This can help prevent GC thrashing in such scenarios and mirrors the behavior implemented in the Parallel GC.</p>
+
+<p>This feature is enabled by default. It can be disabled using the <code class="language-plaintext highlighter-rouge">-XX:-UseGCOverheadLimit</code> option.</p>
+
+<p><a href="https://bugs.openjdk.org/browse/JDK-8212084">JDK-8212084</a></p>
+
+<h3 id="transparent-huge-pages-support">Transparent Huge Pages Support</h3>
+
+<p>G1 can again properly utilize Transparent Huge Pages (THP) on systems with the THP mode configured as <code class="language-plaintext highlighter-rouge">madvise</code>, this resolves an issue introduced in <a href="https://bugs.openjdk.org/browse/JDK-8345655">Java 25</a>. This issue has also been backported to 25.0.2.</p>
+
+<p><a href="https://bugs.openjdk.org/browse/JDK-8366434">JDK-8366434</a></p>
+
+<h2 id="jvm-flag-updates">JVM Flag Updates</h2>
+
+<p>There are a number of updates to JVM flags in Java 26.</p>
+
+<h3 id="initialrampercentage-default-value-removed">InitialRAMPercentage Default Value Removed</h3>
+
+<p><code class="language-plaintext highlighter-rouge">InitialRAMPercentage</code> is being changed from 1.5625 (1/64) to 0. The previous default value was last set in 2007. At that time, the value of 1.5625 was a reasonable assumption, but as available system memory has increased, it can result in excessively large heap sizes. This could result in wasted resources and slower startup performance.</p>
+
+<p>To address this the default value of <code class="language-plaintext highlighter-rouge">InitialRAMPercentage</code> has been removed (set to <code class="language-plaintext highlighter-rouge">0</code>), which matches with <code class="language-plaintext highlighter-rouge">MinHeapSize</code> and <code class="language-plaintext highlighter-rouge">InitialHeapSize</code>, which will default to using <a href="https://docs.oracle.com/en/java/javase/25/gctuning/ergonomics.html#GUID-DB4CAE94-2041-4A16-90EC-6AE3D91EC1F1">JVM ergonomics</a> for setting these values. Users could, if needed, set these values using <code class="language-plaintext highlighter-rouge">-Xms</code>. It is also still possible to set <code class="language-plaintext highlighter-rouge">InitialRAMPercentage</code> explicitly; <code class="language-plaintext highlighter-rouge">-XX: InitialRAMPercentage=[0.0-100]</code>.</p>
+
+<p><a href="https://bugs.openjdk.org/browse/JDK-8371986">JDK-8371986</a></p>
+
+<h3 id="server-and-client-flags-deprecated-for-removal">Server and Client Flags Deprecated for Removal</h3>
+
+<p>The flags <code class="language-plaintext highlighter-rouge">AlwaysActAsServerClassMachine</code> and <code class="language-plaintext highlighter-rouge">NeverActAsServerClassMachine</code> are marked as deprecated for removal. The primary benefit of these flags was driving ergonomics for GC selection: G1 being used on server class machines, and Serial on client machines. However, with the future introduction of <a href="https://openjdk.org/jeps/523">JEP 523</a>, which makes G1 the default GC in all environments, there’s is little difference between the two JVM arguments.</p>
+
+<p><a href="https://bugs.openjdk.org/browse/JDK-8370843">JDK-8370843</a></p>
+
+<h3 id="aggressiveheap-deprecated-for-removal">AggressiveHeap Deprecated for Removal</h3>
+
+<p>The flag <code class="language-plaintext highlighter-rouge">AggressiveHeap</code> has been marked as deprecated for removal. <code class="language-plaintext highlighter-rouge">AggressiveHeap</code> was originally added to satisfy specific benchmarks, but lacks transparency. If your application depended on the behavior of <code class="language-plaintext highlighter-rouge">AggressiveHeap</code>, you can recreate it with the following set of flags:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-XX:+UseParallelGC -XX:+UseLargePages 
+-XX:-ResizeTLAB -XX:TLABSize=256K 
+-XX:YoungPLABSize=256K -XX:OldPLABSize=8K 
+-XX:ThresholdTolerance=100
+</code></pre></div></div>
+
+<p>And additionally set the following flags to the relevant values based on your systems resources:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">-Xmx</code> and <code class="language-plaintext highlighter-rouge">-Xms</code> to half the available physical memory</li>
+  <li><code class="language-plaintext highlighter-rouge">-XX:NewSize</code> to 3/8 of available physical memory</li>
+  <li><code class="language-plaintext highlighter-rouge">-XX:MaxNewSize</code> to the value of <code class="language-plaintext highlighter-rouge">-XX:NewSize</code></li>
+</ul>
+
+<p><a href="https://bugs.openjdk.org/browse/JDK-8370813">JDK-8370813</a></p>
+
+<h3 id="maxram-deprecated-for-removal">MaxRAM Deprecated for Removal</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">MaxRAM</code> flag has been marked as deprecated for removal as the JVM can accurately detect physical RAM and set reasonable commit limits. Often times, users were setting other JVM flags: <code class="language-plaintext highlighter-rouge">MaxRAMPercentage</code>, <code class="language-plaintext highlighter-rouge">MinRAMPercentage</code> or <code class="language-plaintext highlighter-rouge">InitialRAMPercentage</code> as a means of getting around <code class="language-plaintext highlighter-rouge">MaxRAM</code>’s default of 128GB. Users should instead use <code class="language-plaintext highlighter-rouge">-Xmx</code> and <code class="language-plaintext highlighter-rouge">-Xms</code> for controlling heap size.</p>
+
+<p><a href="https://bugs.openjdk.org/browse/JDK-8369346">JDK-8369346</a></p>
+
+<h2 id="jmx-updates">JMX Updates</h2>
+
+<p>JMX, Java Management Extensions, is a technology that can be used to provide a view in the a running JVM. There were a number of updates and changes to the JMX API in Java 26.</p>
+
+<h3 id="garbage-collector-cpu-usage">Garbage Collector CPU Usage</h3>
+
+<p>A new method <code class="language-plaintext highlighter-rouge">getTotalGcCpuTime()</code> has been added to <code class="language-plaintext highlighter-rouge">java.lang.management.MemoryMXBean</code>, which returns a long result with the accumulated CPU time in nanoseconds during the critical section and/or after JIT warmup.</p>
+
+<p><a href="https://bugs.openjdk.org/browse/JDK-8368527">JDK-8368527</a></p>
+
+<h3 id="protocal-requires-for-jmxserviceurl">Protocal Requires for JMXServiceURL</h3>
+
+<p>The class <code class="language-plaintext highlighter-rouge">javax.management.remote.JMXServiceURL</code> requires that a protocol is specified when using its String constructor. In prior releases when a <code class="language-plaintext highlighter-rouge">null</code> protocol was supplied to the constructor, the following exception was thrown:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java.net.MalformedURLException: Unsupported protocol: jmxmp
+        at java.management/
+        ...
+</code></pre></div></div>
+
+<p>This is inaccurate as <code class="language-plaintext highlighter-rouge">jmxmp</code> was a default value, but isn’t part of the JDK. This has been updated to not select <code class="language-plaintext highlighter-rouge">jmxmp</code> and instead print out the follow and more clear message:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java.net.MalformedURLException: Unsupported protocol: Misssing protocol name
+        at java.management/
+        ...
+</code></pre></div></div>
+
+<p><a href="https://bugs.openjdk.org/browse/JDK-8347114">JDK-8347114</a></p>
+
+<p>The classes <code class="language-plaintext highlighter-rouge">javax.management.AttributeList</code>, <code class="language-plaintext highlighter-rouge">javax.management.relation.RoleList</code>, and <code class="language-plaintext highlighter-rouge">RoleUnresolvedList</code>, have been updated to reject objects of the wrong type, as previous those objects were only verified when the <code class="language-plaintext highlighter-rouge">asList()</code> method was called.</p>
+
+<p><a href="https://bugs.openjdk.org/browse/JDK-8359809">JDK-8359809</a></p>
+
+<h3 id="mbeanserver-exception-change">MBeanServer Exception Change</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">javax.management.MBeanServer:eregisterMBean()</code> now throws a <code class="language-plaintext highlighter-rouge">RuntimeOperationsException</code> instead of <code class="language-plaintext highlighter-rouge">NullPointerException</code> when invoked with a <code class="language-plaintext highlighter-rouge">null</code> “object” parameter. This correction aligns the implementation with the specification.</p>
+
+<p><a href="https://bugs.openjdk.org/browse/JDK-8364227">JDK-8364227</a></p>
+
+<h2 id="other-changes">Other Changes</h2>
+
+<p>There are a couple of other updates that don’t neatly fit into the above catagories.</p>
+
+<h3 id="c2-jit-support-enhancement">C2 JIT Support Enhancement</h3>
+
+<p>The C2 JIT compiler can now compile Java methods with a large number of parameters (greater than 30). Previously, C2 would bail out when it attempted to compile such methods, causing the JVM to fall back to C1-compiled code or the interpreter.</p>
+
+<p><a href="https://bugs.openjdk.org/browse/JDK-8325467">JDK-8325467</a></p>
+
+<h3 id="serial-gc-eden-space">Serial GC Eden Space</h3>
+
+<p>Prior to Java 26, the ordering of the young generation (YoungGen) in the Serial GC was eden follow by the to/from spaces (survivor regions). This meant that it was difficult for eden to expand to satisfy an allocation request, possibly resulting in a premature <code class="language-plaintext highlighter-rouge">OutOfMemoryException</code> (OOME).</p>
+
+<p>With Java 26, eden has been moved to be after the to/from space, allowing it to possibly grow to the end of YoungGen to satisfy an allocation request. This might mean it grows beyond the limit governed by <code class="language-plaintext highlighter-rouge">SurvivorRatio</code>. However this behavior is desirable as it can avoid an OOME and VM termination.</p>
+
+<p><a href="https://bugs.openjdk.org/browse/JDK-8368740">JDK-8368740</a></p>
+
+<p>Java 26 will be released on March 17th! If you are able to, be sure to attend JavaOne on March 17-19th, in Redwood Shores, California. A large part of the JDK Engineering team will be there, including some of the engineers who worked on the very issues covered in this article. It can be a great opportunity to learn about Java for the stewards of Java! For more check out https://javaone.com, hope you see you there!</p>]]></content><author><name>[&quot;BillyKorando&quot;]</name></author><category term="JDK 26" /><category term="Performance" /><summary type="html"><![CDATA[Let's review the observability and runtime changes coming in Java 26.]]></summary></entry><entry><title type="html">Intelligent JVM Monitoring: Combining JDK Flight Recorder with AI</title><link href="https://inside.java/2026/03/01/jfr-ai-monitor/" rel="alternate" type="text/html" title="Intelligent JVM Monitoring: Combining JDK Flight Recorder with AI" /><published>2026-03-01T00:00:00+00:00</published><updated>2026-03-01T00:00:00+00:00</updated><id>https://inside.java/2026/03/01/jfr-ai-monitor</id><content type="html" xml:base="https://inside.java/2026/03/01/jfr-ai-monitor/"><![CDATA[<div class="youtube-embed">
+    <iframe src="https://www.youtube.com/embed/z8mDLU8RCUU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>
+</div>
+
+<p><em>How do you monitor your JVM applications effectively? One powerful option is JDK Flight Recorder (JFR).</em></p>
+
+<p><em>JFR simplifies troubleshooting and profiling by capturing detailed JVM event data—and with the JFR Streaming API, you can access those insights in real time. But what if you could go further and stream live JFR data straight into an AI system to enhance monitoring, accelerate troubleshooting, and even help prevent issues before they occur?</em></p>
+
+<p><em>In this session, we’ll demonstrate how to use JFR with the latest JDK features to build self-improving applications with the help of AI. Using a real-life simulated example, you’ll learn how to:</em></p>
+
+<ul>
+  <li><em>Capture and stream JFR data in real time</em></li>
+  <li><em>Integrate JVM event data into an AI-based system</em></li>
+  <li><em>Automatically spot performance bottlenecks and unusual behavior</em></li>
+  <li><em>Build better tools for debugging and monitoring</em></li>
+</ul>
+
+<p><em>By the end of this talk, you’ll have a clear roadmap for combining JFR and AI to improve observability and elevate the troubleshooting experience for your JVM applications.</em></p>
+
+<p>Recorded at <a href="https://www.jfokus.se/">Jfokus 2026</a>.</p>]]></content><author><name>[&quot;YagmurEren&quot;, &quot;JoakimNordstrom&quot;]</name></author><category term="AI" /><category term="JFR" /><category term="Serviceability" /><summary type="html"><![CDATA[JFR simplifies troubleshooting and profiling by capturing detailed JVM event data—and with the JFR Streaming API, you can access those insights in real time. But what if you could go further and stream live JFR data straight into an AI system to enhance monitoring, accelerate troubleshooting, and even help prevent issues before they occur? In this session, we’ll demonstrate how to use JFR with the latest JDK features to build self-improving applications with the help of AI.]]></summary></entry><entry><title type="html">JDK 26 G1/Parallel/Serial GC changes</title><link href="https://inside.java/2026/02/28/jdk26-gc-changes/" rel="alternate" type="text/html" title="JDK 26 G1/Parallel/Serial GC changes" /><published>2026-02-28T00:00:00+00:00</published><updated>2026-02-28T00:00:00+00:00</updated><id>https://inside.java/2026/02/28/jdk26-gc-changes</id><content type="html" xml:base="https://inside.java/2026/02/28/jdk26-gc-changes/"><![CDATA[<p><img class="webfeedsFeaturedVisual" style="display: none;" src="/images/thumbnail/code.jpg" /></p>]]></content><author><name>[&quot;ThomasSchatzl&quot;]</name></author><category term="GC" /><category term="JDK 26" /><summary type="html"><![CDATA[The OpenJDK project is about to release JDK 26 in a few days. This is a good opportunity to add information about notable changes to the stop-the-world collectors in the Hotspot VM.]]></summary></entry><entry><title type="html">Data Oriented Programming, Beyond Records</title><link href="https://inside.java/2026/02/27/beyon-records-dop/" rel="alternate" type="text/html" title="Data Oriented Programming, Beyond Records" /><published>2026-02-27T00:00:00+00:00</published><updated>2026-02-27T00:00:00+00:00</updated><id>https://inside.java/2026/02/27/beyon-records-dop</id><content type="html" xml:base="https://inside.java/2026/02/27/beyon-records-dop/"><![CDATA[<p><img class="webfeedsFeaturedVisual" style="display: none;" src="/images/thumbnail/DukeReadingDocuments.png" /></p>]]></content><author><name>[&quot;BrianGoetz&quot;]</name></author><category term="Amber" /><summary type="html"><![CDATA[We've had some good discussions here, and I've got some updates to the ideas outlined in the previous snapshot. There's a lot here, including a lot that I'm identifying as likely future directions but which should not be the topic of current discussion; I want to focus on the highest-priority aspects first...]]></summary></entry><entry><title type="html">Episode 48 “HTTP/3 in Java 26” [AtA]</title><link href="https://inside.java/2026/02/26/podcast-048/" rel="alternate" type="text/html" title="Episode 48 “HTTP/3 in Java 26” [AtA]" /><published>2026-02-26T00:00:00+00:00</published><updated>2026-02-26T00:00:00+00:00</updated><id>https://inside.java/2026/02/26/Podcast-048</id><content type="html" xml:base="https://inside.java/2026/02/26/podcast-048/"><![CDATA[<p><img class="webfeedsFeaturedVisual" style="display: none;" src="/images/thumbnail/ChadMic.jpg?969123465" /></p>
+
+<p><br /></p>
+
+<iframe title="Libsyn Player" style="border: none" src="//html5-player.libsyn.com/embed/episode/id/40241785/height/90/theme/custom/thumbnail/yes/direction/forward/render-playlist/no/custom-color/000000/" height="90" width="100%" scrolling="no"></iframe>
+
+<div class="youtube-embed">
+<iframe src="https://www.youtube.com/embed/Y8ZWHjNP6K4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+</div>
+
+<p><br /></p>
+
+<p>HTTP/3 is the next version of the internet’s most important application layer protocol. But, somewhat surprisingly, it uses UDP (via the new QUIC protocol) instead of TCP/IP, which has implications for the number of initial roundtrips, HTTP version selection, and time to first byte but also adoption and evolution. Java 26 supports HTTP/3 out of the box.</p>
+
+<p>Nicolai Parlog talks to Daniel Fuchs and Daniel Jelinski, both Consulting Members of Technical Staff at Oracle and OpenJDK committers about Java’s HTTP client. They start by briefly retracing its introduction in Java 11 and its support for HTTP/2 before diving deeper into HTTP/3 to learn about the motivation, technical underpinnings like the QUIC protocol, and challengs for its adoption before discussing its integration into Java 26.</p>
+
+<p>(Apologies for the minor audio issues and thank you for your understanding.)</p>
+
+<p>Links:</p>
+<ul>
+  <li><a href="https://openjdk.org/jeps/517">JEP 517: HTTP/3 for the HTTP Client API</a></li>
+  <li><a href="https://inside.java/2025/10/22/http3-support/">Article “HTTP/3 Support in JDK 26”</a></li>
+</ul>
+
+<p><br />
+Make sure to also check the <strong>Duke’s Corner podcast</strong> on <a href="https://dev.java/duke/corner/">dev.java</a>.</p>
+
+<p><br /></p>
+
+<h3 id="additional-resources">Additional resources</h3>
+
+<ul>
+  <li><a href="https://inside.java">Inside.java</a> : News and views from members of the Java team at Oracle</li>
+  <li><a href="https://dev.java">Dev.java</a> : The Destination for Java Developers</li>
+  <li><a href="https://openjdk.java.net/">OpenJDK</a></li>
+  <li><a href="https://www.oracle.com/java/">Oracle Java</a></li>
+</ul>
+
+<p>For more episodes, check out <a href="https://inside.java/podcast">Inside Java</a>, our <a href="https://www.youtube.com/playlist?list=PLX8CzqL3ArzV_hXbRevwzrXSMcGNzhxiZ">YouTube playlist</a>, and follow <a href="https://twitter.com/java">@Java</a> on Twitter.</p>
+
+<p>Contact us <a href="https://inside.java/about/">here</a>.</p>]]></content><author><name>[&quot;NicolaiParlog&quot;]</name></author><category term="JDK 26" /><category term="Core Libraries" /><category term="Networking" /><summary type="html"><![CDATA[HTTP/3 is the next version of the internet's most important application layer protocol. In this Inside Java Podcast episode, Nicolai Parlog talks to Daniel Fuchs and Daniel Jelinski about HTTP/3's integration into Java's HTTP client.]]></summary></entry><entry><title type="html">Dissecting the CPU-Memory Relationship in Garbage Collection</title><link href="https://inside.java/2026/02/24/gc-cost-cpu-vs-memory/" rel="alternate" type="text/html" title="Dissecting the CPU-Memory Relationship in Garbage Collection" /><published>2026-02-24T00:00:00+00:00</published><updated>2026-02-24T00:00:00+00:00</updated><id>https://inside.java/2026/02/24/gc-cost-cpu-vs-memory</id><content type="html" xml:base="https://inside.java/2026/02/24/gc-cost-cpu-vs-memory/"><![CDATA[<p><img class="webfeedsFeaturedVisual" style="display: none;" src="/images/thumbnail/code.jpg" /></p>]]></content><author><name>[&quot;JonasNorlinder&quot;]</name></author><category term="JDK 26" /><category term="GC" /><category term="Serviceability" /><summary type="html"><![CDATA[This article analyzes why we need to look beyond GC pauses to enable maximal infrastructure efficiency and introduces the new Java API for GC CPU in OpenJDK 26. These capabilities empower engineers and researchers to quantify the collector's CPU overhead, providing the data necessary to make informed decisions regarding the memory-CPU trade-off.]]></summary></entry><entry><title type="html">Episode 47 “Carrier Classes” [IJN]</title><link href="https://inside.java/2026/02/23/podcast-047/" rel="alternate" type="text/html" title="Episode 47 “Carrier Classes” [IJN]" /><published>2026-02-23T00:00:00+00:00</published><updated>2026-02-23T00:00:00+00:00</updated><id>https://inside.java/2026/02/23/Podcast-047</id><content type="html" xml:base="https://inside.java/2026/02/23/podcast-047/"><![CDATA[<p><img class="webfeedsFeaturedVisual" style="display: none;" src="/images/thumbnail/ChadMic.jpg?961365348" /></p>
+
+<p><br /></p>
+
+<iframe title="Libsyn Player" style="border: none" src="//html5-player.libsyn.com/embed/episode/id/40198720/height/90/theme/custom/thumbnail/yes/direction/forward/render-playlist/no/custom-color/000000/" height="90" width="100%" scrolling="no"></iframe>
+
+<p><br /></p>
+
+<p>This episode presents Project Amber lead Brian Goetz’s recent email “Data Oriented Programming, Beyond Records”, wherein he describes plans to improve Java’s data handling capabilities by introducing carrier classes, a generalization of records. Like them, carrier classes describe their state through a component list that defines the type’s external API: accessors, a constructor, and matching deconstructor - this allows carrier classes to participate in pattern matching and reconstruction. Unlike records, the implementation of this API remains the developer’s task although component fields offer a shortcut for the common case where the API does map to a field. Carrier classes don’t have to be final (and can hence participate in inheritance) and neither do their fields (so they can be mutable data carriers).</p>
+
+<p>The email also mentions carrier interfaces, allowing records to be abstract as well as a relaxation of deconstruction patterns that make them more amenable to evolution of the matched type. This episode also briefly touches on Gavin Bierman’s mail to the Project Amber mailing list that announces pattern assignments and constant patterns.</p>
+
+<p>Links:</p>
+<ul>
+  <li><a href="https://mail.openjdk.org/pipermail/amber-spec-experts/2026-January/004307.html">Brian Goetz’ email “Data Oriented Programming, Beyond Records”</a></li>
+  <li><a href="https://mail.openjdk.org/pipermail/amber-spec-experts/2026-January/004306.html">Gavin Bierman’s email “Amber features 2026”</a></li>
+  <li><a href="openjdk.org/projects/amber/">Project Amber</a></li>
+</ul>
+
+<p><br />
+Make sure to also check the <strong>Duke’s Corner podcast</strong> on <a href="https://dev.java/duke/corner/">dev.java</a>.</p>
+
+<p><br /></p>
+
+<h3 id="additional-resources">Additional resources</h3>
+
+<ul>
+  <li><a href="https://inside.java">Inside.java</a> : News and views from members of the Java team at Oracle</li>
+  <li><a href="https://dev.java">Dev.java</a> : The Destination for Java Developers</li>
+  <li><a href="https://openjdk.java.net/">OpenJDK</a></li>
+  <li><a href="https://www.oracle.com/java/">Oracle Java</a></li>
+</ul>
+
+<p>For more episodes, check out <a href="https://inside.java/podcast">Inside Java</a>, our <a href="https://www.youtube.com/playlist?list=PLX8CzqL3ArzV_hXbRevwzrXSMcGNzhxiZ">YouTube playlist</a>, and follow <a href="https://twitter.com/java">@Java</a> on Twitter.</p>
+
+<p>Contact us <a href="https://inside.java/about/">here</a>.</p>]]></content><author><name>[&quot;NicolaiParlog&quot;]</name></author><category term="Amber" /><summary type="html"><![CDATA[This episode presents Project Amber lead Brian Goetz’s recent email “Data Oriented Programming, Beyond Records”, wherein he describes plans to improve Java’s data handling capabilities by introducing carrier classes, a generalization of records...]]></summary></entry><entry><title type="html">Java Serialization: Spooky Action at a Distance - Stack Walker #7</title><link href="https://inside.java/2026/02/21/stackwalker-serialization/" rel="alternate" type="text/html" title="Java Serialization: Spooky Action at a Distance - Stack Walker #7" /><published>2026-02-21T00:00:00+00:00</published><updated>2026-02-21T00:00:00+00:00</updated><id>https://inside.java/2026/02/21/Stackwalker-Serialization</id><content type="html" xml:base="https://inside.java/2026/02/21/stackwalker-serialization/"><![CDATA[<div class="youtube-embed">
+    <iframe src="https://www.youtube.com/embed/2sxK-z84Oi4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>
+</div>
+
+<p><em>Serialization has been a part of the Java Platform since the 1.1 release. While serialization brings with it a lot of utility and was key in Java’s early success, it does have some pretty significant issues as well. In this episode of Stack Walker, we review the history of serialization, the concerns it was attempting to address, and how some of those design decisions have resulted in more than a few headaches for JDK engineers and Java developers alike. We will then look at how the JDK engineering team is working towards addressing the issues that serialization presents and ultimately a replacement.</em></p>
+
+<p><em>Make sure to check the <a href="https://www.youtube.com/watch?v=2sxK-z84Oi4">show-notes</a>.</em></p>]]></content><author><name>[&quot;BillyKorando&quot;]</name></author><category term="Networking" /><category term="Core Libraries" /><summary type="html"><![CDATA[Serialization has been a part of the Java Platform since the 1.1 release. While serialization brings with it a lot of utility and was key in Java's early success, it does have some pretty significant issues as well. In this episode of Stack Walker, we review the history of serialization, the concerns it was attempting to address, and how some of those design decisions have resulted in more than a few headaches for JDK engineers and Java developers alike. We will then look at how the JDK engineering team is working towards addressing the issues that serialization presents and ultimately a replacement.]]></summary></entry><entry><title type="html">Episode 46 “Java’s Plans for 2026” [IJN]</title><link href="https://inside.java/2026/02/20/podcast-046/" rel="alternate" type="text/html" title="Episode 46 “Java’s Plans for 2026” [IJN]" /><published>2026-02-20T00:00:00+00:00</published><updated>2026-02-20T00:00:00+00:00</updated><id>https://inside.java/2026/02/20/Podcast-046</id><content type="html" xml:base="https://inside.java/2026/02/20/podcast-046/"><![CDATA[<p><img class="webfeedsFeaturedVisual" style="display: none;" src="/images/thumbnail/ChadMic.jpg?950313974" /></p>
+
+<p><br /></p>
+
+<iframe title="Libsyn Player" style="border: none" src="//html5-player.libsyn.com/embed/episode/id/40164210/height/90/theme/custom/thumbnail/yes/direction/forward/render-playlist/no/custom-color/000000/" height="90" width="100%" scrolling="no"></iframe>
+
+<p><br /></p>
+
+<p>In 2026, Java keeps evolving: Project Valhalla is gunning for merging its value types preview in the second half of this year; Babylon wants to incubate code reflection; Loom will probably finalize the structured concurrency API; Leyden plans to ship AOT code compilation; and Amber hopes to present JEPs on constant patterns and pattern assignments. And those are just the most progressed features - more are in the pipeline and discussed in this episode of the Inside Java Newscast.</p>
+
+<p>Links for Project Valhalla:</p>
+<ul>
+  <li><a href="https://openjdk.org/projects/valhalla/">Project Valhalla</a></li>
+  <li><a href="https://mail.openjdk.org/mailman/listinfo/valhalla-dev">mailing list</a></li>
+  <li><a href="https://jdk.java.net/valhalla/">early access build</a></li>
+  <li><a href="https://openjdk.org/jeps/401">JEP 401 - Value Types</a></li>
+  <li><a href="https://openjdk.org/jeps/8303099">JEP draft: Null-Restricted and Nullable Types</a></li>
+  <li><a href="https://openjdk.org/jeps/8316779">JEP draft: Null-Restricted Value Class Types</a></li>
+  <li><a href="https://openjdk.org/jeps/402">JEP 402 - Enhanced Primitive Boxing</a></li>
+</ul>
+
+<p>Links for Project Panama:</p>
+<ul>
+  <li><a href="https://openjdk.org/projects/panama/">Project Panama</a></li>
+  <li><a href="https://mail.openjdk.org/mailman/listinfo/panama-dev">mailing list</a></li>
+  <li><a href="https://openjdk.org/jeps/529">JEP 529 Vector API (11th incubator)</a></li>
+  <li><a href="https://github.com/openjdk/jextract">jextract on GitHub</a></li>
+</ul>
+
+<p>Links for Project Babylon:</p>
+<ul>
+  <li><a href="https://openjdk.org/projects/babylon/">Project Babylon</a></li>
+  <li><a href="https://mail.openjdk.org/mailman/listinfo/babylon-dev">Mailing list</a></li>
+  <li><a href="https://github.com/openjdk/babylon/tree/code-reflection/test/jdk/java/lang/reflect/code">prototype</a></li>
+</ul>
+
+<p>Links for Project Loom:</p>
+<ul>
+  <li><a href="https://wiki.openjdk.org/display/loom/Main">Project Loom</a></li>
+  <li><a href="https://mail.openjdk.org/mailman/listinfo/loom-dev">mailing list</a></li>
+  <li><a href="https://openjdk.org/jeps/505">JEP 505 - Structured Concurrency</a></li>
+</ul>
+
+<p>Links for Interlude:</p>
+<ul>
+  <li><a href="https://jdk.java.net/valhalla/">Valhalla early acces build</a></li>
+  <li><a href="https://dev.java/playground/">Dev Java Playground</a></li>
+  <li><a href="https://learn.java">Learn Java</a></li>
+</ul>
+
+<p>Links for Project Leyden:</p>
+<ul>
+  <li><a href="https://openjdk.org/projects/leyden/">Project Leyden</a></li>
+  <li><a href="https://mail.openjdk.org/mailman/listinfo/leyden-dev">mailing list</a></li>
+  <li><a href="https://openjdk.org/jeps/8335368">JEP draft - AOT Code Compilation</a></li>
+</ul>
+
+<p>Links for Project Amber:</p>
+<ul>
+  <li><a href="https://openjdk.org/projects/amber/">Project Amber</a></li>
+  <li><a href="https://mail.openjdk.org/mailman/listinfo/amber-dev">mailing list</a></li>
+  <li><a href="https://www.youtube.com/watch?v=c6L4Ef9owuQ">What Happened to Java’s String Templates?</a></li>
+  <li><a href="https://openjdk.org/jeps/468">JEP 468: Derived Record Creation</a></li>
+</ul>
+
+<p><br />
+Make sure to also check the <strong>Duke’s Corner podcast</strong> on <a href="https://dev.java/duke/corner/">dev.java</a>.</p>
+
+<p><br /></p>
+
+<h3 id="additional-resources">Additional resources</h3>
+
+<ul>
+  <li><a href="https://inside.java">Inside.java</a> : News and views from members of the Java team at Oracle</li>
+  <li><a href="https://dev.java">Dev.java</a> : The Destination for Java Developers</li>
+  <li><a href="https://openjdk.java.net/">OpenJDK</a></li>
+  <li><a href="https://www.oracle.com/java/">Oracle Java</a></li>
+</ul>
+
+<p>For more episodes, check out <a href="https://inside.java/podcast">Inside Java</a>, our <a href="https://www.youtube.com/playlist?list=PLX8CzqL3ArzV_hXbRevwzrXSMcGNzhxiZ">YouTube playlist</a>, and follow <a href="https://twitter.com/java">@Java</a> on Twitter.</p>
+
+<p>Contact us <a href="https://inside.java/about/">here</a>.</p>]]></content><author><name>[&quot;NicolaiParlog&quot;]</name></author><category term="Amber" /><category term="Valhalla" /><category term="Leyden" /><category term="Babylon" /><category term="Loom" /><category term="Panama" /><summary type="html"><![CDATA[In 2026, Java keeps evolving: Project Valhalla is gunning for merging its value types preview in the second half of this year; Babylon wants to incubate code reflection; Loom will probably finalize the structured concurrency API; Leyden plans to ship AOT code compilation; and Amber hopes to present JEPs on constant patterns and pattern assignments. And those are just the most progressed features - more are in the pipeline and discussed in this episode of the Inside Java Newscast.]]></summary></entry></feed>

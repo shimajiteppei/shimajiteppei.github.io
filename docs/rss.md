@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260304
+
+
+- [Quality Outreach Heads-up - JavaFX 27: Metal Is Now the Default Rendering Pipeline on macOS](https://inside.java/2026/03/03/quality-heads-up/)
+- [Java 26 for DevOps](https://inside.java/2026/03/02/jdk-26-rn-ops/)
+
+
 ### 20260303
 
 
@@ -205,11 +212,5 @@ search:
 
 
 - [Level Up Your LangChain4j Apps for Production](https://inside.java/2026/02/01/devoxxbelgium-production-langchain4j/)
-
-
-### 20260131
-
-
-- [Qodana for Android: Increasing Code Quality for Kotlin-First Teams](https://blog.jetbrains.com/qodana/2026/01/qodana-for-android-kotlin/)
 
 
