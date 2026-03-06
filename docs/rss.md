@@ -8,7 +8,18 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260306
+
+
+- [Episode 49 “LazyConstants in JDK 26” [IJN]](https://inside.java/2026/03/06/podcast-049/)
+- [Java 26 is Shipping Soon - Inside Java Newscast #108](https://inside.java/2026/03/05/newscast-108/)
+- [HTTP Client Updates in Java 26](https://inside.java/2026/03/04/jdk-26-http-client/)
+
+
 ### 20260305
+
+
+- [Announcing Rust 1.94.0](https://blog.rust-lang.org/2026/03/05/Rust-1.94.0/)
 
 
 ### 20260304
@@ -190,7 +201,6 @@ search:
 ### 20260205
 
 
-- [Koog x ACP: Connect an Agent to Your IDE and More](https://blog.jetbrains.com/ai/2026/02/koog-x-acp-connect-an-agent-to-your-ide-and-more/)
 - [LazyConstants in JDK 26 - Inside Java Newscast #106](https://inside.java/2026/02/05/newscast-106/)
 - [AI meets SQL Server 2025 on Ubuntu](https://ubuntu.com//blog/sql-server-2025-on-ubuntu)
 
@@ -202,12 +212,8 @@ search:
 
 
 - [Pick Your KotlinConf Workshop by What You Want to Learn](https://blog.jetbrains.com/kotlin/2026/02/pick-your-kotlinconf-workshop/)
-- [Join the Kotlin Ecosystem Mentorship Program](https://blog.jetbrains.com/kotlin/2026/02/kotlin-ecosystem-mentorship/)
 - [First look at 2026 Project goals](https://blog.rust-lang.org/inside-rust/2026/02/03/first-look-at-2026-project-goals/)
 - [AWS IoT Greengrass comes to Ubuntu Core](https://ubuntu.com//blog/aws-iot-greengrass-comes-to-ubuntu-core)
 - [Tutorial: getting started with AWS IoT Greengrass on Ubuntu Core](https://ubuntu.com//blog/tutorial-getting-started-with-aws-greengrass-on-ubuntu-core)
-
-
-### 20260202
 
 
