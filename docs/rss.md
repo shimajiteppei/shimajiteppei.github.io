@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260308
+
+
 ### 20260307
 
 
@@ -208,9 +211,5 @@ search:
 
 
 - [LazyConstants in JDK 26 - Inside Java Newscast #106](https://inside.java/2026/02/05/newscast-106/)
-- [AI meets SQL Server 2025 on Ubuntu](https://ubuntu.com//blog/sql-server-2025-on-ubuntu)
-
-
-### 20260204
 
 
