@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260309
+
+
+- [Episode 50 “Towards Better Checked Exceptions” [IJN]](https://inside.java/2026/03/09/podcast-050/)
+- [Java Performance Update: From JDK 21 to JDK 25](https://inside.java/2026/03/08/jfokus-java-performance-update/)
+
+
 ### 20260308
 
 
@@ -204,12 +211,5 @@ search:
 
 
 - [The Inside Java Newsletter: JavaOne 2026: $100 Discount Now!](https://inside.java/2026/02/06/inside-java-newsletter/)
-- [SpacemiT announces the availability of  Ubuntu on K3/K1 series RISC-V AI computing platforms](https://ubuntu.com//blog/spacemit-announces-availability-of-ubuntu-on-k3-k1-series)
-
-
-### 20260205
-
-
-- [LazyConstants in JDK 26 - Inside Java Newscast #106](https://inside.java/2026/02/05/newscast-106/)
 
 
