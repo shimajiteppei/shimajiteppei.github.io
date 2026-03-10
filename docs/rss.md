@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260310
+
+
+- [Fast-tracking industrial and AI deployment on Renesas RZ platforms](https://ubuntu.com//blog/fast-tracking-industrial-and-ai-deployment-on-renesas-rz-platforms)
+- [Canonical and Arduino collaborate to enable Ubuntu on the VENTUNO Q, the next generation platform for AI](https://ubuntu.com//blog/canonical-and-arduino-collaborate-to-enable-ubuntu-on-the-ventuno-q-the-next-generation-platform-for-ai)
+
+
 ### 20260309
 
 
@@ -203,13 +210,5 @@ search:
 
 
 - [Optimizing Java Class Metadata in Project Valhalla](https://inside.java/2026/02/07/valhalla-class-metadata-optimization/)
-- [SQL Server 2025 is generally available on Ubuntu 24.04 LTS](https://ubuntu.com//blog/sql-server-2025-ubuntu-24-04-lts)
-- [Hiring the Canonical way: trust, humanity, and remote-first thinking](https://ubuntu.com//blog/hiring-the-canonical-way)
-
-
-### 20260206
-
-
-- [The Inside Java Newsletter: JavaOne 2026: $100 Discount Now!](https://inside.java/2026/02/06/inside-java-newsletter/)
 
 
