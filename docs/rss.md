@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260311
+
+
+- [The Inside Java Newsletter: New Sponsors for JavaOne! Registration Discount Continues!](https://inside.java/2026/03/11/inside-java-newsletter/)
+- [Quality Outreach Heads-up - JDK 27: Removal of ‘java.locale.useOldISOCodes’ System Property](https://inside.java/2026/03/10/quality-heads-up/)
+
+
 ### 20260310
 
 
@@ -204,11 +211,5 @@ search:
 
 
 ### 20260208
-
-
-### 20260207
-
-
-- [Optimizing Java Class Metadata in Project Valhalla](https://inside.java/2026/02/07/valhalla-class-metadata-optimization/)
 
 
