@@ -8,9 +8,17 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260312
+
+
+- [Episode 51 “Unboxing Java 26 for Developers” [IJN]](https://inside.java/2026/03/12/podcast-051/)
+- [The bare metal problem in AI Factories](https://ubuntu.com//blog/the-bare-metal-problem-in-ai-factories)
+
+
 ### 20260311
 
 
+- [Introducing Tracy: The AI Observability Library for Kotlin](https://blog.jetbrains.com/kotlin/2026/03/introducing-tracy-the-ai-observability-library-for-kotlin/)
 - [The Inside Java Newsletter: New Sponsors for JavaOne! Registration Discount Continues!](https://inside.java/2026/03/11/inside-java-newsletter/)
 - [Quality Outreach Heads-up - JDK 27: Removal of ‘java.locale.useOldISOCodes’ System Property](https://inside.java/2026/03/10/quality-heads-up/)
 
@@ -208,8 +216,5 @@ search:
 
 - [Quality Outreach Heads-up - JDK 26: DecimalFormat Uses the Double.toString(double) Algorithm](https://inside.java/2026/02/09/quality-heads-up/)
 - [January 2026 Project Director Update](https://blog.rust-lang.org/inside-rust/2026/02/09/project-director-update/)
-
-
-### 20260208
 
 
