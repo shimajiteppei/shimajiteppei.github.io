@@ -8,10 +8,17 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260313
+
+
+- [AppArmor vulnerability fixes available](https://ubuntu.com//blog/apparmor-vulnerability-fixes-available)
+
+
 ### 20260312
 
 
 - [Episode 51 “Unboxing Java 26 for Developers” [IJN]](https://inside.java/2026/03/12/podcast-051/)
+- [Announcing rustup 1.29.0](https://blog.rust-lang.org/2026/03/12/Rustup-1.29.0/)
 - [The bare metal problem in AI Factories](https://ubuntu.com//blog/the-bare-metal-problem-in-ai-factories)
 
 
@@ -209,12 +216,5 @@ search:
 
 
 - [Quality Outreach Heads-up - JDK 27: Removal of ThreadPoolExecutor.finalize()](https://inside.java/2026/02/10/quality-heads-up/)
-
-
-### 20260209
-
-
-- [Quality Outreach Heads-up - JDK 26: DecimalFormat Uses the Double.toString(double) Algorithm](https://inside.java/2026/02/09/quality-heads-up/)
-- [January 2026 Project Director Update](https://blog.rust-lang.org/inside-rust/2026/02/09/project-director-update/)
 
 
