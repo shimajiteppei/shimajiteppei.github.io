@@ -8,9 +8,14 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260314
+
+
 ### 20260313
 
 
+- [Secure, Scalable JVM Diagnostics for Kubernetes with JMS](https://inside.java/2026/03/13/jms-secure-scalable-jvm/)
+- [Call for Testing: Build Dir Layout v2](https://blog.rust-lang.org/2026/03/13/call-for-testing-build-dir-layout-v2/)
 - [AppArmor vulnerability fixes available](https://ubuntu.com//blog/apparmor-vulnerability-fixes-available)
 
 
@@ -209,12 +214,5 @@ search:
 
 
 - [What is RDMA?](https://ubuntu.com//blog/what-is-rdma)
-- [Building new revenue streams: 3 strategic cloud opportunities for telcos in 2026](https://ubuntu.com//blog/new-telco-cloud-opportunity)
-
-
-### 20260210
-
-
-- [Quality Outreach Heads-up - JDK 27: Removal of ThreadPoolExecutor.finalize()](https://inside.java/2026/02/10/quality-heads-up/)
 
 
