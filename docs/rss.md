@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260315
+
+
 ### 20260314
 
 
@@ -206,13 +209,6 @@ search:
 ### 20260212
 
 
-- [Program management update — January 2026](https://blog.rust-lang.org/inside-rust/2026/02/11/program-management-update-2026-01/)
 - [Announcing Rust 1.93.1](https://blog.rust-lang.org/2026/02/12/Rust-1.93.1/)
-
-
-### 20260211
-
-
-- [What is RDMA?](https://ubuntu.com//blog/what-is-rdma)
 
 
