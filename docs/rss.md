@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260317
+
+
+- [Canonical announces it will distribute NVIDIA DOCA-OFED in Ubuntu](https://ubuntu.com//blog/canonical-announces-it-will-distribute-nvidia-doca-ofed-in-ubuntu)
+- [Meet Canonical at NVIDIA GTC 2026](https://ubuntu.com//blog/nvidia-gtc-2026)
+
+
 ### 20260316
 
 
@@ -196,16 +203,5 @@ search:
 
 
 - [Newsletter: JDK 26 Release Candidate | JavaOne and More Heads-Up](https://inside.java/2026/02/14/quality-heads-up/)
-- [The foundations of software: open source libraries and their maintainers](https://ubuntu.com//blog/the-foundations-of-software-open-source-libraries-and-their-maintainers)
-
-
-### 20260213
-
-
-- [Building Modular Monoliths With Kotlin and Spring](https://blog.jetbrains.com/kotlin/2026/02/building-modular-monoliths-with-kotlin-and-spring/)
-- [Episode 45 “Announcement - The New Inside Java Podcast”](https://inside.java/2026/02/13/podcast-045/)
-- [Leadership Council March 2026 Representative Selections](https://blog.rust-lang.org/inside-rust/2026/02/13/leadership-council-repr-selection/)
-- [crates.io: an update to the malicious crate notification policy](https://blog.rust-lang.org/2026/02/13/crates.io-malicious-crate-update/)
-- [From inspiration to impact: design students from Regent’s University London explore open design for their dissertation projects](https://ubuntu.com//blog/from-inspiration-to-impact-design-students-from-regents-university-london-explore-open-design-for-their-dissertation-projects)
 
 
