@@ -8,9 +8,16 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260318
+
+
+- [Building a dry-run mode for the OpenTelemetry Collector](https://ubuntu.com//blog/building-a-dry-run-mode-for-the-opentelemetry-collector)
+
+
 ### 20260317
 
 
+- [The Arrival of Java 26](https://inside.java/2026/03/16/the-arrival-of-java-26/)
 - [Canonical announces it will distribute NVIDIA DOCA-OFED in Ubuntu](https://ubuntu.com//blog/canonical-announces-it-will-distribute-nvidia-doca-ofed-in-ubuntu)
 - [Meet Canonical at NVIDIA GTC 2026](https://ubuntu.com//blog/nvidia-gtc-2026)
 
@@ -197,11 +204,5 @@ search:
 
 
 ### 20260215
-
-
-### 20260214
-
-
-- [Newsletter: JDK 26 Release Candidate | JavaOne and More Heads-Up](https://inside.java/2026/02/14/quality-heads-up/)
 
 
