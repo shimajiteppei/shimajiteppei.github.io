@@ -8,9 +8,19 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260319
+
+
+- [Advantech MIC-770 V3W now certified on Ubuntu 24.04 LTS](https://ubuntu.com//blog/advantech-mic-770-v3w-now-certified-on-ubuntu-24-04-lts)
+- [Canonical collaborates with Microsoft to strengthen enterprise-grade Linux protection](https://ubuntu.com//blog/defenderandpro)
+
+
 ### 20260318
 
 
+- [Google Summer of Code 2026 Is Here: Contribute to Kotlin](https://blog.jetbrains.com/kotlin/2026/03/gsoc-2026-contribute-to-kotlin/)
+- [Java 26 in definitely UNDER 3 minutes](https://inside.java/2026/03/18/jdk-26-in-2-mins/)
+- [The Arrival of Java 26](https://inside.java/2026/03/17/the-arrival-of-java-26/)
 - [Building a dry-run mode for the OpenTelemetry Collector](https://ubuntu.com//blog/building-a-dry-run-mode-for-the-opentelemetry-collector)
 
 
@@ -201,8 +211,5 @@ search:
 
 
 ### 20260216
-
-
-### 20260215
 
 
