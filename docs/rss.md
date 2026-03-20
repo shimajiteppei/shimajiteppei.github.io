@@ -8,9 +8,22 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260320
+
+
+- [KotlinConf 2026: Talks to Help You Navigate the Schedule](https://blog.jetbrains.com/kotlin/2026/03/kotlinconf-2026-talks-schedule/)
+- [Beyond vibe coding: The five building blocks of AI-native engineering](https://www.thoughtworks.com/insights/blog/generative-ai/beyond-vibe-coding-the-five-building-blocks-of-aI-native-engineering)
+- [The hidden pearls of TDD](https://www.thoughtworks.com/insights/blog/testing/the-hidden-pearls-of-TDD)
+- [SRE is entering a paradigm shift](https://www.thoughtworks.com/insights/blog/generative-ai/sre--is-entering-a-paradigm-shift)
+- [Using AI to build a GenAI bot for logistics teams at a major retailer](https://www.thoughtworks.com/insights/blog/generative-ai/using-ai-to-build-genai-bot-for-logistics-teams-major-retailer)
+- [Preparing your team for the agentic software development life cycle](https://www.thoughtworks.com/insights/articles/preparing-your-team-for-agentic-software-development-life-cycle)
+- [Document processing isn&#39;t one problem — it&#39;s three](https://www.thoughtworks.com/insights/blog/generative-ai/document-processing-is-not-one-problem-it-is-three)
+
+
 ### 20260319
 
 
+- [JDK 26 Security Enhancements](https://inside.java/2026/03/19/jdk26-security-enhancements/)
 - [Advantech MIC-770 V3W now certified on Ubuntu 24.04 LTS](https://ubuntu.com//blog/advantech-mic-770-v3w-now-certified-on-ubuntu-24-04-lts)
 - [Canonical collaborates with Microsoft to strengthen enterprise-grade Linux protection](https://ubuntu.com//blog/defenderandpro)
 
@@ -208,8 +221,5 @@ search:
 
 
 - [Post-Quantum Hybrid Key Exchange for TLS 1.3](https://inside.java/2026/02/17/tls-post-quantum-hybrid-key-exchange/)
-
-
-### 20260216
 
 
