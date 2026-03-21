@@ -8,10 +8,18 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260321
+
+
+- [Canonical partners with Snyk for scanning chiseled Ubuntu containers](https://ubuntu.com//blog/canonical-partners-with-snyk-for-scanning-chiseled-ubuntu-containers)
+- [Introducing MicroCloud Cluster Manager](https://ubuntu.com//blog/introducing-microcloud-cluster-manager)
+
+
 ### 20260320
 
 
 - [KotlinConf 2026: Talks to Help You Navigate the Schedule](https://blog.jetbrains.com/kotlin/2026/03/kotlinconf-2026-talks-schedule/)
+- [What we heard about Rust&#39;s challenges, and how we can address them](https://blog.rust-lang.org/2026/03/20/rust-challenges/)
 - [Beyond vibe coding: The five building blocks of AI-native engineering](https://www.thoughtworks.com/insights/blog/generative-ai/beyond-vibe-coding-the-five-building-blocks-of-aI-native-engineering)
 - [The hidden pearls of TDD](https://www.thoughtworks.com/insights/blog/testing/the-hidden-pearls-of-TDD)
 - [SRE is entering a paradigm shift](https://www.thoughtworks.com/insights/blog/generative-ai/sre--is-entering-a-paradigm-shift)
@@ -211,15 +219,6 @@ search:
 ### 20260218
 
 
-- [Kodee’s Kotlin Roundup: KotlinConf ’26 Updates, New Releases, and More](https://blog.jetbrains.com/kotlin/2026/02/kodees-kotlin-roundup-kotlinconf-26-updates-new-releases-and-more/)
 - [This Development-cycle in Cargo: 1.94](https://blog.rust-lang.org/inside-rust/2026/02/18/this-development-cycle-in-cargo-1.94/)
-- [A year of documentation-driven development](https://ubuntu.com//blog/a-year-of-documentation-driven-development)
-- [Announcing FIPS 140-3 for Ubuntu Core22](https://ubuntu.com//blog/announcing-fips-140-3-for-ubuntu-core22)
-
-
-### 20260217
-
-
-- [Post-Quantum Hybrid Key Exchange for TLS 1.3](https://inside.java/2026/02/17/tls-post-quantum-hybrid-key-exchange/)
 
 
