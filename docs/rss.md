@@ -8,9 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260322
+
+
 ### 20260321
 
 
+- [Security advisory for Cargo](https://blog.rust-lang.org/2026/03/21/cve-2026-33056/)
 - [Canonical partners with Snyk for scanning chiseled Ubuntu containers](https://ubuntu.com//blog/canonical-partners-with-snyk-for-scanning-chiseled-ubuntu-containers)
 - [Introducing MicroCloud Cluster Manager](https://ubuntu.com//blog/introducing-microcloud-cluster-manager)
 
@@ -213,12 +217,5 @@ search:
 - [Java to Kotlin Conversion Comes to Visual Studio Code](https://blog.jetbrains.com/kotlin/2026/02/java-to-kotlin-conversion-comes-to-visual-studio-code/)
 - [Towards Better Checked Exceptions - Inside Java Newscast #107](https://inside.java/2026/02/19/newscast-107/)
 - [Rust participates in Google Summer of Code 2026](https://blog.rust-lang.org/2026/02/19/Rust-participates-in-GSoC-2026/)
-- [Predict, compare, and reduce costs with our S3 cost calculator](https://ubuntu.com//blog/predict-compare-and-reduce-costs-with-our-s3-cost-calculator)
-
-
-### 20260218
-
-
-- [This Development-cycle in Cargo: 1.94](https://blog.rust-lang.org/inside-rust/2026/02/18/this-development-cycle-in-cargo-1.94/)
 
 
