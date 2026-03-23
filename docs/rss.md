@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260323
+
+
+- [Canonical joins the Rust Foundation as a Gold Member](https://ubuntu.com//blog/canonical-joins-the-rust-foundation-as-a-gold-member)
+
+
 ### 20260322
 
 
@@ -209,13 +215,5 @@ search:
 
 
 ### 20260220
-
-
-### 20260219
-
-
-- [Java to Kotlin Conversion Comes to Visual Studio Code](https://blog.jetbrains.com/kotlin/2026/02/java-to-kotlin-conversion-comes-to-visual-studio-code/)
-- [Towards Better Checked Exceptions - Inside Java Newscast #107](https://inside.java/2026/02/19/newscast-107/)
-- [Rust participates in Google Summer of Code 2026](https://blog.rust-lang.org/2026/02/19/Rust-participates-in-GSoC-2026/)
 
 
