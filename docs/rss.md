@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260324
+
+
+- [Hot code burns: the supply chain case for letting your containers cool before you ship](https://ubuntu.com//blog/hot-code-burns)
+
+
 ### 20260323
 
 
@@ -186,8 +192,6 @@ search:
 
 
 - [Reflections on the Future of Software Engineering Retreat](https://www.thoughtworks.com/insights/articles/reflections-future-software-engineering-retreat)
-- [Where does the rigor go?](https://www.thoughtworks.com/insights/blog/agile-engineering-practices/where-does-the-rigor-go)
-- [So, you want to run OpenClaw?](https://www.thoughtworks.com/insights/blog/security/want-run-openclaw)
 - [Building quantum-safe telecom infrastructure for 5G and beyond](https://ubuntu.com//blog/building-quantum-safe-telecom-infrastructure-for-5g-and-beyond)
 
 
@@ -211,9 +215,5 @@ search:
 
 
 - [Java Serialization: Spooky Action at a Distance - Stack Walker #7](https://inside.java/2026/02/21/stackwalker-serialization/)
-- [Episode 46 “Java’s Plans for 2026” [IJN]](https://inside.java/2026/02/20/podcast-046/)
-
-
-### 20260220
 
 
