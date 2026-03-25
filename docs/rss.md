@@ -8,6 +8,15 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260325
+
+
+- [JavaFX 26 Today](https://inside.java/2026/03/25/javaone-javafx/)
+- [Announcing the Oracle Java Verified Portfolio including Helidon and reintroduction of JavaFX Commercial Support](https://inside.java/2026/03/17/announce-jvp/)
+- [Canonical at KubeCon Europe 2026: NVIDIA donates the GPU DRA driver to the CNCF](https://ubuntu.com//blog/canonical-nvidia-kubecon-2026)
+- [How to set up a micro lab: four principles for a reliable homelab](https://ubuntu.com//blog/how-to-set-up-a-reliable-homelab)
+
+
 ### 20260324
 
 
@@ -209,11 +218,5 @@ search:
 
 
 ### 20260222
-
-
-### 20260221
-
-
-- [Java Serialization: Spooky Action at a Distance - Stack Walker #7](https://inside.java/2026/02/21/stackwalker-serialization/)
 
 
