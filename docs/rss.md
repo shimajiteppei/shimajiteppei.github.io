@@ -8,11 +8,18 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260326
+
+
+- [Episode 52 “Carrier Classes &amp;amp; Discussing Syntax” [AtA]](https://inside.java/2026/03/26/podcast-052/)
+
+
 ### 20260325
 
 
 - [JavaFX 26 Today](https://inside.java/2026/03/25/javaone-javafx/)
 - [Announcing the Oracle Java Verified Portfolio including Helidon and reintroduction of JavaFX Commercial Support](https://inside.java/2026/03/17/announce-jvp/)
+- [January &amp; February 2026 Project Director Update](https://blog.rust-lang.org/inside-rust/2026/03/25/project-director-update/)
 - [Canonical at KubeCon Europe 2026: NVIDIA donates the GPU DRA driver to the CNCF](https://ubuntu.com//blog/canonical-nvidia-kubecon-2026)
 - [How to set up a micro lab: four principles for a reliable homelab](https://ubuntu.com//blog/how-to-set-up-a-reliable-homelab)
 
@@ -215,8 +222,5 @@ search:
 
 - [Episode 47 “Carrier Classes” [IJN]](https://inside.java/2026/02/23/podcast-047/)
 - [Rust debugging survey 2026](https://blog.rust-lang.org/2026/02/23/rust-debugging-survey-2026/)
-
-
-### 20260222
 
 
