@@ -8,6 +8,14 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260327
+
+
+- [Program management update — February 2026](https://blog.rust-lang.org/inside-rust/2026/03/27/program-management-update-2026-02/)
+- [Announcing Rust 1.94.1](https://blog.rust-lang.org/2026/03/26/1.94.1-release/)
+- [Modern Linux identity management: from local auth to the cloud with Ubuntu](https://ubuntu.com//blog/modern-linux-identity-management-ubuntu)
+
+
 ### 20260326
 
 
@@ -215,12 +223,5 @@ search:
 
 
 - [Dissecting the CPU-Memory Relationship in Garbage Collection](https://inside.java/2026/02/24/gc-cost-cpu-vs-memory/)
-
-
-### 20260223
-
-
-- [Episode 47 “Carrier Classes” [IJN]](https://inside.java/2026/02/23/podcast-047/)
-- [Rust debugging survey 2026](https://blog.rust-lang.org/2026/02/23/rust-debugging-survey-2026/)
 
 
