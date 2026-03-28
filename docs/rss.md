@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260328
+
+
+- [The &amp;#8220;scanner report has to be green&amp;#8221; trap](https://ubuntu.com//blog/stability-backports-and-hidden-risks-of-the-bleeding-edge)
+
+
 ### 20260327
 
 
@@ -216,12 +222,5 @@ search:
 
 
 - [Reflections on the Future of Software Engineering Retreat](https://www.thoughtworks.com/insights/articles/reflections-future-software-engineering-retreat)
-- [Building quantum-safe telecom infrastructure for 5G and beyond](https://ubuntu.com//blog/building-quantum-safe-telecom-infrastructure-for-5g-and-beyond)
-
-
-### 20260224
-
-
-- [Dissecting the CPU-Memory Relationship in Garbage Collection](https://inside.java/2026/02/24/gc-cost-cpu-vs-memory/)
 
 
