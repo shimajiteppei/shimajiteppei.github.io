@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260329
+
+
 ### 20260328
 
 
@@ -216,11 +219,5 @@ search:
 
 
 - [15 Things To Do Before, During, and After KotlinConf’26](https://blog.jetbrains.com/kotlin/2026/02/15-things-to-do-before-during-and-after-kotlinconf-26/)
-
-
-### 20260225
-
-
-- [Reflections on the Future of Software Engineering Retreat](https://www.thoughtworks.com/insights/articles/reflections-future-software-engineering-retreat)
 
 
