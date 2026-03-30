@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260330
+
+
+- [How to Harden Ubuntu SSH: From static keys to cloud identity](https://ubuntu.com//blog/how-to-harden-ubuntu-ssh-cloud)
+
+
 ### 20260329
 
 
@@ -74,7 +80,6 @@ search:
 - [SRE is entering a paradigm shift](https://www.thoughtworks.com/insights/blog/generative-ai/sre--is-entering-a-paradigm-shift)
 - [Using AI to build a GenAI bot for logistics teams at a major retailer](https://www.thoughtworks.com/insights/blog/generative-ai/using-ai-to-build-genai-bot-for-logistics-teams-major-retailer)
 - [Preparing your team for the agentic software development life cycle](https://www.thoughtworks.com/insights/articles/preparing-your-team-for-agentic-software-development-life-cycle)
-- [Document processing isn&#39;t one problem — it&#39;s three](https://www.thoughtworks.com/insights/blog/generative-ai/document-processing-is-not-one-problem-it-is-three)
 
 
 ### 20260319
@@ -211,13 +216,5 @@ search:
 
 
 - [Data Oriented Programming, Beyond Records](https://inside.java/2026/02/27/beyon-records-dop/)
-- [Episode 48 “HTTP/3 in Java 26”](https://inside.java/2026/02/26/podcast-048/)
-- [Unmasking the Resolute Raccoon](https://ubuntu.com//blog/unmasking-the-resolute-raccoon)
-
-
-### 20260226
-
-
-- [15 Things To Do Before, During, and After KotlinConf’26](https://blog.jetbrains.com/kotlin/2026/02/15-things-to-do-before-during-and-after-kotlinconf-26/)
 
 
