@@ -8,6 +8,16 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260331
+
+
+- [Kodee’s Kotlin Roundup: Kotlin 2.3.20, Interview With Josh Long, and More](https://blog.jetbrains.com/kotlin/2026/03/kodees-kotlin-roundup-march-26-edition/)
+- [Amper 0.10 – JDK Provisioning, a Maven Converter, Custom Compiler Plugins, and More](https://blog.jetbrains.com/amper/2026/03/amper-0-10/)
+- [KotlinConf’26 Speakers: In Conversation with Josh Long](https://blog.jetbrains.com/kotlin/2026/03/kotlinconf-26-speakers-in-conversation-with-josh-long/)
+- [How to manage Ubuntu fleets using on-premises Active Directory and ADSys](https://ubuntu.com//blog/manage-ubuntu-fleets-active-directory)
+- [Simplify bare metal operations for sovereign clouds](https://ubuntu.com//blog/simplify-bare-metal-operations-for-sovereign-clouds)
+
+
 ### 20260330
 
 
@@ -209,12 +219,5 @@ search:
 
 - [JDK 26 G1/Parallel/Serial GC changes](https://inside.java/2026/02/28/jdk26-gc-changes/)
 - [Meet the wildlife conservation AI 5G hotspot at MWC Barcelona 2026](https://ubuntu.com//blog/meet-the-wildlife-conservation-ai-5g-hotspot-at-mwc-barcelona-2026)
-- [Canonical and Ubuntu RISC-V: a 2025 retro and looking forward to 2026](https://ubuntu.com//blog/canonical-and-ubuntu-risc-v-a-2025-retro-and-looking-forward-to-2026)
-
-
-### 20260227
-
-
-- [Data Oriented Programming, Beyond Records](https://inside.java/2026/02/27/beyon-records-dop/)
 
 
