@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260402
+
+
+- [KotlinConf’26 Speakers: In Conversation With Lena Reinhard](https://blog.jetbrains.com/kotlin/2026/04/kotlinconf-26-speakers-in-conversation-with-lena-reinhard/)
+
+
 ### 20260401
 
 
@@ -209,11 +215,7 @@ search:
 ### 20260302
 
 
-- [Intelligent JVM Monitoring: Combining JDK Flight Recorder with AI](https://inside.java/2026/03/01/jfr-ai-monitor/)
 - [2025 State of Rust Survey Results](https://blog.rust-lang.org/2026/03/02/2025-State-Of-Rust-Survey-results/)
 - [Cloud-native Android™ infotainment: your CI pipeline shouldn’t depend on hardware](https://ubuntu.com//blog/cloud-native-android-infotainment-your-ci-pipeline-shouldnt-depend-on-hardware)
-
-
-### 20260301
 
 
