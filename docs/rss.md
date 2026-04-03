@@ -8,10 +8,22 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260403
+
+
+- [How to perform a structured evaluation of AI conversational solutions](https://www.thoughtworks.com/insights/blog/generative-ai/how-to-perform-a-structured-evaluation-of-ai-conversational-solutions)
+- [Reimagining API modernization with deterministic AI-assisted engineering](https://www.thoughtworks.com/insights/blog/generative-ai/reimagining-api-modernization-with-deterministic-ai-assisted-engineering)
+- [Casper: Helping developers work effectively with coding assistants](https://www.thoughtworks.com/insights/blog/generative-ai/casper-helping-developers-work-effectively-with-coding-assistants)
+- [Last week in AI | 23 March](https://www.thoughtworks.com/insights/blog/generative-ai/last-week-ai-23-march)
+- [Ubuntu Summit 26.04 is coming: Save the date and share your story!](https://ubuntu.com//blog/ubuntu-summit-26-04-is-coming-save-the-date-and-share-your-story)
+
+
 ### 20260402
 
 
 - [KotlinConf’26 Speakers: In Conversation With Lena Reinhard](https://blog.jetbrains.com/kotlin/2026/04/kotlinconf-26-speakers-in-conversation-with-lena-reinhard/)
+- [Analyzing Crashed JVMs - Inside Java Newscast #109](https://inside.java/2026/04/02/newscast-109/)
+- [docs.rs: building fewer targets by default](https://blog.rust-lang.org/2026/04/04/docsrs-only-default-targets/)
 
 
 ### 20260401
@@ -97,8 +109,6 @@ search:
 - [Beyond vibe coding: The five building blocks of AI-native engineering](https://www.thoughtworks.com/insights/blog/generative-ai/beyond-vibe-coding-the-five-building-blocks-of-aI-native-engineering)
 - [The hidden pearls of TDD](https://www.thoughtworks.com/insights/blog/testing/the-hidden-pearls-of-TDD)
 - [SRE is entering a paradigm shift](https://www.thoughtworks.com/insights/blog/generative-ai/sre--is-entering-a-paradigm-shift)
-- [Using AI to build a GenAI bot for logistics teams at a major retailer](https://www.thoughtworks.com/insights/blog/generative-ai/using-ai-to-build-genai-bot-for-logistics-teams-major-retailer)
-- [Preparing your team for the agentic software development life cycle](https://www.thoughtworks.com/insights/articles/preparing-your-team-for-agentic-software-development-life-cycle)
 
 
 ### 20260319
@@ -203,19 +213,8 @@ search:
 
 
 - [Quality Outreach Heads-up - JavaFX 27: Metal Is Now the Default Rendering Pipeline on macOS](https://inside.java/2026/03/03/quality-heads-up/)
-- [Java 26 for DevOps](https://inside.java/2026/03/02/jdk-26-rn-ops/)
 
 
 ### 20260303
-
-
-- [Supporting more identity providers on Ubuntu with the new Authd OIDC broker](https://ubuntu.com//blog/more-identity-providers-ubuntu-generic-broker)
-
-
-### 20260302
-
-
-- [2025 State of Rust Survey Results](https://blog.rust-lang.org/2026/03/02/2025-State-Of-Rust-Survey-results/)
-- [Cloud-native Android™ infotainment: your CI pipeline shouldn’t depend on hardware](https://ubuntu.com//blog/cloud-native-android-infotainment-your-ci-pipeline-shouldnt-depend-on-hardware)
 
 
