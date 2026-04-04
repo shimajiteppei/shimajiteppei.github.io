@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260404
+
+
 ### 20260403
 
 
@@ -108,7 +111,6 @@ search:
 - [What we heard about Rust&#39;s challenges, and how we can address them](https://blog.rust-lang.org/2026/03/20/rust-challenges/)
 - [Beyond vibe coding: The five building blocks of AI-native engineering](https://www.thoughtworks.com/insights/blog/generative-ai/beyond-vibe-coding-the-five-building-blocks-of-aI-native-engineering)
 - [The hidden pearls of TDD](https://www.thoughtworks.com/insights/blog/testing/the-hidden-pearls-of-TDD)
-- [SRE is entering a paradigm shift](https://www.thoughtworks.com/insights/blog/generative-ai/sre--is-entering-a-paradigm-shift)
 
 
 ### 20260319
@@ -210,11 +212,5 @@ search:
 
 
 ### 20260304
-
-
-- [Quality Outreach Heads-up - JavaFX 27: Metal Is Now the Default Rendering Pipeline on macOS](https://inside.java/2026/03/03/quality-heads-up/)
-
-
-### 20260303
 
 
