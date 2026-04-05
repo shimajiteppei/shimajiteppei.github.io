@@ -8,7 +8,14 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260405
+
+
 ### 20260404
+
+
+- [Episode 53 “Analyzing Crashed JVMs” [IJN]](https://inside.java/2026/04/04/podcast-053/)
+- [Changes to WebAssembly targets and handling undefined symbols](https://blog.rust-lang.org/2026/04/04/changes-to-webassembly-targets-and-handling-undefined-symbols/)
 
 
 ### 20260403
@@ -202,15 +209,11 @@ search:
 
 - [Episode 49 “LazyConstants in JDK 26” [IJN]](https://inside.java/2026/03/06/podcast-049/)
 - [Java 26 is Shipping Soon - Inside Java Newscast #108](https://inside.java/2026/03/05/newscast-108/)
-- [HTTP Client Updates in Java 26](https://inside.java/2026/03/04/jdk-26-http-client/)
 
 
 ### 20260305
 
 
 - [Announcing Rust 1.94.0](https://blog.rust-lang.org/2026/03/05/Rust-1.94.0/)
-
-
-### 20260304
 
 
