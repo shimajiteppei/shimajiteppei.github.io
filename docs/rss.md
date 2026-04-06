@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260406
+
+
 ### 20260405
 
 
@@ -208,12 +211,5 @@ search:
 
 
 - [Episode 49 “LazyConstants in JDK 26” [IJN]](https://inside.java/2026/03/06/podcast-049/)
-- [Java 26 is Shipping Soon - Inside Java Newscast #108](https://inside.java/2026/03/05/newscast-108/)
-
-
-### 20260305
-
-
-- [Announcing Rust 1.94.0](https://blog.rust-lang.org/2026/03/05/Rust-1.94.0/)
 
 
