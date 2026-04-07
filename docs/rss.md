@@ -8,7 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260407
+
+
 ### 20260406
+
+
+- [Leadership Council update — March 2026](https://blog.rust-lang.org/inside-rust/2026/04/06/leadership-council-update/)
 
 
 ### 20260405
@@ -202,14 +208,5 @@ search:
 
 
 ### 20260307
-
-
-- [Sovereign clouds: enhanced data security with confidential computing](https://ubuntu.com//blog/sovereign-cloud-confidential-computing)
-
-
-### 20260306
-
-
-- [Episode 49 “LazyConstants in JDK 26” [IJN]](https://inside.java/2026/03/06/podcast-049/)
 
 
