@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260408
+
+
+- [Java and Post-Quantum Cryptography](https://inside.java/2026/04/08/javaone-post-quantum-cryptography/)
+- [RISC-V 101 &amp;#8211; what is it and what does it mean for Canonical?](https://ubuntu.com//blog/risc-v-101-what-is-it-and-what-does-it-mean-for-canonical)
+
+
 ### 20260407
 
 
@@ -205,8 +212,5 @@ search:
 
 
 ### 20260308
-
-
-### 20260307
 
 
