@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260409
+
+
+- [Episode 54 “How JDK 26 Improves G1’s Throughput” [AtA]](https://inside.java/2026/04/09/podcast-054/)
+- [Ubuntu Pro comes to Nutanix bare-metal Kubernetes](https://ubuntu.com//blog/ubuntu-pro-on-nutanix-bare-metal-kubernetes)
+
+
 ### 20260408
 
 
@@ -208,9 +215,5 @@ search:
 
 
 - [Episode 50 “Towards Better Checked Exceptions” [IJN]](https://inside.java/2026/03/09/podcast-050/)
-- [Java Performance Update: From JDK 21 to JDK 25](https://inside.java/2026/03/08/jfokus-java-performance-update/)
-
-
-### 20260308
 
 
