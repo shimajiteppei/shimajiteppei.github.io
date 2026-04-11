@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260411
+
+
+- [What’s new in security for Ubuntu 26.04 LTS?](https://ubuntu.com//blog/ubuntu-26-04-lts-security-updates)
+
+
 ### 20260410
 
 
@@ -210,12 +216,5 @@ search:
 
 - [Introducing Tracy: The AI Observability Library for Kotlin](https://blog.jetbrains.com/kotlin/2026/03/introducing-tracy-the-ai-observability-library-for-kotlin/)
 - [The Inside Java Newsletter: New Sponsors for JavaOne! Registration Discount Continues!](https://inside.java/2026/03/11/inside-java-newsletter/)
-- [Quality Outreach Heads-up - JDK 27: Removal of ‘java.locale.useOldISOCodes’ System Property](https://inside.java/2026/03/10/quality-heads-up/)
-
-
-### 20260310
-
-
-- [Fast-tracking industrial and AI deployment on Renesas RZ platforms](https://ubuntu.com//blog/fast-tracking-industrial-and-ai-deployment-on-renesas-rz-platforms)
 
 
