@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260413
+
+
+- [Quality Outreach Heads-up - JDK 27: Obsolete Translation Resources Removed](https://inside.java/2026/04/13/quality-heads-up/)
+- [Newsletter: Java 26 Is Now Available | JDK 27 Heads-Ups](https://inside.java/2026/04/12/newsletter/)
+
+
 ### 20260412
 
 
@@ -203,13 +210,5 @@ search:
 
 - [Secure, Scalable JVM Diagnostics for Kubernetes with JMS](https://inside.java/2026/03/13/jms-secure-scalable-jvm/)
 - [Call for Testing: Build Dir Layout v2](https://blog.rust-lang.org/2026/03/13/call-for-testing-build-dir-layout-v2/)
-- [AppArmor vulnerability fixes available](https://ubuntu.com//blog/apparmor-vulnerability-fixes-available)
-
-
-### 20260312
-
-
-- [Episode 51 “Unboxing Java 26 for Developers” [IJN]](https://inside.java/2026/03/12/podcast-051/)
-- [Announcing rustup 1.29.0](https://blog.rust-lang.org/2026/03/12/Rustup-1.29.0/)
 
 
