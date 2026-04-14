@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260414
+
+
+- [Infrastructure Team 2026 Q1 Recap and Q2 Plan](https://blog.rust-lang.org/inside-rust/2026/04/14/infrastructure-team-q1-recap-and-q2-plan/)
+
+
 ### 20260413
 
 
@@ -165,7 +171,6 @@ search:
 - [KotlinConf 2026: Talks to Help You Navigate the Schedule](https://blog.jetbrains.com/kotlin/2026/03/kotlinconf-2026-talks-schedule/)
 - [What we heard about Rust&#39;s challenges, and how we can address them](https://blog.rust-lang.org/2026/03/20/rust-challenges/)
 - [Beyond vibe coding: The five building blocks of AI-native engineering](https://www.thoughtworks.com/insights/blog/generative-ai/beyond-vibe-coding-the-five-building-blocks-of-aI-native-engineering)
-- [The hidden pearls of TDD](https://www.thoughtworks.com/insights/blog/testing/the-hidden-pearls-of-TDD)
 
 
 ### 20260319
@@ -203,12 +208,5 @@ search:
 
 
 ### 20260314
-
-
-### 20260313
-
-
-- [Secure, Scalable JVM Diagnostics for Kubernetes with JMS](https://inside.java/2026/03/13/jms-secure-scalable-jvm/)
-- [Call for Testing: Build Dir Layout v2](https://blog.rust-lang.org/2026/03/13/call-for-testing-build-dir-layout-v2/)
 
 

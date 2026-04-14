@@ -10,9 +10,328 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2026-03-13T17:08:26+00:00</updated>
+    <updated>2026-04-14T07:02:27+00:00</updated>
 
     
+    <entry>
+        <title>docs.rs: building fewer targets by default</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2026/04/04/docsrs-only-default-targets/" type="text/html" title="docs.rs: building fewer targets by default" />
+        <published>2026-04-04T00:00:00+00:00</published>
+        <updated>2026-04-04T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2026/04/04/docsrs-only-default-targets/</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2026/04/04/docsrs-only-default-targets/">&lt;h1 id&#x3D;&quot;building-fewer-targets-by-default&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#building-fewer-targets-by-default&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Building fewer targets by default&lt;/h1&gt;
+&lt;p&gt;On &lt;strong&gt;2026-05-01&lt;/strong&gt;, docs.rs will make a &lt;strong&gt;breaking&lt;/strong&gt; change to its build
+behavior.&lt;/p&gt;
+&lt;p&gt;Today, if a crate does not define a &lt;code&gt;targets&lt;/code&gt; list in its
+&lt;a href&#x3D;&quot;https://docs.rs/about/metadata&quot;&gt;docs.rs metadata&lt;/a&gt;, docs.rs builds documentation for a default
+list of five targets.&lt;/p&gt;
+&lt;p&gt;Starting on &lt;strong&gt;2026-05-01&lt;/strong&gt;, docs.rs will instead build documentation for only
+the default target unless additional targets are requested explicitly.&lt;/p&gt;
+&lt;p&gt;This is the next step in a change we first introduced in 2020, when docs.rs
+added support for opting into fewer build targets. Most crates do not compile
+different code for different targets, so building fewer targets by default is a
+better fit for most releases. It also reduces build times and saves resources on
+docs.rs.&lt;/p&gt;
+&lt;p&gt;This change only affects:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;new releases&lt;/li&gt;
+&lt;li&gt;rebuilds of old releases&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id&#x3D;&quot;how-is-the-default-target-chosen&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#how-is-the-default-target-chosen&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+How is the default target chosen?&lt;/h2&gt;
+&lt;p&gt;If you do not set &lt;code&gt;default-target&lt;/code&gt;, docs.rs uses the target of its build
+servers: &lt;code&gt;x86_64-unknown-linux-gnu&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;You can override that by setting &lt;code&gt;default-target&lt;/code&gt; in your
+&lt;a href&#x3D;&quot;https://docs.rs/about/metadata&quot;&gt;docs.rs metadata&lt;/a&gt;:&lt;/p&gt;
+&lt;pre data-lang&#x3D;&quot;toml&quot; class&#x3D;&quot;language-toml z-code&quot;&gt;&lt;code class&#x3D;&quot;language-toml&quot; data-lang&#x3D;&quot;toml&quot;&gt;&lt;span class&#x3D;&quot;z-source z-toml&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-table z-begin z-toml&quot;&gt;[&lt;/span&gt;&lt;span class&#x3D;&quot;z-meta z-tag z-table z-toml&quot;&gt;&lt;span class&#x3D;&quot;z-entity z-name z-table z-toml&quot;&gt;package&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-separator z-table z-toml&quot;&gt;.&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-table z-toml&quot;&gt;metadata&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-separator z-table z-toml&quot;&gt;.&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-table z-toml&quot;&gt;docs&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-separator z-table z-toml&quot;&gt;.&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-table z-toml&quot;&gt;rs&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-table z-end z-toml&quot;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;span class&#x3D;&quot;z-source z-toml&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-tag z-key z-toml&quot;&gt;&lt;span class&#x3D;&quot;z-entity z-name z-tag z-toml&quot;&gt;default-target&lt;/span&gt;&lt;/span&gt; &lt;span class&#x3D;&quot;z-punctuation z-definition z-key-value z-toml&quot;&gt;&#x3D;&lt;/span&gt; &lt;span class&#x3D;&quot;z-string z-quoted z-double z-basic z-toml&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-begin z-toml&quot;&gt;&amp;quot;&lt;/span&gt;x86_64-apple-darwin&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-end z-toml&quot;&gt;&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id&#x3D;&quot;how-do-i-build-documentation-for-additional-targets&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#how-do-i-build-documentation-for-additional-targets&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+How do I build documentation for additional targets?&lt;/h2&gt;
+&lt;p&gt;If your crate needs documentation to be built for more than the default target,
+define the full list explicitly in your &lt;code&gt;Cargo.toml&lt;/code&gt;:&lt;/p&gt;
+&lt;pre data-lang&#x3D;&quot;toml&quot; class&#x3D;&quot;language-toml z-code&quot;&gt;&lt;code class&#x3D;&quot;language-toml&quot; data-lang&#x3D;&quot;toml&quot;&gt;&lt;span class&#x3D;&quot;z-source z-toml&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-table z-begin z-toml&quot;&gt;[&lt;/span&gt;&lt;span class&#x3D;&quot;z-meta z-tag z-table z-toml&quot;&gt;&lt;span class&#x3D;&quot;z-entity z-name z-table z-toml&quot;&gt;package&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-separator z-table z-toml&quot;&gt;.&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-table z-toml&quot;&gt;metadata&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-separator z-table z-toml&quot;&gt;.&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-table z-toml&quot;&gt;docs&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-separator z-table z-toml&quot;&gt;.&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-table z-toml&quot;&gt;rs&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-table z-end z-toml&quot;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;span class&#x3D;&quot;z-source z-toml&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-tag z-key z-toml&quot;&gt;&lt;span class&#x3D;&quot;z-entity z-name z-tag z-toml&quot;&gt;targets&lt;/span&gt;&lt;/span&gt; &lt;span class&#x3D;&quot;z-punctuation z-definition z-key-value z-toml&quot;&gt;&#x3D;&lt;/span&gt; &lt;span class&#x3D;&quot;z-punctuation z-definition z-array z-begin z-toml&quot;&gt;[&lt;/span&gt;
+&lt;/span&gt;&lt;span class&#x3D;&quot;z-source z-toml&quot;&gt;    &lt;span class&#x3D;&quot;z-string z-quoted z-double z-basic z-toml&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-begin z-toml&quot;&gt;&amp;quot;&lt;/span&gt;x86_64-unknown-linux-gnu&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-end z-toml&quot;&gt;&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-separator z-array z-toml&quot;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;span class&#x3D;&quot;z-source z-toml&quot;&gt;    &lt;span class&#x3D;&quot;z-string z-quoted z-double z-basic z-toml&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-begin z-toml&quot;&gt;&amp;quot;&lt;/span&gt;x86_64-apple-darwin&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-end z-toml&quot;&gt;&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-separator z-array z-toml&quot;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;span class&#x3D;&quot;z-source z-toml&quot;&gt;    &lt;span class&#x3D;&quot;z-string z-quoted z-double z-basic z-toml&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-begin z-toml&quot;&gt;&amp;quot;&lt;/span&gt;x86_64-pc-windows-msvc&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-end z-toml&quot;&gt;&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-separator z-array z-toml&quot;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;span class&#x3D;&quot;z-source z-toml&quot;&gt;    &lt;span class&#x3D;&quot;z-string z-quoted z-double z-basic z-toml&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-begin z-toml&quot;&gt;&amp;quot;&lt;/span&gt;i686-unknown-linux-gnu&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-end z-toml&quot;&gt;&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-separator z-array z-toml&quot;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;span class&#x3D;&quot;z-source z-toml&quot;&gt;    &lt;span class&#x3D;&quot;z-string z-quoted z-double z-basic z-toml&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-begin z-toml&quot;&gt;&amp;quot;&lt;/span&gt;i686-pc-windows-msvc&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-end z-toml&quot;&gt;&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;span class&#x3D;&quot;z-source z-toml&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-array z-end z-toml&quot;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;When &lt;code&gt;targets&lt;/code&gt; is set, docs.rs will build documentation for exactly those
+targets.&lt;/p&gt;
+&lt;p&gt;docs.rs still supports any target available in the Rust toolchain. Only the
+default behavior is changing.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Denis Cornehl</name>
+        </author>
+    </entry>
+    <entry>
+        <title>Changes to WebAssembly targets and handling undefined symbols</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2026/04/04/changes-to-webassembly-targets-and-handling-undefined-symbols/" type="text/html" title="Changes to WebAssembly targets and handling undefined symbols" />
+        <published>2026-04-04T00:00:00+00:00</published>
+        <updated>2026-04-04T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2026/04/04/changes-to-webassembly-targets-and-handling-undefined-symbols/</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2026/04/04/changes-to-webassembly-targets-and-handling-undefined-symbols/">&lt;p&gt;Rust&#x27;s WebAssembly targets are soon going to experience a change which has a
+risk of breaking existing projects, and this post is intended to notify users of
+this upcoming change, explain what it is, and how to handle it. Specifically, all
+WebAssembly targets in Rust have been linked using the &lt;code&gt;--allow-undefined&lt;/code&gt; flag
+to &lt;code&gt;wasm-ld&lt;/code&gt;, and this flag is being removed.&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;what-is-allow-undefined&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#what-is-allow-undefined&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+What is &lt;code&gt;--allow-undefined&lt;/code&gt;?&lt;/h2&gt;
+&lt;p&gt;WebAssembly binaries in Rust today are all created by linking with &lt;code&gt;wasm-ld&lt;/code&gt;.
+This serves a similar purpose to &lt;code&gt;ld&lt;/code&gt;, &lt;code&gt;lld&lt;/code&gt;, and &lt;code&gt;mold&lt;/code&gt;, for example; it
+takes separately compiled crates/object files and creates one final binary.
+Since the first introduction of WebAssembly targets in Rust, the
+&lt;code&gt;--allow-undefined&lt;/code&gt; flag has been passed to &lt;code&gt;wasm-ld&lt;/code&gt;. This flag is documented
+as:&lt;/p&gt;
+&lt;pre class&#x3D;&quot;z-code&quot;&gt;&lt;code&gt;&lt;span class&#x3D;&quot;z-text z-plain&quot;&gt;  --allow-undefined       Allow undefined symbols in linked binary. This options
+&lt;/span&gt;&lt;span class&#x3D;&quot;z-text z-plain&quot;&gt;                          is equivalent to --import-undefined and
+&lt;/span&gt;&lt;span class&#x3D;&quot;z-text z-plain&quot;&gt;                          --unresolved-symbols&#x3D;ignore-all
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The term &quot;undefined&quot; here specifically means with respect to symbol resolution in &lt;code&gt;wasm-ld&lt;/code&gt; itself. Symbols used by &lt;code&gt;wasm-ld&lt;/code&gt; correspond relatively closely to what native platforms use, for example all Rust functions have a symbol associated with them. Symbols can be referred to in Rust through &lt;code&gt;extern &quot;C&quot;&lt;/code&gt; blocks, for example:&lt;/p&gt;
+&lt;pre data-lang&#x3D;&quot;rust&quot; class&#x3D;&quot;language-rust z-code&quot;&gt;&lt;code class&#x3D;&quot;language-rust&quot; data-lang&#x3D;&quot;rust&quot;&gt;&lt;span class&#x3D;&quot;z-source z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-storage z-modifier z-rust&quot;&gt;unsafe&lt;/span&gt; &lt;span class&#x3D;&quot;z-keyword z-other z-rust&quot;&gt;extern&lt;/span&gt; &lt;span class&#x3D;&quot;z-string z-quoted z-double z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-begin z-rust&quot;&gt;&amp;quot;&lt;/span&gt;C&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-end z-rust&quot;&gt;&amp;quot;&lt;/span&gt;&lt;/span&gt; &lt;span class&#x3D;&quot;z-meta z-block z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-section z-block z-begin z-rust&quot;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-source z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-block z-rust&quot;&gt;    &lt;span class&#x3D;&quot;z-meta z-function z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-function z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-storage z-type z-function z-rust&quot;&gt;fn&lt;/span&gt; &lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function z-rust&quot;&gt;mylibrary_init&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-meta z-function z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-function z-parameters z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-section z-parameters z-begin z-rust&quot;&gt;(&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-meta z-function z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-function z-parameters z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-section z-parameters z-end z-rust&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-terminator z-rust&quot;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-source z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-block z-rust&quot;&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-meta z-block z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-section z-block z-end z-rust&quot;&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;span class&#x3D;&quot;z-source z-rust&quot;&gt;
+&lt;/span&gt;&lt;span class&#x3D;&quot;z-source z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-function z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-function z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-storage z-type z-function z-rust&quot;&gt;fn&lt;/span&gt; &lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function z-rust&quot;&gt;init&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-meta z-function z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-function z-parameters z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-section z-parameters z-begin z-rust&quot;&gt;(&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-meta z-function z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-function z-parameters z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-section z-parameters z-end z-rust&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-meta z-function z-rust&quot;&gt; &lt;/span&gt;&lt;span class&#x3D;&quot;z-meta z-function z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-block z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-section z-block z-begin z-rust&quot;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-source z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-function z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-block z-rust&quot;&gt;    &lt;span class&#x3D;&quot;z-storage z-modifier z-rust&quot;&gt;unsafe&lt;/span&gt; &lt;span class&#x3D;&quot;z-meta z-block z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-section z-block z-begin z-rust&quot;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-source z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-function z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-block z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-block z-rust&quot;&gt;        &lt;span class&#x3D;&quot;z-support z-function z-rust&quot;&gt;mylibrary_init&lt;/span&gt;&lt;span class&#x3D;&quot;z-meta z-group z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-section z-group z-begin z-rust&quot;&gt;(&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-meta z-group z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-section z-group z-end z-rust&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-terminator z-rust&quot;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-source z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-function z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-block z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-block z-rust&quot;&gt;    &lt;/span&gt;&lt;span class&#x3D;&quot;z-meta z-block z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-section z-block z-end z-rust&quot;&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-source z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-function z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-block z-rust&quot;&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-meta z-block z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-section z-block z-end z-rust&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The symbol &lt;code&gt;mylibrary_init&lt;/code&gt; is an undefined symbol. This is typically defined by
+a separate component of a program, such as an externally compiled C library,
+which will provide a definition for this symbol. By passing &lt;code&gt;--allow-undefined&lt;/code&gt;
+to &lt;code&gt;wasm-ld&lt;/code&gt;, however, it means that the above would generate a WebAssembly
+module like so:&lt;/p&gt;
+&lt;pre data-lang&#x3D;&quot;wasm&quot; class&#x3D;&quot;language-wasm z-code&quot;&gt;&lt;code class&#x3D;&quot;language-wasm&quot; data-lang&#x3D;&quot;wasm&quot;&gt;&lt;span class&#x3D;&quot;z-text z-plain&quot;&gt;(module
+&lt;/span&gt;&lt;span class&#x3D;&quot;z-text z-plain&quot;&gt;    (import &amp;quot;env&amp;quot; &amp;quot;mylibrary_init&amp;quot; (func $mylibrary_init))
+&lt;/span&gt;&lt;span class&#x3D;&quot;z-text z-plain&quot;&gt;
+&lt;/span&gt;&lt;span class&#x3D;&quot;z-text z-plain&quot;&gt;    ;; ...
+&lt;/span&gt;&lt;span class&#x3D;&quot;z-text z-plain&quot;&gt;)
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This means that the undefined symbol was ignored and ended up as an imported
+symbol in the final WebAssembly module that is produced.&lt;/p&gt;
+&lt;p&gt;The precise history here is somewhat lost to time, but the current understanding
+is that &lt;code&gt;--allow-undefined&lt;/code&gt; was effectively required in the very early days of
+introducing &lt;code&gt;wasm-ld&lt;/code&gt; to the Rust toolchain. This historical workaround stuck
+around till today and hasn&#x27;t changed.&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;what-s-wrong-with-allow-undefined&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#what-s-wrong-with-allow-undefined&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+What&#x27;s wrong with &lt;code&gt;--allow-undefined&lt;/code&gt;?&lt;/h2&gt;
+&lt;p&gt;By passing &lt;code&gt;--allow-undefined&lt;/code&gt; on all WebAssembly targets, rustc is introducing
+diverging behavior between other platforms and WebAssembly. The main risk of
+&lt;code&gt;--allow-undefined&lt;/code&gt; is that misconfiguration or mistakes in building can
+result in broken WebAssembly modules being produced, as opposed to compilation
+errors. This means that the proverbial can is kicked down the road and lengthens
+the distance from where the problem is discovered to where it was introduced.
+Some example problematic situations are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;If &lt;code&gt;mylibrary_init&lt;/code&gt; was typo&#x27;d as &lt;code&gt;mylibraryinit&lt;/code&gt; then the final binary would
+import the &lt;code&gt;mylibraryinit&lt;/code&gt; symbol instead of calling the linked
+&lt;code&gt;mylibrary_init&lt;/code&gt; C symbol.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If &lt;code&gt;mylibrary&lt;/code&gt; was mistakenly not compiled and linked into a final
+application then the &lt;code&gt;mylibrary_init&lt;/code&gt; symbol would end up imported rather than
+producing a linker error saying it&#x27;s undefined.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If external tooling is used to process a WebAssembly module, such as &lt;code&gt;wasm-bindgen&lt;/code&gt; or &lt;code&gt;wasm-tools component new&lt;/code&gt;, these tools don&#x27;t know what to do with &lt;code&gt;&quot;env&quot;&lt;/code&gt; imports by default and they are likely to provide an error message of some form that isn&#x27;t clearly connected back to the original source code and where the symbols was imported from.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;For web users if you&#x27;ve ever seen an error along the lines of &lt;code&gt;Uncaught TypeError: Failed to resolve module specifier &quot;env&quot;. Relative references must start with either &quot;/&quot;, &quot;./&quot;, or &quot;../&quot;.&lt;/code&gt; this can mean that &lt;code&gt;&quot;env&quot;&lt;/code&gt; leaked into the final module unexpectedly and the true error is the undefined symbol error, not the lack of &lt;code&gt;&quot;env&quot;&lt;/code&gt; items provided.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;All native platforms consider undefined symbols to be an error by default, and
+thus by passing &lt;code&gt;--allow-undefined&lt;/code&gt; rustc is introducing surprising behavior on
+WebAssembly targets. The goal of the change is to remove this surprise and
+behave more like native platforms.&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;what-is-going-to-break-and-how-to-fix&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#what-is-going-to-break-and-how-to-fix&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+What is going to break, and how to fix?&lt;/h2&gt;
+&lt;p&gt;In theory, not a whole lot is expected to break from this change. If the final
+WebAssembly binary imports unexpected symbols, then it&#x27;s likely that the binary
+won&#x27;t be runnable in the desired embedding, as the desired embedding probably
+doesn&#x27;t provide the symbol as a definition. For example, if you compile an
+application for &lt;code&gt;wasm32-wasip1&lt;/code&gt; if the final binary imports &lt;code&gt;mylibrary_init&lt;/code&gt;
+then it&#x27;ll fail to run in most runtimes because it&#x27;s considered an unresolved
+import. This means that most of the time this change won&#x27;t break users, but
+it&#x27;ll instead provide better diagnostics.&lt;/p&gt;
+&lt;p&gt;The reason for this post, however, is that it&#x27;s possible users could be
+intentionally relying on this behavior. For example your application might have:&lt;/p&gt;
+&lt;pre data-lang&#x3D;&quot;rust&quot; class&#x3D;&quot;language-rust z-code&quot;&gt;&lt;code class&#x3D;&quot;language-rust&quot; data-lang&#x3D;&quot;rust&quot;&gt;&lt;span class&#x3D;&quot;z-source z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-storage z-modifier z-rust&quot;&gt;unsafe&lt;/span&gt; &lt;span class&#x3D;&quot;z-keyword z-other z-rust&quot;&gt;extern&lt;/span&gt; &lt;span class&#x3D;&quot;z-string z-quoted z-double z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-begin z-rust&quot;&gt;&amp;quot;&lt;/span&gt;C&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-end z-rust&quot;&gt;&amp;quot;&lt;/span&gt;&lt;/span&gt; &lt;span class&#x3D;&quot;z-meta z-block z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-section z-block z-begin z-rust&quot;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-source z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-block z-rust&quot;&gt;    &lt;span class&#x3D;&quot;z-meta z-function z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-function z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-storage z-type z-function z-rust&quot;&gt;fn&lt;/span&gt; &lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function z-rust&quot;&gt;js_log&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-meta z-function z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-function z-parameters z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-section z-parameters z-begin z-rust&quot;&gt;(&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable z-parameter z-rust&quot;&gt;n&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-separator z-rust&quot;&gt;:&lt;/span&gt; &lt;span class&#x3D;&quot;z-storage z-type z-rust&quot;&gt;u32&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-meta z-function z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-function z-parameters z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-section z-parameters z-end z-rust&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-terminator z-rust&quot;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-source z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-block z-rust&quot;&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-meta z-block z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-section z-block z-end z-rust&quot;&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;span class&#x3D;&quot;z-source z-rust&quot;&gt;
+&lt;/span&gt;&lt;span class&#x3D;&quot;z-source z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-comment z-line z-double-slash z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-comment z-rust&quot;&gt;//&lt;/span&gt; ...
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And then perhaps some JS code that looks like:&lt;/p&gt;
+&lt;pre data-lang&#x3D;&quot;js&quot; class&#x3D;&quot;language-js z-code&quot;&gt;&lt;code class&#x3D;&quot;language-js&quot; data-lang&#x3D;&quot;js&quot;&gt;&lt;span class&#x3D;&quot;z-source z-ts&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-var z-expr z-ts&quot;&gt;&lt;span class&#x3D;&quot;z-storage z-type z-ts&quot;&gt;let&lt;/span&gt; &lt;span class&#x3D;&quot;z-meta z-var-single-variable z-expr z-ts&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-definition z-variable z-ts&quot;&gt;&lt;span class&#x3D;&quot;z-variable z-other z-readwrite z-ts&quot;&gt;instance&lt;/span&gt;&lt;/span&gt; &lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator z-assignment z-ts&quot;&gt;&#x3D;&lt;/span&gt; &lt;span class&#x3D;&quot;z-keyword z-control z-flow z-ts&quot;&gt;await&lt;/span&gt; &lt;span class&#x3D;&quot;z-meta z-function-call z-ts&quot;&gt;&lt;span class&#x3D;&quot;z-variable z-other z-object z-ts&quot;&gt;WebAssembly&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-accessor z-ts&quot;&gt;.&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function z-ts&quot;&gt;instantiate&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-meta z-brace z-round z-ts&quot;&gt;(&lt;/span&gt;&lt;span class&#x3D;&quot;z-support z-type z-object z-module z-ts&quot;&gt;module&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-separator z-comma z-ts&quot;&gt;,&lt;/span&gt; &lt;span class&#x3D;&quot;z-meta z-objectliteral z-ts&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-block z-ts&quot;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-source z-ts&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-var z-expr z-ts&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-objectliteral z-ts&quot;&gt;    &lt;span class&#x3D;&quot;z-meta z-object z-member z-ts&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-object-literal z-key z-ts&quot;&gt;env&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-meta z-object z-member z-ts&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-object-literal z-key z-ts&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-separator z-key-value z-ts&quot;&gt;:&lt;/span&gt;&lt;/span&gt; &lt;span class&#x3D;&quot;z-meta z-objectliteral z-ts&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-block z-ts&quot;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-source z-ts&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-var z-expr z-ts&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-objectliteral z-ts&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-object z-member z-ts&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-objectliteral z-ts&quot;&gt;        &lt;span class&#x3D;&quot;z-meta z-object z-member z-ts&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-object-literal z-key z-ts&quot;&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function z-ts&quot;&gt;js_log&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-meta z-object z-member z-ts&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-object-literal z-key z-ts&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-separator z-key-value z-ts&quot;&gt;:&lt;/span&gt;&lt;/span&gt; &lt;span class&#x3D;&quot;z-meta z-arrow z-ts&quot;&gt;&lt;span class&#x3D;&quot;z-variable z-parameter z-ts&quot;&gt;n&lt;/span&gt; &lt;/span&gt;&lt;span class&#x3D;&quot;z-meta z-arrow z-ts&quot;&gt;&lt;span class&#x3D;&quot;z-storage z-type z-function z-arrow z-ts&quot;&gt;&#x3D;&amp;gt;&lt;/span&gt; &lt;/span&gt;&lt;span class&#x3D;&quot;z-meta z-function-call z-ts&quot;&gt;&lt;span class&#x3D;&quot;z-support z-class z-console z-ts&quot;&gt;console&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-accessor z-ts&quot;&gt;.&lt;/span&gt;&lt;span class&#x3D;&quot;z-support z-function z-console z-ts&quot;&gt;log&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-meta z-brace z-round z-ts&quot;&gt;(&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable z-other z-readwrite z-ts&quot;&gt;n&lt;/span&gt;&lt;span class&#x3D;&quot;z-meta z-brace z-round z-ts&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-separator z-comma z-ts&quot;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-source z-ts&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-var z-expr z-ts&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-objectliteral z-ts&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-object z-member z-ts&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-objectliteral z-ts&quot;&gt;    &lt;span class&#x3D;&quot;z-punctuation z-definition z-block z-ts&quot;&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-source z-ts&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-var z-expr z-ts&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-objectliteral z-ts&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-object z-member z-ts&quot;&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-block z-ts&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-meta z-brace z-round z-ts&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-terminator z-statement z-ts&quot;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Effectively it&#x27;s possible for users to explicitly rely on the behavior of
+&lt;code&gt;--allow-undefined&lt;/code&gt; generating an import in the final WebAssembly binary.&lt;/p&gt;
+&lt;p&gt;If users encounter this then the code can be fixed through a &lt;code&gt;#[link]&lt;/code&gt; attribute
+which explicitly specifies the &lt;code&gt;wasm_import_module&lt;/code&gt; name:&lt;/p&gt;
+&lt;pre data-lang&#x3D;&quot;rust&quot; class&#x3D;&quot;language-rust z-code&quot;&gt;&lt;code class&#x3D;&quot;language-rust&quot; data-lang&#x3D;&quot;rust&quot;&gt;&lt;span class&#x3D;&quot;z-source z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-annotation z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-annotation z-rust&quot;&gt;#&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-section z-group z-begin z-rust&quot;&gt;[&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable z-annotation z-rust&quot;&gt;link&lt;/span&gt;&lt;span class&#x3D;&quot;z-meta z-annotation z-parameters z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-group z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-section z-group z-begin z-rust&quot;&gt;(&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-meta z-annotation z-parameters z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-group z-rust&quot;&gt;wasm_import_module &lt;span class&#x3D;&quot;z-keyword z-operator z-rust&quot;&gt;&#x3D;&lt;/span&gt; &lt;span class&#x3D;&quot;z-string z-quoted z-double z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-begin z-rust&quot;&gt;&amp;quot;&lt;/span&gt;env&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-end z-rust&quot;&gt;&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-meta z-annotation z-parameters z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-group z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-section z-group z-end z-rust&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-section z-group z-end z-rust&quot;&gt;]&lt;/span&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;span class&#x3D;&quot;z-source z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-storage z-modifier z-rust&quot;&gt;unsafe&lt;/span&gt; &lt;span class&#x3D;&quot;z-keyword z-other z-rust&quot;&gt;extern&lt;/span&gt; &lt;span class&#x3D;&quot;z-string z-quoted z-double z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-begin z-rust&quot;&gt;&amp;quot;&lt;/span&gt;C&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-end z-rust&quot;&gt;&amp;quot;&lt;/span&gt;&lt;/span&gt; &lt;span class&#x3D;&quot;z-meta z-block z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-section z-block z-begin z-rust&quot;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-source z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-block z-rust&quot;&gt;    &lt;span class&#x3D;&quot;z-meta z-function z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-function z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-storage z-type z-function z-rust&quot;&gt;fn&lt;/span&gt; &lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function z-rust&quot;&gt;js_log&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-meta z-function z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-function z-parameters z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-section z-parameters z-begin z-rust&quot;&gt;(&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable z-parameter z-rust&quot;&gt;n&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-separator z-rust&quot;&gt;:&lt;/span&gt; &lt;span class&#x3D;&quot;z-storage z-type z-rust&quot;&gt;u32&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-meta z-function z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-function z-parameters z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-section z-parameters z-end z-rust&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-terminator z-rust&quot;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-source z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-block z-rust&quot;&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-meta z-block z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-section z-block z-end z-rust&quot;&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;span class&#x3D;&quot;z-source z-rust&quot;&gt;
+&lt;/span&gt;&lt;span class&#x3D;&quot;z-source z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-comment z-line z-double-slash z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-comment z-rust&quot;&gt;//&lt;/span&gt; ...
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This will have the same behavior as before and will no longer be considered an
+undefined symbol to &lt;code&gt;wasm-ld&lt;/code&gt;, and it&#x27;ll work both before and after this change.&lt;/p&gt;
+&lt;p&gt;Affected users can also compile with &lt;code&gt;-Clink-arg&#x3D;--allow-undefined&lt;/code&gt; as well to
+quickly restore the old behavior.&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;when-is-this-change-being-made&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#when-is-this-change-being-made&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+When is this change being made?&lt;/h2&gt;
+&lt;p&gt;Removing &lt;code&gt;--allow-undefined&lt;/code&gt; on wasm targets is being done in
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/149868&quot;&gt;rust-lang/rust#149868&lt;/a&gt;. That change is slated to land in nightly soon, and will then get released with Rust 1.96 on 2026-05-28. If you see any issues as a
+result of this fallout please don&#x27;t hesitate to file an issue on
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust&quot;&gt;rust-lang/rust&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Alex Crichton</name>
+        </author>
+    </entry>
+    <entry>
+        <title>Announcing Rust 1.94.1</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2026/03/26/1.94.1-release/" type="text/html" title="Announcing Rust 1.94.1" />
+        <published>2026-03-26T00:00:00+00:00</published>
+        <updated>2026-03-26T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2026/03/26/1.94.1-release/</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2026/03/26/1.94.1-release/">&lt;p&gt;The Rust team has published a new point release of Rust, 1.94.1. Rust is a
+programming language that is empowering everyone to build reliable and
+efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust 1.94.1 is as easy as:&lt;/p&gt;
+&lt;pre class&#x3D;&quot;z-code&quot;&gt;&lt;code&gt;&lt;span class&#x3D;&quot;z-text z-plain&quot;&gt;rustup update stable
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the appropriate page on our website.&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;what-s-in-1-94-1&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#what-s-in-1-94-1&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+What&#x27;s in 1.94.1&lt;/h2&gt;
+&lt;p&gt;Rust 1.94.1 resolves three regressions that were introduced in the 1.94.0 release.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/153634&quot;&gt;Fix &lt;code&gt;std::thread::spawn&lt;/code&gt; on wasm32-wasip1-threads&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/153491&quot;&gt;Remove new methods added to &lt;code&gt;std::os::windows::fs::OpenOptionsExt&lt;/code&gt;&lt;/a&gt;
+The new methods were unstable, but the trait itself is not sealed and so
+cannot be extended with non-default methods.&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/pull/16685&quot;&gt;Clippy: fix ICE in &lt;code&gt;match_same_arms&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/16787&quot;&gt;Cargo: downgrade curl-sys to 0.4.83&lt;/a&gt;
+This fixes certificate validation error for some users on some versions of
+FreeBSD. See &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/16357&quot;&gt;this issue&lt;/a&gt;
+for more details.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And a security fix:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/16769&quot;&gt;Cargo: Update tar to 0.4.45&lt;/a&gt;
+This resolves &lt;a href&#x3D;&quot;https://www.cve.org/CVERecord?id&#x3D;CVE-2026-33055&quot;&gt;CVE-2026-33055&lt;/a&gt; and &lt;a href&#x3D;&quot;https://www.cve.org/CVERecord?id&#x3D;CVE-2026-33056&quot;&gt;CVE-2026-33056&lt;/a&gt;. Users of crates.io are not affected.
+See &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2026/03/21/cve-2026-33056/&quot;&gt;blog&lt;/a&gt; for more details.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id&#x3D;&quot;contributors-to-1-94-1&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#contributors-to-1-94-1&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Contributors to 1.94.1&lt;/h3&gt;
+&lt;p&gt;Many people came together to create Rust 1.94.1. We couldn&#x27;t have done it without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.94.1/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Release Team</name>
+        </author>
+    </entry>
+    <entry>
+        <title>Security advisory for Cargo</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2026/03/21/cve-2026-33056/" type="text/html" title="Security advisory for Cargo" />
+        <published>2026-03-21T00:00:00+00:00</published>
+        <updated>2026-03-21T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2026/03/21/cve-2026-33056/</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2026/03/21/cve-2026-33056/">&lt;p&gt;The Rust Security Response Team was notified of a vulnerability in the
+third-party crate &lt;a href&#x3D;&quot;https://crates.io/crates/tar&quot;&gt;&lt;code&gt;tar&lt;/code&gt;&lt;/a&gt;, used by Cargo to extract packages during a build. The
+vulnerability, tracked as &lt;a href&#x3D;&quot;https://www.cve.org/CVERecord?id&#x3D;CVE-2026-33056&quot;&gt;CVE-2026-33056&lt;/a&gt;, allows a malicious crate to change
+the permissions on arbitrary directories on the filesystem when Cargo extracts
+it during a build.&lt;/p&gt;
+&lt;p&gt;For users of the public crates.io registry, we deployed a change on March 13th
+to prevent uploading crates exploiting this vulnerability, and we audited all
+crates ever published. We can confirm that no crates on crates.io are exploiting
+this.&lt;/p&gt;
+&lt;p&gt;For users of alternate registries, please contact the vendor of your registry to
+verify whether you are affected by this. The Rust team will release Rust 1.94.1
+on March 26th, 2026, updating to a patched version of the &lt;code&gt;tar&lt;/code&gt; crate (along
+with other non-security fixes for the Rust toolchain), but that won&#x27;t protect
+users of older versions of Cargo using alternate registries.&lt;/p&gt;
+&lt;p&gt;We&#x27;d like to thank Sergei Zimmerman for discovering the underlying &lt;a href&#x3D;&quot;https://crates.io/crates/tar&quot;&gt;&lt;code&gt;tar&lt;/code&gt;&lt;/a&gt; crate
+vulnerability and notifying the Rust project ahead of time, and William Woodruff
+for directly assisting the crates.io team with the mitigations. We&#x27;d also like
+to thank the Rust project members involved in this advisory: Eric Huss for
+patching Cargo; Tobias Bieniek, Adam Harvey and Walter Pearce for patching
+crates.io and analyzing existing crates; Emily Albini and Josh Stone for
+coordinating the response; and Emily Albini for writing this advisory.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Security Response Team</name>
+        </author>
+    </entry>
+    <entry>
+        <title>What we heard about Rust&#x27;s challenges</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2026/03/20/rust-challenges/" type="text/html" title="What we heard about Rust&#x27;s challenges" />
+        <published>2026-03-20T00:00:00+00:00</published>
+        <updated>2026-03-20T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2026/03/20/rust-challenges/</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2026/03/20/rust-challenges/">&lt;p&gt;&lt;em&gt;Author&#x27;s note&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;The &lt;a href&#x3D;&quot;https://github.com/rust-lang/blog.rust-lang.org/blob/786db4b4d202d85ef79741de5be4cee5ea330999/content/rust-challenges.md&quot;&gt;original version&lt;/a&gt; of this article has been retracted. I used an LLM to write the first draft, though this had come after many hours of &lt;em&gt;planning&lt;/em&gt; and going through the data and analyses to identify the points to be made, as well as me going through the post line by line, editing into my voice and verifying the wording and scope of the text was accurate. However, many people still felt like the LLM-speak bled through in ways that felt uncomfortable. Given this, I and other members of the Rust Project have decided to retract the post in its entirety.&lt;/p&gt;
+&lt;p&gt;I stand by the content of the post. As I said, the LLM did not decide the points to be made - those were done well in advance of even beginning to write the blog post. And, admittedly, I &lt;em&gt;did&lt;/em&gt; need to make edits to dampen the scope of them (in large part because I couldn&#x27;t find specific quotes to substantiate them, even though I often &quot;felt&quot; that they were true given what I know as a Rust Project member), but in general I (and the Vision Doc team) defined the content, not an LLM.&lt;/p&gt;
+&lt;p&gt;Many people thought that the blog post felt &quot;empty&quot;, with no &quot;real substance&quot;. While I see the point here, this is unfortunately just how the data played out and goal of this effort. The Vision Doc team conducted ~70 interviews (mostly 1:1), which were the basis for the conclusions in this blog post. This is &lt;em&gt;a lot&lt;/em&gt; of data, it&#x27;s hard to fully capture the essence of them in a single blog post. And yet, it is also &lt;em&gt;not enough&lt;/em&gt; data to fully capture the nuance of differences across groups of different types. On top of this, it shouldn&#x27;t be that unexpected the problems we heard about in these interviews are the same problems that we (and many others) mostly already knew existed. The insight these interviews give us is that they allow us to begin to capture &lt;em&gt;for whom which issues are most prominent&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;The insights we identify and the conclusions we make are supported by the data we have gathered. When making these posts, the Vision Doc team has tried to stay as neutral as possible, doing our best to not exert bias by making any claims that cannot be supported &lt;em&gt;as stated&lt;/em&gt; by the data itself. With drastically more time, I would have loved to pull in data from the ~5500 survey responses we got, which ultimately could help us make &lt;em&gt;stronger&lt;/em&gt; claims or conclusions, but unfortunately that is time that I haven&#x27;t had. That shouldn&#x27;t diminish the substance of the insights and conclusions we &lt;em&gt;have&lt;/em&gt; been able to make though.&lt;/p&gt;
+&lt;p&gt;Wording matters though. And it&#x27;s clear that to many people, the blog post as-written didn&#x27;t meet the mark that they want. LLMs are a tool that many people use (including me, obviously) to varying degrees to help do things that they couldn&#x27;t do before (either for lack of skill, lack of time, or lack of motivation). In this case, I used an LLM to compensate for the lack of time for me to dedicate to sifting through transcripts for the ~70 interviews we did, and the many analyses that followed, to find specific quotes and write an early draft. It certainly did not help that writing and editing of this post happened over the span of about 3 months - meaning that things that &quot;worked&quot; in early edits did not necessarily work in later edits.&lt;/p&gt;
+&lt;p&gt;This all being said, I think that we as a Vision Doc team owe it to the Rust Project and the community to share (at least to some extent) what we have learned here. So, I have taken the original challenges identified by the team (without the recommendations or conclusions) and will provide a brief personal commentary on them. I&#x27;ve chosen to exclude any specific quotes - rather, just focus on the &quot;high level&quot; ideas. So, as a disclaimer, this will mean that the statements here will be much more biased than what we typically want to publish as part of the Vision Doc work.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;Across the ~70 interviews the Vision Doc team conducted, we heard &lt;em&gt;a lot&lt;/em&gt; of complaints. Of course, we tried to keep these interviews pretty high-level, not focusing on any particular technical details. Rather, we wanted to get a general sense of what the difficulties were that people encountered, among the other topics discussed during these interviews. Here, we&#x27;ve identified a few common challenges to most people, and then a few challenges that are more domain-specific.&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;challenges-that-are-universal&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#challenges-that-are-universal&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Challenges that are universal&lt;/h2&gt;
+&lt;p&gt;We heard a number of things that basically everyone said was an issue for them, in some capacity. Doing things to address these issues could have a universal impact, but that is not to say that these issues necessarily &lt;em&gt;block&lt;/em&gt; people from using Rust.&lt;/p&gt;
+&lt;p&gt;The universal challenges, you&#x27;ve definitely heard before. If you write Rust, you&#x27;ve probably encountered them. That&#x27;s what makes them universal. However, the point is that we share the data that we gather, and the fact that we have learned that these challenges &lt;em&gt;do&lt;/em&gt; affect everyone is data in itself: we have sampled different domains, different experience levels, and different backgrounds; and we have found that these challenges exist for everyone.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;compilation-performance&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#compilation-performance&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Compilation performance&lt;/h3&gt;
+&lt;p&gt;Everybody knows that &quot;compile times&quot; are a thing that Rust is known for. This is an ever-moving target: the Rust Project tracks performance of the compiler on every merged change to track regressions, many people have attempted many times to make substantial progress here, and yet there is always more that we want to or could do.&lt;/p&gt;
+&lt;p&gt;The good news, is that among our interviews, nobody really told us that compilation time &lt;em&gt;currently&lt;/em&gt; blocks them. We did hear things to the effect of &quot;if we keep writing more and more Rust code, we may eventually get to a point that compile times are an issue&quot;, so that&#x27;s not to say that we&#x27;re &quot;in the clear&quot; but it is important to think about how this matters &lt;em&gt;on balance&lt;/em&gt; with other challenges that people face.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;borrow-checking-and-ownership&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#borrow-checking-and-ownership&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Borrow checking and ownership&lt;/h3&gt;
+&lt;p&gt;Again, another thing that Rust is known for. Borrow checking and ownership is a hard topic that basically every beginner struggles with. However, we found that &quot;Rust experts&quot; don&#x27;t really complain about the borrow checker anymore: it &lt;em&gt;is&lt;/em&gt; a challenge that goes away with experience. That&#x27;s not to say we can&#x27;t do better for beginners, but it&#x27;s not clear exactly what that means.&lt;/p&gt;
+&lt;p&gt;Certainly learning materials and compiler error messages help, and these are areas that we&#x27;ve tried in the past and today to sincerely provide the best experience. Despite that, the borrow checker remains a difficult part of the Rust language. We have &lt;a href&#x3D;&quot;https://rust-lang.github.io/rust-project-goals/2026/polonius.html&quot;&gt;ongoing efforts&lt;/a&gt; to improve the borrow checker, but it&#x27;s likely that there are (for example) language features that may make this better. (Or worse!)&lt;/p&gt;
+&lt;p&gt;We &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2025/12/19/what-do-people-love-about-rust/#each-piece-is-necessary-for-the-whole-to-work&quot;&gt;found previously&lt;/a&gt; that what makes Rust &lt;em&gt;great&lt;/em&gt; is the balance that we put on reliability, efficiency, and versatility. And, we need to be careful when adjusting something as core as the borrow checker to maintain this balance.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;async&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#async&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Async&lt;/h3&gt;
+&lt;p&gt;When conducting our interviews, async was consistently something that many people had issues with. Beginners often said that they basically completely ignore async while learning. People who &lt;em&gt;do&lt;/em&gt; use async often said that the choice wasn&#x27;t always clear, and that even though using async feels like the right choice &lt;em&gt;now&lt;/em&gt;, they still encounter issues.&lt;/p&gt;
+&lt;p&gt;Fortunately, unlike performance and the borrow checker, we have a number of clear &quot;next steps&quot; for async (e.g. async fns in traits, async drop, async version of std traits) that will &lt;em&gt;begin&lt;/em&gt; to solve these issues and close the gap. Of course, for other things (like the coloring problem), we don&#x27;t have good &quot;solutions&quot; just quite yet.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;ecosystem-crates&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#ecosystem-crates&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Ecosystem crates&lt;/h3&gt;
+&lt;p&gt;We &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2025/12/19/what-do-people-love-about-rust/#example-the-wealth-of-crates-on-crates-io-are-a-key-enabler-but-can-be-an-obstacle&quot;&gt;previously&lt;/a&gt; talked about how crates.io creates a wealth of resources for people to turn to, but people still run into issues. For one, when there &lt;em&gt;are&lt;/em&gt; crates that do the thing people want, they need to know: which crates do the things they need, which crates can they trust, and which crates are just overall the &quot;best&quot; for them. Further, in some domains and industries, there &lt;em&gt;aren&#x27;t&lt;/em&gt; crates that do what people need; Rust support for some industries are still too immature.&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;challenges-that-are-domain-specific&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#challenges-that-are-domain-specific&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Challenges that are domain-specific&lt;/h2&gt;
+&lt;p&gt;Though more challenging given the limited diversity in the interviews we conducted, we still were able to find &lt;em&gt;some&lt;/em&gt; domain-specific challenges: at least, we were able to hear about some challenges that seem to disproportionately effect some domains over others.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;embedded&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#embedded&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Embedded&lt;/h3&gt;
+&lt;p&gt;For developers programming for embedded systems, we heard most often about the difficulties that fundamentally boil down to constrained resource management. For example, embedded developers are often unable to use the vast majority of the crate ecosystem, they often have trouble using the standard library, and the debugging experience is generally harder. Things that are &quot;normal&quot; for most Rust developers are oftentimes &quot;special&quot; for embedded developers.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;safety-critical&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#safety-critical&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Safety-critical&lt;/h3&gt;
+&lt;p&gt;We made an &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2026/01/14/what-does-it-take-to-ship-rust-in-safety-critical/&quot;&gt;entire post&lt;/a&gt; about shipping Rust in safety critical systems. The biggest issue for safety-critical developers with Rust is the lack of availability or maturity for tools to &lt;em&gt;certify&lt;/em&gt; their Rust code.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;gui-development&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#gui-development&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+GUI development&lt;/h3&gt;
+&lt;p&gt;The biggest issue heard from GUI developers is compilation time but is slightly different from the general case, because GUI development is so heavily dependent on the &lt;em&gt;visual&lt;/em&gt; changes - and so this is a slightly different workflow than just &quot;check if the code compiles and passes tests&quot;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Jack Huey</name>
+        </author>
+    </entry>
     <entry>
         <title>Call for Testing: Build Dir Layout v2</title>
         <link rel="alternate" href="https://blog.rust-lang.org/2026/03/13/call-for-testing-build-dir-layout-v2/" type="text/html" title="Call for Testing: Build Dir Layout v2" />
@@ -608,259 +927,6 @@ A look back&lt;/h2&gt;
 
         <author>
             <name>Jakub Beránek</name>
-        </author>
-    </entry>
-    <entry>
-        <title>Rust participates in Google Summer of Code 2026</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2026/02/19/Rust-participates-in-GSoC-2026/" type="text/html" title="Rust participates in Google Summer of Code 2026" />
-        <published>2026-02-19T00:00:00+00:00</published>
-        <updated>2026-02-19T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2026/02/19/Rust-participates-in-GSoC-2026/</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2026/02/19/Rust-participates-in-GSoC-2026/">&lt;p&gt;We are happy to announce that the Rust Project will again be participating in &lt;a href&#x3D;&quot;https://summerofcode.withgoogle.com&quot;&gt;Google Summer of Code (GSoC) 2026&lt;/a&gt;, same as in the previous two years. If you&#x27;re not eligible or interested in participating in GSoC, then most of this post likely isn&#x27;t relevant to you; if you are, this should contain some useful information and links.&lt;/p&gt;
-&lt;p&gt;Google Summer of Code (GSoC) is an annual global program organized by Google that aims to bring new contributors to the world of open-source. The program pairs organizations (such as the Rust Project) with contributors (usually students), with the goal of helping the participants make meaningful open-source contributions under the guidance of experienced mentors.&lt;/p&gt;
-&lt;p&gt;The organizations that have been accepted into the program have been &lt;a href&#x3D;&quot;https://summerofcode.withgoogle.com/programs/2026/organizations&quot;&gt;announced&lt;/a&gt; by Google. The GSoC applicants now have several weeks to discuss project ideas with mentors. Later, they will send project proposals for the projects that they found the most interesting. If their project proposal is accepted, they will embark on a several months long journey during which they will try to complete their proposed project under the guidance of an assigned mentor.&lt;/p&gt;
-&lt;p&gt;We have prepared a &lt;a href&#x3D;&quot;https://github.com/rust-lang/google-summer-of-code&quot;&gt;list of project ideas&lt;/a&gt; that can serve as inspiration for potential GSoC contributors that would like to send a project proposal to the Rust organization. However, applicants can also come up with their own project ideas. You can discuss project ideas or try to find mentors in the &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/421156-gsoc&quot;&gt;#gsoc&lt;/a&gt; Zulip stream. We have also prepared a &lt;a href&#x3D;&quot;https://github.com/rust-lang/google-summer-of-code/blob/main/gsoc/proposal-guide.md&quot;&gt;proposal guide&lt;/a&gt; that should help you with preparing your project proposals. We would also like to bring your attention to our &lt;a href&#x3D;&quot;https://github.com/rust-lang/google-summer-of-code/tree/main/gsoc&quot;&gt;GSoC AI policy&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;You can start discussing the project ideas with Rust Project mentors and maintainers immediately, but you might want to keep the following important dates in mind:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The project proposal application period starts on March 16, 2026. From that date you can submit project proposals into the GSoC dashboard.&lt;/li&gt;
-&lt;li&gt;The project proposal application period ends on &lt;strong&gt;March 31, 2026&lt;/strong&gt; at 18:00 UTC. Take note of that deadline, as there will be no extensions!&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;If you are interested in contributing to the Rust Project, we encourage you to check out our project idea list and send us a GSoC project proposal! Of course, you are also free to discuss these projects and/or try to move them forward even if you do not intend to (or cannot) participate in GSoC. We welcome all contributors to Rust, as there is always enough work to do.&lt;/p&gt;
-&lt;p&gt;Our GSoC contributors were quite successful in the past two years (&lt;a href&#x3D;&quot;https://blog.rust-lang.org/2024/11/07/gsoc-2024-results.html&quot;&gt;2024&lt;/a&gt;, &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2025/11/18/gsoc-2025-results&quot;&gt;2025&lt;/a&gt;), so we are excited what this year&#x27;s GSoC will bring! We hope that participants in the program can improve their skills, but also would love for this to bring new contributors to the Project and increase the awareness of Rust in general. Like last year, we expect to publish blog posts in the future with updates about our participation in the program.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Jakub Beránek, Jack Huey</name>
-        </author>
-    </entry>
-    <entry>
-        <title>crates.io: an update to the malicious crate notification policy</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2026/02/13/crates.io-malicious-crate-update/" type="text/html" title="crates.io: an update to the malicious crate notification policy" />
-        <published>2026-02-13T00:00:00+00:00</published>
-        <updated>2026-02-13T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2026/02/13/crates.io-malicious-crate-update/</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2026/02/13/crates.io-malicious-crate-update/">&lt;p&gt;The crates.io team will no longer publish a blog post each time a malicious crate is detected or reported. In the vast majority of cases to date, these notifications have involved crates that have no evidence of real world usage, and we feel that publishing these blog posts is generating noise, rather than signal.&lt;/p&gt;
-&lt;p&gt;We will always publish a &lt;a href&#x3D;&quot;https://rustsec.org/&quot;&gt;RustSec&lt;/a&gt; advisory when a crate is removed for containing malware. You can subscribe to the &lt;a href&#x3D;&quot;https://rustsec.org/feed.xml&quot;&gt;RustSec advisory RSS feed&lt;/a&gt; to receive updates.&lt;/p&gt;
-&lt;p&gt;Crates that contain malware &lt;em&gt;and&lt;/em&gt; are seeing real usage or exploitation will still get both a blog post and a RustSec advisory. We may also notify via additional communication channels (such as social media) if we feel it is warranted.&lt;/p&gt;
-&lt;h2 id&#x3D;&quot;recent-crates&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#recent-crates&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
-Recent crates&lt;/h2&gt;
-&lt;p&gt;Since we are announcing this policy change now, here is a retrospective summary of the malicious crates removed since &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2025/12/05/crates.io-malicious-crates-finch-rust-and-sha-rust/&quot;&gt;our last blog post&lt;/a&gt; and today:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;finch_cli_rust&lt;/code&gt;, &lt;code&gt;finch-rst&lt;/code&gt;, and &lt;code&gt;sha-rst&lt;/code&gt;: the Rust security response working group was notified on December 9th, 2025 by Matthias Zepper of &lt;a href&#x3D;&quot;https://ngisweden.scilifelab.se/&quot;&gt;National Genomics Infrastructure Sweden&lt;/a&gt; that these crates were attempting to exfiltrate credentials by impersonating the &lt;code&gt;finch&lt;/code&gt; and &lt;code&gt;finch_cli&lt;/code&gt; crates. Advisories: &lt;a href&#x3D;&quot;https://rustsec.org/advisories/RUSTSEC-2025-0150.html&quot;&gt;RUSTSEC-2025-0150&lt;/a&gt;, &lt;a href&#x3D;&quot;https://rustsec.org/advisories/RUSTSEC-2025-0151.html&quot;&gt;RUSTSEC-2025-0151&lt;/a&gt;, &lt;a href&#x3D;&quot;https://rustsec.org/advisories/RUSTSEC-2025-0152.html&quot;&gt;RUSTSEC-2025-0152&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;polymarket-clients-sdk&lt;/code&gt;: we were notified on February 6th by &lt;a href&#x3D;&quot;https://socket.dev/&quot;&gt;Socket&lt;/a&gt; that this crate was attempting to exfiltrate credentials by impersonating the &lt;code&gt;polymarket-client-sdk&lt;/code&gt; crate. Advisory: &lt;a href&#x3D;&quot;https://rustsec.org/advisories/RUSTSEC-2026-0010.html&quot;&gt;RUSTSEC-2026-0010&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;polymarket-client-sdks&lt;/code&gt;: we were notified on February 13th that this crate was attempting to exfiltrate credentials by impersonating the &lt;code&gt;polymarket-client-sdk&lt;/code&gt; crate. Advisory: &lt;a href&#x3D;&quot;https://rustsec.org/advisories/RUSTSEC-2026-0011.html&quot;&gt;RUSTSEC-2026-0011&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;In all cases, the crates were deleted, the user accounts that published them were immediately disabled, and reports were made to upstream providers as appropriate.&lt;/p&gt;
-&lt;h2 id&#x3D;&quot;thanks&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#thanks&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
-Thanks&lt;/h2&gt;
-&lt;p&gt;Once again, our thanks go to Matthias, Socket, and the reporter of &lt;code&gt;polymarket-client-sdks&lt;/code&gt; for their reports. We also want to thank Dirkjan Ochtman from the secure code working group, Emily Albini from the security response working group, and Walter Pearce from the &lt;a href&#x3D;&quot;https://foundation.rust-lang.org/&quot;&gt;Rust Foundation&lt;/a&gt; for aiding in the response.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Adam Harvey</name>
-        </author>
-    </entry>
-    <entry>
-        <title>Announcing Rust 1.93.1</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2026/02/12/Rust-1.93.1/" type="text/html" title="Announcing Rust 1.93.1" />
-        <published>2026-02-12T00:00:00+00:00</published>
-        <updated>2026-02-12T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2026/02/12/Rust-1.93.1/</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2026/02/12/Rust-1.93.1/">&lt;p&gt;The Rust team has published a new point release of Rust, 1.93.1. Rust is a programming language that is empowering everyone to build reliable and efficient software.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust 1.93.1 is as easy as:&lt;/p&gt;
-&lt;pre class&#x3D;&quot;z-code&quot;&gt;&lt;code&gt;&lt;span class&#x3D;&quot;z-text z-plain&quot;&gt;rustup update stable
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the appropriate page on our website.&lt;/p&gt;
-&lt;h2 id&#x3D;&quot;what-s-in-1-93-1&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#what-s-in-1-93-1&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
-What&#x27;s in 1.93.1&lt;/h2&gt;
-&lt;p&gt;Rust 1.93.1 resolves three regressions that were introduced in the 1.93.0 release.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/150590&quot;&gt;Don&#x27;t try to recover a keyword as a non-keyword identifier&lt;/a&gt;, fixing an internal compiler error (ICE) that especially &lt;a href&#x3D;&quot;https://github.com/rust-lang/rustfmt/issues/6739&quot;&gt;affected rustfmt&lt;/a&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/pull/16196&quot;&gt;Fix a &lt;code&gt;clippy::panicking_unwrap&lt;/code&gt; false-positive on field access with an implicit dereference&lt;/a&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/152259&quot;&gt;Revert an update to wasm-related dependencies&lt;/a&gt;, fixing file descriptor leaks on the &lt;code&gt;wasm32-wasip2&lt;/code&gt; target. This only affects the &lt;code&gt;rustup&lt;/code&gt; component for this target, so downstream toolchain builds should check their own dependencies too.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id&#x3D;&quot;contributors-to-1-93-1&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#contributors-to-1-93-1&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
-Contributors to 1.93.1&lt;/h3&gt;
-&lt;p&gt;Many people came together to create Rust 1.93.1. We couldn&#x27;t have done it without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.93.1/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Release Team</name>
-        </author>
-    </entry>
-    <entry>
-        <title>Announcing Rust 1.93.0</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2026/01/22/Rust-1.93.0/" type="text/html" title="Announcing Rust 1.93.0" />
-        <published>2026-01-22T00:00:00+00:00</published>
-        <updated>2026-01-22T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2026/01/22/Rust-1.93.0/</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2026/01/22/Rust-1.93.0/">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.93.0. Rust is a programming language empowering everyone to build reliable and efficient software.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of Rust installed via &lt;code&gt;rustup&lt;/code&gt;, you can get 1.93.0 with:&lt;/p&gt;
-&lt;pre data-lang&#x3D;&quot;console&quot; class&#x3D;&quot;language-console z-code&quot;&gt;&lt;code class&#x3D;&quot;language-console&quot; data-lang&#x3D;&quot;console&quot;&gt;&lt;span class&#x3D;&quot;z-text z-plain&quot;&gt;$ rustup update stable
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the appropriate page on our website, and check out the &lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/releases.html#version-1930-2026-01-22&quot;&gt;detailed release notes for 1.93.0&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;If you&#x27;d like to help us out by testing future releases, you might consider updating locally to use the beta channel (&lt;code&gt;rustup default beta&lt;/code&gt;) or the nightly channel (&lt;code&gt;rustup default nightly&lt;/code&gt;). Please &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/new/choose&quot;&gt;report&lt;/a&gt; any bugs you might come across!&lt;/p&gt;
-&lt;h2 id&#x3D;&quot;what-s-in-1-93-0-stable&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#what-s-in-1-93-0-stable&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
-What&#x27;s in 1.93.0 stable&lt;/h2&gt;
-&lt;h3 id&#x3D;&quot;update-bundled-musl-to-1-2-5&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#update-bundled-musl-to-1-2-5&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
-Update bundled musl to 1.2.5&lt;/h3&gt;
-&lt;p&gt;The various &lt;code&gt;*-linux-musl&lt;/code&gt; targets now all &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/142682&quot;&gt;ship&lt;/a&gt; with musl 1.2.5. This primarily affects static musl builds for &lt;code&gt;x86_64&lt;/code&gt;, &lt;code&gt;aarch64&lt;/code&gt;, and &lt;code&gt;powerpc64le&lt;/code&gt; which bundled musl 1.2.3. This update comes with &lt;a href&#x3D;&quot;https://musl.libc.org/releases.html&quot;&gt;several fixes and improvements&lt;/a&gt;, and a breaking change that affects the Rust ecosystem.&lt;/p&gt;
-&lt;p&gt;For the Rust ecosystem, the primary motivation for this update is to receive major improvements to
-musl&#x27;s DNS resolver which shipped in 1.2.4 and received bug fixes in 1.2.5. When using &lt;code&gt;musl&lt;/code&gt;
-targets for static linking, this should make portable Linux binaries that do networking more
-reliable, particularly in the face of large DNS records and recursive nameservers.&lt;/p&gt;
-&lt;p&gt;However, 1.2.4 also comes with a breaking change: &lt;a href&#x3D;&quot;https://github.com/rust-lang/libc/issues/2934&quot;&gt;the removal of several legacy compatibility symbols that the Rust libc crate was using&lt;/a&gt;.
-A fix for this &lt;a href&#x3D;&quot;https://github.com/rust-lang/libc/pull/2935&quot;&gt;was shipped in libc 0.2.146 in June 2023 (2.5 years ago)&lt;/a&gt;,
-and we believe has sufficiently widely propagated that we&#x27;re ready to make the change in Rust
-targets.&lt;/p&gt;
-&lt;p&gt;See our previous &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2025/12/05/Updating-musl-1.2.5/&quot;&gt;announcement&lt;/a&gt; for more details.&lt;/p&gt;
-&lt;h3 id&#x3D;&quot;allow-the-global-allocator-to-use-thread-local-storage&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#allow-the-global-allocator-to-use-thread-local-storage&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
-Allow the global allocator to use thread-local storage&lt;/h3&gt;
-&lt;p&gt;Rust 1.93 adjusts the internals of the standard library to permit global allocators written in Rust
-to use std&#x27;s &lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/macro.thread_local.html&quot;&gt;&lt;code&gt;thread_local!&lt;/code&gt;&lt;/a&gt; and
-&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/thread/fn.current.html&quot;&gt;&lt;code&gt;std::thread::current&lt;/code&gt;&lt;/a&gt; without
-re-entrancy concerns by using the system allocator instead.&lt;/p&gt;
-&lt;p&gt;See &lt;a href&#x3D;&quot;https://doc.rust-lang.org/nightly/std/alloc/trait.GlobalAlloc.html#re-entrance&quot;&gt;docs&lt;/a&gt; for details.&lt;/p&gt;
-&lt;h3 id&#x3D;&quot;cfg-attributes-on-asm-lines&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#cfg-attributes-on-asm-lines&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
-&lt;code&gt;cfg&lt;/code&gt; attributes on &lt;code&gt;asm!&lt;/code&gt; lines&lt;/h3&gt;
-&lt;p&gt;Previously, if individual parts of a section of inline assembly needed to be &lt;code&gt;cfg&lt;/code&gt;&#x27;d, the full &lt;code&gt;asm!&lt;/code&gt;
-block would need to be repeated with and without that section. In 1.93, &lt;code&gt;cfg&lt;/code&gt; can now be applied to
-individual statements within the &lt;code&gt;asm!&lt;/code&gt; block.&lt;/p&gt;
-&lt;pre data-lang&#x3D;&quot;rust&quot; class&#x3D;&quot;language-rust z-code&quot;&gt;&lt;code class&#x3D;&quot;language-rust&quot; data-lang&#x3D;&quot;rust&quot;&gt;&lt;span class&#x3D;&quot;z-source z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-support z-macro z-rust&quot;&gt;asm!&lt;/span&gt;&lt;span class&#x3D;&quot;z-meta z-group z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-section z-group z-begin z-rust&quot;&gt;(&lt;/span&gt; &lt;span class&#x3D;&quot;z-comment z-line z-double-slash z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-comment z-rust&quot;&gt;//&lt;/span&gt; or global_asm! or naked_asm!
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-source z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-group z-rust&quot;&gt;    &lt;span class&#x3D;&quot;z-string z-quoted z-double z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-begin z-rust&quot;&gt;&amp;quot;&lt;/span&gt;nop&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-end z-rust&quot;&gt;&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-separator z-rust&quot;&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-source z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-group z-rust&quot;&gt;    &lt;span class&#x3D;&quot;z-meta z-annotation z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-annotation z-rust&quot;&gt;#&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-section z-group z-begin z-rust&quot;&gt;[&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable z-annotation z-rust&quot;&gt;cfg&lt;/span&gt;&lt;span class&#x3D;&quot;z-meta z-annotation z-parameters z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-group z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-section z-group z-begin z-rust&quot;&gt;(&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-meta z-annotation z-parameters z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-group z-rust&quot;&gt;target_feature &lt;span class&#x3D;&quot;z-keyword z-operator z-rust&quot;&gt;&#x3D;&lt;/span&gt; &lt;span class&#x3D;&quot;z-string z-quoted z-double z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-begin z-rust&quot;&gt;&amp;quot;&lt;/span&gt;sse2&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-end z-rust&quot;&gt;&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-meta z-annotation z-parameters z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-group z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-section z-group z-end z-rust&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-section z-group z-end z-rust&quot;&gt;]&lt;/span&gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-source z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-group z-rust&quot;&gt;    &lt;span class&#x3D;&quot;z-string z-quoted z-double z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-begin z-rust&quot;&gt;&amp;quot;&lt;/span&gt;nop&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-end z-rust&quot;&gt;&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-separator z-rust&quot;&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-source z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-group z-rust&quot;&gt;    &lt;span class&#x3D;&quot;z-comment z-line z-double-slash z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-comment z-rust&quot;&gt;//&lt;/span&gt; ...
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-source z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-group z-rust&quot;&gt;    &lt;span class&#x3D;&quot;z-meta z-annotation z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-annotation z-rust&quot;&gt;#&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-section z-group z-begin z-rust&quot;&gt;[&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable z-annotation z-rust&quot;&gt;cfg&lt;/span&gt;&lt;span class&#x3D;&quot;z-meta z-annotation z-parameters z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-group z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-section z-group z-begin z-rust&quot;&gt;(&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-meta z-annotation z-parameters z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-group z-rust&quot;&gt;target_feature &lt;span class&#x3D;&quot;z-keyword z-operator z-rust&quot;&gt;&#x3D;&lt;/span&gt; &lt;span class&#x3D;&quot;z-string z-quoted z-double z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-begin z-rust&quot;&gt;&amp;quot;&lt;/span&gt;sse2&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-end z-rust&quot;&gt;&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-meta z-annotation z-parameters z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-group z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-section z-group z-end z-rust&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-section z-group z-end z-rust&quot;&gt;]&lt;/span&gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-source z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-group z-rust&quot;&gt;    a &lt;span class&#x3D;&quot;z-keyword z-operator z-assignment z-rust&quot;&gt;&#x3D;&lt;/span&gt; &lt;span class&#x3D;&quot;z-storage z-type z-rust&quot;&gt;const&lt;/span&gt; &lt;span class&#x3D;&quot;z-constant z-numeric z-integer z-decimal z-rust&quot;&gt;123&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-separator z-rust&quot;&gt;,&lt;/span&gt; &lt;span class&#x3D;&quot;z-comment z-line z-double-slash z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-comment z-rust&quot;&gt;//&lt;/span&gt; only used on sse2
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-source z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-meta z-group z-rust&quot;&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-meta z-group z-rust&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-section z-group z-end z-rust&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-terminator z-rust&quot;&gt;;&lt;/span&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id&#x3D;&quot;stabilized-apis&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#stabilized-apis&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
-Stabilized APIs&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/core/primitive.slice.html#method.assume_init_drop&quot;&gt;&lt;code&gt;&amp;lt;[MaybeUninit&amp;lt;T&amp;gt;]&amp;gt;::assume_init_drop&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/core/primitive.slice.html#method.assume_init_ref&quot;&gt;&lt;code&gt;&amp;lt;[MaybeUninit&amp;lt;T&amp;gt;]&amp;gt;::assume_init_ref&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/core/primitive.slice.html#method.assume_init_mut&quot;&gt;&lt;code&gt;&amp;lt;[MaybeUninit&amp;lt;T&amp;gt;]&amp;gt;::assume_init_mut&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.slice.html#method.write_copy_of_slice&quot;&gt;&lt;code&gt;&amp;lt;[MaybeUninit&amp;lt;T&amp;gt;]&amp;gt;::write_copy_of_slice&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.slice.html#method.write_clone_of_slice&quot;&gt;&lt;code&gt;&amp;lt;[MaybeUninit&amp;lt;T&amp;gt;]&amp;gt;::write_clone_of_slice&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/string/struct.String.html#method.into_raw_parts&quot;&gt;&lt;code&gt;String::into_raw_parts&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/vec/struct.Vec.html#method.into_raw_parts&quot;&gt;&lt;code&gt;Vec::into_raw_parts&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.isize.html#method.unchecked_neg&quot;&gt;&lt;code&gt;&amp;lt;iN&amp;gt;::unchecked_neg&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.isize.html#method.unchecked_shl&quot;&gt;&lt;code&gt;&amp;lt;iN&amp;gt;::unchecked_shl&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.isize.html#method.unchecked_shr&quot;&gt;&lt;code&gt;&amp;lt;iN&amp;gt;::unchecked_shr&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.usize.html#method.unchecked_shl&quot;&gt;&lt;code&gt;&amp;lt;uN&amp;gt;::unchecked_shl&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.usize.html#method.unchecked_shr&quot;&gt;&lt;code&gt;&amp;lt;uN&amp;gt;::unchecked_shr&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.slice.html#method.as_array&quot;&gt;&lt;code&gt;&amp;lt;[T]&amp;gt;::as_array&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.slice.html#method.as_mut_array&quot;&gt;&lt;code&gt;&amp;lt;[T]&amp;gt;::as_mut_array&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.as_array&quot;&gt;&lt;code&gt;&amp;lt;*const [T]&amp;gt;::as_array&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.as_mut_array&quot;&gt;&lt;code&gt;&amp;lt;*mut [T]&amp;gt;::as_mut_array&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/collections/struct.VecDeque.html#method.pop_front_if&quot;&gt;&lt;code&gt;VecDeque::pop_front_if&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/collections/struct.VecDeque.html#method.pop_back_if&quot;&gt;&lt;code&gt;VecDeque::pop_back_if&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/time/struct.Duration.html#method.from_nanos_u128&quot;&gt;&lt;code&gt;Duration::from_nanos_u128&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.char.html#associatedconstant.MAX_LEN_UTF8&quot;&gt;&lt;code&gt;char::MAX_LEN_UTF8&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.char.html#associatedconstant.MAX_LEN_UTF16&quot;&gt;&lt;code&gt;char::MAX_LEN_UTF16&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/fmt/fn.from_fn.html&quot;&gt;&lt;code&gt;std::fmt::from_fn&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/fmt/struct.FromFn.html&quot;&gt;&lt;code&gt;std::fmt::FromFn&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id&#x3D;&quot;other-changes&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
-Other changes&lt;/h3&gt;
-&lt;p&gt;Check out everything that changed in &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/releases/tag/1.93.0&quot;&gt;Rust&lt;/a&gt;, &lt;a href&#x3D;&quot;https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-193-2026-01-22&quot;&gt;Cargo&lt;/a&gt;, and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-193&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id&#x3D;&quot;contributors-to-1-93-0&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#contributors-to-1-93-0&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
-Contributors to 1.93.0&lt;/h2&gt;
-&lt;p&gt;Many people came together to create Rust 1.93.0. We couldn&#x27;t have done it without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.93.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Release Team</name>
-        </author>
-    </entry>
-    <entry>
-        <title>crates.io: development update</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2026/01/21/crates-io-development-update/" type="text/html" title="crates.io: development update" />
-        <published>2026-01-21T00:00:00+00:00</published>
-        <updated>2026-01-21T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2026/01/21/crates-io-development-update/</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2026/01/21/crates-io-development-update/">&lt;p&gt;Time flies! Six months have passed since our last crates.io development update, so it&#x27;s time for another one. Here&#x27;s a summary of the most notable changes and improvements made to &lt;a href&#x3D;&quot;https://crates.io/&quot;&gt;crates.io&lt;/a&gt; over the past six months.&lt;/p&gt;
-&lt;h2 id&#x3D;&quot;security-tab&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#security-tab&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
-Security Tab&lt;/h2&gt;
-&lt;p&gt;Crate pages now have a new &quot;Security&quot; tab that displays security advisories from the &lt;a href&#x3D;&quot;https://rustsec.org/&quot;&gt;RustSec&lt;/a&gt; database. This allows you to quickly see if a crate has known vulnerabilities before adding it as a dependency.&lt;/p&gt;
-&lt;p&gt;&lt;img src&#x3D;&quot;https://blog.rust-lang.org/2026/01/21/crates-io-development-update/security-tab.png&quot; alt&#x3D;&quot;Security Tab Screenshot&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;The tab shows known vulnerabilities for the crate along with the affected version ranges.&lt;/p&gt;
-&lt;p&gt;This feature is still a work in progress, and we plan to add more functionality in the future. We would like to thank the &lt;a href&#x3D;&quot;https://openssf.org/&quot;&gt;OpenSSF&lt;/a&gt; (Open Source Security Foundation) for funding this work and &lt;a href&#x3D;&quot;https://github.com/djc&quot;&gt;Dirkjan Ochtman&lt;/a&gt; for implementing it.&lt;/p&gt;
-&lt;h2 id&#x3D;&quot;trusted-publishing-enhancements&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#trusted-publishing-enhancements&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
-Trusted Publishing Enhancements&lt;/h2&gt;
-&lt;p&gt;In our July 2025 update, we announced Trusted Publishing support for GitHub Actions. Since then, we have made several enhancements to this feature.&lt;/p&gt;
-&lt;h3 id&#x3D;&quot;gitlab-ci-cd-support&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#gitlab-ci-cd-support&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
-GitLab CI/CD Support&lt;/h3&gt;
-&lt;p&gt;Trusted Publishing now supports &lt;a href&#x3D;&quot;https://docs.gitlab.com/ee/ci/&quot;&gt;GitLab CI/CD&lt;/a&gt; in addition to GitHub Actions. This allows GitLab users to publish crates without managing API tokens, using the same OIDC-based authentication flow.&lt;/p&gt;
-&lt;p&gt;Note that this currently only works with GitLab.com. Self-hosted GitLab instances are not supported yet. The crates.io implementation has been refactored to support multiple CI providers, so adding support for other platforms like Codeberg/Forgejo in the future should be straightforward. Contributions are welcome!&lt;/p&gt;
-&lt;h3 id&#x3D;&quot;trusted-publishing-only-mode&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#trusted-publishing-only-mode&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
-Trusted Publishing Only Mode&lt;/h3&gt;
-&lt;p&gt;Crate owners can now enforce Trusted Publishing for their crates. When enabled in the crate settings, traditional API token-based publishing is disabled, and only Trusted Publishing can be used to publish new versions. This reduces the risk of unauthorized publishes from leaked API tokens.&lt;/p&gt;
-&lt;h3 id&#x3D;&quot;blocked-triggers&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#blocked-triggers&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
-Blocked Triggers&lt;/h3&gt;
-&lt;p&gt;The &lt;code&gt;pull_request_target&lt;/code&gt; and &lt;code&gt;workflow_run&lt;/code&gt; GitHub Actions triggers are now blocked from Trusted Publishing. These triggers have been responsible for multiple security incidents in the GitHub Actions ecosystem and are not worth the risk.&lt;/p&gt;
-&lt;h2 id&#x3D;&quot;source-lines-of-code&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#source-lines-of-code&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
-Source Lines of Code&lt;/h2&gt;
-&lt;p&gt;Crate pages now display source lines of code (SLOC) metrics, giving you insight into the size of a crate before adding it as a dependency. This metric is calculated in a background job after publishing using the &lt;a href&#x3D;&quot;https://github.com/XAMPPRocky/tokei&quot;&gt;tokei&lt;/a&gt; crate. It is also shown on OpenGraph images:&lt;/p&gt;
-&lt;p&gt;&lt;img src&#x3D;&quot;https://blog.rust-lang.org/2026/01/21/crates-io-development-update/og-image-sloc.png&quot; alt&#x3D;&quot;OpenGraph image showing SLOC metric&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;Thanks to &lt;a href&#x3D;&quot;https://github.com/XAMPPRocky&quot;&gt;XAMPPRocky&lt;/a&gt; for maintaining the &lt;code&gt;tokei&lt;/code&gt; crate!&lt;/p&gt;
-&lt;h2 id&#x3D;&quot;publication-time-in-index&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#publication-time-in-index&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
-Publication Time in Index&lt;/h2&gt;
-&lt;p&gt;A new &lt;code&gt;pubtime&lt;/code&gt; field has been added to crate index entries, recording when each version was published. This enables several use cases:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Cargo can implement cooldown periods for new versions in the future&lt;/li&gt;
-&lt;li&gt;Cargo can replay dependency resolution as if it were a past date, though yanked versions remain yanked&lt;/li&gt;
-&lt;li&gt;Services like &lt;a href&#x3D;&quot;https://github.com/renovatebot/renovate&quot;&gt;Renovate&lt;/a&gt; can determine release dates without additional API requests&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Thanks to &lt;a href&#x3D;&quot;https://github.com/reneleonhardt&quot;&gt;Rene Leonhardt&lt;/a&gt; for the suggestion and &lt;a href&#x3D;&quot;https://github.com/epage&quot;&gt;Ed Page&lt;/a&gt; for driving this forward on the Cargo side.&lt;/p&gt;
-&lt;h2 id&#x3D;&quot;svelte-frontend-migration&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#svelte-frontend-migration&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
-Svelte Frontend Migration&lt;/h2&gt;
-&lt;p&gt;At the end of 2025, the crates.io team evaluated several options for modernizing our frontend and decided to experiment with porting the website to &lt;a href&#x3D;&quot;https://svelte.dev/&quot;&gt;Svelte&lt;/a&gt;. The goal is to create a one-to-one port of the existing functionality before adding new features.&lt;/p&gt;
-&lt;p&gt;This migration is still considered experimental and is a work in progress. Using a more mainstream framework should make it easier for new contributors to work on the frontend. The new Svelte frontend uses TypeScript and generates type-safe API client code from our &lt;a href&#x3D;&quot;https://crates.io/api/openapi.json&quot;&gt;OpenAPI description&lt;/a&gt;, so types flow from the Rust backend to the TypeScript frontend automatically.&lt;/p&gt;
-&lt;p&gt;Thanks to &lt;a href&#x3D;&quot;https://github.com/eth3lbert&quot;&gt;eth3lbert&lt;/a&gt; for the helpful reviews and guidance on Svelte best practices. We&#x27;ll share more details in a future update.&lt;/p&gt;
-&lt;h2 id&#x3D;&quot;miscellaneous&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#miscellaneous&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
-Miscellaneous&lt;/h2&gt;
-&lt;p&gt;These were some of the more visible changes to crates.io over the past six months, but a lot has happened &quot;under the hood&quot; as well.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Cargo user agent filtering&lt;/strong&gt;: We noticed that download graphs were showing a constant background level of downloads even for unpopular crates due to bots, scrapers, and mirrors. Download counts are now filtered to only include requests from Cargo, providing more accurate statistics.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;HTML emails&lt;/strong&gt;: Emails from crates.io now support HTML formatting.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Encrypted GitHub tokens&lt;/strong&gt;: OAuth access tokens from GitHub are now encrypted at rest in the database. While we have no evidence of any abuse, we decided to improve our security posture. The tokens were never included in the daily database dump, and the old unencrypted column has been removed.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Source link&lt;/strong&gt;: Crate pages now display a &quot;Browse source&quot; link in the sidebar that points to the corresponding docs.rs page. Thanks to &lt;a href&#x3D;&quot;https://github.com/carols10cents&quot;&gt;Carol Nichols&lt;/a&gt; for implementing this feature.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Fastly CDN&lt;/strong&gt;: The sparse index at index.crates.io is now served primarily via Fastly to conserve our AWS credits for other use cases. In the past month, static.crates.io served approximately 1.6 PB across 11 billion requests, while index.crates.io served approximately 740 TB across 19 billion requests. A big thank you to Fastly for providing free CDN services through their &lt;a href&#x3D;&quot;https://www.fastly.com/fast-forward&quot;&gt;Fast Forward program&lt;/a&gt;!&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;OpenGraph image improvements&lt;/strong&gt;: We fixed emoji and CJK character rendering in OpenGraph images, which was caused by missing fonts on our server.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Background worker performance&lt;/strong&gt;: Database indexes were optimized to improve background job processing performance.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;CloudFront invalidation improvements&lt;/strong&gt;: Invalidation requests are now batched to avoid hitting AWS rate limits when publishing large workspaces.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id&#x3D;&quot;feedback&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#feedback&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
-Feedback&lt;/h2&gt;
-&lt;p&gt;We hope you enjoyed this update on the development of crates.io. If you have any feedback or questions, please let us know on &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/318791-t-crates-io&quot;&gt;Zulip&lt;/a&gt; or &lt;a href&#x3D;&quot;https://github.com/rust-lang/crates.io/discussions&quot;&gt;GitHub&lt;/a&gt;. We are always happy to hear from you and are looking forward to your feedback!&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Tobias Bieniek</name>
         </author>
     </entry>
 </feed>
