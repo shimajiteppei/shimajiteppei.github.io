@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260415
+
+
+- [Oracle Java Extension for Visual Studio Code Version 25.1.0 Is Now Available](https://inside.java/2026/04/14/java-vscode-extension-update/)
+
+
 ### 20260414
 
 
@@ -205,8 +211,5 @@ search:
 
 
 ### 20260315
-
-
-### 20260314
 
 
