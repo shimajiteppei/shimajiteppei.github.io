@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260416
+
+
 ### 20260415
 
 
@@ -208,8 +211,5 @@ search:
 
 
 - [Kotlin 2.3.20 Released](https://blog.jetbrains.com/kotlin/2026/03/kotlin-2-3-20-released/)
-
-
-### 20260315
 
 
