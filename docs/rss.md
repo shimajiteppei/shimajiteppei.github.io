@@ -8,7 +8,18 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260417
+
+
+- [Episode 55 “You Must Avoid Final Field Mutation” [IJN]](https://inside.java/2026/04/16/podcast-055/)
+- [crates.io: Help test our new web frontend](https://blog.rust-lang.org/inside-rust/2026/04/17/crates-io-svelte-public-testing/)
+- [Announcing Rust 1.95.0](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/)
+
+
 ### 20260416
+
+
+- [Introducing Koog Integration for Spring AI: Smarter Orchestration for Your Agents](https://blog.jetbrains.com/ai/2026/04/introducing-koog-integration-for-spring-ai-smarter-orchestration-for-your-agents/)
 
 
 ### 20260415
@@ -200,16 +211,5 @@ search:
 
 
 ### 20260317
-
-
-- [The Arrival of Java 26](https://inside.java/2026/03/16/the-arrival-of-java-26/)
-- [Canonical announces it will distribute NVIDIA DOCA-OFED in Ubuntu](https://ubuntu.com//blog/canonical-announces-it-will-distribute-nvidia-doca-ofed-in-ubuntu)
-- [Meet Canonical at NVIDIA GTC 2026](https://ubuntu.com//blog/nvidia-gtc-2026)
-
-
-### 20260316
-
-
-- [Kotlin 2.3.20 Released](https://blog.jetbrains.com/kotlin/2026/03/kotlin-2-3-20-released/)
 
 
