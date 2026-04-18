@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260418
+
+
 ### 20260417
 
 
@@ -156,10 +159,8 @@ search:
 
 
 - [JavaFX 26 Today](https://inside.java/2026/03/25/javaone-javafx/)
-- [Announcing the Oracle Java Verified Portfolio including Helidon and reintroduction of JavaFX Commercial Support](https://inside.java/2026/03/17/announce-jvp/)
 - [January &amp; February 2026 Project Director Update](https://blog.rust-lang.org/inside-rust/2026/03/25/project-director-update/)
 - [Canonical at KubeCon Europe 2026: NVIDIA donates the GPU DRA driver to the CNCF](https://ubuntu.com//blog/canonical-nvidia-kubecon-2026)
-- [How to set up a micro lab: four principles for a reliable homelab](https://ubuntu.com//blog/how-to-set-up-a-reliable-homelab)
 
 
 ### 20260324
@@ -206,10 +207,5 @@ search:
 
 - [Google Summer of Code 2026 Is Here: Contribute to Kotlin](https://blog.jetbrains.com/kotlin/2026/03/gsoc-2026-contribute-to-kotlin/)
 - [Java 26 in definitely UNDER 3 minutes](https://inside.java/2026/03/18/jdk-26-in-2-mins/)
-- [The Arrival of Java 26](https://inside.java/2026/03/17/the-arrival-of-java-26/)
-- [Building a dry-run mode for the OpenTelemetry Collector](https://ubuntu.com//blog/building-a-dry-run-mode-for-the-opentelemetry-collector)
-
-
-### 20260317
 
 
