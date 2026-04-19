@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260419
+
+
+- [How the JVM Optimizes Generic Code](https://inside.java/2026/04/19/generics-optimization/)
+
+
 ### 20260418
 
 
@@ -191,7 +197,6 @@ search:
 
 - [KotlinConf 2026: Talks to Help You Navigate the Schedule](https://blog.jetbrains.com/kotlin/2026/03/kotlinconf-2026-talks-schedule/)
 - [What we heard about Rust&#39;s challenges, and how we can address them](https://blog.rust-lang.org/2026/03/20/rust-challenges/)
-- [Beyond vibe coding: The five building blocks of AI-native engineering](https://www.thoughtworks.com/insights/blog/generative-ai/beyond-vibe-coding-the-five-building-blocks-of-aI-native-engineering)
 
 
 ### 20260319
@@ -199,13 +204,5 @@ search:
 
 - [JDK 26 Security Enhancements](https://inside.java/2026/03/19/jdk26-security-enhancements/)
 - [Advantech MIC-770 V3W now certified on Ubuntu 24.04 LTS](https://ubuntu.com//blog/advantech-mic-770-v3w-now-certified-on-ubuntu-24-04-lts)
-- [Canonical collaborates with Microsoft to strengthen enterprise-grade Linux protection](https://ubuntu.com//blog/defenderandpro)
-
-
-### 20260318
-
-
-- [Google Summer of Code 2026 Is Here: Contribute to Kotlin](https://blog.jetbrains.com/kotlin/2026/03/gsoc-2026-contribute-to-kotlin/)
-- [Java 26 in definitely UNDER 3 minutes](https://inside.java/2026/03/18/jdk-26-in-2-mins/)
 
 
