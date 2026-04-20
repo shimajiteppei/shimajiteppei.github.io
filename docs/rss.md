@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260420
+
+
+- [Hybrid search and reranking: a deeper look at RAG](https://ubuntu.com//blog/hybrid-search-and-reranking-a-deeper-look-at-rag)
+- [Canonical expands Ubuntu support to next-generation MediaTek Genio 520 and 720 platforms](https://ubuntu.com//blog/canonical-expands-ubuntu-support-to-next-generation-mediatek-genio-520-and-720-platforms)
+
+
 ### 20260419
 
 
@@ -197,12 +204,5 @@ search:
 
 - [KotlinConf 2026: Talks to Help You Navigate the Schedule](https://blog.jetbrains.com/kotlin/2026/03/kotlinconf-2026-talks-schedule/)
 - [What we heard about Rust&#39;s challenges, and how we can address them](https://blog.rust-lang.org/2026/03/20/rust-challenges/)
-
-
-### 20260319
-
-
-- [JDK 26 Security Enhancements](https://inside.java/2026/03/19/jdk26-security-enhancements/)
-- [Advantech MIC-770 V3W now certified on Ubuntu 24.04 LTS](https://ubuntu.com//blog/advantech-mic-770-v3w-now-certified-on-ubuntu-24-04-lts)
 
 
