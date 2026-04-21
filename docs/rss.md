@@ -8,9 +8,16 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260421
+
+
+- [Quality Outreach Heads-up - JDK 27: Obsolete Translation Resources Removed](https://inside.java/2026/04/21/quality-heads-up/)
+
+
 ### 20260420
 
 
+- [Helping Decision-Makers Say Yes to Kotlin Multiplatform (KMP)](https://blog.jetbrains.com/kotlin/2026/04/helping-decision-makers-say-yes-to-kmp/)
 - [Hybrid search and reranking: a deeper look at RAG](https://ubuntu.com//blog/hybrid-search-and-reranking-a-deeper-look-at-rag)
 - [Canonical expands Ubuntu support to next-generation MediaTek Genio 520 and 720 platforms](https://ubuntu.com//blog/canonical-expands-ubuntu-support-to-next-generation-mediatek-genio-520-and-720-platforms)
 
@@ -195,14 +202,5 @@ search:
 
 
 - [Security advisory for Cargo](https://blog.rust-lang.org/2026/03/21/cve-2026-33056/)
-- [Canonical partners with Snyk for scanning chiseled Ubuntu containers](https://ubuntu.com//blog/canonical-partners-with-snyk-for-scanning-chiseled-ubuntu-containers)
-- [Introducing MicroCloud Cluster Manager](https://ubuntu.com//blog/introducing-microcloud-cluster-manager)
-
-
-### 20260320
-
-
-- [KotlinConf 2026: Talks to Help You Navigate the Schedule](https://blog.jetbrains.com/kotlin/2026/03/kotlinconf-2026-talks-schedule/)
-- [What we heard about Rust&#39;s challenges, and how we can address them](https://blog.rust-lang.org/2026/03/20/rust-challenges/)
 
 
