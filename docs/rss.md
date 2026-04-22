@@ -8,9 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260422
+
+
 ### 20260421
 
 
+- [Kotlin Professional Certificate by JetBrains – Now on LinkedIn Learning](https://blog.jetbrains.com/kotlin/2026/04/kotlin-professional-certificate-by-jetbrains-now-on-linkedin-learning/)
 - [Quality Outreach Heads-up - JDK 27: Obsolete Translation Resources Removed](https://inside.java/2026/04/21/quality-heads-up/)
 
 
@@ -196,11 +200,5 @@ search:
 
 
 ### 20260322
-
-
-### 20260321
-
-
-- [Security advisory for Cargo](https://blog.rust-lang.org/2026/03/21/cve-2026-33056/)
 
 
