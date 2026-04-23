@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260423
+
+
+- [Episode 56 “Ask the Architects at JavaOne” [AtA]](https://inside.java/2026/04/23/podcast-056/)
+- [From Jammy to Resolute: how Ubuntu&amp;#8217;s toolchains have evolved](https://ubuntu.com//blog/from-jammy-to-resolute-how-ubuntus-toolchains-have-evolved)
+
+
 ### 20260422
 
 
@@ -197,8 +204,5 @@ search:
 
 
 - [Canonical joins the Rust Foundation as a Gold Member](https://ubuntu.com//blog/canonical-joins-the-rust-foundation-as-a-gold-member)
-
-
-### 20260322
 
 
