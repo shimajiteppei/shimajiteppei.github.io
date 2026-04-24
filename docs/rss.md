@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260424
+
+
+- [Canonical releases Ubuntu 26.04 LTS Resolute Raccoon](https://ubuntu.com//blog/canonical-releases-ubuntu-26-04-lts-resolute-raccoon)
+
+
 ### 20260423
 
 
@@ -132,7 +138,6 @@ search:
 - [How to perform a structured evaluation of AI conversational solutions](https://www.thoughtworks.com/insights/blog/generative-ai/how-to-perform-a-structured-evaluation-of-ai-conversational-solutions)
 - [Reimagining API modernization with deterministic AI-assisted engineering](https://www.thoughtworks.com/insights/blog/generative-ai/reimagining-api-modernization-with-deterministic-ai-assisted-engineering)
 - [Casper: Helping developers work effectively with coding assistants](https://www.thoughtworks.com/insights/blog/generative-ai/casper-helping-developers-work-effectively-with-coding-assistants)
-- [Last week in AI | 23 March](https://www.thoughtworks.com/insights/blog/generative-ai/last-week-ai-23-march)
 - [Ubuntu Summit 26.04 is coming: Save the date and share your story!](https://ubuntu.com//blog/ubuntu-summit-26-04-is-coming-save-the-date-and-share-your-story)
 
 
@@ -152,7 +157,6 @@ search:
 
 - [Kodee’s Kotlin Roundup: Kotlin 2.3.20, Interview With Josh Long, and More](https://blog.jetbrains.com/kotlin/2026/03/kodees-kotlin-roundup-march-26-edition/)
 - [Amper 0.10 – JDK Provisioning, a Maven Converter, Custom Compiler Plugins, and More](https://blog.jetbrains.com/amper/2026/03/amper-0-10/)
-- [KotlinConf’26 Speakers: In Conversation with Josh Long](https://blog.jetbrains.com/kotlin/2026/03/kotlinconf-26-speakers-in-conversation-with-josh-long/)
 - [How to manage Ubuntu fleets using on-premises Active Directory and ADSys](https://ubuntu.com//blog/manage-ubuntu-fleets-active-directory)
 - [Simplify bare metal operations for sovereign clouds](https://ubuntu.com//blog/simplify-bare-metal-operations-for-sovereign-clouds)
 
@@ -195,14 +199,5 @@ search:
 
 
 ### 20260324
-
-
-- [Hot code burns: the supply chain case for letting your containers cool before you ship](https://ubuntu.com//blog/hot-code-burns)
-
-
-### 20260323
-
-
-- [Canonical joins the Rust Foundation as a Gold Member](https://ubuntu.com//blog/canonical-joins-the-rust-foundation-as-a-gold-member)
 
 
