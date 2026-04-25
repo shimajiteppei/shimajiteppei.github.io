@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260425
+
+
 ### 20260424
 
 
@@ -137,7 +140,6 @@ search:
 
 - [How to perform a structured evaluation of AI conversational solutions](https://www.thoughtworks.com/insights/blog/generative-ai/how-to-perform-a-structured-evaluation-of-ai-conversational-solutions)
 - [Reimagining API modernization with deterministic AI-assisted engineering](https://www.thoughtworks.com/insights/blog/generative-ai/reimagining-api-modernization-with-deterministic-ai-assisted-engineering)
-- [Casper: Helping developers work effectively with coding assistants](https://www.thoughtworks.com/insights/blog/generative-ai/casper-helping-developers-work-effectively-with-coding-assistants)
 - [Ubuntu Summit 26.04 is coming: Save the date and share your story!](https://ubuntu.com//blog/ubuntu-summit-26-04-is-coming-save-the-date-and-share-your-story)
 
 
@@ -195,9 +197,5 @@ search:
 
 - [JavaFX 26 Today](https://inside.java/2026/03/25/javaone-javafx/)
 - [January &amp; February 2026 Project Director Update](https://blog.rust-lang.org/inside-rust/2026/03/25/project-director-update/)
-- [Canonical at KubeCon Europe 2026: NVIDIA donates the GPU DRA driver to the CNCF](https://ubuntu.com//blog/canonical-nvidia-kubecon-2026)
-
-
-### 20260324
 
 
