@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260426
+
+
+- [Reflecting on HAT: A Project Babylon Case Study](https://inside.java/2026/04/26/javaone-hat-java-gpu/)
+
+
 ### 20260425
 
 
@@ -190,12 +196,5 @@ search:
 
 
 - [Episode 52 “Carrier Classes &amp;amp; Discussing Syntax” [AtA]](https://inside.java/2026/03/26/podcast-052/)
-
-
-### 20260325
-
-
-- [JavaFX 26 Today](https://inside.java/2026/03/25/javaone-javafx/)
-- [January &amp; February 2026 Project Director Update](https://blog.rust-lang.org/inside-rust/2026/03/25/project-director-update/)
 
 
