@@ -8,6 +8,14 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260427
+
+
+- [Avoiding Final Field Mutation](https://inside.java/2026/04/27/avoiding-final-field-mutation/)
+- [Ubuntu 16.04 LTS has reached the end of standard Expanded Security Maintenance with Ubuntu Pro. Here are your options.](https://ubuntu.com//blog/ubuntu-16-04-lts-has-reached-the-end-of-standard-expanded-security-maintenance-with-ubuntu-pro-here-are-your-options)
+- [Understanding disaggregated GenAI model serving with llm-d](https://ubuntu.com//blog/understanding-disaggregated-genai-model-serving-with-llm-d)
+
+
 ### 20260426
 
 
@@ -188,13 +196,6 @@ search:
 
 
 - [Program management update — February 2026](https://blog.rust-lang.org/inside-rust/2026/03/27/program-management-update-2026-02/)
-- [Announcing Rust 1.94.1](https://blog.rust-lang.org/2026/03/26/1.94.1-release/)
 - [Modern Linux identity management: from local auth to the cloud with Ubuntu](https://ubuntu.com//blog/modern-linux-identity-management-ubuntu)
-
-
-### 20260326
-
-
-- [Episode 52 “Carrier Classes &amp;amp; Discussing Syntax” [AtA]](https://inside.java/2026/03/26/podcast-052/)
 
 

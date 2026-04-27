@@ -1,0 +1,633 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="https://inside.java/feed.xml" rel="self" type="application/atom+xml" /><link href="https://inside.java/" rel="alternate" type="text/html" /><updated>2026-04-27T12:15:43+00:00</updated><id>https://inside.java/feed.xml</id><title type="html">insidejava</title><subtitle>News and views from members of the Java team at Oracle</subtitle><entry><title type="html">Avoiding Final Field Mutation</title><link href="https://inside.java/2026/04/27/avoiding-final-field-mutation/" rel="alternate" type="text/html" title="Avoiding Final Field Mutation" /><published>2026-04-27T00:00:00+00:00</published><updated>2026-04-27T00:00:00+00:00</updated><id>https://inside.java/2026/04/27/avoiding-final-field-mutation</id><content type="html" xml:base="https://inside.java/2026/04/27/avoiding-final-field-mutation/"><![CDATA[<p>The Java language requires final fields to be assigned during object construction and forbids later reassignment, but the JDK nonetheless offers mechanisms that allow just that.
+JDK 26 takes first steps towards making final fields truly immutable by issuing warnings when they are mutated through the reflection API.
+<a href="https://openjdk.org/jeps/500">JEP 500</a> explains in detail the rationale and consequences as well as how to use the new command line flags <code class="language-plaintext highlighter-rouge">--enable-final-field-mutation</code> and <code class="language-plaintext highlighter-rouge">--illegal-final-field-mutation</code>.
+While they allow the mutation of final fields, this should be seen as a last resort, and projects should move away from that practice.</p>
+
+<p>This article discusses common scenarios in which final fields are mutated through reflection and what alternatives exist for each of them.
+Since these scenarios can appear in frameworks, libraries, and applications, this article addresses developers of all such projects.</p>
+
+<p>Our guiding star will be the following statement from the <a href="https://openjdk.org/jeps/8305968">JEP on integrity by default</a>, which applies to more than just serialization:</p>
+
+<blockquote>
+  <p>In general, it is a mistake for libraries to serialize and deserialize an object without the cooperation of the object’s class.</p>
+</blockquote>
+
+<p><strong>Note</strong>:
+This article uses <em>serialization</em> as a general term for a mechanism that can turn a Java instance into an external format (e.g. JSON, YAML, or protobuf) and vice versa.
+For Java’s onboard mechanism that revolves around the <code class="language-plaintext highlighter-rouge">Serializable</code> interface and the <code class="language-plaintext highlighter-rouge">ObjectInputStream</code> and <code class="language-plaintext highlighter-rouge">ObjectOutputStream</code> classes, it uses the term <em>platform serialization</em>.</p>
+
+<h2 id="initializing-instances">Initializing Instances</h2>
+
+<p>Final fields are most often illegally mutated to initialize instances right after construction (as opposed to reassigning them later in an instance’s lifetime).
+This can happen during dependency injection, deserialization, cloning, or other initialization processes that need to create usable instances before handing them over to the user.
+Some of those use cases are tightly coupled to where the fields’ values come from (e.g. from a JSON string or some other serialized form) and we will make these connections in later sections.
+Nonetheless, there are certain commonalities between these solutions that make it worthwhile to discuss the initialization of instances in isolation.</p>
+
+<h3 id="ignoring-constructors">Ignoring Constructors</h3>
+
+<p>It was common for some initialization mechanisms to construct “empty” objects with all-<code class="language-plaintext highlighter-rouge">null</code> fields and then assign their values after construction.
+Java’s own platform deserialization works this way (under the hood but also explicitly if <code class="language-plaintext highlighter-rouge">readObject</code> is implemented), Java Beans commonly follow this pattern, and so did dependency injection.</p>
+
+<p>This construct-first-assign-later approach collides head-on with final fields, though, for which the Java language promises that they are assigned exactly once during construction (be it in a field initializer, the constructor, or an initializer block) and never modified after.
+As a consequence, these processes had to resort to forceful assignment, be it via reflection with <code class="language-plaintext highlighter-rouge">setAccessible</code>, via <code class="language-plaintext highlighter-rouge">Unsafe</code>, or JNI, thus undermining the integrity of the keyword <code class="language-plaintext highlighter-rouge">final</code> with all the systemic downsides outlined in JEP 500.</p>
+
+<p>But post-construction assignment (whether the fields are final or not) also has immediate negative consequences for the class itself as it makes it much harder to guarantee that the populated instances fulfill the class’s invariants.
+These are usually established in the constructor but an initialization process that requires an “empty” constructor or even outright sidesteps it can create ill-formed instances that lead to misbehaving programs or even security vulnerabilities.</p>
+
+<h3 id="using-constructors">Using Constructors</h3>
+
+<p>Fortunately, many initialization processes have moved away from this construct-first-assign-later approach.
+Dependency injection frameworks, for example, now support and often default to “constructor injection”, where the values are passed to a constructor that has the task to verify them and then assign them to fields.
+This not only establishes the class’s invariants, it also uses the intended language mechanism to assign final fields and thus solves the problems outlined earlier.</p>
+
+<h3 id="embracing-constructors">Embracing Constructors</h3>
+
+<p>Given the benefits of fully initializing objects through a constructor call, this should not only be the default approach but, unless hard reasons make it unfeasible, <em>the only</em> approach.
+It is flexible, though, and can take various forms:</p>
+
+<ul>
+  <li>If records are used, there is one canonical constructor.</li>
+  <li>If classes are used, the initialization process can require a single constructor to take that role.</li>
+  <li>The process can require the user to identify a dedicated constructor or static factory method (e.g. by annotation).</li>
+  <li>Such a constructor or method doesn’t have to be public and can thus be kept out of the type’s public API if that’s preferable.</li>
+</ul>
+
+<p>A challenge with using constructors or factory methods is getting the argument order right.
+By default, the bytecode does not contain parameter names, which makes it hard to order the arguments correctly without additional information.
+That information could come from:</p>
+
+<ul>
+  <li>the use of records, whose component names are part of their public API</li>
+  <li>compilation with the option <code class="language-plaintext highlighter-rouge">-parameters</code>, which makes argument names available to the reflection API</li>
+  <li>the annotation(s) that the user applies to identify the correct constructor or factory method</li>
+</ul>
+
+<p>Note that neither the reflection API nor even the bytecode is guaranteed to report or contain fields in the order they were declared in the source code, so do <em>not</em> try to align field and parameter order.</p>
+
+<h2 id="platform-serialization">Platform Serialization</h2>
+
+<p>If your code contains <code class="language-plaintext highlighter-rouge">Serializable</code> classes, it may use reflection to mutate final fields during deserialization.</p>
+
+<p>In this example, the serializable class <code class="language-plaintext highlighter-rouge">Token</code> contains a field <code class="language-plaintext highlighter-rouge">derivedKey</code> that must not be reused across application runs and instead be derived with the current run’s cryptography configuration.
+It is hence <code class="language-plaintext highlighter-rouge">transient</code> and because <code class="language-plaintext highlighter-rouge">Token</code> should be immutable, it is also <code class="language-plaintext highlighter-rouge">final</code>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// This is an example for reflective final field mutation, _not_ for a good</span>
+<span class="c1">// implementation of the described use case.</span>
+<span class="c1">// Do _not_ draw any security implications from this code!</span>
+<span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">Token</span> <span class="kd">implements</span> <span class="nc">Serializable</span> <span class="o">{</span>
+
+	<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="mi">7665514043582332374L</span><span class="o">;</span>
+
+	<span class="kd">private</span> <span class="kd">final</span> <span class="nc">String</span> <span class="n">userId</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kd">final</span> <span class="kt">byte</span><span class="o">[]</span> <span class="n">token</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kd">transient</span> <span class="kd">final</span> <span class="kt">byte</span><span class="o">[]</span> <span class="n">derivedKey</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="nf">Token</span><span class="o">(</span><span class="nc">String</span> <span class="n">userId</span><span class="o">,</span> <span class="kt">byte</span><span class="o">[]</span> <span class="n">token</span><span class="o">)</span> <span class="o">{</span>
+		<span class="c1">// verifies and assigns fields and then derives `derivedKey`</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">derivedKey</span> <span class="o">=</span> <span class="nc">Kdf</span><span class="o">.</span><span class="na">derive</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">token</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="c1">// implements `readObject` to compute and assign a derived key</span>
+	<span class="kd">private</span> <span class="kt">void</span> <span class="nf">readObject</span><span class="o">(</span><span class="nc">ObjectInputStream</span> <span class="n">ois</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span><span class="o">,</span> <span class="nc">ClassNotFoundException</span> <span class="o">{</span>
+		<span class="c1">// side note: before the following method call, this instance has all-null fields</span>
+		<span class="n">ois</span><span class="o">.</span><span class="na">defaultReadObject</span><span class="o">();</span>
+
+		<span class="kt">byte</span><span class="o">[]</span> <span class="n">derivedKey</span> <span class="o">=</span> <span class="nc">Kdf</span><span class="o">.</span><span class="na">derive</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">token</span><span class="o">);</span>
+		<span class="c1">// use of reflection to assign `derivedKey` to the field of the same name</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="kt">var</span> <span class="n">derivedKeyField</span> <span class="o">=</span> <span class="nc">Token</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getDeclaredField</span><span class="o">(</span><span class="s">"derivedKey"</span><span class="o">);</span>
+			<span class="n">derivedKeyField</span><span class="o">.</span><span class="na">setAccessible</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+			<span class="n">derivedKeyField</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">derivedKey</span><span class="o">);</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">NoSuchFieldException</span> <span class="o">|</span> <span class="nc">IllegalAccessException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">throw</span> <span class="k">new</span> <span class="nf">InvalidObjectException</span><span class="o">(</span><span class="s">"Failed to set `derivedKey`"</span><span class="o">,</span> <span class="n">ex</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>There are several options to avoid final field mutation in a situation like this.
+A number of them follow the guideline to embrace regular constructor invocation:</p>
+
+<ul>
+  <li>use a record instead of a class (more on that below)</li>
+  <li>use <code class="language-plaintext highlighter-rouge">readResolve</code> instead of <code class="language-plaintext highlighter-rouge">readObject</code></li>
+  <li>employ the <a href="https://nipafx.dev/java-serialization-proxy-pattern/">serialization proxy pattern</a> (which also uses <code class="language-plaintext highlighter-rouge">readResolve</code>)</li>
+</ul>
+
+<p>Some other options revolve around the field itself:</p>
+
+<ul>
+  <li>remove the field and compute the value on demand instead of on deserialization</li>
+  <li>remove the field and store the value in an external data structure</li>
+  <li>make the field non-final</li>
+</ul>
+
+<p>Any of these will remove the need to mutate an otherwise final field.</p>
+
+<h2 id="serialization">Serialization</h2>
+
+<p>If you maintain a custom serialization process, e.g. as the maintainer of a library that turns Java objects into JSON, YAML, etc., there are several routes you can take to avoid final field mutation.
+The one that requires the fewest changes on your end is to instruct users to avoid final fields in serializable classes but given their benefits you may prefer to give your users more options.</p>
+
+<h3 id="limit-to-records">Limit to Records</h3>
+
+<p>A straightforward step is to limit serialization to records - as transparent data carriers, they are a perfect fit for this use case.
+Their defined protocol for (de)construction allows for straightforward lossless reconstruction of instances, usually without further user intervention like annotations.</p>
+
+<h3 id="use-records-as-proxies">Use Records as Proxies</h3>
+
+<p>If that is too limiting, a higher degree of freedom can be achieved with a protocol that asks instances to condense their state into a dedicated record instance and to rehydrate from such a proxy.
+This is akin to the aforementioned serialization proxy pattern and, likewise, these methods don’t have be public, although relying on “magic names” (like platform serialization does) is not ideal - using an annotation to identify the to-proxy and from-proxy methods would be the more legible approach.
+Here’s an example what that could look like:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// IN THE SERIALIZATION LIBRARY</span>
+
+<span class="c1">// marker interface to quickly identify serializable instances</span>
+<span class="c1">// (not strictly needed)</span>
+<span class="kd">interface</span> <span class="nc">DataCarrier</span> <span class="o">{</span>
+	<span class="c1">// defines no methods, so that the serialization protocol</span>
+	<span class="c1">// doesn't have to be public API</span>
+<span class="o">}</span>
+
+<span class="c1">// annotations to identify the serialization methods</span>
+<span class="c1">// (retention policy, possible attributes, etc. are missing)</span>
+<span class="nd">@interface</span> <span class="nc">ToData</span> <span class="o">{</span> <span class="o">}</span>
+<span class="nd">@interface</span> <span class="nc">FromData</span> <span class="o">{</span> <span class="o">}</span>
+
+
+<span class="c1">// ON THE USER'S SIDE</span>
+
+<span class="c1">// for some reason not a record</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="kd">implements</span> <span class="nc">DataCarrier</span> <span class="o">{</span>
+
+	<span class="kd">private</span> <span class="kd">final</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+
+	<span class="c1">// [constructor, methods, etc.]</span>
+
+	<span class="nd">@ToData</span>
+	<span class="kd">private</span> <span class="nc">PersonData</span> <span class="nf">toData</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nf">PersonData</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">age</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@FromData</span>
+	<span class="kd">private</span> <span class="kd">static</span> <span class="nc">Person</span> <span class="nf">fromData</span><span class="o">(</span><span class="nc">PersonData</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nf">Person</span><span class="o">(</span><span class="n">data</span><span class="o">.</span><span class="na">name</span><span class="o">(),</span> <span class="n">data</span><span class="o">.</span><span class="na">age</span><span class="o">());</span>
+	<span class="o">}</span>
+
+	<span class="kd">private</span> <span class="n">record</span> <span class="nf">PersonData</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Having an explicit external representation like this also makes it straightforward to operate across version boundaries.
+If the <code class="language-plaintext highlighter-rouge">Person</code> class evolves and requires a new serialization format, <code class="language-plaintext highlighter-rouge">toData</code> can return an instance of the new class <code class="language-plaintext highlighter-rouge">PersonDataV2</code> but in addition to the new method <code class="language-plaintext highlighter-rouge">fromData(PersonDataV2)</code> the old method <code class="language-plaintext highlighter-rouge">fromData(PersonData)</code> can remain.
+If deserialization is still possible, it could still function properly, otherwise it could create a specific error message.</p>
+
+<h3 id="limit-to-serializable">Limit to <code class="language-plaintext highlighter-rouge">Serializable</code></h3>
+
+<p>Platform serialization is able to write to final fields of <code class="language-plaintext highlighter-rouge">Serializable</code> instances and will remain so for the foreseeable future (I’m not aware of any plans to change that).
+And it offers hooks for external libraries to make use of that capability!
+This way, it’s possible to turn objects into field values and suitable values into objects, both via their class’ serialization protocol.
+That means your (general) serialization library can instruct users to make their classes (platform) serializable and then you can hook into the process to read and write values to and from (final) fields.</p>
+
+<p>Java makes the methods associated with platform serialization available via <a href="https://github.com/openjdk/jdk/blob/master/src/jdk.unsupported/share/classes/sun/reflect/ReflectionFactory.java">sun.reflect.ReflectionFactory</a>, which is considered a <a href="https://openjdk.org/jeps/260#Critical-internal-APIs-not-encapsulated-in-JDK-9">critical internal API</a>.
+Those are available in the JDK-specific module <em>jdk.unsupported</em> and not encapsulated because no supported replacements exist.
+<code class="language-plaintext highlighter-rouge">ReflectionFactory</code>’s functionality can only be applied to classes that implement <code class="language-plaintext highlighter-rouge">Serializable</code>.</p>
+
+<p>A word of warning:
+This API is a sharp tool with extra sharp edges and not for the faint of heart.
+Explaining it in full is beyond the scope of this article.</p>
+
+<p>Here is an example for how to use <code class="language-plaintext highlighter-rouge">ReflectionFactory</code> to turn a pair of <code class="language-plaintext highlighter-rouge">name</code> and <code class="language-plaintext highlighter-rouge">age</code> (which could’ve been read from any external representation) into an instance of <code class="language-plaintext highlighter-rouge">Person</code>.
+First, the class <code class="language-plaintext highlighter-rouge">Person</code>, which is similar to above, but <code class="language-plaintext highlighter-rouge">Serializable</code>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Person</span> <span class="kd">implements</span> <span class="nc">Serializable</span> <span class="o">{</span>
+
+	<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="mi">8127572164613693569L</span><span class="o">;</span>
+
+	<span class="kd">private</span> <span class="kd">final</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="nf">Person</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="nc">Objects</span><span class="o">.</span><span class="na">requireNonNull</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">age</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span>
+			<span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalArgumentException</span><span class="o">(</span><span class="s">"Age must be 0 or larger"</span><span class="o">);</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="s">"Person{name='"</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">"', age="</span> <span class="o">+</span> <span class="n">age</span> <span class="o">+</span> <span class="s">"}"</span><span class="o">;</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Because platform serialization deals with input/output streams, an <code class="language-plaintext highlighter-rouge">ObjectInputStream</code> is required that is populated with the values that should be assigned to the fields.
+One way to provide such a stream is to create a custom implementation that reads values from a <code class="language-plaintext highlighter-rouge">Map</code>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">static</span> <span class="kd">class</span> <span class="nc">MapObjectInputStream</span> <span class="kd">extends</span> <span class="nc">ObjectInputStream</span> <span class="o">{</span>
+
+	<span class="kd">private</span> <span class="kd">final</span> <span class="nc">Iterator</span><span class="o">&lt;</span><span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;&gt;</span> <span class="n">objects</span><span class="o">;</span>
+
+	<span class="nc">MapObjectInputStream</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;&gt;</span> <span class="n">objects</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+		<span class="c1">// create immutable copies of the list and maps</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">objects</span> <span class="o">=</span> <span class="n">objects</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+			<span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="nl">Map:</span><span class="o">:</span><span class="n">copyOf</span><span class="o">)</span>
+			<span class="o">.</span><span class="na">toList</span><span class="o">()</span>
+			<span class="o">.</span><span class="na">iterator</span><span class="o">();</span>
+		<span class="kd">super</span><span class="o">();</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="nc">ObjectInputStream</span><span class="o">.</span><span class="na">GetField</span> <span class="nf">readFields</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">objects</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+			<span class="k">return</span> <span class="k">new</span> <span class="nf">MapGetField</span><span class="o">(</span><span class="n">objects</span><span class="o">.</span><span class="na">next</span><span class="o">());</span>
+		<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+			<span class="k">throw</span> <span class="k">new</span> <span class="nf">IOException</span><span class="o">(</span><span class="s">"No more objects"</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+
+<span class="o">};</span>
+
+<span class="kd">static</span> <span class="kd">class</span> <span class="nc">MapGetField</span> <span class="kd">extends</span> <span class="nc">ObjectInputStream</span><span class="o">.</span><span class="na">GetField</span> <span class="o">{</span>
+
+	<span class="kd">private</span> <span class="kd">final</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">values</span><span class="o">;</span>
+
+	<span class="nc">MapGetField</span><span class="o">(</span><span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">values</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">values</span> <span class="o">=</span> <span class="n">values</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="nc">ObjectStreamClass</span> <span class="nf">getObjectStreamClass</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">throw</span> <span class="k">new</span> <span class="nf">UnsupportedOperationException</span><span class="o">();</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">defaulted</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="o">!</span><span class="n">values</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">get</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">bln</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="o">(</span><span class="kt">boolean</span><span class="o">)</span> <span class="n">values</span><span class="o">.</span><span class="na">getOrDefault</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">bln</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">byte</span> <span class="nf">get</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">byte</span> <span class="n">b</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="o">(</span><span class="kt">byte</span><span class="o">)</span> <span class="n">values</span><span class="o">.</span><span class="na">getOrDefault</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">b</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">char</span> <span class="nf">get</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">char</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="o">(</span><span class="kt">char</span><span class="o">)</span> <span class="n">values</span><span class="o">.</span><span class="na">getOrDefault</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">c</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">short</span> <span class="nf">get</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">short</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="o">(</span><span class="kt">short</span><span class="o">)</span> <span class="n">values</span><span class="o">.</span><span class="na">getOrDefault</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">s</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">get</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">int</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="n">values</span><span class="o">.</span><span class="na">getOrDefault</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">i</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">long</span> <span class="nf">get</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">long</span> <span class="n">l</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="o">(</span><span class="kt">long</span><span class="o">)</span> <span class="n">values</span><span class="o">.</span><span class="na">getOrDefault</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">l</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">float</span> <span class="nf">get</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">float</span> <span class="n">f</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="o">(</span><span class="kt">float</span><span class="o">)</span> <span class="n">values</span><span class="o">.</span><span class="na">getOrDefault</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">f</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">double</span> <span class="nf">get</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">double</span> <span class="n">d</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="o">(</span><span class="kt">double</span><span class="o">)</span> <span class="n">values</span><span class="o">.</span><span class="na">getOrDefault</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">d</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="nc">Object</span> <span class="nf">get</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="nc">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">values</span><span class="o">.</span><span class="na">getOrDefault</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">o</span><span class="o">);</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The following <a href="https://openjdk.org/jeps/512">compact source file</a> uses the prior classes and <code class="language-plaintext highlighter-rouge">ReflectionFactory</code> to:</p>
+
+<ul>
+  <li>create an “empty” instance of <code class="language-plaintext highlighter-rouge">Person</code> (despite the class not having a parameterless constructor)</li>
+  <li>populate it with the legal name <code class="language-plaintext highlighter-rouge">"John Doe"</code> and illegal age <code class="language-plaintext highlighter-rouge">-5</code> (because the method handle returned by <code class="language-plaintext highlighter-rouge">defaultReadObjectForSerialization</code> does not go through the constructor and thus applies no checks)</li>
+  <li>override those values with the legal pair <code class="language-plaintext highlighter-rouge">"Jane Doe"</code>/<code class="language-plaintext highlighter-rouge">23</code> (by invoking the same method handle again)</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">module</span> <span class="n">jdk</span><span class="o">.</span><span class="na">unsupported</span><span class="o">;</span>
+
+<span class="kt">void</span> <span class="nf">main</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Throwable</span> <span class="o">{</span>
+	<span class="nc">ReflectionFactory</span> <span class="n">factory</span> <span class="o">=</span> <span class="nc">ReflectionFactory</span><span class="o">.</span><span class="na">getReflectionFactory</span><span class="o">();</span>
+	<span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">"unchecked"</span><span class="o">)</span>
+	<span class="nc">Constructor</span><span class="o">&lt;</span><span class="nc">Person</span><span class="o">&gt;</span> <span class="n">personConstructor</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Constructor</span><span class="o">&lt;</span><span class="nc">Person</span><span class="o">&gt;)</span> <span class="n">factory</span><span class="o">.</span><span class="na">newConstructorForSerialization</span><span class="o">(</span><span class="nc">Person</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+	<span class="nc">MethodHandle</span> <span class="n">personReader</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="na">defaultReadObjectForSerialization</span><span class="o">(</span><span class="nc">Person</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+
+	<span class="kt">var</span> <span class="n">person</span> <span class="o">=</span> <span class="n">personConstructor</span><span class="o">.</span><span class="na">newInstance</span><span class="o">();</span>
+	<span class="no">IO</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">person</span><span class="o">);</span>
+
+	<span class="kt">var</span> <span class="n">inputStream</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MapObjectInputStream</span><span class="o">(</span><span class="nc">List</span><span class="o">.</span><span class="na">of</span><span class="o">(</span>
+		<span class="nc">Map</span><span class="o">.</span><span class="na">of</span><span class="o">(</span>
+			<span class="s">"name"</span><span class="o">,</span> <span class="s">"John Doe"</span><span class="o">,</span>
+			<span class="s">"age"</span><span class="o">,</span> <span class="o">-</span><span class="mi">5</span><span class="o">),</span>
+		<span class="nc">Map</span><span class="o">.</span><span class="na">of</span><span class="o">(</span>
+			<span class="s">"name"</span><span class="o">,</span> <span class="s">"Jane Doe"</span><span class="o">,</span>
+			<span class="s">"age"</span><span class="o">,</span> <span class="mi">23</span><span class="o">)</span>
+	<span class="o">));</span>
+
+	<span class="n">personReader</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="n">person</span><span class="o">,</span> <span class="n">inputStream</span><span class="o">);</span>
+	<span class="no">IO</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">person</span><span class="o">);</span>
+
+	<span class="n">personReader</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="n">person</span><span class="o">,</span> <span class="n">inputStream</span><span class="o">);</span>
+	<span class="no">IO</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">person</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Platform serialization is an integral part of the JDK and should remain usable without warnings and limitations, so it gets an exception from the rules put forth by JEP 500, but the JDK does not want to disadvantage external serialization libraries and so this exception is extended to them.
+Consequently, executing the code above issues neither warnings nor errors about final field mutation, regardless of what <code class="language-plaintext highlighter-rouge">--illegal-final-field-mutation</code> is set to (including <code class="language-plaintext highlighter-rouge">deny</code>).
+While this may appear like a straightforward way to keep assigning to final fields without limitations (as long as the class is <code class="language-plaintext highlighter-rouge">Serializable</code>), this comes with the huge caveat that it adopts all the challenges of platform serialization:</p>
+
+<ul>
+  <li>requires a full reimplementation of the protocol (e.g. with regards to <code class="language-plaintext highlighter-rouge">readObject</code> and <code class="language-plaintext highlighter-rouge">readResolve</code>), which is complex and hard to get right, particularly when it comes to security</li>
+  <li>relies on the same extralinguistic mechanism that makes it hard for users to guarantee that instances are viable but makes it easy for (intentional or accidental) errors in values to lead to misbehaving instances</li>
+  <li>proliferates the use of <code class="language-plaintext highlighter-rouge">Serializable</code> classes, which, due to the exception from final fields being truly final, will keep suffering from the lack of integrity that JEP 500 sets out to fix (with all the implications for maintainability, security, and performance)</li>
+</ul>
+
+<p>Just like with platform serialization, the seeming simplicity of “just make the class <code class="language-plaintext highlighter-rouge">Serializable</code>” requires a lot of complexity elsewhere.
+Worse, that complexity quickly bleeds into the classes themselves as soon as the serialized form does not map one to one to the fields (e.g. due to evolving the code but being bound to a fixed external form) or deserialization can’t simply create instances (e.g. because invariants should be enforced).
+The lesson to learn from platform serialization is that a more explicit protocol, even if it requires users to write a bit more code, fares better in the long run.</p>
+
+<h3 id="embrace-constructors">Embrace Constructors</h3>
+
+<p>If none of these approaches cover all requirements, the most flexible one is to fully embrace constructors:
+Read an instance’s fields for serialization and let users identify constructors or static factory methods to be invoked during deserialization.
+This approach requires additional configuration by the user and a more complex implementation, though:</p>
+
+<ul>
+  <li>It is necessary to identify fields that should (not) be part of the serialized form.</li>
+  <li>If the serialized form identifies values by name (like most text-based formats), these can be derived from field names, but that then turns this implementation detail into part of the serialization protocol.
+Making these names configurable is recommended.</li>
+  <li>If the serialized form does not guarantee a reliable order (also like most text-based formats) matching values to the deserialization constructor’s or method’s parameters requires additional configuration by the user.</li>
+  <li>If the serialized form is order-dependent, the order must be defined by the user as it cannot be inferred from the fields.</li>
+</ul>
+
+<p>Note how records greatly simplify this because their components’ order and names are part of their API and they are guaranteed to have a constructor that accepts one argument per component.</p>
+
+<h2 id="dependency-injection">Dependency Injection</h2>
+
+<p>As mentioned before, dependency injection frameworks often required parameterless constructors, so they could create “empty” instances and then write the dependencies directly to the fields - this is called “field injection” and requires either non-final fields or the reflective mutation of final fields.
+The ecosystem has largely moved on to constructor injection, where a regular constructor gets called, so that final fields can be assigned therein.
+If you maintain code that in some way or another injects dependencies, you should probably use constructor injection by default, maybe even as the only option.</p>
+
+<h2 id="cloning">Cloning</h2>
+
+<p>In some classes that implement <code class="language-plaintext highlighter-rouge">Cloneable</code>, the <code class="language-plaintext highlighter-rouge">clone()</code> method needs to reassign fields.
+Common reasons are defensive copies of mutable data structures like collections or the need for a deep copy (<code class="language-plaintext highlighter-rouge">Object.clone</code> only creates a shallow copy).
+If those fields are final, they can’t be reassigned after <code class="language-plaintext highlighter-rouge">Object.clone</code> returns, though, and so reflective mutation is often used.</p>
+
+<p>In the following example, the list of addresses is mutable and must not be shared across <code class="language-plaintext highlighter-rouge">Person</code> instances and so <code class="language-plaintext highlighter-rouge">clone()</code> creates a copy that needs to be assigned to the final field <code class="language-plaintext highlighter-rouge">addresses</code>, for which it uses reflection:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Person</span> <span class="kd">implements</span> <span class="nc">Cloneable</span> <span class="o">{</span>
+
+	<span class="kd">private</span> <span class="kd">final</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Address</span><span class="o">&gt;</span> <span class="n">addresses</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="nf">Person</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">Address</span><span class="o">&gt;</span> <span class="n">addresses</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">addresses</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;(</span><span class="n">addresses</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="nc">Person</span> <span class="nf">clone</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">CloneNotSupportedException</span> <span class="o">{</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="nc">Person</span> <span class="n">clone</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Person</span><span class="o">)</span> <span class="kd">super</span><span class="o">.</span><span class="na">clone</span><span class="o">();</span>
+
+			<span class="nc">Field</span> <span class="n">field</span> <span class="o">=</span> <span class="nc">Person</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getDeclaredField</span><span class="o">(</span><span class="s">"addresses"</span><span class="o">);</span>
+			<span class="n">field</span><span class="o">.</span><span class="na">setAccessible</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+			<span class="n">field</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">clone</span><span class="o">,</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;(</span><span class="k">this</span><span class="o">.</span><span class="na">addresses</span><span class="o">));</span>
+
+			<span class="k">return</span> <span class="n">clone</span><span class="o">;</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">ReflectiveOperationException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalStateException</span><span class="o">(</span><span class="n">ex</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Cloning gets no exception from the limitation of final field mutation and so, like in other cases, the use of the reflection API should be avoided.
+Depending on the requirement that triggered its use, there may be specialized solutions.
+In the case of defensive collection copies, for example, the constructor could be changed to create unmodifiable copies with <code class="language-plaintext highlighter-rouge">List.copyOf</code>, <code class="language-plaintext highlighter-rouge">Set.copyOf</code>, or <code class="language-plaintext highlighter-rouge">Map.copyOf</code> and then the cloned object can refer to the same collection instance without having to create a defensive copy in the first place.</p>
+
+<p>Such solutions don’t generalize, though.
+The better approach is to avoid cloning entirely (it has other downsides, too) and instead work with copy constructors or static factory/cloning methods, both of which can prepare arguments before assigning them to final fields, which removes the need to employ reflection for that.</p>
+
+<h2 id="non-construction-cases">Non-Construction Cases</h2>
+
+<p>Mutating final fields outside of the creation of instances, particularly of classes other than the one containing the reflective code, should be an extreme exception.
+Possible reasons could be to circumvent a bug in a dependency or to configure otherwise non-configurable behavior.
+Such fixes/edits should be considered temporary, though, as any change in the dependency could let that code fail or, worse, trigger misbehavior.
+It is highly recommended to work towards merging the fix/change into the dependency to make the mutating code superfluous and remove it.</p>
+
+<p>Still, for emergencies like this, the reflection API’s capability to mutate final fields remains but needs to be allowed by the application owner through command-line flags.
+JDK 26 introduces two new options for that:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">--enable-final-field-mutation</code> is a permanent option that allows specific modules to mutate final fields</li>
+  <li><code class="language-plaintext highlighter-rouge">--illegal-final-field-mutation</code> is a temporary option with values <code class="language-plaintext highlighter-rouge">allow</code>, <code class="language-plaintext highlighter-rouge">warn</code> (default on JDK 26), <code class="language-plaintext highlighter-rouge">debug</code>, and <code class="language-plaintext highlighter-rouge">deny</code> (future default) that manages how code without specific permission that tries to mutate final fields will be handled</li>
+</ul>
+
+<p><a href="https://openjdk.org/jeps/500">JEP 500</a> as well as <a href="https://www.youtube.com/watch?v=bdHkbEIdBAs">Inside Java Newscast #101</a> discuss the use of these options as well as their interaction with strong encapsulation in detail, which is particularly important for application maintainers.</p>]]></content><author><name>[&quot;NicolaiParlog&quot;]</name></author><category term="Integrity by Default" /><summary type="html"><![CDATA[JDK 26 / JEP 500 take first steps towards making final fields truly immutable by issuing warnings when they are mutated through the reflection API. This article discusses common scenarios in which final fields are mutated through reflection and what alternatives exist for each of them.]]></summary></entry><entry><title type="html">Reflecting on HAT: A Project Babylon Case Study</title><link href="https://inside.java/2026/04/26/javaone-hat-java-gpu/" rel="alternate" type="text/html" title="Reflecting on HAT: A Project Babylon Case Study" /><published>2026-04-26T00:00:00+00:00</published><updated>2026-04-26T00:00:00+00:00</updated><id>https://inside.java/2026/04/26/JavaOne-HAT-Java-GPU</id><content type="html" xml:base="https://inside.java/2026/04/26/javaone-hat-java-gpu/"><![CDATA[<div class="youtube-embed">
+    <iframe src="https://www.youtube.com/embed/uX7R_QTHeUI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>
+</div>
+
+<p><em>Project Babylon continues to simplify access to foreign programming models through the development of code reflection. Using code reflection, a Java program can be lowered into a symbolic form then translated into foreign models such as CUDA and OpenCL, allowing programs to be executed on different platforms.</em></p>
+
+<p><em>In this session, we’ll introduce Project Babylon and examine how it’s used by HAT (Heterogeneous Accelerator Toolkit) to make GPU programming more approachable for Java developers. We’ll focus on new HAT features that leverage code reflection to create layers of abstraction and cleaner translations between Java and performant GPU code.</em></p>
+
+<p><em>Make sure to check the <a href="https://www.youtube.com/playlist?list=PLX8CzqL3ArzUMVSzm-z_-if8BIB55EGl4">JavaOne 2026 playlist</a>.</em></p>]]></content><author><name></name></author><category term="Babylon" /><category term="AI" /><summary type="html"><![CDATA[In this session, we'll introduce Project Babylon and examine how it's used by HAT (Heterogeneous Accelerator Toolkit) to make GPU programming more approachable for Java developers. We'll focus on new HAT features that leverage code reflection to create layers of abstraction and cleaner translations between Java and performant GPU code.]]></summary></entry><entry><title type="html">Episode 56 “Ask the Architects at JavaOne” [AtA]</title><link href="https://inside.java/2026/04/23/podcast-056/" rel="alternate" type="text/html" title="Episode 56 “Ask the Architects at JavaOne” [AtA]" /><published>2026-04-23T00:00:00+00:00</published><updated>2026-04-23T00:00:00+00:00</updated><id>https://inside.java/2026/04/23/Podcast-056</id><content type="html" xml:base="https://inside.java/2026/04/23/podcast-056/"><![CDATA[<p><img class="webfeedsFeaturedVisual" style="display: none;" src="/images/thumbnail/ChadMic.jpg?436139819" /></p>
+
+<p><br /></p>
+
+<iframe title="Libsyn Player" style="border: none" src="//html5-player.libsyn.com/embed/episode/id/40987500/height/90/theme/custom/thumbnail/yes/direction/forward/render-playlist/no/custom-color/000000/" height="90" width="100%" scrolling="no"></iframe>
+
+<div class="youtube-embed">
+<iframe src="https://www.youtube.com/embed/DrF4dCC0daE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+</div>
+
+<p><br /></p>
+
+<p>In JavaOne 2026’s closing session, the audience members got to ask the Java architects their questions:</p>
+
+<ul>
+  <li><a href="https://www.youtube.com/watch?v=DrF4dCC0daE&amp;t=2m18s">State of Structured Concurrency</a></li>
+  <li><a href="https://www.youtube.com/watch?v=DrF4dCC0daE&amp;t=4m35s">State of Project Babylon</a></li>
+  <li><a href="https://www.youtube.com/watch?v=DrF4dCC0daE&amp;t=6m34s">Feature Prioritization</a></li>
+  <li><a href="https://www.youtube.com/watch?v=DrF4dCC0daE&amp;t=12m56s">Module Adoption</a></li>
+  <li><a href="https://www.youtube.com/watch?v=DrF4dCC0daE&amp;t=19m38s">Stream API Performance Improvements</a></li>
+  <li><a href="https://www.youtube.com/watch?v=DrF4dCC0daE&amp;t=29m49s">Module vs Class Path</a></li>
+  <li><a href="https://www.youtube.com/watch?v=DrF4dCC0daE&amp;t=33m42s">Thoughts on Lombok</a></li>
+  <li><a href="https://www.youtube.com/watch?v=DrF4dCC0daE&amp;t=36m42s">Object Header Size</a></li>
+  <li><a href="https://www.youtube.com/watch?v=DrF4dCC0daE&amp;t=37m16s">Thoughts on a JDK Build Tool</a></li>
+  <li><a href="https://www.youtube.com/watch?v=DrF4dCC0daE&amp;t=39m38s">“What Are Your Pet Projects?”</a></li>
+  <li><a href="https://www.youtube.com/watch?v=DrF4dCC0daE&amp;t=45m44s">Use of AI Tooling in JDK Development</a></li>
+  <li><a href="https://www.youtube.com/watch?v=DrF4dCC0daE&amp;t=53m06s">Advanced Hardware Information and Interaction</a></li>
+  <li><a href="https://www.youtube.com/watch?v=DrF4dCC0daE&amp;t=54m36s">Breaking Backwards Compatibility</a></li>
+  <li><a href="https://www.youtube.com/watch?v=DrF4dCC0daE&amp;t=55m52s">Next Generation of Java Developers</a></li>
+</ul>
+
+<p>John Rose’s talk: <a href="https://www.youtube.com/watch?v=J4O5h3xpIY8">“How the JVM Optimizes Generic Code”</a></p>
+
+<p><br /></p>
+
+<p>Make sure to also check the <strong>Duke’s Corner podcast</strong> on <a href="https://dev.java/duke/corner/">dev.java</a>.</p>
+
+<p><br /></p>
+
+<h3 id="additional-resources">Additional resources</h3>
+
+<ul>
+  <li><a href="https://inside.java">Inside.java</a> : News and views from members of the Java team at Oracle</li>
+  <li><a href="https://dev.java">Dev.java</a> : The Destination for Java Developers</li>
+  <li><a href="https://openjdk.java.net/">OpenJDK</a></li>
+  <li><a href="https://www.oracle.com/java/">Oracle Java</a></li>
+</ul>
+
+<p>For more episodes, check out <a href="https://inside.java/podcast">Inside Java</a>, our <a href="https://www.youtube.com/playlist?list=PLX8CzqL3ArzV_hXbRevwzrXSMcGNzhxiZ">YouTube playlist</a>, and follow <a href="https://x.com/java">@Java</a> on X.</p>
+
+<p>Contact us <a href="https://inside.java/about/">here</a>.</p>]]></content><author><name>[&quot;NicolaiParlog&quot;]</name></author><category term="Community" /><summary type="html"><![CDATA[In JavaOne 2026's closing session, the audience members asked the Java architects their questions about the state of structured concurrency and Project Babylon, how Java is being developed and what role AI plays in that, and more.]]></summary></entry><entry><title type="html">Quality Outreach Heads-up - JDK 27: Obsolete Translation Resources Removed</title><link href="https://inside.java/2026/04/21/quality-heads-up/" rel="alternate" type="text/html" title="Quality Outreach Heads-up - JDK 27: Obsolete Translation Resources Removed" /><published>2026-04-21T00:00:00+00:00</published><updated>2026-04-21T00:00:00+00:00</updated><id>https://inside.java/2026/04/21/Quality-Heads-Up</id><content type="html" xml:base="https://inside.java/2026/04/21/quality-heads-up/"><![CDATA[<p><img class="webfeedsFeaturedVisual" style="display: none;" src="/images/thumbnail/code.jpg" /></p>
+
+<p><i>The <a href="https://wiki.openjdk.java.net/display/quality/Quality+Outreach">OpenJDK Quality Group</a> is promoting the testing of FOSS projects with OpenJDK builds as a way to improve the overall quality of the release. This heads-up is part of a <a href="https://mail.openjdk.org/archives/list/quality-discuss@openjdk.org/thread/REAJQSW4DJ6BZNEKLGU56HB2757I26HM/">Quality Outreach</a> update sent to the projects involved. To learn more about the program, and how-to join, please check <a href="https://wiki.openjdk.java.net/display/quality/Quality+Outreach">here</a>.</i></p>
+
+<h2 id="jdk-27-obsolete-translation-resources-removed">JDK 27: Obsolete Translation Resources Removed</h2>
+
+<p>The JDK includes localized resource files for a number of locales; however, not all of these locales are actively maintained. In addition to the base English resources, only German, Japanese, and Simplified Chinese are currently maintained. Over time, resource files for unmaintained locales tend to drift out of sync with their English counterparts. Not all resource files are equally affected, as some remain relatively stable compared to others.</p>
+
+<p>Oracle JDK builds already exclude these unmaintained resources at build time. However, they are still present in the OpenJDK source tree and may be included in other JDK builds. As a result, users of such builds may encounter outdated localized messages without being aware of it.</p>
+
+<p>JDK 27 removes unmaintained translation resources, with the exception of those in the <code class="language-plaintext highlighter-rouge">java.desktop</code> module. Unlike other resources, <code class="language-plaintext highlighter-rouge">java.desktop</code> strings may be presented directly to end users of Java applications, not just developers. Because these resources are relatively stable and their removal would be disruptive, they are retained.</p>
+
+<p>The Early Access builds from <a href="https://jdk.java.net/27/">jdk.java.net</a> and Oracle JDK builds are not affected, as they already exclude these unmaintained resources during the build process. However, other JDK builds that do not exclude them (which is the default) may be impacted. In these builds, unsupported locale messages will now appear in English, potentially affecting tests or applications that rely on fixed, locale-specific output. As a result, the overall compatibility risk is considered moderate.</p>
+
+<p>For more information, please check <a href="https://bugs.openjdk.org/browse/JDK-8381511">JDK-8381511</a>.</p>
+
+<center>~</center>]]></content><author><name>[&quot;DavidDelabassee&quot;]</name></author><category term="JDK 27" /><summary type="html"><![CDATA[This Heads-Up is part of the regular communication sent to the projects involved; it covers the removal of obsolete translation resources in JDK 27.]]></summary></entry><entry><title type="html">How the JVM Optimizes Generic Code</title><link href="https://inside.java/2026/04/19/generics-optimization/" rel="alternate" type="text/html" title="How the JVM Optimizes Generic Code" /><published>2026-04-19T00:00:00+00:00</published><updated>2026-04-19T00:00:00+00:00</updated><id>https://inside.java/2026/04/19/Generics-Optimization</id><content type="html" xml:base="https://inside.java/2026/04/19/generics-optimization/"><![CDATA[<div class="youtube-embed">
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/J4O5h3xpIY8?si=smqTh2aPyAtghIqA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+</div>
+
+<p><em>Java has supported generics since 2004, letting you write reusable algorithms and data structures that work across many types. A single List or Arrays.sort can handle strings, ints, or even frogs (if they’re comparable).</em></p>
+
+<p><em>Generics may look like C++ templates, but they behave differently. Java must support both statically known and dynamically typed usage, meaning a single generic method balances flexibility with performance. How does the JVM optimize this? That’s the core question of this talk.</em></p>
+
+<p><em>Using a QuickSort example, we explore how the JVM achieves high performance through type profiling, inlining, and devirtualization—often matching C++ template speed. But there are limits. Issues like profile pollution can degrade performance, causing code to behave more like dynamically typed execution.</em></p>
+
+<p><em>We then look at techniques to avoid these performance cliffs and maintain efficiency.</em></p>
+
+<p><em>This topic is especially relevant today with Project Valhalla. Valhalla introduces value classes, changing how data is laid out in memory. Arrays may no longer be simple pointer collections—they can resemble C++-style structs, making generics harder to optimize.</em></p>
+
+<p><em>So how do we handle this? Short-term solutions exist, and we demonstrate them on today’s JVM (Java 25). Long-term, Valhalla aims to introduce generic specialization, allowing the JVM to generate optimized, type-specific versions of generic code—bringing Java closer to C++ template performance.</em></p>
+
+<p><em>Join us as we explore generics, JVM internals, and the road to Valhalla generics.</em></p>
+
+<p><em>Make sure to check the <a href="https://www.youtube.com/playlist?list=PLX8CzqL3ArzUMVSzm-z_-if8BIB55EGl4">JavaOne 2026 playlist</a>.</em></p>]]></content><author><name>[&quot;JohnRose&quot;]</name></author><category term="HotSpot" /><category term="Valhalla" /><summary type="html"><![CDATA[This video explores generics, JVM internals, and the road to Valhalla generics...]]></summary></entry><entry><title type="html">Episode 55 “You Must Avoid Final Field Mutation” [IJN]</title><link href="https://inside.java/2026/04/16/podcast-055/" rel="alternate" type="text/html" title="Episode 55 “You Must Avoid Final Field Mutation” [IJN]" /><published>2026-04-16T00:00:00+00:00</published><updated>2026-04-16T00:00:00+00:00</updated><id>https://inside.java/2026/04/16/Podcast-055</id><content type="html" xml:base="https://inside.java/2026/04/16/podcast-055/"><![CDATA[<p><img class="webfeedsFeaturedVisual" style="display: none;" src="/images/thumbnail/ChadMic.jpg?422102530" /></p>
+
+<p><br /></p>
+
+<iframe title="Libsyn Player" style="border: none" src="//html5-player.libsyn.com/embed/episode/id/40896780/height/90/theme/custom/thumbnail/yes/direction/forward/render-playlist/no/custom-color/000000/" height="90" width="100%" scrolling="no"></iframe>
+
+<div class="youtube-embed">
+<iframe src="https://www.youtube.com/embed/KoOrPzGC_7w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+</div>
+
+<p><br /></p>
+
+<p>With JDK 26 / JEP 500 starting to prevent final field mutation through reflection, it is important that Java projects stop employing that practice. Whether it is for dependency injection, serialization, cloning, or general hackery, alternatives need to be explored.</p>
+
+<p>Links:</p>
+<ul>
+  <li><a href="https://openjdk.org/jeps/500">JEP 500</a></li>
+  <li><a href="https://www.youtube.com/watch?v=bdHkbEIdBAs">Inside Java Newscast #101</a></li>
+</ul>
+
+<p><br />
+Make sure to also check the <strong>Duke’s Corner podcast</strong> on <a href="https://dev.java/duke/corner/">dev.java</a>.</p>
+
+<p><br /></p>
+
+<h3 id="additional-resources">Additional resources</h3>
+
+<ul>
+  <li><a href="https://inside.java">Inside.java</a> : News and views from members of the Java team at Oracle</li>
+  <li><a href="https://dev.java">Dev.java</a> : The Destination for Java Developers</li>
+  <li><a href="https://openjdk.java.net/">OpenJDK</a></li>
+  <li><a href="https://www.oracle.com/java/">Oracle Java</a></li>
+</ul>
+
+<p>For more episodes, check out <a href="https://inside.java/podcast">Inside Java</a>, our <a href="https://www.youtube.com/playlist?list=PLX8CzqL3ArzV_hXbRevwzrXSMcGNzhxiZ">YouTube playlist</a>, and follow <a href="https://twitter.com/java">@Java</a> on Twitter.</p>
+
+<p>Contact us <a href="https://inside.java/about/">here</a>.</p>]]></content><author><name>[&quot;NicolaiParlog&quot;]</name></author><category term="Integrity by Default" /><summary type="html"><![CDATA[With JDK 26 / JEP 500 starting to prevent final field mutation through reflection, it is important that Java projects stop employing that practice.]]></summary></entry><entry><title type="html">Oracle Java Extension for Visual Studio Code Version 25.1.0 Is Now Available</title><link href="https://inside.java/2026/04/14/java-vscode-extension-update/" rel="alternate" type="text/html" title="Oracle Java Extension for Visual Studio Code Version 25.1.0 Is Now Available" /><published>2026-04-14T00:00:00+00:00</published><updated>2026-04-14T00:00:00+00:00</updated><id>https://inside.java/2026/04/14/java-vscode-extension-update</id><content type="html" xml:base="https://inside.java/2026/04/14/java-vscode-extension-update/"><![CDATA[<p>The Oracle Java Platform Extension for Visual Studio Code version 25.1.0 is now live on the <a href="https://marketplace.visualstudio.com/items?itemName=Oracle.oracle-java">Visual Studio Code Marketplace</a> and the <a href="https://open-vsx.org/extension/Oracle/oracle-java">Open VSX Registry</a>.</p>
+
+<p>The Java Extension for VS Code version 25.1.0 is based on Apache NetBeans 28 and adds the following enhancements:</p>
+<ul>
+  <li>Support for all JDK 26 features, including preview features.</li>
+  <li>Enhanced the Notebook feature with runtime VM configuration options.</li>
+  <li>UI enhancements in the JDK Downloader, simplifying the download of the latest Oracle JDK.</li>
+</ul>
+
+<p>In addition to enhancements, this release includes bug fixes. For more details, please see the <a href="https://marketplace.visualstudio.com/items/Oracle.oracle-java/changelog">Change Log</a>.</p>
+
+<center><img src="/images/blog/vscode/duke-vscode.png" style="max-width: 300px;" /></center>]]></content><author><name>[&quot;ArvindAprameya&quot;]</name></author><category term="Oracle" /><summary type="html"><![CDATA[New release of Java Platform Extension for VS Code]]></summary></entry><entry><title type="html">Newsletter: Java 26 Is Now Available | JDK 27 Heads-Ups</title><link href="https://inside.java/2026/04/12/newsletter/" rel="alternate" type="text/html" title="Newsletter: Java 26 Is Now Available | JDK 27 Heads-Ups" /><published>2026-04-12T00:00:00+00:00</published><updated>2026-04-12T00:00:00+00:00</updated><id>https://inside.java/2026/04/12/Newsletter</id><content type="html" xml:base="https://inside.java/2026/04/12/newsletter/"><![CDATA[<p>This Heads-Up is part of the regular communication sent to the projects involved; it announces the General Availability of Java 26…</p>
+
+<p><img class="webfeedsFeaturedVisual" style="display: none;" src="/images/thumbnail/code.jpg?414679708" /></p>]]></content><author><name>[&quot;DavidDelabassee&quot;]</name></author><category term="JDK 26" /><category term="JDK 27" /><summary type="html"><![CDATA[This Heads-Up is part of the regular communication sent to the projects involved; it announces the General Availability of Java 26...]]></summary></entry><entry><title type="html">Episode 54 “How JDK 26 Improves G1’s Throughput” [AtA]</title><link href="https://inside.java/2026/04/09/podcast-054/" rel="alternate" type="text/html" title="Episode 54 “How JDK 26 Improves G1’s Throughput” [AtA]" /><published>2026-04-09T00:00:00+00:00</published><updated>2026-04-09T00:00:00+00:00</updated><id>https://inside.java/2026/04/09/Podcast-054</id><content type="html" xml:base="https://inside.java/2026/04/09/podcast-054/"><![CDATA[<p><img class="webfeedsFeaturedVisual" style="display: none;" src="/images/thumbnail/ChadMic.jpg?410051460" /></p>
+
+<p><br /></p>
+
+<iframe title="Libsyn Player" style="border: none" src="//html5-player.libsyn.com/embed/episode/id/40782885/height/90/theme/custom/thumbnail/yes/direction/forward/render-playlist/no/custom-color/000000/" height="90" width="100%" scrolling="no"></iframe>
+
+<div class="youtube-embed">
+<iframe src="https://www.youtube.com/embed/MIxIFnaEPwc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+</div>
+
+<p><br /></p>
+
+<p>G1 is Java’s default garbage collector in most environments, and its throughput has been considerably improved in JDK 26 by streamlining its write barriers. This conversation explores the background of that change and dives deep into regions, write barriers, concurrent marking, card tables, and how all that impacts throughput before eventually getting to the improvements made in Java 26, which lay further groundwork to G1 becoming the one and only default collector across <em>all</em> environments.</p>
+
+<p>In this “Ask the Architect” episode of the Inside Java Podcast, recorded during JavaOne 2026, Nicolai Parlog talks to Stefan Johansson, HotSpot Garbage Collection engineer at Oracle.</p>
+
+<p>JEP 522: https://openjdk.org/jeps/522</p>
+
+<p><br /></p>
+
+<p>Make sure to also check the <strong>Duke’s Corner podcast</strong> on <a href="https://dev.java/duke/corner/">dev.java</a>.</p>
+
+<p><br /></p>
+
+<h3 id="additional-resources">Additional resources</h3>
+
+<ul>
+  <li><a href="https://inside.java">Inside.java</a> : News and views from members of the Java team at Oracle</li>
+  <li><a href="https://dev.java">Dev.java</a> : The Destination for Java Developers</li>
+  <li><a href="https://openjdk.java.net/">OpenJDK</a></li>
+  <li><a href="https://www.oracle.com/java/">Oracle Java</a></li>
+</ul>
+
+<p>For more episodes, check out <a href="https://inside.java/podcast">Inside Java</a>, our <a href="https://www.youtube.com/playlist?list=PLX8CzqL3ArzV_hXbRevwzrXSMcGNzhxiZ">YouTube playlist</a>, and follow <a href="https://twitter.com/java">@Java</a> on Twitter.</p>
+
+<p>Contact us <a href="https://inside.java/about/">here</a>.</p>]]></content><author><name>[&quot;NicolaiParlog&quot;]</name></author><category term="GC" /><category term="JDK 26" /><summary type="html"><![CDATA[G1 is Java's default garbage collector in most environments and its throughput has been considerably improved in JDK 26 by streamlining its write barriers, which are discussed in this episode together with regions, concurrent marking, and card tables.]]></summary></entry><entry><title type="html">Java and Post-Quantum Cryptography</title><link href="https://inside.java/2026/04/08/javaone-post-quantum-cryptography/" rel="alternate" type="text/html" title="Java and Post-Quantum Cryptography" /><published>2026-04-08T00:00:00+00:00</published><updated>2026-04-08T00:00:00+00:00</updated><id>https://inside.java/2026/04/08/JavaOne-Post-Quantum-Cryptography</id><content type="html" xml:base="https://inside.java/2026/04/08/javaone-post-quantum-cryptography/"><![CDATA[<div class="youtube-embed">
+    <iframe src="https://www.youtube.com/embed/bN4W74o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>
+</div>
+
+<p><em>Today, the security of the world’s digital infrastructure relies on traditional public-key based cryptographic algorithms such as RSA, and Diffie-Hellman and its elliptic curve variants. However, there’s a looming threat on the horizon predicted to eventually break these algorithms: Quantum Computers.</em></p>
+
+<p><em>In this session, we’ll show how the Java Platform is preparing for this paradigm shift in security by adding support for Post-Quantum Cryptography (PQC), which are algorithms designed to be secure against quantum computer attacks. Come to this session to learn about the PQC-related features we’ve already delivered and what we’re working on for JDK 27 and beyond.</em></p>
+
+<p><em>Make sure to check the <a href="https://www.youtube.com/playlist?list=PLX8CzqL3ArzUMVSzm-z_-if8BIB55EGl4">JavaOne 2026 playlist</a>.</em></p>]]></content><author><name>[&quot;SeanMullan&quot;]</name></author><category term="Security" /><category term="JDK 26" /><category term="JDK 27" /><summary type="html"><![CDATA[In this session, we'll show how the Java Platform is preparing for this paradigm shift in security by adding support for Post-Quantum Cryptography (PQC), which are algorithms designed to be secure against quantum computer attacks. Come to this session to learn about the PQC-related features we've already delivered and what we're working on for JDK 27 and beyond.]]></summary></entry></feed>
