@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260428
+
+
+- [Why Web Engineering is great](https://ubuntu.com//blog/why-web-engineering-is-great)
+
+
 ### 20260427
 
 
@@ -153,7 +159,6 @@ search:
 
 
 - [How to perform a structured evaluation of AI conversational solutions](https://www.thoughtworks.com/insights/blog/generative-ai/how-to-perform-a-structured-evaluation-of-ai-conversational-solutions)
-- [Reimagining API modernization with deterministic AI-assisted engineering](https://www.thoughtworks.com/insights/blog/generative-ai/reimagining-api-modernization-with-deterministic-ai-assisted-engineering)
 - [Ubuntu Summit 26.04 is coming: Save the date and share your story!](https://ubuntu.com//blog/ubuntu-summit-26-04-is-coming-save-the-date-and-share-your-story)
 
 
@@ -187,15 +192,5 @@ search:
 
 
 ### 20260328
-
-
-- [The &amp;#8220;scanner report has to be green&amp;#8221; trap](https://ubuntu.com//blog/stability-backports-and-hidden-risks-of-the-bleeding-edge)
-
-
-### 20260327
-
-
-- [Program management update — February 2026](https://blog.rust-lang.org/inside-rust/2026/03/27/program-management-update-2026-02/)
-- [Modern Linux identity management: from local auth to the cloud with Ubuntu](https://ubuntu.com//blog/modern-linux-identity-management-ubuntu)
 
 
