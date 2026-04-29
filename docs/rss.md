@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260429
+
+
+- [Run NVIDIA Nemotron 3 Nano Omni locally in a single command](https://ubuntu.com//blog/nvidia-nemotron-3-nano-omni)
+
+
 ### 20260428
 
 
@@ -189,8 +195,5 @@ search:
 
 
 ### 20260329
-
-
-### 20260328
 
 
