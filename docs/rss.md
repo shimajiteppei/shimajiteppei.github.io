@@ -8,9 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260430
+
+
 ### 20260429
 
 
+- [Next-Level Observability with OpenTelemetry](https://blog.jetbrains.com/kotlin/2026/04/next-level-observability-with-opentelemetry/)
 - [Run NVIDIA Nemotron 3 Nano Omni locally in a single command](https://ubuntu.com//blog/nvidia-nemotron-3-nano-omni)
 
 
@@ -192,8 +196,5 @@ search:
 
 
 - [How to Harden Ubuntu SSH: From static keys to cloud identity](https://ubuntu.com//blog/how-to-harden-ubuntu-ssh-cloud)
-
-
-### 20260329
 
 
