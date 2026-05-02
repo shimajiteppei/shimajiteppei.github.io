@@ -8,7 +8,23 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260502
+
+
+- [Fixes available for CVE-2026-31431 (Copy Fail) Linux Kernel Local Privilege Escalation Vulnerability](https://ubuntu.com//blog/copy-fail-vulnerability-fixes-available)
+
+
+### 20260501
+
+
+- [Raising the baseline for the `nvptx64-nvidia-cuda` target](https://blog.rust-lang.org/2026/05/01/nvptx-baseline-update/)
+- [Announcing Google Summer of Code 2026 selected projects](https://blog.rust-lang.org/2026/04/30/gsoc-2026-selected-projects/)
+
+
 ### 20260430
+
+
+- [Make Java Safer with Flexible Constructor Bodies - Inside Java Newscast Episode #111](https://inside.java/2026/04/30/newscast-111/)
 
 
 ### 20260429
@@ -181,20 +197,5 @@ search:
 
 
 ### 20260401
-
-
-### 20260331
-
-
-- [Kodee’s Kotlin Roundup: Kotlin 2.3.20, Interview With Josh Long, and More](https://blog.jetbrains.com/kotlin/2026/03/kodees-kotlin-roundup-march-26-edition/)
-- [Amper 0.10 – JDK Provisioning, a Maven Converter, Custom Compiler Plugins, and More](https://blog.jetbrains.com/amper/2026/03/amper-0-10/)
-- [How to manage Ubuntu fleets using on-premises Active Directory and ADSys](https://ubuntu.com//blog/manage-ubuntu-fleets-active-directory)
-- [Simplify bare metal operations for sovereign clouds](https://ubuntu.com//blog/simplify-bare-metal-operations-for-sovereign-clouds)
-
-
-### 20260330
-
-
-- [How to Harden Ubuntu SSH: From static keys to cloud identity](https://ubuntu.com//blog/how-to-harden-ubuntu-ssh-cloud)
 
 
