@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260503
+
+
 ### 20260502
 
 
@@ -194,8 +197,5 @@ search:
 - [KotlinConf’26 Speakers: In Conversation With Lena Reinhard](https://blog.jetbrains.com/kotlin/2026/04/kotlinconf-26-speakers-in-conversation-with-lena-reinhard/)
 - [Analyzing Crashed JVMs - Inside Java Newscast #109](https://inside.java/2026/04/02/newscast-109/)
 - [docs.rs: building fewer targets by default](https://blog.rust-lang.org/2026/04/04/docsrs-only-default-targets/)
-
-
-### 20260401
 
 
