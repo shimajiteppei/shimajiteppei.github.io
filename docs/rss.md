@@ -8,6 +8,14 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260504
+
+
+- [Kodee’s Kotlin Roundup: Golden Kodee Finalists, Kotlin 2.4.0-Beta2, and New Learning Resources](https://blog.jetbrains.com/kotlin/2026/05/kodees-kotlin-roundup-golden-kodee-finalists-kotlin-2-4-0-beta2-and-new-learning-resources/)
+- [The JDK Client Desktop : 2026 and Still Swinging](https://inside.java/2026/05/03/jdk-client-desktop/)
+- [How to use Ubuntu on Windows](https://ubuntu.com//blog/how-to-use-ubuntu-on-windows)
+
+
 ### 20260503
 
 
@@ -181,6 +189,7 @@ search:
 
 
 - [Episode 53 “Analyzing Crashed JVMs” [IJN]](https://inside.java/2026/04/04/podcast-053/)
+- [docs.rs: building fewer targets by default](https://blog.rust-lang.org/2026/04/04/docsrs-only-default-targets/)
 - [Changes to WebAssembly targets and handling undefined symbols](https://blog.rust-lang.org/2026/04/04/changes-to-webassembly-targets-and-handling-undefined-symbols/)
 
 
@@ -189,13 +198,5 @@ search:
 
 - [How to perform a structured evaluation of AI conversational solutions](https://www.thoughtworks.com/insights/blog/generative-ai/how-to-perform-a-structured-evaluation-of-ai-conversational-solutions)
 - [Ubuntu Summit 26.04 is coming: Save the date and share your story!](https://ubuntu.com//blog/ubuntu-summit-26-04-is-coming-save-the-date-and-share-your-story)
-
-
-### 20260402
-
-
-- [KotlinConf’26 Speakers: In Conversation With Lena Reinhard](https://blog.jetbrains.com/kotlin/2026/04/kotlinconf-26-speakers-in-conversation-with-lena-reinhard/)
-- [Analyzing Crashed JVMs - Inside Java Newscast #109](https://inside.java/2026/04/02/newscast-109/)
-- [docs.rs: building fewer targets by default](https://blog.rust-lang.org/2026/04/04/docsrs-only-default-targets/)
 
 
