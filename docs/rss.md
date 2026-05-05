@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260505
+
+
 ### 20260504
 
 
@@ -191,12 +194,5 @@ search:
 - [Episode 53 “Analyzing Crashed JVMs” [IJN]](https://inside.java/2026/04/04/podcast-053/)
 - [docs.rs: building fewer targets by default](https://blog.rust-lang.org/2026/04/04/docsrs-only-default-targets/)
 - [Changes to WebAssembly targets and handling undefined symbols](https://blog.rust-lang.org/2026/04/04/changes-to-webassembly-targets-and-handling-undefined-symbols/)
-
-
-### 20260403
-
-
-- [How to perform a structured evaluation of AI conversational solutions](https://www.thoughtworks.com/insights/blog/generative-ai/how-to-perform-a-structured-evaluation-of-ai-conversational-solutions)
-- [Ubuntu Summit 26.04 is coming: Save the date and share your story!](https://ubuntu.com//blog/ubuntu-summit-26-04-is-coming-save-the-date-and-share-your-story)
 
 
