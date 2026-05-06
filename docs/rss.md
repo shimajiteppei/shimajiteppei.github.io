@@ -8,7 +8,19 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260506
+
+
+- [How to implement effective review gates for AI-assisted development](https://www.thoughtworks.com/insights/blog/generative-ai/how-to-implement-effective-review-gates-for-ai-assisted-development)
+- [Three weeks to go: A sneak peek of the Ubuntu Summit 26.04 experience](https://ubuntu.com//blog/three-weeks-to-go-a-sneak-peek-of-the-ubuntu-summit-26-04-experience)
+
+
 ### 20260505
+
+
+- [Episode 57 “Make Java Safer with Flexible Constructor Bodies”](https://inside.java/2026/05/05/podcast-057/)
+- [March 2026 Project Director Update](https://blog.rust-lang.org/inside-rust/2026/05/04/project-director-update/)
+- [Rust is participating in Outreachy](https://blog.rust-lang.org/2026/05/04/outreachy-2026-may/)
 
 
 ### 20260504
@@ -186,13 +198,5 @@ search:
 
 
 ### 20260405
-
-
-### 20260404
-
-
-- [Episode 53 “Analyzing Crashed JVMs” [IJN]](https://inside.java/2026/04/04/podcast-053/)
-- [docs.rs: building fewer targets by default](https://blog.rust-lang.org/2026/04/04/docsrs-only-default-targets/)
-- [Changes to WebAssembly targets and handling undefined symbols](https://blog.rust-lang.org/2026/04/04/changes-to-webassembly-targets-and-handling-undefined-symbols/)
 
 
