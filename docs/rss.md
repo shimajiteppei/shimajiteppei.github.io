@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260507
+
+
 ### 20260506
 
 
@@ -195,8 +198,5 @@ search:
 
 
 - [Leadership Council update — March 2026](https://blog.rust-lang.org/inside-rust/2026/04/06/leadership-council-update/)
-
-
-### 20260405
 
 
