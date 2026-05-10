@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260510
+
+
 ### 20260509
 
 
@@ -197,12 +200,5 @@ search:
 
 - [Episode 54 “How JDK 26 Improves G1’s Throughput” [AtA]](https://inside.java/2026/04/09/podcast-054/)
 - [Program management update — March 2026](https://blog.rust-lang.org/inside-rust/2026/04/09/program-management-update-2026-03/)
-- [Ubuntu Pro comes to Nutanix bare-metal Kubernetes](https://ubuntu.com//blog/ubuntu-pro-on-nutanix-bare-metal-kubernetes)
-
-
-### 20260408
-
-
-- [Java and Post-Quantum Cryptography](https://inside.java/2026/04/08/javaone-post-quantum-cryptography/)
 
 
