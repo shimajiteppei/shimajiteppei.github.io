@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260511
+
+
 ### 20260510
 
 
@@ -188,17 +191,5 @@ search:
 
 
 ### 20260410
-
-
-- [How the Datadog MCP server can help improve IT operational insight and observability](https://www.thoughtworks.com/insights/blog/generative-ai/how-Datadog-MCP-server-can-help-improve-IT-operational-insight)
-- [The shifted operation model and MSPs in the AI Age](https://www.thoughtworks.com/insights/blog/generative-ai/shifted-operation-model-and-msps-in-ai-age)
-- [Intentional leadership at Canonical](https://ubuntu.com//blog/intentional-leadership-at-canonical)
-
-
-### 20260409
-
-
-- [Episode 54 “How JDK 26 Improves G1’s Throughput” [AtA]](https://inside.java/2026/04/09/podcast-054/)
-- [Program management update — March 2026](https://blog.rust-lang.org/inside-rust/2026/04/09/program-management-update-2026-03/)
 
 
