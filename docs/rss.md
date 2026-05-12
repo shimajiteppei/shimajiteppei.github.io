@@ -8,7 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260512
+
+
 ### 20260511
+
+
+- [JEP targeted to JDK 27: 533: Structured Concurrency (7th Preview)](https://inside.java/2026/05/11/jep533-target-jdk27/)
 
 
 ### 20260510
@@ -185,11 +191,5 @@ search:
 
 
 ### 20260411
-
-
-- [What’s new in security for Ubuntu 26.04 LTS?](https://ubuntu.com//blog/ubuntu-26-04-lts-security-updates)
-
-
-### 20260410
 
 
