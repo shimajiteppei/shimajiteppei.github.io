@@ -8,6 +8,63 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260530
+
+
+- [The agent unconscious: Embedding organizational memory in AI](https://www.thoughtworks.com/insights/blog/generative-ai/agent-unconscious-embedding-organizational-memory-ai)
+- [Backstage with Databricks Lakebase: Bringing the operational database into Unity Catalog](https://www.thoughtworks.com/insights/blog/data-engineering/backstage-databricks-lakebase-operational-database-unity-catalog)
+- [Beyond the prototype: The reality of delivering generative AI products](https://www.thoughtworks.com/insights/blog/product-innovation/beyond-prototype-reality-delivering-generative-ai-products)
+- [Harness engineering and agent feedback: Exploring AI coding sensors](https://www.thoughtworks.com/insights/blog/generative-ai/harness-engineering-agent-feedback-exploring-ai-coding-sensors)
+- [Backstage with Lakebase: Exploring the concept with Databricks](https://www.thoughtworks.com/insights/blog/data-engineering/backstage-lakebase-databricks)
+- [Canonical announces optimized Ubuntu images for TPU virtual machines by Google Cloud](https://ubuntu.com//blog/canonical-announces-optimized-ubuntu-images-for-tpu-virtual-machines-by-google-cloud)
+- [VMware hypervisor deployment using MAAS](https://ubuntu.com//blog/vmware-hypervisor-deployment-using-maas)
+- [Migrating from Apache Spark 3 to Spark 4](https://ubuntu.com//blog/migrating-from-apache-spark-3-to-spark-4)
+- [Introducing Workshop: launch sandboxed development environments on Ubuntu with a single command](https://ubuntu.com//blog/introducing-workshop-sandboxed-development-environments)
+- [Run agentic workloads on Arm and Ubuntu](https://ubuntu.com//blog/run-agentic-workloads-on-arm-and-ubuntu)
+- [Decoding design: How design and engineering thrive together in open source](https://ubuntu.com//blog/decoding-design-how-design-and-engineering-thrive-together-in-open-source)
+- [Developing web apps with local LLM inference](https://ubuntu.com//blog/developing-web-apps-with-local-llm-inference)
+- [PinTheft Linux kernel vulnerability mitigation](https://ubuntu.com//blog/pintheft-linux-kernel-vulnerability-mitigation)
+- [Canonical announces fully Managed Kubeflow AI operations platform on the Microsoft Azure Marketplace](https://ubuntu.com//blog/managed-kubeflow-microsoft-azure-canonical-release)
+- [A look into Ubuntu Core 26: Cloud-powered edge computing with AWS IoT Greengrass and Azure IoT Edge](https://ubuntu.com//blog/ubuntu-core-26-cloud-integration)
+- [CVE-2026-46333 (ssh-keysign-pwn) Linux kernel vulnerability mitigations](https://ubuntu.com//blog/ssh-keysign-pwn-linux-vulnerability-fixes-available)
+- [Canonical launches Ubuntu Core 26](https://ubuntu.com//blog/canonical-launches-ubuntu-core-26)
+
+
+### 20260529
+
+
+- [Episode 59 “Java *is* Memory Efficient” [AtA]](https://inside.java/2026/05/28/podcast-059/)
+- [JEP targeted to JDK 27: 523: Make G1 the Default Garbage Collector in All Environments](https://inside.java/2026/05/26/jep523-target-jdk27/)
+- [Agentic AI Workflows for OpenJDK Development](https://inside.java/2026/05/26/openjdk-ai-agents/)
+- [JEP targeted to JDK 27: 537: Vector API (12th Incubator)](https://inside.java/2026/05/25/jep537-target-jdk27/)
+- [Tutorial: Accessibility in JavaFX](https://inside.java/2026/05/24/javafx-accesibility-tutorials/)
+- [Java AOT in Production at Netflix](https://inside.java/2026/05/23/java-aot-in-production-at-netflix/)
+- [Newsletter: JDK 27 Approaches Rampdown | Final Field Mutation Warnings Heads-up](https://inside.java/2026/05/22/quality-heads-up/)
+- [On Default Values for Primitive-Like Classes](https://inside.java/2026/05/21/values-primitive-classes/)
+- [Quality Outreach Heads-up - JDK 27: Numeric Fields in JSON Thread Dumps](https://inside.java/2026/05/20/quality-heads-up/)
+- [Java 26: Better Language, Better APIs, Better Runtime](https://inside.java/2026/05/19/javaone-better-jdk26/)
+
+
+### 20260528
+
+
+- [Koog 1.0 Is Out: Stable Core, Better Interop, and Multiplatform Observability](https://blog.jetbrains.com/ai/2026/05/koog-1-0-is-out-stable-core-better-interop-and-multiplatform-observability/)
+- [KotlinConf’26 Keynote Highlights: Advances in Language Design, Tooling, AI-Driven Workflows, and Multiplatform Development](https://blog.jetbrains.com/kotlin/2026/05/kotlinconf26-keynote-highlights/)
+- [Introducing a Security Support Policy for the Kotlin Standard Library](https://blog.jetbrains.com/kotlin/2026/05/security-support-policy-for-the-kotlin-standard-library/)
+- [Official Kotlin Support for Visual Studio Code Is Now Available in Alpha](https://blog.jetbrains.com/kotlin/2026/05/official-kotlin-support-for-visual-studio-code-is-now-available-in-alpha/)
+- [Built for Productivity: What the Data Finally Shows About Kotlin](https://blog.jetbrains.com/kotlin/2026/05/built-for-productivity-what-the-data-shows-about-kotlin/)
+- [A New Default Project Structure for Kotlin Multiplatform](https://blog.jetbrains.com/kotlin/2026/05/new-kmp-default-structure/)
+- [Help Shape the Future of Kotlin in the Age of AI](https://blog.jetbrains.com/kotlin/2026/05/help-shape-the-future-of-kotlin-in-the-age-of-ai/)
+- [Compose Multiplatform 1.11.0 Is Now Available](https://blog.jetbrains.com/kotlin/2026/05/compose-multiplatform-1-11-0/)
+- [The Road to Name-Based Destructuring](https://blog.jetbrains.com/kotlin/2026/05/the-road-to-name-based-destructuring/)
+- [1.96.0 pre-release testing](https://blog.rust-lang.org/inside-rust/2026/05/26/1.96.0-prerelease/)
+- [Program management update — April 2026](https://blog.rust-lang.org/inside-rust/2026/05/13/program-management-update--april-2026/)
+- [Announcing Rust 1.96.0](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)
+- [Security Advisory for Cargo (CVE-2026-5223)](https://blog.rust-lang.org/2026/05/25/cve-2026-5223/)
+- [Security Advisory for Cargo (CVE-2026-5222)](https://blog.rust-lang.org/2026/05/25/cve-2026-5222/)
+- [Project goals update — April 2026 (end of 2025H2)](https://blog.rust-lang.org/2026/05/18/project-goals-2026-04/)
+
+
 ### 20260512
 
 
@@ -42,7 +99,6 @@ search:
 ### 20260506
 
 
-- [How to implement effective review gates for AI-assisted development](https://www.thoughtworks.com/insights/blog/generative-ai/how-to-implement-effective-review-gates-for-ai-assisted-development)
 - [Three weeks to go: A sneak peek of the Ubuntu Summit 26.04 experience](https://ubuntu.com//blog/three-weeks-to-go-a-sneak-peek-of-the-ubuntu-summit-26-04-experience)
 
 
@@ -88,108 +144,5 @@ search:
 
 
 - [Next-Level Observability with OpenTelemetry](https://blog.jetbrains.com/kotlin/2026/04/next-level-observability-with-opentelemetry/)
-- [Run NVIDIA Nemotron 3 Nano Omni locally in a single command](https://ubuntu.com//blog/nvidia-nemotron-3-nano-omni)
-
-
-### 20260428
-
-
-- [Why Web Engineering is great](https://ubuntu.com//blog/why-web-engineering-is-great)
-
-
-### 20260427
-
-
-- [Avoiding Final Field Mutation](https://inside.java/2026/04/27/avoiding-final-field-mutation/)
-- [Ubuntu 16.04 LTS has reached the end of standard Expanded Security Maintenance with Ubuntu Pro. Here are your options.](https://ubuntu.com//blog/ubuntu-16-04-lts-has-reached-the-end-of-standard-expanded-security-maintenance-with-ubuntu-pro-here-are-your-options)
-- [Understanding disaggregated GenAI model serving with llm-d](https://ubuntu.com//blog/understanding-disaggregated-genai-model-serving-with-llm-d)
-
-
-### 20260426
-
-
-- [Reflecting on HAT: A Project Babylon Case Study](https://inside.java/2026/04/26/javaone-hat-java-gpu/)
-
-
-### 20260425
-
-
-### 20260424
-
-
-- [Canonical releases Ubuntu 26.04 LTS Resolute Raccoon](https://ubuntu.com//blog/canonical-releases-ubuntu-26-04-lts-resolute-raccoon)
-
-
-### 20260423
-
-
-- [Episode 56 “Ask the Architects at JavaOne” [AtA]](https://inside.java/2026/04/23/podcast-056/)
-- [From Jammy to Resolute: how Ubuntu&amp;#8217;s toolchains have evolved](https://ubuntu.com//blog/from-jammy-to-resolute-how-ubuntus-toolchains-have-evolved)
-
-
-### 20260422
-
-
-### 20260421
-
-
-- [Kotlin Professional Certificate by JetBrains – Now on LinkedIn Learning](https://blog.jetbrains.com/kotlin/2026/04/kotlin-professional-certificate-by-jetbrains-now-on-linkedin-learning/)
-- [Quality Outreach Heads-up - JDK 27: Obsolete Translation Resources Removed](https://inside.java/2026/04/21/quality-heads-up/)
-
-
-### 20260420
-
-
-- [Helping Decision-Makers Say Yes to Kotlin Multiplatform (KMP)](https://blog.jetbrains.com/kotlin/2026/04/helping-decision-makers-say-yes-to-kmp/)
-- [Hybrid search and reranking: a deeper look at RAG](https://ubuntu.com//blog/hybrid-search-and-reranking-a-deeper-look-at-rag)
-- [Canonical expands Ubuntu support to next-generation MediaTek Genio 520 and 720 platforms](https://ubuntu.com//blog/canonical-expands-ubuntu-support-to-next-generation-mediatek-genio-520-and-720-platforms)
-
-
-### 20260419
-
-
-- [How the JVM Optimizes Generic Code](https://inside.java/2026/04/19/generics-optimization/)
-
-
-### 20260418
-
-
-### 20260417
-
-
-- [Episode 55 “You Must Avoid Final Field Mutation” [IJN]](https://inside.java/2026/04/16/podcast-055/)
-- [crates.io: Help test our new web frontend](https://blog.rust-lang.org/inside-rust/2026/04/17/crates-io-svelte-public-testing/)
-- [Announcing Rust 1.95.0](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/)
-
-
-### 20260416
-
-
-- [Introducing Koog Integration for Spring AI: Smarter Orchestration for Your Agents](https://blog.jetbrains.com/ai/2026/04/introducing-koog-integration-for-spring-ai-smarter-orchestration-for-your-agents/)
-
-
-### 20260415
-
-
-- [Oracle Java Extension for Visual Studio Code Version 25.1.0 Is Now Available](https://inside.java/2026/04/14/java-vscode-extension-update/)
-
-
-### 20260414
-
-
-- [Infrastructure Team 2026 Q1 Recap and Q2 Plan](https://blog.rust-lang.org/inside-rust/2026/04/14/infrastructure-team-q1-recap-and-q2-plan/)
-
-
-### 20260413
-
-
-- [Quality Outreach Heads-up - JDK 27: Obsolete Translation Resources Removed](https://inside.java/2026/04/13/quality-heads-up/)
-- [Newsletter: Java 26 Is Now Available | JDK 27 Heads-Ups](https://inside.java/2026/04/12/newsletter/)
-
-
-### 20260412
-
-
-### 20260411
 
 
