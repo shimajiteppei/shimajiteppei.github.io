@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260531
+
+
 ### 20260530
 
 
@@ -138,11 +141,5 @@ search:
 
 
 - [Make Java Safer with Flexible Constructor Bodies - Inside Java Newscast Episode #111](https://inside.java/2026/04/30/newscast-111/)
-
-
-### 20260429
-
-
-- [Next-Level Observability with OpenTelemetry](https://blog.jetbrains.com/kotlin/2026/04/next-level-observability-with-opentelemetry/)
 
 
