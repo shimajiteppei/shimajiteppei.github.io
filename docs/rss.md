@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260601
+
+
+- [Securing AI agent workflows on Ubuntu with the new NVIDIA OpenShell snap](https://ubuntu.com//blog/nvidia-openshell-ubuntu-announcement)
+
+
 ### 20260531
 
 
@@ -127,19 +133,9 @@ search:
 ### 20260502
 
 
-- [Fixes available for CVE-2026-31431 (Copy Fail) Linux Kernel Local Privilege Escalation Vulnerability](https://ubuntu.com//blog/copy-fail-vulnerability-fixes-available)
-
-
 ### 20260501
 
 
 - [Raising the baseline for the `nvptx64-nvidia-cuda` target](https://blog.rust-lang.org/2026/05/01/nvptx-baseline-update/)
-- [Announcing Google Summer of Code 2026 selected projects](https://blog.rust-lang.org/2026/04/30/gsoc-2026-selected-projects/)
-
-
-### 20260430
-
-
-- [Make Java Safer with Flexible Constructor Bodies - Inside Java Newscast Episode #111](https://inside.java/2026/04/30/newscast-111/)
 
 
