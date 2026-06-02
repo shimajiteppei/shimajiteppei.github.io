@@ -8,6 +8,14 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260602
+
+
+- [Intelligent JVM Monitoring: Combining JDK Flight Recorder with AI](https://inside.java/2026/06/02/jfr-ai-monitor/)
+- [What is InfiniBand?](https://ubuntu.com//blog/what-is-infiniband)
+- [How Canonical Support solves hard Linux performance bugs  – even in 12-year old code](https://ubuntu.com//blog/support-solves-bugs-in-12-year-old-code)
+
+
 ### 20260601
 
 
@@ -131,11 +139,5 @@ search:
 
 
 ### 20260502
-
-
-### 20260501
-
-
-- [Raising the baseline for the `nvptx64-nvidia-cuda` target](https://blog.rust-lang.org/2026/05/01/nvptx-baseline-update/)
 
 
