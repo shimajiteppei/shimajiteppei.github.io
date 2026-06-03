@@ -8,10 +8,19 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260603
+
+
+- [Kotlin 2.4.0 Released](https://blog.jetbrains.com/kotlin/2026/06/kotlin-2-4-0-released/)
+- [AI with AMD ROCm on Ubuntu: your questions answered](https://ubuntu.com//blog/amd-rocm-on-ubuntu)
+- [Ubuntu and Ubuntu Pro on Azure Cobalt 200 VMs](https://ubuntu.com//blog/ubuntu-azure-cobalt-200-vms)
+
+
 ### 20260602
 
 
 - [Intelligent JVM Monitoring: Combining JDK Flight Recorder with AI](https://inside.java/2026/06/02/jfr-ai-monitor/)
+- [Launching the Rust Foundation Maintainers Fund](https://blog.rust-lang.org/2026/06/02/launching-the-rust-foundation-maintainers-fund/)
 - [What is InfiniBand?](https://ubuntu.com//blog/what-is-infiniband)
 - [How Canonical Support solves hard Linux performance bugs  – even in 12-year old code](https://ubuntu.com//blog/support-solves-bugs-in-12-year-old-code)
 
@@ -136,8 +145,5 @@ search:
 
 
 ### 20260503
-
-
-### 20260502
 
 
