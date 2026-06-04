@@ -8,10 +8,18 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260604
+
+
+- [A look into Ubuntu Core 26: Deploying AI models on Renesas RZ/V series for production](https://ubuntu.com//blog/ubuntu-core-26-ai-renesas)
+- [RISC-V profiles &amp;#8211; why is RVA23 significant?](https://ubuntu.com//blog/risc-v-profiles-why-is-rva23-significant)
+
+
 ### 20260603
 
 
 - [Kotlin 2.4.0 Released](https://blog.jetbrains.com/kotlin/2026/06/kotlin-2-4-0-released/)
+- [Maintainer spotlight: Tiffany Pek Yuan (@tiif)](https://blog.rust-lang.org/inside-rust/2026/06/03/maintainer-spotlight-tiffany-pek-yuan-tiif/)
 - [AI with AMD ROCm on Ubuntu: your questions answered](https://ubuntu.com//blog/amd-rocm-on-ubuntu)
 - [Ubuntu and Ubuntu Pro on Azure Cobalt 200 VMs](https://ubuntu.com//blog/ubuntu-azure-cobalt-200-vms)
 
@@ -140,10 +148,6 @@ search:
 
 
 - [Kodee’s Kotlin Roundup: Golden Kodee Finalists, Kotlin 2.4.0-Beta2, and New Learning Resources](https://blog.jetbrains.com/kotlin/2026/05/kodees-kotlin-roundup-golden-kodee-finalists-kotlin-2-4-0-beta2-and-new-learning-resources/)
-- [The JDK Client Desktop : 2026 and Still Swinging](https://inside.java/2026/05/03/jdk-client-desktop/)
 - [How to use Ubuntu on Windows](https://ubuntu.com//blog/how-to-use-ubuntu-on-windows)
-
-
-### 20260503
 
 
