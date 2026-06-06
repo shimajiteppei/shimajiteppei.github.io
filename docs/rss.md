@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260606
+
+
 ### 20260605
 
 
@@ -141,11 +144,5 @@ search:
 
 
 - [Three weeks to go: A sneak peek of the Ubuntu Summit 26.04 experience](https://ubuntu.com//blog/three-weeks-to-go-a-sneak-peek-of-the-ubuntu-summit-26-04-experience)
-
-
-### 20260505
-
-
-- [Episode 57 “Make Java Safer with Flexible Constructor Bodies”](https://inside.java/2026/05/05/podcast-057/)
 
 
