@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260607
+
+
 ### 20260606
 
 
@@ -138,11 +141,5 @@ search:
 
 
 - [Kotlin Ecosystem Mentorship Program: Results and Winners](https://blog.jetbrains.com/kotlin/2026/05/kotlin-ecosystem-mentorship-program/)
-
-
-### 20260506
-
-
-- [Three weeks to go: A sneak peek of the Ubuntu Summit 26.04 experience](https://ubuntu.com//blog/three-weeks-to-go-a-sneak-peek-of-the-ubuntu-summit-26-04-experience)
 
 
