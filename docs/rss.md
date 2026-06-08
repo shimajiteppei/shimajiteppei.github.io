@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260608
+
+
 ### 20260607
 
 
@@ -134,12 +137,5 @@ search:
 
 
 - [JEP targeted to JDK 27: 532: Primitive Types in Patterns, instanceof, and switch (5th Preview)](https://inside.java/2026/05/08/jep532-target-jdk27/)
-- [GitHub Copilot and me: The evolution of my partnership with a coding assistant](https://www.thoughtworks.com/insights/blog/generative-ai/github-copilot-me-evolution-partnership-coding-assistant)
-
-
-### 20260507
-
-
-- [Kotlin Ecosystem Mentorship Program: Results and Winners](https://blog.jetbrains.com/kotlin/2026/05/kotlin-ecosystem-mentorship-program/)
 
 
