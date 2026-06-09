@@ -8,6 +8,25 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260609
+
+
+- [Performance Improvements in JDK 26](https://inside.java/2026/06/09/jdk-26-performance-improvements)
+- [Oracle Java Extension for Visual Studio Code Version 26.0.0 Is Now Available](https://inside.java/2026/06/08/java-vscode-extension-update)
+- [JavaNext Language Features](https://inside.java/2026/06/07/java-next-language-features)
+- [JEP targeted to JDK 27: 538: PEM Encodings of Cryptographic Objects (3rd Preview)](https://inside.java/2026/06/05/jep538-target-jdk27)
+- [Intelligent JVM Monitoring: Combining JDK Flight Recorder with AI](https://inside.java/2026/06/02/jfr-ai-monitor)
+- [Episode 59 “Java *is* Memory Efficient” [AtA]](https://inside.java/2026/05/28/podcast-059)
+- [JEP targeted to JDK 27: 523: Make G1 the Default Garbage Collector in All Environments](https://inside.java/2026/05/26/jep523-target-jdk27)
+- [Agentic AI Workflows for OpenJDK Development](https://inside.java/2026/05/26/openjdk-ai-agents)
+- [JEP targeted to JDK 27: 537: Vector API (12th Incubator)](https://inside.java/2026/05/25/jep537-target-jdk27)
+- [Tutorial: Accessibility in JavaFX](https://inside.java/2026/05/24/javafx-accesibility-tutorials)
+- [The VibeSec reckoning: Why prompting your AI to be secure isn&#39;t enough](https://www.thoughtworks.com/insights/articles/vibesec-reckoning-prompting-ai-secure-is-not-enough)
+- [Cognitive debt is a real organizational risk: Don’t ignore it](https://www.thoughtworks.com/insights/blog/generative-ai/cognitive-debt-real-organizational-risk)
+- [Semantic drift and semantic integrity: Stewarding meaning in the age of AI](https://www.thoughtworks.com/insights/blog/data-strategy/semantic-drift-stewarding-meaning-ai)
+- [Hexagonal architecture explained through a practical example](https://www.thoughtworks.com/insights/blog/architecture/hexagonal-architecture-explained-practical-example)
+
+
 ### 20260608
 
 
@@ -65,7 +84,6 @@ search:
 - [Backstage with Databricks Lakebase: Bringing the operational database into Unity Catalog](https://www.thoughtworks.com/insights/blog/data-engineering/backstage-databricks-lakebase-operational-database-unity-catalog)
 - [Beyond the prototype: The reality of delivering generative AI products](https://www.thoughtworks.com/insights/blog/product-innovation/beyond-prototype-reality-delivering-generative-ai-products)
 - [Harness engineering and agent feedback: Exploring AI coding sensors](https://www.thoughtworks.com/insights/blog/generative-ai/harness-engineering-agent-feedback-exploring-ai-coding-sensors)
-- [Backstage with Lakebase: Exploring the concept with Databricks](https://www.thoughtworks.com/insights/blog/data-engineering/backstage-lakebase-databricks)
 - [Canonical announces optimized Ubuntu images for TPU virtual machines by Google Cloud](https://ubuntu.com//blog/canonical-announces-optimized-ubuntu-images-for-tpu-virtual-machines-by-google-cloud)
 - [VMware hypervisor deployment using MAAS](https://ubuntu.com//blog/vmware-hypervisor-deployment-using-maas)
 - [Migrating from Apache Spark 3 to Spark 4](https://ubuntu.com//blog/migrating-from-apache-spark-3-to-spark-4)
@@ -128,14 +146,5 @@ search:
 
 
 ### 20260509
-
-
-- [Dirty Frag Linux kernel local privilege escalation vulnerability mitigations](https://ubuntu.com//blog/dirty-frag-linux-vulnerability-fixes-available)
-
-
-### 20260508
-
-
-- [JEP targeted to JDK 27: 532: Primitive Types in Patterns, instanceof, and switch (5th Preview)](https://inside.java/2026/05/08/jep532-target-jdk27/)
 
 
