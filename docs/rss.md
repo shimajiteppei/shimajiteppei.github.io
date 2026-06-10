@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260610
+
+
+- [Exploiting GPU Tensor Cores from Java using Babylon](https://inside.java/2026/06/10/hat-tensors-computation)
+- [What is RDMA over Converged Ethernet (RoCE)?](https://ubuntu.com//blog/what-is-rdma-over-converged-ethernet-roce)
+
+
 ### 20260609
 
 
@@ -143,8 +150,5 @@ search:
 
 
 ### 20260510
-
-
-### 20260509
 
 
