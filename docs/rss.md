@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260611
+
+
+- [Simplifying Weak Reference Processing in ZGC](https://inside.java/2026/06/11/thesis-simplify-weak-reference-processing-zgc)
+- [The next era of telco clouds: get open infrastructure choice with Sylva and Canonical Kubernetes](https://ubuntu.com//blog/the-next-era-of-telco-clouds-get-open-infrastructure-choice-with-sylva-and-canonical-kubernetes)
+
+
 ### 20260610
 
 
@@ -147,8 +154,5 @@ search:
 
 
 - [JEP targeted to JDK 27: 533: Structured Concurrency (7th Preview)](https://inside.java/2026/05/11/jep533-target-jdk27/)
-
-
-### 20260510
 
 
