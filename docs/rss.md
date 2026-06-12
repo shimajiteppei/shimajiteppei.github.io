@@ -8,10 +8,23 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260612
+
+
+- [Simplifying Weak Reference Processing in ZGC](https://inside.java/2026/06/11/thesis-simplify-weak-reference-processing-zgc/)
+- [Exploiting GPU Tensor Cores from Java using Babylon](https://inside.java/2026/06/10/hat-tensors-computation/)
+- [Performance Improvements in JDK 26](https://inside.java/2026/06/09/jdk-26-performance-improvements/)
+- [Oracle Java Extension for Visual Studio Code Version 26.0.0 Is Now Available](https://inside.java/2026/06/08/java-vscode-extension-update/)
+- [JavaNext Language Features](https://inside.java/2026/06/07/java-next-language-features/)
+- [JEP targeted to JDK 27: 538: PEM Encodings of Cryptographic Objects (3rd Preview)](https://inside.java/2026/06/05/jep538-target-jdk27/)
+- [AI at the edge: simplifying infrastructure with Cisco and Canonical](https://ubuntu.com//blog/ai-at-the-edge-simplifying-infrastructure-with-cisco-and-canonical)
+
+
 ### 20260611
 
 
 - [Simplifying Weak Reference Processing in ZGC](https://inside.java/2026/06/11/thesis-simplify-weak-reference-processing-zgc)
+- [Program management update — May 2026](https://blog.rust-lang.org/inside-rust/2026/06/11/program-management-update-may-2026/)
 - [The next era of telco clouds: get open infrastructure choice with Sylva and Canonical Kubernetes](https://ubuntu.com//blog/the-next-era-of-telco-clouds-get-open-infrastructure-choice-with-sylva-and-canonical-kubernetes)
 
 
@@ -148,11 +161,5 @@ search:
 
 
 ### 20260512
-
-
-### 20260511
-
-
-- [JEP targeted to JDK 27: 533: Structured Concurrency (7th Preview)](https://inside.java/2026/05/11/jep533-target-jdk27/)
 
 
