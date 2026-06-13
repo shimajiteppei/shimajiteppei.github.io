@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260613
+
+
+- [A decade of Ubuntu on IBM Z and IBM LinuxONE](https://ubuntu.com//blog/a-decade-of-ubuntu-on-ibm-z-and-ibm-linuxone)
+
+
 ### 20260612
 
 
@@ -158,8 +164,5 @@ search:
 - [Security Advisory for Cargo (CVE-2026-5223)](https://blog.rust-lang.org/2026/05/25/cve-2026-5223/)
 - [Security Advisory for Cargo (CVE-2026-5222)](https://blog.rust-lang.org/2026/05/25/cve-2026-5222/)
 - [Project goals update — April 2026 (end of 2025H2)](https://blog.rust-lang.org/2026/05/18/project-goals-2026-04/)
-
-
-### 20260512
 
 
