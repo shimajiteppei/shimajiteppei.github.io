@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260614
+
+
+- [How Agentic Coding Can Help You Migrate Java Applications Faster](https://inside.java/2026/06/14/cline-migrate-java-oca/)
+
+
 ### 20260613
 
 
@@ -116,7 +122,6 @@ search:
 - [The agent unconscious: Embedding organizational memory in AI](https://www.thoughtworks.com/insights/blog/generative-ai/agent-unconscious-embedding-organizational-memory-ai)
 - [Backstage with Databricks Lakebase: Bringing the operational database into Unity Catalog](https://www.thoughtworks.com/insights/blog/data-engineering/backstage-databricks-lakebase-operational-database-unity-catalog)
 - [Beyond the prototype: The reality of delivering generative AI products](https://www.thoughtworks.com/insights/blog/product-innovation/beyond-prototype-reality-delivering-generative-ai-products)
-- [Harness engineering and agent feedback: Exploring AI coding sensors](https://www.thoughtworks.com/insights/blog/generative-ai/harness-engineering-agent-feedback-exploring-ai-coding-sensors)
 - [Canonical announces optimized Ubuntu images for TPU virtual machines by Google Cloud](https://ubuntu.com//blog/canonical-announces-optimized-ubuntu-images-for-tpu-virtual-machines-by-google-cloud)
 - [VMware hypervisor deployment using MAAS](https://ubuntu.com//blog/vmware-hypervisor-deployment-using-maas)
 - [Migrating from Apache Spark 3 to Spark 4](https://ubuntu.com//blog/migrating-from-apache-spark-3-to-spark-4)
@@ -157,9 +162,7 @@ search:
 - [A New Default Project Structure for Kotlin Multiplatform](https://blog.jetbrains.com/kotlin/2026/05/new-kmp-default-structure/)
 - [Help Shape the Future of Kotlin in the Age of AI](https://blog.jetbrains.com/kotlin/2026/05/help-shape-the-future-of-kotlin-in-the-age-of-ai/)
 - [Compose Multiplatform 1.11.0 Is Now Available](https://blog.jetbrains.com/kotlin/2026/05/compose-multiplatform-1-11-0/)
-- [The Road to Name-Based Destructuring](https://blog.jetbrains.com/kotlin/2026/05/the-road-to-name-based-destructuring/)
 - [1.96.0 pre-release testing](https://blog.rust-lang.org/inside-rust/2026/05/26/1.96.0-prerelease/)
-- [Program management update — April 2026](https://blog.rust-lang.org/inside-rust/2026/05/13/program-management-update--april-2026/)
 - [Announcing Rust 1.96.0](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)
 - [Security Advisory for Cargo (CVE-2026-5223)](https://blog.rust-lang.org/2026/05/25/cve-2026-5223/)
 - [Security Advisory for Cargo (CVE-2026-5222)](https://blog.rust-lang.org/2026/05/25/cve-2026-5222/)
