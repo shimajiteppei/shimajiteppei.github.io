@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260615
+
+
 ### 20260614
 
 
@@ -121,7 +124,6 @@ search:
 
 - [The agent unconscious: Embedding organizational memory in AI](https://www.thoughtworks.com/insights/blog/generative-ai/agent-unconscious-embedding-organizational-memory-ai)
 - [Backstage with Databricks Lakebase: Bringing the operational database into Unity Catalog](https://www.thoughtworks.com/insights/blog/data-engineering/backstage-databricks-lakebase-operational-database-unity-catalog)
-- [Beyond the prototype: The reality of delivering generative AI products](https://www.thoughtworks.com/insights/blog/product-innovation/beyond-prototype-reality-delivering-generative-ai-products)
 - [Canonical announces optimized Ubuntu images for TPU virtual machines by Google Cloud](https://ubuntu.com//blog/canonical-announces-optimized-ubuntu-images-for-tpu-virtual-machines-by-google-cloud)
 - [VMware hypervisor deployment using MAAS](https://ubuntu.com//blog/vmware-hypervisor-deployment-using-maas)
 - [Migrating from Apache Spark 3 to Spark 4](https://ubuntu.com//blog/migrating-from-apache-spark-3-to-spark-4)
