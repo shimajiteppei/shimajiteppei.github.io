@@ -8,6 +8,21 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260616
+
+
+- [Can Java Microservices Be As Fast As Go? A 2026 Benchmark Update](https://inside.java/2026/06/15/java-microservices-fast-go-2026-benchmark/)
+- [Is a codeless future an illusion?](https://www.thoughtworks.com/insights/blog/programming-languages/codeless-future-illusion)
+- [Your agent skill is not an anti-corruption layer](https://www.thoughtworks.com/insights/blog/generative-ai/your-agent-skill-not-anti-corruption-layer)
+- [Enabling evolutionary database development: Database branching with Lakebase (Part two)](https://www.thoughtworks.com/insights/blog/data-engineering/enabling-evolutionary-database-branching-with-lakebase-part-2)
+- [Navigating today’s AI token crisis](https://www.thoughtworks.com/insights/blog/generative-ai/navigating-ai-token-crisis)
+- [Does every feature we build with AI need a token budget?](https://www.thoughtworks.com/insights/blog/generative-ai/does-every-feature-build-ai-token-budget)
+- [Enabling evolutionary database development: Database branching with Lakebase](https://www.thoughtworks.com/insights/blog/data-engineering/enabling-evolutionary-database-branching-with-lakebase)
+- [Claude outage, June 2026: Reckoning with AI’s increasing status as infrastructure](https://www.thoughtworks.com/insights/blog/generative-ai/claude-outage-june-2026)
+- [Beyond Mythos: responding to a new threat landscape](https://ubuntu.com//blog/responding-to-a-new-threat-landscape)
+- [A look into Ubuntu Core 26: Building a local AI inference appliance in a virtual machine](https://ubuntu.com//blog/ubuntu-core-26-ai-box)
+
+
 ### 20260615
 
 
@@ -123,7 +138,6 @@ search:
 
 
 - [The agent unconscious: Embedding organizational memory in AI](https://www.thoughtworks.com/insights/blog/generative-ai/agent-unconscious-embedding-organizational-memory-ai)
-- [Backstage with Databricks Lakebase: Bringing the operational database into Unity Catalog](https://www.thoughtworks.com/insights/blog/data-engineering/backstage-databricks-lakebase-operational-database-unity-catalog)
 - [Canonical announces optimized Ubuntu images for TPU virtual machines by Google Cloud](https://ubuntu.com//blog/canonical-announces-optimized-ubuntu-images-for-tpu-virtual-machines-by-google-cloud)
 - [VMware hypervisor deployment using MAAS](https://ubuntu.com//blog/vmware-hypervisor-deployment-using-maas)
 - [Migrating from Apache Spark 3 to Spark 4](https://ubuntu.com//blog/migrating-from-apache-spark-3-to-spark-4)
@@ -161,9 +175,6 @@ search:
 - [Introducing a Security Support Policy for the Kotlin Standard Library](https://blog.jetbrains.com/kotlin/2026/05/security-support-policy-for-the-kotlin-standard-library/)
 - [Official Kotlin Support for Visual Studio Code Is Now Available in Alpha](https://blog.jetbrains.com/kotlin/2026/05/official-kotlin-support-for-visual-studio-code-is-now-available-in-alpha/)
 - [Built for Productivity: What the Data Finally Shows About Kotlin](https://blog.jetbrains.com/kotlin/2026/05/built-for-productivity-what-the-data-shows-about-kotlin/)
-- [A New Default Project Structure for Kotlin Multiplatform](https://blog.jetbrains.com/kotlin/2026/05/new-kmp-default-structure/)
-- [Help Shape the Future of Kotlin in the Age of AI](https://blog.jetbrains.com/kotlin/2026/05/help-shape-the-future-of-kotlin-in-the-age-of-ai/)
-- [Compose Multiplatform 1.11.0 Is Now Available](https://blog.jetbrains.com/kotlin/2026/05/compose-multiplatform-1-11-0/)
 - [1.96.0 pre-release testing](https://blog.rust-lang.org/inside-rust/2026/05/26/1.96.0-prerelease/)
 - [Announcing Rust 1.96.0](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)
 - [Security Advisory for Cargo (CVE-2026-5223)](https://blog.rust-lang.org/2026/05/25/cve-2026-5223/)
