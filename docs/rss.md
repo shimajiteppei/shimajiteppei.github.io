@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260617
+
+
+- [The dangers of token usage billing](https://www.thoughtworks.com/insights/blog/generative-ai/dangers-token-usage-billing)
+- [Template: Streamlining open source design contributions](https://ubuntu.com//blog/template-streamlining-open-source-design-contributions)
+
+
 ### 20260616
 
 
