@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260618
+
+
+- [Validating real-world skills through Canonical Academy](https://ubuntu.com//blog/validating-real-world-skills-through-canonical-academy)
+- [Virtualized Android comes to Anbox Cloud](https://ubuntu.com//blog/virtualized-android-comes-to-anbox-cloud)
+
+
 ### 20260617
 
 
