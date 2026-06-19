@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260619
+
+
+- [So you need to add microcontrollers to your fleet: now what?](https://ubuntu.com//blog/microcontrollers-ubuntu-core-golioth)
+
+
 ### 20260618
 
 
@@ -151,7 +157,6 @@ search:
 ### 20260530
 
 
-- [The agent unconscious: Embedding organizational memory in AI](https://www.thoughtworks.com/insights/blog/generative-ai/agent-unconscious-embedding-organizational-memory-ai)
 - [Canonical announces optimized Ubuntu images for TPU virtual machines by Google Cloud](https://ubuntu.com//blog/canonical-announces-optimized-ubuntu-images-for-tpu-virtual-machines-by-google-cloud)
 - [VMware hypervisor deployment using MAAS](https://ubuntu.com//blog/vmware-hypervisor-deployment-using-maas)
 - [Migrating from Apache Spark 3 to Spark 4](https://ubuntu.com//blog/migrating-from-apache-spark-3-to-spark-4)
@@ -193,6 +198,5 @@ search:
 - [Announcing Rust 1.96.0](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)
 - [Security Advisory for Cargo (CVE-2026-5223)](https://blog.rust-lang.org/2026/05/25/cve-2026-5223/)
 - [Security Advisory for Cargo (CVE-2026-5222)](https://blog.rust-lang.org/2026/05/25/cve-2026-5222/)
-- [Project goals update — April 2026 (end of 2025H2)](https://blog.rust-lang.org/2026/05/18/project-goals-2026-04/)
 
 
