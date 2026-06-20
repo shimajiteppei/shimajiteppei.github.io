@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260620
+
+
 ### 20260619
 
 
@@ -167,8 +170,6 @@ search:
 - [PinTheft Linux kernel vulnerability mitigation](https://ubuntu.com//blog/pintheft-linux-kernel-vulnerability-mitigation)
 - [Canonical announces fully Managed Kubeflow AI operations platform on the Microsoft Azure Marketplace](https://ubuntu.com//blog/managed-kubeflow-microsoft-azure-canonical-release)
 - [A look into Ubuntu Core 26: Cloud-powered edge computing with AWS IoT Greengrass and Azure IoT Edge](https://ubuntu.com//blog/ubuntu-core-26-cloud-integration)
-- [CVE-2026-46333 (ssh-keysign-pwn) Linux kernel vulnerability mitigations](https://ubuntu.com//blog/ssh-keysign-pwn-linux-vulnerability-fixes-available)
-- [Canonical launches Ubuntu Core 26](https://ubuntu.com//blog/canonical-launches-ubuntu-core-26)
 
 
 ### 20260529
@@ -183,7 +184,6 @@ search:
 - [Newsletter: JDK 27 Approaches Rampdown | Final Field Mutation Warnings Heads-up](https://inside.java/2026/05/22/quality-heads-up/)
 - [On Default Values for Primitive-Like Classes](https://inside.java/2026/05/21/values-primitive-classes/)
 - [Quality Outreach Heads-up - JDK 27: Numeric Fields in JSON Thread Dumps](https://inside.java/2026/05/20/quality-heads-up/)
-- [Java 26: Better Language, Better APIs, Better Runtime](https://inside.java/2026/05/19/javaone-better-jdk26/)
 
 
 ### 20260528
