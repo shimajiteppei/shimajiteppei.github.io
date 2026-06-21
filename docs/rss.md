@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260621
+
+
 ### 20260620
 
 
@@ -169,7 +172,6 @@ search:
 - [Developing web apps with local LLM inference](https://ubuntu.com//blog/developing-web-apps-with-local-llm-inference)
 - [PinTheft Linux kernel vulnerability mitigation](https://ubuntu.com//blog/pintheft-linux-kernel-vulnerability-mitigation)
 - [Canonical announces fully Managed Kubeflow AI operations platform on the Microsoft Azure Marketplace](https://ubuntu.com//blog/managed-kubeflow-microsoft-azure-canonical-release)
-- [A look into Ubuntu Core 26: Cloud-powered edge computing with AWS IoT Greengrass and Azure IoT Edge](https://ubuntu.com//blog/ubuntu-core-26-cloud-integration)
 
 
 ### 20260529
@@ -183,7 +185,6 @@ search:
 - [Java AOT in Production at Netflix](https://inside.java/2026/05/23/java-aot-in-production-at-netflix/)
 - [Newsletter: JDK 27 Approaches Rampdown | Final Field Mutation Warnings Heads-up](https://inside.java/2026/05/22/quality-heads-up/)
 - [On Default Values for Primitive-Like Classes](https://inside.java/2026/05/21/values-primitive-classes/)
-- [Quality Outreach Heads-up - JDK 27: Numeric Fields in JSON Thread Dumps](https://inside.java/2026/05/20/quality-heads-up/)
 
 
 ### 20260528
@@ -193,7 +194,6 @@ search:
 - [KotlinConf’26 Keynote Highlights: Advances in Language Design, Tooling, AI-Driven Workflows, and Multiplatform Development](https://blog.jetbrains.com/kotlin/2026/05/kotlinconf26-keynote-highlights/)
 - [Introducing a Security Support Policy for the Kotlin Standard Library](https://blog.jetbrains.com/kotlin/2026/05/security-support-policy-for-the-kotlin-standard-library/)
 - [Official Kotlin Support for Visual Studio Code Is Now Available in Alpha](https://blog.jetbrains.com/kotlin/2026/05/official-kotlin-support-for-visual-studio-code-is-now-available-in-alpha/)
-- [Built for Productivity: What the Data Finally Shows About Kotlin](https://blog.jetbrains.com/kotlin/2026/05/built-for-productivity-what-the-data-shows-about-kotlin/)
 - [1.96.0 pre-release testing](https://blog.rust-lang.org/inside-rust/2026/05/26/1.96.0-prerelease/)
 - [Announcing Rust 1.96.0](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)
 - [Security Advisory for Cargo (CVE-2026-5223)](https://blog.rust-lang.org/2026/05/25/cve-2026-5223/)
