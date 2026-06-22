@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260622
+
+
+- [Better Tools for Immutable Data](https://inside.java/2026/06/21/better-tools-immutable-data/)
+- [Ubuntu Summit 26.04: connected by open source](https://ubuntu.com//blog/ubuntu-summit-26-04-connected-by-open-source)
+
+
 ### 20260621
 
 
@@ -107,7 +114,6 @@ search:
 - [The VibeSec reckoning: Why prompting your AI to be secure isn&#39;t enough](https://www.thoughtworks.com/insights/articles/vibesec-reckoning-prompting-ai-secure-is-not-enough)
 - [Cognitive debt is a real organizational risk: Don’t ignore it](https://www.thoughtworks.com/insights/blog/generative-ai/cognitive-debt-real-organizational-risk)
 - [Semantic drift and semantic integrity: Stewarding meaning in the age of AI](https://www.thoughtworks.com/insights/blog/data-strategy/semantic-drift-stewarding-meaning-ai)
-- [Hexagonal architecture explained through a practical example](https://www.thoughtworks.com/insights/blog/architecture/hexagonal-architecture-explained-practical-example)
 
 
 ### 20260608
@@ -169,9 +175,6 @@ search:
 - [Introducing Workshop: launch sandboxed development environments on Ubuntu with a single command](https://ubuntu.com//blog/introducing-workshop-sandboxed-development-environments)
 - [Run agentic workloads on Arm and Ubuntu](https://ubuntu.com//blog/run-agentic-workloads-on-arm-and-ubuntu)
 - [Decoding design: How design and engineering thrive together in open source](https://ubuntu.com//blog/decoding-design-how-design-and-engineering-thrive-together-in-open-source)
-- [Developing web apps with local LLM inference](https://ubuntu.com//blog/developing-web-apps-with-local-llm-inference)
-- [PinTheft Linux kernel vulnerability mitigation](https://ubuntu.com//blog/pintheft-linux-kernel-vulnerability-mitigation)
-- [Canonical announces fully Managed Kubeflow AI operations platform on the Microsoft Azure Marketplace](https://ubuntu.com//blog/managed-kubeflow-microsoft-azure-canonical-release)
 
 
 ### 20260529
@@ -184,16 +187,12 @@ search:
 - [Tutorial: Accessibility in JavaFX](https://inside.java/2026/05/24/javafx-accesibility-tutorials/)
 - [Java AOT in Production at Netflix](https://inside.java/2026/05/23/java-aot-in-production-at-netflix/)
 - [Newsletter: JDK 27 Approaches Rampdown | Final Field Mutation Warnings Heads-up](https://inside.java/2026/05/22/quality-heads-up/)
-- [On Default Values for Primitive-Like Classes](https://inside.java/2026/05/21/values-primitive-classes/)
 
 
 ### 20260528
 
 
 - [Koog 1.0 Is Out: Stable Core, Better Interop, and Multiplatform Observability](https://blog.jetbrains.com/ai/2026/05/koog-1-0-is-out-stable-core-better-interop-and-multiplatform-observability/)
-- [KotlinConf’26 Keynote Highlights: Advances in Language Design, Tooling, AI-Driven Workflows, and Multiplatform Development](https://blog.jetbrains.com/kotlin/2026/05/kotlinconf26-keynote-highlights/)
-- [Introducing a Security Support Policy for the Kotlin Standard Library](https://blog.jetbrains.com/kotlin/2026/05/security-support-policy-for-the-kotlin-standard-library/)
-- [Official Kotlin Support for Visual Studio Code Is Now Available in Alpha](https://blog.jetbrains.com/kotlin/2026/05/official-kotlin-support-for-visual-studio-code-is-now-available-in-alpha/)
 - [1.96.0 pre-release testing](https://blog.rust-lang.org/inside-rust/2026/05/26/1.96.0-prerelease/)
 - [Announcing Rust 1.96.0](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)
 - [Security Advisory for Cargo (CVE-2026-5223)](https://blog.rust-lang.org/2026/05/25/cve-2026-5223/)
