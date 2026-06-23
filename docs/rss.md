@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260623
+
+
+- [Canonical announces live kernel patching for Arm64](https://ubuntu.com//blog/canonical-announces-live-kernel-patching-for-arm64)
+- [How to use RISC-V custom instructions with Ubuntu](https://ubuntu.com//blog/how-to-use-risc-v-custom-instructions-with-ubuntu)
+
+
 ### 20260622
 
 
@@ -174,7 +181,6 @@ search:
 - [Migrating from Apache Spark 3 to Spark 4](https://ubuntu.com//blog/migrating-from-apache-spark-3-to-spark-4)
 - [Introducing Workshop: launch sandboxed development environments on Ubuntu with a single command](https://ubuntu.com//blog/introducing-workshop-sandboxed-development-environments)
 - [Run agentic workloads on Arm and Ubuntu](https://ubuntu.com//blog/run-agentic-workloads-on-arm-and-ubuntu)
-- [Decoding design: How design and engineering thrive together in open source](https://ubuntu.com//blog/decoding-design-how-design-and-engineering-thrive-together-in-open-source)
 
 
 ### 20260529
@@ -186,7 +192,6 @@ search:
 - [JEP targeted to JDK 27: 537: Vector API (12th Incubator)](https://inside.java/2026/05/25/jep537-target-jdk27/)
 - [Tutorial: Accessibility in JavaFX](https://inside.java/2026/05/24/javafx-accesibility-tutorials/)
 - [Java AOT in Production at Netflix](https://inside.java/2026/05/23/java-aot-in-production-at-netflix/)
-- [Newsletter: JDK 27 Approaches Rampdown | Final Field Mutation Warnings Heads-up](https://inside.java/2026/05/22/quality-heads-up/)
 
 
 ### 20260528
