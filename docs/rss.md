@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260624
+
+
 ### 20260623
 
 
@@ -191,7 +194,6 @@ search:
 - [Agentic AI Workflows for OpenJDK Development](https://inside.java/2026/05/26/openjdk-ai-agents/)
 - [JEP targeted to JDK 27: 537: Vector API (12th Incubator)](https://inside.java/2026/05/25/jep537-target-jdk27/)
 - [Tutorial: Accessibility in JavaFX](https://inside.java/2026/05/24/javafx-accesibility-tutorials/)
-- [Java AOT in Production at Netflix](https://inside.java/2026/05/23/java-aot-in-production-at-netflix/)
 
 
 ### 20260528
