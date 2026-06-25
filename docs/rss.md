@@ -8,7 +8,16 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260625
+
+
+- [Anbox Cloud on C4A metal: Android, at scale, without friction](https://ubuntu.com//blog/anbox-cloud-on-c4a-metal-android-at-scale-without-friction)
+
+
 ### 20260624
+
+
+- [Kotlin Toolchain 0.11: The Next Step for Amper](https://blog.jetbrains.com/amper/2026/06/kotlin-toolchain-0-11/)
 
 
 ### 20260623
@@ -120,7 +129,6 @@ search:
 - [JEP targeted to JDK 27: 523: Make G1 the Default Garbage Collector in All Environments](https://inside.java/2026/05/26/jep523-target-jdk27)
 - [Agentic AI Workflows for OpenJDK Development](https://inside.java/2026/05/26/openjdk-ai-agents)
 - [JEP targeted to JDK 27: 537: Vector API (12th Incubator)](https://inside.java/2026/05/25/jep537-target-jdk27)
-- [Tutorial: Accessibility in JavaFX](https://inside.java/2026/05/24/javafx-accesibility-tutorials)
 - [The VibeSec reckoning: Why prompting your AI to be secure isn&#39;t enough](https://www.thoughtworks.com/insights/articles/vibesec-reckoning-prompting-ai-secure-is-not-enough)
 - [Cognitive debt is a real organizational risk: Don’t ignore it](https://www.thoughtworks.com/insights/blog/generative-ai/cognitive-debt-real-organizational-risk)
 - [Semantic drift and semantic integrity: Stewarding meaning in the age of AI](https://www.thoughtworks.com/insights/blog/data-strategy/semantic-drift-stewarding-meaning-ai)
@@ -193,7 +201,6 @@ search:
 - [JEP targeted to JDK 27: 523: Make G1 the Default Garbage Collector in All Environments](https://inside.java/2026/05/26/jep523-target-jdk27/)
 - [Agentic AI Workflows for OpenJDK Development](https://inside.java/2026/05/26/openjdk-ai-agents/)
 - [JEP targeted to JDK 27: 537: Vector API (12th Incubator)](https://inside.java/2026/05/25/jep537-target-jdk27/)
-- [Tutorial: Accessibility in JavaFX](https://inside.java/2026/05/24/javafx-accesibility-tutorials/)
 
 
 ### 20260528
