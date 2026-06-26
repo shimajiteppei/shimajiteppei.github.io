@@ -8,9 +8,17 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260626
+
+
+- [Episode 60 “How JEPs Drive Java&#39;s Evolution” [AtA]](https://inside.java/2026/06/25/podcast-060/)
+- [Challenges designers face in open source (and how to fix them)](https://ubuntu.com//blog/challenges-designers-face-in-open-source-and-how-to-fix-them)
+
+
 ### 20260625
 
 
+- [The many journeys of learning Rust](https://blog.rust-lang.org/2026/06/25/vision-doc-journeys-to-learning-rust/)
 - [Anbox Cloud on C4A metal: Android, at scale, without friction](https://ubuntu.com//blog/anbox-cloud-on-c4a-metal-android-at-scale-without-friction)
 
 
@@ -128,7 +136,6 @@ search:
 - [Episode 59 “Java *is* Memory Efficient” [AtA]](https://inside.java/2026/05/28/podcast-059)
 - [JEP targeted to JDK 27: 523: Make G1 the Default Garbage Collector in All Environments](https://inside.java/2026/05/26/jep523-target-jdk27)
 - [Agentic AI Workflows for OpenJDK Development](https://inside.java/2026/05/26/openjdk-ai-agents)
-- [JEP targeted to JDK 27: 537: Vector API (12th Incubator)](https://inside.java/2026/05/25/jep537-target-jdk27)
 - [The VibeSec reckoning: Why prompting your AI to be secure isn&#39;t enough](https://www.thoughtworks.com/insights/articles/vibesec-reckoning-prompting-ai-secure-is-not-enough)
 - [Cognitive debt is a real organizational risk: Don’t ignore it](https://www.thoughtworks.com/insights/blog/generative-ai/cognitive-debt-real-organizational-risk)
 - [Semantic drift and semantic integrity: Stewarding meaning in the age of AI](https://www.thoughtworks.com/insights/blog/data-strategy/semantic-drift-stewarding-meaning-ai)
@@ -200,7 +207,6 @@ search:
 - [Episode 59 “Java *is* Memory Efficient” [AtA]](https://inside.java/2026/05/28/podcast-059/)
 - [JEP targeted to JDK 27: 523: Make G1 the Default Garbage Collector in All Environments](https://inside.java/2026/05/26/jep523-target-jdk27/)
 - [Agentic AI Workflows for OpenJDK Development](https://inside.java/2026/05/26/openjdk-ai-agents/)
-- [JEP targeted to JDK 27: 537: Vector API (12th Incubator)](https://inside.java/2026/05/25/jep537-target-jdk27/)
 
 
 ### 20260528
@@ -209,7 +215,5 @@ search:
 - [Koog 1.0 Is Out: Stable Core, Better Interop, and Multiplatform Observability](https://blog.jetbrains.com/ai/2026/05/koog-1-0-is-out-stable-core-better-interop-and-multiplatform-observability/)
 - [1.96.0 pre-release testing](https://blog.rust-lang.org/inside-rust/2026/05/26/1.96.0-prerelease/)
 - [Announcing Rust 1.96.0](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)
-- [Security Advisory for Cargo (CVE-2026-5223)](https://blog.rust-lang.org/2026/05/25/cve-2026-5223/)
-- [Security Advisory for Cargo (CVE-2026-5222)](https://blog.rust-lang.org/2026/05/25/cve-2026-5222/)
 
 
