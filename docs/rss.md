@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260627
+
+
+- [1.96.1 pre-release testing](https://blog.rust-lang.org/inside-rust/2026/06/27/1.96.1-prerelease/)
+
+
 ### 20260626
 
 
@@ -134,11 +140,8 @@ search:
 - [JEP targeted to JDK 27: 538: PEM Encodings of Cryptographic Objects (3rd Preview)](https://inside.java/2026/06/05/jep538-target-jdk27)
 - [Intelligent JVM Monitoring: Combining JDK Flight Recorder with AI](https://inside.java/2026/06/02/jfr-ai-monitor)
 - [Episode 59 “Java *is* Memory Efficient” [AtA]](https://inside.java/2026/05/28/podcast-059)
-- [JEP targeted to JDK 27: 523: Make G1 the Default Garbage Collector in All Environments](https://inside.java/2026/05/26/jep523-target-jdk27)
-- [Agentic AI Workflows for OpenJDK Development](https://inside.java/2026/05/26/openjdk-ai-agents)
 - [The VibeSec reckoning: Why prompting your AI to be secure isn&#39;t enough](https://www.thoughtworks.com/insights/articles/vibesec-reckoning-prompting-ai-secure-is-not-enough)
 - [Cognitive debt is a real organizational risk: Don’t ignore it](https://www.thoughtworks.com/insights/blog/generative-ai/cognitive-debt-real-organizational-risk)
-- [Semantic drift and semantic integrity: Stewarding meaning in the age of AI](https://www.thoughtworks.com/insights/blog/data-strategy/semantic-drift-stewarding-meaning-ai)
 
 
 ### 20260608
@@ -198,22 +201,18 @@ search:
 - [VMware hypervisor deployment using MAAS](https://ubuntu.com//blog/vmware-hypervisor-deployment-using-maas)
 - [Migrating from Apache Spark 3 to Spark 4](https://ubuntu.com//blog/migrating-from-apache-spark-3-to-spark-4)
 - [Introducing Workshop: launch sandboxed development environments on Ubuntu with a single command](https://ubuntu.com//blog/introducing-workshop-sandboxed-development-environments)
-- [Run agentic workloads on Arm and Ubuntu](https://ubuntu.com//blog/run-agentic-workloads-on-arm-and-ubuntu)
 
 
 ### 20260529
 
 
 - [Episode 59 “Java *is* Memory Efficient” [AtA]](https://inside.java/2026/05/28/podcast-059/)
-- [JEP targeted to JDK 27: 523: Make G1 the Default Garbage Collector in All Environments](https://inside.java/2026/05/26/jep523-target-jdk27/)
-- [Agentic AI Workflows for OpenJDK Development](https://inside.java/2026/05/26/openjdk-ai-agents/)
 
 
 ### 20260528
 
 
 - [Koog 1.0 Is Out: Stable Core, Better Interop, and Multiplatform Observability](https://blog.jetbrains.com/ai/2026/05/koog-1-0-is-out-stable-core-better-interop-and-multiplatform-observability/)
-- [1.96.0 pre-release testing](https://blog.rust-lang.org/inside-rust/2026/05/26/1.96.0-prerelease/)
 - [Announcing Rust 1.96.0](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)
 
 
