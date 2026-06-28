@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260628
+
+
 ### 20260627
 
 
@@ -200,7 +203,6 @@ search:
 - [Canonical announces optimized Ubuntu images for TPU virtual machines by Google Cloud](https://ubuntu.com//blog/canonical-announces-optimized-ubuntu-images-for-tpu-virtual-machines-by-google-cloud)
 - [VMware hypervisor deployment using MAAS](https://ubuntu.com//blog/vmware-hypervisor-deployment-using-maas)
 - [Migrating from Apache Spark 3 to Spark 4](https://ubuntu.com//blog/migrating-from-apache-spark-3-to-spark-4)
-- [Introducing Workshop: launch sandboxed development environments on Ubuntu with a single command](https://ubuntu.com//blog/introducing-workshop-sandboxed-development-environments)
 
 
 ### 20260529
@@ -212,7 +214,6 @@ search:
 ### 20260528
 
 
-- [Koog 1.0 Is Out: Stable Core, Better Interop, and Multiplatform Observability](https://blog.jetbrains.com/ai/2026/05/koog-1-0-is-out-stable-core-better-interop-and-multiplatform-observability/)
 - [Announcing Rust 1.96.0](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)
 
 
