@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260629
+
+
+- [Hunting a 16-year-old SQLite bug with TLA+: is dqlite affected?](https://ubuntu.com//blog/hunting-a-16-year-old-sqlite-bug-with-tla-is-dqlite-affected)
+
+
 ### 20260628
 
 
@@ -142,9 +148,7 @@ search:
 - [JavaNext Language Features](https://inside.java/2026/06/07/java-next-language-features)
 - [JEP targeted to JDK 27: 538: PEM Encodings of Cryptographic Objects (3rd Preview)](https://inside.java/2026/06/05/jep538-target-jdk27)
 - [Intelligent JVM Monitoring: Combining JDK Flight Recorder with AI](https://inside.java/2026/06/02/jfr-ai-monitor)
-- [Episode 59 “Java *is* Memory Efficient” [AtA]](https://inside.java/2026/05/28/podcast-059)
 - [The VibeSec reckoning: Why prompting your AI to be secure isn&#39;t enough](https://www.thoughtworks.com/insights/articles/vibesec-reckoning-prompting-ai-secure-is-not-enough)
-- [Cognitive debt is a real organizational risk: Don’t ignore it](https://www.thoughtworks.com/insights/blog/generative-ai/cognitive-debt-real-organizational-risk)
 
 
 ### 20260608
@@ -200,20 +204,6 @@ search:
 ### 20260530
 
 
-- [Canonical announces optimized Ubuntu images for TPU virtual machines by Google Cloud](https://ubuntu.com//blog/canonical-announces-optimized-ubuntu-images-for-tpu-virtual-machines-by-google-cloud)
-- [VMware hypervisor deployment using MAAS](https://ubuntu.com//blog/vmware-hypervisor-deployment-using-maas)
-- [Migrating from Apache Spark 3 to Spark 4](https://ubuntu.com//blog/migrating-from-apache-spark-3-to-spark-4)
-
-
 ### 20260529
-
-
-- [Episode 59 “Java *is* Memory Efficient” [AtA]](https://inside.java/2026/05/28/podcast-059/)
-
-
-### 20260528
-
-
-- [Announcing Rust 1.96.0](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)
 
 
