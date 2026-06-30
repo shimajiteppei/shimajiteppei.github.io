@@ -8,9 +8,22 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260630
+
+
+- [Announcing Rust 1.96.1](https://blog.rust-lang.org/2026/06/30/Rust-1.96.1/)
+- [The local inference boundary: Reflections on Apple’s AFM 3 and token economics](https://www.thoughtworks.com/insights/blog/generative-ai/local-inference-boundary-reflections-apple-afm3-token-economics)
+- [Build an AI knowledge fabric for your organization](https://www.thoughtworks.com/insights/blog/machine-learning-and-ai/build-AI-knowledge-fabric-for-your-organization)
+- [Is AI unbundling expertise?](https://www.thoughtworks.com/insights/blog/generative-ai/unbundling-expertise)
+- [Generative ref-AI-ctoring: Solving tech debt in the age of AI](https://www.thoughtworks.com/insights/blog/generative-ai/generative-ai-refactoring)
+- [Evaluating AI agents in production: A practical framework](https://www.thoughtworks.com/insights/blog/machine-learning-and-ai/Evaluating-AI-agents-in-production)
+- [Why ontologies matter, why they fail and how to build them anyway](https://www.thoughtworks.com/insights/blog/data-strategy/why-ontologies-matter-fail-build-anyway)
+
+
 ### 20260629
 
 
+- [Kotlin Notebook Sunset](https://blog.jetbrains.com/idea/2026/06/kotlin-notebook-sunset/)
 - [Hunting a 16-year-old SQLite bug with TLA+: is dqlite affected?](https://ubuntu.com//blog/hunting-a-16-year-old-sqlite-bug-with-tla-is-dqlite-affected)
 
 
@@ -148,7 +161,6 @@ search:
 - [JavaNext Language Features](https://inside.java/2026/06/07/java-next-language-features)
 - [JEP targeted to JDK 27: 538: PEM Encodings of Cryptographic Objects (3rd Preview)](https://inside.java/2026/06/05/jep538-target-jdk27)
 - [Intelligent JVM Monitoring: Combining JDK Flight Recorder with AI](https://inside.java/2026/06/02/jfr-ai-monitor)
-- [The VibeSec reckoning: Why prompting your AI to be secure isn&#39;t enough](https://www.thoughtworks.com/insights/articles/vibesec-reckoning-prompting-ai-secure-is-not-enough)
 
 
 ### 20260608
@@ -202,8 +214,5 @@ search:
 
 
 ### 20260530
-
-
-### 20260529
 
 
