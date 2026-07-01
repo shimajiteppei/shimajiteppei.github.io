@@ -8,6 +8,17 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260701
+
+
+- [Kotlin Comes to BlueJ](https://blog.jetbrains.com/kotlin/2026/07/kotlin-comes-to-bluej/)
+- [Kodee’s Kotlin Roundup: Kotlin Turns 15, Kotlin 2.4.0, and the Kotlin Toolchain](https://blog.jetbrains.com/kotlin/2026/06/kodees-kotlin-roundup-kotlin-turns-15-kotlin-2-4-0-and-the-kotlin-toolchain/)
+- [ZGC: A Decade of Redefining Java Performance](https://inside.java/2026/06/30/zgc-performance-decade/)
+- [DirtyClone Linux kernel local privilege escalation vulnerability fixes available](https://ubuntu.com//blog/dirtyclone-linux-vulnerability-fixes-available)
+- [pedit COW kernel local privilege escalation vulnerability mitigations](https://ubuntu.com//blog/pedit-cow-linux-vulnerability-fixes-available)
+- [Canonical becomes Gold Sponsor of Trifecta Tech Foundation](https://ubuntu.com//blog/canonical-becomes-gold-sponsor-of-trifecta-tech-foundation)
+
+
 ### 20260630
 
 
@@ -211,8 +222,5 @@ search:
 
 
 ### 20260531
-
-
-### 20260530
 
 
