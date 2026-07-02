@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260702
+
+
+- [SIMD Vectors in the HotSpot JVM - Auto Vectorization and the Vector API](https://inside.java/2026/07/02/simd-vectors-hotspot-jvm/)
+
+
 ### 20260701
 
 
@@ -219,8 +225,5 @@ search:
 
 
 - [Securing AI agent workflows on Ubuntu with the new NVIDIA OpenShell snap](https://ubuntu.com//blog/nvidia-openshell-ubuntu-announcement)
-
-
-### 20260531
 
 
