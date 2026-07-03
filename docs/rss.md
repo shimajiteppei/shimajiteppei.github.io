@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260703
+
+
+- [In Conversation With the Golden Kodee Winners](https://blog.jetbrains.com/kotlin/2026/07/in-conversation-with-the-golden-kodee-winners/)
+
+
 ### 20260702
 
 
@@ -218,12 +224,5 @@ search:
 - [Intelligent JVM Monitoring: Combining JDK Flight Recorder with AI](https://inside.java/2026/06/02/jfr-ai-monitor/)
 - [Launching the Rust Foundation Maintainers Fund](https://blog.rust-lang.org/2026/06/02/launching-the-rust-foundation-maintainers-fund/)
 - [What is InfiniBand?](https://ubuntu.com//blog/what-is-infiniband)
-- [How Canonical Support solves hard Linux performance bugs  – even in 12-year old code](https://ubuntu.com//blog/support-solves-bugs-in-12-year-old-code)
-
-
-### 20260601
-
-
-- [Securing AI agent workflows on Ubuntu with the new NVIDIA OpenShell snap](https://ubuntu.com//blog/nvidia-openshell-ubuntu-announcement)
 
 
