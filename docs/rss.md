@@ -8,10 +8,15 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260704
+
+
 ### 20260703
 
 
 - [In Conversation With the Golden Kodee Winners](https://blog.jetbrains.com/kotlin/2026/07/in-conversation-with-the-golden-kodee-winners/)
+- [Rustup update: our plans for the 1.30 release cycle](https://blog.rust-lang.org/inside-rust/2026/07/03/rustup-update-1.30/)
+- [April &amp; May 2026 Project Director Update](https://blog.rust-lang.org/inside-rust/2026/07/01/project-director-update/)
 
 
 ### 20260702
@@ -183,7 +188,6 @@ search:
 - [Oracle Java Extension for Visual Studio Code Version 26.0.0 Is Now Available](https://inside.java/2026/06/08/java-vscode-extension-update)
 - [JavaNext Language Features](https://inside.java/2026/06/07/java-next-language-features)
 - [JEP targeted to JDK 27: 538: PEM Encodings of Cryptographic Objects (3rd Preview)](https://inside.java/2026/06/05/jep538-target-jdk27)
-- [Intelligent JVM Monitoring: Combining JDK Flight Recorder with AI](https://inside.java/2026/06/02/jfr-ai-monitor)
 
 
 ### 20260608
@@ -215,14 +219,5 @@ search:
 - [Kotlin 2.4.0 Released](https://blog.jetbrains.com/kotlin/2026/06/kotlin-2-4-0-released/)
 - [Maintainer spotlight: Tiffany Pek Yuan (@tiif)](https://blog.rust-lang.org/inside-rust/2026/06/03/maintainer-spotlight-tiffany-pek-yuan-tiif/)
 - [AI with AMD ROCm on Ubuntu: your questions answered](https://ubuntu.com//blog/amd-rocm-on-ubuntu)
-- [Ubuntu and Ubuntu Pro on Azure Cobalt 200 VMs](https://ubuntu.com//blog/ubuntu-azure-cobalt-200-vms)
-
-
-### 20260602
-
-
-- [Intelligent JVM Monitoring: Combining JDK Flight Recorder with AI](https://inside.java/2026/06/02/jfr-ai-monitor/)
-- [Launching the Rust Foundation Maintainers Fund](https://blog.rust-lang.org/2026/06/02/launching-the-rust-foundation-maintainers-fund/)
-- [What is InfiniBand?](https://ubuntu.com//blog/what-is-infiniband)
 
 
