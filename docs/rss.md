@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260705
+
+
 ### 20260704
 
 
@@ -134,7 +137,6 @@ search:
 - [Navigating today’s AI token crisis](https://www.thoughtworks.com/insights/blog/generative-ai/navigating-ai-token-crisis)
 - [Does every feature we build with AI need a token budget?](https://www.thoughtworks.com/insights/blog/generative-ai/does-every-feature-build-ai-token-budget)
 - [Enabling evolutionary database development: Database branching with Lakebase](https://www.thoughtworks.com/insights/blog/data-engineering/enabling-evolutionary-database-branching-with-lakebase)
-- [Claude outage, June 2026: Reckoning with AI’s increasing status as infrastructure](https://www.thoughtworks.com/insights/blog/generative-ai/claude-outage-june-2026)
 - [Beyond Mythos: responding to a new threat landscape](https://ubuntu.com//blog/responding-to-a-new-threat-landscape)
 - [A look into Ubuntu Core 26: Building a local AI inference appliance in a virtual machine](https://ubuntu.com//blog/ubuntu-core-26-ai-box)
 
@@ -210,14 +212,5 @@ search:
 
 - [How Josh helps Rust manage code across multiple repositories](https://blog.rust-lang.org/inside-rust/2026/06/04/how-josh-helps-rust-manage-code-across-multiple-repositories/)
 - [A look into Ubuntu Core 26: Deploying AI models on Renesas RZ/V series for production](https://ubuntu.com//blog/ubuntu-core-26-ai-renesas)
-- [RISC-V profiles &amp;#8211; why is RVA23 significant?](https://ubuntu.com//blog/risc-v-profiles-why-is-rva23-significant)
-
-
-### 20260603
-
-
-- [Kotlin 2.4.0 Released](https://blog.jetbrains.com/kotlin/2026/06/kotlin-2-4-0-released/)
-- [Maintainer spotlight: Tiffany Pek Yuan (@tiif)](https://blog.rust-lang.org/inside-rust/2026/06/03/maintainer-spotlight-tiffany-pek-yuan-tiif/)
-- [AI with AMD ROCm on Ubuntu: your questions answered](https://ubuntu.com//blog/amd-rocm-on-ubuntu)
 
 
