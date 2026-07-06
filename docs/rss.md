@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260706
+
+
+- [Building an open source chain of trust: new research uncovers key blockers and ways forward](https://ubuntu.com//blog/open-source-security-research)
+- [Beyond safety and security: Why automotive open source demands dependability](https://ubuntu.com//blog/beyond-safety-and-security-why-automotive-open-source-demands-dependability)
+
+
 ### 20260705
 
 
@@ -136,7 +143,6 @@ search:
 - [Enabling evolutionary database development: Database branching with Lakebase (Part two)](https://www.thoughtworks.com/insights/blog/data-engineering/enabling-evolutionary-database-branching-with-lakebase-part-2)
 - [Navigating today’s AI token crisis](https://www.thoughtworks.com/insights/blog/generative-ai/navigating-ai-token-crisis)
 - [Does every feature we build with AI need a token budget?](https://www.thoughtworks.com/insights/blog/generative-ai/does-every-feature-build-ai-token-budget)
-- [Enabling evolutionary database development: Database branching with Lakebase](https://www.thoughtworks.com/insights/blog/data-engineering/enabling-evolutionary-database-branching-with-lakebase)
 - [Beyond Mythos: responding to a new threat landscape](https://ubuntu.com//blog/responding-to-a-new-threat-landscape)
 - [A look into Ubuntu Core 26: Building a local AI inference appliance in a virtual machine](https://ubuntu.com//blog/ubuntu-core-26-ai-box)
 
@@ -205,12 +211,5 @@ search:
 
 
 - [Beyond tokens per watt – using Ubuntu 26.04 LTS for AI](https://ubuntu.com//blog/beyond-tokens-per-watt)
-
-
-### 20260604
-
-
-- [How Josh helps Rust manage code across multiple repositories](https://blog.rust-lang.org/inside-rust/2026/06/04/how-josh-helps-rust-manage-code-across-multiple-repositories/)
-- [A look into Ubuntu Core 26: Deploying AI models on Renesas RZ/V series for production](https://ubuntu.com//blog/ubuntu-core-26-ai-renesas)
 
 
