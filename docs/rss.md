@@ -8,6 +8,14 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260707
+
+
+- [1.97.0 pre-release testing](https://blog.rust-lang.org/inside-rust/2026/07/07/1.97.0-prerelease/)
+- [Together for a healthier Clippy](https://blog.rust-lang.org/inside-rust/2026/07/06/unite-for-clippy/)
+- [Leadership Council update — June 2026](https://blog.rust-lang.org/inside-rust/2026/07/06/leadership-council-update/)
+
+
 ### 20260706
 
 
@@ -142,7 +150,6 @@ search:
 - [Your agent skill is not an anti-corruption layer](https://www.thoughtworks.com/insights/blog/generative-ai/your-agent-skill-not-anti-corruption-layer)
 - [Enabling evolutionary database development: Database branching with Lakebase (Part two)](https://www.thoughtworks.com/insights/blog/data-engineering/enabling-evolutionary-database-branching-with-lakebase-part-2)
 - [Navigating today’s AI token crisis](https://www.thoughtworks.com/insights/blog/generative-ai/navigating-ai-token-crisis)
-- [Does every feature we build with AI need a token budget?](https://www.thoughtworks.com/insights/blog/generative-ai/does-every-feature-build-ai-token-budget)
 - [Beyond Mythos: responding to a new threat landscape](https://ubuntu.com//blog/responding-to-a-new-threat-landscape)
 - [A look into Ubuntu Core 26: Building a local AI inference appliance in a virtual machine](https://ubuntu.com//blog/ubuntu-core-26-ai-box)
 
@@ -170,7 +177,6 @@ search:
 - [Performance Improvements in JDK 26](https://inside.java/2026/06/09/jdk-26-performance-improvements/)
 - [Oracle Java Extension for Visual Studio Code Version 26.0.0 Is Now Available](https://inside.java/2026/06/08/java-vscode-extension-update/)
 - [JavaNext Language Features](https://inside.java/2026/06/07/java-next-language-features/)
-- [JEP targeted to JDK 27: 538: PEM Encodings of Cryptographic Objects (3rd Preview)](https://inside.java/2026/06/05/jep538-target-jdk27/)
 - [AI at the edge: simplifying infrastructure with Cisco and Canonical](https://ubuntu.com//blog/ai-at-the-edge-simplifying-infrastructure-with-cisco-and-canonical)
 
 
@@ -195,7 +201,6 @@ search:
 - [Performance Improvements in JDK 26](https://inside.java/2026/06/09/jdk-26-performance-improvements)
 - [Oracle Java Extension for Visual Studio Code Version 26.0.0 Is Now Available](https://inside.java/2026/06/08/java-vscode-extension-update)
 - [JavaNext Language Features](https://inside.java/2026/06/07/java-next-language-features)
-- [JEP targeted to JDK 27: 538: PEM Encodings of Cryptographic Objects (3rd Preview)](https://inside.java/2026/06/05/jep538-target-jdk27)
 
 
 ### 20260608
@@ -205,11 +210,5 @@ search:
 
 
 ### 20260606
-
-
-### 20260605
-
-
-- [Beyond tokens per watt – using Ubuntu 26.04 LTS for AI](https://ubuntu.com//blog/beyond-tokens-per-watt)
 
 
