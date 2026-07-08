@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260708
+
+
+- [Introducing the Kotlin Benchmark for AI Coding Agents](https://blog.jetbrains.com/kotlin/2026/07/introducing-the-kotlin-benchmark-evaluate-ai-coding-agents-on-real-world-kotlin-tasks/)
+- [Ubuntu Server: a platform made for enterprise scale](https://ubuntu.com//blog/ubuntu-server-a-platform-made-for-enterprise-scale)
+
+
 ### 20260707
 
 
@@ -207,8 +214,5 @@ search:
 
 
 ### 20260607
-
-
-### 20260606
 
 
