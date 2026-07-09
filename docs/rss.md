@@ -8,6 +8,14 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260709
+
+
+- [Episode 61 “Scripting JS and Python with Project Detroit” [AtA]](https://inside.java/2026/07/09/podcast-061/)
+- [Maintainer spotlight: Gen Li (@rami3l)](https://blog.rust-lang.org/inside-rust/2026/07/07/maintainer-spotlight-gen-li-rami3l/)
+- [Announcing Rust 1.97.0](https://blog.rust-lang.org/2026/07/09/Rust-1.97.0/)
+
+
 ### 20260708
 
 
@@ -183,7 +191,6 @@ search:
 - [Exploiting GPU Tensor Cores from Java using Babylon](https://inside.java/2026/06/10/hat-tensors-computation/)
 - [Performance Improvements in JDK 26](https://inside.java/2026/06/09/jdk-26-performance-improvements/)
 - [Oracle Java Extension for Visual Studio Code Version 26.0.0 Is Now Available](https://inside.java/2026/06/08/java-vscode-extension-update/)
-- [JavaNext Language Features](https://inside.java/2026/06/07/java-next-language-features/)
 - [AI at the edge: simplifying infrastructure with Cisco and Canonical](https://ubuntu.com//blog/ai-at-the-edge-simplifying-infrastructure-with-cisco-and-canonical)
 
 
@@ -207,12 +214,8 @@ search:
 
 - [Performance Improvements in JDK 26](https://inside.java/2026/06/09/jdk-26-performance-improvements)
 - [Oracle Java Extension for Visual Studio Code Version 26.0.0 Is Now Available](https://inside.java/2026/06/08/java-vscode-extension-update)
-- [JavaNext Language Features](https://inside.java/2026/06/07/java-next-language-features)
 
 
 ### 20260608
-
-
-### 20260607
 
 
