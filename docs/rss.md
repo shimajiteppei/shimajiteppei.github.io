@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260710
+
+
+- [Managing Ubuntu on bare metal at scale](https://ubuntu.com//blog/managing-ubuntu-on-bare-metal-at-scale)
+
+
 ### 20260709
 
 
@@ -190,7 +196,6 @@ search:
 - [Simplifying Weak Reference Processing in ZGC](https://inside.java/2026/06/11/thesis-simplify-weak-reference-processing-zgc/)
 - [Exploiting GPU Tensor Cores from Java using Babylon](https://inside.java/2026/06/10/hat-tensors-computation/)
 - [Performance Improvements in JDK 26](https://inside.java/2026/06/09/jdk-26-performance-improvements/)
-- [Oracle Java Extension for Visual Studio Code Version 26.0.0 Is Now Available](https://inside.java/2026/06/08/java-vscode-extension-update/)
 - [AI at the edge: simplifying infrastructure with Cisco and Canonical](https://ubuntu.com//blog/ai-at-the-edge-simplifying-infrastructure-with-cisco-and-canonical)
 
 
@@ -213,9 +218,5 @@ search:
 
 
 - [Performance Improvements in JDK 26](https://inside.java/2026/06/09/jdk-26-performance-improvements)
-- [Oracle Java Extension for Visual Studio Code Version 26.0.0 Is Now Available](https://inside.java/2026/06/08/java-vscode-extension-update)
-
-
-### 20260608
 
 
