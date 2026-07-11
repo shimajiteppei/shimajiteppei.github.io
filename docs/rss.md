@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260711
+
+
 ### 20260710
 
 
@@ -195,7 +198,6 @@ search:
 
 - [Simplifying Weak Reference Processing in ZGC](https://inside.java/2026/06/11/thesis-simplify-weak-reference-processing-zgc/)
 - [Exploiting GPU Tensor Cores from Java using Babylon](https://inside.java/2026/06/10/hat-tensors-computation/)
-- [Performance Improvements in JDK 26](https://inside.java/2026/06/09/jdk-26-performance-improvements/)
 - [AI at the edge: simplifying infrastructure with Cisco and Canonical](https://ubuntu.com//blog/ai-at-the-edge-simplifying-infrastructure-with-cisco-and-canonical)
 
 
@@ -211,12 +213,5 @@ search:
 
 
 - [Exploiting GPU Tensor Cores from Java using Babylon](https://inside.java/2026/06/10/hat-tensors-computation)
-- [What is RDMA over Converged Ethernet (RoCE)?](https://ubuntu.com//blog/what-is-rdma-over-converged-ethernet-roce)
-
-
-### 20260609
-
-
-- [Performance Improvements in JDK 26](https://inside.java/2026/06/09/jdk-26-performance-improvements)
 
 
