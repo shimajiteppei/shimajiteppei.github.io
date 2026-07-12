@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260712
+
+
+- [Januscape vulnerability CVE-2026-53359 mitigations available](https://ubuntu.com//blog/januscape-linux-vulnerability-mitigations-available)
+
+
 ### 20260711
 
 
@@ -173,7 +179,6 @@ search:
 - [Is a codeless future an illusion?](https://www.thoughtworks.com/insights/blog/programming-languages/codeless-future-illusion)
 - [Your agent skill is not an anti-corruption layer](https://www.thoughtworks.com/insights/blog/generative-ai/your-agent-skill-not-anti-corruption-layer)
 - [Enabling evolutionary database development: Database branching with Lakebase (Part two)](https://www.thoughtworks.com/insights/blog/data-engineering/enabling-evolutionary-database-branching-with-lakebase-part-2)
-- [Navigating today’s AI token crisis](https://www.thoughtworks.com/insights/blog/generative-ai/navigating-ai-token-crisis)
 - [Beyond Mythos: responding to a new threat landscape](https://ubuntu.com//blog/responding-to-a-new-threat-landscape)
 - [A look into Ubuntu Core 26: Building a local AI inference appliance in a virtual machine](https://ubuntu.com//blog/ubuntu-core-26-ai-box)
 
@@ -197,7 +202,6 @@ search:
 
 
 - [Simplifying Weak Reference Processing in ZGC](https://inside.java/2026/06/11/thesis-simplify-weak-reference-processing-zgc/)
-- [Exploiting GPU Tensor Cores from Java using Babylon](https://inside.java/2026/06/10/hat-tensors-computation/)
 - [AI at the edge: simplifying infrastructure with Cisco and Canonical](https://ubuntu.com//blog/ai-at-the-edge-simplifying-infrastructure-with-cisco-and-canonical)
 
 
@@ -207,11 +211,5 @@ search:
 - [Simplifying Weak Reference Processing in ZGC](https://inside.java/2026/06/11/thesis-simplify-weak-reference-processing-zgc)
 - [Program management update — May 2026](https://blog.rust-lang.org/inside-rust/2026/06/11/program-management-update-may-2026/)
 - [The next era of telco clouds: get open infrastructure choice with Sylva and Canonical Kubernetes](https://ubuntu.com//blog/the-next-era-of-telco-clouds-get-open-infrastructure-choice-with-sylva-and-canonical-kubernetes)
-
-
-### 20260610
-
-
-- [Exploiting GPU Tensor Cores from Java using Babylon](https://inside.java/2026/06/10/hat-tensors-computation)
 
 
