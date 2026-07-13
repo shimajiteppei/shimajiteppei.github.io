@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260713
+
+
+- [crates.io: development update](https://blog.rust-lang.org/2026/07/13/crates-io-development-update/)
+
+
 ### 20260712
 
 
@@ -199,17 +205,5 @@ search:
 
 
 ### 20260612
-
-
-- [Simplifying Weak Reference Processing in ZGC](https://inside.java/2026/06/11/thesis-simplify-weak-reference-processing-zgc/)
-- [AI at the edge: simplifying infrastructure with Cisco and Canonical](https://ubuntu.com//blog/ai-at-the-edge-simplifying-infrastructure-with-cisco-and-canonical)
-
-
-### 20260611
-
-
-- [Simplifying Weak Reference Processing in ZGC](https://inside.java/2026/06/11/thesis-simplify-weak-reference-processing-zgc)
-- [Program management update — May 2026](https://blog.rust-lang.org/inside-rust/2026/06/11/program-management-update-may-2026/)
-- [The next era of telco clouds: get open infrastructure choice with Sylva and Canonical Kubernetes](https://ubuntu.com//blog/the-next-era-of-telco-clouds-get-open-infrastructure-choice-with-sylva-and-canonical-kubernetes)
 
 
