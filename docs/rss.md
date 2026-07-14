@@ -8,6 +8,15 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260714
+
+
+- [Rustup 1.29.1 beta: call for testing!](https://blog.rust-lang.org/inside-rust/2026/07/14/rustup-1.29.1-beta-cft/)
+- [The zero-cost fallacy: Open source software in the agentic era](https://www.thoughtworks.com/insights/blog/open-source/zero-cost-fallacy-open-source-agentic-era)
+- [Are non-functional requirements the missing guardrail for AI-generated code?](https://www.thoughtworks.com/insights/blog/architecture/non-functional-requirements-missing-guardrail-ai-generated-code)
+- [Performance engineering in agentic AI systems](https://www.thoughtworks.com/insights/articles/Performance-engineering-in-agentic-AI-systems)
+
+
 ### 20260713
 
 
@@ -183,8 +192,6 @@ search:
 
 - [Can Java Microservices Be As Fast As Go? A 2026 Benchmark Update](https://inside.java/2026/06/15/java-microservices-fast-go-2026-benchmark/)
 - [Is a codeless future an illusion?](https://www.thoughtworks.com/insights/blog/programming-languages/codeless-future-illusion)
-- [Your agent skill is not an anti-corruption layer](https://www.thoughtworks.com/insights/blog/generative-ai/your-agent-skill-not-anti-corruption-layer)
-- [Enabling evolutionary database development: Database branching with Lakebase (Part two)](https://www.thoughtworks.com/insights/blog/data-engineering/enabling-evolutionary-database-branching-with-lakebase-part-2)
 - [Beyond Mythos: responding to a new threat landscape](https://ubuntu.com//blog/responding-to-a-new-threat-landscape)
 - [A look into Ubuntu Core 26: Building a local AI inference appliance in a virtual machine](https://ubuntu.com//blog/ubuntu-core-26-ai-box)
 
@@ -199,11 +206,5 @@ search:
 
 
 ### 20260613
-
-
-- [A decade of Ubuntu on IBM Z and IBM LinuxONE](https://ubuntu.com//blog/a-decade-of-ubuntu-on-ibm-z-and-ibm-linuxone)
-
-
-### 20260612
 
 
