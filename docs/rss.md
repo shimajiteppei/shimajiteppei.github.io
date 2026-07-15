@@ -8,6 +8,14 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260715
+
+
+- [1.97.1 pre-release testing](https://blog.rust-lang.org/inside-rust/2026/07/15/1.97.1-prerelease/)
+- [Program management update — June 2026](https://blog.rust-lang.org/inside-rust/2026/07/14/program-management-update--june-2026/)
+- [MAAS installation: bare metal provisioning is easier than ever](https://ubuntu.com//blog/maas-installation-bare-metal-provisioning-is-easier-than-ever)
+
+
 ### 20260714
 
 
@@ -203,8 +211,5 @@ search:
 
 
 - [How Agentic Coding Can Help You Migrate Java Applications Faster](https://inside.java/2026/06/14/cline-migrate-java-oca/)
-
-
-### 20260613
 
 
