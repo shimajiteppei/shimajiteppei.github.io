@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260717
+
+
+- [Tracing a memory leak bug in PID 1 and contributing an upstream fix: a Linux support story](https://ubuntu.com//blog/fixing-memory-bug)
+
+
 ### 20260716
 
 
@@ -206,12 +212,7 @@ search:
 ### 20260616
 
 
-- [Can Java Microservices Be As Fast As Go? A 2026 Benchmark Update](https://inside.java/2026/06/15/java-microservices-fast-go-2026-benchmark/)
-- [Is a codeless future an illusion?](https://www.thoughtworks.com/insights/blog/programming-languages/codeless-future-illusion)
 - [Beyond Mythos: responding to a new threat landscape](https://ubuntu.com//blog/responding-to-a-new-threat-landscape)
 - [A look into Ubuntu Core 26: Building a local AI inference appliance in a virtual machine](https://ubuntu.com//blog/ubuntu-core-26-ai-box)
-
-
-### 20260615
 
 
