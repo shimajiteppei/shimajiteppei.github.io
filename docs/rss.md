@@ -8,9 +8,17 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260718
+
+
+- [The Java Story | The Official Documentary](https://inside.java/2026/07/18/the-java-documentary/)
+
+
 ### 20260717
 
 
+- [Kotlin Turns 15: Celebrate the Kotlin Effect](https://blog.jetbrains.com/kotlin/2026/07/kotlin-turns-15-celebrate-the-kotlin-effect/)
+- [The History of Kodee, Kotlin’s Mascot](https://blog.jetbrains.com/research/2026/07/the-history-of-kodee/)
 - [Tracing a memory leak bug in PID 1 and contributing an upstream fix: a Linux support story](https://ubuntu.com//blog/fixing-memory-bug)
 
 
@@ -203,16 +211,5 @@ search:
 
 
 ### 20260617
-
-
-- [The dangers of token usage billing](https://www.thoughtworks.com/insights/blog/generative-ai/dangers-token-usage-billing)
-- [Template: Streamlining open source design contributions](https://ubuntu.com//blog/template-streamlining-open-source-design-contributions)
-
-
-### 20260616
-
-
-- [Beyond Mythos: responding to a new threat landscape](https://ubuntu.com//blog/responding-to-a-new-threat-landscape)
-- [A look into Ubuntu Core 26: Building a local AI inference appliance in a virtual machine](https://ubuntu.com//blog/ubuntu-core-26-ai-box)
 
 
