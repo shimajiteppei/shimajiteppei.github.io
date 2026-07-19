@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260719
+
+
+- [Episode 62 “JDK 27 + Valhalla, Now! + Hackathon” [IJN]](https://inside.java/2026/07/19/podcast-062/)
+
+
 ### 20260718
 
 
@@ -138,7 +144,6 @@ search:
 - [Is AI unbundling expertise?](https://www.thoughtworks.com/insights/blog/generative-ai/unbundling-expertise)
 - [Generative ref-AI-ctoring: Solving tech debt in the age of AI](https://www.thoughtworks.com/insights/blog/generative-ai/generative-ai-refactoring)
 - [Evaluating AI agents in production: A practical framework](https://www.thoughtworks.com/insights/blog/machine-learning-and-ai/Evaluating-AI-agents-in-production)
-- [Why ontologies matter, why they fail and how to build them anyway](https://www.thoughtworks.com/insights/blog/data-strategy/why-ontologies-matter-fail-build-anyway)
 
 
 ### 20260629
@@ -204,12 +209,5 @@ search:
 
 
 ### 20260618
-
-
-- [Validating real-world skills through Canonical Academy](https://ubuntu.com//blog/validating-real-world-skills-through-canonical-academy)
-- [Virtualized Android comes to Anbox Cloud](https://ubuntu.com//blog/virtualized-android-comes-to-anbox-cloud)
-
-
-### 20260617
 
 
