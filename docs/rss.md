@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260720
+
+
 ### 20260719
 
 
@@ -142,8 +145,6 @@ search:
 - [The local inference boundary: Reflections on Apple’s AFM 3 and token economics](https://www.thoughtworks.com/insights/blog/generative-ai/local-inference-boundary-reflections-apple-afm3-token-economics)
 - [Build an AI knowledge fabric for your organization](https://www.thoughtworks.com/insights/blog/machine-learning-and-ai/build-AI-knowledge-fabric-for-your-organization)
 - [Is AI unbundling expertise?](https://www.thoughtworks.com/insights/blog/generative-ai/unbundling-expertise)
-- [Generative ref-AI-ctoring: Solving tech debt in the age of AI](https://www.thoughtworks.com/insights/blog/generative-ai/generative-ai-refactoring)
-- [Evaluating AI agents in production: A practical framework](https://www.thoughtworks.com/insights/blog/machine-learning-and-ai/Evaluating-AI-agents-in-production)
 
 
 ### 20260629
@@ -203,11 +204,5 @@ search:
 
 
 ### 20260619
-
-
-- [So you need to add microcontrollers to your fleet: now what?](https://ubuntu.com//blog/microcontrollers-ubuntu-core-golioth)
-
-
-### 20260618
 
 
