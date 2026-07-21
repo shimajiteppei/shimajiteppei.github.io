@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260721
+
+
+- [Quality Outreach Heads-up - JDK 27: Default G1 in All Environments](https://inside.java/2026/07/20/quality-heads-up/)
+
+
 ### 20260720
 
 
@@ -144,7 +150,6 @@ search:
 - [Announcing Rust 1.96.1](https://blog.rust-lang.org/2026/06/30/Rust-1.96.1/)
 - [The local inference boundary: Reflections on Apple’s AFM 3 and token economics](https://www.thoughtworks.com/insights/blog/generative-ai/local-inference-boundary-reflections-apple-afm3-token-economics)
 - [Build an AI knowledge fabric for your organization](https://www.thoughtworks.com/insights/blog/machine-learning-and-ai/build-AI-knowledge-fabric-for-your-organization)
-- [Is AI unbundling expertise?](https://www.thoughtworks.com/insights/blog/generative-ai/unbundling-expertise)
 
 
 ### 20260629
@@ -201,8 +206,5 @@ search:
 
 
 ### 20260620
-
-
-### 20260619
 
 
