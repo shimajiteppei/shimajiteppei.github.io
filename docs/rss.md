@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260722
+
+
+- [Canonical announces the Enterprise Store as part of Ubuntu Pro](https://ubuntu.com//blog/canonical-announces-the-enterprise-store)
+
+
 ### 20260721
 
 
@@ -203,8 +209,5 @@ search:
 
 
 ### 20260621
-
-
-### 20260620
 
 
