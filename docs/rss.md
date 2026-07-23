@@ -8,6 +8,16 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260723
+
+
+- [Episode 63 “AI Solutions with Spring AI 2.0 [I/O]](https://inside.java/2026/07/23/podcast-063/)
+- [Should we still design code for humans?](https://www.thoughtworks.com/insights/blog/programming-languages/should-still-design-code-humans)
+- [The commodity illusion and the new geopolitics of compute](https://www.thoughtworks.com/insights/blog/generative-ai/the-commodity-illusion-new-geopolitics-compute)
+- [The primitive paradox: Reclaiming software discipline in an agentic world](https://www.thoughtworks.com/insights/blog/generative-ai/primitive-paradox-reclaiming-software-discipline-agentic-world)
+- [Context decay is quietly killing your features before they go live](https://www.thoughtworks.com/insights/blog/continuous-delivery/Context-decay-is-killing-your-features-before-they-go-live)
+
+
 ### 20260722
 
 
@@ -204,10 +214,6 @@ search:
 ### 20260622
 
 
-- [Better Tools for Immutable Data](https://inside.java/2026/06/21/better-tools-immutable-data/)
 - [Ubuntu Summit 26.04: connected by open source](https://ubuntu.com//blog/ubuntu-summit-26-04-connected-by-open-source)
-
-
-### 20260621
 
 
