@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260724
+
+
+- [A day in the life of an Android developer with Anbox Cloud](https://ubuntu.com//blog/android-development-with-anbox-cloud)
+
+
 ### 20260723
 
 
@@ -165,7 +171,6 @@ search:
 
 - [Announcing Rust 1.96.1](https://blog.rust-lang.org/2026/06/30/Rust-1.96.1/)
 - [The local inference boundary: Reflections on Apple’s AFM 3 and token economics](https://www.thoughtworks.com/insights/blog/generative-ai/local-inference-boundary-reflections-apple-afm3-token-economics)
-- [Build an AI knowledge fabric for your organization](https://www.thoughtworks.com/insights/blog/machine-learning-and-ai/build-AI-knowledge-fabric-for-your-organization)
 
 
 ### 20260629
@@ -208,12 +213,5 @@ search:
 
 
 - [Canonical announces live kernel patching for Arm64](https://ubuntu.com//blog/canonical-announces-live-kernel-patching-for-arm64)
-- [How to use RISC-V custom instructions with Ubuntu](https://ubuntu.com//blog/how-to-use-risc-v-custom-instructions-with-ubuntu)
-
-
-### 20260622
-
-
-- [Ubuntu Summit 26.04: connected by open source](https://ubuntu.com//blog/ubuntu-summit-26-04-connected-by-open-source)
 
 
