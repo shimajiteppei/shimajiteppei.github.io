@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260725
+
+
+- [Pairing In-Process and Hosted Embeddings for Java MCP Tool Development](https://inside.java/2026/07/25/design-java-mcp-tool/)
+- [Confidential computing and the new regulatory focus on data in use](https://ubuntu.com//blog/confidential-computing-and-the-new-regulatory-focus-on-data-in-use)
+
+
 ### 20260724
 
 
@@ -170,7 +177,6 @@ search:
 
 
 - [Announcing Rust 1.96.1](https://blog.rust-lang.org/2026/06/30/Rust-1.96.1/)
-- [The local inference boundary: Reflections on Apple’s AFM 3 and token economics](https://www.thoughtworks.com/insights/blog/generative-ai/local-inference-boundary-reflections-apple-afm3-token-economics)
 
 
 ### 20260629
@@ -207,11 +213,5 @@ search:
 
 
 - [Kotlin Toolchain 0.11: The Next Step for Amper](https://blog.jetbrains.com/amper/2026/06/kotlin-toolchain-0-11/)
-
-
-### 20260623
-
-
-- [Canonical announces live kernel patching for Arm64](https://ubuntu.com//blog/canonical-announces-live-kernel-patching-for-arm64)
 
 
