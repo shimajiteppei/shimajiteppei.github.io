@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260726
+
+
 ### 20260725
 
 
@@ -206,12 +209,5 @@ search:
 
 
 - [The many journeys of learning Rust](https://blog.rust-lang.org/2026/06/25/vision-doc-journeys-to-learning-rust/)
-- [Anbox Cloud on C4A metal: Android, at scale, without friction](https://ubuntu.com//blog/anbox-cloud-on-c4a-metal-android-at-scale-without-friction)
-
-
-### 20260624
-
-
-- [Kotlin Toolchain 0.11: The Next Step for Amper](https://blog.jetbrains.com/amper/2026/06/kotlin-toolchain-0-11/)
 
 
