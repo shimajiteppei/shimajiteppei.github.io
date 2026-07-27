@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260727
+
+
+- [Ubuntu’s virtualization hardware enablement (HWE) stack: a new model for confidential computing enablement](https://ubuntu.com//blog/ubuntu-virtualization-hwe-stack-confidential-computing)
+
+
 ### 20260726
 
 
@@ -186,7 +192,6 @@ search:
 
 
 - [Kotlin Notebook Sunset](https://blog.jetbrains.com/idea/2026/06/kotlin-notebook-sunset/)
-- [Hunting a 16-year-old SQLite bug with TLA+: is dqlite affected?](https://ubuntu.com//blog/hunting-a-16-year-old-sqlite-bug-with-tla-is-dqlite-affected)
 
 
 ### 20260628
@@ -201,13 +206,6 @@ search:
 ### 20260626
 
 
-- [Episode 60 “How JEPs Drive Java&#39;s Evolution” [AtA]](https://inside.java/2026/06/25/podcast-060/)
 - [Challenges designers face in open source (and how to fix them)](https://ubuntu.com//blog/challenges-designers-face-in-open-source-and-how-to-fix-them)
-
-
-### 20260625
-
-
-- [The many journeys of learning Rust](https://blog.rust-lang.org/2026/06/25/vision-doc-journeys-to-learning-rust/)
 
 
