@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260728
+
+
+- [KotlinLLM is Going Open Source](https://blog.jetbrains.com/research/2026/07/kotlinllm-open-source/)
+- [Sakana AI&#39;s Fugu: Is this where model routing should live?](https://www.thoughtworks.com/insights/blog/generative-ai/sakana-ai-fugu-is-this-where-model-routing-should-live)
+
+
 ### 20260727
 
 
@@ -201,11 +208,5 @@ search:
 
 
 - [1.96.1 pre-release testing](https://blog.rust-lang.org/inside-rust/2026/06/27/1.96.1-prerelease/)
-
-
-### 20260626
-
-
-- [Challenges designers face in open source (and how to fix them)](https://ubuntu.com//blog/challenges-designers-face-in-open-source-and-how-to-fix-them)
 
 
