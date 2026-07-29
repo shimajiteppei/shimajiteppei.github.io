@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260729
+
+
+- [Secure Your APIs: OAuth2 and JWT for Beginners](https://blog.jetbrains.com/kotlin/2026/07/secure-your-apis-oauth2-and-jwt-for-beginners/)
+- [Quality Outreach Heads-up - JDK 28: jlink cacerts plugin](https://inside.java/2026/07/28/quality-heads-up/)
+
+
 ### 20260728
 
 
@@ -202,11 +209,5 @@ search:
 
 
 ### 20260628
-
-
-### 20260627
-
-
-- [1.96.1 pre-release testing](https://blog.rust-lang.org/inside-rust/2026/06/27/1.96.1-prerelease/)
 
 
