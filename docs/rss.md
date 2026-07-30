@@ -8,6 +8,14 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260730
+
+
+- [Episode 64 “JIT Compiler From the Ground Up” [AtA]](https://inside.java/2026/07/30/podcast-064/)
+- [Under the HAT: Empowering GPU Acceleration for Java](https://inside.java/2026/07/30/under-the-hat-empowering-gpu-acceleration-for-java/)
+- [Newsletter: JDK 27 Rampdown Phase is Closing - Default G1 in All Environments](https://inside.java/2026/07/29/quality-heads-up/)
+
+
 ### 20260729
 
 
@@ -206,8 +214,5 @@ search:
 
 
 - [Kotlin Notebook Sunset](https://blog.jetbrains.com/idea/2026/06/kotlin-notebook-sunset/)
-
-
-### 20260628
 
 
