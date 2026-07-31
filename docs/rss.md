@@ -8,6 +8,14 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260731
+
+
+- [Transitioning Java to More Frequent Security Updates](https://inside.java/2026/07/31/transitioning-java-to-more-frequent-security-updates/)
+- [All Hands 2026 retrospective](https://blog.rust-lang.org/inside-rust/2026/07/31/all-hands-2026-retrospective/)
+- [Kimi K3: Are we entering a new multi-model era?](https://www.thoughtworks.com/insights/blog/generative-ai/kimi-k3-new-multi-model-era)
+
+
 ### 20260730
 
 
@@ -208,11 +216,5 @@ search:
 
 
 - [Announcing Rust 1.96.1](https://blog.rust-lang.org/2026/06/30/Rust-1.96.1/)
-
-
-### 20260629
-
-
-- [Kotlin Notebook Sunset](https://blog.jetbrains.com/idea/2026/06/kotlin-notebook-sunset/)
 
 
