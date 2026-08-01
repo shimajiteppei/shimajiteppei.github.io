@@ -10,9 +10,214 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2026-06-30T12:20:27+00:00</updated>
+    <updated>2026-08-01T08:56:36+00:00</updated>
 
     
+    <entry>
+        <title>Announcing Rust 1.97.1</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2026/07/16/Rust-1.97.1/" type="text/html" title="Announcing Rust 1.97.1" />
+        <published>2026-07-16T00:00:00+00:00</published>
+        <updated>2026-07-16T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2026/07/16/Rust-1.97.1/</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2026/07/16/Rust-1.97.1/">&lt;p&gt;The Rust team has published a new point release of Rust, 1.97.1. Rust is a programming language that is empowering everyone to build reliable and efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust 1.97.1 is as easy as:&lt;/p&gt;
+&lt;pre class&#x3D;&quot;giallo z-code&quot;&gt;&lt;code data-lang&#x3D;&quot;plain&quot;&gt;&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;rustup update stable&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don&#x27;t have it already, you can &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the appropriate page on our website.&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;what-s-in-1-97-1&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#what-s-in-1-97-1&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+What&#x27;s in 1.97.1&lt;/h2&gt;
+&lt;p&gt;Rust 1.97.1 fixes a &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/rust/issues/159035&quot;&gt;miscompilation in an LLVM optimization&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;We have backported both an LLVM fix and a disable of the underlying change in Rust 1.97.0 of
+Rust&#x27;s generated IR that increased the likelihood of this happening. However,
+note that the underlying miscompilation has been present since at least Rust
+1.87.&lt;/p&gt;
+&lt;p&gt;If you&#x27;d like to help us out by testing future releases, you might consider
+running your code&#x27;s CI or locally using the beta channel (&lt;code&gt;rustup default beta&lt;/code&gt;) or the nightly
+channel (&lt;code&gt;rustup default nightly&lt;/code&gt;). Please
+&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/rust/issues/new/choose&quot;&gt;report&lt;/a&gt; any bugs you
+might come across!&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;contributors-to-1-97-1&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#contributors-to-1-97-1&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Contributors to 1.97.1&lt;/h3&gt;
+&lt;p&gt;Many people came together to create Rust 1.97.1. We couldn&#x27;t have done it without all of you. &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.97.1/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Release Team</name>
+        </author>
+    </entry>
+    <entry>
+        <title>crates.io: development update</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2026/07/13/crates-io-development-update/" type="text/html" title="crates.io: development update" />
+        <published>2026-07-13T00:00:00+00:00</published>
+        <updated>2026-07-13T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2026/07/13/crates-io-development-update/</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2026/07/13/crates-io-development-update/">&lt;p&gt;Another six months have passed since our &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://blog.rust-lang.org/2026/01/21/crates-io-development-update/&quot;&gt;last development update&lt;/a&gt;, and the crates.io team has been busy. Here&#x27;s a summary of the most notable changes and improvements made to &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://crates.io/&quot;&gt;crates.io&lt;/a&gt; since then.&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;source-code-viewer&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#source-code-viewer&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Source Code Viewer&lt;/h2&gt;
+&lt;p&gt;Crate pages now have a &quot;Code&quot; tab that lets you browse the contents of published crate versions directly on crates.io. This shows you the exact files that &lt;code&gt;cargo&lt;/code&gt; downloads when you add a crate as a dependency, which might differ from the linked repository. This makes it much easier to audit your dependencies, including files that never appear in the repository, like the normalized &lt;code&gt;Cargo.toml&lt;/code&gt; files that &lt;code&gt;cargo&lt;/code&gt; generates.&lt;/p&gt;
+&lt;p&gt;&lt;img src&#x3D;&quot;https://blog.rust-lang.org/2026/07/13/crates-io-development-update/code-tab.png&quot; alt&#x3D;&quot;Source code viewer showing the &amp;quot;Code&amp;quot; tab of the serde crate&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;The viewer comes with a file tree sidebar with search functionality, syntax highlighting, and GitHub-style line selection, where clicking or dragging line numbers produces shareable &lt;code&gt;#L10-L20&lt;/code&gt; URLs.&lt;/p&gt;
+&lt;p&gt;Under the hood, the server now builds a zip file for every published version. Since the &lt;code&gt;.crate&lt;/code&gt; files that &lt;code&gt;cargo&lt;/code&gt; consumes are gzipped tarballs without random access support, a background job re-packs each of them into a seekable zip archive plus a JSON manifest describing the contained files. Both are served from our static CDN. The frontend then fetches only the manifest and loads each file on demand with an HTTP range request. Because of this architecture, browsing crate sources essentially adds no load on the crates.io API servers. Existing crate versions have been backfilled, so this works for old releases too.&lt;/p&gt;
+&lt;p&gt;The rendering library behind the code viewer is a diff renderer at heart, and that&#x27;s no accident: a version-to-version diff viewer built on the same infrastructure is currently in the works. This will allow you to review exactly what changed between two published versions, right on crates.io. Stay tuned!&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;untangling-crates-io-accounts-from-github&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#untangling-crates-io-accounts-from-github&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Untangling crates.io Accounts from GitHub&lt;/h2&gt;
+&lt;p&gt;At the end of May, the crates.io team accepted &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/3946&quot;&gt;RFC #3946&lt;/a&gt;. Crates.io accounts always have been tightly coupled to GitHub: signing in means &quot;Log in with GitHub&quot;, and your crates.io identity is your GitHub username. The RFC changes that. It introduces usernames that are native to crates.io and independent of linked GitHub accounts, as a prerequisite for eventually supporting login via other identity providers.&lt;/p&gt;
+&lt;p&gt;The implementation of crates.io usernames has started, but there is still a lot left to do, most visibly the ability to change your crates.io username. After that is complete, there will be future RFCs and implementation for signing in with identity providers other than GitHub. Since all of this touches authentication and account security, we are deliberately taking it slow and rolling these changes out in small, carefully reviewed steps.&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;advisories-and-suggestions&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#advisories-and-suggestions&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Advisories and Suggestions&lt;/h2&gt;
+&lt;p&gt;In our &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://blog.rust-lang.org/2026/01/21/crates-io-development-update/&quot;&gt;January update&lt;/a&gt; we introduced the &quot;Security&quot; tab, which shows security advisories from the &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://rustsec.org/&quot;&gt;RustSec&lt;/a&gt; database. We have since taken this integration one step further: crates that RustSec has flagged as unmaintained now show a warning banner directly on their crate pages, linking to the corresponding advisory for details and possible alternatives. Thanks to &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/djc&quot;&gt;Dirkjan Ochtman&lt;/a&gt; for implementing this feature!&lt;/p&gt;
+&lt;p&gt;&lt;img src&#x3D;&quot;https://blog.rust-lang.org/2026/07/13/crates-io-development-update/unmaintained-banner.png&quot; alt&#x3D;&quot;Unmaintained warning banner on the ansi_term crate page&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;Related to this, some popular crates have been largely absorbed into the Rust standard library over the years, like &lt;code&gt;lazy_static&lt;/code&gt;, which has been superseded by &lt;code&gt;std::sync::LazyLock&lt;/code&gt; since Rust 1.80. Crate pages of such crates now show a friendly &quot;You might not need this dependency&quot; banner describing the standard library replacement, and superseded crates in dependency lists get a small light bulb icon with a similar hint.&lt;/p&gt;
+&lt;p&gt;&lt;img src&#x3D;&quot;https://blog.rust-lang.org/2026/07/13/crates-io-development-update/std-replacement-banner.png&quot; alt&#x3D;&quot;&amp;quot;You might not need this dependency&amp;quot; banner on the lazy_static crate page&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;The dataset behind this feature lives in the new &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/std-replacement-data&quot;&gt;rust-lang/std-replacement-data&lt;/a&gt; repository, together with a documented inclusion policy: standard library replacements only, every entry must cite the stable &lt;code&gt;std&lt;/code&gt;, &lt;code&gt;core&lt;/code&gt;, or &lt;code&gt;alloc&lt;/code&gt; API and Rust version, and crate maintainers get a notice-and-comment window before an entry is added. New entries can be proposed upstream and can benefit other tools too.&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;ferris&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#ferris&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Ferris&lt;/h2&gt;
+&lt;p&gt;The most delightful change of this cycle: the Ferris on our error pages now follows your mouse cursor with its eyes:&lt;/p&gt;
+&lt;p&gt;&lt;img src&#x3D;&quot;https://blog.rust-lang.org/2026/07/13/crates-io-development-update/ferris.gif&quot; alt&#x3D;&quot;Ferris&amp;#39; eyes following the mouse cursor on the error page&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;Getting a 404 error on crates.io is now slightly less sad.&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;svelte-frontend-migration-completed&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#svelte-frontend-migration-completed&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Svelte Frontend Migration Completed&lt;/h2&gt;
+&lt;p&gt;In our &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://blog.rust-lang.org/2026/01/21/crates-io-development-update/&quot;&gt;January update&lt;/a&gt;, we announced that we were experimenting with porting the crates.io frontend from Ember.js to &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://svelte.dev/&quot;&gt;Svelte&lt;/a&gt;. This experiment has concluded successfully: the new frontend reached feature parity, went through a &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2026/04/17/crates-io-svelte-public-testing/&quot;&gt;public testing phase&lt;/a&gt; in April, became the default at the beginning of May, and the Ember.js app has been removed from our repository.&lt;/p&gt;
+&lt;p&gt;We designed this change to be invisible for our users, since the new frontend is a 1:1 port of the previous design and functionality. For the team and our contributors, however, it is a big deal: the frontend is now built on a more modern framework, which should make it easier for new contributors to get started. It also allows us to iterate faster, as the source code viewer above demonstrates.&lt;/p&gt;
+&lt;p&gt;We want to thank the &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://emberjs.com/teams/&quot;&gt;Ember.js team&lt;/a&gt; for a framework that served crates.io well for many years, and the Svelte team for making the transition so enjoyable.&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;miscellaneous&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#miscellaneous&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Miscellaneous&lt;/h2&gt;
+&lt;p&gt;These were some of the more visible changes to crates.io over the past six months, but a lot has happened &quot;under the hood&quot; as well:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Search performance&lt;/strong&gt;: Relevance-sorted search queries previously ranked every crate matching the query, which could take 1-2 seconds for short or common search terms. Ranking is now bounded to the 1,000 matching crates with the highest recent download counts.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Reverse dependencies performance&lt;/strong&gt;: The reverse dependencies endpoint no longer recomputes the full dependent set on every request. It is now served from a precomputed table kept in sync by database triggers, turning an expensive join into a bounded index scan and greatly reducing the chance of getting a timeout error.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;New ARCHITECTURE.md&lt;/strong&gt;: If you&#x27;ve ever wondered how crates.io actually works, our &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/crates.io/blob/main/docs/ARCHITECTURE.md&quot;&gt;&lt;code&gt;ARCHITECTURE.md&lt;/code&gt;&lt;/a&gt; document got a complete rewrite. It is now organized around the high-level systems that make up crates.io and how they fit together, and includes walkthroughs of what happens when you run &lt;code&gt;cargo publish&lt;/code&gt;, why a typical crate download never touches our API servers, and how download counts are derived from CDN access logs.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Definition lists&lt;/strong&gt;: READMEs now render Markdown &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/crates.io/pull/13950&quot;&gt;definition lists&lt;/a&gt;, a widely used Markdown extension. Our markdown renderer &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://crates.io/crates/comrak&quot;&gt;comrak&lt;/a&gt; already supported them, the extension just wasn&#x27;t enabled yet. Thanks to &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/mistaste&quot;&gt;@mistaste&lt;/a&gt; for this contribution!&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;CDN cache tags&lt;/strong&gt;: Files uploaded to our static CDN now carry cache-tag metadata, allowing us to invalidate all cached files of a crate or a specific release in a single operation, instead of issuing one invalidation per file URL.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Caching improvements&lt;/strong&gt;: We removed a global &lt;code&gt;Vary: Cookie&lt;/code&gt; response header that was preventing our CDNs from caching public API responses and frontend assets effectively. Per-user responses now use &lt;code&gt;Cache-Control: no-store&lt;/code&gt; instead, resulting in better cache hit rates at the CDN edge.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Accessibility&lt;/strong&gt;: We have made crates.io friendlier to screen readers: decorative icons are now hidden from the accessibility tree, heading hierarchies have been fixed, and lists are marked up as proper lists. ARIA snapshot tests now ensure that regressions can&#x27;t slip in unnoticed. We plan to continue to improve crates.io accessibility over the coming months.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Git index performance&lt;/strong&gt;: The background worker&#x27;s local clone of the git index is now a bare and shallow repository, eliminating roughly 250,000 checked-out files and the full commit history from its disk, improving its performance as we see increased rates of crate publication. The periodic index squashing now goes through the GitHub API instead of generating large git packs locally, which had previously caused out-of-memory failures on the production worker.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id&#x3D;&quot;feedback&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#feedback&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Feedback&lt;/h2&gt;
+&lt;p&gt;We hope you enjoyed this update on the development of crates.io. If you have any feedback or questions, please let us know on &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/318791-t-crates-io&quot;&gt;Zulip&lt;/a&gt; or &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/crates.io/discussions&quot;&gt;GitHub&lt;/a&gt;. We are always happy to hear from you and are looking forward to your feedback!&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Tobias Bieniek</name>
+        </author>
+    </entry>
+    <entry>
+        <title>Announcing Rust 1.97.0</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2026/07/09/Rust-1.97.0/" type="text/html" title="Announcing Rust 1.97.0" />
+        <published>2026-07-09T00:00:00+00:00</published>
+        <updated>2026-07-09T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2026/07/09/Rust-1.97.0/</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2026/07/09/Rust-1.97.0/">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.97.0. Rust is a programming language empowering everyone to build reliable and efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of Rust installed via &lt;code&gt;rustup&lt;/code&gt;, you can get 1.97.0 with:&lt;/p&gt;
+&lt;pre class&#x3D;&quot;giallo z-code&quot;&gt;&lt;code data-lang&#x3D;&quot;shellsession&quot;&gt;&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;$&lt;/span&gt;&lt;span&gt; rustup update stable&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don&#x27;t have it already, you can get &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;&lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the appropriate page on our website, and check out the &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://doc.rust-lang.org/stable/releases.html#version-1970-2026-07-09&quot;&gt;detailed release notes for 1.97.0&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If you&#x27;d like to help us out by testing future releases, you might consider updating locally to use the beta channel (&lt;code&gt;rustup default beta&lt;/code&gt;) or the nightly channel (&lt;code&gt;rustup default nightly&lt;/code&gt;). Please &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/rust/issues/new/choose&quot;&gt;report&lt;/a&gt; any bugs you might come across!&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;what-s-in-1-97-0-stable&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#what-s-in-1-97-0-stable&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+What&#x27;s in 1.97.0 stable&lt;/h2&gt;
+&lt;h3 id&#x3D;&quot;symbol-mangling-v0-enabled-by-default&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#symbol-mangling-v0-enabled-by-default&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Symbol mangling v0 enabled by default&lt;/h3&gt;
+&lt;p&gt;When Rust is compiled into object files and binaries, each item (functions,
+statics, etc) must have a globally unique &quot;symbol&quot; identifying it. To avoid
+conflicts when linking together different Rust programs, Rust mangles the
+original name of items to include additional context such as the module path,
+defining crate, generics, and more. Historically, this mangling was based on
+the &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://refspecs.linuxbase.org/cxxabi-1.86.html#mangling&quot;&gt;Itanium ABI&lt;/a&gt;,
+also (sometimes) used by C++.&lt;/p&gt;
+&lt;p&gt;The new mangling scheme resolves a number of drawbacks from the previous one:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Generic parameter instantiations preserve their values, rather than being tracked solely behind a hash&lt;/li&gt;
+&lt;li&gt;Inconsistencies: not all parts used the Itanium ABI, meaning that custom demangling was still necessary&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Since Rust 1.59, the compiler has supported opting into a Rust-specific
+mangling scheme via &lt;code&gt;-Csymbol-mangling-version&#x3D;v0&lt;/code&gt;. Since November 2025, this
+scheme has been enabled by default on nightly, and 1.97 is now enabling it on
+stable Rust. The legacy mangling scheme can only be enabled on nightly, and the
+current plan is to fully remove it.&lt;/p&gt;
+&lt;p&gt;See the previous &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://blog.rust-lang.org/2025/11/20/switching-to-v0-mangling-on-nightly/&quot;&gt;blog post&lt;/a&gt; for more details.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;cargo-support-for-denying-warnings&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#cargo-support-for-denying-warnings&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Cargo support for denying warnings&lt;/h3&gt;
+&lt;p&gt;It&#x27;s common practice to deny warnings in CI. Historically, doing so is
+typically done through &lt;code&gt;RUSTFLAGS&#x3D;-Dwarnings&lt;/code&gt;. With Rust 1.97, Cargo controls
+how warnings interact with build success: either silencing them (via &lt;code&gt;allow&lt;/code&gt;
+level), rendering without failing (default, &lt;code&gt;warn&lt;/code&gt;), or denying them (via &lt;code&gt;deny&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;As a  result of Cargo configuration determining the behavior, using this
+feature doesn&#x27;t invalidate the underlying build cache, meaning that it&#x27;s easy
+to temporarily opt-in. For example, if warnings are adding unwanted noise while
+working through fixing errors after a refactor, you can run
+&lt;code&gt;CARGO_BUILD_WARNINGS&#x3D;allow cargo check&lt;/code&gt;, temporarily silencing them.&lt;/p&gt;
+&lt;p&gt;In CI, jobs can instead set &lt;code&gt;CARGO_BUILD_WARNINGS&#x3D;deny&lt;/code&gt; to deny warnings. This
+can be combined with &lt;code&gt;--keep-going&lt;/code&gt; to collect all errors and warnings rather
+than stopping on the first failing package.&lt;/p&gt;
+&lt;p&gt;See the &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://doc.rust-lang.org/cargo/reference/config.html#buildwarnings&quot;&gt;documentation&lt;/a&gt; for more details.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;linker-output-no-longer-hidden-by-default&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#linker-output-no-longer-hidden-by-default&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Linker output no longer hidden by default&lt;/h3&gt;
+&lt;p&gt;rustc invokes a linker on behalf of users. Historically, rustc has silenced
+linker output by default if the link completes successfully. This can mask real
+problems, though, so in Rust 1.97 we are enabling linker messages by default.
+These are emitted as a warning lint, for example:&lt;/p&gt;
+&lt;pre class&#x3D;&quot;giallo z-code&quot;&gt;&lt;code data-lang&#x3D;&quot;plain&quot;&gt;&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;warning: linker stderr: ignoring deprecated linker optimization setting &amp;#39;1&amp;#39;&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;  |&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;  &#x3D; note: &#x60;#[warn(linker_messages)]&#x60; on by default&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Common linker messages that have been diagnosed as false positives or intentional behavior
+are filtered out by rustc. Several defects have already been fixed as a result
+of no longer hiding this output on nightly.&lt;/p&gt;
+&lt;p&gt;Note that currently, &lt;code&gt;linker_messages&lt;/code&gt; is a special lint that is &lt;em&gt;not&lt;/em&gt; affected
+by the &lt;code&gt;warnings&lt;/code&gt; lint group. This is intentional as rustc generally doesn&#x27;t
+control linker output as precisely, and it&#x27;s not uncommon for output to only
+appear on some platforms. If you are seeing what you think is a false positive
+output from the linker, please &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/rust/issues/new/choose&quot;&gt;file an issue&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To silence the warning in the mean time, you can configure the lint level to
+allow. This can be done through &lt;code&gt;Cargo.toml&lt;/code&gt; by adding a &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://doc.rust-lang.org/nightly/cargo/reference/manifest.html#the-lints-section&quot;&gt;lints section&lt;/a&gt; like this:&lt;/p&gt;
+&lt;pre class&#x3D;&quot;giallo z-code&quot;&gt;&lt;code data-lang&#x3D;&quot;toml&quot;&gt;&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;[&lt;/span&gt;&lt;span&gt;lints&lt;/span&gt;&lt;span&gt;.&lt;/span&gt;&lt;span&gt;rust&lt;/span&gt;&lt;span&gt;]&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt;linker_messages&lt;/span&gt;&lt;span&gt; &#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-string&quot;&gt; &amp;quot;&lt;/span&gt;&lt;span class&#x3D;&quot;z-string z-quoted z-string&quot;&gt;allow&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-string&quot;&gt;&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;h3 id&#x3D;&quot;stabilized-apis&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#stabilized-apis&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Stabilized APIs&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://doc.rust-lang.org/stable/std/iter/struct.RepeatN.html#impl-Default-for-RepeatN%3CA%3E&quot;&gt;&lt;code&gt;Default for RepeatN&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ffi/struct.FromBytesUntilNulError.html#impl-Copy-for-FromBytesUntilNulError&quot;&gt;&lt;code&gt;Copy for ffi::FromBytesUntilNulError&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/rust/pull/154003&quot;&gt;&lt;code&gt;Send for std::fs::File&lt;/code&gt; on UEFI&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.u32.html#method.isolate_highest_one&quot;&gt;&lt;code&gt;&amp;lt;{integer}&amp;gt;::isolate_highest_one&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.u32.html#method.isolate_lowest_one&quot;&gt;&lt;code&gt;&amp;lt;{integer}&amp;gt;::isolate_lowest_one&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.u32.html#method.highest_one&quot;&gt;&lt;code&gt;&amp;lt;{integer}&amp;gt;::highest_one&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.u32.html#method.lowest_one&quot;&gt;&lt;code&gt;&amp;lt;{integer}&amp;gt;::lowest_one&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.u32.html#method.bit_width&quot;&gt;&lt;code&gt;&amp;lt;{uN}&amp;gt;::bit_width&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://doc.rust-lang.org/stable/std/num/struct.NonZero.html#method.isolate_highest_one&quot;&gt;&lt;code&gt;NonZero&amp;lt;{integer}&amp;gt;::isolate_highest_one&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://doc.rust-lang.org/stable/std/num/struct.NonZero.html#method.isolate_lowest_one&quot;&gt;&lt;code&gt;NonZero&amp;lt;{integer}&amp;gt;::isolate_lowest_one&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://doc.rust-lang.org/stable/std/num/struct.NonZero.html#method.highest_one&quot;&gt;&lt;code&gt;NonZero&amp;lt;{integer}&amp;gt;::highest_one&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://doc.rust-lang.org/stable/std/num/struct.NonZero.html#method.lowest_one&quot;&gt;&lt;code&gt;NonZero&amp;lt;{integer}&amp;gt;::lowest_one&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://doc.rust-lang.org/stable/std/num/struct.NonZero.html#method.bit_width&quot;&gt;&lt;code&gt;NonZero&amp;lt;{uN}&amp;gt;::bit_width&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;These previously stable APIs are now stable in const contexts:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.char.html#method.is_control&quot;&gt;&lt;code&gt;char::is_control&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id&#x3D;&quot;other-changes&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Other changes&lt;/h3&gt;
+&lt;p&gt;Check out everything that changed in &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/rust/releases/tag/1.97.0&quot;&gt;Rust&lt;/a&gt;, &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-197-2026-07-09&quot;&gt;Cargo&lt;/a&gt;, and &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-197&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;contributors-to-1-97-0&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#contributors-to-1-97-0&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Contributors to 1.97.0&lt;/h2&gt;
+&lt;p&gt;Many people came together to create Rust 1.97.0. We couldn&#x27;t have done it without all of you. &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.97.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Release Team</name>
+        </author>
+    </entry>
     <entry>
         <title>Announcing Rust 1.96.1</title>
         <link rel="alternate" href="https://blog.rust-lang.org/2026/06/30/Rust-1.96.1/" type="text/html" title="Announcing Rust 1.96.1" />
@@ -2199,138 +2404,6 @@ Blockers&lt;/h3&gt;
 
         <author>
             <name>Nurzhan Saken</name>
-        </author>
-    </entry>
-    <entry>
-        <title>Rust is participating in Outreachy</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2026/05/04/outreachy-2026-may/" type="text/html" title="Rust is participating in Outreachy" />
-        <published>2026-05-04T00:00:00+00:00</published>
-        <updated>2026-05-04T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2026/05/04/outreachy-2026-may/</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2026/05/04/outreachy-2026-may/">&lt;p&gt;The Rust Project has been building up a good history of participating in various open-source mentorship programs, including &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://blog.rust-lang.org/2026/04/30/gsoc-2026-selected-projects/&quot;&gt;Google Summer of Code&lt;/a&gt; for three years (including this year) and &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://blog.rust-lang.org/2024/05/07/OSPP-2024/&quot;&gt;previously OSPP&lt;/a&gt;. We&#x27;re happy to announce that this year we are also participating in &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://www.outreachy.org/&quot;&gt;Outreachy&lt;/a&gt; starting in the May 2026 cohort.&lt;/p&gt;
-&lt;p&gt;Each of these mentorship programs has different criteria for eligibility depending on who they target and the motivations of the program. Outreachy provides internships in open source, to people from any background who face underrepresentation, systemic bias, or discrimination in the technical industry where they are living. You can learn more about the Outreachy program &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://www.outreachy.org/&quot;&gt;on their website&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id&#x3D;&quot;what-is-outreachy-and-how-is-it-different-than-google-summer-of-code&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#what-is-outreachy-and-how-is-it-different-than-google-summer-of-code&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
-What is Outreachy and how is it different than Google Summer of Code&lt;/h2&gt;
-&lt;p&gt;Outreachy is similar to Google Summer of Code (GSoC) in some aspects, but different in others. First off, unlike GSoC, Outreachy interns first apply to the overall program and only &lt;em&gt;then&lt;/em&gt; can apply to specific communities. Second, while oftentimes GSoC applicants submit various contributions prior to their application, Outreachy has a dedicated period where contributions are not just optional, but required. Finally, Outreachy applicants submit an application similar to GSoC applications and communities pick interns based on those applications and the interns&#x27; contributions. Outreachy has two internship periods per year, one running from May to August (in which we are currently participating) and one from December to March.&lt;/p&gt;
-&lt;p&gt;The other major difference between Google Summer of Code and Outreachy is the source of intern stipends. For GSoC, Google graciously covers contributor stipends and overhead. For Outreachy, communities instead cover the interns&#x27; stipends and overhead.&lt;/p&gt;
-&lt;h2 id&#x3D;&quot;we-are-mentoring-4-interns-for-the-may-2026-cohort&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#we-are-mentoring-4-interns-for-the-may-2026-cohort&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
-We are mentoring 4 interns for the May 2026 cohort&lt;/h2&gt;
-&lt;p&gt;Because of limited funding availability and mentoring capacity, the Rust Project decided to select four interns for mentorship. We&#x27;ll briefly share these projects below.&lt;/p&gt;
-&lt;h3 id&#x3D;&quot;calling-overloaded-c-functions-from-rust&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#calling-overloaded-c-functions-from-rust&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
-Calling overloaded C++ functions from Rust&lt;/h3&gt;
-&lt;p&gt;&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://www.github.com/Ajay-singh1&quot;&gt;Ajay Singh&lt;/a&gt; has been selected, mentored by &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/teor2345&quot;&gt;teor&lt;/a&gt;, &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/cramertj&quot;&gt;Taylor Cramer&lt;/a&gt;, and &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/thunderseethe&quot;&gt;Ethan Smith&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;This project aims to implement an experimental feature for calling overloaded C++ functions from Rust, and to begin testing that feature in a few representative use cases.&lt;/p&gt;
-&lt;h3 id&#x3D;&quot;code-coverage-of-the-rust-compiler-at-scale&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#code-coverage-of-the-rust-compiler-at-scale&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
-Code coverage of the Rust compiler at scale&lt;/h3&gt;
-&lt;p&gt;&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/akintewe&quot;&gt;Akintewe Oluwasola&lt;/a&gt; has been selected, mentored by &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/jackh726/&quot;&gt;Jack Huey&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;This project aims to develop the workflows to run and analyze code coverage of the compiler at the scale of the entire compiler test suite and on ecosystem crates detected by crater. The hope is to be able to detect when the compiler is inadequately tested, both within the compiler and in the ecosystem, and to build tools to do continuous analysis on this.&lt;/p&gt;
-&lt;h3 id&#x3D;&quot;fuzzing-the-a-mir-formality-type-system-implementation&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#fuzzing-the-a-mir-formality-type-system-implementation&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
-Fuzzing the a-mir-formality type system implementation&lt;/h3&gt;
-&lt;p&gt;&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/System625&quot;&gt;Tunde-Ajayi Olamiposi&lt;/a&gt; has been selected, mentored by &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/nikomatsakis/&quot;&gt;Niko Matsakis&lt;/a&gt;, &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/lqd/&quot;&gt;Rémy Rakic&lt;/a&gt;, and &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/tiif&quot;&gt;tiif&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;This project aims to implement fuzzing for &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/a-mir-formality/&quot;&gt;a-mir-formality&lt;/a&gt;, an in-progress model for Rust&#x27;s type and trait system.  The goal is to generate programs in order to identify rules with underspecified semantics in a-mir-formality.&lt;/p&gt;
-&lt;h3 id&#x3D;&quot;improve-the-security-of-github-actions-of-the-rust-project&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#improve-the-security-of-github-actions-of-the-rust-project&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
-Improve the security of GitHub Actions of the Rust Project&lt;/h3&gt;
-&lt;p&gt;&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rukysandy&quot;&gt;oghenerukevwe Sandra Idjighere&lt;/a&gt; has been selected, mentored by &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/marcoieni&quot;&gt;Marco Ieni&lt;/a&gt; and &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/ubiratansoares&quot;&gt;Ubiratan Soares&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;This project aims to improve the security of GitHub Actions workflows of the repositories owned by the Rust Project. It will develop tools and workflows, integrating with existing software, to analyze Github repositories and detect if they follow the best security practices, fix existing issues, and ensure that good security practices are followed in the future.&lt;/p&gt;
-&lt;h2 id&#x3D;&quot;what-s-next&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#what-s-next&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
-What&#x27;s next&lt;/h2&gt;
-&lt;p&gt;Over the next 3 months, the interns will work closely with their mentors to make progress on their projects. When the internship period is over, we&#x27;ll write another blog post to share the results! See you then!&lt;/p&gt;
-&lt;p&gt;We also want to thank all the people that submitted applications and made contributions. It was quite tough to decide which applicants to select. Hopefully we will participate in Outreachy again in the future and there are other opportunities to participate. We also very much welcome you to stick around and continue being involved - there is a ton of places in the Rust Project with opportunities to be involved.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Jack Huey</name>
-        </author>
-    </entry>
-    <entry>
-        <title>Raising the baseline for the &#x60;nvptx64-nvidia-cuda&#x60; target</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2026/05/01/nvptx-baseline-update/" type="text/html" title="Raising the baseline for the &#x60;nvptx64-nvidia-cuda&#x60; target" />
-        <published>2026-05-01T00:00:00+00:00</published>
-        <updated>2026-05-01T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2026/05/01/nvptx-baseline-update/</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2026/05/01/nvptx-baseline-update/">&lt;p&gt;The &lt;code&gt;nvptx64-nvidia-cuda&lt;/code&gt; target is a compilation target for NVIDIA GPUs. When using this target, the final output is &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://docs.nvidia.com/cuda/parallel-thread-execution/index.html&quot;&gt;PTX&lt;/a&gt;. Two version choices shape that output:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;a GPU architecture (for example, &lt;code&gt;sm_70&lt;/code&gt;, &lt;code&gt;sm_80&lt;/code&gt;, …), which determines which GPUs can run the PTX, and&lt;/li&gt;
-&lt;li&gt;a PTX ISA version, which determines which CUDA driver versions can load (and JIT-compile) the PTX.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;In Rust 1.97 (scheduled for release on July 9, 2026), the baseline PTX ISA version and GPU architecture for &lt;code&gt;nvptx64-nvidia-cuda&lt;/code&gt; will be &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/965&quot;&gt;increased&lt;/a&gt;. These changes affect both the Rust compiler (&lt;code&gt;rustc&lt;/code&gt;) and related host tooling, and they make it impossible to generate PTX artifacts compatible with older GPUs and older CUDA drivers.&lt;/p&gt;
-&lt;p&gt;The new minimum supported versions will be:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;PTX ISA 7.0&lt;/strong&gt; (requires a CUDA 11 driver or newer)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;SM 7.0&lt;/strong&gt; (GPUs with compute capability below 7.0 are no longer supported)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id&#x3D;&quot;why-are-the-requirements-being-changed&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#why-are-the-requirements-being-changed&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
-Why are the requirements being changed?&lt;/h2&gt;
-&lt;p&gt;Until now, Rust has supported emitting PTX for a wide range of GPU architectures and PTX ISA versions. In practice, several defects existed that could cause valid Rust code to trigger compiler crashes or miscompilations. Raising the baseline addresses these issues and enables more complete support for the remaining supported hardware.&lt;/p&gt;
-&lt;p&gt;Removing support affects users of the architectures being removed. In this case, the most recent affected GPU architectures date back to 2017 and are no longer actively supported by NVIDIA. We therefore expect the overall impact of this change to be limited.&lt;/p&gt;
-&lt;p&gt;Maintaining support for these architectures would require substantial effort. These removals let us focus development efforts on improving correctness and performance for currently supported hardware.&lt;/p&gt;
-&lt;h2 id&#x3D;&quot;what-happens-when-i-update-to-rust-1-97&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#what-happens-when-i-update-to-rust-1-97&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
-What happens when I update to Rust 1.97?&lt;/h2&gt;
-&lt;p&gt;If you need to target a CUDA driver that does not support PTX ISA 7.0 (CUDA 10-era drivers and older), Rust 1.97 will no longer be able to generate PTX compatible with that environment. Similarly, if you need to run on GPUs with compute capability below 7.0 (for example, Maxwell or Pascal), Rust 1.97 will no longer be able to generate compatible PTX for those GPUs.&lt;/p&gt;
-&lt;p&gt;Assuming you are targeting a CUDA driver compatible with CUDA 11 or newer and using GPUs with compute capability 7.0 or newer:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;If you do &lt;strong&gt;not&lt;/strong&gt; specify &lt;code&gt;-C target-cpu&lt;/code&gt;, the new default will be &lt;code&gt;sm_70&lt;/code&gt;, and your build should continue to work (but will no longer be compatible with pre-Volta GPUs).&lt;/li&gt;
-&lt;li&gt;If you currently specify an older &lt;code&gt;-C target-cpu&lt;/code&gt; (for example, &lt;code&gt;sm_60&lt;/code&gt;), you will need to either:
-&lt;ul&gt;
-&lt;li&gt;remove that flag and let it default to &lt;code&gt;sm_70&lt;/code&gt;, or&lt;/li&gt;
-&lt;li&gt;update it to &lt;code&gt;sm_70&lt;/code&gt; or a newer architecture.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;If you already specify &lt;code&gt;-C target-cpu&#x3D;sm_70&lt;/code&gt; (or newer), there should be no behavioral changes from this update.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;For more details on building and configuring &lt;code&gt;nvptx64-nvidia-cuda&lt;/code&gt;, see &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://doc.rust-lang.org/rustc/platform-support/nvptx64-nvidia-cuda.html&quot;&gt;the platform support documentation&lt;/a&gt;.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Kjetil Kjeka</name>
-        </author>
-    </entry>
-    <entry>
-        <title>Announcing Google Summer of Code 2026 selected projects</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2026/04/30/gsoc-2026-selected-projects/" type="text/html" title="Announcing Google Summer of Code 2026 selected projects" />
-        <published>2026-04-30T00:00:00+00:00</published>
-        <updated>2026-04-30T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2026/04/30/gsoc-2026-selected-projects/</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2026/04/30/gsoc-2026-selected-projects/">&lt;p&gt;As &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://blog.rust-lang.org/2026/02/19/Rust-participates-in-GSoC-2026/&quot;&gt;previously announced&lt;/a&gt;, the Rust Project is participating in &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://summerofcode.withgoogle.com&quot;&gt;Google Summer of Code (GSoC)&lt;/a&gt; 2026. GSoC is a global program organized by Google that is designed to bring new contributors to the world of open source.&lt;/p&gt;
-&lt;p&gt;A few months ago, we published a list of &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/google-summer-of-code&quot;&gt;GSoC project ideas&lt;/a&gt;, and started discussing these projects with potential GSoC applicants on our &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/421156-gsoc&quot;&gt;Zulip&lt;/a&gt;. We had many interesting discussions with the potential contributors, and even saw some of them making non-trivial contributions to various Rust Project repositories before GSoC officially started!&lt;/p&gt;
-&lt;p&gt;The applicants prepared and submitted their project proposals by the end of March. This year, we received 96 proposals, which is a 50% increase from last year. We are glad that there was again a lot of interest in our projects! Like many other GSoC organizations this year, we somewhat struggled with some AI-generated proposals and low-quality contributions generated using AI agents, but it stayed manageable.&lt;/p&gt;
-&lt;p&gt;GSoC requires us to produce an ordered list of the best proposals, which is always challenging, as Rust is a big project with many priorities. Our mentors examined the submitted proposals and evaluated them based on their prior interactions with the given applicant, their contributions so far, the quality of the proposal itself, but also the importance of the proposed project for the Rust Project and its wider community. We also had to take mentor bandwidth and availability into account. Unfortunately, we had to cancel some projects due to several mentors losing their funding for Rust work in the past few weeks.&lt;/p&gt;
-&lt;p&gt;As is usual in GSoC, even though some project topics received multiple proposals&lt;sup class&#x3D;&quot;footnote-reference&quot; id&#x3D;&quot;fr-most-popular-1&quot;&gt;&lt;a href&#x3D;&quot;#fn-most-popular&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;, we had to pick only one proposal per project topic. We also had to choose between proposals targeting different work to avoid overloading a single mentor with multiple projects. In the end, we narrowed the list down to the best proposals that we could still realistically support with our available mentor pool. We submitted this list and eagerly awaited how many of them would be accepted into GSoC.&lt;/p&gt;
-&lt;h2 id&#x3D;&quot;selected-projects&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#selected-projects&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
-Selected projects&lt;/h2&gt;
-&lt;p&gt;On the 30th of April, Google has announced the accepted projects. We are happy to share that &lt;strong&gt;13&lt;/strong&gt; Rust Project proposals were accepted by Google for Google Summer of Code 2026. That is a lot of projects! We are really happy and excited about GSoC 2026!&lt;/p&gt;
-&lt;p&gt;Below you can find the list of accepted proposals (in alphabetical order), along with the names of their authors and the assigned mentor(s):&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://summerofcode.withgoogle.com/programs/2026/projects/eF3fkjrN&quot;&gt;A Frontend for Safe GPU Offloading in Rust&lt;/a&gt;&lt;/strong&gt; by &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/sa4dus&quot;&gt;Marcelo Domínguez&lt;/a&gt;, mentored by &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/ZuseZ4&quot;&gt;Manuel Drehwald&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://summerofcode.withgoogle.com/programs/2026/projects/Fx0vHvcq&quot;&gt;Adding WebAssembly Linking Support to Wild&lt;/a&gt;&lt;/strong&gt; by &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/lapla-cogito&quot;&gt;Kei Akiyama&lt;/a&gt;, mentored by &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/davidlattimore&quot;&gt;David Lattimore&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://summerofcode.withgoogle.com/programs/2026/projects/Wg1mCCHL&quot;&gt;Bringing autodiff and offload into Rust CI&lt;/a&gt;&lt;/strong&gt; by &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/sgasho&quot;&gt;Shota Sugano&lt;/a&gt;, mentored by &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/ZuseZ4&quot;&gt;Manuel Drehwald&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://summerofcode.withgoogle.com/programs/2026/projects/TBpqK07H&quot;&gt;Debugger for Miri&lt;/a&gt;&lt;/strong&gt; by &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/moabo3li&quot;&gt;Mohamed Ali Mohamed&lt;/a&gt;, mentored by &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/oli-obk&quot;&gt;Oli Scherer&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://summerofcode.withgoogle.com/programs/2026/projects/xFrskRCv&quot;&gt;Implementing impl and mut restrictions&lt;/a&gt;&lt;/strong&gt; by &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/CoCo-Japan-pan&quot;&gt;Ryosuke Yamano&lt;/a&gt;, mentored by &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/jhpratt&quot;&gt;Jacob Pratt&lt;/a&gt; and &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/Urgau&quot;&gt;Urgau&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://summerofcode.withgoogle.com/programs/2026/projects/g4xMTT5l&quot;&gt;Improving Ergonomics and Safety of serialport-rs&lt;/a&gt;&lt;/strong&gt; by &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/NONnonHere&quot;&gt;Tanmay&lt;/a&gt;, mentored by &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/sirhcel&quot;&gt;Christian Meusel&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://summerofcode.withgoogle.com/programs/2026/projects/AObylxqh&quot;&gt;libc: transition differing bit-width time and offset variants and deprecate bug-prone constants&lt;/a&gt;&lt;/strong&gt; by &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/dybucc&quot;&gt;Adam Martinez&lt;/a&gt;, mentored by &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/tgross35&quot;&gt;Trevor Gross&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://summerofcode.withgoogle.com/programs/2026/projects/svblODn5&quot;&gt;Link Linux kernel and its Modules with Wild&lt;/a&gt;&lt;/strong&gt; by &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/vishruth-thimmaiah&quot;&gt;Vishruth Thimmaiah&lt;/a&gt;, mentored by &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/davidlattimore&quot;&gt;David Lattimore&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://summerofcode.withgoogle.com/programs/2026/projects/lif4YQOE&quot;&gt;Migrating rust-analyzer assists to SyntaxEditor&lt;/a&gt;&lt;/strong&gt; by &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/Shourya742&quot;&gt;Shourya Sharma&lt;/a&gt;, mentored by &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/ChayimFriedman2&quot;&gt;Chayim Refael Friedman&lt;/a&gt; and &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/Veykril&quot;&gt;Lukas Wirth&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://summerofcode.withgoogle.com/programs/2026/projects/Aak8J6RB&quot;&gt;Port std::arch test suite to rust-lang/rust&lt;/a&gt;&lt;/strong&gt; by &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/xonx4l&quot;&gt;Sumit Kumar&lt;/a&gt;, mentored by &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/Kobzol&quot;&gt;Jakub Beránek&lt;/a&gt; and &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/folkertdev&quot;&gt;Folkert de Vries&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://summerofcode.withgoogle.com/programs/2026/projects/l4jlMDP9&quot;&gt;Reorganizing tests/ui/issues&lt;/a&gt;&lt;/strong&gt; by &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/zedddie&quot;&gt;zedddie&lt;/a&gt;, mentored by &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/Teapot4195&quot;&gt;Teapot&lt;/a&gt; and &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/Kivooeo&quot;&gt;Kivooeo&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://summerofcode.withgoogle.com/programs/2026/projects/gzkF5BG0&quot;&gt;Utilize debugger APIs to improve debug info test accuracy and error reporting&lt;/a&gt;&lt;/strong&gt; by &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/Walnut356&quot;&gt;Anthony Bolden&lt;/a&gt;, mentored by &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/Kobzol&quot;&gt;Jakub Beránek&lt;/a&gt; and &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/jieyouxu&quot;&gt;Jieyou Xu&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://summerofcode.withgoogle.com/programs/2026/projects/jP7dTlN6&quot;&gt;XDG path support for rustup&lt;/a&gt;&lt;/strong&gt; by &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/Cloud0310&quot;&gt;Guicheng Liu&lt;/a&gt;, mentored by &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rami3l&quot;&gt;rami3l&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Congratulations to all applicants whose project was selected!&lt;/strong&gt; Our mentors are looking forward to working with you on these exciting projects to improve the Rust ecosystem. You can expect to hear from us soon, so that we can start coordinating the work on your GSoC projects.&lt;/p&gt;
-&lt;p&gt;We are excited to mentor three contributors who already experienced GSoC with us in the previous year. Welcome back, Kei, Marcelo and Shourya!&lt;/p&gt;
-&lt;p&gt;We would like to thank all the applicants whose proposal was sadly not accepted, for their interactions with the Rust community and contributions to various Rust projects. There were some great proposals that did not make the cut, in large part because of limited mentorship capacity. However, even if your proposal was not accepted, we would be happy if you would consider contributing to the projects that got you interested, even outside GSoC! Our &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/google-summer-of-code&quot;&gt;project idea list&lt;/a&gt; is still current and could serve as a general entry point for contributors that would like to work on projects that would help the Rust Project and the Rust ecosystem. Some of the &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://rust-lang.github.io/rust-project-goals/2026/goals.html&quot;&gt;Rust Project Goals&lt;/a&gt; are also looking for help.&lt;/p&gt;
-&lt;p&gt;There is a good chance we&#x27;ll participate in GSoC next year as well (though we can&#x27;t promise anything at this moment), so we hope to receive your proposals again in the future!&lt;/p&gt;
-&lt;p&gt;The accepted GSoC projects will run for several months. After GSoC 2026 finishes (in autumn of 2026), we will publish a blog post in which we will summarize the outcome of the accepted projects.&lt;/p&gt;
-&lt;section class&#x3D;&quot;footnotes&quot;&gt;
-&lt;ol class&#x3D;&quot;footnotes-list&quot;&gt;
-&lt;li id&#x3D;&quot;fn-most-popular&quot;&gt;
-&lt;p&gt;The most popular project topic received fourteen different proposals! &lt;a href&#x3D;&quot;#fr-most-popular-1&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/section&gt;
-</content>
-
-        <author>
-            <name>Jakub Beránek</name>
         </author>
     </entry>
 </feed>
