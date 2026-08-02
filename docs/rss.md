@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260802
+
+
 ### 20260801
 
 
@@ -195,20 +198,11 @@ search:
 
 - [In Conversation With the Golden Kodee Winners](https://blog.jetbrains.com/kotlin/2026/07/in-conversation-with-the-golden-kodee-winners/)
 - [Rustup update: our plans for the 1.30 release cycle](https://blog.rust-lang.org/inside-rust/2026/07/03/rustup-update-1.30/)
-- [April &amp; May 2026 Project Director Update](https://blog.rust-lang.org/inside-rust/2026/07/01/project-director-update/)
 
 
 ### 20260702
 
 
 - [SIMD Vectors in the HotSpot JVM - Auto Vectorization and the Vector API](https://inside.java/2026/07/02/simd-vectors-hotspot-jvm/)
-
-
-### 20260701
-
-
-- [Kotlin Comes to BlueJ](https://blog.jetbrains.com/kotlin/2026/07/kotlin-comes-to-bluej/)
-- [DirtyClone Linux kernel local privilege escalation vulnerability fixes available](https://ubuntu.com//blog/dirtyclone-linux-vulnerability-fixes-available)
-- [pedit COW kernel local privilege escalation vulnerability mitigations](https://ubuntu.com//blog/pedit-cow-linux-vulnerability-fixes-available)
 
 
