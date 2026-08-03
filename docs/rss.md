@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260803
+
+
+- [Know Kotlin? Ship It Everywhere and Win at Shipaton 2026](https://blog.jetbrains.com/kotlin/2026/07/know-kotlin-ship-it-everywhere-and-win-at-shipaton-2026/)
+- [Qodana 2026.2: More Security, Better Coverage, Less Configuration](https://blog.jetbrains.com/qodana/2026/07/qodana-2026-2-more-security-better-coverage-less-configuration/)
+
+
 ### 20260802
 
 
@@ -198,11 +205,5 @@ search:
 
 - [In Conversation With the Golden Kodee Winners](https://blog.jetbrains.com/kotlin/2026/07/in-conversation-with-the-golden-kodee-winners/)
 - [Rustup update: our plans for the 1.30 release cycle](https://blog.rust-lang.org/inside-rust/2026/07/03/rustup-update-1.30/)
-
-
-### 20260702
-
-
-- [SIMD Vectors in the HotSpot JVM - Auto Vectorization and the Vector API](https://inside.java/2026/07/02/simd-vectors-hotspot-jvm/)
 
 
