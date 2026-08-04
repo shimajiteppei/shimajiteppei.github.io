@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260804
+
+
+- [Kodee’s Kotlin Roundup: Birthday Wishes, Shipaton 2026, and the New Kotlin AI Benchmark](https://blog.jetbrains.com/kotlin/2026/08/kodees-kotlin-roundup-birthday-wishes-shipaton-2026-and-the-new-kotlin-ai-benchmark/)
+- [Funding team progress update — July 2026](https://blog.rust-lang.org/inside-rust/2026/08/04/funding-team-progress-update-july-2026/)
+
+
 ### 20260803
 
 
@@ -198,12 +205,5 @@ search:
 
 
 ### 20260704
-
-
-### 20260703
-
-
-- [In Conversation With the Golden Kodee Winners](https://blog.jetbrains.com/kotlin/2026/07/in-conversation-with-the-golden-kodee-winners/)
-- [Rustup update: our plans for the 1.30 release cycle](https://blog.rust-lang.org/inside-rust/2026/07/03/rustup-update-1.30/)
 
 
