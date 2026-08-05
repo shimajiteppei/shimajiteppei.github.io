@@ -8,6 +8,14 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260805
+
+
+- [Oracle Java Platform Extension for Visual Studio Code - Version 26.0.1 Is Now Available](https://inside.java/2026/08/05/java-vscode-extension-update/)
+- [rust-lang/rust is adopting an LLM policy](https://blog.rust-lang.org/inside-rust/2026/08/05/rust-langrust-is-adopting-an-llm-policy/)
+- [Enabling the next iteration of the borrow checker on nightly](https://blog.rust-lang.org/2026/08/04/enabling-polonius-alpha-on-nightly/)
+
+
 ### 20260804
 
 
@@ -202,8 +210,5 @@ search:
 
 
 ### 20260705
-
-
-### 20260704
 
 
