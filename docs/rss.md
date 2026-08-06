@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260806
+
+
+- [Episode 65 “Embracing Virtual Threads with Helidon” [I/O]](https://inside.java/2026/08/06/podcast-065/)
+
+
 ### 20260805
 
 
@@ -207,8 +213,5 @@ search:
 
 - [Building an open source chain of trust: new research uncovers key blockers and ways forward](https://ubuntu.com//blog/open-source-security-research)
 - [Beyond safety and security: Why automotive open source demands dependability](https://ubuntu.com//blog/beyond-safety-and-security-why-automotive-open-source-demands-dependability)
-
-
-### 20260705
 
 
