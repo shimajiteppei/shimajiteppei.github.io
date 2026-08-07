@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260807
+
+
+- [Post-Quantum Cryptography in Long-Term Support JDK Releases](https://inside.java/2026/08/07/post-quantum-cryptography-in-long-term-support-jdk-releases/)
+
+
 ### 20260806
 
 
@@ -161,7 +167,6 @@ search:
 - [Rustup 1.29.1 beta: call for testing!](https://blog.rust-lang.org/inside-rust/2026/07/14/rustup-1.29.1-beta-cft/)
 - [The zero-cost fallacy: Open source software in the agentic era](https://www.thoughtworks.com/insights/blog/open-source/zero-cost-fallacy-open-source-agentic-era)
 - [Are non-functional requirements the missing guardrail for AI-generated code?](https://www.thoughtworks.com/insights/blog/architecture/non-functional-requirements-missing-guardrail-ai-generated-code)
-- [Performance engineering in agentic AI systems](https://www.thoughtworks.com/insights/articles/Performance-engineering-in-agentic-AI-systems)
 
 
 ### 20260713
@@ -204,14 +209,5 @@ search:
 
 
 - [1.97.0 pre-release testing](https://blog.rust-lang.org/inside-rust/2026/07/07/1.97.0-prerelease/)
-- [Together for a healthier Clippy](https://blog.rust-lang.org/inside-rust/2026/07/06/unite-for-clippy/)
-- [Leadership Council update — June 2026](https://blog.rust-lang.org/inside-rust/2026/07/06/leadership-council-update/)
-
-
-### 20260706
-
-
-- [Building an open source chain of trust: new research uncovers key blockers and ways forward](https://ubuntu.com//blog/open-source-security-research)
-- [Beyond safety and security: Why automotive open source demands dependability](https://ubuntu.com//blog/beyond-safety-and-security-why-automotive-open-source-demands-dependability)
 
 
