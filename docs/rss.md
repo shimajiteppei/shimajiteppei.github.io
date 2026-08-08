@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260808
+
+
 ### 20260807
 
 
@@ -194,7 +197,6 @@ search:
 
 
 - [Episode 61 “Scripting JS and Python with Project Detroit” [AtA]](https://inside.java/2026/07/09/podcast-061/)
-- [Maintainer spotlight: Gen Li (@rami3l)](https://blog.rust-lang.org/inside-rust/2026/07/07/maintainer-spotlight-gen-li-rami3l/)
 - [Announcing Rust 1.97.0](https://blog.rust-lang.org/2026/07/09/Rust-1.97.0/)
 
 
@@ -202,12 +204,5 @@ search:
 
 
 - [Introducing the Kotlin Benchmark for AI Coding Agents](https://blog.jetbrains.com/kotlin/2026/07/introducing-the-kotlin-benchmark-evaluate-ai-coding-agents-on-real-world-kotlin-tasks/)
-- [Ubuntu Server: a platform made for enterprise scale](https://ubuntu.com//blog/ubuntu-server-a-platform-made-for-enterprise-scale)
-
-
-### 20260707
-
-
-- [1.97.0 pre-release testing](https://blog.rust-lang.org/inside-rust/2026/07/07/1.97.0-prerelease/)
 
 
