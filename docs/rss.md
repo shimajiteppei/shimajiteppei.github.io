@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260809
+
+
 ### 20260808
 
 
@@ -169,7 +172,6 @@ search:
 
 - [Rustup 1.29.1 beta: call for testing!](https://blog.rust-lang.org/inside-rust/2026/07/14/rustup-1.29.1-beta-cft/)
 - [The zero-cost fallacy: Open source software in the agentic era](https://www.thoughtworks.com/insights/blog/open-source/zero-cost-fallacy-open-source-agentic-era)
-- [Are non-functional requirements the missing guardrail for AI-generated code?](https://www.thoughtworks.com/insights/blog/architecture/non-functional-requirements-missing-guardrail-ai-generated-code)
 
 
 ### 20260713
@@ -198,11 +200,5 @@ search:
 
 - [Episode 61 “Scripting JS and Python with Project Detroit” [AtA]](https://inside.java/2026/07/09/podcast-061/)
 - [Announcing Rust 1.97.0](https://blog.rust-lang.org/2026/07/09/Rust-1.97.0/)
-
-
-### 20260708
-
-
-- [Introducing the Kotlin Benchmark for AI Coding Agents](https://blog.jetbrains.com/kotlin/2026/07/introducing-the-kotlin-benchmark-evaluate-ai-coding-agents-on-real-world-kotlin-tasks/)
 
 
