@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260810
+
+
+- [Call for testing: Restricting trait implementability and field mutability](https://blog.rust-lang.org/inside-rust/2026/08/10/call-for-testing-impl-and-mut-restrictions/)
+
+
 ### 20260809
 
 
@@ -147,7 +153,6 @@ search:
 
 
 - [Kotlin Turns 15: Celebrate the Kotlin Effect](https://blog.jetbrains.com/kotlin/2026/07/kotlin-turns-15-celebrate-the-kotlin-effect/)
-- [The History of Kodee, Kotlin’s Mascot](https://blog.jetbrains.com/research/2026/07/the-history-of-kodee/)
 - [Tracing a memory leak bug in PID 1 and contributing an upstream fix: a Linux support story](https://ubuntu.com//blog/fixing-memory-bug)
 
 
@@ -171,7 +176,6 @@ search:
 
 
 - [Rustup 1.29.1 beta: call for testing!](https://blog.rust-lang.org/inside-rust/2026/07/14/rustup-1.29.1-beta-cft/)
-- [The zero-cost fallacy: Open source software in the agentic era](https://www.thoughtworks.com/insights/blog/open-source/zero-cost-fallacy-open-source-agentic-era)
 
 
 ### 20260713
@@ -190,15 +194,5 @@ search:
 
 
 ### 20260710
-
-
-- [Managing Ubuntu on bare metal at scale](https://ubuntu.com//blog/managing-ubuntu-on-bare-metal-at-scale)
-
-
-### 20260709
-
-
-- [Episode 61 “Scripting JS and Python with Project Detroit” [AtA]](https://inside.java/2026/07/09/podcast-061/)
-- [Announcing Rust 1.97.0](https://blog.rust-lang.org/2026/07/09/Rust-1.97.0/)
 
 
