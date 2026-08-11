@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260811
+
+
 ### 20260810
 
 
@@ -119,7 +122,6 @@ search:
 - [Should we still design code for humans?](https://www.thoughtworks.com/insights/blog/programming-languages/should-still-design-code-humans)
 - [The commodity illusion and the new geopolitics of compute](https://www.thoughtworks.com/insights/blog/generative-ai/the-commodity-illusion-new-geopolitics-compute)
 - [The primitive paradox: Reclaiming software discipline in an agentic world](https://www.thoughtworks.com/insights/blog/generative-ai/primitive-paradox-reclaiming-software-discipline-agentic-world)
-- [Context decay is quietly killing your features before they go live](https://www.thoughtworks.com/insights/blog/continuous-delivery/Context-decay-is-killing-your-features-before-they-go-live)
 
 
 ### 20260722
@@ -191,8 +193,5 @@ search:
 
 
 ### 20260711
-
-
-### 20260710
 
 
