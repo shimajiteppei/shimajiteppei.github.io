@@ -8,7 +8,17 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260812
+
+
+- [Putting NVIDIA Nemotron 3.5 Lightning to the test](https://www.thoughtworks.com/insights/blog/generative-ai/putting-nvidia-nemotron-3-5-lightning-test)
+- [Canonical integrates NVIDIA Nemotron 3.5 Lightning with Ubuntu for always-on AI agents](https://ubuntu.com//blog/nvidia-nemotron-3-5-lightning)
+
+
 ### 20260811
+
+
+- [The Power of JDK Flight Recorder: Efficient Profiling and Troubleshooting for Java Applications](https://inside.java/2026/08/11/efficient-java-apps-profiling-troubleshooting/)
 
 
 ### 20260810
@@ -187,11 +197,5 @@ search:
 
 
 ### 20260712
-
-
-- [Januscape vulnerability CVE-2026-53359 mitigations available](https://ubuntu.com//blog/januscape-linux-vulnerability-mitigations-available)
-
-
-### 20260711
 
 
