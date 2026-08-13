@@ -8,9 +8,17 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260813
+
+
+- [Advantech AOM-2721 is now Ubuntu Certified](https://ubuntu.com//blog/advantech-aom-2721-ubuntu-certified)
+
+
 ### 20260812
 
 
+- [When Escape Routes Become Toll Roads: Mapping How Developers Move Between Programming Languages](https://blog.jetbrains.com/research/2026/08/programming-language-migration/)
+- [Evolving a Java MCP Server During MCP Specification Upgrades](https://inside.java/2026/08/12/java-mcp-migration/)
 - [Putting NVIDIA Nemotron 3.5 Lightning to the test](https://www.thoughtworks.com/insights/blog/generative-ai/putting-nvidia-nemotron-3-5-lightning-test)
 - [Canonical integrates NVIDIA Nemotron 3.5 Lightning with Ubuntu for always-on AI agents](https://ubuntu.com//blog/nvidia-nemotron-3-5-lightning)
 
@@ -194,8 +202,5 @@ search:
 
 
 - [crates.io: development update](https://blog.rust-lang.org/2026/07/13/crates-io-development-update/)
-
-
-### 20260712
 
 
