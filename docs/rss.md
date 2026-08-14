@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260814
+
+
+- [Preparing for Change: Safe Switching over Sealed APIs](https://inside.java/2026/08/14/java-exhaustiveness-guide/)
+
+
 ### 20260813
 
 
@@ -196,11 +202,5 @@ search:
 
 
 - [Rustup 1.29.1 beta: call for testing!](https://blog.rust-lang.org/inside-rust/2026/07/14/rustup-1.29.1-beta-cft/)
-
-
-### 20260713
-
-
-- [crates.io: development update](https://blog.rust-lang.org/2026/07/13/crates-io-development-update/)
 
 
