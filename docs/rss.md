@@ -8,9 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260815
+
+
 ### 20260814
 
 
+- [Exploring Compose HTML for Server Side Rendering](https://blog.jetbrains.com/kotlin/2026/08/exploring-compose-html-for-server-side-rendering/)
 - [Preparing for Change: Safe Switching over Sealed APIs](https://inside.java/2026/08/14/java-exhaustiveness-guide/)
 
 
@@ -145,7 +149,6 @@ search:
 - [Episode 63 “AI Solutions with Spring AI 2.0 [I/O]](https://inside.java/2026/07/23/podcast-063/)
 - [Should we still design code for humans?](https://www.thoughtworks.com/insights/blog/programming-languages/should-still-design-code-humans)
 - [The commodity illusion and the new geopolitics of compute](https://www.thoughtworks.com/insights/blog/generative-ai/the-commodity-illusion-new-geopolitics-compute)
-- [The primitive paradox: Reclaiming software discipline in an agentic world](https://www.thoughtworks.com/insights/blog/generative-ai/primitive-paradox-reclaiming-software-discipline-agentic-world)
 
 
 ### 20260722
@@ -194,13 +197,5 @@ search:
 
 
 - [1.97.1 pre-release testing](https://blog.rust-lang.org/inside-rust/2026/07/15/1.97.1-prerelease/)
-- [Program management update — June 2026](https://blog.rust-lang.org/inside-rust/2026/07/14/program-management-update--june-2026/)
-- [MAAS installation: bare metal provisioning is easier than ever](https://ubuntu.com//blog/maas-installation-bare-metal-provisioning-is-easier-than-ever)
-
-
-### 20260714
-
-
-- [Rustup 1.29.1 beta: call for testing!](https://blog.rust-lang.org/inside-rust/2026/07/14/rustup-1.29.1-beta-cft/)
 
 
