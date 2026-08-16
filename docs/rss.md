@@ -8,7 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260816
+
+
 ### 20260815
+
+
+- [Episode 66 “JSON API, Valhalla Progress, LTS ❤️ PQC” [IJN]](https://inside.java/2026/08/15/podcast-066/)
 
 
 ### 20260814
@@ -189,13 +195,6 @@ search:
 
 
 - [Identifying JDK Value Class Candidates](https://inside.java/2026/07/16/identify-jdk-value-classes-candidates/)
-- [Infrastructure Team 2026 Q2 Recap and Q3 Plan](https://blog.rust-lang.org/inside-rust/2026/07/15/infrastructure-team-q2-recap-and-q3-plan/)
 - [Announcing Rust 1.97.1](https://blog.rust-lang.org/2026/07/16/Rust-1.97.1/)
-
-
-### 20260715
-
-
-- [1.97.1 pre-release testing](https://blog.rust-lang.org/inside-rust/2026/07/15/1.97.1-prerelease/)
 
 
