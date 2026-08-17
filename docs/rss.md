@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260817
+
+
+- [June 2026 Project Director Update](https://blog.rust-lang.org/inside-rust/2026/08/17/project-director-update/)
+
+
 ### 20260816
 
 
@@ -154,7 +160,6 @@ search:
 
 - [Episode 63 “AI Solutions with Spring AI 2.0 [I/O]](https://inside.java/2026/07/23/podcast-063/)
 - [Should we still design code for humans?](https://www.thoughtworks.com/insights/blog/programming-languages/should-still-design-code-humans)
-- [The commodity illusion and the new geopolitics of compute](https://www.thoughtworks.com/insights/blog/generative-ai/the-commodity-illusion-new-geopolitics-compute)
 
 
 ### 20260722
@@ -189,12 +194,5 @@ search:
 
 - [Kotlin Turns 15: Celebrate the Kotlin Effect](https://blog.jetbrains.com/kotlin/2026/07/kotlin-turns-15-celebrate-the-kotlin-effect/)
 - [Tracing a memory leak bug in PID 1 and contributing an upstream fix: a Linux support story](https://ubuntu.com//blog/fixing-memory-bug)
-
-
-### 20260716
-
-
-- [Identifying JDK Value Class Candidates](https://inside.java/2026/07/16/identify-jdk-value-classes-candidates/)
-- [Announcing Rust 1.97.1](https://blog.rust-lang.org/2026/07/16/Rust-1.97.1/)
 
 
