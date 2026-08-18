@@ -8,9 +8,16 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260818
+
+
+- [Leadership Council September 2026 Representative Selections](https://blog.rust-lang.org/inside-rust/2026/08/18/leadership-council-repr-selection/)
+
+
 ### 20260817
 
 
+- [Klibs.io Grows to 4,200+ KMP Projects With Smarter Discovery and New AI Integrations](https://blog.jetbrains.com/kotlin/2026/08/klibsio-grows-to-4200-kmp-projects-with-smarter-discovery-and-new-ai-integrations/)
 - [June 2026 Project Director Update](https://blog.rust-lang.org/inside-rust/2026/08/17/project-director-update/)
 
 
@@ -187,12 +194,5 @@ search:
 
 
 - [The Java Story | The Official Documentary](https://inside.java/2026/07/18/the-java-documentary/)
-
-
-### 20260717
-
-
-- [Kotlin Turns 15: Celebrate the Kotlin Effect](https://blog.jetbrains.com/kotlin/2026/07/kotlin-turns-15-celebrate-the-kotlin-effect/)
-- [Tracing a memory leak bug in PID 1 and contributing an upstream fix: a Linux support story](https://ubuntu.com//blog/fixing-memory-bug)
 
 
