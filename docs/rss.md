@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260819
+
+
 ### 20260818
 
 
@@ -188,11 +191,5 @@ search:
 
 
 - [Episode 62 “JDK 27 + Valhalla, Now! + Hackathon” [IJN]](https://inside.java/2026/07/19/podcast-062/)
-
-
-### 20260718
-
-
-- [The Java Story | The Official Documentary](https://inside.java/2026/07/18/the-java-documentary/)
 
 
