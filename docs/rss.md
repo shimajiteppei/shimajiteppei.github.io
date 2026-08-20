@@ -8,7 +8,20 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260820
+
+
+- [Episode 67 “Keeping Up With the Java Release Train” [I/O]](https://inside.java/2026/08/20/podcast-067/)
+- [Rust Function Overloading - Call for Experimentation](https://blog.rust-lang.org/inside-rust/2026/08/19/overloading-experiment/)
+- [1.98.0 pre-release testing](https://blog.rust-lang.org/inside-rust/2026/08/19/1.98.0-prerelease/)
+- [Experiment in reducing target directory size on nightly](https://blog.rust-lang.org/inside-rust/2026/08/18/reducing-target-dir-size-on-nightly/)
+- [Supply chain attack on arrayref](https://blog.rust-lang.org/2026/08/20/supply-chain-attack-on-arrayref/)
+
+
 ### 20260819
+
+
+- [Signatures, be true: domain errors and functional handling in Kotlin](https://blog.jetbrains.com/kotlin/2026/08/signatures-be-true-domain-errors-and-functional-handling-in-kotlin/)
 
 
 ### 20260818
@@ -185,11 +198,5 @@ search:
 
 
 ### 20260720
-
-
-### 20260719
-
-
-- [Episode 62 “JDK 27 + Valhalla, Now! + Hackathon” [IJN]](https://inside.java/2026/07/19/podcast-062/)
 
 

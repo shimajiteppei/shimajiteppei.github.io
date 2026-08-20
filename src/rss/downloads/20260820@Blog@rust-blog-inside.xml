@@ -1,0 +1,1158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <generator uri="https://blog.rust-lang.org/inside-rust/" version="0.1.0">Inside Rust Blog</generator>
+    <link href="https://blog.rust-lang.org/inside-rust/feed.xml" rel="self" type="application/atom+xml" />
+    <link href="https://blog.rust-lang.org/inside-rust/" rel="alternate" type="text/html" />
+    <id>https://blog.rust-lang.org/inside-rust/</id>
+    <title>Inside Rust Blog</title>
+    <subtitle>Want to follow along with Rust development? Curious how you might get involved? Take a look!</subtitle>
+    <author>
+        <name>Maintained by the Rust Teams.</name>
+        <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
+    </author>
+    <updated>2026-08-20T11:39:26+00:00</updated>
+
+    
+    <entry>
+        <title>Rust Function Overloading - Call for Experimentation</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2026/08/19/overloading-experiment/" type="text/html" title="Rust Function Overloading - Call for Experimentation" />
+        <published>2026-08-19T00:00:00+00:00</published>
+        <updated>2026-08-19T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2026/08/19/overloading-experiment/</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2026/08/19/overloading-experiment/">&lt;p&gt;In partnership with the &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://rustfoundation.org/interop-initiative/&quot;&gt;Rust Foundation&#x27;s Rust-C++ Interop Initiative&lt;/a&gt;,
+the Rust Project has been experimenting with
+&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://rust-lang.github.io/rust-project-goals/2026/overloading-for-ffi.html&quot;&gt;function overloading for FFI bindings&lt;/a&gt;. This experiment is now at a stage
+where compiler and interop tool developers can start exploring function overloading.&lt;/p&gt;
+&lt;p&gt;Stable Rust already supports &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://internals.rust-lang.org/t/pre-pre-rfc-splatting-for-named-arguments-and-function-overloading/24012&quot;&gt;a form of overloading using tuples and traits&lt;/a&gt;, but
+calling these overloaded functions looks strange, because the overloaded arguments have to be
+passed as a single tuple argument, like this: &lt;code&gt;hypot((2.0, 3.0, 6.0))&lt;/code&gt;. Stable Rust also allows
+overloading of built-in operators with user-defined types, via traits like
+&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://doc.rust-lang.org/std/ops/trait.Add.html&quot;&gt;&lt;code&gt;Add&lt;/code&gt; (the &lt;code&gt;+&lt;/code&gt; operator)&lt;/a&gt; and &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://doc.rust-lang.org/std/ops/trait.Neg.html&quot;&gt;&lt;code&gt;Neg&lt;/code&gt; (the &lt;code&gt;-&lt;/code&gt; value negation operator)&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;We are running an unstable nightly Rust language experiment to answer questions like:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;How much overloading can we do with Rust’s existing trait system?&lt;/li&gt;
+&lt;li&gt;Could this help us call C++ from Rust ergonomically?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In the tradition of &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/501&quot;&gt;yeet&lt;/a&gt; (to &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://en.wiktionary.org/wiki/bikeshedding&quot;&gt;avoid bikeshedding&lt;/a&gt;), we are using basic
+syntax in the first stage of the experiment: the &lt;code&gt;#[rustc_splat]&lt;/code&gt; attribute.
+&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://en.wiktionary.org/wiki/splat#Noun_2:~:text&#x3D;An%20operator%20indicating%20a%20variable-length%20argument%20list&quot;&gt;Alternative syntaxes&lt;/a&gt; can be considered later, if the experiment generates useful
+outcomes.&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;experimental-function-overloading&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#experimental-function-overloading&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Experimental Function Overloading&lt;/h2&gt;
+&lt;p&gt;Rust nightly builds &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://rust-lang.github.io/rustup-components-history/&quot;&gt;from 2026-07-31 onwards&lt;/a&gt; have experimental support for
+more ergonomic function and method overloading, using the incomplete &quot;splat&quot; compiler feature;
+if you&#x27;re a compiler or interop tool developer, we encourage you to experiment with it!&lt;/p&gt;
+&lt;p&gt;&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/rust/issues/153629&quot;&gt;This experiment&lt;/a&gt; lets overloaded functions be called with separate arguments,
+like this: &lt;code&gt;hypot(2.0, 3.0, 6.0)&lt;/code&gt;. No double parentheses required! But type inference and type
+checking still happen as they would in a stable Rust overload.&lt;/p&gt;
+&lt;p&gt;We are experimenting with splat to get a feel for the complexity of the implementation, and to see
+if it solves some language interoperability use cases. Like most
+&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://lang-team.rust-lang.org/how_to/experiment.html&quot;&gt;Rust language experiments&lt;/a&gt;, this nightly feature has no RFC, and can change or be
+removed at any time.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;experiment-design&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#experiment-design&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Experiment Design&lt;/h3&gt;
+&lt;p&gt;We expect the feature to change significantly in future, or to be replaced by a more ergonomic
+interface. In this spirit, &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/ajay-singh1&quot;&gt;Ajay Singh&lt;/a&gt;, a
+&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://ajay-singh1.github.io/posts/outreachy/&quot;&gt;Rust Project Outreachy intern&lt;/a&gt;, is working on a macro to make splat-based
+overloading more ergonomic. You can find his work in the
+&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rustfoundation/overloading-macros/tree/main/splat-overload&quot;&gt;rust-foundation/overloading-macros&lt;/a&gt; repository on GitHub.&lt;/p&gt;
+&lt;p&gt;The design axioms for this feature are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&quot;keep Rust nice&quot;&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;make calling overloaded FFI functions easy&lt;/li&gt;
+&lt;li&gt;preserve foreign language maintainability&lt;/li&gt;
+&lt;li&gt;select the overload most developers would expect&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This could be a challenging design, because different programming languages have different overload
+resolution rules.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;example-usage&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#example-usage&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Example Usage&lt;/h3&gt;
+&lt;p&gt;Rust overloading aims to support a range of programming languages. This example uses C++ because it
+is well known, and has significant existing interop tooling.&lt;/p&gt;
+&lt;p&gt;Here is some Rust code that calls the overloaded C++ &lt;code&gt;hypot&lt;/code&gt; (hypotenuse) function, using &quot;splat&quot;
+to create corresponding overloads in Rust.&lt;/p&gt;
+&lt;pre class&#x3D;&quot;giallo z-code&quot;&gt;&lt;code data-lang&#x3D;&quot;rust&quot;&gt;&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;#&lt;/span&gt;&lt;span&gt;!&lt;/span&gt;&lt;span&gt;[&lt;/span&gt;&lt;span&gt;feature&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;splat&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;span&gt; tuple_trait&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span&gt;]&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;#&lt;/span&gt;&lt;span&gt;!&lt;/span&gt;&lt;span&gt;[&lt;/span&gt;&lt;span&gt;expect&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;incomplete_features&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span&gt;]&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;use&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-namespace&quot;&gt; cpp&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt;::&lt;/span&gt;&lt;span&gt;cpp&lt;/span&gt;&lt;span&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;use&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-namespace&quot;&gt; std&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt;::&lt;/span&gt;&lt;span&gt;{&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-namespace&quot;&gt;ffi&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt;::&lt;/span&gt;&lt;span&gt;c_double&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-namespace&quot;&gt; marker&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt;::&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt;Tuple&lt;/span&gt;&lt;span&gt;}&lt;/span&gt;&lt;span&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function&quot;&gt;cpp!&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;span&gt;{&lt;/span&gt;&lt;span&gt; #&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt;include&lt;/span&gt;&lt;span&gt; &amp;lt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt;cmath&lt;/span&gt;&lt;span&gt;&amp;gt;&lt;/span&gt;&lt;span&gt; }&lt;/span&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-comment z-comment&quot;&gt;///&lt;/span&gt;&lt;span class&#x3D;&quot;z-comment&quot;&gt; The arguments of an overloaded C++ &#x60;hypot&#x60; function.&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-storage z-type&quot;&gt;trait&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; HypotArgs&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt;:&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; Tuple&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-storage z-type&quot;&gt;    type&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; Output&lt;/span&gt;&lt;span&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;    fn&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function&quot;&gt; call_hypot&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable z-language&quot;&gt;self&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt; -&amp;gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable z-language&quot;&gt; Self&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt;::&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt;Output&lt;/span&gt;&lt;span&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-comment z-comment&quot;&gt;///&lt;/span&gt;&lt;span class&#x3D;&quot;z-comment&quot;&gt; Calls the overloaded C++ &#x60;std::hypot&#x60; function with the given arguments.&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;fn&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function&quot;&gt; hypot&lt;/span&gt;&lt;span&gt;&amp;lt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt;Args&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt;:&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; HypotArgs&lt;/span&gt;&lt;span&gt;&amp;gt;&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;#&lt;/span&gt;&lt;span&gt;[&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt;rustc_splat&lt;/span&gt;&lt;span&gt;]&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt; args&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt;:&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; Args&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt; -&amp;gt;&lt;/span&gt;&lt;span&gt; &amp;lt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt;Args&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt; as&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; HypotArgs&lt;/span&gt;&lt;span&gt;&amp;gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt;::&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt;Output&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt;    args&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt;.&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function&quot;&gt;call_hypot&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-comment z-comment&quot;&gt;///&lt;/span&gt;&lt;span class&#x3D;&quot;z-comment&quot;&gt; A 2-argument &#x60;hypot&#x60; overload.&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;impl&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; HypotArgs&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-control&quot;&gt; for&lt;/span&gt;&lt;span&gt; (&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt;c_double&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt; c_double&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-storage z-type&quot;&gt;    type&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; Output&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator z-assignment z-keyword z-operator&quot;&gt; &#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt; c_double&lt;/span&gt;&lt;span&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;    fn&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function&quot;&gt; call_hypot&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable z-language&quot;&gt;self&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt; -&amp;gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt; c_double&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-storage z-type&quot;&gt;        let&lt;/span&gt;&lt;span&gt; (&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt;x&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt; y&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator z-assignment z-keyword z-operator&quot;&gt; &#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable z-language&quot;&gt; self&lt;/span&gt;&lt;span&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;        unsafe&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function&quot;&gt;            cpp!&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;[&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt;x&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt; as&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-string&quot;&gt; &amp;quot;&lt;/span&gt;&lt;span class&#x3D;&quot;z-string z-quoted z-string&quot;&gt;double&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-string&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt; y&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt; as&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-string&quot;&gt; &amp;quot;&lt;/span&gt;&lt;span class&#x3D;&quot;z-string z-quoted z-string&quot;&gt;double&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-string&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span&gt;]&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt; -&amp;gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt; c_double&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt; as&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-string&quot;&gt; &amp;quot;&lt;/span&gt;&lt;span class&#x3D;&quot;z-string z-quoted z-string&quot;&gt;double&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-string&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-comment z-comment&quot;&gt;                //&lt;/span&gt;&lt;span class&#x3D;&quot;z-comment z-line z-double-slash z-comment&quot;&gt; This is C++ code!&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword z-control&quot;&gt;                return&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-namespace&quot;&gt; std&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt;::&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function&quot;&gt;hypot&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt;x&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt; y&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;            }&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;        }&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;    }&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-comment z-comment&quot;&gt;///&lt;/span&gt;&lt;span class&#x3D;&quot;z-comment&quot;&gt; A 3-argument &#x60;hypot&#x60; overload.&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;impl&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; HypotArgs&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-control&quot;&gt; for&lt;/span&gt;&lt;span&gt; (&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt;c_double&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt; c_double&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt; c_double&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-storage z-type&quot;&gt;    type&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; Output&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator z-assignment z-keyword z-operator&quot;&gt; &#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt; c_double&lt;/span&gt;&lt;span&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;    fn&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function&quot;&gt; call_hypot&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable z-language&quot;&gt;self&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt; -&amp;gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt; c_double&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-storage z-type&quot;&gt;        let&lt;/span&gt;&lt;span&gt; (&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt;x&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt; y&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt; z&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator z-assignment z-keyword z-operator&quot;&gt; &#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable z-language&quot;&gt; self&lt;/span&gt;&lt;span&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;        unsafe&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function&quot;&gt;            cpp!&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;[&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt;x&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt; as&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-string&quot;&gt; &amp;quot;&lt;/span&gt;&lt;span class&#x3D;&quot;z-string z-quoted z-string&quot;&gt;double&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-string&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt; y&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt; as&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-string&quot;&gt; &amp;quot;&lt;/span&gt;&lt;span class&#x3D;&quot;z-string z-quoted z-string&quot;&gt;double&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-string&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt; z&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt; as&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-string&quot;&gt; &amp;quot;&lt;/span&gt;&lt;span class&#x3D;&quot;z-string z-quoted z-string&quot;&gt;double&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-string&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span&gt;]&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt; -&amp;gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt; c_double&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt; as&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-string&quot;&gt; &amp;quot;&lt;/span&gt;&lt;span class&#x3D;&quot;z-string z-quoted z-string&quot;&gt;double&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-string&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword z-control&quot;&gt;                return&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-namespace&quot;&gt; std&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt;::&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function&quot;&gt;hypot&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt;x&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt; y&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt; z&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;            }&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;        }&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;    }&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;fn&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function&quot;&gt; main&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function&quot;&gt;    println!&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-string&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span class&#x3D;&quot;z-string z-quoted z-string&quot;&gt;|(3, 4)|    &#x3D; &lt;/span&gt;&lt;span class&#x3D;&quot;z-string z-quoted z-string&quot;&gt;{&lt;/span&gt;&lt;span class&#x3D;&quot;z-string z-quoted z-string&quot;&gt;}&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-string&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function&quot;&gt; hypot&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span class&#x3D;&quot;z-constant z-numeric&quot;&gt;3&lt;/span&gt;&lt;span class&#x3D;&quot;z-constant z-numeric&quot;&gt;.&lt;/span&gt;&lt;span class&#x3D;&quot;z-constant z-numeric&quot;&gt;0&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;span class&#x3D;&quot;z-constant z-numeric&quot;&gt; 4&lt;/span&gt;&lt;span class&#x3D;&quot;z-constant z-numeric&quot;&gt;.&lt;/span&gt;&lt;span class&#x3D;&quot;z-constant z-numeric&quot;&gt;0&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function&quot;&gt;    println!&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-string&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span class&#x3D;&quot;z-string z-quoted z-string&quot;&gt;|(2, 3, 6)| &#x3D; &lt;/span&gt;&lt;span class&#x3D;&quot;z-string z-quoted z-string&quot;&gt;{&lt;/span&gt;&lt;span class&#x3D;&quot;z-string z-quoted z-string&quot;&gt;}&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-string&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function&quot;&gt; hypot&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span class&#x3D;&quot;z-constant z-numeric&quot;&gt;2&lt;/span&gt;&lt;span class&#x3D;&quot;z-constant z-numeric&quot;&gt;.&lt;/span&gt;&lt;span class&#x3D;&quot;z-constant z-numeric&quot;&gt;0&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;span class&#x3D;&quot;z-constant z-numeric&quot;&gt; 3&lt;/span&gt;&lt;span class&#x3D;&quot;z-constant z-numeric&quot;&gt;.&lt;/span&gt;&lt;span class&#x3D;&quot;z-constant z-numeric&quot;&gt;0&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;span class&#x3D;&quot;z-constant z-numeric&quot;&gt; 6&lt;/span&gt;&lt;span class&#x3D;&quot;z-constant z-numeric&quot;&gt;.&lt;/span&gt;&lt;span class&#x3D;&quot;z-constant z-numeric&quot;&gt;0&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This example uses &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://crates.io/crates/cpp&quot;&gt;the cpp crate&lt;/a&gt; to inline C++ code in a Rust file. A full runnable
+example &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rustfoundation/overloading-examples&quot;&gt;is available on GitHub&lt;/a&gt;. You can also run a minimal Rust-only
+example online, &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://play.rust-lang.org/?version&#x3D;nightly&amp;amp;mode&#x3D;debug&amp;amp;edition&#x3D;2024&amp;amp;gist&#x3D;d9494d84fa32271b3517fa293d3215ff&quot;&gt;in the Rust playground&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://internals.rust-lang.org/t/pre-pre-rfc-splatting-for-named-arguments-and-function-overloading/24012&quot;&gt;Nadrieril’s original &quot;Overloading at Home&quot; code&lt;/a&gt; from his recent write-up of &quot;splat&quot;,
+can also be run &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://play.rust-lang.org/?version&#x3D;nightly&amp;amp;mode&#x3D;debug&amp;amp;edition&#x3D;2024&amp;amp;gist&#x3D;fcf1ead0e431166177fd9f05d5e33fd0&quot;&gt;in the Rust playground&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;limitations&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#limitations&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Limitations&lt;/h3&gt;
+&lt;p&gt;As stated above, splat is currently an incomplete compiler feature, and is only available in the
+nightly Rust compiler. Splat is also unergonomic, and we want to change that as part of the next
+design phase.&lt;/p&gt;
+&lt;p&gt;Support for splatted function arguments in rustdoc &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/rust/pull/160882&quot;&gt;just merged on 12 August&lt;/a&gt;. Splatted
+arguments display as an ellipsis (&lt;code&gt;…&lt;/code&gt;), rather than the argument name. This syntax is unstable,
+currently only used for display in rustdoc, and can change at any time. For example:&lt;/p&gt;
+&lt;pre class&#x3D;&quot;giallo z-code&quot;&gt;&lt;code data-lang&#x3D;&quot;rust&quot;&gt;&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;fn&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function&quot;&gt; example&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;#&lt;/span&gt;&lt;span&gt;[&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt;rustc_splat&lt;/span&gt;&lt;span&gt;]&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt; args&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt;:&lt;/span&gt;&lt;span&gt; (&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt;u32&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; String&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span&gt;;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Is displayed as:&lt;/p&gt;
+&lt;pre class&#x3D;&quot;giallo z-code&quot;&gt;&lt;code data-lang&#x3D;&quot;rust&quot;&gt;&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;fn&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function&quot;&gt; example&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;…&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt;:&lt;/span&gt;&lt;span&gt; (&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt;u32&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; String&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span&gt;;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We&#x27;ve also recently merged &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/rust/pull/158645&quot;&gt;splat support for function pointers&lt;/a&gt;, if you&#x27;re seeing
+&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/rust/issues/158603&quot;&gt;an internal compiler error&lt;/a&gt;, please update to the latest nightly.
+If you want overloading support for function pointers, please let us know about your use case in
+the &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/channel/427678-t-lang.2Finterop&quot;&gt;#t-lang/interop channel on Zulip&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;And there is an ongoing &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/rust/issues/160728&quot;&gt;Rust standard library experiment&lt;/a&gt; using splat for
+variable-argument &lt;code&gt;smallest&lt;/code&gt; and &lt;code&gt;greatest&lt;/code&gt; functions. Hopefully they will be
+&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/rust/pull/160687&quot;&gt;available soon on nightly&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Experimenters will find other bugs – &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/rust/issues?q&#x3D;label:F-splat&quot;&gt;some have already been found in the last few months&lt;/a&gt;
+– and some overloading functionality is out of scope for now. If you think you&#x27;ve found a bug or
+limitation, ask us about it in the &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/channel/427678-t-lang.2Finterop&quot;&gt;#t-lang/interop channel on Zulip&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;credits&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#credits&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Credits&lt;/h3&gt;
+&lt;p&gt;This work would not be possible without Google’s generous funding and support of the Rust
+Foundation’s Rust-C++ &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://rustfoundation.org/interop-initiative/&quot;&gt;Interop Initiative&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;It is driven by the &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://rust-lang.github.io/rust-project-goals/2026/overloading-for-ffi.html&quot;&gt;Nightly support for function overloading in FFI bindings&lt;/a&gt;
+Rust Project goal, and it is an outcome of the
+&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://rust-lang.github.io/rust-project-goals/2026/interop-problem-map.html&quot;&gt;C++/Rust Interop Problem Space Mapping&lt;/a&gt; Rust Project goal.&lt;/p&gt;
+&lt;p&gt;Thank you also to everyone who has contributed to the overloading work, including &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/oli-obk&quot;&gt;Oli&lt;/a&gt;,
+&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/ajay-singh1&quot;&gt;Ajay&lt;/a&gt;, &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/nadrieril&quot;&gt;Nadrieril&lt;/a&gt;, &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/scottmcm&quot;&gt;Scott&lt;/a&gt;, &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/cramertj&quot;&gt;Taylor&lt;/a&gt;, &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/tmandry&quot;&gt;Tyler&lt;/a&gt;,
+&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/matthiaskrgr&quot;&gt;Matthias&lt;/a&gt;, &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/theemathas&quot;&gt;Tim&lt;/a&gt;, &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/ssbr&quot;&gt;Devin&lt;/a&gt;, &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/RalfJung&quot;&gt;Ralf&lt;/a&gt;, &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/programmerjake&quot;&gt;Jacob&lt;/a&gt;,
+&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/bushrat011899&quot;&gt;Zachary&lt;/a&gt; and the many project members who have given suggestions, feedback, testing,
+bug reports, and reviews.&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;future-work&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#future-work&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Future Work&lt;/h2&gt;
+&lt;h3 id&#x3D;&quot;overloading-in-the-shiny-future&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#overloading-in-the-shiny-future&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Overloading, In The Shiny Future&lt;/h3&gt;
+&lt;pre class&#x3D;&quot;giallo z-code&quot;&gt;&lt;code data-lang&#x3D;&quot;rust&quot;&gt;&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;#&lt;/span&gt;&lt;span&gt;[&lt;/span&gt;&lt;span&gt;overload&lt;/span&gt;&lt;span&gt;]&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;impl&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; f64&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-comment z-comment&quot;&gt;    ///&lt;/span&gt;&lt;span class&#x3D;&quot;z-comment&quot;&gt; Returns the 2-dimensional distance from the origin.&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;    fn&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function&quot;&gt; hypot&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable z-language&quot;&gt;self&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt; y&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt;:&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; f64&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt; -&amp;gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; f64&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;span&gt; … &lt;/span&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-comment z-comment&quot;&gt;    ///&lt;/span&gt;&lt;span class&#x3D;&quot;z-comment&quot;&gt; Returns the 3-dimensional distance from the origin.&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;    fn&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function&quot;&gt; hypot&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable z-language&quot;&gt;self&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt; y&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt;:&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; f64&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt; z&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt;:&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; f64&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt; -&amp;gt;&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; f64&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;span&gt; … &lt;/span&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;em&gt;(This example is a variant of a design shared by &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/cramertj&quot;&gt;Taylor Cramer&lt;/a&gt;.)&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;In the shiny future, Rust might have an &lt;code&gt;#[overload]&lt;/code&gt; attribute that &quot;just works&quot; to call
+overloaded foreign functions with the same name. No traits, tuples, or &lt;code&gt;#[rustc_splat]&lt;/code&gt; required,
+the compiler handles it all for you. Since this work is targeted at interop, overloading might be
+limited to &lt;code&gt;extern&lt;/code&gt; blocks to start with. Extending it to native Rust could be a separate feature,
+stabilised on a longer timeframe (or not at all).&lt;/p&gt;
+&lt;p&gt;This might happen through macros that hide compiler implementation internals, or it might not need
+any macros. It&#x27;s hard to guess what the final shape of the feature will be: we’ve only just started
+the first experiment.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;future-designs&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#future-designs&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Future Designs&lt;/h3&gt;
+&lt;p&gt;We have a lot of work to do before we can discuss overloading designs in detail. The &quot;splat&quot;
+experiment will help us find the limits of the Rust type system, how it handles typical foreign
+language overloads, the diagnostics needed to guide overloading users, and any design gaps for
+future work.&lt;/p&gt;
+&lt;p&gt;We’ll also need to find a syntax for overloading, if it is accepted. Naming things is hard, as many
+users of function overloading have discovered 😅&lt;/p&gt;
+&lt;p&gt;Stay tuned for future interop updates on our blog. You can see the
+&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://rust-lang.github.io/rust-project-goals/2026/goals.html&quot;&gt;full list of Project Goals here&lt;/a&gt;, many of which are
+&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://docs.google.com/document/d/1pFOUJXcs3bZKsCwrMOVHaCbjSe8XEb5ZtHux_4nTwp0/edit?usp&#x3D;sharing&quot;&gt;working towards better interop&lt;/a&gt; with a range of programming languages.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>teor</name>
+        </author>
+    </entry>
+    <entry>
+        <title>1.98.0 pre-release testing</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2026/08/19/1.98.0-prerelease/" type="text/html" title="1.98.0 pre-release testing" />
+        <published>2026-08-19T00:00:00+00:00</published>
+        <updated>2026-08-19T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2026/08/19/1.98.0-prerelease/</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2026/08/19/1.98.0-prerelease/">&lt;p&gt;The 1.98.0 pre-release is ready for testing. The release is scheduled for
+August 20. &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://dev-doc.rust-lang.org/1.98.0/releases.html&quot;&gt;Release notes can be found here.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You can try it out locally by running:&lt;/p&gt;
+&lt;pre class&#x3D;&quot;giallo z-code&quot;&gt;&lt;code data-lang&#x3D;&quot;plain&quot;&gt;&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;RUSTUP_DIST_SERVER&#x3D;https://dev-static.rust-lang.org rustup update stable&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The index is &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://dev-static.rust-lang.org/dist/2026-08-18/index.html&quot;&gt;https://dev-static.rust-lang.org/dist/2026-08-18/index.html&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You can leave feedback on the &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://internals.rust-lang.org/t/rust-1-98-0-pre-release-testing/24541&quot;&gt;internals thread&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;General feedback about our pre-release process is welcome &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/release-team/issues/16&quot;&gt;on this GitHub issue&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Release automation</name>
+        </author>
+    </entry>
+    <entry>
+        <title>Experiment in reducing target directory size on nightly</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2026/08/18/reducing-target-dir-size-on-nightly/" type="text/html" title="Experiment in reducing target directory size on nightly" />
+        <published>2026-08-18T00:00:00+00:00</published>
+        <updated>2026-08-18T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2026/08/18/reducing-target-dir-size-on-nightly/</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2026/08/18/reducing-target-dir-size-on-nightly/">&lt;p&gt;TL;DR: The Cargo Team will be rolling out an experiment to identify user impact for a proposed change. Cargo will enable the &lt;code&gt;-Zembed-metadata&#x3D;no&lt;/code&gt; feature on the &lt;em&gt;nightly&lt;/em&gt; channel by default, which can help reduce the size of the target directory somewhat. This is an experiment designed to gather feedback about viability of this feature. Users are not expected to migrate to support this feature, but to report any issues and &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2026/08/18/reducing-target-dir-size-on-nightly/#how-to-opt-out&quot;&gt;opt-out&lt;/a&gt; if needed in the meantime.&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;what-is-this-about&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#what-is-this-about&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+What is this about?&lt;/h2&gt;
+&lt;p&gt;High disk usage of Rust compilation artifacts is frequently cited as one of the biggest annoyances of Rust users. In our 2025 State of Rust survey, it was actually the second most commonly reported &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://blog.rust-lang.org/2026/03/02/2025-State-Of-Rust-Survey-results/#challenges-and-wishes-about-rust&quot;&gt;problem&lt;/a&gt;, right after compilation speed.&lt;/p&gt;
+&lt;p&gt;There are various reasons why the &lt;code&gt;target&lt;/code&gt; directory can become quite large, such as:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Cargo compiles the whole crate graph from scratch by default, which produces a lot of build artifacts.&lt;/li&gt;
+&lt;li&gt;Debug information takes a lot of disk space.&lt;/li&gt;
+&lt;li&gt;Incremental compilation artifacts take a lot of disk space.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;While you can disable debug information or incremental compilation to reduce the &lt;code&gt;target&lt;/code&gt; directory size, that of course comes with severe trade-offs in compilation speed and debuggability of your program. However, there is one source of data in the &lt;code&gt;target&lt;/code&gt; directory that currently takes too much size even though it doesn&#x27;t really have to. It is the &quot;crate metadata&quot;, which can be duplicated across multiple files. We will focus on that in this blog post.&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;what-causes-duplicated-meta-data&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#what-causes-duplicated-meta-data&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+What causes duplicated (meta)data&lt;/h2&gt;
+&lt;p&gt;For years, Cargo has been using &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://blog.rust-lang.org/2019/09/26/Rust-1.38.0/#pipelined-compilation&quot;&gt;pipelined compilation&lt;/a&gt; to speed up building of crate graphs. When compiling a library crate, it tells the compiler to produce an &lt;code&gt;.rmeta&lt;/code&gt; file (which contains all the crate metadata required to use this library) as soon as possible, even before having the final executable code available. This enables dependent crates to start compiling sooner. However, once the library does finish compiling, the final produced &lt;code&gt;.rlib&lt;/code&gt; file will contain &lt;em&gt;both&lt;/em&gt; the executable code and the Rust-specific metadata.&lt;/p&gt;
+&lt;p&gt;Which means that after the compilation finishes, the metadata of each library crate will be stored on disk twice: in the &lt;code&gt;.rmeta&lt;/code&gt; file and also in the &lt;code&gt;.rlib&lt;/code&gt; file. This can cause a non-trivial increase of the &lt;code&gt;target&lt;/code&gt; directory size.&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;avoiding-duplicated-metadata&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#avoiding-duplicated-metadata&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Avoiding duplicated metadata&lt;/h2&gt;
+&lt;p&gt;In order to reduce unnecessary data duplication in the built artifacts, last year we introduced an unstable compiler &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/rust/pull/137535&quot;&gt;flag&lt;/a&gt; called &lt;code&gt;-Zembed-metadata&lt;/code&gt;, together with a corresponding &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/15378&quot;&gt;Cargo flag&lt;/a&gt; with the same name. When using &lt;code&gt;-Zembed-metadata&#x3D;no&lt;/code&gt;, the compiler will stop putting the metadata into the &lt;code&gt;.rlib&lt;/code&gt; files, thus reducing their file size.&lt;/p&gt;
+&lt;p&gt;Soon, Cargo will start defaulting to using &lt;code&gt;-Zembed-metadata&#x3D;no&lt;/code&gt; when &lt;em&gt;both&lt;/em&gt; Cargo and the used &lt;code&gt;rustc&lt;/code&gt; have the &lt;code&gt;nightly&lt;/code&gt; channel. Note that this is an experiment, the feature is not currently headed for stabilization. We want to evaluate how does this change fare in practice, and gather feedback from nightly users. So if you encounter any issues with this change, please do &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/cargo/issues&quot;&gt;report them&lt;/a&gt;!&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;how-much-does-it-help&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#how-much-does-it-help&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+How much does it help?&lt;/h2&gt;
+&lt;p&gt;We compiled two crates (&lt;code&gt;serde&lt;/code&gt; and &lt;code&gt;cargo&lt;/code&gt; itself) on the &lt;code&gt;x86_64-unknown-linux-gnu&lt;/code&gt; target using a recent nightly compiler (&lt;code&gt;rustc 1.100.0-nightly (67854e511 2026-08-15)&lt;/code&gt;) in several configurations:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;dev&lt;/code&gt; profile with/without incremental compilation and with/without debuginfo&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;release&lt;/code&gt; profile without incremental compilation and without debuginfo&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We can see the results in the table below. The &lt;code&gt;Before&lt;/code&gt; column shows the size of the &lt;code&gt;target&lt;/code&gt; directory when using the previous default (&lt;code&gt;-Zembed-metadata&#x3D;yes&lt;/code&gt;), while the &lt;code&gt;After&lt;/code&gt; column shows the &lt;code&gt;target&lt;/code&gt; disk size with &lt;code&gt;-Zembed-metadata&#x3D;no&lt;/code&gt;, which will soon be the default on the nightly channel.&lt;/p&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Profile&lt;/th&gt;&lt;th&gt;Incremental&lt;/th&gt;&lt;th&gt;Debuginfo&lt;/th&gt;&lt;th&gt;Before [MiB]&lt;/th&gt;&lt;th&gt;After [MiB]&lt;/th&gt;&lt;th&gt;Reduction&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;dev&lt;/code&gt;&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;179.70&lt;/td&gt;&lt;td&gt;171.29&lt;/td&gt;&lt;td&gt;-4.7%&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;dev&lt;/code&gt;&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;96.84&lt;/td&gt;&lt;td&gt;88.44&lt;/td&gt;&lt;td&gt;-8.7%&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;dev&lt;/code&gt;&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;81.12&lt;/td&gt;&lt;td&gt;72.68&lt;/td&gt;&lt;td&gt;-10.4%&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;dev&lt;/code&gt;&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;31.06&lt;/td&gt;&lt;td&gt;22.62&lt;/td&gt;&lt;td&gt;-27.2%&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;release&lt;/code&gt;&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;40.88&lt;/td&gt;&lt;td&gt;28.68&lt;/td&gt;&lt;td&gt;-29.8%&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;As expected, the disk size wins depend a lot on how much of the &lt;code&gt;target&lt;/code&gt; directory is taken up by the crate metadata itself. If there are no incremental artifacts and no debuginfo, such as when using the default configuration of the &lt;code&gt;release&lt;/code&gt; profile, the wins are substantial, in this case almost 30%. On the other hand, if we use the defaults of the &lt;code&gt;dev&lt;/code&gt; profile, which enables both incremental compilation and generation of debug information, then the wins are more modest (in this case around 5%), because the debug information and incremental build artifacts dwarf the size of the crate metadata.&lt;/p&gt;
+&lt;p&gt;Below are the results for compiling Cargo itself, which are slightly better than for serde. In the best case, the new default reduced the size of the &lt;code&gt;target&lt;/code&gt; directory by approximately 33%, almost 300 MiB in absolute terms!&lt;/p&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Profile&lt;/th&gt;&lt;th&gt;Incremental&lt;/th&gt;&lt;th&gt;Debuginfo&lt;/th&gt;&lt;th&gt;Before [MiB]&lt;/th&gt;&lt;th&gt;After [MiB]&lt;/th&gt;&lt;th&gt;Reduction&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;dev&lt;/code&gt;&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;3151.16&lt;/td&gt;&lt;td&gt;2910.88&lt;/td&gt;&lt;td&gt;-7.6%&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;dev&lt;/code&gt;&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;1476.00&lt;/td&gt;&lt;td&gt;1235.71&lt;/td&gt;&lt;td&gt;-16.3%&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;dev&lt;/code&gt;&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;2065.75&lt;/td&gt;&lt;td&gt;1825.45&lt;/td&gt;&lt;td&gt;-11.6%&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;dev&lt;/code&gt;&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;999.71&lt;/td&gt;&lt;td&gt;759.41&lt;/td&gt;&lt;td&gt;-24.0%&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;release&lt;/code&gt;&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;807.05&lt;/td&gt;&lt;td&gt;537.15&lt;/td&gt;&lt;td&gt;-33.4%&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;This does not fully solve the problem of large &lt;code&gt;target&lt;/code&gt; directories, but it can help at least a little bit.&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;does-this-affect-me&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#does-this-affect-me&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Does this affect me?&lt;/h2&gt;
+&lt;p&gt;In the vast majority of situations, you should not notice anything different when &lt;code&gt;-Zembed-metadata&#x3D;no&lt;/code&gt; is used, other than the &lt;code&gt;target&lt;/code&gt; directory becoming smaller. However, if you for some reason link to &lt;code&gt;.rlib&lt;/code&gt; files manually, you might now also have to pass the corresponding &lt;code&gt;.rmeta&lt;/code&gt; file to the compiler using the &lt;code&gt;--extern&lt;/code&gt; flag to get access to the crate&#x27;s metadata. Please &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/cargo/issues&quot;&gt;let us know&lt;/a&gt; if you have a use-case like this!&lt;/p&gt;
+&lt;p&gt;If you do not do that correctly, you might be greeted with an error similar to this one:&lt;/p&gt;
+&lt;pre class&#x3D;&quot;giallo z-code&quot;&gt;&lt;code data-lang&#x3D;&quot;plain&quot;&gt;&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;error: only metadata stub found for &#x60;rlib&#x60; dependency &#x60;foo&#x60;&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;please provide path to the corresponding .rmeta file with full metadata&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note that Cargo does not currently &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/17359&quot;&gt;&quot;uplift&quot;&lt;/a&gt; the corresponding &lt;code&gt;.rmeta&lt;/code&gt; file, even when using &lt;code&gt;-Zembed-metadata&#x3D;no&lt;/code&gt;. That means that the &lt;code&gt;.rmeta&lt;/code&gt; file (unlike the &lt;code&gt;.rlib&lt;/code&gt; file) will not appear as &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://doc.rust-lang.org/cargo/reference/build-cache.html&quot;&gt;a final build artifact&lt;/a&gt; in the &lt;code&gt;target/&amp;lt;profile&amp;gt;&lt;/code&gt; directory after the build of a leaf library completes, and so you must find its location in the nested build directories, e.g. using Cargo&#x27;s &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://doc.rust-lang.org/cargo/reference/external-tools.html#json-messages&quot;&gt;JSON output&lt;/a&gt;, if you want to locate it.&lt;/p&gt;
+&lt;p&gt;If you are using a different build system than Cargo, then this change will not affect you.&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;how-to-opt-out&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#how-to-opt-out&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+How to opt out?&lt;/h2&gt;
+&lt;p&gt;If you want to opt out, you can either pass the &lt;code&gt;-Zembed-metadata&#x3D;yes&lt;/code&gt; command-line argument to Cargo (note that this is passed as a Cargo flag, not as a compiler flag in &lt;code&gt;RUSTFLAGS&lt;/code&gt;, because Cargo must be aware of the flag&#x27;s value) or set the environment variable &lt;code&gt;CARGO_UNSTABLE_EMBED_METADATA&#x3D;true&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;You can also opt out using a &lt;code&gt;.cargo/config.toml&lt;/code&gt; file:&lt;/p&gt;
+&lt;pre class&#x3D;&quot;giallo z-code&quot;&gt;&lt;code data-lang&#x3D;&quot;toml&quot;&gt;&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;[&lt;/span&gt;&lt;span&gt;unstable&lt;/span&gt;&lt;span&gt;]&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt;embed-metadata&lt;/span&gt;&lt;span&gt; &#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;z-constant z-language z-boolean z-constant z-language&quot;&gt; true&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;h2 id&#x3D;&quot;future-work&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#future-work&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Future work&lt;/h2&gt;
+&lt;p&gt;By enabling this feature on the &lt;code&gt;nightly&lt;/code&gt; channel by default, we want to figure out how will it work in practice, and if Cargo users are negatively affected by this change. After we gather feedback about the feature, and learn of any potential issues, the Cargo team will decide how to move forward: whether the feature can be stabilized as-is, changes need to be made, or if there are significant issues that would require us to return to the drawing board.&lt;/p&gt;
+&lt;p&gt;Therefore, if you run into any issues with this new default, please &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/cargo/issues&quot;&gt;open an issue&lt;/a&gt; in the Cargo repository, so that we get to know about them. We cannot fix issues that we do not know about, thank you!&lt;/p&gt;
+&lt;p&gt;And if you are interested in how is this feature moving forward, you can observe its progress in its &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/15495&quot;&gt;tracking issue&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Jakub Beránek</name>
+        </author>
+    </entry>
+    <entry>
+        <title>Leadership Council September 2026 Representative Selections</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2026/08/18/leadership-council-repr-selection/" type="text/html" title="Leadership Council September 2026 Representative Selections" />
+        <published>2026-08-18T00:00:00+00:00</published>
+        <updated>2026-08-18T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2026/08/18/leadership-council-repr-selection/</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2026/08/18/leadership-council-repr-selection/">&lt;p&gt;The selection process for representatives on the &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://www.rust-lang.org/governance/teams/leadership-council&quot;&gt;Leadership Council&lt;/a&gt; is starting today.&lt;/p&gt;
+&lt;p&gt;Every six months, half of the council terms end.
+The following teams are up to choose their representative for the next year:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://www.rust-lang.org/governance/teams/infra&quot;&gt;Infra&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://www.rust-lang.org/governance/teams/lang&quot;&gt;Lang&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://www.rust-lang.org/governance/teams/library&quot;&gt;Libs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://www.rust-lang.org/governance/teams/moderation&quot;&gt;Mods&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We are aiming to have the teams confirm their choices by September 23, 2026, and for any possible new members to be ready to join the council meetings starting September 25th.&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;criteria-for-representatives&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#criteria-for-representatives&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Criteria for representatives&lt;/h2&gt;
+&lt;p&gt;Any member of the top-level team or a member of any of their subteams is eligible to be the representative.
+See &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://forge.rust-lang.org/governance/council.html#candidate-criteria&quot;&gt;candidate criteria&lt;/a&gt; for a description of what makes a good representative.&lt;/p&gt;
+&lt;p&gt;There is a limit of at most two people affiliated with the same company or other legal entity being on the council &lt;sup class&#x3D;&quot;footnote-reference&quot; id&#x3D;&quot;fr-affiliates-1&quot;&gt;&lt;a href&#x3D;&quot;#fn-affiliates&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;.
+During the selection process, the council will consider the affiliation of candidates to decide if all choices will be compatible with that constraint.&lt;/p&gt;
+&lt;p&gt;Representatives may serve multiple terms if the team decides to choose the same representative again.
+There is a soft limit of three terms.&lt;sup class&#x3D;&quot;footnote-reference&quot; id&#x3D;&quot;fr-limit-1&quot;&gt;&lt;a href&#x3D;&quot;#fn-limit&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;
+It is recommended that teams rotate their representatives if possible to help avoid burnout and to spread the experience to a broader group of people.&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;what-do-representatives-do&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#what-do-representatives-do&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+What do Representatives do?&lt;/h2&gt;
+&lt;p&gt;A representative provides a voice on the council to represent the interests of their teams and contribute to the long-term success of the Rust Project.
+A detailed description of the role may be found at the &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/leadership-council/blob/main/roles/council-representative.md&quot;&gt;Representative Role Description&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;how-should-teams-make-their-selection&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#how-should-teams-make-their-selection&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+How should teams make their selection?&lt;/h2&gt;
+&lt;p&gt;The Leadership Council has put together a &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/leadership-council/blob/main/guides/representative-selection.md&quot;&gt;Representative Selection Guide&lt;/a&gt; with recommendations for teams on how to go about choosing a representative.
+It is not a requirement that teams follow this guide; top-level teams may choose their own process.&lt;/p&gt;
+&lt;section class&#x3D;&quot;footnotes&quot;&gt;
+&lt;ol class&#x3D;&quot;footnotes-list&quot;&gt;
+&lt;li id&#x3D;&quot;fn-affiliates&quot;&gt;
+&lt;p&gt;See &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://forge.rust-lang.org/governance/council.html#limits-on-representatives-from-a-single-companyentity&quot;&gt;Limits on representatives from a single company/entity&lt;/a&gt; &lt;a href&#x3D;&quot;#fr-affiliates-1&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id&#x3D;&quot;fn-limit&quot;&gt;
+&lt;p&gt;See &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://forge.rust-lang.org/governance/council.html#term-limits&quot;&gt;Term limits&lt;/a&gt;. &lt;a href&#x3D;&quot;#fr-limit-1&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</content>
+
+        <author>
+            <name>Jakub Beránek</name>
+        </author>
+    </entry>
+    <entry>
+        <title>June 2026 Project Director Update</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2026/08/17/project-director-update/" type="text/html" title="June 2026 Project Director Update" />
+        <published>2026-08-17T00:00:00+00:00</published>
+        <updated>2026-08-17T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2026/08/17/project-director-update/</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2026/08/17/project-director-update/">&lt;p&gt;This post covers the Rust Foundation board meeting that took place on June 9, 2026.&lt;/p&gt;
+&lt;p&gt;&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://rustfoundation.org/resource/june-2026-board-meeting/&quot;&gt;Find the full June 2026 minutes on the Foundation&#x27;s site&lt;/a&gt;. Highlights include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Abi Broom brought a draft &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://rustfoundation.org/policy/donation-acceptance-policy/&quot;&gt;Donation Acceptance Policy&lt;/a&gt; to the board for discussion; us Project Directors provided some feedback and gathered some feedback from the Project.&lt;/li&gt;
+&lt;li&gt;The board discussed whether our current subcommittees were serving us, and we agreed to re-evaluate committee membership after Project Director selections in September.&lt;/li&gt;
+&lt;li&gt;The Foundation has successfully distributed hardware 2FA tokens to all relevant Foundation and Project members to improve infrastructure security.&lt;/li&gt;
+&lt;li&gt;The Foundation staff has started brainstorming possible ideas to fund crates.io sustainably in line with the &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://openssf.org/blog/2025/09/23/open-infrastructure-is-not-free-a-joint-statement-on-sustainable-stewardship/&quot;&gt;Joint Statement on Sustainable Stewardship&lt;/a&gt; signed by many open source languages&#x27; package registry maintainers. These ideas are targeting heavy corporate usage and will be discussed with the Project and the Board before implementation.&lt;/li&gt;
+&lt;li&gt;teor &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/all-hands-2026/issues/11&quot;&gt;held a workshop on C++ interop at the All Hands&lt;/a&gt; and has been working on a number of other interop projects. There will be updates soon!&lt;/li&gt;
+&lt;li&gt;The August board meeting will be cancelled, and there will be a hybrid in-person and online board meeting at RustConf in September. The Foundation is also running a &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://rustfoundation.org/media/rust-teams-health-summit-september-8-in-montreal/&quot;&gt;Team Health Summit&lt;/a&gt; the day before RustConf.&lt;/li&gt;
+&lt;li&gt;The Foundation is planning to coordinate with DARPA to gather an evaluation committee for &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://www.ll.mit.edu/r-d/projects/translating-all-c-rust-tractor-benchmarks&quot;&gt;TRACTOR&lt;/a&gt; submissions, which is &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2024/12/17/project-director-update/&quot;&gt;a contest the board agreed for the Foundation to support in 2024&lt;/a&gt;. The Foundation staff and Project Directors will be connecting with the Project in Zulip soon to discuss any questions or comments about this initiative prior to DARPA soliciting Project input/evaluator volunteers.&lt;/li&gt;
+&lt;li&gt;The Foundation &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://rustfoundation.org/media/rust-foundation-trusted-training-program-launches-giving-learners-a-mark-of-quality-to-trust/&quot;&gt;launched its Trusted Training program&lt;/a&gt; with five initial training partners.&lt;/li&gt;
+&lt;li&gt;The Foundation &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://rustfoundation.org/media/building-the-rust-commercial-network-a-home-for-rust-in-production/&quot;&gt;launched the Rust Commercial Network&lt;/a&gt;, a community where the companies and organizations running Rust in production work together, and with the Rust Project, to advance Rust adoption. It has since grown to 50 companies and 100 individuals in the network! See &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://rustfoundation.org/media/updates-from-rust-commercial-network-rcn/&quot;&gt;Lori Lorusso&#x27;s blog post for more details&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+
+        <author>
+            <name>Carol Nichols and David Wood</name>
+        </author>
+    </entry>
+    <entry>
+        <title>Call for testing: Restricting trait implementability and field mutability</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2026/08/10/call-for-testing-impl-and-mut-restrictions/" type="text/html" title="Call for testing: Restricting trait implementability and field mutability" />
+        <published>2026-08-10T00:00:00+00:00</published>
+        <updated>2026-08-10T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2026/08/10/call-for-testing-impl-and-mut-restrictions/</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2026/08/10/call-for-testing-impl-and-mut-restrictions/">&lt;p&gt;We are excited to announce that &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://rust-lang.github.io/rfcs/3323-restrictions.html&quot;&gt;RFC 3323&lt;/a&gt; &quot;Restrictions&quot; is ready for testing on nightly Rust. In this post, we will briefly describe the features. If you are already familiar with them, you can skip ahead to the &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2026/08/10/call-for-testing-impl-and-mut-restrictions/#how-can-i-help&quot;&gt;How can I help?&lt;/a&gt; section.&lt;/p&gt;
+&lt;p&gt;The RFC is split into two features: &lt;code&gt;impl_restriction&lt;/code&gt; and &lt;code&gt;mut_restriction&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;what-is-impl-restriction&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#what-is-impl-restriction&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+What is &lt;code&gt;impl_restriction&lt;/code&gt;?&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;impl_restriction&lt;/code&gt; feature allows explicit restriction of the scope in which a trait may be implemented.&lt;/p&gt;
+&lt;p&gt;For example, consider a trait &lt;code&gt;Foo&lt;/code&gt; with a method that we want users to be able to call, while preventing downstream crates from providing their own implementations. With this feature, we can write:&lt;/p&gt;
+&lt;pre class&#x3D;&quot;giallo z-code&quot;&gt;&lt;code data-lang&#x3D;&quot;rust&quot;&gt;&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;#&lt;/span&gt;&lt;span&gt;!&lt;/span&gt;&lt;span&gt;[&lt;/span&gt;&lt;span&gt;feature&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;impl_restriction&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span&gt;]&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;pub&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function&quot;&gt; impl&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;crate&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span class&#x3D;&quot;z-storage z-type&quot;&gt; trait&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; Foo&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;    fn&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function&quot;&gt; method&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;impl&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; Foo&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-control&quot;&gt; for&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; usize&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;    fn&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function&quot;&gt; method&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;impl(crate)&lt;/code&gt; restriction prevents &lt;code&gt;Foo&lt;/code&gt; from being implemented outside the current crate. As with &lt;code&gt;pub&lt;/code&gt;, other paths can also be specified, such as &lt;code&gt;impl(super)&lt;/code&gt; or &lt;code&gt;impl(in path)&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Without this feature, this use case is typically handled using the sealed trait pattern, which is described in the &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://rust-lang.github.io/api-guidelines/future-proofing.html#sealed-traits-protect-against-downstream-implementations-c-sealed&quot;&gt;Rust API Guidelines&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In short, this pattern defines a public &lt;code&gt;Sealed&lt;/code&gt; trait inside a private module and makes it a supertrait of &lt;code&gt;Foo&lt;/code&gt;. Because downstream crates cannot name &lt;code&gt;Sealed&lt;/code&gt;, they cannot implement &lt;code&gt;Foo&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class&#x3D;&quot;giallo z-code&quot;&gt;&lt;code data-lang&#x3D;&quot;rust&quot;&gt;&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;pub&lt;/span&gt;&lt;span class&#x3D;&quot;z-storage z-type&quot;&gt; trait&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; Foo&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt;:&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-namespace&quot;&gt; private&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt;::&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt;Sealed&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;    fn&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function&quot;&gt; method&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-comment z-comment&quot;&gt;//&lt;/span&gt;&lt;span class&#x3D;&quot;z-comment z-line z-double-slash z-comment&quot;&gt; Implement &#x60;Foo&#x60; for selected types.&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;impl&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; Foo&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-control&quot;&gt; for&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; usize&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;    fn&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function&quot;&gt; method&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-storage z-type&quot;&gt;mod&lt;/span&gt;&lt;span&gt; private&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;    pub&lt;/span&gt;&lt;span class&#x3D;&quot;z-storage z-type&quot;&gt; trait&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; Sealed&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-comment z-comment&quot;&gt;    //&lt;/span&gt;&lt;span class&#x3D;&quot;z-comment z-line z-double-slash z-comment&quot;&gt; Implement &#x60;Sealed&#x60; for those same types, but no others.&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;    impl&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; Sealed&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-control&quot;&gt; for&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; usize&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;However, this pattern requires defining an additional &lt;code&gt;Sealed&lt;/code&gt; trait. The new &lt;code&gt;impl_restriction&lt;/code&gt; feature provides a more direct and concise way to express the same restriction.&lt;/p&gt;
+&lt;p&gt;The feature also allows the compiler to produce a more direct error message when an implementation is attempted outside the permitted scope.&lt;/p&gt;
+&lt;p&gt;For example, the following code:&lt;/p&gt;
+&lt;pre class&#x3D;&quot;giallo z-code&quot;&gt;&lt;code data-lang&#x3D;&quot;rust&quot;&gt;&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;#&lt;/span&gt;&lt;span&gt;!&lt;/span&gt;&lt;span&gt;[&lt;/span&gt;&lt;span&gt;feature&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;impl_restriction&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span&gt;]&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;pub&lt;/span&gt;&lt;span class&#x3D;&quot;z-storage z-type&quot;&gt; mod&lt;/span&gt;&lt;span&gt; foo&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;    pub&lt;/span&gt;&lt;span class&#x3D;&quot;z-storage z-type&quot;&gt; mod&lt;/span&gt;&lt;span&gt; bar&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;        pub&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;crate&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function&quot;&gt; impl&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable z-language&quot;&gt;super&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span class&#x3D;&quot;z-storage z-type&quot;&gt; trait&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; Foo&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;    }&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-comment z-comment&quot;&gt;    //&lt;/span&gt;&lt;span class&#x3D;&quot;z-comment z-line z-double-slash z-comment&quot;&gt; &#x60;Foo&#x60; may be implemented here.&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;    impl&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-namespace&quot;&gt; bar&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt;::&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt;Foo&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-control&quot;&gt; for&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; i8&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-comment z-comment&quot;&gt;//&lt;/span&gt;&lt;span class&#x3D;&quot;z-comment z-line z-double-slash z-comment&quot;&gt; Error: &#x60;Foo&#x60; cannot be implemented here.&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;impl&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-namespace&quot;&gt; foo&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt;::&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-namespace&quot;&gt;bar&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt;::&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt;Foo&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-control&quot;&gt; for&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; u8&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;results in the following error:&lt;/p&gt;
+&lt;pre class&#x3D;&quot;giallo z-code&quot;&gt;&lt;code data-lang&#x3D;&quot;plain&quot;&gt;&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;error: trait cannot be implemented outside &#x60;crate::foo&#x60;&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;  --&amp;gt; src/lib.rs:12:1&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;   |&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;12 | impl foo::bar::Foo for u8 {}&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;   | ^^^^^^^^^^^^^^^^^^^^^^^^^&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;   |&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;note: trait restricted here&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;  --&amp;gt; src/lib.rs:5:20&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;   |&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt; 5 |         pub(crate) impl(super) trait Foo {}&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;   |                    ^^^^^^^^^^^&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;h2 id&#x3D;&quot;what-is-mut-restriction&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#what-is-mut-restriction&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+What is &lt;code&gt;mut_restriction&lt;/code&gt;?&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;mut_restriction&lt;/code&gt; feature allows explicit restriction of the scope in which a field may be mutated.&lt;/p&gt;
+&lt;p&gt;For example, consider a struct &lt;code&gt;Bar&lt;/code&gt; with a field &lt;code&gt;alpha&lt;/code&gt; that can be read from any crate but can only be mutated within the crate where &lt;code&gt;Bar&lt;/code&gt; is defined. With this feature, we can write:&lt;/p&gt;
+&lt;pre class&#x3D;&quot;giallo z-code&quot;&gt;&lt;code data-lang&#x3D;&quot;rust&quot;&gt;&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;#&lt;/span&gt;&lt;span&gt;!&lt;/span&gt;&lt;span&gt;[&lt;/span&gt;&lt;span&gt;feature&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;mut_restriction&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span&gt;]&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;pub&lt;/span&gt;&lt;span class&#x3D;&quot;z-storage z-type&quot;&gt; struct&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; Bar&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;    pub&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function&quot;&gt; mut&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;crate&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt; alpha&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt;:&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; u8&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;mut(crate)&lt;/code&gt; restriction prevents &lt;code&gt;alpha&lt;/code&gt; from being mutated outside the current crate. As with &lt;code&gt;pub&lt;/code&gt;, other paths can also be specified, such as &lt;code&gt;mut(super)&lt;/code&gt; or &lt;code&gt;mut(in path)&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;This provides an alternative to getter methods by allowing read-only access through direct field access. It can also work better with the borrow checker, which can track borrows at the field level and allow disjoint fields to be borrowed independently.&lt;/p&gt;
+&lt;p&gt;When code attempts to mutate a restricted field outside the permitted scope, the compiler produces a direct error message. For example, the following code:&lt;/p&gt;
+&lt;pre class&#x3D;&quot;giallo z-code&quot;&gt;&lt;code data-lang&#x3D;&quot;rust&quot;&gt;&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;#&lt;/span&gt;&lt;span&gt;!&lt;/span&gt;&lt;span&gt;[&lt;/span&gt;&lt;span&gt;feature&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;mut_restriction&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span&gt;]&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;pub&lt;/span&gt;&lt;span class&#x3D;&quot;z-storage z-type&quot;&gt; mod&lt;/span&gt;&lt;span&gt; foo&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;    pub&lt;/span&gt;&lt;span class&#x3D;&quot;z-storage z-type&quot;&gt; struct&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; Bar&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;        pub&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function&quot;&gt; mut&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable z-language&quot;&gt;self&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt; alpha&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt;:&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt; &amp;amp;&lt;/span&gt;&lt;span&gt;&amp;#39;&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt;static&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; str&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;    }&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;    impl&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; Bar&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;        pub&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt; fn&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function&quot;&gt; mutate_inner&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class&#x3D;&quot;z-storage z-storage z-modifier&quot;&gt;mut&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable z-language&quot;&gt; self&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-comment z-comment&quot;&gt;            //&lt;/span&gt;&lt;span class&#x3D;&quot;z-comment z-line z-double-slash z-comment&quot;&gt; &#x60;alpha&#x60; may be mutated here.&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-variable z-language&quot;&gt;            self&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt;.&lt;/span&gt;&lt;span&gt;alpha &lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator z-assignment z-keyword z-operator&quot;&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-string&quot;&gt; &amp;quot;&lt;/span&gt;&lt;span class&#x3D;&quot;z-string z-quoted z-string&quot;&gt;inner&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-string&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;        }&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;    }&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;impl&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-namespace&quot;&gt; foo&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt;::&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt;Bar&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;    pub&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt; fn&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function&quot;&gt; mutate_outer&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class&#x3D;&quot;z-storage z-storage z-modifier&quot;&gt;mut&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable z-language&quot;&gt; self&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-comment z-comment&quot;&gt;        //&lt;/span&gt;&lt;span class&#x3D;&quot;z-comment z-line z-double-slash z-comment&quot;&gt; Error: &#x60;alpha&#x60; cannot be mutated here.&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-variable z-language&quot;&gt;        self&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt;.&lt;/span&gt;&lt;span&gt;alpha &lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator z-assignment z-keyword z-operator&quot;&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-string&quot;&gt; &amp;quot;&lt;/span&gt;&lt;span class&#x3D;&quot;z-string z-quoted z-string&quot;&gt;outer&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-string z-string&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;    }&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;results in the following error:&lt;/p&gt;
+&lt;pre class&#x3D;&quot;giallo z-code&quot;&gt;&lt;code data-lang&#x3D;&quot;plain&quot;&gt;&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;error: field &#x60;alpha&#x60; cannot be mutated outside &#x60;crate::foo&#x60;&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;  --&amp;gt; src/lib.rs:19:9&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;   |&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt; 5 |         pub mut(self) alpha: &amp;amp;&amp;#39;static str,&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;   |             --------- field restricted here&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;...&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;19 |         self.alpha &#x3D; &amp;quot;outer&amp;quot;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;   |         ^^^^^^^^^^^^^^^^^^^^&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;mut_restriction&lt;/code&gt; feature can also be used with fields of enum variants and unions. For example, we can write:&lt;/p&gt;
+&lt;pre class&#x3D;&quot;giallo z-code&quot;&gt;&lt;code data-lang&#x3D;&quot;rust&quot;&gt;&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;pub&lt;/span&gt;&lt;span class&#x3D;&quot;z-storage z-type&quot;&gt; enum&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; Foo&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt;    Alpha&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function&quot;&gt; mut&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;crate&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt; x&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt;:&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; u8&lt;/span&gt;&lt;span&gt; }&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function&quot;&gt;    Beta&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span class&#x3D;&quot;z-storage z-storage z-modifier&quot;&gt;mut&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;crate&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; u8&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-comment z-comment&quot;&gt; //&lt;/span&gt;&lt;span class&#x3D;&quot;z-comment z-line z-double-slash z-comment&quot;&gt; We can also use tuple-style&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;pub&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt; union&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; Bar&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;    pub&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function&quot;&gt; mut&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;crate&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt; i&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt;:&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; i32&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;    pub&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt; f&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt;:&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; f32&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;pub&lt;/span&gt;&lt;span class&#x3D;&quot;z-storage z-type&quot;&gt; struct&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; Baz&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;pub&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function&quot;&gt; mut&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;crate&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; u8&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span&gt;;&lt;/span&gt;&lt;span class&#x3D;&quot;z-punctuation z-definition z-comment z-comment&quot;&gt; //&lt;/span&gt;&lt;span class&#x3D;&quot;z-comment z-line z-double-slash z-comment&quot;&gt; We can also use tuple-style&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;h3 id&#x3D;&quot;restricting-construction-with-struct-expressions&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#restricting-construction-with-struct-expressions&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Restricting construction with struct expressions&lt;/h3&gt;
+&lt;p&gt;A common reason to use &lt;code&gt;mut&lt;/code&gt;-restricted fields is to preserve an invariant. However, allowing unrestricted construction with struct expressions would let users create values that have not been validated, potentially violating that invariant.&lt;/p&gt;
+&lt;p&gt;Thus, we disallow struct expressions if any &lt;code&gt;mut&lt;/code&gt;-restricted field cannot be mutated from the current scope. For example, the following code:&lt;/p&gt;
+&lt;pre class&#x3D;&quot;giallo z-code&quot;&gt;&lt;code data-lang&#x3D;&quot;rust&quot;&gt;&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;#&lt;/span&gt;&lt;span&gt;!&lt;/span&gt;&lt;span&gt;[&lt;/span&gt;&lt;span&gt;feature&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;mut_restriction&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span&gt;]&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;pub&lt;/span&gt;&lt;span class&#x3D;&quot;z-storage z-type&quot;&gt; mod&lt;/span&gt;&lt;span&gt; foo&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;    pub&lt;/span&gt;&lt;span class&#x3D;&quot;z-storage z-type&quot;&gt; struct&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; Baz&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;        pub&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt; alpha&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt;:&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; u8&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;        pub&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function&quot;&gt; mut&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable z-language&quot;&gt;self&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt; beta&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt;:&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt; u8&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;    }&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-keyword&quot;&gt;fn&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-function&quot;&gt; main&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span class&#x3D;&quot;z-storage z-type&quot;&gt;    let&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt; bar&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator z-assignment z-keyword z-operator&quot;&gt; &#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-namespace&quot;&gt; foo&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt;::&lt;/span&gt;&lt;span class&#x3D;&quot;z-entity z-name z-type&quot;&gt;Baz&lt;/span&gt;&lt;span&gt; {&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt; alpha&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt;:&lt;/span&gt;&lt;span class&#x3D;&quot;z-constant z-numeric&quot;&gt; 0&lt;/span&gt;&lt;span&gt;,&lt;/span&gt;&lt;span class&#x3D;&quot;z-variable&quot;&gt; beta&lt;/span&gt;&lt;span class&#x3D;&quot;z-keyword z-operator&quot;&gt;:&lt;/span&gt;&lt;span class&#x3D;&quot;z-constant z-numeric&quot;&gt; 1&lt;/span&gt;&lt;span&gt; }&lt;/span&gt;&lt;span&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;results in the following error:&lt;/p&gt;
+&lt;pre class&#x3D;&quot;giallo z-code&quot;&gt;&lt;code data-lang&#x3D;&quot;plain&quot;&gt;&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;error: &#x60;Baz&#x60; cannot be constructed using a &#x60;struct&#x60; expression outside &#x60;crate::foo&#x60;&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;  --&amp;gt; src/main.rs:11:15&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;   |&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt; 6 |         pub mut(self) beta: u8,&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;   |             --------- field restricted here&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;...&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;11 |     let bar &#x3D; foo::Baz { alpha: 0, beta: 1 };&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;   |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;h2 id&#x3D;&quot;how-can-i-help&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#how-can-i-help&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+How can I help?&lt;/h2&gt;
+&lt;p&gt;We&#x27;d love for you to try out these new features and share your feedback! To get started, use the latest Rust nightly compiler&lt;sup class&#x3D;&quot;footnote-reference&quot; id&#x3D;&quot;fr-1-1&quot;&gt;&lt;a href&#x3D;&quot;#fn-1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; and enable &lt;code&gt;#![feature(impl_restriction)]&lt;/code&gt; or &lt;code&gt;#![feature(mut_restriction)]&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Please share your feedback in the &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/rust/issues/160614&quot;&gt;dedicated feedback issue&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In particular, the RFC lists several &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://rust-lang.github.io/rfcs/3323-restrictions.html#unresolved-questions&quot;&gt;unresolved questions&lt;/a&gt;. One of the main open questions concerns the syntax, which is still open to discussion. Please try out the features and let us know what you think!&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;acknowledgements&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#acknowledgements&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Acknowledgements&lt;/h2&gt;
+&lt;p&gt;These features were implemented as part of a &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://summerofcode.withgoogle.com/programs/2026/projects/xFrskRCv&quot;&gt;Google Summer of Code 2026 project&lt;/a&gt;. I would like to thank my mentors, &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/jhpratt&quot;&gt;Jacob Pratt&lt;/a&gt; and &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/Urgau&quot;&gt;Urgau&lt;/a&gt;, for their guidance and support throughout the project.&lt;/p&gt;
+&lt;section class&#x3D;&quot;footnotes&quot;&gt;
+&lt;ol class&#x3D;&quot;footnotes-list&quot;&gt;
+&lt;li id&#x3D;&quot;fn-1&quot;&gt;
+&lt;p&gt;Make sure to run &lt;code&gt;rustup update nightly&lt;/code&gt; first, as these features are very new and may not be available on an older nightly toolchain. &lt;a href&#x3D;&quot;#fr-1-1&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</content>
+
+        <author>
+            <name>Ryosuke Yamano</name>
+        </author>
+    </entry>
+    <entry>
+        <title>rust-lang/rust is adopting an LLM policy</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2026/08/05/rust-langrust-is-adopting-an-llm-policy/" type="text/html" title="rust-lang/rust is adopting an LLM policy" />
+        <published>2026-08-05T00:00:00+00:00</published>
+        <updated>2026-08-05T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2026/08/05/rust-langrust-is-adopting-an-llm-policy/</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2026/08/05/rust-langrust-is-adopting-an-llm-policy/">&lt;p&gt;Recently, &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://triagebot.infra.rust-lang.org/gh-comments/rust-lang/rust-forge/pull/1040#issuecomment-4438128685&quot;&gt;five teams in the Rust project&lt;/a&gt; adopted a &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://forge.rust-lang.org/policies/llm-usage.html&quot;&gt;policy&lt;/a&gt; that I originally authored,
+governing how &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://en.wikipedia.org/wiki/Large_language_model&quot;&gt;Large Language Models&lt;/a&gt; can be used when contributing to the &lt;code&gt;rust-lang/rust&lt;/code&gt; monorepo.
+Notably, the new policy is &lt;em&gt;not&lt;/em&gt; an official stance on LLMs, and does &lt;em&gt;not&lt;/em&gt; apply everywhere in the Rust project.
+I wrote it for a very specific purpose, described below.&lt;/p&gt;
+&lt;p&gt;This post talks about why we created that policy, what it says, and how this will affect contributors.&lt;/p&gt;
+&lt;p&gt;The policy affects the following groups of people:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;People who review or moderate PRs on &lt;code&gt;rust-lang/rust&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;People who author PRs with LLM-generated code on &lt;code&gt;rust-lang/rust&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;People who discover issues using LLMs and post them on &lt;code&gt;rust-lang/rust&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;People who write issues or comments that directly quote an LLM on &lt;code&gt;rust-lang/rust&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If you are not in one of those groups, you don&#x27;t have to change anything about how you work.&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;why-was-this-policy-created&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#why-was-this-policy-created&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Why was this policy created?&lt;/h2&gt;
+&lt;p&gt;While the Rust project is a collection of technical artifacts,
+it is also a &lt;em&gt;community&lt;/em&gt; of people who work together to build, maintain, and extend those artifacts.
+When we talk about &quot;contributing to the Rust project&quot;, we partly mean work on those artifacts,
+but we also mean joining that community and collaborating with the people already there.&lt;/p&gt;
+&lt;p&gt;Even before this policy was created, people were using LLMs to contribute to &lt;code&gt;rust-lang/rust&lt;/code&gt;.
+Some of those uses respected our community:
+translating messages to English so people could draft them in their native language;
+finding poor diagnostics for code snippets that new contributors to Rust might write;
+analyzing RFCs to see if they were missing a discussion of other parts of the language that could affect the design.
+Some of those uses, sometimes unintentionally, did not.&lt;/p&gt;
+&lt;p&gt;I&#x27;ve seen LLMs causing three main issues for our community:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Polished technical products no longer indicate effort and understanding.&lt;/li&gt;
+&lt;li&gt;Making code easier to write exacerbates our existing issues with review bandwidth.&lt;/li&gt;
+&lt;li&gt;People mechanically copy-pasting to and from an LLM is a waste of our time.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;As time went on, these issues grew and grew, until we had to create dedicated channels and moderation policy for how to deal with them.
+However, those channels work against our goals of being transparent and welcoming, because new contributors have no idea what the rules are.&lt;/p&gt;
+&lt;p&gt;The new policy formalizes those rules publicly, so that new contributors know how to join our community without getting their PRs closed for reasons they don&#x27;t understand,
+and so that existing reviewers can easily point to the rules as an actionable reason when closing PRs that don&#x27;t follow them.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;technical-products-no-longer-indicate-effort&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#technical-products-no-longer-indicate-effort&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Technical products no longer indicate effort&lt;/h3&gt;
+&lt;p&gt;It used to be that if an open source project got a polished, well-tested, detailed PR,
+that indicated that there was someone on the other end who had put time, effort, and understanding into the PR.
+That influenced Rust&#x27;s culture in several ways:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;We are generally reluctant to close PRs, since they represent someone else&#x27;s hard work.&lt;/li&gt;
+&lt;li&gt;Our process emphasizes incremental discussions, where PRs are allowed to change existing design if we discover new facts during creation or review.&lt;/li&gt;
+&lt;li&gt;We treat PRs as an indication that someone is interested in joining our community and being mentored to work on future PRs.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;With LLMs, none of these signals are reliable.
+Polished PRs no longer indicate effort;
+authors of polished PRs no longer necessarily understand their code—and in the case of autonomous agents, there is no longer someone on the other end at all;
+and because it&#x27;s become so much easier to write code, a polished PR no longer indicates that someone is likely to stick around for the long term.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;making-code-easier-to-write-causes-review-issues&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#making-code-easier-to-write-causes-review-issues&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Making code easier to write causes review issues&lt;/h3&gt;
+&lt;p&gt;At the time of writing, there are &lt;strong&gt;1,281 open PRs&lt;/strong&gt; to &lt;code&gt;rust-lang/rust&lt;/code&gt;.
+This represents a staggering amount of time invested by both authors and reviewers.
+We have long had the problem that there are more people who want to write code than people willing to review it.
+With the advent of LLMs, this problem only gets worse.&lt;/p&gt;
+&lt;p&gt;Most of the work of reviewing is not simply catching bugs.
+A great deal of it is deciding &lt;em&gt;whether this direction is a good approach&lt;/em&gt;, whether the PR is a good idea at all.
+In other words, &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://web.archive.org/web/20260213080731/https://siderea.dreamwidth.org/1219758.html&quot;&gt;reviewing is made of decisions&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&quot;Shotgunning&quot; PRs at reviewers incurs a high mental cost for them.
+I think most authors of LLM PRs believe that they are sincerely helping, but from our perspective,
+the code itself is the smallest and in some ways least important part of the change.
+We care much more about authors &lt;em&gt;understanding&lt;/em&gt; what the code does, &lt;em&gt;planning&lt;/em&gt; how it will change in the future, and &lt;em&gt;deciding&lt;/em&gt; what it should look like.
+The code itself cannot help with any of those.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;mechanically-copy-pasting-llm-output-is-a-waste-of-time&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#mechanically-copy-pasting-llm-output-is-a-waste-of-time&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Mechanically copy-pasting LLM output is a waste of time&lt;/h3&gt;
+&lt;p&gt;We will often get people who respond to review comments by copy-pasting them into their LLM, then copy-pasting its response back onto GitHub.
+Bluntly: &lt;strong&gt;this is a waste of everyone&#x27;s time&lt;/strong&gt;.
+If we wanted an LLM&#x27;s opinion, we could have asked it ourselves.
+We want to hear &lt;em&gt;your&lt;/em&gt; thoughts, not a machine&#x27;s.&lt;/p&gt;
+&lt;p&gt;Moreover, this is a breach of trust between the reviewer and the author.
+Our assumption when we review is that we&#x27;re talking to a real person who wants to do their best work.
+Pasting LLM text creates suspicion: does the author actually care? Is there a person here at all?&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;so-why-a-policy&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#so-why-a-policy&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+So why a policy?&lt;/h3&gt;
+&lt;p&gt;Before this policy, we had a &quot;wild west&quot; approach to moderation.
+We had dozens of LLM PRs; no disclosure rules; people trying to add risky &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://rustc-dev-guide.rust-lang.org/mir/optimizations.html&quot;&gt;MIR optimizations&lt;/a&gt; as their first PR;
+and people posting &quot;Verification: &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://git-scm.com/docs/git-diff#Documentation/git-diff.txt---check&quot;&gt;&lt;code&gt;git diff --check&lt;/code&gt;&lt;/a&gt;&quot; in their PR description as if that did something.
+While we had &lt;em&gt;something&lt;/em&gt; for moderators to point to in the form of &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://triagebot.infra.rust-lang.org/gh-comments/rust-lang/compiler-team/issues/893&quot;&gt;&quot;Empower reviewers to reject burdensome PRs&quot;&lt;/a&gt;,
+our enforcement was inconsistent and our rules were not published anywhere.
+In practice, the rule was &quot;anything goes, as long as it&#x27;s not &lt;em&gt;obviously&lt;/em&gt; horrible&quot;.
+Compared to the previous situation, the new policy is both much more strict and much more clear.&lt;/p&gt;
+&lt;p&gt;Regardless of your opinions on whether LLMs are good, bad, or a secret third thing, they can no longer be &lt;em&gt;ignored&lt;/em&gt;.
+Our choices are not &quot;no policy&quot; or &quot;policy&quot;.
+Our choice is whether to have the policy be an unofficial list of moderation notes or something we stand by publicly.&lt;/p&gt;
+&lt;p&gt;Why not ban LLMs altogether, or allow any use of LLMs that we think are pro-social?
+Because Rust governance doesn&#x27;t work that way.
+We do not have a benevolent dictator who can say
+&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://ziglang.org/code-of-conduct/#strict-no-llm-no-ai-policy&quot;&gt;&quot;No LLM-generated content, whether it be code or prose.&quot;&lt;/a&gt;
+or &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://lore.kernel.org/linux-media/CAHk-&#x3D;wi4zC+Ze8e+p3tMv8TtG_80KzsZ1syL9anBtmEh5Z40vg@mail.gmail.com/&quot;&gt;&quot;AI is a tool, just like other tools we use&quot;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Rust operates by consensus. As the policy says:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;There is not a consensus within the Rust project—and likely never will be—about when/how/where it is acceptable to use AI-based tools.
+Many members of the Rust project and community find value in AI;
+many others feel that its negative impact on society and the climate are severe enough that no use is acceptable.
+Still others are working out their opinion.&lt;/p&gt;
+&lt;p&gt;Despite these differences, there are many values we all share:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Building a community of deep experts in our collective projects.&lt;/li&gt;
+&lt;li&gt;Building an inclusive community where all feel welcome and respected.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;We want it to be possible to change the policy in the future.
+The policy has &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://forge.rust-lang.org/policies/llm-usage.html#conditions-for-modification-or-dissolution&quot;&gt;several provisions&lt;/a&gt; that make it easier to change than it was to originally adopt.
+The leadership council is also &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://triagebot.infra.rust-lang.org/gh-comments/rust-lang/leadership-council/issues/308&quot;&gt;considering creating a sub-team&lt;/a&gt; that would handle LLM policy so we have fewer &quot;nightmare&quot; 30-person approval requirements.&lt;/p&gt;
+&lt;p&gt;I do not think every rule in this policy is wholly good.
+I &lt;em&gt;do&lt;/em&gt; think that writing our rules down is better than not writing them down,
+and that having a policy that everyone kinda dislikes pushes us to improve our governance structures.&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;what-does-the-policy-say&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#what-does-the-policy-say&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+What does the policy say?&lt;/h2&gt;
+&lt;p&gt;The policy summarizes itself this way:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;It&#x27;s fine to use LLMs to answer questions, analyze, distill, refine, check, suggest, review. But not to &lt;strong&gt;create&lt;/strong&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Uses in the first category are allowed, sometimes requiring disclosure.
+Uses in the second category are heavily restricted.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;general-rules&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#general-rules&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+General rules&lt;/h3&gt;
+&lt;p&gt;No one except the author is required to read LLM output unless they choose to:
+LLM output isn&#x27;t allowed in public docs, PR descriptions, or Github comments unless it&#x27;s clearly marked;
+reviewers aren&#x27;t required to look at LLM PRs if they don&#x27;t want to.&lt;/p&gt;
+&lt;p&gt;No one is required to use LLMs to contribute to &lt;code&gt;rust-lang/rust&lt;/code&gt;:
+policies must be written first for humans, and only summarized for machines;
+LLM reviews cannot substitute for human review or self-review.&lt;/p&gt;
+&lt;p&gt;You are allowed to generate LLM content that only you see, without disclosure,
+as long as you do not post it anywhere that you expect us to read or review.&lt;/p&gt;
+&lt;p&gt;Disclosure is required for machine translation, &quot;trivial&quot; changes, discovering bugs, and reviewing other people&#x27;s work using an LLM.
+We welcome messages posted in your native language; English translation is not required to contribute.&lt;/p&gt;
+&lt;p&gt;There are very strict guidelines on LLM-generated code changes:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Pre-arranged, non-critical, high-quality, well-tested, and well-reviewed code changes that are originally created by an LLM are allowed, &lt;strong&gt;with disclosure&lt;/strong&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The policy holds LLM-generated changes to a &lt;em&gt;higher&lt;/em&gt; bar than human-authored changes, not a lower one:
+LLM PRs are required to have tests, full stop, regardless of how hard that is, as well as various other restrictions;
+LLMs must not generate soundness-critical changes unless the author is already a domain expert, and even then it&#x27;s strongly discouraged.&lt;/p&gt;
+&lt;p&gt;In general, the policy focuses on &lt;em&gt;understanding&lt;/em&gt;, helping to ensure that we have a mental model of our code, not just artifacts that mechanically do the right thing.
+Our motivation is influenced by &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://web.archive.org/web/20201109034130/https://www.abelard.org/asimov.php&quot;&gt;Profession by Isaac Asimov&lt;/a&gt;.
+No programmer tapes.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;moderation-rules&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#moderation-rules&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Moderation rules&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;You must disclose LLM-generated content.&lt;/strong&gt;
+You can choose to not post LLM content, or you can choose to post it and disclose its origin.
+You may not hide LLM involvement.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Harassment is not allowed.&lt;/strong&gt;
+You may not harass people for using an LLM, regardless of whether or not their use is banned by the policy.
+You must follow the &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://rust-lang.org/policies/code-of-conduct/&quot;&gt;Code of Conduct&lt;/a&gt; at all times when interacting with the Rust project.&lt;/p&gt;
+&lt;p&gt;See &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://forge.rust-lang.org/policies/llm-usage.html&quot;&gt;the policy itself&lt;/a&gt; for more information.&lt;/p&gt;
+&lt;p&gt;Some parts of the policy are unenforceable.
+This is not a bug.
+The goal is &lt;em&gt;not&lt;/em&gt; to catch every violation, but to create a clear bright-line rule:
+Disclosure is required for all public LLM text, unless specifically exempted by the policy.
+This allows moderators to identify violations based on &lt;em&gt;actions&lt;/em&gt;, not on intent, and only consider intent when deciding how to respond.&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;how-does-this-affect-contributors&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#how-does-this-affect-contributors&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+How does this affect contributors?&lt;/h2&gt;
+&lt;h3 id&#x3D;&quot;issue-reporters&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#issue-reporters&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Issue reporters&lt;/h3&gt;
+&lt;p&gt;You must disclose any LLM involvement in discovering or reporting issues.
+You must tell us if you found an issue using an LLM.
+You must clearly quote and indicate which parts of your report were LLM-generated;
+the &quot;no LLM-generated comments&quot; rule applies to you too.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;authors-who-post-llm-generated-code&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#authors-who-post-llm-generated-code&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Authors who post LLM-generated code&lt;/h3&gt;
+&lt;p&gt;I have written a list of guidelines you should follow if you make a PR to &lt;code&gt;rust-lang/rust&lt;/code&gt; with LLM-generated code.
+You can avoid thinking about them, or indeed reading the list at all, if you follow this simple guideline from the policy:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;It&#x27;s fine to use LLMs to answer questions, analyze, distill, refine, check, suggest, review. But not to &lt;strong&gt;create&lt;/strong&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;See the &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://forge.rust-lang.org/policies/llm-usage.html#-allowed&quot;&gt;&quot;Allowed&quot; section of the policy&lt;/a&gt; for a full list of what&#x27;s meant by that.
+See &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://rustc-dev-guide.rust-lang.org/llm-guidance/writing.html&quot;&gt;rustc-dev-guide&lt;/a&gt; for the full list of guidelines.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;reviewers&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#reviewers&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Reviewers&lt;/h3&gt;
+&lt;h4 id&#x3D;&quot;general-review&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#general-review&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+General review&lt;/h4&gt;
+&lt;p&gt;You are allowed to close PRs that don&#x27;t follow the policy, no questions asked.
+Please point the author to &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://rust-lang.zulipchat.com/join/rlfvpemsaacs3pfi6kwqnqjb/&quot;&gt;#llm-mentoring&lt;/a&gt; at the same time.
+See &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://rustc-dev-guide.rust-lang.org/llm-guidance/reviewing.html&quot;&gt;the dev guide&lt;/a&gt; for exact circumstances and suggested wording.&lt;/p&gt;
+&lt;p&gt;You are not responsible for determining whether a PR is LLM-generated;
+that responsibility lies with the author.
+We will add a PR template that asks authors whether their code was LLM-generated so that this rarely comes up.&lt;/p&gt;
+&lt;p&gt;If an author claims their code is not LLM-generated, but you&#x27;re still not sure, please report the PR &lt;em&gt;privately&lt;/em&gt; to moderation.
+Style is not evidence; please do not accuse people of using an LLM.
+Reporting is not intended to be a penalty; the mod team is interested in seeing non-violations as well as violations.&lt;/p&gt;
+&lt;h4 id&#x3D;&quot;review-of-llm-code&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#review-of-llm-code&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Review of LLM code&lt;/h4&gt;
+&lt;p&gt;If you have volunteered to review LLM PRs, the following section applies to you.
+No one is required to review LLM PRs unless they volunteer.&lt;/p&gt;
+&lt;p&gt;Everyone is expected to follow the new policy, not just authors.
+That means it is &lt;strong&gt;your responsibility&lt;/strong&gt; to check whether an LLM-created PR touches an area that&#x27;s disallowed by the policy,
+such as docs, diagnostics, or soundness-critical changes.
+You may request that the author redo it without LLM-generated code, in which case this section doesn&#x27;t apply.&lt;/p&gt;
+&lt;p&gt;There&#x27;s a more detailed summary of the rules you&#x27;re expected to enforce in &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://rustc-dev-guide.rust-lang.org/llm-guidance/reviewing.html&quot;&gt;the dev guide&lt;/a&gt;.
+The &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://forge.rust-lang.org/policies/llm-usage.html&quot;&gt;official policy&lt;/a&gt; remains canonical.&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;what-next&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#what-next&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+What next?&lt;/h2&gt;
+&lt;p&gt;Quite a lot of work has been put into this by moderators, team leads, reviewers, council representatives, and various other people inside and outside the project.
+Some of that work started months ago before the policy itself was written.
+I&#x27;d like to thank everyone who contributed, whether directly or indirectly.&lt;/p&gt;
+&lt;p&gt;This is not the end of the story.
+One of the goals of the policy is to help us gather data:
+Are people doing interesting and useful things with LLMs? Are they learning? Are they making repeat contributions?
+The answers to those questions will help us determine how the policy changes in the future.&lt;/p&gt;
+&lt;p&gt;This is not the first LLM policy published by teams in the Rust project,
+and hopefully it will not be the last.
+While the current policy only applies to the &lt;code&gt;rust-lang/rust&lt;/code&gt; monorepo,
+I still believe that Rust would benefit from a project-wide policy that specifies what we expect in chats, forums, public communications, repositories without an explicit policy, and other cross-project areas.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Jynn Nelson</name>
+        </author>
+    </entry>
+    <entry>
+        <title>Funding team progress update — July 2026</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2026/08/04/funding-team-progress-update-july-2026/" type="text/html" title="Funding team progress update — July 2026" />
+        <published>2026-08-04T00:00:00+00:00</published>
+        <updated>2026-08-04T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2026/08/04/funding-team-progress-update-july-2026/</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2026/08/04/funding-team-progress-update-july-2026/">&lt;p&gt;Hi all! This is an update from the &lt;strong&gt;funding team&lt;/strong&gt;. &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/leadership-council/issues/294&quot;&gt;Established by the leadership council&lt;/a&gt;, the funding team is tasked with administering the Rust Foundation Maintainers Fund. Per &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/3931&quot;&gt;RFC #3931&lt;/a&gt;, our initial focus has been on establishing the &lt;strong&gt;Maintainer in Residence (MiR)&lt;/strong&gt; program. The goal of the MiR program is to offer a long-term, stable option to support people doing &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2026/01/12/what-is-maintenance-anyway/&quot;&gt;maintenance work&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;While &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/3931&quot;&gt;RFC #3931&lt;/a&gt; laid out the high-level structure of the program, going from the &quot;idea&quot; of a Maintainer in Residence program to an actual functioning entity involves a lot of small decisions. This post covers the questions we&#x27;ve been discussing. For some of those questions, we have preliminary decisions, for others we are still deliberating. In any case, we welcome your input.&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;funding-total&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#funding-total&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Funding total&lt;/h2&gt;
+&lt;p&gt;We have so far received generous donations totaling $350K. We&#x27;ll go into details on the sponsors when we announce our first Maintainer-in-Residence.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Want to help?&lt;/strong&gt; You can sponsor the Rust Foundation Maintainers Fund directly on &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/sponsors/rustfoundation&quot;&gt;GitHub Sponsors&lt;/a&gt;. For companies and larger donations, reach out to &lt;code&gt;funding@rust-lang.org&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;We&#x27;re also brainstorming ideas for an individual fundraising campaign to help grow the fund; if you&#x27;d like to pitch in ideas or follow along, join the discussion on the &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/channel/548261-funding/topic/Fundraising.20campaign/with/611653646&quot;&gt;funding stream on Zulip&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;gathering-details-what-we-learned&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#gathering-details-what-we-learned&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Gathering details: what we learned&lt;/h2&gt;
+&lt;p&gt;We sent out messages to existing Rust team members asking people to fill out a form if they were interested in being supported by the funding team. We heard from &lt;strong&gt;45&lt;/strong&gt; individuals looking for funding and &lt;strong&gt;3&lt;/strong&gt; teams gave us a general update.&lt;/p&gt;
+&lt;p&gt;Broken out by area (with some double counting as some individuals opted for more than one area):&lt;/p&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Area&lt;/th&gt;&lt;th&gt;Count&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;compiler&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;libs&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;clippy&lt;/td&gt;&lt;td&gt;3&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;rustdoc&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;a-mir-formality&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;cargo&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;crates.io&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;infra&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;lang&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;mods&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Rust Analyzer&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;rustup&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Safety Critical Rust Consortium&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;Of the respondents, &lt;strong&gt;34&lt;/strong&gt; indicated interest in a general maintenance (MiR) role and &lt;strong&gt;13&lt;/strong&gt; indicated interest in being funded towards specific &lt;em&gt;project goals&lt;/em&gt; (some people indicated both). We also asked about desired arrangement and compensation; as expected, there was a wide variance, with many preferring full-time employment but also many looking for contracts or part-time work.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;2025-survey-results-show-the-need-is-real&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#2025-survey-results-show-the-need-is-real&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+2025 survey results show the need is real&lt;/h3&gt;
+&lt;p&gt;There is a definite need for funding. In November of 2025 we ran a survey amongst active Rust maintainers. In that survey we found that 35% of contributors who filled the survey are currently funded for their Rust contributions (and this also includes people who only receive a minimal monthly amount e.g. through GitHub Sponsors). A similar number of people (~35%) never received &lt;em&gt;any&lt;/em&gt; funding for their upstream Rust work. Even though many of those people are not funded at all, the average number of hours spent by a Rust Project contributor on improving Rust is around 40 hours each month!&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;hashing-out-the-details-of-the-mir-program&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#hashing-out-the-details-of-the-mir-program&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Hashing out the details of the MiR program&lt;/h2&gt;
+&lt;p&gt;The goal of the MiR program is to provide &lt;strong&gt;open-ended funding to support Rust maintainers and by proxy also the Rust teams that they operate in&lt;/strong&gt;. As we discussed in our blog post &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2026/01/12/what-is-maintenance-anyway/&quot;&gt;&quot;What is Maintenance, anyway?&quot;&lt;/a&gt;, the precise needs of teams vary, so this can be tricky to define.&lt;/p&gt;
+&lt;p&gt;The important thing is that MiRs help &quot;enable other contributors to evolve and improve the project&quot;. For some teams, this might mean helping to run triage meetings, or burning through a PR review backlog. For others, it might mean focusing on a big refactor that everybody on the team knows is necessary, but nobody has the time to do.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;general-shape-year-long-contracts-with-expectation-to-renew&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#general-shape-year-long-contracts-with-expectation-to-renew&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+General shape: year-long contracts with expectation to renew&lt;/h3&gt;
+&lt;p&gt;To begin with, the MiR program will consist of year-long contracts that come with the expectation &lt;em&gt;but not guarantee&lt;/em&gt; that they will be renewed year-over-year. It&#x27;s too early in this program to judge how stable our funding will be and thus we are not able to make long-term promises around renewal.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Flat rate or negotiated rates?&lt;/strong&gt; One of the obvious questions that had to be decided is whether we should pay all Maintainers in Residence the same rate or whether we should negotiate on a case-by-case basis. We&#x27;ve decided to start with a &lt;strong&gt;flat rate, independent of geography&lt;/strong&gt;. This is more transparent and easier to administer. It avoids questions of unfairness where someone is getting paid more because they&#x27;re a better negotiator or because of where they live. On the flip side, it does mean that the MiR program will not be a good fit for people who live in expensive areas or who are looking for a higher salary than what we offer.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;How much to pay?&lt;/strong&gt; The next question of course is how much to pay. We looked at the incoming data that we received on what rates people are looking for, both in our recent survey as well as the November of 2025 survey, and also looked at comparable setups at other foundations (e.g., Zig). We&#x27;ve settled on the following flat rates, though in individual cases we may make small adjustments.  Note that we&#x27;ve opted not to document this as an &lt;em&gt;hourly&lt;/em&gt; rate, but rather a &lt;em&gt;monthly&lt;/em&gt; rate with various levels of expected activity. This is because we don&#x27;t intend to have people submit hourly reports to account for their time.&lt;/p&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Activity level&lt;/th&gt;&lt;th&gt;Rate per month&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;Full time (~40h/wk)&lt;/td&gt;&lt;td&gt;$10K USD&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Half time (~20h/wk)&lt;/td&gt;&lt;td&gt;$5K USD&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Day       (~8h/wk)&lt;/td&gt;&lt;td&gt;$2K USD&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Half-day  (~4h/wk)&lt;/td&gt;&lt;td&gt;$1K USD&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;Note that these are the amounts the Rust Foundation pays to the person or entity taking on the work; they are not a gross salary or take-home figure, and how they translate to net pay will depend on your situation and jurisdiction.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Exclusive?&lt;/strong&gt; The MiR contracts are not &quot;exclusive&quot; so if a MiR wishes to take additional contracts on the side, that is fine, so long as they do not interfere with their ability to do maintenance work as discussed above.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Under discussion: Off-ramp period.&lt;/strong&gt; As noted earlier, we expect to renew MiR contracts year over year but we are not in a position to guarantee that. Therefore, we are considering including a certain amount of &quot;padding&quot; in our budgeting so that if we are not able to renew the contract after one year, we can give MiR recipients an &quot;off-ramp&quot;. The idea would be that if we are not able to renew the contract for another year, we can give a short-term payout to help cover expenses (and any maintenance they may choose to do...) while they find a new role. The goal is that MiR recipients can focus on maintenance worry-free for one year, even if funding is not renewed. Questions to be decided:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Do we do this off-ramp?&lt;/em&gt; We want to, but it does mean that we have fewer total MiRs.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Do we do this off-ramp for everyone?&lt;/em&gt; We are thinking we would offer the off-ramp only to full-time MiR (or perhaps full- and half-time), since if the MiR is only covering a day, that implies that the MiR is less dependent on the salary.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;How long is the off-ramp?&lt;/em&gt; Our initial thought was 25% (3 months), but shorter would mean we can fund more work.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Why not employment?&lt;/strong&gt; For many people, employment is the ideal setup (though by no means everyone), but we are not in a position to offer it at this time, because employment requires ongoing funding. As the MiR program evolves, we hope to be able to support long-term employment for established Maintainers in Residence, but that is something we&#x27;ll have to figure out as the program matures.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;how-do-we-decide-where-to-fund-a-mir-role&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#how-do-we-decide-where-to-fund-a-mir-role&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+How do we decide where to fund a MiR role?&lt;/h3&gt;
+&lt;p&gt;We decided that rather than starting with individuals seeking funding, it was better to look at the &lt;strong&gt;teams&lt;/strong&gt; that need funding first. But we know we&#x27;re not going to be able to provide for all the teams at the level we would like to. Therefore, we wanted some rubric for how we prioritize which teams to fund. We settled on the following axioms that we can use to guide decisions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;End-user impact first.&lt;/strong&gt; We prefer to fund maintenance of areas that have a real (direct or indirect) impact on Rust users&#x27; experience.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Dire needs first.&lt;/strong&gt; Address the teams with the greatest need first — raise the floor before raising the ceiling.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Fund what no one else will.&lt;/strong&gt; We lean toward maintenance, review, and triage: work with no natural corporate sponsor and no realistic path to directed funding.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Scale to demand.&lt;/strong&gt; For areas with lots of potential for directed funding, we still want to fund maintainers to keep the code healthy between feature work.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Shovel-ready.&lt;/strong&gt; Between equal-priority needs, we start with the one that can begin the soonest.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;These axioms are written in priority order and they&#x27;re meant to help us resolve tough decisions. For example, if we have to pick between two teams, both of which have dire need, but one of which has more visible end-user impact, we&#x27;ll pick the one with more visible end-user impact because that will help us in raising additional funding later. (At the same time, these are rough guidelines, not iron laws: there may be particulars of the situation that lead us the other way.)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Short-list of teams.&lt;/strong&gt; Based on the identified criteria, we are focused first on the following teams: rustup, rustfmt, clippy, rustdoc, libs, cargo, and mods (in no particular order).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Under discussion: what if there are no MiR applicants?&lt;/strong&gt; There are teams that we would like to support but where none of the existing team members are interested in a MiR role (perhaps they have another full-time job or just like working on a volunteer basis). &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/channel/548261-funding/topic/.22Recruiting.22.20for.20a.20team/with/609598431&quot;&gt;We are discussing how best to manage this situation when it arises.&lt;/a&gt; For example, we might approach the team and see if there are any active contributors they would support for a MiR role or perhaps put out a call for applications.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Restricted funding.&lt;/strong&gt; So far, all the funds in the MiR were given &lt;strong&gt;unrestricted&lt;/strong&gt;, which means that the funding team and the project can decide how to spend them. However, we have also had sponsors raise the idea of &lt;strong&gt;restricted funding&lt;/strong&gt;, where a sponsor wants to fund a MiR for a particular team (say, rustfmt, or cargo) because they are concerned about that area, or even wants to fund a specific &lt;em&gt;individual&lt;/em&gt; who they know does good work. We decided that we would &lt;strong&gt;happily accept restricted funding so long as the person is being funded to do maintenance work and generally treated like any other MiR&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;what-comes-next&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#what-comes-next&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+What comes next?&lt;/h2&gt;
+&lt;p&gt;This is our overall roadmap:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled&#x3D;&quot;&quot; type&#x3D;&quot;checkbox&quot; checked&#x3D;&quot;&quot;/&gt;
+&lt;em&gt;Rust Foundation:&lt;/em&gt; Announce program and begin fundraising&lt;/li&gt;
+&lt;li&gt;&lt;input disabled&#x3D;&quot;&quot; type&#x3D;&quot;checkbox&quot; checked&#x3D;&quot;&quot;/&gt;
+&lt;em&gt;Leadership Council:&lt;/em&gt; Establish funding team and outlines of the MiR program (&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/3931&quot;&gt;RFC #3931&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;input disabled&#x3D;&quot;&quot; type&#x3D;&quot;checkbox&quot; checked&#x3D;&quot;&quot;/&gt;
+&lt;em&gt;Funding team:&lt;/em&gt; Gather information on who is looking for funding and what work they&#x27;d like to do  (👈 subject of this update)&lt;/li&gt;
+&lt;li&gt;&lt;input disabled&#x3D;&quot;&quot; type&#x3D;&quot;checkbox&quot; checked&#x3D;&quot;&quot;/&gt;
+&lt;em&gt;Funding team:&lt;/em&gt; Hash out the details of the MiR program (👈 subject of this update)&lt;/li&gt;
+&lt;li&gt;&lt;input disabled&#x3D;&quot;&quot; type&#x3D;&quot;checkbox&quot;/&gt;
+&lt;em&gt;Funding team:&lt;/em&gt; Narrow down to a short list of candidate MiRs and begin individual discussions (currently ongoing)&lt;/li&gt;
+&lt;li&gt;&lt;input disabled&#x3D;&quot;&quot; type&#x3D;&quot;checkbox&quot;/&gt;
+&lt;em&gt;Funding team:&lt;/em&gt; Announce MiR selection (hopefully coming soon!)&lt;/li&gt;
+&lt;li&gt;&lt;input disabled&#x3D;&quot;&quot; type&#x3D;&quot;checkbox&quot;/&gt;
+&lt;em&gt;MiRs:&lt;/em&gt; Do your thing.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;At this point we have assembled a short list of candidates for our initial round of MiRs and we are planning to begin discussing specifics with them. This will help us to narrow to the final list. We are aiming to have that list announced by the end of August.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Niko Matsakis</name>
+        </author>
+    </entry>
+    <entry>
+        <title>All Hands 2026 retrospective</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2026/07/31/all-hands-2026-retrospective/" type="text/html" title="All Hands 2026 retrospective" />
+        <published>2026-07-31T00:00:00+00:00</published>
+        <updated>2026-07-31T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2026/07/31/all-hands-2026-retrospective/</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2026/07/31/all-hands-2026-retrospective/">&lt;p&gt;In May 2026, 166 Rustaceans gathered in Utrecht for the &lt;em&gt;Rust All Hands&lt;/em&gt;. This event is an opportunity for the Rust Project members and invited guests to work on Rust in person for several days — discuss its future, resolve blockers, build connections between teams, and so on (but not make any final decisions!).&lt;/p&gt;
+&lt;p&gt;This was the second All Hands organized by &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://rustnl.org/&quot;&gt;RustNL&lt;/a&gt;, after &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2025/09/30/all-hands-2026/&quot;&gt;the one last year&lt;/a&gt; revived the tradition after a six-year hiatus. It was part of &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://2026.rustweek.org/&quot;&gt;RustWeek&lt;/a&gt; both times, with the Rust All Hands following directly after the conference days. And yes, the All Hands will happen again in 2027! More details on that at the end.&lt;/p&gt;
+&lt;p&gt;&lt;img src&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2026/07/31/all-hands-2026-retrospective/allhands.jpeg&quot; alt&#x3D;&quot;A large room full of Rustaceans and friends smiling into the camera&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;Also co-located with the All Hands was the RustWeek Unconference, where invited ecosystem maintainers and contributors collaborated with each other and with Rust Project members. This year, there were six participating groups: &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://bevy.org/&quot;&gt;Bevy Engine&lt;/a&gt;, &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://ariel-os.org/&quot;&gt;Ariel OS&lt;/a&gt;, &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://linebender.org/&quot;&gt;Linebender&lt;/a&gt;, the &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/Safety-Critical-Rust-Consortium&quot;&gt;Safety-Critical Rust Consortium&lt;/a&gt;, &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/Rust-GPU&quot;&gt;Rust GPU&lt;/a&gt;, and &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-embedded&quot;&gt;Rust Embedded&lt;/a&gt; — with around 60 members in total.&lt;/p&gt;
+&lt;p&gt;Similarly to last year, the conference day right before the All Hands had a special track, the &quot;Rust Project Track&quot;, with talks presented by Project members. (See the &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://www.youtube.com/playlist?list&#x3D;PL8Q1w7Ff68DBkk0ddSEqdf97swuDvMSKS&quot;&gt;recordings&lt;/a&gt;.). The talks touched on some of the topics that the Rust teams discussed in greater depth in the All Hands sessions.&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;sessions&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#sessions&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Sessions&lt;/h2&gt;
+&lt;p&gt;At the All Hands, there were 73 sessions spread across 3 days and 11 rooms, most of which were &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://raw.githubusercontent.com/rust-lang/all-hands-2026/main/all-hands-schedule.pdf&quot;&gt;pre-scheduled&lt;/a&gt;, though some happened spontaneously. You can find the session notes in &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/all-hands-2026/issues&quot;&gt;rust-lang/all-hands-2026&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/all-hands-2026/issues/37&quot;&gt;State of the Rust teams&lt;/a&gt; session kicked off the All Hands and provided a (literal) platform for teams to tell everyone about their activities.&lt;/p&gt;
+&lt;p&gt;Many sessions focused on pressing topics in the Project&#x27;s governance. The &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/all-hands-2026/issues/23&quot;&gt;Leadership Council&lt;/a&gt; and &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/all-hands-2026/issues/34&quot;&gt;Project Directors&lt;/a&gt; both held Q&amp;amp;A panels about their roles and processes, and how they relate to one another and the Rust Foundation. The &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/all-hands-2026/issues/52&quot;&gt;moderation panel&lt;/a&gt; provided a safe space for Rust moderators to discuss the challenges they face, with support from &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://hachyderm.io/@quintessence&quot;&gt;Q (head moderator of Hachyderm)&lt;/a&gt;&lt;sup class&#x3D;&quot;footnote-reference&quot; id&#x3D;&quot;fr-talk-mod-1&quot;&gt;&lt;a href&#x3D;&quot;#fn-talk-mod&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;. The &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/all-hands-2026/issues/35&quot;&gt;Project culture discussion&lt;/a&gt; examined sources of disempowerment for maintainers and contributors, and ways to address them. The sessions on &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/all-hands-2026/issues/19&quot;&gt;Project Goals&lt;/a&gt;, &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/all-hands-2026/issues/25&quot;&gt;north stars&lt;/a&gt;, and &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/all-hands-2026/issues/20&quot;&gt;funding&lt;/a&gt; looked at improving how the Project coordinates and communicates work&lt;sup class&#x3D;&quot;footnote-reference&quot; id&#x3D;&quot;fr-talk-comms-1&quot;&gt;&lt;a href&#x3D;&quot;#fn-talk-comms&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;. Finally, there was a discussion about &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/all-hands-2026/issues/6&quot;&gt;improving the RFC process&lt;/a&gt;, possibly by integrating some ideas from the &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/all-hands-2026/issues/27&quot;&gt;TC39 process&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;As expected, most of the sessions focused on the evolution of Rust itself. The teams discussed a wide variety of efforts, including &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/all-hands-2026/issues/64&quot;&gt;const generics&lt;/a&gt;, &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/all-hands-2026/issues/39&quot;&gt;const traits&lt;/a&gt;, field projections&lt;sup class&#x3D;&quot;footnote-reference&quot; id&#x3D;&quot;fr-talk-fp-1&quot;&gt;&lt;a href&#x3D;&quot;#fn-talk-fp&quot;&gt;3&lt;/a&gt;&lt;/sup&gt; and reborrowing&lt;sup class&#x3D;&quot;footnote-reference&quot; id&#x3D;&quot;fr-talk-rb-1&quot;&gt;&lt;a href&#x3D;&quot;#fn-talk-rb&quot;&gt;4&lt;/a&gt;&lt;/sup&gt; (&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/all-hands-2026/issues/16&quot;&gt;1&lt;/a&gt;, &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/all-hands-2026/issues/53&quot;&gt;2&lt;/a&gt;, &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/all-hands-2026/issues/68&quot;&gt;3&lt;/a&gt;), &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/all-hands-2026/issues/17&quot;&gt;in-place initialization&lt;/a&gt;, &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/all-hands-2026/issues/45&quot;&gt;SIMD&lt;/a&gt;, &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/all-hands-2026/issues/48&quot;&gt;allocators&lt;/a&gt;&lt;sup class&#x3D;&quot;footnote-reference&quot; id&#x3D;&quot;fr-allocator-1&quot;&gt;&lt;a href&#x3D;&quot;#fn-allocator&quot;&gt;5&lt;/a&gt;&lt;/sup&gt;, &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/all-hands-2026/issues/13&quot;&gt;custom lints&lt;/a&gt;, &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/all-hands-2026/issues/14&quot;&gt;stability attributes&lt;/a&gt; for libraries, &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/all-hands-2026/issues/31&quot;&gt;&lt;code&gt;rustc&lt;/code&gt; as a library&lt;/a&gt;&lt;sup class&#x3D;&quot;footnote-reference&quot; id&#x3D;&quot;fr-talk-rustc-1&quot;&gt;&lt;a href&#x3D;&quot;#fn-talk-rustc&quot;&gt;6&lt;/a&gt;&lt;/sup&gt;, the &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/all-hands-2026/issues/54&quot;&gt;Sized Hierarchy&lt;/a&gt;, and &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/all-hands-2026/issues/28&quot;&gt;auto traits&lt;/a&gt;. Beyond these, there were numerous sessions on compiler internals, codegen, semantics, specification, tooling, and infrastructure.&lt;/p&gt;
+&lt;p&gt;Interoperability was another prominent topic. Discussions covered the &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/all-hands-2026/issues/11&quot;&gt;overall Rust/C++ interop problem and solution space&lt;/a&gt;&lt;sup class&#x3D;&quot;footnote-reference&quot; id&#x3D;&quot;fr-talk-interop-1&quot;&gt;&lt;a href&#x3D;&quot;#fn-talk-interop&quot;&gt;7&lt;/a&gt;&lt;/sup&gt;, the &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/all-hands-2026/issues/67&quot;&gt;state of Rust/C++ interop using Crubit&lt;/a&gt;&lt;sup class&#x3D;&quot;footnote-reference&quot; id&#x3D;&quot;fr-talk-crubit-1&quot;&gt;&lt;a href&#x3D;&quot;#fn-talk-crubit&quot;&gt;8&lt;/a&gt;&lt;/sup&gt;, and &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/all-hands-2026/issues/26&quot;&gt;safer interop via combining LLVM IR with Rust MIR&lt;/a&gt;. It was also great to see in-person collaboration between the Rust Project and both &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/all-hands-2026/issues/18&quot;&gt;Rust for Linux&lt;/a&gt;&lt;sup class&#x3D;&quot;footnote-reference&quot; id&#x3D;&quot;fr-talk-rfl-1&quot;&gt;&lt;a href&#x3D;&quot;#fn-talk-rfl&quot;&gt;9&lt;/a&gt;&lt;/sup&gt; and &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/all-hands-2026/issues/32&quot;&gt;Rust for CPython&lt;/a&gt;, aimed at unblocking further integration of Rust into the Linux kernel and CPython.&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;feedback&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#feedback&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Feedback&lt;/h2&gt;
+&lt;p&gt;Overall, people loved the All Hands! Responders rated it 9.5/10 on average, and indicated they&#x27;d return next year if given the chance.&lt;/p&gt;
+&lt;p&gt;Here are some of the things they shared:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Got some very awesome conversations about effects with Jana Dönszelmann and later Tyler Mandry and Benno Lossin which have gotten me very excited and I&#x27;m writing blog posts as we speak.&lt;/p&gt;
+&lt;p&gt;I&#x27;m also full of ideas from the mods convo with Q, that I expect to bear fruit in subtle ways.&lt;/p&gt;
+&lt;p&gt;We may also have unblocked &lt;code&gt;rustc_public&lt;/code&gt;, and are working with t-infra to be able to statically compile a &lt;code&gt;rustc&lt;/code&gt; driver.&lt;/p&gt;
+&lt;p&gt;— Nadrieril&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The week was full of good surprises! I was surprised at the significant interest in the things I&#x27;m working on, based on conversations and the attendance at the workshops (and the related talks).&lt;/p&gt;
+&lt;p&gt;I was happy to see we&#x27;re covering most of the high priority interop issues people are concerned about. That was a really good outcome.&lt;/p&gt;
+&lt;p&gt;There are also a bunch of exciting things in the early stages of discussions or scoping work. Some might never happen, but if/when they are ready, I&#x27;m looking forward to sharing them.&lt;/p&gt;
+&lt;p&gt;— teor&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;For &lt;code&gt;cargo-semver-checks&lt;/code&gt;, we decided on a path forward for building rustdoc JSON with correct features enabled, which is sufficient to unblock cross-crate analysis. We also agreed that it would be desirable to run it on PRs to the standard library, because accidental breakage happens there too and it&#x27;s extremely painful to deal with. We have a clear path forward here too.&lt;/p&gt;
+&lt;p&gt;We also got to consensus that it would be good to ship (on stable) a &lt;code&gt;rustup&lt;/code&gt; component with the &lt;code&gt;rustdoc&lt;/code&gt; JSON of that target triple&#x27;s standard library, while making the component itself unstable because the JSON format is not stable. This is a fine line, and we technically only just nailed down the details earlier this week, but the bulk of the spicy conversations happened in person.&lt;/p&gt;
+&lt;p&gt;I have more, these are just the first things that came to mind. I have probably a year and a half&#x27;s worth of stuff to build off of just things that got unblocked at RustWeek. Now I just need more hours in the day to code! :)&lt;/p&gt;
+&lt;p&gt;— Predrag Gruevski&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;In addition to all the value the Rust Project got out of the &quot;official&quot; portions like the talks, All Hands sessions, etc. I also wanted to give &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/obi1kenobi/cargo-semver-checks/issues/532#issuecomment-4625323394&quot;&gt;one example&lt;/a&gt; of &quot;I randomly bumped into someone in the hallway / at the hotel, and learned something invaluable as a result.&quot; It was a stroke of good fortune that I happened to bump into the right people, in the right context, to learn about that obscure edge case that will make &lt;code&gt;cargo-semver-checks&lt;/code&gt; a more useful tool for the Rust community. This was far from the only such case at the All Hands!&lt;/p&gt;
+&lt;p&gt;There&#x27;s inherent value in having people in the same place, and in facilitating opportunities for informal mingling — whether it&#x27;s in hallways, at the post-event social sessions, at the hotel(s) where many people are staying, etc. I&#x27;m thrilled that the organizing team again paid a lot of attention to creating such opportunities in many ways: with the choice of venue, with how the schedule was created, with offering recommended hotel blocks that were relatively close to each other, etc.&lt;/p&gt;
+&lt;p&gt;— Predrag Gruevski&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;I covered so many different and varied topics, from &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/all-hands-2026/issues/44&quot;&gt;meta-dictionary trait solving&lt;/a&gt; with lcnr &amp;amp; the rest of t-types over &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/all-hands-2026/issues/75&quot;&gt;formality discussions&lt;/a&gt; with tiif, Xiang &amp;amp; Nico to talking with Aapo about reborrowing and so many more! (Not to mention the huge amount of people I talked with about field projections!) I feel bad making a list, because inevitably I would forget people, because it was so packed!&lt;/p&gt;
+&lt;p&gt;— Benno Lossin&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;my highlight on the technical side is definitely that we seem to have finished the non-aliasing-model parts of the opsem. :) specifically, &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/all-hands-2026/issues/55&quot;&gt;reference&lt;/a&gt; and &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/all-hands-2026/issues/58&quot;&gt;union validity&lt;/a&gt;. FCPs are in progress.&lt;/p&gt;
+&lt;p&gt;We didnt make as much progress on terminology as I had hoped, though we did uncover new interesting questions which is at least some progress.&lt;/p&gt;
+&lt;p&gt;— Ralf Jung&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;I&#x27;m thrilled that we settled union operational semantics at the All Hands.&lt;/p&gt;
+&lt;p&gt;I really appreciated the random conversations with people I didn&#x27;t know. I&#x27;m glad that the event provides a low-friction way for Rust team members to make themselves available to others. :heart:&lt;/p&gt;
+&lt;p&gt;Oh, another one! I loved the &quot;state of the teams&quot; session (thanks to Lori Lorusso for coordinating it). I know it kinda ballooned with the addition of more teams, and I&#x27;m glad it did; I loved having a quick overview of the state of many different teams, including teams I haven&#x27;t had much view into before.&lt;/p&gt;
+&lt;p&gt;— Josh Triplett&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;As someone totally new to the Project getting to meet people in person was really good and totally overwhelming but in a good way. I really enjoyed getting to have discussions with so many different people about a variety of rust and non rust topics. I really appreciate and can&#x27;t thank the team reps enough that not only supported my session but created it (no way it would have worked if you all didn&#x27;t step up to the stage) and for Mara giving me the opportunity to thank everyone in the closing session. This event and Mara&#x27;s support did a lot for me and for what my position hopes to achieve.&lt;/p&gt;
+&lt;p&gt;— Lori Lorusso&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Myself being fairly new, I went in not expecting much beyond just wanting to meet everyone, have a good time and watch people do their thing. But I contributed a fair amount to some meetings and had some very nice and productive 1:1 chats. It&#x27;s also a totally different feeling contributing to rust now when you&#x27;ve met so many people IRL. 100% would do again.&lt;/p&gt;
+&lt;p&gt;— mejrs&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;I was at the unconf rather than the all-hands, but I just wanted to say it was a fantastic experience! Having the two events co-located was great for the ability to build connections between ecosystem and project people and work on problems and solutions together. Everyone I interacted with from the project was incredibly friendly and enthusiastic and projected an infectious can-do attitude about making Rust better. As this was my first-time at a Rust event, I came in feeling a bit intimidated about being in the same building as all these brilliant people who have done such impactful work, and I left feeling welcomed, included, and excited for next year.&lt;/p&gt;
+&lt;p&gt;— Jonathan Keller&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id&#x3D;&quot;all-hands-2027&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#all-hands-2027&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+All Hands 2027&lt;/h2&gt;
+&lt;p&gt;The Rust All Hands will return next year! It will be part of &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://2027.rustweek.org/&quot;&gt;RustWeek 2027&lt;/a&gt; in &lt;strong&gt;Utrecht, the Netherlands&lt;/strong&gt;, on &lt;strong&gt;27–29 May&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Save the date, and we&#x27;ll be sharing more information later!&lt;/p&gt;
+&lt;p&gt;Huge thanks to &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://mara.nl/&quot;&gt;Mara&lt;/a&gt; and &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://rustnl.org/&quot;&gt;RustNL&lt;/a&gt; for keeping up this amazing tradition with such a deep level of care.&lt;/p&gt;
+&lt;p&gt;See you next year!&lt;/p&gt;
+&lt;section class&#x3D;&quot;footnotes&quot;&gt;
+&lt;ol class&#x3D;&quot;footnotes-list&quot;&gt;
+&lt;li id&#x3D;&quot;fn-talk-mod&quot;&gt;
+&lt;p&gt;See related &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://youtu.be/LrcTWBYJAyg&quot;&gt;talk by Antonio Piraino and Oli Scherer&lt;/a&gt;. &lt;a href&#x3D;&quot;#fr-talk-mod-1&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id&#x3D;&quot;fn-talk-comms&quot;&gt;
+&lt;p&gt;See related &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://youtu.be/Gu17MeidD-Q&quot;&gt;talk by Niko Matsakis and Jack Huey&lt;/a&gt;. &lt;a href&#x3D;&quot;#fr-talk-comms-1&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id&#x3D;&quot;fn-talk-fp&quot;&gt;
+&lt;p&gt;See related &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://youtu.be/S7nxamPK76M&quot;&gt;talk by Benno Lossin and Nadrieril&lt;/a&gt;. &lt;a href&#x3D;&quot;#fr-talk-fp-1&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id&#x3D;&quot;fn-talk-rb&quot;&gt;
+&lt;p&gt;See related &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://youtu.be/2GE0GL0ith4&quot;&gt;talk by Aapo Alasuutari&lt;/a&gt;. &lt;a href&#x3D;&quot;#fr-talk-rb-1&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id&#x3D;&quot;fn-allocator&quot;&gt;
+&lt;p&gt;This renewed the momentum to &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/rust/pull/156882&quot;&gt;stabilize &lt;code&gt;Allocator&lt;/code&gt;&lt;/a&gt;! &lt;a href&#x3D;&quot;#fr-allocator-1&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id&#x3D;&quot;fn-talk-rustc&quot;&gt;
+&lt;p&gt;See related &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://youtu.be/ExxxtADP-t8&quot;&gt;talk by Alona Enraght-Moony&lt;/a&gt;. &lt;a href&#x3D;&quot;#fr-talk-rustc-1&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id&#x3D;&quot;fn-talk-interop&quot;&gt;
+&lt;p&gt;See related &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://youtu.be/0c-MNe1Nwe8&quot;&gt;talk by Teor&lt;/a&gt; and &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://youtu.be/1NnCJTVYPA4&quot;&gt;talk by Tyler Mandry&lt;/a&gt;. &lt;a href&#x3D;&quot;#fr-talk-interop-1&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id&#x3D;&quot;fn-talk-crubit&quot;&gt;
+&lt;p&gt;See related &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://youtu.be/mLzJfuaomZw&quot;&gt;talk by Bastian Kersting&lt;/a&gt;. &lt;a href&#x3D;&quot;#fr-talk-crubit-1&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id&#x3D;&quot;fn-talk-rfl&quot;&gt;
+&lt;p&gt;See related &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://youtu.be/Nzmj7K0FNRY&quot;&gt;talk by Greg Kroah-Hartman&lt;/a&gt; and &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://youtu.be/E0spRyDu5kk&quot;&gt;live podcast by Greg K-H and Alice Ryhl&lt;/a&gt; &lt;a href&#x3D;&quot;#fr-talk-rfl-1&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</content>
+
+        <author>
+            <name>Nurzhan Saken</name>
+        </author>
+    </entry>
+    <entry>
+        <title>Infrastructure Team 2026 Q2 Recap and Q3 Plan</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2026/07/15/infrastructure-team-q2-recap-and-q3-plan/" type="text/html" title="Infrastructure Team 2026 Q2 Recap and Q3 Plan" />
+        <published>2026-07-15T00:00:00+00:00</published>
+        <updated>2026-07-15T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2026/07/15/infrastructure-team-q2-recap-and-q3-plan/</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2026/07/15/infrastructure-team-q2-recap-and-q3-plan/">&lt;p&gt;Here&#x27;s what the Infrastructure Team delivered in Q2 2026 and what we&#x27;re focusing
+on in Q3.&lt;/p&gt;
+&lt;p&gt;You can find the previous blog post of this series &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2026/04/14/infrastructure-team-q1-recap-and-q2-plan/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;q2-2026-accomplishments&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#q2-2026-accomplishments&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Q2 2026 Accomplishments&lt;/h2&gt;
+&lt;h3 id&#x3D;&quot;github-rulesets-are-now-the-default-protections&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#github-rulesets-are-now-the-default-protections&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+GitHub Rulesets are now the default protections&lt;/h3&gt;
+&lt;p&gt;We migrated the &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/rust&quot;&gt;&lt;code&gt;rust-lang/rust&lt;/code&gt;&lt;/a&gt; repository to
+&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets&quot;&gt;GitHub Rulesets&lt;/a&gt;
+and finished moving off the legacy GitHub branch protections. Rulesets are
+now the default way to configure protections for &lt;code&gt;rust-lang&lt;/code&gt; repositories through
+&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/team&quot;&gt;&lt;code&gt;team&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;github-apps-are-now-enabled-through-team&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#github-apps-are-now-enabled-through-team&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+GitHub apps are now enabled through team&lt;/h3&gt;
+&lt;p&gt;We &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/team/pull/2255&quot;&gt;re-enabled&lt;/a&gt;
+the ability to install GitHub apps in &lt;code&gt;rust-lang&lt;/code&gt; repositories through &lt;code&gt;team&lt;/code&gt;.
+This improves the developer experience
+for contributors and reduces the operational overload for Infrastructure Team members.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;shared-renovate-presets&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#shared-renovate-presets&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Shared Renovate Presets&lt;/h3&gt;
+&lt;p&gt;&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/renovatebot/renovate&quot;&gt;Renovate&lt;/a&gt; is the tool the Infrastructure Team
+recommends to the Project for keeping dependencies and GitHub Actions up to date.&lt;/p&gt;
+&lt;p&gt;We created shared Renovate &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/renovate&quot;&gt;presets&lt;/a&gt;
+to simplify the Renovate configurations of the &lt;code&gt;rust-lang&lt;/code&gt; repositories.
+These presets aim to get
+the benefits of dependency updates while minimizing the number of PRs to review.
+We also &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://forge.rust-lang.org/infra/docs/renovate.html&quot;&gt;documented&lt;/a&gt;
+how to adopt Renovate in repositories.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;code-security-for-rust-lang-repositories&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#code-security-for-rust-lang-repositories&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Code security for rust-lang repositories&lt;/h3&gt;
+&lt;p&gt;As part of our security work, we enabled &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://docs.github.com/en/code-security/concepts/secret-security/secret-scanning&quot;&gt;GitHub Secret Scanning&lt;/a&gt;
+for all &lt;code&gt;rust-lang&lt;/code&gt; repositories. We triaged all alerts tagged as &lt;em&gt;leaked secrets&lt;/em&gt;
+and confirmed that they were false positives.&lt;/p&gt;
+&lt;p&gt;In addition, in collaboration with the &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;http://crates.io&quot;&gt;crates.io&lt;/a&gt;
+team, we started experimenting with Datadog Code Security to get additional
+visibility into security issues inferred directly from source files. We &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/infra-team/blob/main/service-catalog/datadog/code-security.md&quot;&gt;documented&lt;/a&gt;
+how to opt into this feature, and we want to try it with more repositories in
+the future. This work is a follow-up of the
+&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://rustfoundation.org/media/rust-foundation-joins-datadogs-open-source-program/&quot;&gt;Rust Foundation partnership with Datadog&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;new-github-actions-runners-powered-by-external-hardware&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#new-github-actions-runners-powered-by-external-hardware&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+New GitHub Actions runners powered by external hardware&lt;/h3&gt;
+&lt;p&gt;We enabled new &lt;strong&gt;powerpc64&lt;/strong&gt; and &lt;strong&gt;RISC-V&lt;/strong&gt; GitHub Actions runners for
+&lt;code&gt;rust-lang&lt;/code&gt; repositories. We also documented which external runners are powered
+by external hardware and where they are used in &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://forge.rust-lang.org/infra/docs/external-ci-runners.html&quot;&gt;rust-forge&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In addition, we created a new infrastructure
+&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/infra-team/blob/main/service-catalog/rust-ci/external-runners/README.md&quot;&gt;guideline&lt;/a&gt;
+to help onboard external hardware into the Rust CI infrastructure.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;experiments-with-macos-26-on-ci&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#experiments-with-macos-26-on-ci&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Experiments with macos-26 on CI&lt;/h3&gt;
+&lt;p&gt;We started experimenting with &lt;code&gt;macos-26&lt;/code&gt; in &lt;code&gt;rust-lang/rust&lt;/code&gt; CI.
+&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/channel/533458-t-infra.2Fannouncements/topic/Experimental.20test.20job.20.60aarch64-apple-macos-26.60/with/601619992&quot;&gt;We created an additional CI job&lt;/a&gt;
+and have been tracking how it performs. It&#x27;s worth mentioning that GitHub will &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.blog/changelog/2026-05-14-github-actions-upcoming-image-migrations/#macos-latest-migration-begins-june-15&quot;&gt;migrate&lt;/a&gt;
+all &lt;code&gt;macos-latest&lt;/code&gt; images to &lt;code&gt;macos-26&lt;/code&gt; in June and July.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;ci-dashboard-available-again&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#ci-dashboard-available-again&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+CI dashboard available again&lt;/h3&gt;
+&lt;p&gt;In December 2024, we &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide/pull/2167&quot;&gt;created&lt;/a&gt;
+a Datadog dashboard to track CI visibility for the
+&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/rust&quot;&gt;&lt;code&gt;rust-lang/rust&lt;/code&gt;&lt;/a&gt; repository. It proved very
+valuable, but we had to &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/infra-team/pull/242&quot;&gt;remove&lt;/a&gt;
+it because its cost was not sustainable.&lt;/p&gt;
+&lt;p&gt;Now that the Rust Foundation is part of
+&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://rustfoundation.org/media/rust-foundation-joins-datadogs-open-source-program/&quot;&gt;Datadog&#x27;s Open Source Program&lt;/a&gt;,
+we enabled it again.&lt;/p&gt;
+&lt;p&gt;In the past, the dashboard helped us track the top failing jobs, slowest jobs, and overall
+pipeline duration over time. We expect it to be just as useful going forward.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;hardware-security-keys-for-critical-infrastructure-access&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#hardware-security-keys-for-critical-infrastructure-access&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Hardware Security Keys for critical infrastructure access&lt;/h3&gt;
+&lt;p&gt;We introduced &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/infra-team/issues/245&quot;&gt;official support for hardware keys&lt;/a&gt;
+as part of the Rust infrastructure security processes. We created a
+&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://forge.rust-lang.org/infra/policies/mfa-critical-systems.html&quot;&gt;policy mandating multi-factor authentication with hardware keys&lt;/a&gt;
+for people and teams with access to systems considered critical, and in
+&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://www.yubico.com/why-yubico/secure-it-forward/&quot;&gt;partnership with Yubico&lt;/a&gt;
+we empowered Rust Project members with YubiKeys.&lt;/p&gt;
+&lt;p&gt;We also &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://forge.rust-lang.org/infra/docs/hardware-security-keys.html&quot;&gt;documented how Project members can configure these devices&lt;/a&gt;
+for existing use cases. We want to expand this support further, enabling new
+ways to use the keys.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;partnership-with-canonical-and-ubuntu-pro-for-ec2-instances&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#partnership-with-canonical-and-ubuntu-pro-for-ec2-instances&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Partnership with Canonical and Ubuntu Pro for EC2 instances&lt;/h3&gt;
+&lt;p&gt;As a follow-up to &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://canonical.com/blog/canonical-joins-the-rust-foundation-as-a-gold-member&quot;&gt;Canonical joining the Rust Foundation&lt;/a&gt; in March,
+we got access to &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://ubuntu.com/pro&quot;&gt;Ubuntu Pro&lt;/a&gt; licenses and
+applied them to our EC2 instances,
+including the instance running &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;http://docs.rs&quot;&gt;docs.rs&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;We improved our Infrastructure as Code setup to apply these changes, so that Ubuntu
+Pro will be enabled by default even in future instances.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;faster-mergeability-checks-in-bors&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#faster-mergeability-checks-in-bors&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Faster mergeability checks in Bors&lt;/h3&gt;
+&lt;p&gt;We switched from GitHub&#x27;s REST API to the GraphQL API and cut Bors
+pull request mergeability check times from an average of 30 minutes to just 1 minute.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;add-the-concept-of-community-reviews-before-pr-assignment&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#add-the-concept-of-community-reviews-before-pr-assignment&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Add the concept of community reviews before PR assignment&lt;/h3&gt;
+&lt;p&gt;As part of multiple discussions that happened during the 2026 All-hands, the Clippy team asked the Triagebot team to be able to delay the assignment of a reviewer until one or multiple community reviews were done.&lt;/p&gt;
+&lt;p&gt;That work was carried out in &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/triagebot/pull/2426&quot;&gt;triagebot#2426&lt;/a&gt; (&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://forge.rust-lang.org/triagebot/pr-assignment.html#community-reviews&quot;&gt;docs&lt;/a&gt;) and has just been enabled in the &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/issues?q&#x3D;state%3Aopen%20label%3AS-waiting-on-community-reviews&quot;&gt;Clippy repository&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;reintroduce-delegation-approval-for-merge-queue-repositories&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#reintroduce-delegation-approval-for-merge-queue-repositories&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Reintroduce delegation approval for merge queue repositories&lt;/h3&gt;
+&lt;p&gt;When we switched our repositories to GitHub merge queues instead of bors (our custom merging bot), we lost the ability to delegate approval on behalf of the reviewer.&lt;/p&gt;
+&lt;p&gt;That functionality is quite useful when there are only some nits left and the reviewer feels confident about the author&#x27;s ability to resolve them without having to re-review and approve the changes.&lt;/p&gt;
+&lt;p&gt;Work was carried out in &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/triagebot/pull/2412&quot;&gt;triagebot#2412&lt;/a&gt; and &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/triagebot/pull/2436&quot;&gt;triagebot#2436&lt;/a&gt; to add such functionality back. It&#x27;s currently only enabled in the Clippy repository:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;@rustbot delegate[&#x3D;@handle]&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;@rustbot merge&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id&#x3D;&quot;continue-supporting-the-moderation-team-with-locking-unlocking-of-issues&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#continue-supporting-the-moderation-team-with-locking-unlocking-of-issues&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Continue supporting the moderation team with locking/unlocking of issues&lt;/h3&gt;
+&lt;p&gt;As part of the effort to help the moderation team better moderate issues and pull requests in our different repositories and organizations, triagebot gained support for locking and unlocking an issue/PR from a GitHub command and Zulip DM.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;quality-of-life-improvements-in-our-range-diff-viewer-for-github-prs&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#quality-of-life-improvements-in-our-range-diff-viewer-for-github-prs&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Quality of life improvements in our range-diff viewer for GitHub PRs&lt;/h3&gt;
+&lt;p&gt;We landed multiple quality of life improvements in our range-diff viewer for GitHub PRs.&lt;/p&gt;
+&lt;h4 id&#x3D;&quot;filtering-of-context-only-hunks&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#filtering-of-context-only-hunks&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Filtering of context-only hunks&lt;/h4&gt;
+&lt;p&gt;As part of our range-diff, we try as much as possible to only show the relevant parts of a diff. Context changes (lines that changed on main only) are not relevant, and we made a significant effort to filter them out from the shown diff.&lt;/p&gt;
+&lt;p&gt;More details are available in &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/triagebot/pull/2398&quot;&gt;triagebot#2398&lt;/a&gt;.&lt;/p&gt;
+&lt;h4 id&#x3D;&quot;commit-messages-diff&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#commit-messages-diff&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Commit messages diff&lt;/h4&gt;
+&lt;p&gt;Our range-diff now shows the list of commits and diffs them with the previous ones.&lt;/p&gt;
+&lt;p&gt;New commits:&lt;/p&gt;
+&lt;img alt&#x3D;&quot;Range-diff showing new added commits and their commit messages&quot; src&#x3D;&quot;commit-messages-diff.png&quot; /&gt;
+&lt;h4 id&#x3D;&quot;warning-against-unicode-bidi-characters&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#warning-against-unicode-bidi-characters&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Warning against Unicode Bidi characters&lt;/h4&gt;
+&lt;p&gt;Following what GitHub does when it detects Unicode Bidi characters in a PR diff, we now also warn since &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/triagebot/pull/2440&quot;&gt;triagebot#2440&lt;/a&gt;.&lt;/p&gt;
+&lt;img alt&#x3D;&quot;Range-diff warning that a file contains bidirectional or hidden Unicode text&quot; src&#x3D;&quot;unicode-bidi-warning.png&quot; /&gt;
+&lt;h2 id&#x3D;&quot;small-tweaks-to-the-triagebot&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#small-tweaks-to-the-triagebot&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Small tweaks to the triagebot&lt;/h2&gt;
+&lt;p&gt;A new &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://forge.rust-lang.org/triagebot/zulip-commands.html#stream-commands&quot;&gt;triagebot command&lt;/a&gt; to assign a priority value to regressions directly from Zulip, useful when doing triage. Example:&lt;/p&gt;
+&lt;pre class&#x3D;&quot;giallo z-code&quot;&gt;&lt;code data-lang&#x3D;&quot;plain&quot;&gt;&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;@**triagebot** assign-priority 123456 high&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Minor tweaks (in &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/triagebot/commit/b1e783a2&quot;&gt;b1e783a2&lt;/a&gt; and &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/triagebot/commit/6611570e&quot;&gt;6611570e&lt;/a&gt;) to the triagebot &lt;code&gt;backport&lt;/code&gt; and &lt;code&gt;user-info&lt;/code&gt; commands, which now support shorter variants:&lt;/p&gt;
+&lt;pre class&#x3D;&quot;giallo z-code&quot;&gt;&lt;code data-lang&#x3D;&quot;plain&quot;&gt;&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;# Supported syntaxes for the &#x60;backport&#x60; command&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;@**triagebot** backport accept beta 123456&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;@**triagebot** backport accept beta&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;@**triagebot** backport accept&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;# Supported syntaxes for the &#x60;user-info&#x60; command&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;@**triagebot** user-info https://www.github.com/apiraino&lt;/span&gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;giallo-l&quot;&gt;&lt;span&gt;@**triagebot** user-info apiraino&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;h2 id&#x3D;&quot;q3-2026-plans&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#q3-2026-plans&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Q3 2026 Plans&lt;/h2&gt;
+&lt;h3 id&#x3D;&quot;finish-leftover-work-from-q2&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#finish-leftover-work-from-q2&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Finish leftover work from Q2&lt;/h3&gt;
+&lt;p&gt;In Q3, we will continue working on some of the things we could not finish in Q2:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Improve access controls for Rust infrastructure with SAML SSO.&lt;/li&gt;
+&lt;li&gt;Modernize the &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;http://docs.rs&quot;&gt;docs.rs&lt;/a&gt; infrastructure.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id&#x3D;&quot;improve-github-actions-security&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#improve-github-actions-security&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Improve GitHub Actions security&lt;/h3&gt;
+&lt;p&gt;We&#x27;ve been actively working on GitHub Actions security through our
+&lt;a href&#x3D;&quot;https://blog.rust-lang.org/2026/05/04/outreachy-2026-may/&quot;&gt;Outreachy mentorship program&lt;/a&gt;.
+This effort started in April when we adopted zizmor as a
+Static Application Security Testing solution for GitHub Actions in some of our repositories.&lt;/p&gt;
+&lt;p&gt;As a follow-up of &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/all-hands-2026/issues/51&quot;&gt;one of our Rust All-Hands sessions&lt;/a&gt;, we started working on a
+&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/crabwatch&quot;&gt;system to foster zizmor&lt;/a&gt; auditing and progressive adoption across the &lt;code&gt;rust-lang&lt;/code&gt;
+&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/&quot;&gt;organization&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;move-mailing-lists-from-mailgun-to-google-groups-to-reduce-spam&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#move-mailing-lists-from-mailgun-to-google-groups-to-reduce-spam&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Move mailing lists from Mailgun to Google Groups to reduce spam&lt;/h3&gt;
+&lt;p&gt;As a follow-up to setting up the Google Workspace for the Rust Project,
+we want to evaluate whether Google Groups can reduce spam for existing mailing
+lists, which are currently managed through Mailgun. We want to keep the same
+developer experience by provisioning these new mailing lists through &lt;code&gt;team&lt;/code&gt;.
+If the results are satisfactory, we will also migrate existing lists.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;consolidate-logs-on-datadog&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#consolidate-logs-on-datadog&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Consolidate logs on Datadog&lt;/h3&gt;
+&lt;p&gt;As part of our efforts to improve observability, we want to consolidate all log
+management in Datadog. Next, we want to push logs from all services into
+it, including those from our bots (&lt;code&gt;triagebot&lt;/code&gt;, &lt;code&gt;bors&lt;/code&gt;, etc).&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;reduce-reliance-on-external-resources-in-ci&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#reduce-reliance-on-external-resources-in-ci&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Reduce reliance on external resources in CI&lt;/h3&gt;
+&lt;p&gt;We want &lt;code&gt;rust-lang/rust&lt;/code&gt; CI to depend less on third-party services during builds
+and tests. When CI downloads required artifacts from external sources,
+an outage in those services can cause failures unrelated to Rust itself.&lt;/p&gt;
+&lt;p&gt;To make CI more reliable, we plan to mirror more of those artifacts in the
+Rust project&#x27;s &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/ci-mirrors&quot;&gt;CI mirrors&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;stricter-networking-access-rules-for-crater-agents&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#stricter-networking-access-rules-for-crater-agents&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Stricter networking access rules for crater agents&lt;/h3&gt;
+&lt;p&gt;As discussed during the Rust All-Hands, we want to improve the security of
+crater agents by &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/crater/issues/838&quot;&gt;isolating their network access&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id&#x3D;&quot;start-planning-for-github-rest-api-upgrade&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#start-planning-for-github-rest-api-upgrade&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Start planning for GitHub REST API upgrade&lt;/h3&gt;
+&lt;p&gt;The current GitHub REST API version (&quot;2022-11-28&quot;) will be deprecated in about 2 years (see the
+&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://docs.github.com/rest/about-the-rest-api/api-versions?apiVersion&#x3D;2026-03-10&quot;&gt;GitHub announcement&lt;/a&gt;). We &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/triagebot/commit/efb2e090&quot;&gt;pinpointed&lt;/a&gt; it in our GitHub client and plan
+to start testing the new version (&quot;2026-03-10&quot;) and see what it breaks.&lt;/p&gt;
+&lt;h2 id&#x3D;&quot;join-us&quot;&gt;&lt;a class&#x3D;&quot;anchor&quot; href&#x3D;&quot;#join-us&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/a&gt;
+Join us&lt;/h2&gt;
+&lt;p&gt;If you&#x27;re interested in contributing to Rust&#x27;s infrastructure, have a look at the
+&lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://github.com/rust-lang/infra-team&quot;&gt;infra-team&lt;/a&gt; repository to learn more about us
+and reach out on &lt;a rel&#x3D;&quot;external&quot; href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/channel/242791-t-infra&quot;&gt;Zulip&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;We are always looking for new contributors!&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Ubiratan Soares</name>
+        </author>
+    </entry>
+</feed>
