@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260821
+
+
+- [Quality Outreach Heads-up - JDK 28: Named Group Information Captured in the TLSHandshake JFR Event](https://inside.java/2026/08/21/quality-heads-up/)
+- [Announcing Rust 1.98.0](https://blog.rust-lang.org/2026/08/20/Rust-1.98.0/)
+
+
 ### 20260820
 
 
@@ -192,11 +199,5 @@ search:
 
 
 ### 20260721
-
-
-- [Quality Outreach Heads-up - JDK 27: Default G1 in All Environments](https://inside.java/2026/07/20/quality-heads-up/)
-
-
-### 20260720
 
 
