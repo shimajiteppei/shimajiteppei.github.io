@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260824
+
+
 ### 20260823
 
 
@@ -169,7 +172,6 @@ search:
 
 
 - [KotlinLLM is Going Open Source](https://blog.jetbrains.com/research/2026/07/kotlinllm-open-source/)
-- [Sakana AI&#39;s Fugu: Is this where model routing should live?](https://www.thoughtworks.com/insights/blog/generative-ai/sakana-ai-fugu-is-this-where-model-routing-should-live)
 
 
 ### 20260727
@@ -192,12 +194,5 @@ search:
 
 
 - [A day in the life of an Android developer with Anbox Cloud](https://ubuntu.com//blog/android-development-with-anbox-cloud)
-
-
-### 20260723
-
-
-- [Episode 63 “AI Solutions with Spring AI 2.0 [I/O]](https://inside.java/2026/07/23/podcast-063/)
-- [Should we still design code for humans?](https://www.thoughtworks.com/insights/blog/programming-languages/should-still-design-code-humans)
 
 
