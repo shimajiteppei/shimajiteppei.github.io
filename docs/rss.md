@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260825
+
+
+- [Announcing Oracle Jipher 10.37: FIPS 140-3 Cryptography for Java](https://inside.java/2026/08/25/jipher-cryptography-for-java/)
+- [Value Classes Still Need Compiler Sympathy](https://inside.java/2026/08/24/value-classes-compiler-sympathy/)
+
+
 ### 20260824
 
 
@@ -187,12 +194,5 @@ search:
 
 
 - [Pairing In-Process and Hosted Embeddings for Java MCP Tool Development](https://inside.java/2026/07/25/design-java-mcp-tool/)
-- [Confidential computing and the new regulatory focus on data in use](https://ubuntu.com//blog/confidential-computing-and-the-new-regulatory-focus-on-data-in-use)
-
-
-### 20260724
-
-
-- [A day in the life of an Android developer with Anbox Cloud](https://ubuntu.com//blog/android-development-with-anbox-cloud)
 
 
