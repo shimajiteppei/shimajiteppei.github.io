@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260826
+
+
+- [Arduino® VENTUNO™ Q is available for pre-order with Ubuntu pre-installed](https://ubuntu.com//blog/arduino-ventuno-q-is-available-for-pre-order-with-ubuntu-pre-installed)
+
+
 ### 20260825
 
 
@@ -188,11 +194,5 @@ search:
 
 
 ### 20260726
-
-
-### 20260725
-
-
-- [Pairing In-Process and Hosted Embeddings for Java MCP Tool Development](https://inside.java/2026/07/25/design-java-mcp-tool/)
 
 
