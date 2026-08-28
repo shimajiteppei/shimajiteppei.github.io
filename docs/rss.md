@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260828
+
+
+- [AI harnesses for telco autonomous networks](https://ubuntu.com//blog/ai-harnesses-for-telco-autonomous-networks)
+
+
 ### 20260827
 
 
@@ -193,11 +199,5 @@ search:
 
 
 - [KotlinLLM is Going Open Source](https://blog.jetbrains.com/research/2026/07/kotlinllm-open-source/)
-
-
-### 20260727
-
-
-- [Ubuntu’s virtualization hardware enablement (HWE) stack: a new model for confidential computing enablement](https://ubuntu.com//blog/ubuntu-virtualization-hwe-stack-confidential-computing)
 
 
