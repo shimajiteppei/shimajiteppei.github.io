@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260829
+
+
+- [Electing new Project Directors 2026](https://blog.rust-lang.org/inside-rust/2026/08/28/electing-new-project-directors-2026/)
+
+
 ### 20260828
 
 
@@ -192,12 +198,5 @@ search:
 
 
 - [Secure Your APIs: OAuth2 and JWT for Beginners](https://blog.jetbrains.com/kotlin/2026/07/secure-your-apis-oauth2-and-jwt-for-beginners/)
-- [Quality Outreach Heads-up - JDK 28: jlink cacerts plugin](https://inside.java/2026/07/28/quality-heads-up/)
-
-
-### 20260728
-
-
-- [KotlinLLM is Going Open Source](https://blog.jetbrains.com/research/2026/07/kotlinllm-open-source/)
 
 
