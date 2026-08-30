@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260830
+
+
 ### 20260829
 
 
@@ -169,7 +172,6 @@ search:
 
 
 - [Know Kotlin? Ship It Everywhere and Win at Shipaton 2026](https://blog.jetbrains.com/kotlin/2026/07/know-kotlin-ship-it-everywhere-and-win-at-shipaton-2026/)
-- [Qodana 2026.2: More Security, Better Coverage, Less Configuration](https://blog.jetbrains.com/qodana/2026/07/qodana-2026-2-more-security-better-coverage-less-configuration/)
 
 
 ### 20260802
@@ -191,12 +193,5 @@ search:
 
 - [Episode 64 “JIT Compiler From the Ground Up” [AtA]](https://inside.java/2026/07/30/podcast-064/)
 - [Under the HAT: Empowering GPU Acceleration for Java](https://inside.java/2026/07/30/under-the-hat-empowering-gpu-acceleration-for-java/)
-- [Newsletter: JDK 27 Rampdown Phase is Closing - Default G1 in All Environments](https://inside.java/2026/07/29/quality-heads-up/)
-
-
-### 20260729
-
-
-- [Secure Your APIs: OAuth2 and JWT for Beginners](https://blog.jetbrains.com/kotlin/2026/07/secure-your-apis-oauth2-and-jwt-for-beginners/)
 
 
