@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260831
+
+
+- [Program management in July–August 2026](https://blog.rust-lang.org/inside-rust/2026/08/31/program-management-2026-jul-aug/)
+- [Canonical joins the Open Secure AI Alliance](https://ubuntu.com//blog/open-secure-ai-alliance)
+
+
 ### 20260830
 
 
@@ -185,13 +192,5 @@ search:
 
 - [Transitioning Java to More Frequent Security Updates](https://inside.java/2026/07/31/transitioning-java-to-more-frequent-security-updates/)
 - [All Hands 2026 retrospective](https://blog.rust-lang.org/inside-rust/2026/07/31/all-hands-2026-retrospective/)
-- [Kimi K3: Are we entering a new multi-model era?](https://www.thoughtworks.com/insights/blog/generative-ai/kimi-k3-new-multi-model-era)
-
-
-### 20260730
-
-
-- [Episode 64 “JIT Compiler From the Ground Up” [AtA]](https://inside.java/2026/07/30/podcast-064/)
-- [Under the HAT: Empowering GPU Acceleration for Java](https://inside.java/2026/07/30/under-the-hat-empowering-gpu-acceleration-for-java/)
 
 
