@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260902
+
+
 ### 20260901
 
 
@@ -186,8 +189,5 @@ search:
 
 
 ### 20260802
-
-
-### 20260801
 
 
