@@ -8,6 +8,15 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260903
+
+
+- [Kotlin Toolchain 0.12: Multiplatform Library Publishing, Wasm Apps, and More](https://blog.jetbrains.com/kotlin/2026/09/kotlin-toolchain-0-12-multiplatform-library-publishing-wasm-apps-and-more/)
+- [1.98.1 pre-release testing](https://blog.rust-lang.org/inside-rust/2026/09/02/1.98.1-prerelease/)
+- [Announcing Rust 1.98.1](https://blog.rust-lang.org/2026/09/03/Rust-1.98.1/)
+- [Why generative AI won&#39;t create 10x developers](https://www.thoughtworks.com/insights/blog/generative-ai/why-generative-ai-wont-create-ten-x-developers)
+
+
 ### 20260902
 
 
@@ -186,8 +195,5 @@ search:
 
 
 ### 20260803
-
-
-### 20260802
 
 
