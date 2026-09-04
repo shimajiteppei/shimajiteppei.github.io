@@ -8,6 +8,14 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260904
+
+
+- [Principles of Memory Management in Java](https://inside.java/2026/09/04/memory-management-principles-java/)
+- [Acceleration of Curve25519 Field Operations with Java Software and Intrinsics](https://inside.java/2026/09/03/java-acceleration-curve25519-field-operations/)
+- [How we create a Canonical Academy exam](https://ubuntu.com//blog/how-we-create-a-canonical-academy-exam)
+
+
 ### 20260903
 
 
@@ -192,8 +200,5 @@ search:
 
 - [Kodee’s Kotlin Roundup: Birthday Wishes, Shipaton 2026, and the New Kotlin AI Benchmark](https://blog.jetbrains.com/kotlin/2026/08/kodees-kotlin-roundup-birthday-wishes-shipaton-2026-and-the-new-kotlin-ai-benchmark/)
 - [Funding team progress update — July 2026](https://blog.rust-lang.org/inside-rust/2026/08/04/funding-team-progress-update-july-2026/)
-
-
-### 20260803
 
 
