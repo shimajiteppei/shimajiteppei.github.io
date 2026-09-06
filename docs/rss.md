@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260906
+
+
 ### 20260905
 
 
@@ -188,12 +191,5 @@ search:
 
 
 - [Episode 65 “Embracing Virtual Threads with Helidon” [I/O]](https://inside.java/2026/08/06/podcast-065/)
-
-
-### 20260805
-
-
-- [Oracle Java Platform Extension for Visual Studio Code - Version 26.0.1 Is Now Available](https://inside.java/2026/08/05/java-vscode-extension-update/)
-- [rust-lang/rust is adopting an LLM policy](https://blog.rust-lang.org/inside-rust/2026/08/05/rust-langrust-is-adopting-an-llm-policy/)
 
 
