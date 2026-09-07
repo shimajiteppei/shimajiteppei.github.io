@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260907
+
+
+- [Kotlin 2.4.20 Released](https://blog.jetbrains.com/kotlin/2026/09/kotlin-2-4-20-released/)
+- [Rust debugging survey 2026 results](https://blog.rust-lang.org/2026/09/07/rust-debugging-survey-2026-results/)
+
+
 ### 20260906
 
 
@@ -185,11 +192,5 @@ search:
 
 
 - [Post-Quantum Cryptography in Long-Term Support JDK Releases](https://inside.java/2026/08/07/post-quantum-cryptography-in-long-term-support-jdk-releases/)
-
-
-### 20260806
-
-
-- [Episode 65 “Embracing Virtual Threads with Helidon” [I/O]](https://inside.java/2026/08/06/podcast-065/)
 
 
