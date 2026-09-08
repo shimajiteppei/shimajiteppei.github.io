@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260908
+
+
+- [Grace on the currents: Stonking Stingray](https://ubuntu.com//blog/grace-on-the-currents-stonking-stingray)
+
+
 ### 20260907
 
 
@@ -186,11 +192,5 @@ search:
 
 
 ### 20260808
-
-
-### 20260807
-
-
-- [Post-Quantum Cryptography in Long-Term Support JDK Releases](https://inside.java/2026/08/07/post-quantum-cryptography-in-long-term-support-jdk-releases/)
 
 
