@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260910
+
+
+- [Episode 69 “Declassifying Java 27” [IJN]](https://inside.java/2026/09/10/podcast-069/)
+
+
 ### 20260909
 
 
@@ -193,8 +199,5 @@ search:
 
 
 - [Call for testing: Restricting trait implementability and field mutability](https://blog.rust-lang.org/inside-rust/2026/08/10/call-for-testing-impl-and-mut-restrictions/)
-
-
-### 20260809
 
 
