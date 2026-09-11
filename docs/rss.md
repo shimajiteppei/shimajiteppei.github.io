@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260911
+
+
+- [Cut bloat, not features](https://ubuntu.com//blog/cut-bloat-not-features)
+
+
 ### 20260910
 
 
@@ -193,11 +199,5 @@ search:
 
 
 - [The Power of JDK Flight Recorder: Efficient Profiling and Troubleshooting for Java Applications](https://inside.java/2026/08/11/efficient-java-apps-profiling-troubleshooting/)
-
-
-### 20260810
-
-
-- [Call for testing: Restricting trait implementability and field mutability](https://blog.rust-lang.org/inside-rust/2026/08/10/call-for-testing-impl-and-mut-restrictions/)
 
 
