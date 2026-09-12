@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260912
+
+
+- [JDK 27 Runtime Updates Release Notes](https://inside.java/2026/09/12/jdk-27-runtime-updates/)
+
+
 ### 20260911
 
 
@@ -191,13 +197,5 @@ search:
 
 - [When Escape Routes Become Toll Roads: Mapping How Developers Move Between Programming Languages](https://blog.jetbrains.com/research/2026/08/programming-language-migration/)
 - [Evolving a Java MCP Server During MCP Specification Upgrades](https://inside.java/2026/08/12/java-mcp-migration/)
-- [Putting NVIDIA Nemotron 3.5 Lightning to the test](https://www.thoughtworks.com/insights/blog/generative-ai/putting-nvidia-nemotron-3-5-lightning-test)
-- [Canonical integrates NVIDIA Nemotron 3.5 Lightning with Ubuntu for always-on AI agents](https://ubuntu.com//blog/nvidia-nemotron-3-5-lightning)
-
-
-### 20260811
-
-
-- [The Power of JDK Flight Recorder: Efficient Profiling and Troubleshooting for Java Applications](https://inside.java/2026/08/11/efficient-java-apps-profiling-troubleshooting/)
 
 
