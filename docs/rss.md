@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260913
+
+
+- [Java 27 Technically Within 2 Minutes](https://inside.java/2026/09/13/jdk-27-in-2-min/)
+
+
 ### 20260912
 
 
@@ -190,12 +196,5 @@ search:
 
 
 - [Advantech AOM-2721 is now Ubuntu Certified](https://ubuntu.com//blog/advantech-aom-2721-ubuntu-certified)
-
-
-### 20260812
-
-
-- [When Escape Routes Become Toll Roads: Mapping How Developers Move Between Programming Languages](https://blog.jetbrains.com/research/2026/08/programming-language-migration/)
-- [Evolving a Java MCP Server During MCP Specification Upgrades](https://inside.java/2026/08/12/java-mcp-migration/)
 
 
