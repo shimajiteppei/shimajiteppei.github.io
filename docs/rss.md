@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260914
+
+
 ### 20260913
 
 
@@ -190,11 +193,5 @@ search:
 
 - [Exploring Compose HTML for Server Side Rendering](https://blog.jetbrains.com/kotlin/2026/08/exploring-compose-html-for-server-side-rendering/)
 - [Preparing for Change: Safe Switching over Sealed APIs](https://inside.java/2026/08/14/java-exhaustiveness-guide/)
-
-
-### 20260813
-
-
-- [Advantech AOM-2721 is now Ubuntu Certified](https://ubuntu.com//blog/advantech-aom-2721-ubuntu-certified)
 
 
