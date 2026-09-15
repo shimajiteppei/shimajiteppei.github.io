@@ -8,6 +8,14 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260915
+
+
+- [The Arrival of Java 27!](https://inside.java/2026/09/15/jdk-27-available/)
+- [Bring Zenoh to ROS 2 with snaps](https://ubuntu.com//blog/bring-zenoh-to-ros-2-with-snaps)
+- [Evolution of the RISC-V ISA. What next after RVA23?](https://ubuntu.com//blog/evolution-of-the-risc-v-isa-what-next-after-rva23)
+
+
 ### 20260914
 
 
@@ -186,12 +194,5 @@ search:
 
 
 - [Episode 66 “JSON API, Valhalla Progress, LTS ❤️ PQC” [IJN]](https://inside.java/2026/08/15/podcast-066/)
-
-
-### 20260814
-
-
-- [Exploring Compose HTML for Server Side Rendering](https://blog.jetbrains.com/kotlin/2026/08/exploring-compose-html-for-server-side-rendering/)
-- [Preparing for Change: Safe Switching over Sealed APIs](https://inside.java/2026/08/14/java-exhaustiveness-guide/)
 
 
