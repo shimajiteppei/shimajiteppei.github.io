@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260916
+
+
+- [Java 27 Launch Stream](https://inside.java/2026/09/16/java-27-launch/)
+- [JDK 27 Security Enhancements](https://inside.java/2026/09/16/jdk27-security-enhancements/)
+
+
 ### 20260915
 
 
@@ -188,11 +195,5 @@ search:
 
 
 ### 20260816
-
-
-### 20260815
-
-
-- [Episode 66 “JSON API, Valhalla Progress, LTS ❤️ PQC” [IJN]](https://inside.java/2026/08/15/podcast-066/)
 
 
