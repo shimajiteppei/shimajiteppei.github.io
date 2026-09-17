@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260917
+
+
+- [Episode 70 “AOT Caching - Netflix&#39; Practice vs OpenJDK&#39;s Theory” [I/O]](https://inside.java/2026/09/17/podcast-070/)
+- [Android™ development shouldn’t start with a physical device](https://ubuntu.com//blog/android-development-shouldnt-start-with-a-physical-device)
+
+
 ### 20260916
 
 
@@ -192,8 +199,5 @@ search:
 
 - [Klibs.io Grows to 4,200+ KMP Projects With Smarter Discovery and New AI Integrations](https://blog.jetbrains.com/kotlin/2026/08/klibsio-grows-to-4200-kmp-projects-with-smarter-discovery-and-new-ai-integrations/)
 - [June 2026 Project Director Update](https://blog.rust-lang.org/inside-rust/2026/08/17/project-director-update/)
-
-
-### 20260816
 
 
