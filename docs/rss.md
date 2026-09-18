@@ -8,10 +8,17 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260918
+
+
+- [Beyond the 10-year mark: Extending Ubuntu Pro 16.04 LTS security coverage](https://ubuntu.com//blog/extending-ubuntu-pro-16-04-coverage)
+
+
 ### 20260917
 
 
 - [Episode 70 “AOT Caching - Netflix&#39; Practice vs OpenJDK&#39;s Theory” [I/O]](https://inside.java/2026/09/17/podcast-070/)
+- [Be alert: targeted attacks on prominent Rustaceans](https://blog.rust-lang.org/2026/09/17/targeted-attacks/)
 - [Android™ development shouldn’t start with a physical device](https://ubuntu.com//blog/android-development-shouldnt-start-with-a-physical-device)
 
 
@@ -192,12 +199,5 @@ search:
 
 
 - [Leadership Council September 2026 Representative Selections](https://blog.rust-lang.org/inside-rust/2026/08/18/leadership-council-repr-selection/)
-
-
-### 20260817
-
-
-- [Klibs.io Grows to 4,200+ KMP Projects With Smarter Discovery and New AI Integrations](https://blog.jetbrains.com/kotlin/2026/08/klibsio-grows-to-4200-kmp-projects-with-smarter-discovery-and-new-ai-integrations/)
-- [June 2026 Project Director Update](https://blog.rust-lang.org/inside-rust/2026/08/17/project-director-update/)
 
 
