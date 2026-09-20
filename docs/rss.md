@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260920
+
+
+- [JEP targeted to JDK 28: 401: Value Objects (Preview)](https://inside.java/2026/09/20/jep401-target-jdk28/)
+
+
 ### 20260919
 
 
@@ -186,14 +192,6 @@ search:
 
 
 - [Episode 67 “Keeping Up With the Java Release Train” [I/O]](https://inside.java/2026/08/20/podcast-067/)
-- [Rust Function Overloading - Call for Experimentation](https://blog.rust-lang.org/inside-rust/2026/08/19/overloading-experiment/)
-- [1.98.0 pre-release testing](https://blog.rust-lang.org/inside-rust/2026/08/19/1.98.0-prerelease/)
 - [Supply chain attack on arrayref](https://blog.rust-lang.org/2026/08/20/supply-chain-attack-on-arrayref/)
-
-
-### 20260819
-
-
-- [Signatures, be true: domain errors and functional handling in Kotlin](https://blog.jetbrains.com/kotlin/2026/08/signatures-be-true-domain-errors-and-functional-handling-in-kotlin/)
 
 
