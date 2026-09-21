@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260921
+
+
+- [Just-In-Time Compilation for Java Performance: Recent and Ongoing Improvements](https://inside.java/2026/09/21/jit-for-java-performance/)
+- [Attach an Ubuntu Pro subscription to your AWS Image Builder image](https://ubuntu.com//blog/attach-ubuntu-pro-aws-image-builder)
+
+
 ### 20260920
 
 
@@ -185,13 +192,5 @@ search:
 
 
 - [Quality Outreach Heads-up - JDK 28: Named Group Information Captured in the TLSHandshake JFR Event](https://inside.java/2026/08/21/quality-heads-up/)
-- [Announcing Rust 1.98.0](https://blog.rust-lang.org/2026/08/20/Rust-1.98.0/)
-
-
-### 20260820
-
-
-- [Episode 67 “Keeping Up With the Java Release Train” [I/O]](https://inside.java/2026/08/20/podcast-067/)
-- [Supply chain attack on arrayref](https://blog.rust-lang.org/2026/08/20/supply-chain-attack-on-arrayref/)
 
 
