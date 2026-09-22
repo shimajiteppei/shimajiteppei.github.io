@@ -8,6 +8,15 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260922
+
+
+- [Helidon 27 Released](https://inside.java/2026/09/22/helidon27-release/)
+- [Maintainer spotlight: Alejandra González (@blyxyas)](https://blog.rust-lang.org/inside-rust/2026/09/21/maintainer-spotlight-alejandra-gonzalez-blyxyas/)
+- [Announcing a Maintainer in Residence: Scott Schafer for the Cargo team](https://blog.rust-lang.org/2026/09/22/announcing-a-maintainer-in-residence-scott-schafer-for-the-cargo-team/)
+- [GitHub Actions leaking secrets when Miri output is cached](https://blog.rust-lang.org/2026/09/21/github-actions-leaking-secrets-when-miri-output-is-cached/)
+
+
 ### 20260921
 
 
@@ -183,14 +192,5 @@ search:
 
 
 ### 20260822
-
-
-- [Enabling the next-generation trait solver on nightly](https://blog.rust-lang.org/2026/08/21/enabling-next-solver-on-nightly/)
-
-
-### 20260821
-
-
-- [Quality Outreach Heads-up - JDK 28: Named Group Information Captured in the TLSHandshake JFR Event](https://inside.java/2026/08/21/quality-heads-up/)
 
 
