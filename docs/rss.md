@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260924
+
+
+- [Episode 71 “Security in Java” [AtA]](https://inside.java/2026/09/24/podcast-071/)
+
+
 ### 20260923
 
 
@@ -194,8 +200,5 @@ search:
 
 
 ### 20260824
-
-
-### 20260823
 
 

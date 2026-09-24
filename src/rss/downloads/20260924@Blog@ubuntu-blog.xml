@@ -1,0 +1,716 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ubuntu blog</title><link>https://ubuntu.com//blog/feed</link><description>Ubuntu blog feed</description><atom:link href="https://ubuntu.com//blog/feed" rel="self"/><docs>http://www.rssboard.org/rss-specification</docs><generator>Python Feedgen</generator><lastBuildDate>Thu, 24 Sep 2026 15:17:59 +0000</lastBuildDate><item><title>Fine tune your own custom LLM with Canonical Charmed Kubeflow and Feast</title><link>https://ubuntu.com//blog/fine-tune-your-own-custom-llm-with-canonical-charmed-kubeflow-and-feast</link><description>&lt;p&gt;So you want your own pet LLM huh? Knowing where to start can be quite tricky, so luckily for you I’ve put together this end-to-end guide. It’ll get you not just started; you’ll end with a fully working chatbot that you’ve fine tuned on the dataset `nampdn-ai/tiny-webtext`, which is a training dataset designed to improve [&amp;hellip;]&lt;/p&gt;
+</description><content:encoded>
+&lt;p&gt;So you want your own pet LLM huh?&lt;/p&gt;
+&lt;p&gt;Knowing where to start can be quite tricky, so luckily for you I’ve put together this end-to-end guide. It’ll get you not just started; you’ll end with a fully working chatbot that you’ve fine tuned on the dataset &lt;strong&gt;`nampdn-ai/tiny-webtext`,&lt;/strong&gt; which is a training dataset designed to improve models’ critical thinking abilities. Buckle up, this is going to be both fun and deep.&lt;/p&gt;
+&lt;p&gt;We’re going to do everything using Canonical’s &lt;strong&gt;Charmed Kubeflow &lt;/strong&gt;– an enterprise MLOps platform equipped for end-to-end model fine-tuning within a sovereign setup. You can deploy it on a high-performance laptop or a homelab running Kubernetes. If you’re planning to do this at scale, you can even run it in a full-on, data center-scale AI factory with many nodes, GPU accelerators, and ultra high-performance network fabric. Check out the Charmed Kubeflow &lt;a href="https://canonical.com/mlops/kubeflow"&gt;product page on canonical.com&lt;/a&gt; or &lt;a href="https://marketplace.microsoft.com/en-us/product/canonical.managed-kubeflow"&gt;sign up for the managed service,&lt;/a&gt; which runs Charmed Kubeflow in your own Microsoft Azure tenancy with the backing of around the clock operational management from Canonical.&lt;/p&gt;
+&lt;p&gt;All the files you’ll need can be found in my &lt;a href="https://github.com/grobbie/fine-tune-your-own-custom-llm-with-canonical-charmed-kubeflow-and-feast"&gt;GitHub repo&lt;/a&gt;, but let’s check your system specs first. For this project you will need:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;One or more computers running Ubuntu 24.04 LTS or later with 32GB RAM and 16 cores, more is better&lt;/li&gt;
+&lt;li&gt;A good, stable internet connection to download rather large stuff&lt;/li&gt;
+&lt;li&gt;Some familiarity with Linux and Kubernetes – at least, enough to be able to follow along and run the commands.&lt;/li&gt;
+&lt;li&gt;An account on Hugging Face so that you can download the dataset we’ll be using.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Sounds good? Cool. Let’s bring up the system.&lt;/p&gt;
+&lt;p&gt;Open up your terminal and make sure you’ve got the base software installed. Run the following commands:&lt;/p&gt;
+&lt;pre class="wp-block-code"&gt;&lt;code&gt;sudo snap install microk8s --channel 1.34-strict/stable
+sudo microk8s enable storage dns
+sudo microk8s enable metallb 10.64.140.43-10.64.140.49
+sudo snap install juju --channel 3.6/stable
+sudo microk8s.config | juju add-k8s my-k8s --client
+juju bootstrap my-k8s
+sudo snap install terraform
+sudo apt install git -y
+git clone https://github.com/canonical/charmed-kubeflow-solutions.git
+pushd charmed-kubeflow-solutions
+git checkout track/1.11-rc
+pushd terraform/products/kubeflow
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Ok, awesome. That got you set up with a one-node, super-compact Kubernetes cluster running Canonical’s &lt;a href="https://canonical.com/microk8s"&gt;MicroK8s&lt;/a&gt;, with Canonical’s operations management engine &lt;a href="https://juju.is"&gt;Juju&lt;/a&gt;, and with Terraform.&lt;/p&gt;
+&lt;p&gt;Now let’s launch Charmed Kubeflow. We’re going to enable the Kubeflow base system, Kubeflow Trainer v2, KServe model server, and Feast. We’ll disable all the other modules like Katib, MLFlow, TensorBoard, federated login and the Canonical Observability Stack. You can always enable them if you want.&lt;/p&gt;
+&lt;pre class="wp-block-code"&gt;&lt;code&gt;DEX_USERNAME=username
+DEX_PASSWORD=password
+terraform init
+terraform apply -auto-approve -var dex_static_username="${DEX_USERNAME}" -var dex_static_password="${DEX_PASSWORD}" -var enable_feast=true -var enable_katib=false -var enable_kserve=true -var enable_training_v2=true -var enable_training_v1=false -var enable_observability=false -var enable_tensorboard=false 
+popd
+popd
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Once the Terraform plan completes, it might still take a good 10 minutes for things to come up on the Kubernetes cluster. You can monitor how close to ready things are getting with the command `juju status`. When everything is saying “available”, you’re gold and you can try to log into Kubeflow.&lt;/p&gt;
+&lt;p&gt;Open a new tab in your browser and set the address to &lt;a href="http://10.64.140.43"&gt;http://10.64.140.43&lt;/a&gt;. You should see a login screen. Here you can enter the username and password that you set earlier in the variables `DEX_USERNAME` and `DEX_PASSWORD`. Once you’re in, step through the setup wizard and you should see the Kubeflow Dashboard screen. &lt;/p&gt;
+&lt;figure class="wp-block-image size-full"&gt;&lt;img alt="" height="992" loading="lazy" sizes="(min-width: 1913px) 1913px, 100vw" src="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1913/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2Ff997%2Fkubeflow-dashboard.png" srcset="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_460/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2Ff997%2Fkubeflow-dashboard.png 460w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_620/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2Ff997%2Fkubeflow-dashboard.png 620w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1036/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2Ff997%2Fkubeflow-dashboard.png 1036w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1681/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2Ff997%2Fkubeflow-dashboard.png 1681w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1920/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2Ff997%2Fkubeflow-dashboard.png 1920w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1913/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2Ff997%2Fkubeflow-dashboard.png 1913w" width="1913"/&gt;&lt;/figure&gt;
+&lt;p&gt;Now, go to Notebooks in the left menu, and launch a new Jupyter Notebook. Make sure you give the notebook a maximum of at least 3 CPU cores and 6GB of RAM, because it’s going to do quite a bit of work here. Also, &lt;strong&gt;very important&lt;/strong&gt;, there’s an “advanced options” setting, expand that, and then in configurations, make sure to check both “allow access to Kubeflow Pipelines” and “allow access to Feast” before you click the launch button. This will inject all the necessary information into your Jupyter Notebook  to be able to access these services as files or environment variables.&lt;/p&gt;
+&lt;p&gt;Once your notebook is available, you’ll see a green tick icon next to it on the list of notebooks in the dashboard and the “connect” button becomes active. Push connect and you should see a new tab open in your browser, with your notebook server in it. In the Launcher, launch a new terminal session. We’re going to run some commands.&lt;/p&gt;
+&lt;p&gt;But first, let’s get familiar with the model training architecture we’re going to use to fine-tune that LLM.&lt;/p&gt;
+&lt;h2 class="wp-block-heading"&gt;Architecture overview&lt;/h2&gt;
+&lt;figure class="wp-block-image size-full"&gt;&lt;img alt="" height="2072" loading="lazy" sizes="(min-width: 1790px) 1790px, 100vw" src="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1790/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F4c3a%2Foutput.png" srcset="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_460/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F4c3a%2Foutput.png 460w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_620/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F4c3a%2Foutput.png 620w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1036/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F4c3a%2Foutput.png 1036w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1681/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F4c3a%2Foutput.png 1681w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1920/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F4c3a%2Foutput.png 1920w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1790/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F4c3a%2Foutput.png 1790w" width="1790"/&gt;&lt;/figure&gt;
+&lt;p&gt;As you can see from the diagram, we’re going to pull a dataset from Hugging Face, load it into a Postgres database, register it as a reusable, offline feature store in Feast, and then run a training job using the Kubeflow Trainer v2. We’re going to persist the model checkpoints to a Kubernetes Persistent Volume, and then later, we’ll run that up on KServe so we can chat to our new, custom LLM.&lt;/p&gt;
+&lt;h2 class="wp-block-heading"&gt;Project files&lt;/h2&gt;
+&lt;p&gt;The table below lists all the project files. You’ll find them all in the GitHub repo that accompanies this article.&lt;/p&gt;
+&lt;figure class="wp-block-table"&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;File&lt;/td&gt;&lt;td&gt;Description&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;features.py&lt;/td&gt;&lt;td&gt;Feast Entity and `BatchFeatureView` schema definitions&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;ingest_data.py&lt;/td&gt;&lt;td&gt;Ingestion script downloading HF dataset into PostgreSQL&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;train.py&lt;/td&gt;&lt;td&gt;Training script consuming Feast features &amp;amp; fine-tuning with HF LoRA&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;train_job_no_registry.py&lt;/td&gt;&lt;td&gt;Kubeflow Trainer v2 `TrainJob` Kubernetes custom resource&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;requirements.txt&lt;/td&gt;&lt;td&gt;Python package dependencies&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;train_distributed.py&lt;/td&gt;&lt;td&gt;Training script consuming Feast features &amp;amp; fine-tuning with HF LoRA – distributed multi-node flavour&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;create_pvc.yaml&lt;/td&gt;&lt;td&gt;Creates a persistent volume to store the model checkpoints, so you don’t lose your work when training completes&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;Grab all the files from the GitHub repo by running the following command in your Jupyter Notebook terminal session:&lt;/p&gt;
+&lt;pre class="wp-block-code"&gt;&lt;code&gt;git clone https://github.com/grobbie/fine-tune-your-own-custom-llm-with-canonical-charmed-kubeflow-and-feast.git&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 class="wp-block-heading"&gt;Ingest the dataset into the feature store&lt;/h2&gt;
+&lt;p&gt;Since we chose to deploy the Feast feature store module when we originally set Charmed Kubeflow up, there’s not really that much to configure. You’ll need the database credentials for the Postgres `offline_store` database, which you’ll find in the file `/feast/feature_store.yaml` on your Jupyter Notebook instance. Got those? Great. In your Jupyter Notebook terminal session, type in the following environment variables, making sure to replace the values “your_user” and “your_password” with the right ones for your Postgres offline feature store.&lt;/p&gt;
+&lt;pre class="wp-block-code"&gt;&lt;code&gt;export POSTGRES_HOST="postgres.default.svc.cluster.local"
+export POSTGRES_PORT="5432"
+export POSTGRES_DB="offline_store"
+export POSTGRES_USER="your_user"
+export POSTGRES_PASSWORD="your_password"&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;There are some dependencies we need that are missing from the standard Jupyter Notebook image. Let’s fix that. Run these commands in your Jupyter Notebook terminal session:&lt;/p&gt;
+&lt;pre class="wp-block-code"&gt;&lt;code&gt;conda install gcc gxx_linux-64
+mv fine-tune-your-own-custom-llm-with-canonical-charmed-kubeflow-and-feast kubeflow-feast-finetune
+pushd kubeflow-feast-finetune
+pip install -r requirements.txt
+popd&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You’ll need to log into your Hugging Face account now and authorize the session, which you can do by running the following command in your notebook terminal session and following the onscreen instructions.&lt;/p&gt;
+&lt;pre class="wp-block-code"&gt;&lt;code&gt;hf auth login&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You might also need to accept the terms of use for the dataset if you didn’t already. You’ll need to do that at &lt;a href="https://huggingface.co/datasets/nampdn-ai/tiny-webtext"&gt;https://huggingface.co/datasets/nampdn-ai/tiny-webtext&lt;/a&gt; or you’ll get an error when you try to run the ingestion script.&lt;/p&gt;
+&lt;p&gt;Ok, now run the following command in your notebook terminal session to download the dataset from Hugging Face and load it into your PostgreSQL database.&lt;/p&gt;
+&lt;pre class="wp-block-code"&gt;&lt;code&gt;python kubeflow-feast-finetune/ingest_data.py&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 class="wp-block-heading"&gt;Register the features with Feast&lt;/h2&gt;
+&lt;p&gt;The script `features.py` will register the features in Feast. We don’t need to run this directly, the `feast` command will pick up the script and run it for us. We just need to copy the Feast YAML configuration file into the directory beforehand. Run the following commands in your notebook terminal session:&lt;/p&gt;
+&lt;pre class="wp-block-code"&gt;&lt;code&gt;pushd kubeflow-feast-finetune
+cp /feast/feature_store.yaml .
+feast apply
+popd&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 class="wp-block-heading"&gt;Package the training script&lt;/h2&gt;
+&lt;p&gt;The following commands will create a Kubernetes config map loaded up with all the script and configuration files needed for the training job. Run them in your notebook terminal session, as before:&lt;/p&gt;
+&lt;pre class="wp-block-code"&gt;&lt;code&gt;pushd kubeflow-feast-finetune
+python3 -c '
+import yaml
+
+cm = {
+    "apiVersion": "v1",
+    "kind": "ConfigMap",
+    "metadata": {"name": "feast-train-code", "namespace": "kubeflow"},
+    "data": {
+        "feature_store.yaml": open("feature_store.yaml").read(),
+        "features.py": open("features.py").read(),
+        "train.py": open("train.py").read()
+    }
+}
+print(yaml.dump(cm))
+' | kubectl apply -f -
+popd&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 class="wp-block-heading"&gt;Create the Kubernetes PersistentVolumeClaim (PVC)&lt;/h2&gt;
+&lt;p&gt;Apply the `create_pvc.yaml` manifest to create a 20GB persistent storage volume in your `kubeflow` namespace. You’ll need this later as without it your work will be gone when your training job completes. Run the following command in your notebook terminal session:&lt;/p&gt;
+&lt;pre class="wp-block-code"&gt;&lt;code&gt;cat kubeflow-feast-finetune/create_pvc.yaml | kubectl apply -f -&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 class="wp-block-heading"&gt;Submit the fine-tuning job to run on your cluster&lt;/h2&gt;
+&lt;p&gt;The next command will launch a `torch-distributed` training job on the cluster, just using one training instance. Go ahead and run the command in your Jupyter Notebook terminal session.&lt;/p&gt;
+&lt;pre class="wp-block-code"&gt;&lt;code&gt;cat kubeflow-feast-finetune/train_job_no_registry.yaml | kubectl apply -f -&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You should see a confirmation message that the training job has been successfully created.&lt;/p&gt;
+&lt;h2 class="wp-block-heading"&gt;Monitor training&lt;/h2&gt;
+&lt;p&gt;The training job will take a while to complete – maybe an hour or more, depending on your hardware. You can monitor it using the command below. Again, run it in your Jupyter Notebook terminal session:&lt;/p&gt;
+&lt;pre class="wp-block-code"&gt;&lt;code&gt;kubectl logs -f -l batch.kubernetes.io/job-name=feast-tiny-webtext-finetune -n kubeflow -f&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The command above will allow you to follow the progress of your training job. When it’s finished, you’ll see a message in the output something like `Training job completed`. When you see that, you can use Control-C to stop following the log file. The fine-tuned model weights will be saved to your configured persistent volume.&lt;/p&gt;
+&lt;p&gt;All done. Now to test it out&lt;/p&gt;
+&lt;h2 class="wp-block-heading"&gt;Model serving with KServe&lt;/h2&gt;
+&lt;p&gt;Let’s deploy a KServe model server on Kubernetes pointing to your PVC path, so we can chat to it over an OpenAI-like REST API, like you would do with ChatGPT. The “storage URI” in the following code listing points to the storage volume (“PVC”) that we created for the training job, so that the KServe model server can use its output to serve our brand-new fine, fine-tuned LLM. Run the following command in your Jupyter notebook terminal session:&lt;/p&gt;
+&lt;pre class="wp-block-code"&gt;&lt;code&gt;echo "apiVersion: serving.kserve.io/v1beta1
+kind: InferenceService
+metadata:
+  name: tiny-webtext-llm
+  namespace: kubeflow
+spec:
+  predictor:
+    model:
+      modelFormat:
+        name: huggingface
+      storageUri: "pvc://model-checkpoint-pvc/"
+      resources:
+        limits:
+          cpu: "4"
+          memory: "8Gi"
+        requests:
+          cpu: "2"
+          memory: "4Gi"
+      args:
+        - --model_id=/mnt/models
+        - --backend=huggingface
+        - --task=text_generation
+" | kubectl apply -f -&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You’ll need to get the IP of the KServe inference service to be able to chat with your new LLM. To keep things simple, we’ll use the internal IP address, and chat from our Jupyter Notebook terminal session. We can use this one-liner command to find that IP address.&lt;/p&gt;
+&lt;pre class="wp-block-code"&gt;&lt;code&gt;KSERVE_IP=$(kubectl get services -n kubeflow | grep tiny-webtext-llm-predictor | grep private | awk '{ print $3 }')&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now that we’ve got the IP address, we can chat with the custom LLM.&lt;/p&gt;
+&lt;pre class="wp-block-code"&gt;&lt;code&gt;curl -i http://${KSERVE_IP}/openai/v1/chat/completions   -H "Content-Type: application/json"   -d '{
+    "model": "tiny-webtext-llm",
+    "messages": [
+      {"role": "user", "content": "What is your favorite color?"}
+    ],
+    "max_tokens": 80,
+    "temperature": 0.2,
+    "top_p": 0.9,
+    "stop": ["\nHuman:", "&amp;lt;|endoftext|&amp;gt;"]
+  }'&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You should get some kind of answer:&lt;/p&gt;
+&lt;blockquote class="wp-block-quote"&gt;
+&lt;p&gt;“I love the color of the car. I love the way it looks. I love the way it looks. I love the way it looks. I love the way it looks. I love the way it looks. I love the way it looks. I love the way it looks. I love the way it looks. I love the way it looks. I love the way it looks. I love the way it looks. I love the way it looks. I love the way it looks.”&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Fair enough, that was a bit of an anticlimax. The model that we’ve been using as the base model for our fine-tuning – GPT-2 – is a very early model, publicly released in 2019. To get better answers, you can try training a more sophisticated base model, by playing with the `–model-name` parameter sent to `train.py`. For example, you could try the Qwen2.5-0.5B-Instruct model, which is pretty advanced:&lt;/p&gt;
+&lt;pre class="wp-block-code"&gt;&lt;code&gt;python train.py --model-name=Qwen/Qwen2.5-0.5B-Instruct&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Asking the same “what is your favorite color?” question to this more sophisticated model yields quite different results:&lt;/p&gt;
+&lt;blockquote class="wp-block-quote"&gt;
+&lt;p&gt;“The most important thing is to find something that you like and that you feel comfortable with. If you like a certain color, then that’s great! If you don’t like a certain color, then that’s okay too. Just remember to choose something that you feel comfortable with and that you like. This will help you to feel more confident and comfortable in your own skin. Remember, it’s okay”&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;However, just beware – that model might take a lot longer to fine-tune. Using the exact same dataset, it took my system (which has no GPUs) all day when I tried. You can mess with that by tweaking `train_job_no_registry.yaml` – but I’ll stop here for now. You’ve got everything you need to take things further yourself.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://canonical.com/mlops/kubeflow"&gt;Discover the full capabilities of Charmed Kubeflow&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://canonical.com/mlops/feast"&gt;Deep dive into feature engineering with Feast&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Want us to manage the infrastructure so you can focus on the models? &lt;a href="https://marketplace.microsoft.com/en-us/product/saas/canonical.managed-kubeflow?tab=overview"&gt;Sign up for Managed Kubeflow on Azure&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content:encoded><author>Rob Gibbon (Rob Gibbon)</author><category>AI</category><category>Kubeflow</category><category>MLOps</category><pubDate>Wed, 23 Sep 2026 15:09:20 +0000</pubDate></item><item><title>Scaling Android™ development without scaling hardware</title><link>https://ubuntu.com//blog/scaling-android-development-without-scaling-hardware</link><description>&lt;p&gt;How shared Android capacity helps engineering teams move beyond fixed device labs In the first blog of this series, we discussed how programmable Android environments can replace manual device preparation with a repeatable lifecycle. A workflow requests an environment with a predefined configuration, executes the required task, collects the results, and releases the resources once [&amp;hellip;]&lt;/p&gt;
+</description><content:encoded>
+&lt;p&gt;How shared Android capacity helps engineering teams move beyond fixed device labs&lt;/p&gt;
+&lt;p&gt;In the first blog of this series, we discussed &lt;a href="https://ubuntu.com/blog/android-development-shouldnt-start-with-a-physical-device"&gt;how programmable Android environments can replace manual device preparation&lt;/a&gt; with a repeatable lifecycle. A workflow requests an environment with a predefined configuration, executes the required task, collects the results, and releases the resources once the work is completed.&lt;/p&gt;
+&lt;p&gt;Automation enables a team to create a single Android environment reliably. The next question is about scaling: how can that same operating model support every developer, test, session, and workflow that needs Android?&lt;/p&gt;
+&lt;p&gt;Running one Android environment in the cloud is useful. Making Android capacity available on demand, at scale, is where the operating model begins to change.&lt;/p&gt;
+&lt;h1 class="wp-block-heading"&gt;Fixed hardware, variable demand&lt;/h1&gt;
+&lt;p&gt;Physical device labs grow one device at a time. Each additional phone, development board, display, or hardware bench must be purchased, prepared, connected, maintained, shared, and eventually replaced.&lt;/p&gt;
+&lt;p&gt;That model can work when demand is small and predictable. Engineering demand, however, rarely is. Consider these common use cases:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A CI pipeline may need many temporary environments after a code change. &lt;/li&gt;
+&lt;li&gt;A QA team may need additional capacity before a release. &lt;/li&gt;
+&lt;li&gt;A streaming service may experience a sudden increase in active sessions. &lt;/li&gt;
+&lt;li&gt;An automotive team may need to validate several Android Automotive OS configurations in parallel.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The traditional approach leaves teams compromising. They can either provision enough hardware for average demand and accept queues during busy periods. Or they can provision for peak demand and leave equipment idle when activity falls.&lt;/p&gt;
+&lt;p&gt;This creates a clear mismatch. Dedicated Android devices provide a fixed amount of capacity, while development, testing, and streaming workloads create demand that changes over time.&lt;/p&gt;
+&lt;p&gt;Target hardware (the real components, such as sensors, peripherals, and GPUs) remains essential for validating the characteristics of the final product. However, the number of phones, development boards, or hardware benches available should not determine how quickly every software activity can move.&lt;/p&gt;
+&lt;h1 class="wp-block-heading"&gt;From device inventory to requested capacity&lt;/h1&gt;
+&lt;p&gt;Cloud infrastructure handles variable demand by pooling compute resources and allocating them to workloads when required. Those workloads run in containers or virtual machines on shared host infrastructure, depending on their technical requirements.&lt;/p&gt;
+&lt;p&gt;Android can use the same model through Anbox Cloud. Instead of reserving a particular phone, board, or hardware bench, a workflow requests an Android environment with a defined image, configuration, and resource profile. Anbox Cloud runs that environment as a managed container or virtual machine on the available host infrastructure.&lt;/p&gt;
+&lt;p&gt;Once the task is complete, the Android instance can be removed and its CPU, memory, storage, and graphics resources returned to the shared pool. That capacity can then serve another developer, test, or session.&lt;/p&gt;
+&lt;p&gt;Android capacity becomes something workflows request rather than something people reserve. Teams can make more environments available when demand rises without assigning a dedicated Android device to every task.&lt;/p&gt;
+&lt;h1 class="wp-block-heading"&gt;Scale for the workload&lt;/h1&gt;
+&lt;p&gt;Scaling discussions often begin with one question: how many Android instances can run on one server?&lt;/p&gt;
+&lt;p&gt;There is no universal answer. &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A streamed Android game does not have the same resource profile as an automated test. &lt;/li&gt;
+&lt;li&gt;An interactive development environment creates a different demand pattern from a nightly validation pipeline. &lt;/li&gt;
+&lt;li&gt;A complete Android Automotive OS image requires different resources from an application-level workload.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Some environments are constrained primarily by CPU and memory. Others depend on GPU capacity, storage performance, network throughput, startup time, or predictable frame delivery. These differences matter more than the raw instance count.&lt;/p&gt;
+&lt;p&gt;The more useful question is, how much capacity does this workload require to produce predictable results?&lt;/p&gt;
+&lt;p&gt;Teams need to measure representative applications and Android images under realistic conditions. They need to understand average concurrency, peak demand, session duration, and which infrastructure resource becomes constrained first. Density matters, but predictability matters more.&lt;/p&gt;
+&lt;p&gt;To match the execution model to the workload, Anbox Cloud supports both containerized and virtualized Android execution. &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Containers&lt;/strong&gt; are suited to application-oriented workloads where density, startup time, and efficient resource use matter, including testing, streaming, automation, and gaming. &lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Virtual machines&lt;/strong&gt; are suited to workloads that require a complete Android system with its own kernel and virtual-machine boundary, such as custom Android system development and system-level validation.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Neither execution model is intrinsically better. The appropriate model depends on the workload, while the operational objective remains the same: provide the required Android capacity with predictable behavior.&lt;/p&gt;
+&lt;h1 class="wp-block-heading"&gt;Scaling teams, not only instances&lt;/h1&gt;
+&lt;p&gt;Shared Android capacity also removes organizational bottlenecks, by making environments centrally managed and remotely accessible.&lt;/p&gt;
+&lt;p&gt;A development board may be located in one office while the engineer who needs it works in another country. A hardware bench may be assigned to one team even when it remains idle. A device may need to remain in a specific degraded state until another engineer is actually assigned or available to investigate it.&lt;/p&gt;
+&lt;p&gt;When Android environments are centrally managed and remotely accessible, developers no longer need to know which server hosts an instance or where that infrastructure is located. QA engineers do not need to reserve a particular device days in advance, and support teams can access a reproducible environment instead of waiting for hardware to be prepared or shipped.&lt;/p&gt;
+&lt;p&gt;The same environment can also support both automated and interactive workflows. A failed test can be recreated for investigation, an instance can be streamed to a browser for visual inspection, and a temporary session can be shared with another team.&lt;/p&gt;
+&lt;p&gt;Scaling therefore means more than running additional instances. It means giving more people access to the right Android environment when they need it.&lt;/p&gt;
+&lt;h1 class="wp-block-heading"&gt;Reusable capacity&lt;/h1&gt;
+&lt;p&gt;Shared infrastructure remains efficient only when resources are released after use. Temporary Android instances should be removed once their outputs have been collected, while persistent environments should exist because a workflow explicitly requires them.&lt;/p&gt;
+&lt;p&gt;For a single environment, this improves reproducibility. At fleet scale, it prevents unused instances from consuming capacity required by active workloads.&lt;/p&gt;
+&lt;h1 class="wp-block-heading"&gt;From scalable capacity to continuous workflows&lt;/h1&gt;
+&lt;p&gt;Automation makes Android environments programmable. Scaling makes that capacity available to more developers, tests, sessions, and engineering teams. Together, they allow Android capacity to be requested by software rather than reserved by people. Tests can run in parallel instead of waiting for individual devices, while interactive environments can be accessed remotely rather than tied to a particular laboratory.&lt;/p&gt;
+&lt;p&gt;Dedicated Android devices and target hardware still have an essential role. Teams must ultimately validate sensors, peripherals, drivers, radio interfaces, thermal behavior, performance, and other device-specific characteristics on the final product.&lt;/p&gt;
+&lt;p&gt;However, those devices can be reserved for work that genuinely depends on their physical characteristics, rather than expecting those same devices to carry every development and validation task. Teams can run early checks in programmable environments, execute broader test matrices in parallel, and reproduce software failures, all without waiting for a particular device.&lt;/p&gt;
+&lt;p&gt;This creates a more balanced validation model: run early, validate in the cloud, and prove on target hardware.&lt;/p&gt;
+&lt;p&gt;Once Android capacity can be requested on demand, the next question is what should request those environments and when.&lt;/p&gt;
+&lt;p&gt;The answer is the development pipeline.&lt;/p&gt;
+&lt;p&gt;In the next article, we will look at how Android environments can become a standard part of continuous integration and delivery: created automatically for each change, used for validation, and removed when the workflow is complete.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://ubuntu.com/blog/android-development-shouldnt-start-with-a-physical-device"&gt;Read Part 1: Android development shouldn’t start with a physical device&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Learn more about Anbox Cloud or contact our team: &lt;a href="https://canonical.com/anbox-cloud"&gt;https://canonical.com/anbox-cloud&lt;/a&gt; &lt;/p&gt;
+</content:encoded><author>Bertrand Boisseau (Bertrand Boisseau)</author><category>Anbox</category><category>anbox cloud</category><category>Anbox Cloud Appliance</category><pubDate>Wed, 23 Sep 2026 08:37:00 +0000</pubDate></item><item><title>Attach an Ubuntu Pro subscription to your AWS Image Builder image</title><link>https://ubuntu.com//blog/attach-ubuntu-pro-aws-image-builder</link><description>&lt;p&gt;We are pleased to announce that you can now attach an Ubuntu Pro subscription directly to any base image in AWS Image Builder, allowing you to create enterprise-grade custom images from the get go.&lt;/p&gt;
+</description><content:encoded>
+&lt;p&gt;We are pleased to announce that you can now attach an Ubuntu Pro subscription directly to any base image in AWS Image Builder, allowing you to create enterprise-grade custom images from the get go.&lt;/p&gt;
+&lt;h2 class="wp-block-heading"&gt;Why this is important&lt;/h2&gt;
+&lt;p&gt;Until now, getting Ubuntu Pro into a custom AMI (Amazon Machine Image) meant either starting from an Ubuntu Pro base image or manually applying a token during the build. You can now attach an Ubuntu Pro subscription to &lt;em&gt;any&lt;/em&gt; base image directly in your build pipeline even if the base image is a non-Ubuntu Linux image.&lt;/p&gt;
+&lt;p&gt;This unlocks simpler and more flexible AMI builds: add Ubuntu Pro as just another component to the recipe, with no manual steps required. This makes Ubuntu Pro straightforward to integrate into CI/CD pipelines and automated provisioning workflows.&lt;/p&gt;
+&lt;blockquote class="wp-block-quote"&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Attaching Ubuntu Pro to a non-Ubuntu host only licenses the cluster to run Ubuntu Pro containers. It does not give the host access to Ubuntu Pro services like Expanded Security Maintenance, compliance hardening, or Kernel live patching.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 class="wp-block-heading"&gt;Before you begin&lt;/h2&gt;
+&lt;p&gt;Make sure you have the following in place:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;An AWS account with permissions to use EC2 Image Builder and AWS Marketplace.&lt;/li&gt;
+&lt;li&gt;IAM permissions which allow Image Builder to access Marketplace components (&lt;code&gt;imagebuilder:GetComponent, aws-marketplace:Subscribe&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;A base image ready to use (EC2 Managed image, Marketplace AMI, or a custom AMI).&lt;/li&gt;
+&lt;li&gt;If your base image is Ubuntu, &lt;code&gt;ubuntu-pro-client&lt;/code&gt; should be installed for the Pro client to activate services on first boot.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 class="wp-block-heading"&gt;How to get it&lt;/h2&gt;
+&lt;h3 class="wp-block-heading"&gt;Step 1: Subscribe to the marketplace listing&lt;/h3&gt;
+&lt;p&gt;Subscribe to the component that matches your target architecture:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://aws.amazon.com/marketplace/pp/prodview-n2kyhcn7wgik6"&gt;Ubuntu Pro subscription for EC2 Image Builder (AMD64)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://aws.amazon.com/marketplace/pp/prodview-6u77zpx2ewqwi"&gt;Ubuntu Pro subscription for EC2 Image Builder (ARM64)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 class="wp-block-heading"&gt;Step 2: Create or edit an image recipe&lt;/h3&gt;
+&lt;p&gt;You can do this using the AWS Web Console or the AWS CLI. The overall flow is the same:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Create an image pipeline (or open an existing one).&lt;/li&gt;
+&lt;li&gt;Create a new recipe or edit an existing one:
+&lt;ol&gt;
+&lt;li&gt;Select a base image (EC2 Managed image, Marketplace AMI, or a custom image).&lt;/li&gt;
+&lt;li&gt;Select the image name (the operating system to use as a base).&lt;/li&gt;
+&lt;li&gt;Add user data if needed.&lt;/li&gt;
+&lt;li&gt;Add your components – this is where the &lt;strong&gt;Upgrade to Ubuntu Pro&lt;/strong&gt; component comes in. &lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;If you are using the AWS Web console, open the Source dropdown and select AWS Marketplace. This will display all available Marketplace components. Search for Ubuntu Pro and select the component that matches your base AMI architecture (AMD64 or ARM64).&lt;/p&gt;
+&lt;p&gt;If you are using AWS CLI, you will need to take note of the Ubuntu Pro component ARN to use it in your API call.&lt;/p&gt;
+&lt;h3 class="wp-block-heading"&gt;Step 3: Continue with the rest of the details as usual&lt;/h3&gt;
+&lt;p&gt;The next step should be familiar: configure custom workflows, infrastructure details, and distribution settings.&lt;/p&gt;
+&lt;h3 class="wp-block-heading"&gt;Step 4: Build and distribute&lt;/h3&gt;
+&lt;p&gt;Once you have added the Ubuntu Pro component to your recipe, the rest of the workflow follows the instructions of the standard Image Builder:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Add any additional components for your own configurations and deployments.&lt;/li&gt;
+&lt;li&gt;Configure a distribution setting (regions, AMI name, etc.).&lt;/li&gt;
+&lt;li&gt;Configure a test pipeline (optional but recommended).&lt;/li&gt;
+&lt;li&gt;Run the pipeline and let Image Builder produce the image.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Once the image is built, the Ubuntu Pro subscription will be attached to the resulting AMI as instance metadata. If your base image is Ubuntu and the Pro client is installed, the default Ubuntu Pro services will be activated on the next boot.&lt;/p&gt;
+&lt;p&gt;If you want to learn more in detail about how to build a recipe with the Ubuntu Pro component, read more in our &lt;a href="https://documentation.ubuntu.com/aws/aws-how-to/instances"&gt;official documentation page&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 class="wp-block-heading"&gt;Validating your license&lt;/h2&gt;
+&lt;p&gt;To confirm the Ubuntu Pro license was attached correctly, check whether the right Marketplace product code is present on your AMI.&lt;/p&gt;
+&lt;h4 class="wp-block-heading"&gt;Using the AWS console&lt;/h4&gt;
+&lt;p&gt;Go to &lt;strong&gt;EC2 → AMIs&lt;/strong&gt;, select your AMI, and look at the &lt;strong&gt;Product codes&lt;/strong&gt; field in the details panel below. You should see one of the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Marketplace:9bztusbna2lfuk6zw7upzdvsv&lt;/code&gt; — AMD64 images&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Marketplace:291iwywwdb7ujmih1x7z4l3my &lt;/code&gt;— Graviton (ARM64) images&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 class="wp-block-heading"&gt;Using the AWS CLI&lt;/h4&gt;
+&lt;div class="wp-block-group is-vertical is-layout-flex wp-container-core-group-layout-1 wp-block-group-is-layout-flex"&gt;
+&lt;pre class="wp-block-code"&gt;&lt;code&gt;aws ec2 describe-images \
+  --owners self \
+  --query 'Images[*].{ImageId: ImageId, Name: Name, ProductCodes: ProductCodes[*].ProductCodeId}' \
+  --output text&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;h2 class="wp-block-heading"&gt;Learn more&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://ubuntu.com/aws/docs/aws-how-to/instances/build-ubuntu-pro-image-with-ec2-image-builder/"&gt;Ubuntu Documentation for EC2 Image Builder Components&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://docs.aws.amazon.com/imagebuilder/latest/userguide/what-is-image-builder.html"&gt;AWS EC2 Image Builder Documentation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://aws.amazon.com/marketplace/pp/prodview-n2kyhcn7wgik6"&gt;AWS Marketplace Premium Components&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://ubuntu.com/aws/pro"&gt;Ubuntu Pro on AWS&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content:encoded><author>Carlos Bravo (Carlos Bravo)</author><category>AWS</category><category>AWS EC2</category><category>Ubuntu Pro</category><pubDate>Mon, 21 Sep 2026 16:35:23 +0000</pubDate></item><item><title>Beyond the 10-year mark: Extending Ubuntu Pro 16.04 LTS security coverage</title><link>https://ubuntu.com//blog/extending-ubuntu-pro-16-04-coverage</link><description>&lt;p&gt;A decade ago, Canonical launched Ubuntu 16.04 LTS (codenamed &amp;#8220;Xenial Xerus&amp;#8221;). As a Long-Term Support (LTS) release, it comes with 5 years of standard security coverage, which is doubled to a total of 10 years through Expanded Security Maintenance (ESM) for users with an Ubuntu Pro subscription.&lt;/p&gt;
+</description><content:encoded>
+&lt;p&gt;A decade ago, Canonical launched Ubuntu 16.04 LTS (codenamed “Xenial Xerus”). As a Long-Term Support (LTS) release, it comes with 5 years of standard security coverage, which is doubled to a total of 10 years through Expanded Security Maintenance (ESM) for users with an Ubuntu Pro subscription.&lt;/p&gt;
+&lt;p&gt;As of &lt;strong&gt;April 30, 2026&lt;/strong&gt;, the 10-year ESM coverage for Ubuntu 16.04 LTS, under Ubuntu Pro, has officially reached its end of support.&lt;/p&gt;
+&lt;p&gt;While Ubuntu 16.04 LTS images can still be launched on the public clouds, they are now marked as deprecated and will no longer receive any security patches, bug fixes, or maintenance updates. There are two paths you can follow to keep your Ubuntu estate security maintained.&lt;/p&gt;
+&lt;h3 class="wp-block-heading"&gt;&lt;strong&gt;Path 1: Upgrade to a newer supported Ubuntu LTS&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;Canonical strongly recommends migrating workloads to a newer, supported LTS version (such as 22.04 LTS, 24.04 LTS or 26.04 LTS) to benefit from modern security frameworks, updated software stacks, and performance improvements. There are two options when upgrading:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Fresh installation:&lt;/strong&gt; Redeploying your workloads on a brand-new instance of a modern Ubuntu LTS ensures a clean slate and optimal configuration.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;In-place migration:&lt;/strong&gt; If redeployment isn’t immediately feasible, you can perform an upgrade on your existing instances. Learn how to perform an in-place migration by reading our &lt;a href="https://ubuntu.com/server/docs/how-to/software/upgrade-your-release/"&gt;Ubuntu LTS Upgrade Guide&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 class="wp-block-heading"&gt;&lt;strong&gt;Path 2: Get 5 additional years of maintenance with the Legacy add-on&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;We understand that complex enterprise architectures, legacy applications, and regulatory dependencies can make immediate migration impossible. If you cannot redeploy your workloads right away, Canonical offers a further five years of security maintenance and support with the Legacy add-on on top of an active Ubuntu Pro subscription.&lt;/p&gt;
+&lt;p&gt;The &lt;strong&gt;Ubuntu Pro Legacy add-on&lt;/strong&gt; brings the total lifecycle of the release to 15 years. This add-on ensures your Ubuntu 16.04 LTS environments continue to receive critical security patches until 2031 – giving you time to safely plan and execute your migration strategy.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;How to get it:&lt;/strong&gt; If you need to keep running Ubuntu 16.04 LTS securely, contact the Canonical team directly via the &lt;a href="https://ubuntu.com/support"&gt;Canonical Support Form&lt;/a&gt; to get the Legacy add-on.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 class="wp-block-heading"&gt;&lt;strong&gt;Next steps&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;Leaving your infrastructure on an unsupported operating system can expose you to security threats. Take control of your migration timeline today:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Assess your inventory:&lt;/strong&gt; Identify any remaining Ubuntu 16.04 LTS machines or images in your environment.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Choose your path:&lt;/strong&gt; Begin scheduling upgrades to a newer LTS, or bridge the gap securely with Ubuntu Pro and a Legacy add-on.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Read the full announcement:&lt;/strong&gt; Learn more about how Canonical is expanding total coverage for legacy releases &lt;a href="https://canonical.com/blog/canonical-expands-total-coverage-for-ubuntu-lts-releases-to-15-years-with-legacy-add-on"&gt;in our official announcement&lt;/a&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+</content:encoded><author>Carlos Bravo (Carlos Bravo)</author><category>AWS</category><category>AWS EC2</category><category>Ubuntu Pro</category><pubDate>Thu, 17 Sep 2026 19:46:36 +0000</pubDate></item><item><title>Android™ development shouldn’t start with a physical device</title><link>https://ubuntu.com//blog/android-development-shouldnt-start-with-a-physical-device</link><description>&lt;p&gt;How on-demand Android environments lay the foundation for Android engineering Software engineering has evolved dramatically over the last decade. Development environments that once depended on dedicated hardware have become resources that can be provisioned, configured, and removed on demand. Infrastructure is now expected to be reproducible, automated, and integrated into continuous development workflows. However, Android [&amp;hellip;]&lt;/p&gt;
+</description><content:encoded>
+&lt;p&gt;How on-demand Android environments lay the foundation for Android engineering&lt;/p&gt;
+&lt;p&gt;Software engineering has evolved dramatically over the last decade. Development environments that once depended on dedicated hardware have become resources that can be provisioned, configured, and removed on demand.&lt;/p&gt;
+&lt;p&gt;Infrastructure is now expected to be reproducible, automated, and integrated into continuous development workflows. However, Android has largely remained an exception.&lt;/p&gt;
+&lt;p&gt;Many Android workflows still rely on physical devices or locally managed emulators. Here’s the typical flow: &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;A developer connects a phone to reproduce an issue. &lt;/li&gt;
+&lt;li&gt;A QA engineer then reserves a device from a shared lab. &lt;/li&gt;
+&lt;li&gt;A platform team maintains development boards to validate new Android builds.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;These approaches are familiar, and they can work well for small teams. However, as projects grow, hardware must be managed and shared. Environments gradually diverge, and reproducing an issue can depend as much on finding the right device as on finding the bug itself. &lt;/p&gt;
+&lt;p&gt;Before proceeding, a quick note on terminology. In this blog, a “physical device” means a phone, development board, automotive bench, or any other dedicated Android target. “Target hardware” refers to the real components themselves, such as sensors, peripherals, radios, GPUs, or vehicle interfaces whose specific behaviors must eventually be validated on the final product. Both are specific forms of physical hardware. &lt;/p&gt;
+&lt;p&gt;Physical hardware will always have an important role in Android development. But it should not be the starting point for every test, investigation, or validation workflow.&lt;/p&gt;
+&lt;p&gt;The challenge is not Android itself. It is that Android is still often treated as a dedicated physical asset rather than as a programmable part of the wider engineering infrastructure. This is beginning to change.&lt;/p&gt;
+&lt;h2 class="wp-block-heading"&gt;From devices to environments&lt;/h2&gt;
+&lt;p&gt;Modern infrastructure platforms are built around a simple principle: resources should be requested by workflows rather than handled manually. Their value comes from being provisioned automatically, configured consistently, and removed when they are no longer required. Android should follow the same model.&lt;/p&gt;
+&lt;p&gt;Instead of asking someone to prepare a phone or start an emulator, a workflow should be able to request an Android environment with a known configuration, use it to perform a task, collect the results, and release it when the work is complete.&lt;/p&gt;
+&lt;p&gt;This is the approach we have taken with Anbox Cloud.&lt;/p&gt;
+&lt;p&gt;Anbox Cloud runs complete Android systems as managed containers or virtual machines on supported cloud, edge, or bare-metal infrastructure. This moves routine Android execution away from dedicated physical devices, while retaining real target hardware for the validation that genuinely depends on it.&lt;/p&gt;
+&lt;p&gt;The purpose of Anbox Cloud is not to reproduce every physical characteristic of the final product. It is to containerize or virtualize the Android execution environment so that development, testing, debugging, and streaming workflows do not each require their own dedicated device.&lt;/p&gt;
+&lt;p&gt;With Anbox Cloud, teams can create, configure, access, stream, copy, and remove Android instances programmatically. Containerized instances support application-oriented workloads where density and efficiency matter, while virtualized instances support workloads that require a complete Android system inside a virtual machine.&lt;/p&gt;
+&lt;p&gt;Whether the environment is used for application testing, streaming, platform validation, or Android Automotive development, the same consistent lifecycle applies: request, configure, use, collect, and release. Android capacity is provided exactly when the workflow needs it rather than reserved manually in advance.&lt;/p&gt;
+&lt;h2 class="wp-block-heading"&gt;A repeatable Android lifecycle&lt;/h2&gt;
+&lt;p&gt;Android projects vary considerably, but their workflows often follow the same sequence.&lt;br/&gt;With Anbox Cloud, a workflow can:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Request an Android instance from a known image.&lt;/li&gt;
+&lt;li&gt;Configure it with the required application, resources, settings, user data, or test parameters.&lt;/li&gt;
+&lt;li&gt;Use it through ADB, shell access, browser-based streaming, or an automated test runner.&lt;/li&gt;
+&lt;li&gt;Collect logs, screenshots, test reports, recordings, or other outputs.&lt;/li&gt;
+&lt;li&gt;Release the instance or preserve it intentionally for further investigation.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Treating this lifecycle as code rather than as a manual procedure is what makes the Android environment programmable.&lt;/p&gt;
+&lt;h2 class="wp-block-heading"&gt;A more efficient, timely way to build&lt;/h2&gt;
+&lt;p&gt;Teams can manage the Android lifecycle with Anbox Cloud using the Anbox Management Client, the AMS HTTP API, or SDKs. This allows Android environment management to be integrated into existing development tools, automation platforms, and CI systems instead of being designed around manually prepared devices or local emulators.&lt;/p&gt;
+&lt;p&gt;Making the lifecycle programmable also makes its configuration explicit. The Android image, application version, display settings, resource allocation, input data, expected outputs, and cleanup behavior can all become part of the workflow. Every execution begins from a defined configuration rather than undocumented setup, steps, or settings that exist only in someone’s local environment.&lt;/p&gt;
+&lt;p&gt;This makes the lifecycle a lot smoother: &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A CI job can launch an environment, execute a test suite, collect the results, and remove the instance automatically. &lt;/li&gt;
+&lt;li&gt;A QA engineer can recreate the same environment to investigate a failure. &lt;/li&gt;
+&lt;li&gt;A support engineer can launch a temporary interactive session to reproduce a customer issue. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The value is not simply that an API can start Android. It is that developers, QA engineers, CI systems, and support teams can repeatedly create the same environment from the same definition. When a problem occurs, teams can identify the configuration that produced it, rather than trying to determine which manually prepared device was used.&lt;/p&gt;
+&lt;p&gt;This same operating model also supports interactive work. An environment can be created automatically and still be accessed through ADB, shell, or browser-based streaming when human investigation is required. Automation and interactive access are not separate approaches. They are different ways of working with the same environment.&lt;/p&gt;
+&lt;p&gt;Persistence also becomes an explicit workflow decision. Instead of allowing long-lived devices to accumulate installed applications, cached data, logged-in accounts, and undocumented changes, each execution can begin from a clean environment. When persistence is required, teams can copy an instance, preserve its data, or publish a configured environment for reuse.&lt;/p&gt;
+&lt;p&gt;This makes Android environments easier to understand, reproduce, and trust.&lt;/p&gt;
+&lt;h1 class="wp-block-heading"&gt;Removing hardware from the critical path&lt;/h1&gt;
+&lt;p&gt;By moving routine Android execution to managed containers and virtual machines, Anbox Cloud turns Android from a scarce physical asset into programmable engineering infrastructure. This enables repeatable CI, QA, and support workflows while reserving target hardware for validation that genuinely depends on it.&lt;/p&gt;
+&lt;p&gt;Automation is the first step. However, once teams can launch one Android environment reliably, the next challenge is no longer how to prepare an environment. It is how to make hundreds or thousands of environments available efficiently without simply building a larger device lab.&lt;/p&gt;
+&lt;p&gt;That is where scaling becomes the next logical step.&lt;/p&gt;
+&lt;p&gt;In our next article, we will look at how Android teams can scale development without scaling hardware.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://ubuntu.com/blog/scaling-android-development-without-scaling-hardware"&gt;Read Part 2: Scaling Android development without scaling hardware&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Learn more about Anbox Cloud or contact our team: &lt;a href="https://canonical.com/anbox-cloud"&gt;https://canonical.com/anbox-cloud&lt;/a&gt; &lt;/p&gt;
+</content:encoded><author>Bertrand Boisseau (Bertrand Boisseau)</author><category>Anbox</category><category>anbox cloud</category><category>Anbox Cloud Appliance</category><pubDate>Thu, 17 Sep 2026 12:43:46 +0000</pubDate></item><item><title>Bring Zenoh to ROS 2 with snaps</title><link>https://ubuntu.com//blog/bring-zenoh-to-ros-2-with-snaps</link><description>&lt;p&gt;ROS 2 gives robotics developers the freedom to choose the middleware that fits their system. As a communication protocol for ROS, Zenoh has gained strong traction. It delivers proven performance and stability while giving developers explicit control over node discovery. Zenoh is a lightweight, high-performance communication protocol designed for robotics and distributed systems. Supporting publisher/subscriber [&amp;hellip;]&lt;/p&gt;
+</description><content:encoded>
+&lt;p&gt;ROS 2 gives robotics developers the freedom to choose the middleware that fits their system. As a communication protocol for ROS, Zenoh has gained strong traction. It delivers proven performance and stability while giving developers explicit control over node discovery.&lt;/p&gt;
+&lt;p&gt;Zenoh is a lightweight, high-performance communication protocol designed for robotics and distributed systems. Supporting publisher/subscriber and query-based communication, it handles unreliable network connections efficiently. It can act as the middleware for ROS 2 systems.&lt;/p&gt;
+&lt;p&gt;For teams running ROS 2 applications with DDS (Data Distribution Service), a Zenoh bridge provides a way to keep applications as they are and bridge their communication into Zenoh. Meanwhile, the Zenoh router provides data stream routes and distributes queries across endpoints.&lt;/p&gt;
+&lt;p&gt;To deploy ROS 2 and Zenoh effectively, you need a stable, reliable environment. This blog explores how to achieve that using snaps, covering three key deployment approaches:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Packaging:&lt;/strong&gt; Include the Zenoh ROS middleware directly within your application&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Infrastructure:&lt;/strong&gt; Run the Zenoh router as a standalone snap&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Integration:&lt;/strong&gt; Use the Zenoh-to-DDS bridge to connect existing ROS 2 applications&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;These methods are not mutually exclusive, enabling teams to mix and match as needed to suit their architecture.&lt;/p&gt;
+&lt;h2 class="wp-block-heading"&gt;&lt;strong&gt;Package Zenoh with your ROS 2 application&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;When developers want to use Zenoh as part of the application, they can include the rmw_zenoh_cpp dependency directly in the ROS 2 &lt;a href="https://ubuntu.com/docs/snapcraft/latest/reference/snapcraft-yaml/"&gt;&lt;code&gt;snapcraft.yaml&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The &lt;a href="https://github.com/ubuntu-robotics/ros-snaps-examples/tree/main/talker_listener_zenoh_core24"&gt;talker_listener_zenoh_core24&lt;/a&gt; project in the ROS snap examples repository demonstrates this approach with ROS 2 Jazzy. It packages the familiar &lt;code&gt;demo_nodes_cpp&lt;/code&gt; talker and listener while selecting Zenoh via the &lt;code&gt;RMW_IMPLEMENTATION&lt;/code&gt; environment variable.&lt;/p&gt;
+&lt;p&gt;The important changes in &lt;code&gt;snapcraft.yaml&lt;/code&gt; appear below:&lt;/p&gt;
+&lt;pre class="wp-block-code"&gt;&lt;code&gt;base: core24
+confinement: strict
+
+parts:
+  ros-demos:
+    plugin: colcon
+    source: https://github.com/ros2/demos.git
+    source-branch: jazzy
+    stage-packages:
+      - &lt;strong&gt;ros-jazzy-rmw-zenoh-cpp&lt;/strong&gt;
+      - ros-jazzy-ros2run
+
+apps:
+  talker-router:
+    command: opt/ros/jazzy/bin/ros2 run demo_nodes_cpp talker
+    plugs: [network, network-bind]
+    extensions: [ros2-jazzy]
+    environment:
+&lt;strong&gt;      RMW_IMPLEMENTATION: rmw_zenoh_cpp&lt;/strong&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;a href="https://snapcraft.io/docs/robotics/"&gt;&lt;code&gt;ros2-jazzy extension&lt;/code&gt;&lt;/a&gt; sets up the ROS 2 environment inside the snap. The &lt;code&gt;stage-packages&lt;/code&gt; entry adds &lt;code&gt;rmw_zenoh_cpp&lt;/code&gt;, while &lt;code&gt;RMW_IMPLEMENTATION&lt;/code&gt; tells the application to use it at runtime.&lt;/p&gt;
+&lt;p&gt;This keeps the communication choice within the application. The developer controls the ROS 2 version, middleware package, environment, and application lifecycle in one artifact. The same tested package can then move between development systems and robots without rebuilding on each device.&lt;/p&gt;
+&lt;p&gt;The &lt;a href="https://github.com/ubuntu-robotics/ros-snaps-examples/blob/main/talker_listener_zenoh_core24/snap/snapcraft.yaml"&gt;example&lt;/a&gt; provides two operating modes: one using a dedicated Zenoh router (talker-router/listener-router) and another relying on multicast scouting (talker/listener). This flexibility enables developers to start with a compact, all-in-one package for workstations or robots, then evolve to a separate router service if their communication architecture scales, without needing to change the application.&lt;/p&gt;
+&lt;h2 class="wp-block-heading"&gt;&lt;strong&gt;Run the Zenoh router as a snap&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;A router is infrastructure, and infrastructure requires stability.&lt;/p&gt;
+&lt;p&gt;The&lt;a href="https://snapcraft.io/zenohd"&gt; zenohd snap&lt;/a&gt; packages the Zenoh router as a command and a system service. It can be installed independently of the ROS 2 applications that use it:&lt;/p&gt;
+&lt;pre class="wp-block-code"&gt;&lt;code&gt;sudo snap install zenohd
+sudo snap start --enable zenohd.daemon&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The service is installed disabled, so users decide when to enable it. Once enabled, snapd manages it like other snap services.&lt;/p&gt;
+&lt;p&gt;The router can also run as a terminal command:&lt;/p&gt;
+&lt;pre class="wp-block-code"&gt;&lt;code&gt;zenohd [OPTIONS]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you plan to pass a configuration file via the CLI, ensure it is in a &lt;a href="https://snapcraft.io/docs/reference/administration/data-locations/#user-data"&gt;location accessible to a strictly confined snap&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The snap looks for a JSON5 or YAML configuration under its snap-managed data directories. The default daemon configuration path is:&lt;/p&gt;
+&lt;pre class="wp-block-code"&gt;&lt;code&gt;/var/snap/zenohd/common/config.json5&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The&lt;a href="https://github.com/eclipse-zenoh/zenoh/blob/main/DEFAULT_CONFIG.json5"&gt; upstream reference configuration&lt;/a&gt; documents the available options.&lt;/p&gt;
+&lt;p&gt;After changing it, restart the service:&lt;/p&gt;
+&lt;pre class="wp-block-code"&gt;&lt;code&gt;sudo snap restart zenohd.daemon&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;a href="https://github.com/canonical/zenohd-snap"&gt;&lt;code&gt;snapcraft.yaml&lt;/code&gt;&lt;/a&gt; file describes the daemon and command for reference.&lt;/p&gt;
+&lt;p&gt;With a router deployed in the cloud, multiple Zenoh-enabled applications can communicate across the internet. In that setup, consider configuring &lt;a href="https://zenoh.io/docs/manual/tls/"&gt;TLS authentication for Zenoh&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 class="wp-block-heading"&gt;&lt;strong&gt;Add Zenoh to existing ROS 2 applications&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;Repackaging an application is not always the right starting point. A robot may already run several ROS 2 nodes using DDS, or a team may want to introduce Zenoh without changing those nodes.&lt;/p&gt;
+&lt;p&gt;The&lt;a href="https://snapcraft.io/zenoh-bridge-ros2dds"&gt; zenoh-bridge-ros2dds snap&lt;/a&gt; packages the upstream Zenoh bridge for ROS 2 over DDS. The bridge discovers ROS 2 communication on its DDS side and maps it to Zenoh. This lets existing ROS 2 applications keep their current middleware configuration.&lt;/p&gt;
+&lt;p&gt;Install and enable it with:&lt;/p&gt;
+&lt;pre class="wp-block-code"&gt;&lt;code&gt;sudo snap install zenoh-bridge-ros2dds
+sudo snap start --enable zenoh-bridge-ros2dds.bridge&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Like the router snap, the bridge is installed disabled and can also run as a CLI:&lt;/p&gt;
+&lt;pre class="wp-block-code"&gt;&lt;code&gt;zenoh-bridge-ros2dds [OPTIONS]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Its configuration can live in the snap’s common data directory:&lt;/p&gt;
+&lt;pre class="wp-block-code"&gt;&lt;code&gt;/var/snap/zenoh-bridge-ros2dds/common/config.json5&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Or in the root user data directory&lt;/p&gt;
+&lt;pre class="wp-block-code"&gt;&lt;code&gt;/root/snap/zenoh-bridge-ros2dds/common/config.json5&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The&lt;a href="https://github.com/eclipse-zenoh/zenoh-plugin-ros2dds/blob/main/DEFAULT_CONFIG.json5"&gt; upstream reference configuration&lt;/a&gt; documents the available options.&lt;/p&gt;
+&lt;p&gt;The bridge can sit beside a ROS 2 system on a robot, workstation or other host and connect that DDS domain to the Zenoh side of the architecture. ROS 2 nodes do not need to know that the bridge is there.&lt;/p&gt;
+&lt;p&gt;The &lt;a href="https://github.com/canonical/zenoh-bridge-ros2dds-snap"&gt;&lt;code&gt;snapcraft.yaml&lt;/code&gt;&lt;/a&gt; file demonstrates how to package the Rust-based bridge as both a daemon and a CLI.&lt;/p&gt;
+&lt;h2 class="wp-block-heading"&gt;&lt;strong&gt;One RMW implementation, three approaches&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;To recap, Zenoh offers flexible deployment options for ROS 2 systems through three distinct approaches using snaps:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Packaging:&lt;/strong&gt; Developers can bundle the &lt;code&gt;rmw_zenoh_cpp&lt;/code&gt; RMW implementation directly within their application snap.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Infrastructure:&lt;/strong&gt; The &lt;code&gt;zenohd&lt;/code&gt; router snap serves as shared infrastructure for routing data streams across the system.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Integration:&lt;/strong&gt; The &lt;code&gt;zenoh-bridge-ros2dds&lt;/code&gt; snap bridges existing DDS-based applications into the Zenoh network without requiring code changes.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Snaps unify these deployments with a consistent operational model. All three approaches support &lt;code&gt;amd64&lt;/code&gt; and &lt;code&gt;arm64&lt;/code&gt; platforms, ensuring hardware-agnostic deployment across different robots. Furthermore, snaps provide a single framework for transactional updates, lifecycle management, and service control through &lt;code&gt;snapd&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Security is central to this model. Strict confinement isolates the communication stack, while mandatory interfaces like &lt;code&gt;network&lt;/code&gt; and &lt;code&gt;network-bind&lt;/code&gt; enforce explicit system access. This ensures that each component operates within a well-defined boundary.&lt;/p&gt;
+&lt;p&gt;Ultimately, this allows the application, the bridge, and the router to evolve independently with their own configuration and refresh cycles. This modularity maintains a robust operational boundary for the entire robotics architecture.&lt;/p&gt;
+&lt;h2 class="wp-block-heading"&gt;&lt;strong&gt;Start snapping Zenoh into ROS 2&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;Here are some practical starting points for the three projects:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Explore the &lt;a href="https://github.com/ubuntu-robotics/ros-snaps-examples/tree/main/talker_listener_zenoh_core24"&gt;&lt;code&gt;rmw_zenoh_cpp&lt;/code&gt; talker and listener example&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Install the &lt;a href="https://snapcraft.io/zenohd"&gt;&lt;code&gt;zenohd&lt;/code&gt; router snap&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Install the &lt;a href="https://snapcraft.io/zenoh-bridge-ros2dds"&gt;&lt;code&gt;zenoh-bridge-ros2dds&lt;/code&gt; snap&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Check the &lt;a href="https://github.com/canonical/zenohd-snap"&gt;&lt;code&gt;zenohd&lt;/code&gt; snap source&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Check the &lt;a href="https://github.com/canonical/zenoh-bridge-ros2dds-snap"&gt;&lt;code&gt;zenoh-bridge-ros2dds&lt;/code&gt; snap source&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If snaps are new to you, start with the&lt;a href="https://snapcraft.io/docs/snapcraft-overview/"&gt; Snapcraft overview&lt;/a&gt;, then&lt;a href="https://snapcraft.io/docs/snapcraft-setup/"&gt; set up Snapcraft&lt;/a&gt; and follow the guide to&lt;a href="https://snapcraft.io/docs/create-a-new-snap/"&gt; create a snap&lt;/a&gt;. The&lt;a href="https://snapcraft.io/docs/robotics/"&gt; Snapcraft robotics documentation&lt;/a&gt; covers the ROS-specific extensions and workflows.&lt;/p&gt;
+&lt;p&gt;For the middleware itself, consult the&lt;a href="https://docs.ros.org/en/jazzy/Installation/RMW-Implementations/Non-DDS-Implementations/Working-with-Zenoh.html"&gt; ROS 2 Jazzy guide to working with Zenoh&lt;/a&gt;, the &lt;a href="https://github.com/ros2/rmw_zenoh"&gt;&lt;code&gt;rmw_zenoh&lt;/code&gt; repository&lt;/a&gt;, and the&lt;a href="https://zenoh.io/docs/getting-started/first-app/"&gt; Zenoh documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Whether Zenoh belongs inside your application, beside it, or at the center of its communication infrastructure, there is a snap-shaped way to deploy it.&lt;/p&gt;
+</content:encoded><author>gbeuzeboc (gbeuzeboc)</author><category>ROS 2</category><category>Snap</category><pubDate>Tue, 15 Sep 2026 15:07:15 +0000</pubDate></item><item><title>Evolution of the RISC-V ISA. What next after RVA23?</title><link>https://ubuntu.com//blog/evolution-of-the-risc-v-isa-what-next-after-rva23</link><description>&lt;p&gt;Introduction Releasing the RVA23 specification was a major milestone for the RISC-V community. While it provides an excellent baseline for deployment at scale, innovation continues to take place and we will see further extensions and profiles over the coming years. Upcoming innovations fall into a couple of key areas In this blog, we’ll look at [&amp;hellip;]&lt;/p&gt;
+</description><content:encoded>
+&lt;h2 class="wp-block-heading"&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Releasing the RVA23 specification was a major milestone for the RISC-V community. While it provides an excellent baseline for deployment at scale, innovation continues to take place and we will see further extensions and profiles over the coming years.&lt;/p&gt;
+&lt;p&gt;Upcoming innovations fall into a couple of key areas&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Security related extensions, such as Control Flow Integrity (CFI).&lt;/li&gt;
+&lt;li&gt;Performance related extensions such as Matrix&lt;/li&gt;
+&lt;li&gt;Minor specification updates, such as RVA23.1&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In this blog, we’ll look at these in more detail. We’ll also discuss Canonical and the wider community’s approach to supporting these extensions.&lt;/p&gt;
+&lt;h2 class="wp-block-heading"&gt;Security extensions&lt;/h2&gt;
+&lt;p&gt;RISC-V has a number of mechanisms to address security. These include basic features such as memory protection, memory management, and privilege levels. But these are mostly about helping well behaved programs do the right thing. In modern computing, this is increasingly insufficient where the risk of malicious attacks keeps increasing.  The good news is that there are also multiple levels of mechanisms to defend against this which are being actively developed. The first extension we’ll discuss is CFI, which was ratified by RISC-V international in 2024, while the other extensions we will cover are moving towards ratification in 2026 or 2027.&lt;/p&gt;
+&lt;h3 class="wp-block-heading"&gt;Control Flow Integrity&lt;/h3&gt;
+&lt;p&gt;This is a lightweight, optional extension designed to protect against Return-Oriented Programming (ROP) and Call/Jump-Oriented Programming (COP/JOP) control flow attacks.  Both of these mechanisms change the flow of the program and jump to unexpected places in the code. Clever use of these techniques can result in the ability to run arbitrary code using snippets (usually called “gadgets”) from elsewhere in the program binary.&lt;/p&gt;
+&lt;p&gt;CFI is composed of two independent extensions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Zicfilp&lt;/li&gt;
+&lt;li&gt;Zicfiss&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Both of these extensions govern control flow, in which typical attacks are about jumping to an unintended point in the code. They have been designed  to prevent these kinds of attacks, and to maximize compatibility with existing RVA23 hardware, such that if the hardware implementation is not present, the instructions from these extensions will be ignored. &lt;/p&gt;
+&lt;p&gt;However, on pre-RVA23 hardware without the Zimop opcode support, the Zicfiss instructions will trap. While no-operation instructions (NOPs) are not ideal for performance and code size, this provides some flexibility where software can quickly adopt this (e.g. in compiler toolchains) and as soon as the hardware is available it will “just work”.&lt;/p&gt;
+&lt;p&gt;Here’s how they work: &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The first extension (Zicfilp) creates landing pads. If the program branches to a location that isn’t a landing pad, it will trap. This means an attacker can’t branch to an arbitrary location that isn’t an explicit branch target.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;The second (Zicfiss) is similar, but about protecting function returns. A typical attack would try and overwrite the stack, so when a program returns, it branches to a different location from the originally saved one. This extension adds a shadow stack. When a function call is made, the return address is stored in both the normal stack and shadow stack. On returning from that function the values are compared, and  a mismatch will result in a trap. In that case, the execution is stopped before the attack can start.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href="https://www.youtube.com/watch?v=d-wU0YUTdtg"&gt;RISC-V Control-Flow Integrity (CFI) – Ved Shanbhogue, Rivos &amp;amp; George Christou&lt;/a&gt;&lt;/p&gt;
+&lt;h2 class="wp-block-heading"&gt;Matrix extensions&lt;/h2&gt;
+&lt;p&gt;AI/ML has been a massive growth area for RISC-V over the last few years, and continues to grow. The applications and use cases are just as diverse as those for processors, and ultimately most rely on a large amount of matrix math. The requirements for a small IoT endpoint will be different from a server, and correspondingly the right way to add these extensions varies too, depending on use case. RISC-V has three different methods to add matrix extensions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Integrated Matrix Extension (IME)&lt;/li&gt;
+&lt;li&gt;Vector Matrix Extension (VME)&lt;/li&gt;
+&lt;li&gt;Attached Matrix Extension (AME)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I won’t explain them in detail here, but they provide different levels of scale for different applications (I’ve linked a video for a deeper dive at the end of the blog). From Canonical’s perspective, the more interesting thing is the impact for software and toolchains. The OS has to be aware of architectural state to handle context switches. &lt;/p&gt;
+&lt;p&gt;For VME, this is the same as standard vector extensions, so no additional state is needed, and no OS level changes are needed. IME and AME are more complex, requiring OS changes to support them. IME extends the Vector register file, and adds some additional registers for the results., while AME has a completely new register file. The OS needs to be aware of these registers during context switches.&lt;/p&gt;
+&lt;p&gt;In a &lt;a href="https://ubuntu.com/blog/how-to-use-risc-v-custom-instructions-with-ubuntu"&gt;previous blog&lt;/a&gt; about RISC-V custom instructions, we talked about using the sys_riscv_hwprobe() Linux system call to discover which extensions are implemented. This function will return a value to an application  indicating whether a particular extension is supported. The same mechanism works for matrix instructions. What this means is that code libraries can be compiled with support for multiple implementation choices, and at runtime the software can choose the appropriate implementation.&lt;/p&gt;
+&lt;h2 class="wp-block-heading"&gt;Profile updates &lt;/h2&gt;
+&lt;p&gt;It’s not surprising that architectures evolve over time. Applications change, new applications emerge, and the complexity of what it’s possible to implement in silicon changes too. Minor revisions to RISC-V ratified specification deliberately don’t include mandatory extensions. This provides longer term software stability while still allowing new innovations. There are two types of these optional extensions. &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Development option&lt;/li&gt;
+&lt;li&gt;Expansion option&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Development options are introduced as a precursor to becoming mandatory in a future profile and allow a softer landing. Expansion options are intended to remain optional and might target specific applications where the implementation cost is justified, but are too large to mandate for all users of a profile. Let’s now look at some of the new options in more detail. &lt;/p&gt;
+&lt;h3 class="wp-block-heading"&gt;RVA23.1&lt;/h3&gt;
+&lt;p&gt;This adds three development options and two expansion options. Of these five new extensions, there are three that are particularly relevant to Ubuntu.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Double trap Handling (Ssdbltrap)&lt;/li&gt;
+&lt;li&gt;Supervisor Counter Delegation (Sscfg)&lt;/li&gt;
+&lt;li&gt;Control Transfer Records (Ssctr)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 class="wp-block-heading"&gt;Double Trap Handling&lt;/h4&gt;
+&lt;p&gt;This is about covering a small corner case during trap handling. If a second trap occurs while the first trap handler is still in a non-reentrant state, it can result in a system crash. This extension allows the machine mode or hypervisor mode to safely catch the second trap, improving system stability and reducing the risk of memory corruption.&lt;/p&gt;
+&lt;h4 class="wp-block-heading"&gt;Supervisor Counter Delegation&lt;/h4&gt;
+&lt;p&gt;This allows the Supervisor privilege level to manage and configure performance counter registers directly, without having to call to the machine mode firmware. For Linux utilities like “perf”, this provides a performance uplift when profiling code. &lt;/p&gt;
+&lt;h4 class="wp-block-heading"&gt;Control Transfer Records&lt;/h4&gt;
+&lt;p&gt;This extension allows for better profiling of branches. In particular it enables profile guided optimization (PGO), which is something &lt;a href="https://ubuntu.com/server/docs/explanation/performance/perf-pgo/"&gt;we have talked about in the context of other architectures&lt;/a&gt;.  PGO allows an iterative build process. The program is compiled with profiling options and an execution trace generated. This trace can be used for a subsequent build and informs the optimization process. PGO also requires upstream Linux kernel support for the kernel to expose the branch record buffers via “perf”. Patches are available, but haven’t been accepted upstream yet. &lt;/p&gt;
+&lt;h2 class="wp-block-heading"&gt;Toolchain support&lt;/h2&gt;
+&lt;p&gt;For Ubuntu to be able to make use of these extensions, as well as silicon support, we also need the toolchains (GCC, LLVM) to support them. Let’s look at each group in turn:&lt;/p&gt;
+&lt;h3 class="wp-block-heading"&gt;Control flow integrity&lt;/h3&gt;
+&lt;p&gt;GCC and LLVM support these already today. &lt;/p&gt;
+&lt;h3 class="wp-block-heading"&gt;Matrix&lt;/h3&gt;
+&lt;p&gt;There are two approaches to targeting Matrix extensions. &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;One is to use compiler intrinsics (essentially writing assembly-like code). &lt;/li&gt;
+&lt;li&gt;Harder is to have the compiler automatically target matrix instructions. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;These extensions are at different levels of maturity and need different levels of work. VME is relatively simple to support, while AME will need a lot of work. While waiting for ratification of the standard, it’s also possible there will be out-of-tree work done — for example &lt;a href="https://github.com/XUANTIE-RV/riscv-matrix-extension-spec"&gt;Xuantie&lt;/a&gt; are working on a version of matrix extensions and have developed their own support in a private GCC branch.&lt;/p&gt;
+&lt;h3 class="wp-block-heading"&gt;RVA23.1&lt;/h3&gt;
+&lt;p&gt;Some of these features will be accessed by intrinsics or assembly CSRs rather than code generation per-se, however extensions like Ssctr directly interface to compiler profilers. &lt;/p&gt;
+&lt;h2 class="wp-block-heading"&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;RVA23 established a great foundational baseline for RISC-V. For many years to come it will serve as the common platform which software builds against. And RVA23 binaries will run on newer silicon, so there’s no worry about loss in backwards compatibility. But as new features are made available, it’s useful to understand what the innovations are and how they can be used.&lt;/p&gt;
+&lt;h2 class="wp-block-heading"&gt;Further reading&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://docs.riscv.org/reference/isa/v20260120/priv/priv-cfi.html"&gt;RISC-V CFI specification&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://groups.google.com/a/groups.riscv.org/g/isa-dev/c/JBT5kq4ryLc"&gt;Announcement of RVA23.1 and RVB23.1 public review&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;For a deeper dive into IME, VME, and AME, SiFive published a video:  &lt;a href="https://youtu.be/BJis0tkUt8E?si=ZAj2UZHAWFZ_EatN&amp;amp;t=113"&gt;SiFive 2nd Generation Intelligence Technology Explainer&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content:encoded><author>Jon Taylor (Jon Taylor)</author><category>RISC-V</category><pubDate>Tue, 15 Sep 2026 08:22:32 +0000</pubDate></item><item><title>Cut bloat, not features</title><link>https://ubuntu.com//blog/cut-bloat-not-features</link><description>&lt;p&gt;Accelerating software delivery with minimal OCI images For Independent Software Vendors (ISVs), delivering containerized applications to enterprise clients often means navigating a difficult trade-off between minimal image size and accurate security visibility. Traditional approaches can leave development teams battling severe CVE noise or, conversely, missing critical vulnerabilities entirely due to scanner blind spots. What’s more, [&amp;hellip;]&lt;/p&gt;
+</description><content:encoded>
+&lt;h2 class="wp-block-heading"&gt;Accelerating software delivery with minimal OCI images&lt;/h2&gt;
+&lt;p&gt;For Independent Software Vendors (ISVs), delivering containerized applications to enterprise clients often means navigating a difficult trade-off between minimal image size and accurate security visibility. Traditional approaches can leave development teams battling severe CVE noise or, conversely, missing critical vulnerabilities entirely due to scanner blind spots. What’s more, off-the-shelf images require clients to fit their needs into what’s available, rather than being able to build and use container images that meet their exact specifications.&lt;/p&gt;
+&lt;p&gt;To help ISVs overcome this compromise, Canonical is hosting a technical webinar on &lt;strong&gt;September 23, 2026&lt;/strong&gt;. In the session, you’ll learn how to deliver lightweight, secure, and scannable container images without the operational overhead.&lt;/p&gt;
+&lt;h3 class="wp-block-heading"&gt;Addressing the distroless security gap&lt;/h3&gt;
+&lt;p&gt;Typical distroless images use a “top-down” approach, inflating a base image and then cherry-picking to trim it down. Unfortunately, this often strips out essential package metadata, causing security scanners to miss critical vulnerabilities and report false negatives. &lt;/p&gt;
+&lt;p&gt;In this webinar, you’ll learn how rocks, Canonical’s OCI-compliant, minimal container images, solve this by using a “bottom-up” approach. Powered by Chisel, our novel package manager, rocks are built by slicing packages directly from the Ubuntu archives, staying ultra-small while retaining the exact metadata required for highly accurate CVE scanning. &lt;/p&gt;
+&lt;h3 class="wp-block-heading"&gt;Live demo: building a rock with Rockcraft&lt;/h3&gt;
+&lt;p&gt;Creating a minimal, secure, and maintainable container shouldn’t be a hurdle. Our engineers will provide a hands-on demonstration of building a rock using Chisel and Rockcraft. You will see how to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Move away from ungoverned, imperative Dockerfiles that cause inconsistencies.&lt;/li&gt;
+&lt;li&gt;Use Rockcraft’s declarative YAML format for a standardized, reproducible developer experience.&lt;/li&gt;
+&lt;li&gt;Build and pack OCI-compliant images effortlessly.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 class="wp-block-heading"&gt;Enterprise-ready commitments&lt;/h3&gt;
+&lt;p&gt;Enterprises trust their operating systems for their most critical systems. With rocks, ISVs can draw upon the trusted Ubuntu ecosystem, but for their container dependencies. We will cover the enterprise commitments behind rocks, including:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Non-root default execution to enforce the principle of least privilege and contain blast radiuses.&lt;/li&gt;
+&lt;li&gt;Hardened designs built from trusted, heavily audited Ubuntu sources.&lt;/li&gt;
+&lt;li&gt;Timely CVE fixes, backporting, and up to 15 years of Long-Term Support (LTS) through Ubuntu Pro.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 class="wp-block-heading"&gt;Empowered by security scanner partnerships&lt;/h3&gt;
+&lt;p&gt;Because rocks solve the distroless visibility problem, the wider cybersecurity industry is taking notice. We will highlight how major security vendors are partnering with Canonical through the Ubuntu Security Research Alliance Program. You will learn how industry-leading tools, including Snyk and Google’s OSV-Scanner, now provide native support for scanning chiseled Ubuntu images, allowing you to confidently deliver precise, noise-free vulnerability data to your customers.&lt;/p&gt;
+&lt;p&gt;Stop letting container bloat and scanning inaccuracies slow down your enterprise software deployments.&lt;/p&gt;
+&lt;p&gt; &lt;a aria-label=" (opens in a new tab)" class="p-button--small p-button--positive" href="https://www.brighttalk.com/webcast/6793/672758?utm_source=Canonical&amp;amp;utm_medium=brighttalk&amp;amp;utm_campaign=672758" rel="noreferrer noopener" target="_blank"&gt;Register now on BrightTALK to reserve your spot&lt;/a&gt;&lt;/p&gt;
+</content:encoded><author>Lily Rivers-Klee (Lily Rivers-Klee)</author><category>chisel</category><category>cloud-native</category><category>containers</category><category>rocks</category><pubDate>Fri, 11 Sep 2026 15:20:21 +0000</pubDate></item><item><title>Ubuntu now certified on Qualcomm Dragonwing™ IQ-8275</title><link>https://ubuntu.com//blog/ubuntu-now-certified-on-qualcomm-dragonwing-iq-8275</link><description>&lt;p&gt;Sep 8, 2026 &amp;#8211;&amp;nbsp; Canonical and Qualcomm Technologies, Inc. announce the general availability of certified Ubuntu 24.04 LTS images for the Qualcomm Dragonwing™ IQ-8275 Evaluation Kit (EVK). Offering industrial-grade efficiency, this release provides production-ready software designed for building high-performance edge AI applications. For developers, system integrators, and OEMs, Qualcomm Dragonwing IQ-8275 hardware and Ubuntu 24.04 [&amp;hellip;]&lt;/p&gt;
+</description><content:encoded>
+&lt;p&gt;Sep 8, 2026 –  Canonical and Qualcomm Technologies, Inc. announce the general availability of certified Ubuntu 24.04 LTS images for the &lt;a href="https://www.qualcomm.com/internet-of-things/products/iq8-series/iq-8275"&gt;Qualcomm Dragonwing™ IQ-8275&lt;/a&gt; Evaluation Kit (EVK). Offering industrial-grade efficiency, this release provides production-ready software designed for building high-performance edge AI applications.&lt;/p&gt;
+&lt;p&gt;For developers, system integrators, and OEMs, &lt;a href="https://www.qualcomm.com/internet-of-things/products/iq8-series/iq-8275"&gt;Qualcomm Dragonwing IQ-8275&lt;/a&gt; hardware and Ubuntu 24.04 LTS together provide a production-ready foundation that accelerates the journey from proof of concept to industrial deployment, enabling securely designed, scalable, and AI-powered systems for robotics, manufacturing, machine vision, and physical AI applications. The combination of industrial-grade compute, on-device AI acceleration, long lifecycle support, and enterprise Linux delivers a faster path from evaluation to production.&lt;/p&gt;
+&lt;p&gt;This launch builds on the &lt;a href="https://canonical.com/blog/canonical-qualcomm-dragonwing-iq9075"&gt;general availability of Ubuntu for the IQ-9075 platform&lt;/a&gt;, with today’s announcement being the latest instance of Canonical support for Qualcomm Dragonwing  processors.&lt;/p&gt;
+&lt;h3 class="wp-block-heading"&gt;Bringing Industrial AI to the edge with Qualcomm Dragonwing IQ-8275 &lt;/h3&gt;
+&lt;p&gt;The Qualcomm Dragonwing IQ-8275 is purpose built for the next generation of industrial and edge AI deployments, where developers must process sensor data, run AI models, manage connectivity, and execute real-time control workloads simultaneously on a single platform. The processor combines heterogeneous compute, integrated AI acceleration, industrial-grade reliability, and rich connectivity to simplify development while reducing system cost, power consumption, and integration effort.&lt;/p&gt;
+&lt;p&gt;Unlike traditional architectures that rely on multiple discrete components, the IQ-8275 integrates high-performance CPU cores, GPU acceleration, a dedicated Hexagon&lt;sup&gt;TM&lt;/sup&gt; AI processor, safety capabilities, and extensive industrial I/O into a unified platform. This enables developers to build robotics, industrial automation systems, autonomous mobile robots (AMRs), machine vision solutions, gateways, and edge AI appliances using common hardware and software foundation. &lt;/p&gt;
+&lt;p&gt;Key advantages include: &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;On-device local AI with up to 40 TOPS AI performance, enabling local execution of computer vision, multimodal AI, LLMs, and industrial analytics workloads without any dependence on cloud connectivity&lt;/li&gt;
+&lt;li&gt;Industrial grade operation with support for temperature ranges from -40°C to +125°C, ECC memory support, and long-life deployment requirements&lt;/li&gt;
+&lt;li&gt;Rich Industrial connectivity including integrated Ethernet with TSN support, PCIe, Wifi, Bluetooth, USB, CAN-FD, and extensive peripheral expansion options.&lt;/li&gt;
+&lt;li&gt;Advanced vision capabilities supporting multi-camera systems, 4K video processing, computer vision, inspection, navigation, and machine perception applications&lt;/li&gt;
+&lt;li&gt;Scalability across the Qualcomm Dragonwing portfolio, allowing customers to leverage the common software stack and consistent development environment as product requirements evolve.&lt;/li&gt;
+&lt;li&gt;Long-term operational stability through Qualcomm’s 10+ year product longevity commitment with up to 15 years of security maintenance through Canonical Ubuntu Pro, enabling continuous enterprise-grade stability and security.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 class="wp-block-heading"&gt;A maturing partnership &lt;/h3&gt;
+&lt;blockquote class="wp-block-quote"&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;“By certifying Ubuntu 24.04 LTS on the Dragonwing IQ-8275 EVK, we are providing developers with a trusted, production-ready software foundation for industrial AI and edge computing. Together with Qualcomm Technologies, we are enabling innovators to move from evaluation to deployment faster with enterprise-grade security maintenance and long-term support for up to 15 years.”&lt;/p&gt;
+&lt;cite&gt;&lt;em&gt;Joe Dulin, VP of Devices Sales at Canonical.&lt;/em&gt;&lt;/cite&gt;&lt;/blockquote&gt;
+&lt;div class="wp-block-group is-layout-constrained wp-block-group-is-layout-constrained"&gt;&lt;div class="wp-block-group__inner-container"&gt;
+&lt;blockquote class="wp-block-quote"&gt;
+&lt;p&gt;“The Qualcomm Dragonwing IQ-8275 is designed to bring high performance, on-device AI, industrial grade reliability, and scalable connectivity together in a single platform. With certified Ubuntu support, our customers, ODMs, and ecosystem partners gain access to a secure, enterprise-ready software environment that accelerates development of next generation industrial automation, robotics, machine vision, and edge AI solutions.” &lt;/p&gt;
+&lt;cite&gt;&lt;em&gt;Manvinder Singh, VP of Product Management at Qualcomm Technologies, Inc.&lt;/em&gt;&lt;/cite&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;/div&gt;
+&lt;h2 class="wp-block-heading"&gt;Getting started&lt;/h2&gt;
+&lt;p&gt;To access the latest certified Ubuntu images for the Qualcomm Dragonwing IQ-8275 platform, please visit our &lt;a href="https://ubuntu.com/download/qualcomm-iot#evaluation-kit2"&gt;Qualcomm IoT download page&lt;/a&gt;. If you have any questions about the platform or would like information about our certification program, then &lt;a href="https://ubuntu.com/download/qualcomm-iot#get-in-touch"&gt;contact us by filling out our dedicated form.&lt;/a&gt;&lt;/p&gt;
+</content:encoded><author>Canonical (Canonical)</author><category>Certification</category><category>Embedded Devices</category><category>Industrial</category><category>Internet of things</category><category>IoT</category><category>Qualcomm Dragonwing</category><pubDate>Tue, 08 Sep 2026 19:39:05 +0000</pubDate></item><item><title>Grace on the currents: Stonking Stingray</title><link>https://ubuntu.com//blog/grace-on-the-currents-stonking-stingray</link><description>&lt;p&gt;When the codename for Ubuntu 26.10 was announced, I suspect there was a measurable surge in users searching for the definition of “stonking” across search engines and the various popular AI chatbots. As it so happens, the rather silly sounding word is actually a bit of British slang that denotes “something of considerable size, or [&amp;hellip;]&lt;/p&gt;
+</description><content:encoded>
+&lt;figure class="wp-block-image size-full wp-bypass-cloudinary"&gt;&lt;img alt="" height="600" loading="lazy" src="https://ubuntu.com/wp-content/uploads/b61a/stonking-stingray-loop-1x1-600x600-2bal24fps.webp" width="600"/&gt;&lt;/figure&gt;
+&lt;p&gt;When the codename for Ubuntu 26.10 was announced, I suspect there was a measurable surge in users searching for the definition of “stonking” across search engines and the various popular AI chatbots. As it so happens, the rather silly sounding word is actually a bit of British slang that denotes “something of considerable size, or an object that is quite impressive.” Now despite my Cornish last name, I’m not a Brit and my English slang lexicon is admittedly limited, so it initially seemed like an odd pairing with our mascot. Upon closer inspection, and a bit of aquatic reflection, it may be a perfect descriptor. &lt;/p&gt;
+&lt;p&gt;I have had the privilege of seeing our chosen mascot for this release, the stingray, up close on a few occasions and photos often fail to capture the true size of a full grown sea pancake. Some larger species of rays can exceed 2 meters in width and nearly 400 kg! Stonking indeed! In many cases, animals of that size tend to be a bit slow or plodding, but not rays. They move with such grace and fluidity that one could swear that they are flying. They soar through the ocean depths with the velocity of an unladen swallow in a magnificent display of evolutionary refinement.&lt;/p&gt;
+&lt;p&gt;Stingrays are a beautiful example that grand, complex things can still move with agility and grace. And that’s what we want people to think about Ubuntu. You see, Ubuntu is made up of millions of lines of code, crafted by scores of contributors and volunteers, knitted together by countless interworking components and systems that flow seamlessly into one polished form. In the vast sea of the connected world where it’s easy to get swept away by dangerous waves, you can always trust Ubuntu to guide you to safer currents.&lt;/p&gt;
+&lt;figure class="wp-block-image size-full"&gt;&lt;img alt="" height="1080" loading="lazy" sizes="(min-width: 1920px) 1920px, 100vw" src="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1920/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F8d06%2FStonking_Stingray_Wallpaper_Color_1920x1080.png" srcset="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_460/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F8d06%2FStonking_Stingray_Wallpaper_Color_1920x1080.png 460w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_620/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F8d06%2FStonking_Stingray_Wallpaper_Color_1920x1080.png 620w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1036/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F8d06%2FStonking_Stingray_Wallpaper_Color_1920x1080.png 1036w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1681/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F8d06%2FStonking_Stingray_Wallpaper_Color_1920x1080.png 1681w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1920/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F8d06%2FStonking_Stingray_Wallpaper_Color_1920x1080.png 1920w" width="1920"/&gt;&lt;/figure&gt;
+&lt;figure class="wp-block-image size-full"&gt;&lt;img alt="" height="1080" loading="lazy" sizes="(min-width: 1920px) 1920px, 100vw" src="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1920/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2Fdf00%2FStonking_Stingray_Wallpaper_Dark_1920x1080.png" srcset="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_460/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2Fdf00%2FStonking_Stingray_Wallpaper_Dark_1920x1080.png 460w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_620/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2Fdf00%2FStonking_Stingray_Wallpaper_Dark_1920x1080.png 620w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1036/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2Fdf00%2FStonking_Stingray_Wallpaper_Dark_1920x1080.png 1036w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1681/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2Fdf00%2FStonking_Stingray_Wallpaper_Dark_1920x1080.png 1681w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1920/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2Fdf00%2FStonking_Stingray_Wallpaper_Dark_1920x1080.png 1920w" width="1920"/&gt;&lt;/figure&gt;
+&lt;figure class="wp-block-image size-full"&gt;&lt;img alt="" height="1080" loading="lazy" sizes="(min-width: 1920px) 1920px, 100vw" src="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1920/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F954f%2FStonking_Stingray_Wallpaper_Dimmed_1920x1080.png" srcset="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_460/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F954f%2FStonking_Stingray_Wallpaper_Dimmed_1920x1080.png 460w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_620/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F954f%2FStonking_Stingray_Wallpaper_Dimmed_1920x1080.png 620w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1036/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F954f%2FStonking_Stingray_Wallpaper_Dimmed_1920x1080.png 1036w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1681/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F954f%2FStonking_Stingray_Wallpaper_Dimmed_1920x1080.png 1681w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1920/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F954f%2FStonking_Stingray_Wallpaper_Dimmed_1920x1080.png 1920w" width="1920"/&gt;&lt;/figure&gt;
+&lt;figure class="wp-block-image size-full"&gt;&lt;img alt="" height="1080" loading="lazy" sizes="(min-width: 1921px) 1921px, 100vw" src="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1921/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2Fde44%2FStonking_Stingray_Wallpaper_Light_1920x1080.png" srcset="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_460/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2Fde44%2FStonking_Stingray_Wallpaper_Light_1920x1080.png 460w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_620/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2Fde44%2FStonking_Stingray_Wallpaper_Light_1920x1080.png 620w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1036/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2Fde44%2FStonking_Stingray_Wallpaper_Light_1920x1080.png 1036w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1681/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2Fde44%2FStonking_Stingray_Wallpaper_Light_1920x1080.png 1681w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1920/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2Fde44%2FStonking_Stingray_Wallpaper_Light_1920x1080.png 1920w" width="1921"/&gt;&lt;/figure&gt;
+&lt;p&gt;You can download the official Stonking Stingray wallpapers in a variety of colors, shapes, and sizes &lt;a href="https://drive.google.com/drive/folders/14hcgS7OUmJXs-OIrUiYSTr1wl_sYHbdt"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 class="wp-block-heading"&gt;Drawing from the depths&lt;/h2&gt;
+&lt;p&gt;Our undersea artist must have donned his diving suit and submerged his bathysphere studio directly into the Benthic Zone for this one. Capturing both the scale and elegance of a stingray takes a master naut, and Marcus Haslam accomplished just that feat. In his own words:&lt;/p&gt;
+&lt;blockquote class="wp-block-quote"&gt;
+&lt;p&gt;“For Stonking Stingray, my goal was to capture the stingray’s grace and elegance. I refined the shape to more closely resemble the actual animal, with wide fins sweeping gracefully into the body and a long tail that creates a natural sense of movement in the design.&lt;/p&gt;
+&lt;p&gt;“While working on Stonking, I spoke with someone who encountered a stingray while diving. They described its remarkable presence and the extraordinary way it moved through the water—almost as if it were flying rather than swimming. That image stayed with me and became central to my design approach.&lt;/p&gt;
+&lt;p&gt;“For me, Stonking’s character is rooted in its elegance and refined form. Instead of focusing on facial expression, I let the stingray’s shape and movement define its personality. I also introduced a bold, sweeping shape into the fin, which adds graphic character and further emphasises movement in the overall form.&lt;/p&gt;
+&lt;p&gt;“The dots add another dimension. They stay the same size; the gradation gives them a sense of movement and direction. It adds energy to the background and gives us something interesting to play with in animation.&lt;/p&gt;
+&lt;p&gt;“I’ve kept the circle to bring everything together and give the mascot a strong, simple framework. The stingray’s shape fits naturally within it, while the long tail adds movement and gives Stonking a distinctive silhouette.&lt;/p&gt;
+&lt;p&gt;“Overall, I wanted Stonking to feel simple, elegant, and full of movement – taking what is already captivating about a stingray and transforming that into a strong graphic character.”&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 class="wp-block-heading"&gt;Wallpaper fever&lt;/h2&gt;
+&lt;p&gt;The temperature over on the Ubuntu Discourse always rises when we announce the wallpaper competition. For Stonking Stingray, our community caught quite the bug, or rather, quite the fever (which, coincidentally, is the term for a group of rays). In this, one of our most engaged interim release wallpaper competitions, the community provided a very diverse and stunning collection of works. Unfortunately we cannot include them all, so the community made their voices heard and chose their favorites. It’s my great honor and pleasure to present the winners of the Stonking Stingray wallpaper competition:&lt;/p&gt;
+&lt;h3 class="wp-block-heading"&gt;Mascot Category&lt;/h3&gt;
+&lt;figure class="wp-block-image size-full"&gt;&lt;img alt="" height="1080" loading="lazy" sizes="(min-width: 1920px) 1920px, 100vw" src="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1920/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F8ba2%2FStonker-Light-Dark.png" srcset="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_460/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F8ba2%2FStonker-Light-Dark.png 460w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_620/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F8ba2%2FStonker-Light-Dark.png 620w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1036/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F8ba2%2FStonker-Light-Dark.png 1036w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1681/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F8ba2%2FStonker-Light-Dark.png 1681w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1920/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F8ba2%2FStonker-Light-Dark.png 1920w" width="1920"/&gt;&lt;/figure&gt;
+&lt;p&gt;Stonker Light / Dark – &lt;a href="https://discourse.ubuntu.com/u/moskalenko-v"&gt;@moskalenko-v&lt;/a&gt;&lt;/p&gt;
+&lt;figure class="wp-block-image size-full"&gt;&lt;img alt="" height="1080" loading="lazy" sizes="(min-width: 1920px) 1920px, 100vw" src="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1920/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F6c88%2FMythical-stingray.png" srcset="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_460/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F6c88%2FMythical-stingray.png 460w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_620/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F6c88%2FMythical-stingray.png 620w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1036/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F6c88%2FMythical-stingray.png 1036w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1681/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F6c88%2FMythical-stingray.png 1681w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1920/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F6c88%2FMythical-stingray.png 1920w" width="1920"/&gt;&lt;/figure&gt;
+&lt;p&gt;Mythical stingray – &lt;a href="https://discourse.ubuntu.com/u/jens-42"&gt;@jens-42&lt;/a&gt;&lt;/p&gt;
+&lt;figure class="wp-block-image size-full"&gt;&lt;img alt="" height="1080" loading="lazy" sizes="(min-width: 1920px) 1920px, 100vw" src="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1920/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2Fd416%2FStonking-Stingray-Minimal.png" srcset="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_460/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2Fd416%2FStonking-Stingray-Minimal.png 460w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_620/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2Fd416%2FStonking-Stingray-Minimal.png 620w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1036/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2Fd416%2FStonking-Stingray-Minimal.png 1036w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1681/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2Fd416%2FStonking-Stingray-Minimal.png 1681w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1920/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2Fd416%2FStonking-Stingray-Minimal.png 1920w" width="1920"/&gt;&lt;/figure&gt;
+&lt;p&gt;Stonking Stingray Minimal (Dark/Light) – &lt;a href="https://discourse.ubuntu.com/u/dmxplx"&gt;@dmxplx&lt;/a&gt;&lt;/p&gt;
+&lt;figure class="wp-block-image size-full"&gt;&lt;img alt="" height="1080" loading="lazy" sizes="(min-width: 1920px) 1920px, 100vw" src="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1920/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2Faa6d%2Frausku.png" srcset="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_460/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2Faa6d%2Frausku.png 460w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_620/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2Faa6d%2Frausku.png 620w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1036/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2Faa6d%2Frausku.png 1036w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1681/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2Faa6d%2Frausku.png 1681w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1920/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2Faa6d%2Frausku.png 1920w" width="1920"/&gt;&lt;/figure&gt;
+&lt;p&gt;Rausku (Light/Dark) – &lt;a href="https://discourse.ubuntu.com/u/hattivatti43"&gt;@hattivatti43&lt;/a&gt;&lt;/p&gt;
+&lt;h3 class="wp-block-heading"&gt;Digital / Abstract Category&lt;/h3&gt;
+&lt;figure class="wp-block-image size-full"&gt;&lt;img alt="" height="1080" loading="lazy" sizes="(min-width: 1920px) 1920px, 100vw" src="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1920/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F1e57%2FAlpha-Waves.png" srcset="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_460/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F1e57%2FAlpha-Waves.png 460w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_620/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F1e57%2FAlpha-Waves.png 620w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1036/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F1e57%2FAlpha-Waves.png 1036w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1681/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F1e57%2FAlpha-Waves.png 1681w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1920/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F1e57%2FAlpha-Waves.png 1920w" width="1920"/&gt;&lt;/figure&gt;
+&lt;p&gt;Alpha Waves (Light/Dark) – &lt;a href="https://discourse.ubuntu.com/u/iryge"&gt;@iryge&lt;/a&gt;&lt;/p&gt;
+&lt;figure class="wp-block-image size-full"&gt;&lt;img alt="" height="1080" loading="lazy" sizes="(min-width: 1920px) 1920px, 100vw" src="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1920/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F65a0%2Fstongking-stingray.jpg" srcset="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_460/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F65a0%2Fstongking-stingray.jpg 460w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_620/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F65a0%2Fstongking-stingray.jpg 620w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1036/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F65a0%2Fstongking-stingray.jpg 1036w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1681/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F65a0%2Fstongking-stingray.jpg 1681w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1920/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F65a0%2Fstongking-stingray.jpg 1920w" width="1920"/&gt;&lt;/figure&gt;
+&lt;p&gt;Stingray Nocturne – &lt;a href="https://discourse.ubuntu.com/u/normangeek"&gt;@normangeek&lt;/a&gt;&lt;/p&gt;
+&lt;figure class="wp-block-image size-full"&gt;&lt;img alt="" height="1080" loading="lazy" sizes="(min-width: 1920px) 1920px, 100vw" src="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1920/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F7550%2FRed-Tone.png" srcset="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_460/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F7550%2FRed-Tone.png 460w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_620/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F7550%2FRed-Tone.png 620w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1036/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F7550%2FRed-Tone.png 1036w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1681/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F7550%2FRed-Tone.png 1681w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1920/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F7550%2FRed-Tone.png 1920w" width="1920"/&gt;&lt;/figure&gt;
+&lt;p&gt;Red Tone (Light/Dark) – &lt;a href="https://discourse.ubuntu.com/u/jdecroocq"&gt;@jdecroocq&lt;/a&gt;&lt;/p&gt;
+&lt;figure class="wp-block-image size-full"&gt;&lt;img alt="" height="1080" loading="lazy" sizes="(min-width: 1920px) 1920px, 100vw" src="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1920/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F26d5%2FAscending-Waves.png" srcset="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_460/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F26d5%2FAscending-Waves.png 460w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_620/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F26d5%2FAscending-Waves.png 620w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1036/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F26d5%2FAscending-Waves.png 1036w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1681/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F26d5%2FAscending-Waves.png 1681w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1920/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F26d5%2FAscending-Waves.png 1920w" width="1920"/&gt;&lt;/figure&gt;
+&lt;p&gt;Ascending Waves (Light/Dark) – &lt;a href="https://discourse.ubuntu.com/u/iryge"&gt;@iryge&lt;/a&gt;&lt;/p&gt;
+&lt;h3 class="wp-block-heading"&gt;Photography Category&lt;/h3&gt;
+&lt;figure class="wp-block-image size-full"&gt;&lt;img alt="" height="1440" loading="lazy" sizes="(min-width: 1920px) 1920px, 100vw" src="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1920/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F3d73%2Fmichin-acuarium.jpg" srcset="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_460/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F3d73%2Fmichin-acuarium.jpg 460w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_620/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F3d73%2Fmichin-acuarium.jpg 620w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1036/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F3d73%2Fmichin-acuarium.jpg 1036w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1681/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F3d73%2Fmichin-acuarium.jpg 1681w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1920/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F3d73%2Fmichin-acuarium.jpg 1920w" width="1920"/&gt;&lt;/figure&gt;
+&lt;p&gt;michin acuarium – &lt;a href="https://discourse.ubuntu.com/u/jarsoca99"&gt;@jarsoca99&lt;/a&gt;&lt;/p&gt;
+&lt;figure class="wp-block-image size-full"&gt;&lt;img alt="" height="1080" loading="lazy" sizes="(min-width: 1920px) 1920px, 100vw" src="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1920/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F8fee%2FLuce-e-Ombra.jpg" srcset="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_460/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F8fee%2FLuce-e-Ombra.jpg 460w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_620/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F8fee%2FLuce-e-Ombra.jpg 620w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1036/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F8fee%2FLuce-e-Ombra.jpg 1036w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1681/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F8fee%2FLuce-e-Ombra.jpg 1681w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1920/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F8fee%2FLuce-e-Ombra.jpg 1920w" width="1920"/&gt;&lt;/figure&gt;
+&lt;p&gt;Luce e Ombra – &lt;a href="https://discourse.ubuntu.com/u/jacop02169"&gt;@jacop02169&lt;/a&gt;&lt;/p&gt;
+&lt;figure class="wp-block-image size-full"&gt;&lt;img alt="" height="1064" loading="lazy" sizes="(min-width: 1920px) 1920px, 100vw" src="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1920/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F3965%2FDerwentwater.jpg" srcset="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_460/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F3965%2FDerwentwater.jpg 460w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_620/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F3965%2FDerwentwater.jpg 620w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1036/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F3965%2FDerwentwater.jpg 1036w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1681/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F3965%2FDerwentwater.jpg 1681w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1920/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F3965%2FDerwentwater.jpg 1920w" width="1920"/&gt;&lt;/figure&gt;
+&lt;p&gt;Derwentwater – &lt;a href="https://discourse.ubuntu.com/u/mendhak"&gt;@mendhak&lt;/a&gt;&lt;/p&gt;
+&lt;figure class="wp-block-image size-full"&gt;&lt;img alt="" height="1440" loading="lazy" sizes="(min-width: 1920px) 1920px, 100vw" src="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1920/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F8fcf%2FStingray.jpg" srcset="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_460/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F8fcf%2FStingray.jpg 460w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_620/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F8fcf%2FStingray.jpg 620w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1036/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F8fcf%2FStingray.jpg 1036w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1681/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F8fcf%2FStingray.jpg 1681w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1920/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2F8fcf%2FStingray.jpg 1920w" width="1920"/&gt;&lt;/figure&gt;
+&lt;p&gt;Stingray – &lt;a href="https://discourse.ubuntu.com/u/stephane93130"&gt;@stephane93130&lt;/a&gt;&lt;/p&gt;
+&lt;h2 class="wp-block-heading"&gt;Getting involved&lt;/h2&gt;
+&lt;p&gt;The Ubuntu Wallpaper Competition is just one of many ways that you can contribute to our community. We welcome and encourage you to bring your unique skills and experience to our great collective project. There is always room to make a splash!&lt;/p&gt;
+&lt;p&gt;Learn about the many ways that you can get involved:&lt;/p&gt;
+&lt;div class="p-cta-block"&gt;
+&lt;a class="p-button--positive" href="https://ubuntu.com/community/contribute"&gt;Contribute to the community&lt;/a&gt;
+&lt;a href="https://discourse.ubuntu.com/"&gt;Join the conversation on Discourse ›&lt;/a&gt;
+&lt;/div&gt;
+</content:encoded><author>Aaron Prisk (Aaron Prisk)</author><category>Community</category><category>Ubuntu Desktop</category><pubDate>Tue, 08 Sep 2026 10:29:18 +0000</pubDate></item><item><title>How we create a Canonical Academy exam</title><link>https://ubuntu.com//blog/how-we-create-a-canonical-academy-exam</link><description>&lt;p&gt;Open source provides the world with access to cutting-edge software, and the learning that comes with it. But how do you validate someone’s skills in an open ecosystem? Canonical Academy is a highly rigorous, job-focused qualification platform designed to empower individuals and enterprises with industry-recognized credentials. The platform addresses a critical gap in tech: validating [&amp;hellip;]&lt;/p&gt;
+</description><content:encoded>
+&lt;p&gt;Open source provides the world with access to cutting-edge software, and the learning that comes with it. But how do you validate someone’s skills in an open ecosystem?&lt;/p&gt;
+&lt;p&gt;Canonical Academy is a highly rigorous, job-focused qualification platform designed to empower individuals and enterprises with industry-recognized credentials. The platform addresses a critical gap in tech: validating real-world, hands-on capability rather than rote memorization.&lt;/p&gt;
+&lt;p&gt;Rather than generic certifications, our approach focuses on specialized learning paths broken down into core modular exams. Taking our System Administration track consists of four sequential, timed, and hands-on proctored assessments. Candidates can earn badges for individual exams – &lt;em&gt;Using Linux Terminal&lt;/em&gt;, &lt;em&gt;Using Ubuntu Desktop&lt;/em&gt;, &lt;em&gt;Using Ubuntu Server, or Using DevOps Principles&lt;/em&gt; – and if they complete the full set of exams, they unlock the comprehensive, track-level qualification. This structured approach gives modern engineering teams a clear blueprint for onboarding, career progression, and upskilling, matching today’s dynamic employment market.&lt;/p&gt;
+&lt;h2 class="wp-block-heading"&gt;&lt;strong&gt;Inside the blueprint: how we build high-fidelity exams&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;To understand what differentiates a Canonical Qualification, you have to look inside our development process. We build exams with the day-to-day realities of qualified tech professionals. Our rigorous exam creation framework follows an exact ADDIE iteration cycle engineered to yield highly credible and error-tolerant assessments.&lt;/p&gt;
+&lt;figure class="wp-block-image size-full"&gt;&lt;img alt="" height="569" loading="lazy" sizes="(min-width: 1703px) 1703px, 100vw" src="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1703/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2Fa302%2Fimage.png" srcset="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_460/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2Fa302%2Fimage.png 460w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_620/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2Fa302%2Fimage.png 620w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1036/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2Fa302%2Fimage.png 1036w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1681/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2Fa302%2Fimage.png 1681w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1920/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2Fa302%2Fimage.png 1920w, https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_1703/https%3A%2F%2Fubuntu.com%2Fwp-content%2Fuploads%2Fa302%2Fimage.png 1703w" width="1703"/&gt;&lt;/figure&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Analysis phase (track level):&lt;/strong&gt; We begin by executing an intensive Job Task Analysis (JTA) survey. Subject Matter Experts (SMEs) are surveyed to isolate the critical, high-frequency responsibilities native to the target role.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Design phase (exam level):&lt;/strong&gt; Armed with JTA insights, we draft a tight qualification Blueprint defining assessment objectives and identifying complementary Learning Objectives (LOs).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Item development phase (item level):&lt;/strong&gt; Content managers and expert engineers prototype actual hands-on test items, including terminal-based live lab exercises, which undergo strict internal code reviews for clinical technical accuracy.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Form development phase (variations level):&lt;/strong&gt; We establish multiple distinct variations of questions and use variables in individual items to ensure security and reliability while engineering specific automated scoring scripts.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Implementation phase (exam level):&lt;/strong&gt; Assessments proceed through private Alpha and public Beta periods to stress-test real-world performance. This lets us evaluate timing data and calculate fair psychometric cut scores based on verified tester results.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Evaluation phase (ongoing quality check):&lt;/strong&gt; Continuous feedback and direct user exit surveys, run persistently post-launch, guaranteeing that exams maintain long-term alignment and clinical relevance.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 class="wp-block-heading"&gt;&lt;strong&gt;Engineered for real-world industry relevance&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;Modern enterprises have grown skeptical of multiple-choice certifications that can be easily memorized or side-stepped using AI prompts. Organizations want certifications that validate what their employees can do on the job. Canonical Academy was launched to bridge this exact gap.&lt;/p&gt;
+&lt;p&gt;Our assessments avoid artificial test environments. Candidates are evaluated directly within sandbox instances running on identical production infrastructure they will face in the workplace. The exam delivery system demands active execution, such as spinning up an environment, altering production network stacks, or automating scripts via python or bash, while granting full, native access to documentation and documentation man pages just like on the job.&lt;/p&gt;
+&lt;p&gt;This means that candidates are evaluated in an environment with infrastructure that resembles what they would find in a real workspace. For instance, they could be spinning up containers, altering network stacks, or writing automated scripts in the exam, while being able to access product documentation and man pages just like on the job.&lt;/p&gt;
+&lt;p&gt;Furthermore, our blueprint explicitly balances core open source tooling with specialized workflows (for instance, LXD with Docker Compose or NFS and Samba with enterprise integrations like Active Directory), preparing developers and administrators for cross-functional roles. &lt;/p&gt;
+&lt;p&gt;By putting individuals through rigorous, realistically timed problem sets, an employer can immediately trust that a certified individual possesses verified execution capabilities.&lt;/p&gt;
+&lt;h2 class="wp-block-heading"&gt;&lt;strong&gt;Shape the future by becoming a Canonical Academy SME&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;The strength of any certification lies entirely in the expertise of its developers. To build authentic tracks, we regularly source a diverse panel of qualified technical professionals, both internally from Canonical and externally,  to consult directly on future content development pipelines.&lt;/p&gt;
+&lt;p&gt;We are actively recruiting Subject Matter Experts (SMEs) to help refine upcoming focus areas, including cloud architecture, security virtualization, and DevOps tracks. The selection process targets active practitioners: mid-to-senior engineers, site reliability engineers (SREs), and experienced system administrators who maintain active hands-on experience.&lt;/p&gt;
+&lt;p&gt;As an active SME, you can participate flexibly based on your availability, whether through structured, interactive content-development workshops or asynchronous GitHub code reviews on question prototypes. Your unique perspective will directly combat structural bias and ensure high credibility.&lt;/p&gt;
+&lt;p&gt;Ready to contribute to the global open-source community?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Connect directly with our team on our official channel:  &lt;a href="https://matrix.to/#/#canonical-academy:ubuntu.com"&gt;&lt;strong&gt;Join the Canonical Academy Matri&lt;/strong&gt;x channel&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://academy.canonical.com/sign-up/sme"&gt;Become an SME&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://academy.canonical.com/sign-up/tester"&gt;Become a tester&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content:encoded><author>Ishani Ghoshal (Ishani Ghoshal)</author><category>Canonical Academy</category><pubDate>Wed, 02 Sep 2026 14:56:39 +0000</pubDate></item><item><title>Surviving the uncharted: when dedicated OpenStack expertise is your best ally in disaster recovery </title><link>https://ubuntu.com//blog/support-restores-openstack</link><description>&lt;p&gt;A customer&amp;#8217;s OpenStack control plane went down overnight after their only backup proved stale. Canonical support rebuilt the database cluster live, service by service, without losing a single workload.&lt;/p&gt;
+</description><content:encoded>
+&lt;p&gt;Some support cases are routine. Others take you off the documented path entirely, into territory where the only way forward is deep, hands on open source expertise. This series looks at how Canonical Support navigates the unexpected: cases where standard playbooks aren’t enough, and a support engineer helps a customer find a solution in real time.&lt;/p&gt;
+&lt;p&gt;This is one of those cases. A customer’s production OpenStack environment went, overnight, from fully operational to unable to provision, scale, or manage a single resource.&lt;/p&gt;
+&lt;h2 class="wp-block-heading"&gt;What happened&lt;/h2&gt;
+&lt;p&gt;OpenStack is not a single piece of software. It is a coordinated architecture of services that manage core infrastructure components like compute, networking, identity, storage, all of which depend on a shared database that keeps a record of the current state of the cloud: what is running, where, and how it is configured.&lt;/p&gt;
+&lt;p&gt;During routine operations, an action targeted the database cluster underpinning that control plane. Within seconds, the layer that lets operators manage the cloud, provision, migrate, scale, was gone.&lt;/p&gt;
+&lt;p&gt;The support case opened the same day.&lt;/p&gt;
+&lt;h2 class="wp-block-heading"&gt;The first problem: the backup&lt;/h2&gt;
+&lt;p&gt;The team’s first question was straightforward: when was the last backup taken, and had it ever been tested as a restore? The available backup was old enough that it no longer reflected the cloud’s current state. Virtual machines had moved, resources had been reallocated, credentials had rotated since it was captured.&lt;/p&gt;
+&lt;p&gt;Restoring it directly risked producing a control plane that described a cloud that no longer existed. That ruled out the simplest path, and left something harder: rebuild the control plane around live, running workloads, without breaking them.&lt;/p&gt;
+&lt;p&gt;This is worth pausing on, because it is a common gap even in mature operations. A backup schedule tells you data is being captured. It does not tell you the restore will work, or that the restored state will still match reality by the time you need it. The two need to be validated together, on a cadence tied to how quickly the environment actually changes.&lt;/p&gt;
+&lt;h2 class="wp-block-heading"&gt;The thing that didn’t break&lt;/h2&gt;
+&lt;p&gt;Before touching anything, the assigned support engineer checked what was still running, and found that nothing had actually gone down. No workloads were lost. The business kept running. What had been lost was the ability to manage the cloud: no new provisioning, no migration, no scaling.&lt;/p&gt;
+&lt;p&gt;This is a property of OpenStack’s architecture worth understanding on its own terms. The control plane manages the state of the cloud; the data plane does the actual work, compute, networking, storage. These layers are decoupled by design, specifically so that a failure in management infrastructure does not take down the workloads depending on it. It is one of the architectural advantages that makes OpenStack viable for large scale production environments in the first place, and it is exactly what held up here.&lt;/p&gt;
+&lt;p&gt;That guarantee only helps you if you know it exists and know how to use it to shape a recovery strategy. Recognizing it early is what turned this from an open ended crisis into a scoped, solvable engineering problem within the first hour.&lt;/p&gt;
+&lt;h2 class="wp-block-heading"&gt;The recovery&lt;/h2&gt;
+&lt;p&gt;With existing workloads confirmed safe, the team turned to rebuilding the control plane. Because the need to rebuild a database from scratch is such a rare edge case, standard recovery documentation covers only damaged or degraded states. So the engineer developed and validated a new procedure for that specific scenario: reconstructing the database cluster, restoring available data in a controlled sequence, then reconnecting every OpenStack service to the new database, one dependency at a time.&lt;/p&gt;
+&lt;p&gt;That last part was the bulk of the work. The relationships linking each service to the database had to be reestablished individually, and gaps between the backup’s state and the cloud’s actual state had to be reconciled by hand, including cases where a VM was running perfectly well but the database, working from stale information, reported it as stopped or in error.&lt;/p&gt;
+&lt;p&gt;It took several days of close, sustained collaboration between the Canonical engineer and the customer’s team. By the end, the cloud was fully operational, with zero workloads lost.&lt;/p&gt;
+&lt;h2 class="wp-block-heading"&gt;What this case actually shows&lt;/h2&gt;
+&lt;p&gt;Two things are worth taking from this.&lt;/p&gt;
+&lt;p&gt;Backup validation deserves the same rigor as backup scheduling. This is not a hypothetical gap. &lt;a href="https://www.cockroachlabs.com/guides/the-state-of-resilience-2025/"&gt;Cockroach Labs’ &lt;em&gt;State of Resilience 2025&lt;/em&gt; survey&lt;/a&gt; found that 62% of organizations do not perform regular backup restoration exercises, and 71% do no failover testing at all, despite nearly all of them running some form of resiliency testing on paper. Separately, &lt;a href="https://www.acronis.com/en/tru/posts/why-most-dr-deployments-may-not-survive-a-real-disaster/"&gt;Acronis’ Q1 2026 telemetry&lt;/a&gt; across its disaster recovery platform found that 85% of recovery servers had RPO monitoring turned off entirely, meaning no automatic check on whether backups are even recent enough to be useful, and only 18% of backup rules were configured for monthly testing.&lt;/p&gt;
+&lt;p&gt;The pattern is consistent: having a backup policy is common, but proving that policy actually works under real conditions is not. That gap tends to stay invisible until the day it matters, which is exactly why a tested, timed, end to end restore process belongs on a resilience checklist next to RTO and RPO targets, not treated as a given once the backup job shows green.&lt;/p&gt;
+&lt;p&gt;In a system this interconnected, architectural knowledge is what makes recovery possible at all. Knowing that OpenStack’s control and data planes are decoupled was not trivial here. It was the fact that determined the entire recovery strategy, because it told the engineer, within the first hour, that the business had not already lost. That is the kind of knowledge that matters exactly once, at the highest stakes moment, and it is precisely what deep, specialized support exists to provide on demand.&lt;/p&gt;
+&lt;p&gt;Large, distributed infrastructure accumulates operational complexity and interdependency by nature, at every vendor and every layer of the stack. What determines the outcome when something goes wrong is not whether an environment is complex. It is whether the team responding has the depth to move fast, diagnose correctly, and build a solution under pressure when the documented path runs out.&lt;/p&gt;
+&lt;p&gt;The procedure developed during this incident has since been documented for future cases. But the case itself is a useful reminder of what a support subscription is actually buying: not just answers to known problems, but access to the expertise to navigate the ones nobody has written down yet.&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;If your organization runs OpenStack in production, &lt;a href="https://ubuntu.com/support/contact-us?product=support-overview"&gt;talk to us about Ubuntu Pro with Support&lt;/a&gt;.&lt;/strong&gt;&lt;/p&gt;
+</content:encoded><author>Lidia Luna Puerta (Lidia Luna Puerta)</author><category>Database</category><category>OpenStack</category><category>Support</category><pubDate>Tue, 01 Sep 2026 11:10:15 +0000</pubDate></item></channel></rss>
