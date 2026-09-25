@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260925
+
+
+- [The Limitations of Running a Workload Generator In the Same JVM as the System-Under-Test](https://inside.java/2026/09/25/limitations-of-running-a-workload-generator-in-the-same-jvm/)
+
+
 ### 20260924
 
 
@@ -196,9 +202,5 @@ search:
 
 
 - [Announcing Oracle Jipher 10.37: FIPS 140-3 Cryptography for Java](https://inside.java/2026/08/25/jipher-cryptography-for-java/)
-- [Value Classes Still Need Compiler Sympathy](https://inside.java/2026/08/24/value-classes-compiler-sympathy/)
-
-
-### 20260824
 
 
