@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260926
+
+
+- [JEP targeted to JDK 28: 539: Strict Field Initialization in the JVM (Preview)](https://inside.java/2026/09/26/jep539-target-jdk28/)
+
+
 ### 20260925
 
 
@@ -195,12 +201,5 @@ search:
 
 
 - [Compose Multiplatform 1.12.0 Released](https://blog.jetbrains.com/kotlin/2026/08/compose-multiplatform-1-12-0/)
-- [Arduino® VENTUNO™ Q is available for pre-order with Ubuntu pre-installed](https://ubuntu.com//blog/arduino-ventuno-q-is-available-for-pre-order-with-ubuntu-pre-installed)
-
-
-### 20260825
-
-
-- [Announcing Oracle Jipher 10.37: FIPS 140-3 Cryptography for Java](https://inside.java/2026/08/25/jipher-cryptography-for-java/)
 
 
