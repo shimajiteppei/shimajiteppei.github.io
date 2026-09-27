@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260927
+
+
 ### 20260926
 
 
@@ -194,12 +197,5 @@ search:
 
 
 - [Episode 68 “Operator Overloading with Type Classes” [AtA]](https://inside.java/2026/08/27/podcast-068/)
-- [Announcing our first Maintainers in Residence](https://blog.rust-lang.org/2026/08/26/announcing-our-first-maintainers-in-residence/)
-
-
-### 20260826
-
-
-- [Compose Multiplatform 1.12.0 Released](https://blog.jetbrains.com/kotlin/2026/08/compose-multiplatform-1-12-0/)
 
 
