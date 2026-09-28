@@ -8,6 +8,16 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260928
+
+
+- [A More Reliable Compilation Scheme for Kotlin Multiplatform Modules](https://blog.jetbrains.com/kotlin/2026/09/a-more-reliable-compilation-scheme-for-kotlin-multiplatform-modules/)
+- [Performance Improvements in JDK 27](https://inside.java/2026/09/28/performance-update-jdk27/)
+- [Leadership Council update — September 2026](https://blog.rust-lang.org/inside-rust/2026/09/28/leadership-council-update/)
+- [Creating a private 5G network](https://ubuntu.com//blog/creating-a-private-5g-network)
+- [How a missing kernel flag broke FIPS-certified containers in managed Kubernetes](https://ubuntu.com//blog/fixing-fips-kernel-flag)
+
+
 ### 20260927
 
 
@@ -191,11 +201,5 @@ search:
 
 
 - [AI harnesses for telco autonomous networks](https://ubuntu.com//blog/ai-harnesses-for-telco-autonomous-networks)
-
-
-### 20260827
-
-
-- [Episode 68 “Operator Overloading with Type Classes” [AtA]](https://inside.java/2026/08/27/podcast-068/)
 
 
