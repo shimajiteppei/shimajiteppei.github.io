@@ -8,6 +8,14 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260929
+
+
+- [The State of Kotlin in 2026 Report](https://blog.jetbrains.com/kotlin/2026/09/state-of-kotlin-2026-report/)
+- [JEP targeted to JDK 28: 541: Deprecate the macOS/x64 Port for Removal](https://inside.java/2026/09/29/jep541-target-jdk28/)
+- [Upgrade your desktop: Ubuntu 26.04.1 LTS is now available](https://ubuntu.com//blog/upgrade-your-desktop-ubuntu-26-04-lts)
+
+
 ### 20260928
 
 
@@ -185,21 +193,11 @@ search:
 
 
 - [Program management in July–August 2026](https://blog.rust-lang.org/inside-rust/2026/08/31/program-management-2026-jul-aug/)
-- [Canonical joins the Open Secure AI Alliance](https://ubuntu.com//blog/open-secure-ai-alliance)
 
 
 ### 20260830
 
 
 ### 20260829
-
-
-- [Electing new Project Directors 2026](https://blog.rust-lang.org/inside-rust/2026/08/28/electing-new-project-directors-2026/)
-
-
-### 20260828
-
-
-- [AI harnesses for telco autonomous networks](https://ubuntu.com//blog/ai-harnesses-for-telco-autonomous-networks)
 
 
