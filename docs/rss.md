@@ -8,6 +8,14 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20260930
+
+
+- [The Companions to Come](https://blog.jetbrains.com/kotlin/2026/09/the-companions-to-come/)
+- [Faster Post-Quantum Cryptography with JDK Intrinsics](https://inside.java/2026/09/30/faster-post-quantum-cryptography-with-jdk-intrinsics/)
+- [Realtime transaction fraud detection – with an LLM?](https://ubuntu.com//blog/realtime-transaction-fraud-detection-with-an-llm)
+
+
 ### 20260929
 
 
@@ -196,8 +204,5 @@ search:
 
 
 ### 20260830
-
-
-### 20260829
 
 
