@@ -8,6 +8,15 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261001
+
+
+- [Agent Helidon: License to Scale](https://inside.java/2026/10/01/agent-helidon-scale/)
+- [1.99.0 pre-release testing](https://blog.rust-lang.org/inside-rust/2026/09/29/1.99.0-prerelease/)
+- [Announcing Rust 1.99.0](https://blog.rust-lang.org/2026/10/01/Rust-1.99.0/)
+- [Android™ belongs in your CI/CD pipeline](https://ubuntu.com//blog/android-belongs-in-your-ci-cd-pipeline)
+
+
 ### 20260930
 
 
@@ -201,8 +210,5 @@ search:
 
 
 - [Program management in July–August 2026](https://blog.rust-lang.org/inside-rust/2026/08/31/program-management-2026-jul-aug/)
-
-
-### 20260830
 
 
