@@ -8,6 +8,14 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261002
+
+
+- [JEP targeted to JDK 28: 540: Simple JSON API (Incubator)](https://inside.java/2026/10/02/jep549-target-jdk28/)
+- [Generic Const Args and You](https://blog.rust-lang.org/inside-rust/2026/10/02/generic-const-args-and-you/)
+- [Demoting i686 Windows targets to std-only](https://blog.rust-lang.org/2026/10/02/demoting-i686-windows-targets-to-std-only/)
+
+
 ### 20261001
 
 
@@ -204,11 +212,5 @@ search:
 
 - [Announcing rustup 1.29.1](https://blog.rust-lang.org/2026/09/01/Rustup-1.29.1/)
 - [Surviving the uncharted: when dedicated OpenStack expertise is your best ally in disaster recovery](https://ubuntu.com//blog/support-restores-openstack)
-
-
-### 20260831
-
-
-- [Program management in July–August 2026](https://blog.rust-lang.org/inside-rust/2026/08/31/program-management-2026-jul-aug/)
 
 
