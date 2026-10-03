@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261003
+
+
 ### 20261002
 
 
@@ -205,12 +208,5 @@ search:
 
 
 ### 20260902
-
-
-### 20260901
-
-
-- [Announcing rustup 1.29.1](https://blog.rust-lang.org/2026/09/01/Rustup-1.29.1/)
-- [Surviving the uncharted: when dedicated OpenStack expertise is your best ally in disaster recovery](https://ubuntu.com//blog/support-restores-openstack)
 
 
