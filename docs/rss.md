@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261004
+
+
 ### 20261003
 
 
@@ -195,18 +198,13 @@ search:
 
 - [Principles of Memory Management in Java](https://inside.java/2026/09/04/memory-management-principles-java/)
 - [Acceleration of Curve25519 Field Operations with Java Software and Intrinsics](https://inside.java/2026/09/03/java-acceleration-curve25519-field-operations/)
-- [How we create a Canonical Academy exam](https://ubuntu.com//blog/how-we-create-a-canonical-academy-exam)
 
 
 ### 20260903
 
 
 - [Kotlin Toolchain 0.12: Multiplatform Library Publishing, Wasm Apps, and More](https://blog.jetbrains.com/kotlin/2026/09/kotlin-toolchain-0-12-multiplatform-library-publishing-wasm-apps-and-more/)
-- [1.98.1 pre-release testing](https://blog.rust-lang.org/inside-rust/2026/09/02/1.98.1-prerelease/)
 - [Announcing Rust 1.98.1](https://blog.rust-lang.org/2026/09/03/Rust-1.98.1/)
 - [Why generative AI won&#39;t create 10x developers](https://www.thoughtworks.com/insights/blog/generative-ai/why-generative-ai-wont-create-ten-x-developers)
-
-
-### 20260902
 
 
