@@ -8,6 +8,14 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261006
+
+
+- [JEP targeted to JDK 28: 542: PEM Encodings of Cryptographic Objects](https://inside.java/2026/10/06/jep542-target-jdk28/)
+- [What&amp;#8217;s new in security for Ubuntu 26.10?](https://ubuntu.com//blog/ubuntu-26-10-security)
+- [Devpack for Rust: Zero to Rust in seconds](https://ubuntu.com//blog/devpack-for-rust-support)
+
+
 ### 20261005
 
 
@@ -199,11 +207,5 @@ search:
 
 
 ### 20260905
-
-
-### 20260904
-
-
-- [Principles of Memory Management in Java](https://inside.java/2026/09/04/memory-management-principles-java/)
 
 
