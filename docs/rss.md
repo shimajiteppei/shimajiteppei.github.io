@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261007
+
+
+- [Start Your Next KMP App With Kotlin Toolchain 0.13](https://blog.jetbrains.com/kotlin/2026/10/start-your-next-kmp-app-with-kotlin-toolchain-0-13/)
+
+
 ### 20261006
 
 
@@ -204,8 +210,5 @@ search:
 
 
 ### 20260906
-
-
-### 20260905
 
 
