@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261009
+
+
+- [Oracle Java Platform Extension for Visual Studio Code - Version 27.0.0 Is Now Available](https://inside.java/2026/10/08/java-vscode-extension-update/)
+
+
 ### 20261008
 
 
@@ -203,12 +209,5 @@ search:
 
 - [Welcome Dongpo and Ross to the Cargo team](https://blog.rust-lang.org/inside-rust/2026/09/08/welcome-dongpo-and-ross-to-the-cargo-team/)
 - [Grace on the currents: Stonking Stingray](https://ubuntu.com//blog/grace-on-the-currents-stonking-stingray)
-
-
-### 20260907
-
-
-- [Kotlin 2.4.20 Released](https://blog.jetbrains.com/kotlin/2026/09/kotlin-2-4-20-released/)
-- [Rust debugging survey 2026 results](https://blog.rust-lang.org/2026/09/07/rust-debugging-survey-2026-results/)
 
 
