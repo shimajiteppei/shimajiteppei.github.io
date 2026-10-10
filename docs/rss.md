@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261010
+
+
 ### 20261009
 
 
@@ -199,15 +202,5 @@ search:
 
 
 ### 20260909
-
-
-- [Ubuntu now certified on Qualcomm Dragonwing™ IQ-8275](https://ubuntu.com//blog/ubuntu-now-certified-on-qualcomm-dragonwing-iq-8275)
-
-
-### 20260908
-
-
-- [Welcome Dongpo and Ross to the Cargo team](https://blog.rust-lang.org/inside-rust/2026/09/08/welcome-dongpo-and-ross-to-the-cargo-team/)
-- [Grace on the currents: Stonking Stingray](https://ubuntu.com//blog/grace-on-the-currents-stonking-stingray)
 
 
