@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261011
+
+
+- [Java - The Year of the Runtime!](https://inside.java/2026/10/11/devoxxbelgium-runtime-year-keynite/)
+
+
 ### 20261010
 
 
@@ -199,8 +205,5 @@ search:
 
 
 - [Episode 69 “Declassifying Java 27” [IJN]](https://inside.java/2026/09/10/podcast-069/)
-
-
-### 20260909
 
 
