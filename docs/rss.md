@@ -8,6 +8,15 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261012
+
+
+- [Structured Concurrency Looms](https://inside.java/2026/10/12/devoxxbelgium-structured-concurrency/)
+- [Java - The Year of the Runtime!](https://inside.java/2026/10/11/devoxxbelgium-runtime-year-keynote/)
+- [Infrastructure Team 2026 Q3 Recap and Q4 Plan](https://blog.rust-lang.org/inside-rust/2026/10/12/infrastructure-team-q3-recap-and-q4-plan/)
+- [Myna speech-to-text is now available as a technology preview](https://ubuntu.com//blog/myna-speech-to-text-technology-preview-available)
+
+
 ### 20261011
 
 
@@ -199,11 +208,5 @@ search:
 
 
 - [Cut bloat, not features](https://ubuntu.com//blog/cut-bloat-not-features)
-
-
-### 20260910
-
-
-- [Episode 69 “Declassifying Java 27” [IJN]](https://inside.java/2026/09/10/podcast-069/)
 
 
