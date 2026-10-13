@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261013
+
+
+- [1.99.1 pre-release testing](https://blog.rust-lang.org/inside-rust/2026/10/13/1.99.1-prerelease/)
+- [Jev and the rise of decision models: what you need to know and why they matter](https://www.thoughtworks.com/insights/blog/generative-ai/jev-decision-models-what-need-know-why)
+
+
 ### 20261012
 
 
@@ -202,11 +209,5 @@ search:
 
 
 - [JDK 27 Runtime Updates Release Notes](https://inside.java/2026/09/12/jdk-27-runtime-updates/)
-
-
-### 20260911
-
-
-- [Cut bloat, not features](https://ubuntu.com//blog/cut-bloat-not-features)
 
 
