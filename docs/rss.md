@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261014
+
+
+- [KotlinConf Recap: Lessons from Verifone’s Architect on Kotlin in Mission-Critical Payments](https://blog.jetbrains.com/kotlin/2026/10/kotlinconf-recap-lessons-from-verifone-s-architect-on-kotlin-in-mission-critical-payments/)
+- [Everyday JSON in Java](https://inside.java/2026/10/14/devoxxbelgium-everyday-json/)
+
+
 ### 20261013
 
 
@@ -203,11 +210,5 @@ search:
 
 
 - [Java 27 Technically Within 2 Minutes](https://inside.java/2026/09/13/jdk-27-in-2-min/)
-
-
-### 20260912
-
-
-- [JDK 27 Runtime Updates Release Notes](https://inside.java/2026/09/12/jdk-27-runtime-updates/)
 
 
