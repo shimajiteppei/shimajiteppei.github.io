@@ -8,6 +8,17 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261015
+
+
+- [Google Summer of Code 2026 With the Kotlin Foundation: Recap](https://blog.jetbrains.com/kotlin/2026/10/google-summer-of-code-2026-with-kotlin/)
+- [What Makes a Great KotlinConf Proposal?](https://blog.jetbrains.com/kotlin/2026/10/what-makes-a-great-kotlinconf-proposal/)
+- [How Does Java Fit Into the World of AI—and How Can It Become an Even Better Fit?](https://inside.java/2026/10/15/java-fit-ai-world/)
+- [Canonical releases Ubuntu 26.10 Stonking Stingray](https://ubuntu.com//blog/canonical-releases-ubuntu-26-10-stonking-stingray)
+- [Fixes available for CVE-2026-92392 and other curl vulnerabilities](https://ubuntu.com//blog/curl-vulnerabilities-fixes-available)
+- [Securing open source software dependencies in the public cloud](https://ubuntu.com//blog/securing-open-source-software-dependencies-in-the-public-cloud)
+
+
 ### 20261014
 
 
@@ -204,11 +215,5 @@ search:
 
 
 ### 20260914
-
-
-### 20260913
-
-
-- [Java 27 Technically Within 2 Minutes](https://inside.java/2026/09/13/jdk-27-in-2-min/)
 
 
