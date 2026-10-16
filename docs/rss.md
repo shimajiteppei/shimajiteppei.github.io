@@ -8,12 +8,20 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261016
+
+
+- [JEP targeted to JDK 28: 545: Faster Startup and Warmup with ZGC](https://inside.java/2026/10/16/jep545-target-jdk28/)
+- [How to lower Android™ development costs by removing hardware from the critical path](https://ubuntu.com//blog/lower-android-development-cost)
+
+
 ### 20261015
 
 
 - [Google Summer of Code 2026 With the Kotlin Foundation: Recap](https://blog.jetbrains.com/kotlin/2026/10/google-summer-of-code-2026-with-kotlin/)
 - [What Makes a Great KotlinConf Proposal?](https://blog.jetbrains.com/kotlin/2026/10/what-makes-a-great-kotlinconf-proposal/)
 - [How Does Java Fit Into the World of AI—and How Can It Become an Even Better Fit?](https://inside.java/2026/10/15/java-fit-ai-world/)
+- [Announcing Rust 1.99.1](https://blog.rust-lang.org/2026/10/15/Rust-1.99.1/)
 - [Canonical releases Ubuntu 26.10 Stonking Stingray](https://ubuntu.com//blog/canonical-releases-ubuntu-26-10-stonking-stingray)
 - [Fixes available for CVE-2026-92392 and other curl vulnerabilities](https://ubuntu.com//blog/curl-vulnerabilities-fixes-available)
 - [Securing open source software dependencies in the public cloud](https://ubuntu.com//blog/securing-open-source-software-dependencies-in-the-public-cloud)
@@ -212,8 +220,5 @@ search:
 - [The Arrival of Java 27!](https://inside.java/2026/09/15/jdk-27-available/)
 - [Bring Zenoh to ROS 2 with snaps](https://ubuntu.com//blog/bring-zenoh-to-ros-2-with-snaps)
 - [Evolution of the RISC-V ISA. What next after RVA23?](https://ubuntu.com//blog/evolution-of-the-risc-v-isa-what-next-after-rva23)
-
-
-### 20260914
 
 
