@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261017
+
+
 ### 20261016
 
 
@@ -212,13 +215,5 @@ search:
 
 - [Java 27 Launch Stream](https://inside.java/2026/09/16/java-27-launch/)
 - [JDK 27 Security Enhancements](https://inside.java/2026/09/16/jdk27-security-enhancements/)
-
-
-### 20260915
-
-
-- [The Arrival of Java 27!](https://inside.java/2026/09/15/jdk-27-available/)
-- [Bring Zenoh to ROS 2 with snaps](https://ubuntu.com//blog/bring-zenoh-to-ros-2-with-snaps)
-- [Evolution of the RISC-V ISA. What next after RVA23?](https://ubuntu.com//blog/evolution-of-the-risc-v-isa-what-next-after-rva23)
 
 
