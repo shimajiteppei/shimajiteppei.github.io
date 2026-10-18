@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261018
+
+
+- [Episode 72 “OpenJDK Bug Fixing, JavaOne, and JDK 28” [IJN]](https://inside.java/2026/10/17/podcast-072/)
+
+
 ### 20261017
 
 
@@ -208,12 +214,5 @@ search:
 - [Episode 70 “AOT Caching - Netflix&#39; Practice vs OpenJDK&#39;s Theory” [I/O]](https://inside.java/2026/09/17/podcast-070/)
 - [Be alert: targeted attacks on prominent Rustaceans](https://blog.rust-lang.org/2026/09/17/targeted-attacks/)
 - [Android™ development shouldn’t start with a physical device](https://ubuntu.com//blog/android-development-shouldnt-start-with-a-physical-device)
-
-
-### 20260916
-
-
-- [Java 27 Launch Stream](https://inside.java/2026/09/16/java-27-launch/)
-- [JDK 27 Security Enhancements](https://inside.java/2026/09/16/jdk27-security-enhancements/)
 
 
