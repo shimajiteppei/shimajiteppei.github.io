@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261019
+
+
+- [JEP targeted to JDK 28: 546: Adaptive Heap Sizing for ZGC](https://inside.java/2026/10/19/jep546-target-jdk28/)
+- [Cheaper code won&#39;t kill software development, but it’s already reshaping it](https://www.thoughtworks.com/insights/articles/cheaper-code-wont-kill-software-development)
+
+
 ### 20261018
 
 
@@ -203,16 +210,5 @@ search:
 
 
 ### 20260918
-
-
-- [Beyond the 10-year mark: Extending Ubuntu Pro 16.04 LTS security coverage](https://ubuntu.com//blog/extending-ubuntu-pro-16-04-coverage)
-
-
-### 20260917
-
-
-- [Episode 70 “AOT Caching - Netflix&#39; Practice vs OpenJDK&#39;s Theory” [I/O]](https://inside.java/2026/09/17/podcast-070/)
-- [Be alert: targeted attacks on prominent Rustaceans](https://blog.rust-lang.org/2026/09/17/targeted-attacks/)
-- [Android™ development shouldn’t start with a physical device](https://ubuntu.com//blog/android-development-shouldnt-start-with-a-physical-device)
 
 
