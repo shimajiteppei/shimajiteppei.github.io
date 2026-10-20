@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261020
+
+
+- [Announcing the GPU notification group and Linker Working Area](https://blog.rust-lang.org/inside-rust/2026/10/20/gpu-target-notification-group/)
+- [From personas to archetypes: a living, shared understanding of the people we build for (Part 1 of 2)](https://ubuntu.com//blog/from-personas-to-archetypes)
+
+
 ### 20261019
 
 
@@ -207,8 +214,5 @@ search:
 
 
 ### 20260919
-
-
-### 20260918
 
 
