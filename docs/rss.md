@@ -8,6 +8,16 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261021
+
+
+- [JEP targeted to JDK 28: 543: Structured Concurrency](https://inside.java/2026/10/21/jep543-target-jdk28/)
+- [Reflect, Transform, Accelerate: Bringing GPU Computing to Java](https://inside.java/2026/10/20/devoxxbelgium-bringing-gpu-computing-to-java/)
+- [Announcing rustup 1.29.2](https://blog.rust-lang.org/2026/10/20/Rustup-1.29.2/)
+- [php2shell (CVE-2026-109618 and CVE-2026-109619) – PHP critical vulnerability fixes available](https://ubuntu.com//blog/php2shell-vulnerability-fixes-available)
+- [eMudhra CA compromise fixes available](https://ubuntu.com//blog/emudhra-ca-compromise-fixes-available)
+
+
 ### 20261020
 
 
@@ -211,8 +221,5 @@ search:
 
 
 - [JEP targeted to JDK 28: 401: Value Objects (Preview)](https://inside.java/2026/09/20/jep401-target-jdk28/)
-
-
-### 20260919
 
 
