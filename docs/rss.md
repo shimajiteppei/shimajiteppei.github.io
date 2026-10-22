@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261022
+
+
+- [What&#39;s Going Wrong with My JVM?! A Guide to First-Time Failure Diagnosis](https://inside.java/2026/10/22/jvm-diagnosis/)
+- [How Sensible Harness can help teams create an AI-first delivery environment](https://www.thoughtworks.com/insights/blog/generative-ai/how-sensible-harness-help-teams-create-ai-first-delivery-environment)
+
+
 ### 20261021
 
 
@@ -215,11 +222,5 @@ search:
 
 - [Just-In-Time Compilation for Java Performance: Recent and Ongoing Improvements](https://inside.java/2026/09/21/jit-for-java-performance/)
 - [Attach an Ubuntu Pro subscription to your AWS Image Builder image](https://ubuntu.com//blog/attach-ubuntu-pro-aws-image-builder)
-
-
-### 20260920
-
-
-- [JEP targeted to JDK 28: 401: Value Objects (Preview)](https://inside.java/2026/09/20/jep401-target-jdk28/)
 
 
