@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261024
+
+
 ### 20261023
 
 
@@ -212,12 +215,5 @@ search:
 - [Quality Outreach Heads-up - JDK 28: Rich JavaDoc Notes](https://inside.java/2026/09/23/quality-heads-up/)
 - [Fine tune your own custom LLM with Canonical Charmed Kubeflow and Feast](https://ubuntu.com//blog/fine-tune-your-own-custom-llm-with-canonical-charmed-kubeflow-and-feast)
 - [Scaling Android™ development without scaling hardware](https://ubuntu.com//blog/scaling-android-development-without-scaling-hardware)
-
-
-### 20260922
-
-
-- [Helidon 27 Released](https://inside.java/2026/09/22/helidon27-release/)
-- [Announcing a Maintainer in Residence: Scott Schafer for the Cargo team](https://blog.rust-lang.org/2026/09/22/announcing-a-maintainer-in-residence-scott-schafer-for-the-cargo-team/)
 
 
