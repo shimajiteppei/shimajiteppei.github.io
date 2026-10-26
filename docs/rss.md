@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261026
+
+
+- [How to fund Rust contributors](https://blog.rust-lang.org/2026/10/26/how-to-fund-rust-contributors/)
+
+
 ### 20261025
 
 
@@ -207,11 +213,5 @@ search:
 
 
 - [The Limitations of Running a Workload Generator In the Same JVM as the System-Under-Test](https://inside.java/2026/09/25/limitations-of-running-a-workload-generator-in-the-same-jvm/)
-
-
-### 20260924
-
-
-- [Episode 71 “Security in Java” [AtA]](https://inside.java/2026/09/24/podcast-071/)
 
 
