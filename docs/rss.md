@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261027
+
+
+- [Quality Outreach Heads-up - JDK 28: Value Classes](https://inside.java/2026/10/27/quality-heads-up/)
+- [Variadic Generics Micro Survey results](https://blog.rust-lang.org/inside-rust/2026/10/27/variadic-generics-micro-survey-results/)
+
+
 ### 20261026
 
 
@@ -207,11 +214,5 @@ search:
 
 
 - [JEP targeted to JDK 28: 539: Strict Field Initialization in the JVM (Preview)](https://inside.java/2026/09/26/jep539-target-jdk28/)
-
-
-### 20260925
-
-
-- [The Limitations of Running a Workload Generator In the Same JVM as the System-Under-Test](https://inside.java/2026/09/25/limitations-of-running-a-workload-generator-in-the-same-jvm/)
 
 
