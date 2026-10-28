@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261028
+
+
+- [Java Secure Coding Guidelines](https://inside.java/2026/10/28/java-secure-coding-guidelines/)
+
+
 ### 20261027
 
 
@@ -208,11 +214,5 @@ search:
 
 
 ### 20260927
-
-
-### 20260926
-
-
-- [JEP targeted to JDK 28: 539: Strict Field Initialization in the JVM (Preview)](https://inside.java/2026/09/26/jep539-target-jdk28/)
 
 
