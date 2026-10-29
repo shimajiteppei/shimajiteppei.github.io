@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261029
+
+
+- [Episode 73 “Immutable Data Beyond Value Classes” [AtA]](https://inside.java/2026/10/29/podcast-073/)
+- [Compromised Certificates and OpenJDK Java Runtimes](https://inside.java/2026/10/24/openjdk-emudhra/)
+
+
 ### 20261028
 
 
@@ -211,8 +218,5 @@ search:
 - [Leadership Council update — September 2026](https://blog.rust-lang.org/inside-rust/2026/09/28/leadership-council-update/)
 - [Creating a private 5G network](https://ubuntu.com//blog/creating-a-private-5g-network)
 - [How a missing kernel flag broke FIPS-certified containers in managed Kubernetes](https://ubuntu.com//blog/fixing-fips-kernel-flag)
-
-
-### 20260927
 
 
