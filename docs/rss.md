@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261030
+
+
+- [Kodee’s Kotlin Roundup: Shipaton 2026 Winners, Kotlin 2.5.0-Beta2, and KotlinConf 2027](https://blog.jetbrains.com/kotlin/2026/10/kodee-s-kotlin-roundup-shipaton-2026-winners-kotlin-2-5-0-beta2-and-kotlinconf-2027/)
+- [JDK 27 G1/Parallel/Serial GC changes](https://inside.java/2026/10/30/jdk27-gc-changes/)
+
+
 ### 20261029
 
 
@@ -208,15 +215,5 @@ search:
 - [The State of Kotlin in 2026 Report](https://blog.jetbrains.com/kotlin/2026/09/state-of-kotlin-2026-report/)
 - [JEP targeted to JDK 28: 541: Deprecate the macOS/x64 Port for Removal](https://inside.java/2026/09/29/jep541-target-jdk28/)
 - [Upgrade your desktop: Ubuntu 26.04.1 LTS is now available](https://ubuntu.com//blog/upgrade-your-desktop-ubuntu-26-04-lts)
-
-
-### 20260928
-
-
-- [A More Reliable Compilation Scheme for Kotlin Multiplatform Modules](https://blog.jetbrains.com/kotlin/2026/09/a-more-reliable-compilation-scheme-for-kotlin-multiplatform-modules/)
-- [Performance Improvements in JDK 27](https://inside.java/2026/09/28/performance-update-jdk27/)
-- [Leadership Council update — September 2026](https://blog.rust-lang.org/inside-rust/2026/09/28/leadership-council-update/)
-- [Creating a private 5G network](https://ubuntu.com//blog/creating-a-private-5g-network)
-- [How a missing kernel flag broke FIPS-certified containers in managed Kubernetes](https://ubuntu.com//blog/fixing-fips-kernel-flag)
 
 
