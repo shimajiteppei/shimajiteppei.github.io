@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261031
+
+
 ### 20261030
 
 
@@ -196,7 +199,6 @@ search:
 
 
 - [Agent Helidon: License to Scale](https://inside.java/2026/10/01/agent-helidon-scale/)
-- [1.99.0 pre-release testing](https://blog.rust-lang.org/inside-rust/2026/09/29/1.99.0-prerelease/)
 - [Announcing Rust 1.99.0](https://blog.rust-lang.org/2026/10/01/Rust-1.99.0/)
 - [Android™ belongs in your CI/CD pipeline](https://ubuntu.com//blog/android-belongs-in-your-ci-cd-pipeline)
 
@@ -207,13 +209,5 @@ search:
 - [The Companions to Come](https://blog.jetbrains.com/kotlin/2026/09/the-companions-to-come/)
 - [Faster Post-Quantum Cryptography with JDK Intrinsics](https://inside.java/2026/09/30/faster-post-quantum-cryptography-with-jdk-intrinsics/)
 - [Realtime transaction fraud detection – with an LLM?](https://ubuntu.com//blog/realtime-transaction-fraud-detection-with-an-llm)
-
-
-### 20260929
-
-
-- [The State of Kotlin in 2026 Report](https://blog.jetbrains.com/kotlin/2026/09/state-of-kotlin-2026-report/)
-- [JEP targeted to JDK 28: 541: Deprecate the macOS/x64 Port for Removal](https://inside.java/2026/09/29/jep541-target-jdk28/)
-- [Upgrade your desktop: Ubuntu 26.04.1 LTS is now available](https://ubuntu.com//blog/upgrade-your-desktop-ubuntu-26-04-lts)
 
 
