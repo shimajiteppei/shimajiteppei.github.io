@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261102
+
+
+- [Maintainer spotlight: Anthony Bolden (@Walnut356)](https://blog.rust-lang.org/inside-rust/2026/11/02/maintainer-spotlight-anthony-bolden-walnut356/)
+- [Fixes available in -proposed pocket for CVE-2026-98432](https://ubuntu.com//blog/fixes-available-in-proposed-pocket-for-cve-2026-98432)
+
+
 ### 20261101
 
 
@@ -196,13 +203,5 @@ search:
 - [JEP targeted to JDK 28: 540: Simple JSON API (Incubator)](https://inside.java/2026/10/02/jep549-target-jdk28/)
 - [Generic Const Args and You](https://blog.rust-lang.org/inside-rust/2026/10/02/generic-const-args-and-you/)
 - [Demoting i686 Windows targets to std-only](https://blog.rust-lang.org/2026/10/02/demoting-i686-windows-targets-to-std-only/)
-
-
-### 20261001
-
-
-- [Agent Helidon: License to Scale](https://inside.java/2026/10/01/agent-helidon-scale/)
-- [Announcing Rust 1.99.0](https://blog.rust-lang.org/2026/10/01/Rust-1.99.0/)
-- [Android™ belongs in your CI/CD pipeline](https://ubuntu.com//blog/android-belongs-in-your-ci-cd-pipeline)
 
 
