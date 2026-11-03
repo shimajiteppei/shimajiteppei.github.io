@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261103
+
+
+- [Announcing rustup 1.29.3](https://blog.rust-lang.org/2026/11/03/Rustup-1.29.3/)
+
+
 ### 20261102
 
 
@@ -188,20 +194,11 @@ search:
 
 - [Discontinuing Swift Language IDE Support in the Kotlin Multiplatform Plugin](https://blog.jetbrains.com/kotlin/2026/10/discontinuing-swift-language-ide-support-in-the-kotlin-multiplatform-plugin/)
 - [Making Arena.ofConfined() Even Cheaper in JDK 28](https://inside.java/2026/10/05/confined-pools/)
-- [Confidential computing in the real world: finding your use case](https://ubuntu.com//blog/confidential-computing-use-cases)
 
 
 ### 20261004
 
 
 ### 20261003
-
-
-### 20261002
-
-
-- [JEP targeted to JDK 28: 540: Simple JSON API (Incubator)](https://inside.java/2026/10/02/jep549-target-jdk28/)
-- [Generic Const Args and You](https://blog.rust-lang.org/inside-rust/2026/10/02/generic-const-args-and-you/)
-- [Demoting i686 Windows targets to std-only](https://blog.rust-lang.org/2026/10/02/demoting-i686-windows-targets-to-std-only/)
 
 
