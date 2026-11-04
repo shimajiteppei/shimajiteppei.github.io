@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261104
+
+
+- [Project Detroit: From Foreign Libraries to Foreign Language Runtimes](https://inside.java/2026/11/04/devoxxbelgium-project-detroit/)
+- [Never lose robot data again: automatic ROS 2 bag recording and upload](https://ubuntu.com//blog/never-lose-robot-data-again-automatic-ros-2-bag-recording-and-upload)
+
+
 ### 20261103
 
 
@@ -197,8 +204,5 @@ search:
 
 
 ### 20261004
-
-
-### 20261003
 
 
