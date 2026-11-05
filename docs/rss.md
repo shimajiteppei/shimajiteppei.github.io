@@ -8,6 +8,14 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261105
+
+
+- [Episode 74 “Ask the Architects at Devoxx” [AtA]](https://inside.java/2026/11/05/podcast-074/)
+- [Ubuntu Pro is now available on AWS Deep Learning Amazon Machine Images (DLAMI)](https://ubuntu.com//blog/ubuntu-pro-available-on-dlami)
+- [CVE-2026-109518 APT vulnerability fixes available](https://ubuntu.com//blog/apt-vulnerability-fixes-available)
+
+
 ### 20261104
 
 
@@ -201,8 +209,5 @@ search:
 
 - [Discontinuing Swift Language IDE Support in the Kotlin Multiplatform Plugin](https://blog.jetbrains.com/kotlin/2026/10/discontinuing-swift-language-ide-support-in-the-kotlin-multiplatform-plugin/)
 - [Making Arena.ofConfined() Even Cheaper in JDK 28](https://inside.java/2026/10/05/confined-pools/)
-
-
-### 20261004
 
 
