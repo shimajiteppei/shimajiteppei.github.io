@@ -8,6 +8,14 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261106
+
+
+- [The Kotlin Multiplatform Contest Is Open: Win a Trip to KotlinConf](https://blog.jetbrains.com/kotlin/2026/11/kotlin-multiplatform-contest-2027/)
+- [Ubuntu Summit 26.10: Less than a week away!](https://ubuntu.com//blog/ubuntu-summit-26-10-less-than-a-week-away)
+- [The missing piece: bringing up to 15 years of support to Zephyr for microcontroller-based ECUs](https://ubuntu.com//blog/the-missing-piece-bringing-up-to-15-years-of-support-to-zephyr-for-microcontroller-based-ecus)
+
+
 ### 20261105
 
 
@@ -146,7 +154,6 @@ search:
 - [Announcing Rust 1.99.1](https://blog.rust-lang.org/2026/10/15/Rust-1.99.1/)
 - [Canonical releases Ubuntu 26.10 Stonking Stingray](https://ubuntu.com//blog/canonical-releases-ubuntu-26-10-stonking-stingray)
 - [Fixes available for CVE-2026-92392 and other curl vulnerabilities](https://ubuntu.com//blog/curl-vulnerabilities-fixes-available)
-- [Securing open source software dependencies in the public cloud](https://ubuntu.com//blog/securing-open-source-software-dependencies-in-the-public-cloud)
 
 
 ### 20261014
@@ -201,13 +208,5 @@ search:
 
 - [JEP targeted to JDK 28: 542: PEM Encodings of Cryptographic Objects](https://inside.java/2026/10/06/jep542-target-jdk28/)
 - [What&amp;#8217;s new in security for Ubuntu 26.10?](https://ubuntu.com//blog/ubuntu-26-10-security)
-- [Devpack for Rust: Zero to Rust in seconds](https://ubuntu.com//blog/devpack-for-rust-support)
-
-
-### 20261005
-
-
-- [Discontinuing Swift Language IDE Support in the Kotlin Multiplatform Plugin](https://blog.jetbrains.com/kotlin/2026/10/discontinuing-swift-language-ide-support-in-the-kotlin-multiplatform-plugin/)
-- [Making Arena.ofConfined() Even Cheaper in JDK 28](https://inside.java/2026/10/05/confined-pools/)
 
 
