@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261107
+
+
 ### 20261106
 
 
@@ -201,12 +204,5 @@ search:
 
 
 - [Start Your Next KMP App With Kotlin Toolchain 0.13](https://blog.jetbrains.com/kotlin/2026/10/start-your-next-kmp-app-with-kotlin-toolchain-0-13/)
-
-
-### 20261006
-
-
-- [JEP targeted to JDK 28: 542: PEM Encodings of Cryptographic Objects](https://inside.java/2026/10/06/jep542-target-jdk28/)
-- [What&amp;#8217;s new in security for Ubuntu 26.10?](https://ubuntu.com//blog/ubuntu-26-10-security)
 
 
