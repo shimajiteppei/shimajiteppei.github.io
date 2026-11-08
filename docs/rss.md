@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261108
+
+
+- [Java and the Next Generation of Programming Models](https://inside.java/2026/11/08/devoxxbelgium-java-next-programming-models/)
+
+
 ### 20261107
 
 
@@ -198,11 +204,5 @@ search:
 
 
 ### 20261008
-
-
-### 20261007
-
-
-- [Start Your Next KMP App With Kotlin Toolchain 0.13](https://blog.jetbrains.com/kotlin/2026/10/start-your-next-kmp-app-with-kotlin-toolchain-0-13/)
 
 
