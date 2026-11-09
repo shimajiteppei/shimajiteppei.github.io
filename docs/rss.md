@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261109
+
+
+- [A Valhalla Ticker in One int](https://inside.java/2026/11/09/inside-java-ticker-value-class/)
+
+
 ### 20261108
 
 
@@ -198,11 +204,5 @@ search:
 
 
 ### 20261009
-
-
-- [Oracle Java Platform Extension for Visual Studio Code - Version 27.0.0 Is Now Available](https://inside.java/2026/10/08/java-vscode-extension-update/)
-
-
-### 20261008
 
 
