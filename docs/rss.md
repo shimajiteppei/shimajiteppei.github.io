@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261110
+
+
+- [Tutorial: The G1 Garbage Collector](https://inside.java/2026/11/10/g1gc-tutorial/)
+
+
 ### 20261109
 
 
@@ -201,8 +207,5 @@ search:
 
 
 ### 20261010
-
-
-### 20261009
 
 
