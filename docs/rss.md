@@ -8,6 +8,14 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261111
+
+
+- [Withdrawing the Primitive Patterns Preview Feature](https://inside.java/2026/11/11/withdraw-primitive-patterns-preview/)
+- [Google Summer of Code 2026 results](https://blog.rust-lang.org/2026/11/11/gsoc-2026-results/)
+- [What if your Virtual Data Room (VDR) was Android™ based?](https://ubuntu.com//blog/what-if-your-virtual-data-room-vdr-was-android-based)
+
+
 ### 20261110
 
 
@@ -204,8 +212,5 @@ search:
 
 
 - [Java - The Year of the Runtime!](https://inside.java/2026/10/11/devoxxbelgium-runtime-year-keynite/)
-
-
-### 20261010
 
 
