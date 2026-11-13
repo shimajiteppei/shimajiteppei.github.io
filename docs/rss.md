@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261113
+
+
+- [From desktop to cloud to road](https://ubuntu.com//blog/from-desktop-to-cloud-to-road)
+
+
 ### 20261112
 
 
@@ -202,14 +208,5 @@ search:
 
 
 - [1.99.1 pre-release testing](https://blog.rust-lang.org/inside-rust/2026/10/13/1.99.1-prerelease/)
-- [Jev and the rise of decision models: what you need to know and why they matter](https://www.thoughtworks.com/insights/blog/generative-ai/jev-decision-models-what-need-know-why)
-
-
-### 20261012
-
-
-- [Structured Concurrency Looms](https://inside.java/2026/10/12/devoxxbelgium-structured-concurrency/)
-- [Infrastructure Team 2026 Q3 Recap and Q4 Plan](https://blog.rust-lang.org/inside-rust/2026/10/12/infrastructure-team-q3-recap-and-q4-plan/)
-- [Myna speech-to-text is now available as a technology preview](https://ubuntu.com//blog/myna-speech-to-text-technology-preview-available)
 
 
