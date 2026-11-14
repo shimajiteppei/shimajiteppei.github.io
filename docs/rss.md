@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261114
+
+
+- [Adaptive Heap Sizing + Numeric Conversion + Primitive Patterns - Inside Java Newscast #117](https://inside.java/newscast/117/)
+
+
 ### 20261113
 
 
@@ -202,11 +208,5 @@ search:
 
 - [KotlinConf Recap: Lessons from Verifone’s Architect on Kotlin in Mission-Critical Payments](https://blog.jetbrains.com/kotlin/2026/10/kotlinconf-recap-lessons-from-verifone-s-architect-on-kotlin-in-mission-critical-payments/)
 - [Everyday JSON in Java](https://inside.java/2026/10/14/devoxxbelgium-everyday-json/)
-
-
-### 20261013
-
-
-- [1.99.1 pre-release testing](https://blog.rust-lang.org/inside-rust/2026/10/13/1.99.1-prerelease/)
 
 
