@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261115
+
+
 ### 20261114
 
 
@@ -200,13 +203,5 @@ search:
 - [How Does Java Fit Into the World of AI—and How Can It Become an Even Better Fit?](https://inside.java/2026/10/15/java-fit-ai-world/)
 - [Announcing Rust 1.99.1](https://blog.rust-lang.org/2026/10/15/Rust-1.99.1/)
 - [Canonical releases Ubuntu 26.10 Stonking Stingray](https://ubuntu.com//blog/canonical-releases-ubuntu-26-10-stonking-stingray)
-- [Fixes available for CVE-2026-92392 and other curl vulnerabilities](https://ubuntu.com//blog/curl-vulnerabilities-fixes-available)
-
-
-### 20261014
-
-
-- [KotlinConf Recap: Lessons from Verifone’s Architect on Kotlin in Mission-Critical Payments](https://blog.jetbrains.com/kotlin/2026/10/kotlinconf-recap-lessons-from-verifone-s-architect-on-kotlin-in-mission-critical-payments/)
-- [Everyday JSON in Java](https://inside.java/2026/10/14/devoxxbelgium-everyday-json/)
 
 
