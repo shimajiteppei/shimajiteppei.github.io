@@ -8,6 +8,15 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261116
+
+
+- [Why It Takes 3000 Commits to Bring Valhalla’s Value Objects to the JDK](https://inside.java/2026/11/16/devoxxbelgium-valhalla-value-objects/)
+- [Announcing Oracle WebLogic Server and Coherence 26](https://inside.java/2026/11/12/announcing-oracle-weblogic-server-and-coherence-26/)
+- [Episode 74 “Ask the Architects at Devoxx” [AtA]](https://inside.java/podcast/74/)
+- [Enabling the parallel frontend on nightly](https://blog.rust-lang.org/2026/11/16/enabling-parallel-frontend-on-nightly/)
+
+
 ### 20261115
 
 
@@ -193,15 +202,5 @@ search:
 
 - [JEP targeted to JDK 28: 545: Faster Startup and Warmup with ZGC](https://inside.java/2026/10/16/jep545-target-jdk28/)
 - [How to lower Android™ development costs by removing hardware from the critical path](https://ubuntu.com//blog/lower-android-development-cost)
-
-
-### 20261015
-
-
-- [Google Summer of Code 2026 With the Kotlin Foundation: Recap](https://blog.jetbrains.com/kotlin/2026/10/google-summer-of-code-2026-with-kotlin/)
-- [What Makes a Great KotlinConf Proposal?](https://blog.jetbrains.com/kotlin/2026/10/what-makes-a-great-kotlinconf-proposal/)
-- [How Does Java Fit Into the World of AI—and How Can It Become an Even Better Fit?](https://inside.java/2026/10/15/java-fit-ai-world/)
-- [Announcing Rust 1.99.1](https://blog.rust-lang.org/2026/10/15/Rust-1.99.1/)
-- [Canonical releases Ubuntu 26.10 Stonking Stingray](https://ubuntu.com//blog/canonical-releases-ubuntu-26-10-stonking-stingray)
 
 
