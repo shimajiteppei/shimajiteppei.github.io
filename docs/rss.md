@@ -8,6 +8,9 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261117
+
+
 ### 20261116
 
 
@@ -195,12 +198,5 @@ search:
 
 
 ### 20261017
-
-
-### 20261016
-
-
-- [JEP targeted to JDK 28: 545: Faster Startup and Warmup with ZGC](https://inside.java/2026/10/16/jep545-target-jdk28/)
-- [How to lower Android™ development costs by removing hardware from the critical path](https://ubuntu.com//blog/lower-android-development-cost)
 
 
