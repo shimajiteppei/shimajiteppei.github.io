@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261118
+
+
+- [Kotlin Toolchain 0.14: Agentic Development and iOS Publishing](https://blog.jetbrains.com/kotlin/2026/11/kotlin-toolchain-0-14-agentic-development-and-ios-publishing/)
+
+
 ### 20261117
 
 
@@ -192,11 +198,5 @@ search:
 
 
 ### 20261018
-
-
-- [Episode 72 “OpenJDK Bug Fixing, JavaOne, and JDK 28” [IJN]](https://inside.java/2026/10/17/podcast-072/)
-
-
-### 20261017
 
 
