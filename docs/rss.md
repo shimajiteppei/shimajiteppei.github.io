@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261119
+
+
+- [The AI factory stack](https://www.thoughtworks.com/insights/blog/machine-learning-and-ai/ai-factory-stack)
+- [Automating bare metal infrastructure in FIPS-regulated environments with MAAS](https://ubuntu.com//blog/automating-bare-metal-infrastructure-in-fips-regulated-environments-with-maas)
+
+
 ### 20261118
 
 
@@ -195,8 +202,5 @@ search:
 
 - [JEP targeted to JDK 28: 546: Adaptive Heap Sizing for ZGC](https://inside.java/2026/10/19/jep546-target-jdk28/)
 - [Cheaper code won&#39;t kill software development, but it’s already reshaping it](https://www.thoughtworks.com/insights/articles/cheaper-code-wont-kill-software-development)
-
-
-### 20261018
 
 
