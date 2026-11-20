@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261120
+
+
+- [JEP targeted to JDK 28: 547: Lazy Constants (4th Preview)](https://inside.java/2026/11/20/jep547-target-jdk28/)
+
+
 ### 20261119
 
 
@@ -194,13 +200,5 @@ search:
 
 
 - [Announcing the GPU notification group and Linker Working Area](https://blog.rust-lang.org/inside-rust/2026/10/20/gpu-target-notification-group/)
-- [From personas to archetypes: a living, shared understanding of the people we build for (Part 1 of 2)](https://ubuntu.com//blog/from-personas-to-archetypes)
-
-
-### 20261019
-
-
-- [JEP targeted to JDK 28: 546: Adaptive Heap Sizing for ZGC](https://inside.java/2026/10/19/jep546-target-jdk28/)
-- [Cheaper code won&#39;t kill software development, but it’s already reshaping it](https://www.thoughtworks.com/insights/articles/cheaper-code-wont-kill-software-development)
 
 
