@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261122
+
+
+- [15 years of long term support for bare metal automation with MAAS](https://ubuntu.com//blog/15-years-of-long-term-support-for-bare-metal-automation-with-maas)
+
+
 ### 20261121
 
 
@@ -190,12 +196,5 @@ search:
 
 - [What&#39;s Going Wrong with My JVM?! A Guide to First-Time Failure Diagnosis](https://inside.java/2026/10/22/jvm-diagnosis/)
 - [How Sensible Harness can help teams create an AI-first delivery environment](https://www.thoughtworks.com/insights/blog/generative-ai/how-sensible-harness-help-teams-create-ai-first-delivery-environment)
-
-
-### 20261021
-
-
-- [JEP targeted to JDK 28: 543: Structured Concurrency](https://inside.java/2026/10/21/jep543-target-jdk28/)
-- [php2shell (CVE-2026-109618 and CVE-2026-109619) – PHP critical vulnerability fixes available](https://ubuntu.com//blog/php2shell-vulnerability-fixes-available)
 
 
