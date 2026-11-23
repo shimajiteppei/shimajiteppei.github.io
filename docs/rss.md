@@ -8,6 +8,16 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261123
+
+
+- [Kotlin Benchmark 2.0: How AI Coding Agents Handle Harder Tasks and Closed-Source Code](https://blog.jetbrains.com/kotlin/2026/11/kotlin-benchmark-2-0-how-ai-coding-agents-handle-harder-tasks-and-closed-source-code/)
+- [Evolving the Java Language: An Inside Perspective](https://inside.java/2026/11/23/evolving-java-language/)
+- [Rust All Hands 2027](https://blog.rust-lang.org/inside-rust/2026/11/23/all-hands-2027/)
+- [Understanding the context development lifecycle](https://www.thoughtworks.com/insights/blog/generative-ai/understanding-context-development-lifecycle)
+- [Automating encryption at rest with Canonical’s Charmed MongoDB](https://ubuntu.com//blog/encryption-at-rest-with-charmed-mongodb)
+
+
 ### 20261122
 
 
@@ -189,12 +199,5 @@ search:
 
 
 - [Allocating Off-Heap Memory: Typically 6-18x Faster in JDK 28](https://inside.java/2026/10/23/confined-pools/)
-
-
-### 20261022
-
-
-- [What&#39;s Going Wrong with My JVM?! A Guide to First-Time Failure Diagnosis](https://inside.java/2026/10/22/jvm-diagnosis/)
-- [How Sensible Harness can help teams create an AI-first delivery environment](https://www.thoughtworks.com/insights/blog/generative-ai/how-sensible-harness-help-teams-create-ai-first-delivery-environment)
 
 
