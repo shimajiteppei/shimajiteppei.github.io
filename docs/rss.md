@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261124
+
+
+- [Tutorial: Advanced Accessibility in JavaFX](https://inside.java/2026/11/24/advanced-a11y-javafx-tutorial/)
+
+
 ### 20261123
 
 
@@ -193,11 +199,5 @@ search:
 
 
 ### 20261024
-
-
-### 20261023
-
-
-- [Allocating Off-Heap Memory: Typically 6-18x Faster in JDK 28](https://inside.java/2026/10/23/confined-pools/)
 
 
