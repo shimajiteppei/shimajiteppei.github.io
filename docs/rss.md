@@ -8,6 +8,13 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261125
+
+
+- [Kotlin Heroes: Episode 15 – Anniversary Edition](https://blog.jetbrains.com/kotlin/2026/11/kotlin-heroes-episode-15-anniversary-edition/)
+- [JDK 28: New jlink Security Properties Plugin - Quality Outreach Heads-up](https://inside.java/2026/11/25/quality-heads-up/)
+
+
 ### 20261124
 
 
@@ -170,7 +177,6 @@ search:
 
 
 - [Episode 73 “Immutable Data Beyond Value Classes” [AtA]](https://inside.java/2026/10/29/podcast-073/)
-- [Compromised Certificates and OpenJDK Java Runtimes](https://inside.java/2026/10/24/openjdk-emudhra/)
 
 
 ### 20261028
@@ -196,8 +202,5 @@ search:
 
 
 - [JEP targeted to JDK 28: 544: Ahead-of-Time Code Compilation](https://inside.java/2026/10/25/jep544-target-jdk28/)
-
-
-### 20261024
 
 
