@@ -8,6 +8,12 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261126
+
+
+- [Episode 76 “Java in the Age of AI” [AtA]](https://inside.java/podcast/76/)
+
+
 ### 20261125
 
 
@@ -196,11 +202,5 @@ search:
 
 
 - [How to fund Rust contributors](https://blog.rust-lang.org/2026/10/26/how-to-fund-rust-contributors/)
-
-
-### 20261025
-
-
-- [JEP targeted to JDK 28: 544: Ahead-of-Time Code Compilation](https://inside.java/2026/10/25/jep544-target-jdk28/)
 
 
