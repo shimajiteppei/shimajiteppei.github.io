@@ -8,6 +8,14 @@ search:
 
 [osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考に、GitHub Actionsで定期的にRSSを購読しています。
 
+### 20261127
+
+
+- [Introducing the Kotlin Security Newsletter](https://blog.jetbrains.com/kotlin/2026/11/introducing-the-kotlin-security-newsletter/)
+- [Advent of Code 2026: ’Tis the Season to Code in Kotlin](https://blog.jetbrains.com/kotlin/2026/11/advent-of-code-2026-in-kotlin/)
+- [Announcing Rust 1.100.1](https://blog.rust-lang.org/2026/11/27/Rust-1.100.1/)
+
+
 ### 20261126
 
 
@@ -196,11 +204,5 @@ search:
 
 - [Quality Outreach Heads-up - JDK 28: Value Classes](https://inside.java/2026/10/27/quality-heads-up/)
 - [Variadic Generics Micro Survey results](https://blog.rust-lang.org/inside-rust/2026/10/27/variadic-generics-micro-survey-results/)
-
-
-### 20261026
-
-
-- [How to fund Rust contributors](https://blog.rust-lang.org/2026/10/26/how-to-fund-rust-contributors/)
 
 
